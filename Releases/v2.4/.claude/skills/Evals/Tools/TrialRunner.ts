@@ -216,7 +216,7 @@ export function formatEvalResults(run: EvalRun): string {
   lines.push(`|-------|--------|-------|----------|`);
 
   for (const trial of run.trials) {
-    const status = trial.passed ? '✅ PASS' : trial.status === 'error' ? '❌ ERROR' : '❌ FAIL';
+    const status = trial.passed ? '✓ PASS' : trial.status === 'error' ? '✗ ERROR' : '✗ FAIL';
     const duration = trial.transcript.metrics.wall_time_ms;
     lines.push(`| ${trial.trial_number} | ${status} | ${trial.score.toFixed(3)} | ${(duration / 1000).toFixed(2)}s |`);
   }
@@ -230,7 +230,7 @@ export function formatEvalResults(run: EvalRun): string {
     lines.push(`|--------|-------|--------|--------|`);
 
     for (const result of run.trials[0].grader_results) {
-      const passed = result.passed ? '✅' : '❌';
+      const passed = result.passed ? '✓' : '✗';
       lines.push(`| ${result.grader_type} | ${result.score.toFixed(3)} | ${passed} | ${result.weight} |`);
     }
   }

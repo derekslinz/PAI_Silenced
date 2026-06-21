@@ -32,7 +32,7 @@
  * - MUST RUN AFTER: Claude's response generation
  *
  * HANDLERS (in hooks/handlers/):
- * - VoiceNotification.ts: Extracts 🗣️ line, sends to voice server
+ * - VoiceNotification.ts: Extracts line, sends to voice server
  * - ResponseCapture.ts: Updates current-work.json and WORK/ items
  * - TabState.ts: Resets Kitty tab to default UL blue
  * - SystemIntegrity.ts: Detects PAI changes, spawns IntegrityMaintenance.ts

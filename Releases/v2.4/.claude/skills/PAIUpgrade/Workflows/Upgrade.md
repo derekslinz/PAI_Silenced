@@ -260,7 +260,7 @@ Generate the final report following SKILL.md's "Primary Output Format" with thes
 
 ---
 
-## 🎯 Extracted Techniques
+## Extracted Techniques
 
 [For EACH technique extracted, use this structure:]
 
@@ -286,7 +286,7 @@ Generate the final report following SKILL.md's "Primary Output Format" with thes
 
 ---
 
-## 📊 Technique Summary
+## Technique Summary
 
 | # | Technique | Source | PAI Component | Impact |
 |---|-----------|--------|---------------|--------|
@@ -294,13 +294,13 @@ Generate the final report following SKILL.md's "Primary Output Format" with thes
 
 ---
 
-## ⏭️ Skipped Content
+## Skipped Content
 
 [Content with no extractable techniques - with specific reasons]
 
 ---
 
-## 🔍 Sources Processed
+## Sources Processed
 
 [What was actually analyzed, with extraction counts]
 ```

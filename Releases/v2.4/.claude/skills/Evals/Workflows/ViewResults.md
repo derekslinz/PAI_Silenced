@@ -145,9 +145,9 @@ bun run ~/.claude/skills/Evals/EvalServer/cli.ts trend \
 Use structured response format:
 
 ```markdown
-📋 SUMMARY: Evaluation results for <use-case>
+SUMMARY: Evaluation results for <use-case>
 
-📊 STATUS:
+STATUS:
 | Metric | Value |
 |--------|-------|
 | Run ID | <run-id> |
@@ -159,7 +159,7 @@ Use structured response format:
 | Passed | N |
 | Failed | N |
 
-📖 STORY EXPLANATION:
+STORY EXPLANATION:
 1. Retrieved evaluation run from <date>
 2. <N> test cases were evaluated
 3. Deterministic scorers ran first (format, length, voice)
@@ -169,7 +169,7 @@ Use structured response format:
 7. <Key finding about top/bottom performers>
 8. <Recommendation based on results>
 
-🎯 COMPLETED: Results retrieved for <use-case>, <pass-rate>% pass rate.
+COMPLETED: Results retrieved for <use-case>, <pass-rate>% pass rate.
 ```
 
 ## Query Patterns
@@ -283,7 +283,7 @@ bun run ~/.claude/skills/Evals/EvalServer/cli.ts trend \
 ### Performance Over Time
 
 ```
-📈 Trend: newsletter_summaries (last 30 days)
+Trend: newsletter_summaries (last 30 days)
 
 Date       | Pass Rate | Mean Score | Change
 -----------|-----------|------------|--------

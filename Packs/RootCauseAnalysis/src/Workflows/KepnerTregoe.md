@@ -101,7 +101,7 @@ Confirm the identified cause produces the problem when present and doesn't when 
 ## Output Format
 
 ```
-🔬 KEPNER-TREGOE ANALYSIS: [deviation]
+KEPNER-TREGOE ANALYSIS: [deviation]
 
 DEVIATION:
 - Expected: [...]

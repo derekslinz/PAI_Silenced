@@ -103,10 +103,10 @@ async function main() {
     console.log(`   Filtered in code before model context`)
     console.log()
 
-    console.log('✅ Successfully retrieved tweets using code-first Apify!')
+    console.log('✓ Successfully retrieved tweets using code-first Apify!')
 
   } catch (error) {
-    console.error('❌ Error:', error instanceof Error ? error.message : error)
+    console.error('✗ Error:', error instanceof Error ? error.message : error)
     if (error instanceof Error && error.stack) {
       console.error('\nStack:', error.stack)
     }

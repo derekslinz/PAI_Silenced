@@ -291,7 +291,7 @@ Flag any issues for follow-up.`,
 
 ## Common Mistakes to Avoid
 
-**❌ WRONG: Sequential execution**
+**✗ WRONG: Sequential execution**
 ```typescript
 await Task({ ... }); // Agent 1 (blocks)
 await Task({ ... }); // Agent 2 (waits for 1)
@@ -299,7 +299,7 @@ await Task({ ... }); // Agent 3 (waits for 2)
 // Takes 3x as long!
 ```
 
-**✅ RIGHT: Parallel execution**
+**✓ RIGHT: Parallel execution**
 ```typescript
 // Send ONE message with multiple Task calls:
 Task({ ... })  // Agent 1
@@ -308,13 +308,13 @@ Task({ ... })  // Agent 3
 // All run simultaneously
 ```
 
-**❌ WRONG: Using ComposeAgent for generic agents**
+**✗ WRONG: Using ComposeAgent for generic agents**
 ```bash
 # Overkill for simple parallel work
 bun run ComposeAgent.ts --traits "research,analytical"
 ```
 
-**✅ RIGHT: Direct Intern launch**
+**✓ RIGHT: Direct Intern launch**
 ```typescript
 // Simple and fast
 Task({
@@ -325,13 +325,13 @@ Task({
 })
 ```
 
-**❌ WRONG: Skipping spotcheck**
+**✗ WRONG: Skipping spotcheck**
 ```typescript
 // Launch agents, get results, done
 // No validation = potential inconsistencies
 ```
 
-**✅ RIGHT: Always spotcheck**
+**✓ RIGHT: Always spotcheck**
 ```typescript
 // Launch agents
 // Get results
@@ -339,7 +339,7 @@ Task({
 // THEN report as complete
 ```
 
-**❌ WRONG: Using opus for simple parallel tasks**
+**✗ WRONG: Using opus for simple parallel tasks**
 ```typescript
 // Each agent uses opus = slow + expensive
 Task({ ..., model: "opus" })
@@ -347,7 +347,7 @@ Task({ ..., model: "opus" })
 Task({ ..., model: "opus" })
 ```
 
-**✅ RIGHT: Use haiku for grunt work**
+**✓ RIGHT: Use haiku for grunt work**
 ```typescript
 // 10-20x faster, sufficient for simple tasks
 Task({ ..., model: "haiku" })

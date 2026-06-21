@@ -62,16 +62,16 @@ Your perspective focuses on: [agent's domain]
 ```markdown
 ### Round 1: Initial Positions
 
-**🏛️ Architect (Serena):**
+**Architect (Serena):**
 [Response]
 
-**🎨 Designer (Aditi):**
+**Designer (Aditi):**
 [Response]
 
-**⚙️ Engineer (Marcus):**
+**Engineer (Marcus):**
 [Response]
 
-**🔍 Researcher (Ava):**
+**Researcher (Ava):**
 [Response]
 ```
 
@@ -104,16 +104,16 @@ The value is in genuine intellectual friction—engage with their actual argumen
 ```markdown
 ### Round 2: Responses & Challenges
 
-**🏛️ Architect (Serena):**
+**Architect (Serena):**
 [Response referencing others' points]
 
-**🎨 Designer (Aditi):**
+**Designer (Aditi):**
 [Response referencing others' points]
 
-**⚙️ Engineer (Marcus):**
+**Engineer (Marcus):**
 [Response referencing others' points]
 
-**🔍 Researcher (Ava):**
+**Researcher (Ava):**
 [Response referencing others' points]
 ```
 
@@ -145,16 +145,16 @@ Be honest about remaining disagreements—forced consensus is worse than acknowl
 ```markdown
 ### Round 3: Synthesis
 
-**🏛️ Architect (Serena):**
+**Architect (Serena):**
 [Final synthesis]
 
-**🎨 Designer (Aditi):**
+**Designer (Aditi):**
 [Final synthesis]
 
-**⚙️ Engineer (Marcus):**
+**Engineer (Marcus):**
 [Final synthesis]
 
-**🔍 Researcher (Ava):**
+**Researcher (Ava):**
 [Final synthesis]
 ```
 

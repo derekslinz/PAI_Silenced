@@ -97,19 +97,19 @@ async function removeBackground(
 ): Promise<void> {
   const apiKey = process.env.REMOVEBG_API_KEY;
   if (!apiKey) {
-    console.error("❌ Missing environment variable: REMOVEBG_API_KEY");
+    console.error("✗ Missing environment variable: REMOVEBG_API_KEY");
     console.error("   Add it to ${PAI_DIR}/.env or export it in your shell");
     process.exit(1);
   }
 
   // Validate input file exists
   if (!existsSync(inputPath)) {
-    console.error(`❌ File not found: ${inputPath}`);
+    console.error(`✗ File not found: ${inputPath}`);
     process.exit(1);
   }
 
   const output = outputPath || inputPath;
-  console.log(`🔲 Removing background: ${inputPath}`);
+  console.log(`Removing background: ${inputPath}`);
 
   try {
     const imageBuffer = await readFile(inputPath);
@@ -127,17 +127,17 @@ async function removeBackground(
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`❌ remove.bg API error: ${response.status}`);
+      console.error(`✗ remove.bg API error: ${response.status}`);
       console.error(`   ${errorText}`);
       process.exit(1);
     }
 
     const resultBuffer = Buffer.from(await response.arrayBuffer());
     await writeFile(output, resultBuffer);
-    console.log(`✅ Saved: ${output}`);
+    console.log(`✓ Saved: ${output}`);
   } catch (error) {
     console.error(
-      `❌ Error processing ${inputPath}:`,
+      `✗ Error processing ${inputPath}:`,
       error instanceof Error ? error.message : String(error)
     );
     process.exit(1);
@@ -182,7 +182,7 @@ async function main(): Promise<void> {
   }
 
   // Batch mode - multiple files
-  console.log(`🔲 Batch processing ${args.length} files...\n`);
+  console.log(`Batch processing ${args.length} files...\n`);
   let success = 0;
   let failed = 0;
 
@@ -195,7 +195,7 @@ async function main(): Promise<void> {
     }
   }
 
-  console.log(`\n📊 Complete: ${success} succeeded, ${failed} failed`);
+  console.log(`\nComplete: ${success} succeeded, ${failed} failed`);
 }
 
 main();

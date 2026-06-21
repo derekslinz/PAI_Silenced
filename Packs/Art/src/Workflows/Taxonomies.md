@@ -76,7 +76,7 @@ White #FFFFFF or Light Cream #F5E6D3 — For clarity
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+## MANDATORY WORKFLOW STEPS
 
 ### Step 1: Define Classification System
 

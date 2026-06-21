@@ -26,14 +26,14 @@ If you can't answer this precisely, stop. Define it before proceeding.
 ```
 
 **Examples:**
-- ❌ "Make the app faster" (vague)
-- ✅ "Page load time is under 1 second for 95% of users"
+- ✗ "Make the app faster" (vague)
+- ✓ "Page load time is under 1 second for 95% of users"
 
-- ❌ "Fix the bug" (vague)
-- ✅ "Users can complete checkout without encountering the 500 error"
+- ✗ "Fix the bug" (vague)
+- ✓ "Users can complete checkout without encountering the 500 error"
 
-- ❌ "Improve the content" (vague)
-- ✅ "Blog post generates 50+ comments and 1000+ shares"
+- ✗ "Improve the content" (vague)
+- ✓ "Blog post generates 50+ comments and 1000+ shares"
 
 ### Step 2: Measurable Indicators
 
@@ -109,7 +109,7 @@ This prevents scope creep and clarifies trade-offs.
 
 Before proceeding, verify:
 
-| Criterion | Question | ✅ |
+| Criterion | Question | ✓ |
 |-----------|----------|---|
 | **Specific** | Is it clear what success looks like? | |
 | **Measurable** | Can we objectively determine if we achieved it? | |
@@ -174,24 +174,24 @@ This goal specification was locked at [timestamp] and will not be modified after
 ## Common Pitfalls
 
 ### Pitfall 1: Vague Outcomes
-❌ "Make it better"
-✅ "Reduce load time from 3s to under 1s"
+✗ "Make it better"
+✓ "Reduce load time from 3s to under 1s"
 
 ### Pitfall 2: No Falsifiability
-❌ "Improve user experience" (how would you fail?)
-✅ "Increase task completion rate from 60% to 80%"
+✗ "Improve user experience" (how would you fail?)
+✓ "Increase task completion rate from 60% to 80%"
 
 ### Pitfall 3: Moving Goalposts
-❌ "Well, we didn't hit the metric, but qualitatively it feels better..."
-✅ "We didn't hit the metric. That's a failure. What did we learn?"
+✗ "Well, we didn't hit the metric, but qualitatively it feels better..."
+✓ "We didn't hit the metric. That's a failure. What did we learn?"
 
 ### Pitfall 4: Missing Constraints
-❌ "Optimize the system" (with unlimited time and resources?)
-✅ "Optimize the system within 2 weeks using existing infrastructure"
+✗ "Optimize the system" (with unlimited time and resources?)
+✓ "Optimize the system within 2 weeks using existing infrastructure"
 
 ### Pitfall 5: Scope Creep via Unstated Anti-Goals
-❌ Project keeps expanding because boundaries weren't defined
-✅ Explicitly stated: "We are NOT redesigning the entire auth system"
+✗ Project keeps expanding because boundaries weren't defined
+✓ Explicitly stated: "We are NOT redesigning the entire auth system"
 
 ---
 

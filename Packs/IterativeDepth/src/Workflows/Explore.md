@@ -45,7 +45,7 @@ For domain-specific tasks, the ordering may be overridden:
 
 ```
 ┌─────────────────────────────────────────────┐
-│ 🔍 ITERATIVE DEPTH — Pass {i}/{N}: {LENS_NAME}                      │
+│ ITERATIVE DEPTH — Pass {i}/{N}: {LENS_NAME}                      │
 │                                                                       │
 │ Lens Question: "{The lens's core question}"                          │
 │                                                                       │
@@ -94,24 +94,24 @@ Return the enriched criteria to the calling context:
 ## Output Format
 
 ```
-🔍 ITERATIVE DEPTH COMPLETE ({N} lenses applied)
+ITERATIVE DEPTH COMPLETE ({N} lenses applied)
 
-📊 Coverage:
+Coverage:
 - Lenses used: {list of lens names}
 - New criteria discovered: {count}
 - Existing criteria refined: {count}
 - Anti-criteria discovered: {count}
 
-📋 NEW ISC CRITERIA:
+NEW ISC CRITERIA:
 [Use TaskCreate for each, prefixed "ISC-"]
 
-📋 REFINED ISC CRITERIA:
+REFINED ISC CRITERIA:
 [Use TaskUpdate for each, with evidence of what changed]
 
-📋 NEW ANTI-CRITERIA:
+NEW ANTI-CRITERIA:
 [Use TaskCreate for each, prefixed "ISC-A"]
 
-💡 Key Insight: [The most surprising finding across all lenses — the thing single-pass analysis would have missed]
+Key Insight: [The most surprising finding across all lenses — the thing single-pass analysis would have missed]
 ```
 
 ## Agent Prompt Template (for Deep SLA)

@@ -68,7 +68,7 @@ export function DimensionRing({ d, onClick }: DimensionRingProps) {
       <div className="dim-label">
         <div className="dim-name">{d.label}</div>
         <div className={'dim-velo '+(up?'up':dn?'down':'flat')}>
-          {up ? '↗' : dn ? '↘' : '·'} {cadence}
+          {up ? '' : dn ? '' : '·'} {cadence}
         </div>
       </div>
     </div>

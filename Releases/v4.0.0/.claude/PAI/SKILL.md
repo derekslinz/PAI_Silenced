@@ -22,12 +22,12 @@ The CapabilityRecommender hook uses AI inference to classify depth. Its classifi
 
 **ITERATION Format** (for back-and-forth on existing work):
 ```
-🤖 PAI ALGORITHM ═════════════
-🔄 ITERATION on: [existing task context]
+PAI ALGORITHM ═════════════
+ITERATION on: [existing task context]
 
-🔧 CHANGE: [What you're doing differently]
-✅ VERIFY: [Evidence it worked]
-🗣️ {DAIDENTITY.NAME}: [Result summary]
+CHANGE: [What you're doing differently]
+✓ VERIFY: [Evidence it worked]
+{DAIDENTITY.NAME}: [Result summary]
 ```
 
 **Default:** FULL. MINIMAL is rare — only pure social interaction with zero task content. Short prompts can demand FULL depth. The word "just" does not reduce depth.
@@ -53,7 +53,7 @@ Problem-solving = transitioning CURRENT STATE → IDEAL STATE. This requires ver
 
 ## Zero-Delay Output
 
-Emit `♻️` header and `🗒️ TASK` as first tokens — IMMEDIATELY. Don't pre-compute. Stream progressively. Silence = critical failure.
+Emit `` header and `TASK` as first tokens — IMMEDIATELY. Don't pre-compute. Stream progressively. Silence = critical failure.
 
 ## Effort Levels
 
@@ -170,7 +170,7 @@ Every capability audit evaluates ALL 25. No exceptions. Capabilities are organiz
 
 Standard:
 ```
-☑︎ CAPABILITY AUDIT (25 capabilities):
+✓︎ CAPABILITY AUDIT (25 capabilities):
   USE: [#Capability] — [reason it helps] | [#Capability] — [reason] | ...
   DECLINE: [#Capability] — [reason not applicable] | ...
   N/A: [batch list of obviously irrelevant capabilities]
@@ -178,7 +178,7 @@ Standard:
 
 Extended+:
 ```
-☑︎ CAPABILITY AUDIT (25 capabilities):
+✓︎ CAPABILITY AUDIT (25 capabilities):
   A-FOUNDATION: #1 Task — USE: ISC tracking | #4 Skills — USE: scan for matches | ...
   B-THINKING: #5 IterativeDepth — USE: need multiple angles | #6 FirstPrinciples — DECLINE: single approach clear | ...
   C-AGENTS: #13 Research — USE: need external data | #10 Algorithm — N/A | ...
@@ -234,13 +234,13 @@ More ISC = finer verification = better hill-climbing. When in doubt, more criter
 ## The Seven Mandatory Phases of Algorithm Execution
 
 ```
-♻︎ Entering the PAI ALGORITHM… (v3.5.0 | github.com/danielmiessler/TheAlgorithm) ═════════════
+︎ Entering the PAI ALGORITHM… (v3.5.0 | github.com/danielmiessler/TheAlgorithm) ═════════════
 
-🗒️ TASK: [8 word description]
+TASK: [8 word description]
 
 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"voice_id":"fTtv3eikoepIosk8dTZ5","message": "Entering the PAI Algorithm Observe phase"}'`
 
-━━━ 👁️ OBSERVE ━━━ 1/7
+━━━ OBSERVE ━━━ 1/7
 ```
 
 **Thinking-only.** No tool calls except TaskCreate, voice curls, context recovery (Grep/Glob/Read, ≤34s).
@@ -257,7 +257,7 @@ More ISC = finer verification = better hill-climbing. When in doubt, more criter
 
 **1.2 Effort Level Assignment**
 
-💪🏼 EFFORT LEVEL: [Effort Level]
+EFFORT LEVEL: [Effort Level]
 
 **1.5 — CONSTRAINT EXTRACTION** (Standard: numbered list. Extended+: 4-scan — quantitative, prohibitions, requirements, implicit.)
 
@@ -272,7 +272,7 @@ Walk the Full Capability Registry (25 capabilities, Sections A-F) and assign USE
 ```
 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"voice_id":"fTtv3eikoepIosk8dTZ5","message": "Entering the Think phase"}'`
 
-━━━ 🧠 THINK ━━━ 2/7
+━━━ THINK ━━━ 2/7
 ```
 
 **IDEAL STATE PRESSURE TEST:**
@@ -288,7 +288,7 @@ Extended+: Rehearse verification for each CRITICAL criterion.
 ```
 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"voice_id":"fTtv3eikoepIosk8dTZ5","message": "Entering the Plan phase"}'`
 
-━━━ 📋 PLAN ━━━ 3/7
+━━━ PLAN ━━━ 3/7
 ```
 
 - Validate prerequisites: env vars, credentials, dependencies, state, files.
@@ -301,7 +301,7 @@ Extended+: Rehearse verification for each CRITICAL criterion.
 ```
 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"voice_id":"fTtv3eikoepIosk8dTZ5","message": "Entering the Build phase"}'`
 
-━━━ 🔨 BUILD ━━━ 4/7
+━━━ BUILD ━━━ 4/7
 ```
 
 - **Invoke execution/creation/parallelization-role skills via `Skill` or `Task` tool.** Log: `[Skill] → [Tool call] → [What it produced]`.
@@ -311,7 +311,7 @@ Extended+: Rehearse verification for each CRITICAL criterion.
 ```
 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"voice_id":"fTtv3eikoepIosk8dTZ5","message": "Entering the Execute phase"}'`
 
-━━━ ⚡ EXECUTE ━━━ 5/7
+━━━ EXECUTE ━━━ 5/7
 ```
 
 - Run the work. Verify after each significant change.
@@ -322,7 +322,7 @@ Extended+: Rehearse verification for each CRITICAL criterion.
 ```
 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"voice_id":"fTtv3eikoepIosk8dTZ5","message": "Entering the Verify phase."}'`
 
-━━━ ✅ VERIFY ━━━ 6/7
+━━━ ✓ VERIFY ━━━ 6/7
 ```
 
 **No rubber-stamping:**
@@ -339,7 +339,7 @@ Extended+: Rehearse verification for each CRITICAL criterion.
 ```
 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"voice_id":"fTtv3eikoepIosk8dTZ5","message": "Entering the Learn phase"}'`
 
-━━━ 📚 LEARN ━━━ 7/7
+━━━ LEARN ━━━ 7/7
 ```
 
 - Reflection: Q1 Self (what What have you done differently?), Q2 Algorithm (What would a smarter algorithm have done differently?), Q3 AI (What would a smarter AI have done differently?).
@@ -348,7 +348,7 @@ Extended+: Rehearse verification for each CRITICAL criterion.
 - Wisdom Frame if genuine insight.
 - Voice summary.
 
-`🗣️ {DAIDENTITY.NAME}: [12-24 word spoken summary]`
+`{DAIDENTITY.NAME}: [12-24 word spoken summary]`
 
 ## Response Formats
 
@@ -358,22 +358,22 @@ CRITICAL: ALWAYS use this format, even for short interactions.
 
 **Iteration** (continuing existing work):
 ```
-🤖 PAI ALGORITHM ═════════════
-💪🏼 EFFORT LEVEL: [INSTANT|FAST|STANDARD|EXTENDED|ADVANCED|DEEP|COMPREHENSIVE]
-🔄 ITERATION ON: [context]
-🗒️ OUTPUT: [Main output if there was an artifact result]
-🔧 CHANGE: [What's different]
-✅ VERIFY: [Evidence]
-🗣️ {DAIDENTITY.NAME}: [Result]
+PAI ALGORITHM ═════════════
+EFFORT LEVEL: [INSTANT|FAST|STANDARD|EXTENDED|ADVANCED|DEEP|COMPREHENSIVE]
+ITERATION ON: [context]
+OUTPUT: [Main output if there was an artifact result]
+CHANGE: [What's different]
+✓ VERIFY: [Evidence]
+{DAIDENTITY.NAME}: [Result]
 ```
 
 **Minimal** (greetings, ratings, acknowledgments):
 ```
-🤖 PAI ALGORITHM (v3.5.0) ═════════════
+PAI ALGORITHM (v3.5.0) ═════════════
    Task: [6 words]
    Effort: [INSTANT|FAST|STANDARD|EXTENDED|ADVANCED|DEEP|COMPREHENSIVE]
-📋 SUMMARY: [bullets]
-🗣️ {DAIDENTITY.NAME}: [summary]
+SUMMARY: [bullets]
+{DAIDENTITY.NAME}: [summary]
 ```
 
 ## PRD Persistence
@@ -400,7 +400,7 @@ Created in PLAN via `generatePRDTemplate()`. PRDWriteback syncs ISC to disk each
 - **Use skills.** Plenty of time + not using skills = failing.
 - **No reasonless audits.** Every USE and DECLINE must have a reason. N/A may batch at Standard.
 
-🚨 ISC = VERIFICATION = hill-climbing → Euphoric Surprise. ALWAYS USE THE ALGORITHM. 🚨
+ISC = VERIFICATION = hill-climbing → Euphoric Surprise. ALWAYS USE THE ALGORITHM. 
 
 ## Configuration
 

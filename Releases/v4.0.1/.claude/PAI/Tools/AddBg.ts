@@ -86,28 +86,28 @@ async function addBackground(
 ): Promise<void> {
   // Validate input file exists
   if (!existsSync(inputPath)) {
-    console.error(`❌ File not found: ${inputPath}`);
+    console.error(`✗ File not found: ${inputPath}`);
     process.exit(1);
   }
 
   // Validate hex color
   if (!validateHexColor(hexColor)) {
-    console.error(`❌ Invalid hex color: ${hexColor}`);
+    console.error(`✗ Invalid hex color: ${hexColor}`);
     console.error('   Must be in format #RRGGBB (e.g., "#EAE9DF")');
     process.exit(1);
   }
 
-  console.log(`🎨 Adding background ${hexColor} to ${inputPath}`);
+  console.log(`Adding background ${hexColor} to ${inputPath}`);
 
   // Use ImageMagick to composite the transparent image onto a colored background
   const command = `magick "${inputPath}" -background "${hexColor}" -flatten "${outputPath}"`;
 
   try {
     await execAsync(command);
-    console.log(`✅ Saved: ${outputPath}`);
+    console.log(`✓ Saved: ${outputPath}`);
   } catch (error) {
     console.error(
-      `❌ ImageMagick error:`,
+      `✗ ImageMagick error:`,
       error instanceof Error ? error.message : String(error)
     );
     console.error("   Make sure ImageMagick is installed: brew install imagemagick");
@@ -129,7 +129,7 @@ async function main(): Promise<void> {
 
   // Need at least 3 args: input, color/--brand, output
   if (args.length < 3) {
-    console.error("❌ Missing arguments");
+    console.error("✗ Missing arguments");
     console.error("   Usage: add-bg <input> <color|--brand> <output>");
     process.exit(1);
   }

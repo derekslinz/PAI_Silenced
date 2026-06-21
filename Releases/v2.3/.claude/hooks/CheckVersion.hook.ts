@@ -81,7 +81,7 @@ async function main() {
     ]);
 
     if (currentVersion !== 'unknown' && latestVersion !== 'unknown' && currentVersion !== latestVersion) {
-      console.error(`💡 Update available: CC ${currentVersion} → ${latestVersion}`);
+      console.error(`Update available: CC ${currentVersion} → ${latestVersion}`);
     }
 
     process.exit(0);

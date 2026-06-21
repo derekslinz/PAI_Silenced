@@ -3,7 +3,7 @@
  * MassScan.ts - Large-scale network port scanning
  * Wraps masscan for scanning large IP ranges at high speed
  *
- * ⚠️  REQUIRES ROOT/SUDO for raw packet operations
+ *  REQUIRES ROOT/SUDO for raw packet operations
  *
  * Usage:
  *   sudo bun MassScan.ts <target> [options]
@@ -284,7 +284,7 @@ function parseArgs(args: string[]): { target: string; options: MassScanOptions }
         console.log(`
 MassScan - Large-scale network port scanning
 
-⚠️  REQUIRES ROOT/SUDO for raw packet operations
+ REQUIRES ROOT/SUDO for raw packet operations
 
 Usage:
   sudo bun MassScan.ts <target> [options]
@@ -345,15 +345,15 @@ const result = await runMassScan(target || options.includeFile!, options);
 if (options.json) {
   console.log(JSON.stringify(result, null, 2));
 } else {
-  console.log(`\n🚀 MassScan: ${result.target}`);
-  console.log(`⏱️  Timestamp: ${result.timestamp}`);
-  console.log(`📡 Rate: ${result.rate} packets/second`);
-  console.log(`🎯 Ports: ${result.portsScanned}`);
+  console.log(`\nMassScan: ${result.target}`);
+  console.log(` Timestamp: ${result.timestamp}`);
+  console.log(`Rate: ${result.rate} packets/second`);
+  console.log(`Ports: ${result.portsScanned}`);
 
   if (result.errors.length > 0 && result.errors.some(e => e.includes("root"))) {
-    console.log("\n⚠️  Run with sudo for raw packet scanning");
+    console.log("\n Run with sudo for raw packet scanning");
   } else {
-    console.log(`\n📊 Found ${result.totalPorts} open ports on ${result.totalHosts} hosts:\n`);
+    console.log(`\nFound ${result.totalPorts} open ports on ${result.totalHosts} hosts:\n`);
 
     if (result.results.length === 0) {
       console.log("  No open ports found");
@@ -396,7 +396,7 @@ if (options.json) {
   }
 
   if (result.errors.length > 0) {
-    console.log("\n⚠️  Errors:");
+    console.log("\n Errors:");
     for (const err of result.errors) {
       console.log(`  ${err}`);
     }
@@ -406,7 +406,7 @@ if (options.json) {
 // Save to file if requested
 if (options.outputFile) {
   await Bun.write(options.outputFile, JSON.stringify(result, null, 2));
-  console.log(`\n💾 Results saved to: ${options.outputFile}`);
+  console.log(`\nResults saved to: ${options.outputFile}`);
 }
 
 export { runMassScan, MassScanOptions, MassScanReport, MassScanResult };

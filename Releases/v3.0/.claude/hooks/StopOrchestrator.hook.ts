@@ -9,7 +9,7 @@
  * TRIGGER: Stop (fires after Claude generates a response)
  *
  * HANDLERS (in hooks/handlers/):
- * - VoiceNotification.ts: Extracts 🗣️ line, sends to voice server
+ * - VoiceNotification.ts: Extracts line, sends to voice server
  * - TabState.ts: Resets Kitty tab to default UL blue
  * - RebuildSkill.ts: Auto-rebuilds SKILL.md from Components/ if modified
  * - DocCrossRefIntegrity.ts: Checks if system docs/hooks were modified, updates cross-refs if so

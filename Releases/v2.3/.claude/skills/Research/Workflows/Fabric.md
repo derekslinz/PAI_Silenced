@@ -2,7 +2,7 @@
 
 Intelligent pattern selection for Fabric CLI. Automatically selects the right pattern from 242+ specialized prompts based on your intent - threat modeling, analysis, summarization, content creation, extraction, and more. USE WHEN processing content, analyzing data, creating summaries, threat modeling, or transforming text.
 
-## 🎯 Load Full PAI Context
+## Load Full PAI Context
 
 **Before starting any task with this skill, load complete PAI context:**
 
@@ -47,7 +47,7 @@ fi
 
 **The Goal:** Select the RIGHT pattern from 242+ available patterns based on what you're trying to accomplish.
 
-## 🎯 Pattern Selection Strategy
+## Pattern Selection Strategy
 
 When a user requests Fabric processing, follow this decision tree:
 
@@ -131,7 +131,7 @@ cat file.txt | fabric -p [pattern]
 fabric "your text here" -p [pattern]
 ```
 
-## 📚 Pattern Categories (242 Total)
+## Pattern Categories (242 Total)
 
 ### Threat Modeling & Security (15 patterns)
 - `create_threat_model` - General threat modeling
@@ -279,7 +279,7 @@ fabric "your text here" -p [pattern]
 - `check_agreement` - Agreement checking
 - `arbiter-evaluate-quality` - Quality evaluation
 
-## 🔄 Updating Patterns
+## Updating Patterns
 
 The Fabric repository is included in this skill at `${PAI_DIR}/skills/fabric/fabric-repo/`.
 
@@ -298,7 +298,7 @@ ls ${PAI_DIR}/skills/fabric/fabric-repo/data/Patterns/
 ls ~/.config/fabric/Patterns/
 ```
 
-## 💡 Usage Examples
+## Usage Examples
 
 **Threat Modeling:**
 ```bash
@@ -333,7 +333,7 @@ fabric "$(cat code.py)" -p analyze_code
 fabric "security claims text" -p analyze_claims
 ```
 
-## 🎯 Pattern Selection Decision Matrix
+## Pattern Selection Decision Matrix
 
 | User Request Contains | Likely Intent | Recommended Patterns |
 |----------------------|---------------|----------------------|
@@ -346,7 +346,7 @@ fabric "security claims text" -p analyze_claims
 | "rate", "judge", "evaluate" | Rating | `rate_content`, `judge_output` |
 | "main idea", "core message" | Core extraction | `extract_main_idea`, `extract_core_message` |
 
-## 🚀 Advanced Usage
+## Advanced Usage
 
 **Pipe content through Fabric:**
 ```bash
@@ -368,14 +368,14 @@ fabric -u "URL" -p extract_wisdom > wisdom.txt
 cat wisdom.txt | fabric -p create_5_sentence_summary
 ```
 
-## 📖 Supplementary Resources
+## Supplementary Resources
 
 **Full Pattern List:** `ls ${PAI_DIR}/skills/fabric/fabric-repo/data/Patterns/`
 **Fabric Repo:** `${PAI_DIR}/skills/fabric/fabric-repo/`
 **Fabric Documentation:** https://github.com/fabric-project/fabric
 **Pattern Templates:** See `${PAI_DIR}/skills/fabric/fabric-repo/data/Patterns/official_pattern_template/`
 
-## 🔑 Key Insight
+## Key Insight
 
 **The skill's value is in selecting the RIGHT pattern for the task.**
 

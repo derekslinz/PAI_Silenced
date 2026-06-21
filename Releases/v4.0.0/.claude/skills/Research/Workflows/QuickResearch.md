@@ -33,15 +33,15 @@ Task({
 Report findings using standard format:
 
 ```markdown
-📋 SUMMARY: Quick research on [topic]
-🔍 ANALYSIS: [Key findings from Claude]
-⚡ ACTIONS: 1 Claude query
-✅ RESULTS: [Answer]
-📊 STATUS: Quick mode - 1 agent, 1 query
-📁 CAPTURE: [Key facts]
-➡️ NEXT: [Suggest standard research if more depth needed]
-📖 STORY EXPLANATION: [3-5 numbered points - keep brief]
-🎯 COMPLETED: Quick answer on [topic]
+SUMMARY: Quick research on [topic]
+ANALYSIS: [Key findings from Claude]
+ACTIONS: 1 Claude query
+✓ RESULTS: [Answer]
+STATUS: Quick mode - 1 agent, 1 query
+CAPTURE: [Key facts]
+→NEXT: [Suggest standard research if more depth needed]
+STORY EXPLANATION: [3-5 numbered points - keep brief]
+COMPLETED: Quick answer on [topic]
 ```
 
 ## Speed Target

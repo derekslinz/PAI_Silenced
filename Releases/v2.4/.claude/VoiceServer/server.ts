@@ -33,7 +33,7 @@ const PORT = parseInt(process.env.PORT || "8888");
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
 
 if (!ELEVENLABS_API_KEY) {
-  console.error('⚠️  ELEVENLABS_API_KEY not found in ~/.claude/.env');
+  console.error(' ELEVENLABS_API_KEY not found in ~/.claude/.env');
   console.error('Add: ELEVENLABS_API_KEY=your_key_here');
 }
 
@@ -48,22 +48,22 @@ try {
     const settings = JSON.parse(settingsContent);
     if (settings.daidentity?.voiceId) {
       daVoiceId = settings.daidentity.voiceId;
-      console.log(`✅ Loaded DA voice ID from settings.json`);
+      console.log(`✓ Loaded DA voice ID from settings.json`);
     }
     if (settings.daidentity?.name) {
       daName = settings.daidentity.name;
     }
     if (settings.daidentity?.voice) {
       daVoiceProsody = settings.daidentity.voice as ProsodySettings;
-      console.log(`✅ Loaded DA voice prosody from settings.json`);
+      console.log(`✓ Loaded DA voice prosody from settings.json`);
     }
   }
 } catch (error) {
-  console.warn('⚠️  Failed to load DA voice settings from settings.json');
+  console.warn(' Failed to load DA voice settings from settings.json');
 }
 
 if (!daVoiceId) {
-  console.warn('⚠️  No voiceId configured in settings.json daidentity section');
+  console.warn(' No voiceId configured in settings.json daidentity section');
   console.warn('   Add: "daidentity": { "voiceId": "your_elevenlabs_voice_id" }');
 }
 
@@ -116,11 +116,11 @@ try {
     const jsonMatch = markdownContent.match(/```json\n([\s\S]*?)\n```/);
     if (jsonMatch && jsonMatch[1]) {
       voicesConfig = JSON.parse(jsonMatch[1]);
-      console.log('✅ Loaded agent voice personalities from AGENTPERSONALITIES.md');
+      console.log('✓ Loaded agent voice personalities from AGENTPERSONALITIES.md');
     }
   }
 } catch (error) {
-  console.warn('⚠️  Failed to load agent voice personalities');
+  console.warn(' Failed to load agent voice personalities');
 }
 
 // Load user pronunciation customizations
@@ -130,10 +130,10 @@ try {
   if (existsSync(pronunciationsPath)) {
     const content = readFileSync(pronunciationsPath, 'utf-8');
     pronunciations = JSON.parse(content);
-    console.log(`✅ Loaded ${Object.keys(pronunciations).length} pronunciation(s) from USER config`);
+    console.log(`✓ Loaded ${Object.keys(pronunciations).length} pronunciation(s) from USER config`);
   }
 } catch (error) {
-  console.warn('⚠️  Failed to load pronunciation customizations');
+  console.warn(' Failed to load pronunciation customizations');
 }
 
 // Apply pronunciation substitutions to text before TTS
@@ -375,22 +375,22 @@ async function sendNotification(
             use_speaker_boost: voiceConfig.use_speaker_boost ?? DEFAULT_PROSODY.use_speaker_boost,
           };
         }
-        console.log(`👤 Voice: ${voiceConfig.description}`);
+        console.log(`Voice: ${voiceConfig.description}`);
       } else if (voice === DEFAULT_VOICE_ID && daVoiceProsody) {
         // Using DA's default voice - use prosody from settings.json
         prosody = daVoiceProsody;
-        console.log(`👤 Voice: DA default (Kai)`);
+        console.log(`Voice: DA default (Kai)`);
       }
 
       // Request prosody overrides config prosody
       if (requestProsody) {
         prosody = { ...prosody, ...requestProsody };
-        console.log(`🎛️  Using request prosody overrides`);
+        console.log(` Using request prosody overrides`);
       }
 
       const settings = { ...DEFAULT_PROSODY, ...prosody };
       const volume = (prosody as any)?.volume ?? daVoiceProsody?.volume;
-      console.log(`🎙️  Generating speech (voice: ${voice}, stability: ${settings.stability}, style: ${settings.style}, speed: ${settings.speed}, volume: ${volume ?? 1.0})`);
+      console.log(` Generating speech (voice: ${voice}, stability: ${settings.stability}, style: ${settings.style}, speed: ${settings.speed}, volume: ${volume ?? 1.0})`);
 
       const spokenMessage = applyPronunciations(safeMessage);
         const audioBuffer = await generateSpeech(spokenMessage, voice, prosody);
@@ -481,7 +481,7 @@ const server = serve({
           throw new Error('Invalid voice_id');
         }
 
-        console.log(`📨 Notification: "${title}" - "${message}" (voice: ${voiceEnabled}, voiceId: ${voiceId || DEFAULT_VOICE_ID})`);
+        console.log(`Notification: "${title}" - "${message}" (voice: ${voiceEnabled}, voiceId: ${voiceId || DEFAULT_VOICE_ID})`);
 
         await sendNotification(title, message, voiceEnabled, voiceId, voiceSettings);
 
@@ -510,7 +510,7 @@ const server = serve({
         const title = data.title || "PAI Assistant";
         const message = data.message || "Task completed";
 
-        console.log(`🤖 PAI notification: "${title}" - "${message}"`);
+        console.log(`PAI notification: "${title}" - "${message}"`);
 
         await sendNotification(title, message, true, null);
 
@@ -556,8 +556,8 @@ const server = serve({
   },
 });
 
-console.log(`🚀 Voice Server running on port ${PORT}`);
-console.log(`🎙️  Using ElevenLabs TTS (default voice: ${DEFAULT_VOICE_ID})`);
-console.log(`📡 POST to http://localhost:${PORT}/notify`);
-console.log(`🔒 Security: CORS restricted to localhost, rate limiting enabled`);
-console.log(`🔑 API Key: ${ELEVENLABS_API_KEY ? '✅ Configured' : '❌ Missing'}`);
+console.log(`Voice Server running on port ${PORT}`);
+console.log(` Using ElevenLabs TTS (default voice: ${DEFAULT_VOICE_ID})`);
+console.log(`POST to http://localhost:${PORT}/notify`);
+console.log(`Security: CORS restricted to localhost, rate limiting enabled`);
+console.log(`API Key: ${ELEVENLABS_API_KEY ? '✓ Configured' : '✗ Missing'}`);

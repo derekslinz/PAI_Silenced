@@ -3,7 +3,7 @@
  * VoiceCompletion.hook.ts — Send completion voice line to TTS server
  *
  * PURPOSE:
- * Extracts the 🗣️ voice line from Claude's response and sends it to
+ * Extracts the voice line from Claude's response and sends it to
  * the ElevenLabs voice server for spoken playback.
  *
  * TRIGGER: Stop

@@ -51,12 +51,12 @@ The idea is that if you can define testable criteria upfront, you can actually v
 The core mechanism is **Ideal State Criteria**—exactly 8-word, binary-testable conditions that define success:
 
 ```
-🎯 ISC TRACKER ════════════════════════════════════════════════════════════════
+ISC TRACKER ════════════════════════════════════════════════════════════════
 │ # │ Criterion (exactly 8 words)        │ Status          │ Evidence       │
 ├───┼────────────────────────────────────┼─────────────────┼────────────────┤
-│ 1 │ All unit tests pass after fix applied │ ✅ VERIFIED     │ pytest: 47/47  │
-│ 2 │ No regressions in existing functionality  │ ✅ VERIFIED     │ CI green       │
-│ 3 │ Error message matches user expectation    │ ✅ VERIFIED     │ Screenshot     │
+│ 1 │ All unit tests pass after fix applied │ ✓ VERIFIED     │ pytest: 47/47  │
+│ 2 │ No regressions in existing functionality  │ ✓ VERIFIED     │ CI green       │
+│ 3 │ Error message matches user expectation    │ ✓ VERIFIED     │ Screenshot     │
 └───┴────────────────────────────────────┴─────────────────┴────────────────┘
    SCORE: 3/3 verified │ ANTI: 0 triggered │ RESULT: COMPLETE
 ```
@@ -68,9 +68,9 @@ The core mechanism is **Ideal State Criteria**—exactly 8-word, binary-testable
 The Algorithm also tracks what must NOT happen:
 
 ```
-⚠️ ANTI-CRITERIA CHECK
-│ ! │ No credentials exposed in output   │ ✅ AVOIDED                      │
-│ ! │ No breaking changes to public API  │ ✅ AVOIDED                      │
+ANTI-CRITERIA CHECK
+│ ! │ No credentials exposed in output   │ ✓ AVOIDED                      │
+│ ! │ No breaking changes to public API  │ ✓ AVOIDED                      │
 ```
 
 This prevents the common AI failure mode of solving one problem while creating another.

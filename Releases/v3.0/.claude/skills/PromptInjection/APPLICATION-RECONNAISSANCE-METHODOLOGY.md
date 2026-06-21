@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Overview
+## Overview
 
 This methodology uses browser automation to systematically extract and analyze web applications for prompt injection testing. It provides complete visibility into the application's attack surface including DOM structure, JavaScript code, API endpoints, and parameters.
 
@@ -15,7 +15,7 @@ This methodology uses browser automation to systematically extract and analyze w
 
 ---
 
-## 📋 Reconnaissance Phases
+## Reconnaissance Phases
 
 ### Phase 1: Initial Application Discovery
 ### Phase 2: DOM Extraction & Analysis
@@ -609,7 +609,7 @@ User Input → Web Form → POST /api/chat → Backend Server → OpenAI API
 
 ---
 
-## 🔄 Automated Reconnaissance Workflow
+## Automated Reconnaissance Workflow
 
 ### Complete Automation Script
 
@@ -750,7 +750,7 @@ chmod +x reconnaissance.sh
 
 ---
 
-## 📊 Analysis & Synthesis
+## Analysis & Synthesis
 
 ### Post-Reconnaissance Analysis
 
@@ -783,7 +783,7 @@ Create comprehensive attack surface map combining:
 
 ---
 
-## 🎯 Testing Prioritization
+## Testing Prioritization
 
 ### Priority Matrix
 
@@ -806,25 +806,25 @@ Create comprehensive attack surface map combining:
 
 ---
 
-## 🔒 Security Considerations
+## Security Considerations
 
 ### Responsible Testing
 
 **Always:**
-- ✅ Obtain written authorization before testing
-- ✅ Document all authorization in AUTHORIZATION.md
-- ✅ Test only in-scope targets
-- ✅ Respect rate limits and avoid DoS
-- ✅ Preserve evidence of findings
-- ✅ Follow responsible disclosure practices
+- ✓ Obtain written authorization before testing
+- ✓ Document all authorization in AUTHORIZATION.md
+- ✓ Test only in-scope targets
+- ✓ Respect rate limits and avoid DoS
+- ✓ Preserve evidence of findings
+- ✓ Follow responsible disclosure practices
 
 **Never:**
-- ❌ Test systems without explicit permission
-- ❌ Exceed authorized scope
-- ❌ Perform denial-of-service testing
-- ❌ Exfiltrate real user data
-- ❌ Disclose vulnerabilities publicly before vendor has time to fix
-- ❌ Use findings for malicious purposes
+- ✗ Test systems without explicit permission
+- ✗ Exceed authorized scope
+- ✗ Perform denial-of-service testing
+- ✗ Exfiltrate real user data
+- ✗ Disclose vulnerabilities publicly before vendor has time to fix
+- ✗ Use findings for malicious purposes
 
 ### Legal & Ethical Compliance
 

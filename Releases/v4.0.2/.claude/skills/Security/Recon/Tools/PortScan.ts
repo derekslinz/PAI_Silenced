@@ -320,11 +320,11 @@ const result = await runPortScan(target, options);
 if (options.json) {
   console.log(JSON.stringify(result, null, 2));
 } else {
-  console.log(`\n🔍 Port Scan: ${result.target}`);
-  console.log(`⏱️  Timestamp: ${result.timestamp}`);
-  console.log(`📡 Scan Type: ${result.scanType}`);
-  console.log(`🎯 Ports: ${result.portsScanned}`);
-  console.log(`\n📊 Found ${result.totalPorts} open ports on ${result.totalHosts} hosts:\n`);
+  console.log(`\nPort Scan: ${result.target}`);
+  console.log(` Timestamp: ${result.timestamp}`);
+  console.log(`Scan Type: ${result.scanType}`);
+  console.log(`Ports: ${result.portsScanned}`);
+  console.log(`\nFound ${result.totalPorts} open ports on ${result.totalHosts} hosts:\n`);
 
   if (result.results.length === 0) {
     console.log("  No open ports found");
@@ -348,7 +348,7 @@ if (options.json) {
   }
 
   if (result.errors.length > 0) {
-    console.log("\n⚠️  Errors:");
+    console.log("\n Errors:");
     for (const err of result.errors) {
       console.log(`  ${err}`);
     }

@@ -101,7 +101,7 @@ function loadSources(): Sources {
   try {
     return JSON.parse(readFileSync(SOURCES_FILE, 'utf-8'));
   } catch (error) {
-    console.error('❌ Failed to load sources.json:', error);
+    console.error('✗ Failed to load sources.json:', error);
     process.exit(1);
   }
 }
@@ -117,7 +117,7 @@ function loadState(): State {
   try {
     return JSON.parse(readFileSync(STATE_FILE, 'utf-8'));
   } catch (error) {
-    console.warn('⚠️ Failed to load state, starting fresh:', error);
+    console.warn('Failed to load state, starting fresh:', error);
     return {
       last_check_timestamp: new Date(Date.now() - DAYS * 24 * 60 * 60 * 1000).toISOString(),
       sources: {}
@@ -129,7 +129,7 @@ function saveState(state: State): void {
   try {
     writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf-8');
   } catch (error) {
-    console.error('❌ Failed to save state:', error);
+    console.error('✗ Failed to save state:', error);
   }
 }
 
@@ -153,7 +153,7 @@ function logRun(updatesFound: number, high: number, medium: number, low: number)
 
     appendFileSync(LOG_FILE, JSON.stringify(logEntry) + '\n', 'utf-8');
   } catch (error) {
-    console.warn('⚠️ Failed to log run:', error);
+    console.warn('Failed to log run:', error);
   }
 }
 
@@ -183,7 +183,7 @@ async function fetchBlog(source: Source, state: State): Promise<Update[]> {
   try {
     const response = await fetch(source.url!);
     if (!response.ok) {
-      console.warn(`⚠️ Failed to fetch ${source.name}: ${response.status}`);
+      console.warn(`Failed to fetch ${source.name}: ${response.status}`);
       return [];
     }
 
@@ -214,7 +214,7 @@ async function fetchBlog(source: Source, state: State): Promise<Update[]> {
     }];
 
   } catch (error) {
-    console.warn(`⚠️ Error fetching blog ${source.name}:`, error);
+    console.warn(`Error fetching blog ${source.name}:`, error);
     return [];
   }
 }
@@ -291,7 +291,7 @@ async function fetchGitHubRepo(source: Source, state: State): Promise<Update[]> 
     }
 
   } catch (error) {
-    console.warn(`⚠️ Error fetching GitHub repo ${source.name}:`, error);
+    console.warn(`Error fetching GitHub repo ${source.name}:`, error);
   }
 
   return updates;
@@ -301,7 +301,7 @@ async function fetchChangelog(source: Source, state: State): Promise<Update[]> {
   try {
     const response = await fetch(source.url!);
     if (!response.ok) {
-      console.warn(`⚠️ Failed to fetch ${source.name}: ${response.status}`);
+      console.warn(`Failed to fetch ${source.name}: ${response.status}`);
       return [];
     }
 
@@ -332,7 +332,7 @@ async function fetchChangelog(source: Source, state: State): Promise<Update[]> {
     }];
 
   } catch (error) {
-    console.warn(`⚠️ Error fetching changelog ${source.name}:`, error);
+    console.warn(`Error fetching changelog ${source.name}:`, error);
     return [];
   }
 }
@@ -341,7 +341,7 @@ async function fetchDocs(source: Source, state: State): Promise<Update[]> {
   try {
     const response = await fetch(source.url!);
     if (!response.ok) {
-      console.warn(`⚠️ Failed to fetch ${source.name}: ${response.status}`);
+      console.warn(`Failed to fetch ${source.name}: ${response.status}`);
       return [];
     }
 
@@ -368,7 +368,7 @@ async function fetchDocs(source: Source, state: State): Promise<Update[]> {
     }];
 
   } catch (error) {
-    console.warn(`⚠️ Error fetching docs ${source.name}:`, error);
+    console.warn(`Error fetching docs ${source.name}:`, error);
     return [];
   }
 }
@@ -508,7 +508,7 @@ function generateNarrative(updates: Update[]): string {
   const docUpdates = updates.filter(u => u.type === 'docs');
   const releases = updates.filter(u => u.type === 'release');
 
-  let narrative = `## 📖 Executive Summary: What This Means for PAI\n\n`;
+  let narrative = `## Executive Summary: What This Means for PAI\n\n`;
 
   // Overall activity
   narrative += `Found **${updates.length} updates** across the Anthropic ecosystem in the monitored period. `;
@@ -543,19 +543,19 @@ function generateNarrative(updates: Update[]): string {
   }
 
   if (themes.length > 0) {
-    narrative += `### 🎯 Key Activity Areas\n\n`;
+    narrative += `### Key Activity Areas\n\n`;
     themes.forEach(theme => narrative += `- ${theme}\n`);
     narrative += `\n`;
   }
 
   // Detailed analysis
-  narrative += `### 💡 What's Happening\n\n`;
+  narrative += `### What's Happening\n\n`;
 
   // Skills analysis (most critical)
   if (skillUpdates.length > 0) {
     const highSkills = skillUpdates.filter(u => u.priority === 'HIGH').length;
     if (highSkills > 0) {
-      narrative += `**🔥 CRITICAL: Skills System Activity**\n`;
+      narrative += `**CRITICAL: Skills System Activity**\n`;
       narrative += `There are **${highSkills} HIGH-priority skill updates** - this is BIG because PAI's entire architecture is built on the skills system. `;
       narrative += `Any changes to skill patterns, specifications, or conventions could require updates to PAI's ${countSkills()} existing skills. `;
 
@@ -579,7 +579,7 @@ function generateNarrative(updates: Update[]): string {
   if (mcpUpdates.length > 0) {
     const highMcp = mcpUpdates.filter(u => u.priority === 'HIGH').length;
     if (highMcp > 0) {
-      narrative += `**🔧 IMPORTANT: MCP Infrastructure Changes**\n`;
+      narrative += `**IMPORTANT: MCP Infrastructure Changes**\n`;
       narrative += `**${highMcp} HIGH-priority MCP updates** detected. Since PAI uses MCP servers for brightdata, Ref, content, and Stripe, `;
       narrative += `protocol changes could affect our integrations. `;
 
@@ -598,7 +598,7 @@ function generateNarrative(updates: Update[]): string {
   if (codeUpdates.length > 0) {
     const highCode = codeUpdates.filter(u => u.priority === 'HIGH').length;
     if (highCode > 0) {
-      narrative += `**⚡ PLATFORM UPDATE: Claude Code Changes**\n`;
+      narrative += `**PLATFORM UPDATE: Claude Code Changes**\n`;
       narrative += `**${highCode} HIGH-priority** Claude Code updates found. Since PAI runs on Claude Code, platform changes can affect everything. `;
 
       const codeRelease = codeUpdates.find(u => u.type === 'release');
@@ -614,7 +614,7 @@ function generateNarrative(updates: Update[]): string {
 
   // Cookbooks/patterns
   if (cookbookUpdates.length > 0) {
-    narrative += `**📚 Implementation Patterns**\n`;
+    narrative += `**Implementation Patterns**\n`;
     narrative += `**${cookbookUpdates.length} cookbook updates** - these often contain useful patterns and examples. `;
     const skillCookbooks = cookbookUpdates.filter(u => u.title.toLowerCase().includes('skill'));
     if (skillCookbooks.length > 0) {
@@ -625,13 +625,13 @@ function generateNarrative(updates: Update[]): string {
 
   // Documentation
   if (docUpdates.length > 5) {
-    narrative += `**📖 Documentation Updates**\n`;
+    narrative += `**Documentation Updates**\n`;
     narrative += `**${docUpdates.length} documentation pages** updated. While less urgent, docs often reveal new capabilities or best practices not yet used in PAI.\n\n`;
   }
 
   // Releases summary
   if (releases.length > 0) {
-    narrative += `### 🎉 Releases Summary\n\n`;
+    narrative += `### Releases Summary\n\n`;
     narrative += `**${releases.length} new releases** published:\n`;
     releases.forEach(r => {
       narrative += `- ${r.source}: ${r.title}\n`;
@@ -640,7 +640,7 @@ function generateNarrative(updates: Update[]): string {
   }
 
   // Bottom line
-  narrative += `### 🎯 Bottom Line for PAI\n\n`;
+  narrative += `### Bottom Line for PAI\n\n`;
 
   if (high.length > 5) {
     narrative += `**High activity period** with ${high.length} high-priority changes. This suggests significant ecosystem development. `;
@@ -680,17 +680,17 @@ function countSkills(): number {
 
 // Main execution
 async function main() {
-  console.log('🔍 Checking Anthropic sources for updates...\n');
-  console.log(`📅 Date: ${new Date().toISOString().split('T')[0]}`);
-  console.log(`⏰ Looking back: ${DAYS} days`);
-  console.log(`🔄 Force mode: ${FORCE ? 'Yes' : 'No'}`);
+  console.log('Checking Anthropic sources for updates...\n');
+  console.log(`Date: ${new Date().toISOString().split('T')[0]}`);
+  console.log(`Looking back: ${DAYS} days`);
+  console.log(`Force mode: ${FORCE ? 'Yes' : 'No'}`);
 
   // Show last run info
   const lastRun = getLastRunInfo();
   if (lastRun) {
-    console.log(`📜 Last run: ${lastRun.days_ago} days ago (${lastRun.last_timestamp.split('T')[0]})`);
+    console.log(`Last run: ${lastRun.days_ago} days ago (${lastRun.last_timestamp.split('T')[0]})`);
   } else {
-    console.log(`📜 First run - no previous history`);
+    console.log(`First run - no previous history`);
   }
   console.log();
 
@@ -698,8 +698,8 @@ async function main() {
   const sources = loadSources();
   const state = loadState();
 
-  console.log(`📊 Last state update: ${state.last_check_timestamp.split('T')[0]}\n`);
-  console.log('⚡ Fetching all sources in parallel...\n');
+  console.log(`Last state update: ${state.last_check_timestamp.split('T')[0]}\n`);
+  console.log('Fetching all sources in parallel...\n');
 
   // Fetch all sources in parallel
   const fetchPromises: Promise<Update[]>[] = [];
@@ -728,13 +728,13 @@ async function main() {
   const allUpdatesArrays = await Promise.all(fetchPromises);
   const allUpdates = allUpdatesArrays.flat();
 
-  console.log(`✅ Fetch complete. Found ${allUpdates.length} updates.\n`);
+  console.log(`✓ Fetch complete. Found ${allUpdates.length} updates.\n`);
 
   if (allUpdates.length === 0) {
-    console.log('✨ No new updates found. Everything is up to date!\n');
-    console.log('📊 STATUS: All monitored sources checked, no changes detected');
-    console.log('➡️ NEXT: Check again later or use --force to see all current content');
-    console.log('🎯 COMPLETED: Completed Anthropic changes monitoring check');
+    console.log('★ No new updates found. Everything is up to date!\n');
+    console.log('STATUS: All monitored sources checked, no changes detected');
+    console.log('→NEXT: Check again later or use --force to see all current content');
+    console.log('COMPLETED: Completed Anthropic changes monitoring check');
     return;
   }
 
@@ -757,10 +757,10 @@ async function main() {
 
   // Generate report
   console.log('═'.repeat(80));
-  console.log('\n# 🎯 Anthropic Changes Report\n');
-  console.log(`📅 Generated: ${new Date().toISOString().split('T')[0]}`);
-  console.log(`📊 Period: Last ${DAYS} days`);
-  console.log(`🔍 Updates found: ${allUpdates.length}\n`);
+  console.log('\n# Anthropic Changes Report\n');
+  console.log(`Generated: ${new Date().toISOString().split('T')[0]}`);
+  console.log(`Period: Last ${DAYS} days`);
+  console.log(`Updates found: ${allUpdates.length}\n`);
 
   const highPriority = allUpdates.filter(u => u.priority === 'HIGH');
   const mediumPriority = allUpdates.filter(u => u.priority === 'MEDIUM');
@@ -774,7 +774,7 @@ async function main() {
 
   // HIGH PRIORITY
   if (highPriority.length > 0) {
-    console.log(`## 🔥 HIGH PRIORITY (${highPriority.length})\n`);
+    console.log(`## HIGH PRIORITY (${highPriority.length})\n`);
     for (const update of highPriority) {
       console.log(`### [${update.category.toUpperCase()}] ${update.title}\n`);
       console.log(`**Source:** ${update.source}`);
@@ -789,7 +789,7 @@ async function main() {
 
   // MEDIUM PRIORITY
   if (mediumPriority.length > 0) {
-    console.log(`## 📌 MEDIUM PRIORITY (${mediumPriority.length})\n`);
+    console.log(`## MEDIUM PRIORITY (${mediumPriority.length})\n`);
     for (const update of mediumPriority) {
       console.log(`### [${update.category.toUpperCase()}] ${update.title}\n`);
       console.log(`**Source:** ${update.source}`);
@@ -802,7 +802,7 @@ async function main() {
 
   // LOW PRIORITY
   if (lowPriority.length > 0) {
-    console.log(`## 📝 LOW PRIORITY (${lowPriority.length})\n`);
+    console.log(`## LOW PRIORITY (${lowPriority.length})\n`);
     for (const update of lowPriority) {
       console.log(`- **${update.title}** - [View](${update.url}) - ${update.date}`);
     }
@@ -810,14 +810,14 @@ async function main() {
   }
 
   // Community reminder
-  console.log('## 💬 Community Channel\n');
+  console.log('## Community Channel\n');
   console.log('**Discord:** https://discord.com/invite/6PPFFzqPDZ');
   console.log('_(Manual check recommended - automated scraping not performed)_\n');
 
   console.log('═'.repeat(80));
-  console.log('\n📊 STATUS: Report generated successfully');
-  console.log('➡️ NEXT: Review HIGH priority items and implement relevant recommendations');
-  console.log('🎯 COMPLETED: Completed comprehensive Anthropic changes monitoring\n');
+  console.log('\nSTATUS: Report generated successfully');
+  console.log('→NEXT: Review HIGH priority items and implement relevant recommendations');
+  console.log('COMPLETED: Completed comprehensive Anthropic changes monitoring\n');
 
   // Update state
   const newState: State = {
@@ -867,13 +867,13 @@ async function main() {
   }
 
   saveState(newState);
-  console.log('💾 State saved successfully\n');
+  console.log('State saved successfully\n');
 
   // Log this run
   logRun(allUpdates.length, highPriority.length, mediumPriority.length, lowPriority.length);
 }
 
 main().catch(error => {
-  console.error('❌ Fatal error:', error);
+  console.error('✗ Fatal error:', error);
   process.exit(1);
 });

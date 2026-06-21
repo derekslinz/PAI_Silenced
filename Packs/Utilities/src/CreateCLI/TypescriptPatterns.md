@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Overview
+## Overview
 
 This document captures type safety patterns, modern TypeScript features, and error handling strategies from real-world production CLIs.
 
@@ -19,7 +19,7 @@ This document captures type safety patterns, modern TypeScript features, and err
 
 ---
 
-## 1️⃣ TYPE-SAFE ARGUMENT PARSING
+## 1⃣ TYPE-SAFE ARGUMENT PARSING
 
 ### Pattern 1: Schema-Driven Inference (cleye library - used by tsx)
 
@@ -122,7 +122,7 @@ switch (argv.command) {
 
 ---
 
-## 2️⃣ MODERN TYPESCRIPT FEATURES (5.x)
+## 2⃣ MODERN TYPESCRIPT FEATURES (5.x)
 
 ### Pattern 1: `satisfies` Operator (Vite/Turbo)
 
@@ -171,10 +171,10 @@ export default config;
 ```
 
 **Benefits:**
-- ✅ Literal types preserved
-- ✅ Type-checked against interface
-- ✅ IntelliSense on config object
-- ✅ Compile error on typos
+- ✓ Literal types preserved
+- ✓ Type-checked against interface
+- ✓ IntelliSense on config object
+- ✓ Compile error on typos
 
 ---
 
@@ -190,9 +190,9 @@ function createDebugger(namespace: ViteDebugScope): void {
   // ...
 }
 
-createDebugger('vite:server'); // ✅ Valid
-createDebugger('vite:config'); // ✅ Valid
-createDebugger('app:server');  // ❌ Type error
+createDebugger('vite:server'); // ✓ Valid
+createDebugger('vite:config'); // ✓ Valid
+createDebugger('app:server');  // ✗ Type error
 ```
 
 **CLI command validation:**
@@ -205,9 +205,9 @@ function runCommand<const T extends CommandName>(name: T) {
   console.log(`Running: ${name}`);
 }
 
-runCommand('build:production'); // ✅
-runCommand('dev:local');        // ✅
-runCommand('deploy:prod');      // ❌ Type error
+runCommand('build:production'); // ✓
+runCommand('dev:local');        // ✓
+runCommand('deploy:prod');      // ✗ Type error
 ```
 
 ---
@@ -242,7 +242,7 @@ const flags = defineFlags({
 
 ---
 
-## 3️⃣ ERROR HANDLING PATTERNS
+## 3⃣ ERROR HANDLING PATTERNS
 
 ### Pattern 1: Custom Error Classes (pnpm)
 
@@ -470,7 +470,7 @@ childProcess.on('close', (code, signal) => {
 
 ---
 
-## 4️⃣ TYPE-SAFE CONFIGURATION
+## 4⃣ TYPE-SAFE CONFIGURATION
 
 ### Pattern 1: Zod Validation with Transform
 
@@ -548,7 +548,7 @@ export type Env = typeof env;
 
 ---
 
-## 5️⃣ ASYNC/AWAIT BEST PRACTICES
+## 5⃣ ASYNC/AWAIT BEST PRACTICES
 
 ### Pattern 1: Top-Level Await (Prisma Style)
 
@@ -560,7 +560,7 @@ async function main() {
 }
 
 void main().catch((err) => {
-  console.error('❌', err instanceof Error ? err.message : err);
+  console.error('✗', err instanceof Error ? err.message : err);
   process.exitCode = 1;
 });
 ```
@@ -649,7 +649,7 @@ await main().catch(async (err) => {
 
 ---
 
-## 6️⃣ RECOMMENDED PATTERNS FOR KAI CLIS
+## 6⃣ RECOMMENDED PATTERNS FOR KAI CLIS
 
 ### For Tier 1 (llcli-style):
 
@@ -745,7 +745,7 @@ program.parse();
 
 ---
 
-## ✅ QUICK REFERENCE CHECKLIST
+## ✓ QUICK REFERENCE CHECKLIST
 
 **Type Safety:**
 - [ ] Use strict mode in tsconfig.json

@@ -413,7 +413,7 @@ function handleBash(input: HookInput): void {
         reason: result.reason,
         action_taken: 'Hard block - exit 2'
       });
-      console.error(`[PAI SECURITY] 🚨 BLOCKED: ${result.reason}`);
+      console.error(`[PAI SECURITY] BLOCKED: ${result.reason}`);
       console.error(`Command: ${command.slice(0, 100)}`);
       process.exit(2);
       break;
@@ -431,7 +431,7 @@ function handleBash(input: HookInput): void {
       });
       console.log(JSON.stringify({
         decision: 'ask',
-        message: `[PAI SECURITY] ⚠️ ${result.reason}\n\nCommand: ${command.slice(0, 200)}\n\nProceed?`
+        message: `[PAI SECURITY] ${result.reason}\n\nCommand: ${command.slice(0, 200)}\n\nProceed?`
       }));
       break;
 
@@ -446,7 +446,7 @@ function handleBash(input: HookInput): void {
         reason: result.reason,
         action_taken: 'Logged alert, allowed execution'
       });
-      console.error(`[PAI SECURITY] ⚠️ ALERT: ${result.reason}`);
+      console.error(`[PAI SECURITY] ALERT: ${result.reason}`);
       console.error(`Command: ${command.slice(0, 100)}`);
       console.log(JSON.stringify({ continue: true }));
       break;
@@ -480,7 +480,7 @@ function handleEdit(input: HookInput): void {
         reason: result.reason,
         action_taken: 'Hard block - exit 2'
       });
-      console.error(`[PAI SECURITY] 🚨 BLOCKED: ${result.reason}`);
+      console.error(`[PAI SECURITY] BLOCKED: ${result.reason}`);
       console.error(`Path: ${filePath}`);
       process.exit(2);
       break;
@@ -498,7 +498,7 @@ function handleEdit(input: HookInput): void {
       });
       console.log(JSON.stringify({
         decision: 'ask',
-        message: `[PAI SECURITY] ⚠️ ${result.reason}\n\nPath: ${filePath}\n\nProceed?`
+        message: `[PAI SECURITY] ${result.reason}\n\nPath: ${filePath}\n\nProceed?`
       }));
       break;
 
@@ -531,7 +531,7 @@ function handleWrite(input: HookInput): void {
         reason: result.reason,
         action_taken: 'Hard block - exit 2'
       });
-      console.error(`[PAI SECURITY] 🚨 BLOCKED: ${result.reason}`);
+      console.error(`[PAI SECURITY] BLOCKED: ${result.reason}`);
       console.error(`Path: ${filePath}`);
       process.exit(2);
       break;
@@ -549,7 +549,7 @@ function handleWrite(input: HookInput): void {
       });
       console.log(JSON.stringify({
         decision: 'ask',
-        message: `[PAI SECURITY] ⚠️ ${result.reason}\n\nPath: ${filePath}\n\nProceed?`
+        message: `[PAI SECURITY] ${result.reason}\n\nPath: ${filePath}\n\nProceed?`
       }));
       break;
 
@@ -582,7 +582,7 @@ function handleRead(input: HookInput): void {
         reason: result.reason,
         action_taken: 'Hard block - exit 2'
       });
-      console.error(`[PAI SECURITY] 🚨 BLOCKED: ${result.reason}`);
+      console.error(`[PAI SECURITY] BLOCKED: ${result.reason}`);
       console.error(`Path: ${filePath}`);
       process.exit(2);
       break;

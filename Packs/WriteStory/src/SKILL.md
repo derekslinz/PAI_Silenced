@@ -4,7 +4,7 @@ description: "Constructs fiction across seven simultaneous narrative layers (Mea
 effort: high
 ---
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 

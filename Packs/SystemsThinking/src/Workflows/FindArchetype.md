@@ -263,7 +263,7 @@ If you can't find any record of the canonical intervention helping similar situa
 ## Output
 
 ```
-🧩 ARCHETYPE MATCH: [name]
+ARCHETYPE MATCH: [name]
 
 BEHAVIOR DESCRIPTION:
 [What is happening, 2-4 sentences]

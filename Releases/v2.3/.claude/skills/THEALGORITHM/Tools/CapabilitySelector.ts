@@ -52,7 +52,7 @@ const CAPABILITY_INDICATORS = {
       "state of",
     ],
     category: "research",
-    icon: "🔬",
+    icon: "",
   },
   thinking: {
     keywords: [
@@ -69,7 +69,7 @@ const CAPABILITY_INDICATORS = {
       "architect",
     ],
     category: "thinking",
-    icon: "💡",
+    icon: "",
   },
   debate: {
     keywords: [
@@ -87,7 +87,7 @@ const CAPABILITY_INDICATORS = {
       "red team",
     ],
     category: "debate",
-    icon: "🗣️",
+    icon: "",
   },
   analysis: {
     keywords: [
@@ -102,7 +102,7 @@ const CAPABILITY_INDICATORS = {
       "underlying",
     ],
     category: "analysis",
-    icon: "🔍",
+    icon: "",
   },
   execution: {
     keywords: [
@@ -118,7 +118,7 @@ const CAPABILITY_INDICATORS = {
       "construct",
     ],
     category: "execution",
-    icon: "🤖",
+    icon: "",
   },
   verification: {
     keywords: [
@@ -133,7 +133,7 @@ const CAPABILITY_INDICATORS = {
       "audit",
     ],
     category: "verification",
-    icon: "✅",
+    icon: "✓",
   },
 };
 
@@ -262,7 +262,7 @@ function selectCapabilities(
   // 1. Capability's own icon (if defined)
   // 2. Category indicator icon
   // 3. Default
-  let icon = "🤖";
+  let icon = "";
   if (primary) {
     // Check if capability has its own icon defined
     if (primary.capability.icon) {

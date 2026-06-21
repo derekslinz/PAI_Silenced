@@ -4,13 +4,13 @@
 
 ## Section order (NON-NEGOTIABLE)
 
-1. **✨ Discoveries** — what was found, ranked by interestingness
-2. **🔥 Recommendations** — what to do, ranked by priority tier
-3. **🎯 Technique Details** — full extraction with code/quotes
-4. **🪞 Internal Reflections** — upgrade candidates from algorithm reflections (Thread 3)
-5. **📊 Summary** — one-line totals
-6. **⏭️ Skipped Content** — already-done / rejected with file:line evidence
-7. **🔍 Sources Processed** — count footer
+1. **★ Discoveries** — what was found, ranked by interestingness
+2. **Recommendations** — what to do, ranked by priority tier
+3. **Technique Details** — full extraction with code/quotes
+4. **Internal Reflections** — upgrade candidates from algorithm reflections (Thread 3)
+5. **Summary** — one-line totals
+6. **Skipped Content** — already-done / rejected with file:line evidence
+7. **Sources Processed** — count footer
 
 **Print only non-empty tiers** in Recommendations. If no CRITICAL items, omit that header entirely.
 
@@ -27,7 +27,7 @@
 
 ---
 
-## ✨ Discoveries
+## ★ Discoveries
 
 Ranked by interestingness, NOT implementation priority. A LOW-priority item can be Discovery #1 if it's the most "whoa" finding.
 
@@ -37,37 +37,37 @@ Ranked by interestingness, NOT implementation priority. A LOW-priority item can 
 
 ---
 
-## 🔥 Recommendations
+## Recommendations
 
 Every row MUST carry a Prior Status tag with file:line evidence from Thread 0.
 
 **Prior Status legend:**
-- 🆕 **NEW** — no prior trace in Algorithm, PATTERNS.yaml, hooks, ISAs, KNOWLEDGE, or MEMORY
-- 🔶 **PARTIAL** — partially implemented; row scopes only the missing delta
-- 💬 **DISCUSSED** — appears in ISA/session/KNOWLEDGE but not shipped; confirm not deferred-by-decision
-- 🚫 **REJECTED** — previously decided against; only re-surface if context changed (state what changed)
-- ✅ **DONE** — already implemented; goes to Skipped Content with evidence, NOT here
+- **NEW** — no prior trace in Algorithm, PATTERNS.yaml, hooks, ISAs, KNOWLEDGE, or MEMORY
+- **PARTIAL** — partially implemented; row scopes only the missing delta
+- **DISCUSSED** — appears in ISA/session/KNOWLEDGE but not shipped; confirm not deferred-by-decision
+- **REJECTED** — previously decided against; only re-surface if context changed (state what changed)
+- ✓ **DONE** — already implemented; goes to Skipped Content with evidence, NOT here
 
-### 🔴 CRITICAL — Integrate immediately
+### ● CRITICAL — Integrate immediately
 Fixes gaps, security issues, or unlocks capabilities PAI should already have.
 
 | # | Recommendation | Prior Status | Evidence | PAI Relevance | Effort | Files Affected |
 |---|---------------|-------------|----------|---------------|--------|----------------|
 
-### 🟠 HIGH — Integrate this week
+### ● HIGH — Integrate this week
 Significantly improves PAI capabilities or efficiency.
 
-### 🟡 MEDIUM — Integrate when convenient
+### ● MEDIUM — Integrate when convenient
 Useful capabilities or ecosystem alignment.
 
-### 🟢 LOW — Awareness / future reference
+### ● LOW — Awareness / future reference
 Nice-to-know or will become relevant later.
 
 (Emit only the tiers that have items.)
 
 ---
 
-## 🎯 Technique Details
+## Technique Details
 
 Numbered to match Recommendations. One block per technique.
 
@@ -76,7 +76,7 @@ Numbered to match Recommendations. One block per technique.
 
 #### [N]. [Technique Name]
 **Source:** [exact source with version/timestamp]
-**Priority:** 🔴 CRITICAL | 🟠 HIGH | 🟡 MEDIUM | 🟢 LOW
+**Priority:** ● CRITICAL | ● HIGH | ● MEDIUM | ● LOW
 
 **What It Is:** [≤2 sentences, concrete and specific — what the technique does, how it works, what capability it provides]
 
@@ -95,9 +95,9 @@ Numbered to match Recommendations. One block per technique.
 ### From GitHub Trending Projects (variant)
 
 ```markdown
-#### [N]. [Project Name] ([stars] ⭐)
+#### [N]. [Project Name] ([stars] ★)
 **Source:** GitHub: [owner/repo] — [category query that found it]
-**Priority:** 🔴 | 🟠 | 🟡 | 🟢
+**Priority:** ● | ● | ● | ●
 
 **What It Is:** [≤2 sentences]
 **How It Helps PAI:** [≤2 sentences]
@@ -111,7 +111,7 @@ Numbered to match Recommendations. One block per technique.
 
 ---
 
-## 🪞 Internal Reflections (Thread 3)
+## Internal Reflections (Thread 3)
 
 ```markdown
 **Source:** ~/.claude/PAI/MEMORY/LEARNING/REFLECTIONS/algorithm-reflections.jsonl
@@ -130,7 +130,7 @@ If no reflections yet:
 
 ---
 
-## 📊 Summary
+## Summary
 
 | # | Technique | Source | Priority | PAI Component | Effort |
 |---|-----------|--------|----------|---------------|--------|
@@ -139,7 +139,7 @@ If no reflections yet:
 
 ---
 
-## ⏭️ Skipped Content
+## Skipped Content
 
 | Content | Source | Why Skipped | Evidence |
 |---------|--------|-------------|----------|
@@ -148,7 +148,7 @@ If no reflections yet:
 
 ---
 
-## 🔍 Sources Processed
+## Sources Processed
 
 One-line digest of source counts and routing.
 

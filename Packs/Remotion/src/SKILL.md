@@ -4,7 +4,7 @@ description: "Creates programmatic video with React via Remotion — builds comp
 effort: medium
 ---
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 

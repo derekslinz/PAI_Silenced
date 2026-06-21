@@ -429,11 +429,11 @@ ${verificationSection}
 
 function getSignificanceBadge(significance: SignificanceLabel): string {
   const badges: Record<SignificanceLabel, string> = {
-    critical: '🔴 Critical',
-    major: '🟠 Major',
-    moderate: '🟡 Moderate',
-    minor: '🟢 Minor',
-    trivial: '⚪ Trivial',
+    critical: '● Critical',
+    major: '● Major',
+    moderate: '● Moderate',
+    minor: '● Minor',
+    trivial: '○ Trivial',
   };
   return badges[significance];
 }

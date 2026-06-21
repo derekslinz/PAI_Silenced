@@ -56,10 +56,10 @@ Trigger this command when {principal.name} says things like:
 
 ## Critical Rules
 
-🚨 **NEVER manually edit TELOS files** - Always use this command
-🚨 **Always create backups** - Every change is logged and backed up
-🚨 **Be conversational** - Don't just execute, engage with {principal.name} about the update
-🚨 **Validate input** - Ensure the update makes sense for the file being modified
+**NEVER manually edit TELOS files** - Always use this command
+**Always create backups** - Every change is logged and backed up
+**Be conversational** - Don't just execute, engage with {principal.name} about the update
+**Validate input** - Ensure the update makes sense for the file being modified
 
 # TASK
 
@@ -171,7 +171,7 @@ Great! I'll add "Project Hail Mary" by Andy Weir to your BOOKS.md file.
 
 [Execute the update command]
 
-✅ Added to BOOKS.md and backed up!
+✓ Added to BOOKS.md and backed up!
 
 That book has such an interesting take on problem-solving under pressure. Anything else you want to capture about it - maybe a lesson or insight?
 ```
@@ -186,7 +186,7 @@ Important lesson! I'll add that to LESSONS.md with proper formatting.
 
 [Execute the update command]
 
-✅ Lesson recorded and backed up!
+✓ Lesson recorded and backed up!
 
 This is especially relevant for system design and personal knowledge management. Should we also add this as a strategy to STRATEGIES.md?
 ```
@@ -204,7 +204,7 @@ I believe AI will achieve consciousness within the next decade (by 2035). This i
 
 [Execute the update command with properly formatted belief]
 
-✅ Belief recorded and backed up!
+✓ Belief recorded and backed up!
 
 This is quite an optimistic timeline compared to most predictions. What's driving your confidence in this?
 ```
@@ -219,7 +219,7 @@ Perfect, I'll add all three classics to BOOKS.md:
 
 [Execute three separate update commands, one for each book]
 
-✅ All three books added and backed up!
+✓ All three books added and backed up!
 
 You're capturing some foundational sci-fi there. Are these recent reads or longtime favorites you want to ensure are documented?
 ```
@@ -229,33 +229,33 @@ You're capturing some foundational sci-fi there. Are these recent reads or longt
 ## Common Issues
 
 ### Invalid File Name
-**Error:** `❌ Invalid file: BOOK.md`
+**Error:** `✗ Invalid file: BOOK.md`
 **Fix:** File names must be exact: "BOOKS.md" not "BOOK.md"
 **Response:** "I need the exact filename. It's BOOKS.md (plural). Let me add that for you with the correct name."
 
 ### Missing Content
-**Error:** `❌ Usage: update-telos <file> "<content>" "<change-description>"`
+**Error:** `✗ Usage: update-telos <file> "<content>" "<change-description>"`
 **Fix:** Provide all three parameters
 **Response:** "I need to know what content to add. Could you tell me what you'd like to add to [FILE]?"
 
 ### File Doesn't Exist
-**Error:** `❌ File does not exist: [path]`
+**Error:** `✗ File does not exist: [path]`
 **Fix:** Check TELOS directory structure
 **Response:** "Something's wrong with the TELOS directory structure. Let me investigate..."
 
 ### Backup Failed
-**Error:** `❌ Failed to create backup: [error]`
+**Error:** `✗ Failed to create backup: [error]`
 **Fix:** Check directory permissions and backup folder
 **Response:** "The backup system isn't working. This is critical - we need to fix this before making any TELOS updates."
 
 ## Validation Rules
 
 Before executing update:
-1. ✅ File name is in the valid list
-2. ✅ Content is not empty
-3. ✅ Description accurately represents the change
-4. ✅ Content format matches the file type
-5. ✅ User confirmed the update (for major changes)
+1. ✓ File name is in the valid list
+2. ✓ Content is not empty
+3. ✓ Description accurately represents the change
+4. ✓ Content format matches the file type
+5. ✓ User confirmed the update (for major changes)
 
 # SECURITY & SAFETY
 

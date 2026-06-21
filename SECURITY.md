@@ -67,7 +67,7 @@ When copying from PAI_DIRECTORY to PAI:
 
 ---
 
-## 🛡️ PROMPT INJECTION & INPUT VALIDATION
+## PROMPT INJECTION & INPUT VALIDATION
 
 ### Core Security Principle
 
@@ -101,7 +101,7 @@ curl -L "[USER_PROVIDED_URL]"
 **Attack:** `https://example.com"; rm -rf / #`
 **Result:** Executes `curl` then `rm -rf /` (deletes filesystem)
 
-**✅ SAFE (Separate Arguments):**
+**✓ SAFE (Separate Arguments):**
 ```typescript
 import { execFile } from 'child_process';
 
@@ -109,7 +109,7 @@ import { execFile } from 'child_process';
 const { stdout } = await execFile('curl', ['-L', validatedUrl]);
 ```
 
-**✅ EVEN BETTER (HTTP Library):**
+**✓ EVEN BETTER (HTTP Library):**
 ```typescript
 import { fetch } from 'bun';
 

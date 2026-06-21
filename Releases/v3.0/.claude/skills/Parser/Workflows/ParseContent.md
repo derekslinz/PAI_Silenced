@@ -246,11 +246,11 @@ Running the **ParseContent** workflow in the **Parser** skill to parse URLs...
 
 **Output to User:**
 ```
-✅ Parsed: [title]
-📄 Output: [filename]
-📊 Stats: [word_count] words, [people_count] people, [company_count] companies, [link_count] links
-🎯 Confidence: [confidence_score]
-⚠️ Warnings: [warnings if any]
+✓ Parsed: [title]
+Output: [filename]
+Stats: [word_count] words, [people_count] people, [company_count] companies, [link_count] links
+Confidence: [confidence_score]
+Warnings: [warnings if any]
 ```
 
 ---
@@ -268,19 +268,19 @@ Running the **ParseContent** workflow in the **Parser** skill to parse URLs...
 **Progress updates:**
 ```
 Processing 1 of 5: [URL]
-✅ Completed: [filename]
+✓ Completed: [filename]
 
 Processing 2 of 5: [URL]
-❌ Failed: [error message]
+✗ Failed: [error message]
 
 ...
 ```
 
 **Summary report:**
 ```
-📊 Batch Processing Complete
-✅ Successful: 4/5
-❌ Failed: 1/5
+Batch Processing Complete
+✓ Successful: 4/5
+✗ Failed: 1/5
 
 Output files:
 - 20251114-153045_article-1.json
@@ -365,10 +365,10 @@ User: "Parse this article: https://anthropic.com/news/claude-3"
 5. Populates schema
 6. Validates and outputs JSON
 
-✅ Parsed: Claude 3 Model Family Announcement
-📄 Output: 20251114-153045_claude-3-announcement.json
-📊 Stats: 2,500 words, 5 people, 3 companies, 12 links
-🎯 Confidence: 0.92
+✓ Parsed: Claude 3 Model Family Announcement
+Output: 20251114-153045_claude-3-announcement.json
+Stats: 2,500 words, 5 people, 3 companies, 12 links
+Confidence: 0.92
 ```
 
 **Example 2: YouTube Video**
@@ -383,10 +383,10 @@ User: "Parse this YouTube video: https://youtube.com/watch?v=abc123"
 5. Extracts channel info and description links
 6. Outputs JSON
 
-✅ Parsed: AI Safety Interview with Anthropic CEO
-📄 Output: 20251114-153120_ai-safety-interview.json
-📊 Stats: 8,000 words (transcript), 3 people, 5 companies, 7 links
-🎯 Confidence: 0.88
+✓ Parsed: AI Safety Interview with Anthropic CEO
+Output: 20251114-153120_ai-safety-interview.json
+Stats: 8,000 words (transcript), 3 people, 5 companies, 7 links
+Confidence: 0.88
 ```
 
 **Example 3: Batch Processing**
@@ -399,8 +399,8 @@ User: "Parse these 3 URLs:
 {DAIDENTITY.NAME}:
 [Processes each sequentially]
 
-📊 Batch Processing Complete
-✅ Successful: 3/3
+Batch Processing Complete
+✓ Successful: 3/3
 
 Output files:
 - 20251114-153215_attention-all-you-need.json (PDF)

@@ -255,13 +255,13 @@ function formatDiagnostics(
 
   // Screenshot (if taken)
   if (screenshotPath) {
-    lines.push(`📸 Screenshot: ${screenshotPath}`)
+    lines.push(`Screenshot: ${screenshotPath}`)
     lines.push('')
   }
 
   // Console errors
   if (diag.errors.length > 0) {
-    lines.push(`🔴 Console Errors (${diag.errors.length}):`)
+    lines.push(`● Console Errors (${diag.errors.length}):`)
     for (const err of diag.errors.slice(0, 5)) {
       lines.push(`   • ${truncate(err.text, 100)}`)
     }
@@ -273,7 +273,7 @@ function formatDiagnostics(
 
   // Console warnings
   if (diag.warnings.length > 0) {
-    lines.push(`⚠️ Console Warnings (${diag.warnings.length}):`)
+    lines.push(`Console Warnings (${diag.warnings.length}):`)
     for (const warn of diag.warnings.slice(0, 3)) {
       lines.push(`   • ${truncate(warn.text, 100)}`)
     }
@@ -285,7 +285,7 @@ function formatDiagnostics(
 
   // Failed requests
   if (diag.failedRequests.length > 0) {
-    lines.push(`🌐 Failed Requests (${diag.failedRequests.length}):`)
+    lines.push(`Failed Requests (${diag.failedRequests.length}):`)
     for (const req of diag.failedRequests.slice(0, 5)) {
       const urlPath = new URL(req.url).pathname
       lines.push(`   • ${req.method} ${truncate(urlPath, 50)} → ${req.status} ${req.statusText || ''}`)
@@ -297,14 +297,14 @@ function formatDiagnostics(
   }
 
   // Network summary
-  lines.push(`📊 Network: ${diag.stats.totalRequests} requests | ${formatBytes(diag.stats.totalSize)} | avg ${Math.round(diag.stats.avgDuration)}ms`)
+  lines.push(`Network: ${diag.stats.totalRequests} requests | ${formatBytes(diag.stats.totalSize)} | avg ${Math.round(diag.stats.avgDuration)}ms`)
 
   // Final status
   const hasIssues = diag.errors.length > 0 || diag.failedRequests.length > 0
   if (hasIssues) {
-    lines.push(`⚠️ Page: "${diag.pageTitle}" loaded with issues`)
+    lines.push(`Page: "${diag.pageTitle}" loaded with issues`)
   } else {
-    lines.push(`✅ Page: "${diag.pageTitle}" loaded successfully`)
+    lines.push(`✓ Page: "${diag.pageTitle}" loaded successfully`)
   }
 
   return lines.join('\n')
@@ -334,11 +334,11 @@ async function showErrors(): Promise<void> {
   const diag = await sessionCommand('diagnostics', {}, 'GET') as Diagnostics
 
   if (diag.errors.length === 0) {
-    console.log('✅ No console errors')
+    console.log('✓ No console errors')
     return
   }
 
-  console.log(`🔴 Console Errors (${diag.errors.length}):\n`)
+  console.log(`● Console Errors (${diag.errors.length}):\n`)
   for (const err of diag.errors) {
     const time = new Date(err.timestamp).toLocaleTimeString()
     console.log(`[${time}] ${err.text}\n`)
@@ -349,11 +349,11 @@ async function showWarnings(): Promise<void> {
   const diag = await sessionCommand('diagnostics', {}, 'GET') as Diagnostics
 
   if (diag.warnings.length === 0) {
-    console.log('✅ No console warnings')
+    console.log('✓ No console warnings')
     return
   }
 
-  console.log(`⚠️ Console Warnings (${diag.warnings.length}):\n`)
+  console.log(`Console Warnings (${diag.warnings.length}):\n`)
   for (const warn of diag.warnings) {
     const time = new Date(warn.timestamp).toLocaleTimeString()
     console.log(`[${time}] ${warn.text}\n`)
@@ -368,16 +368,16 @@ async function showConsole(): Promise<void> {
   }>
 
   if (logs.length === 0) {
-    console.log('📋 No console output')
+    console.log('No console output')
     return
   }
 
-  console.log(`📋 Console Output (${logs.length} entries):\n`)
+  console.log(`Console Output (${logs.length} entries):\n`)
   for (const log of logs) {
     const time = new Date(log.timestamp).toLocaleTimeString()
-    const icon = log.type === 'error' ? '🔴' :
-                 log.type === 'warning' ? '⚠️' :
-                 log.type === 'info' ? 'ℹ️' : '   '
+    const icon = log.type === 'error' ? '●' :
+                 log.type === 'warning' ? '' :
+                 log.type === 'info' ? '' : '   '
     console.log(`${icon} [${time}] ${log.text}`)
   }
 }
@@ -393,18 +393,18 @@ async function showNetwork(): Promise<void> {
   }>
 
   if (logs.length === 0) {
-    console.log('🌐 No network activity')
+    console.log('No network activity')
     return
   }
 
   // Show only responses (more useful)
   const responses = logs.filter(l => l.type === 'response')
 
-  console.log(`🌐 Network Activity (${responses.length} responses):\n`)
+  console.log(`Network Activity (${responses.length} responses):\n`)
   for (const log of responses.slice(-20)) {
     const urlPath = new URL(log.url).pathname
     const status = log.status || 0
-    const icon = status >= 400 ? '❌' : status >= 300 ? '↪️' : '✅'
+    const icon = status >= 400 ? '✗' : status >= 300 ? '' : '✓'
     const size = log.size ? formatBytes(log.size) : ''
     const duration = log.duration ? `${log.duration}ms` : ''
     console.log(`${icon} ${status} ${log.method} ${truncate(urlPath, 50)} ${size} ${duration}`)
@@ -415,20 +415,20 @@ async function showFailed(): Promise<void> {
   const diag = await sessionCommand('diagnostics', {}, 'GET') as Diagnostics
 
   if (diag.failedRequests.length === 0) {
-    console.log('✅ No failed requests')
+    console.log('✓ No failed requests')
     return
   }
 
-  console.log(`🌐 Failed Requests (${diag.failedRequests.length}):\n`)
+  console.log(`Failed Requests (${diag.failedRequests.length}):\n`)
   for (const req of diag.failedRequests) {
-    console.log(`❌ ${req.status} ${req.method} ${req.url}`)
+    console.log(`✗ ${req.status} ${req.method} ${req.url}`)
   }
 }
 
 async function takeScreenshot(path?: string): Promise<void> {
   const screenshotPath = path || join(tmpdir(), `screenshot-${Date.now()}.png`)
   await sessionCommand('screenshot', { path: screenshotPath })
-  console.log(`📸 Screenshot: ${screenshotPath}`)
+  console.log(`Screenshot: ${screenshotPath}`)
 }
 
 async function navigate(url: string): Promise<void> {

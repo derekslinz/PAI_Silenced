@@ -14,7 +14,7 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo "🔍 PAIVoice Server Setup Validator"
+echo "PAIVoice Server Setup Validator"
 echo "=========================================="
 echo ""
 
@@ -28,10 +28,10 @@ check_requirement() {
     local install_hint=$3
     
     if eval "$check_command" &>/dev/null; then
-        echo -e "${GREEN}✅ $name${NC}"
+        echo -e "${GREEN}✓ $name${NC}"
         return 0
     else
-        echo -e "${RED}❌ $name${NC}"
+        echo -e "${RED}✗ $name${NC}"
         echo "   $install_hint"
         ISSUES_FOUND=$((ISSUES_FOUND + 1))
         return 1
@@ -45,17 +45,17 @@ check_warning() {
     local hint=$3
     
     if eval "$check_command" &>/dev/null; then
-        echo -e "${GREEN}✅ $name${NC}"
+        echo -e "${GREEN}✓ $name${NC}"
         return 0
     else
-        echo -e "${YELLOW}⚠️  $name${NC}"
+        echo -e "${YELLOW} $name${NC}"
         echo "   $hint"
         WARNINGS_FOUND=$((WARNINGS_FOUND + 1))
         return 1
     fi
 }
 
-echo "📋 Checking Requirements:"
+echo "Checking Requirements:"
 echo ""
 
 # Check Bun installation
@@ -71,22 +71,22 @@ check_requirement "Server file exists" \
 # Check if port 8888 is available or used by our service
 PORT_CHECK=$(lsof -i :8888 2>/dev/null | grep -v COMMAND | head -1)
 if [ -z "$PORT_CHECK" ]; then
-    echo -e "${GREEN}✅ Port 8888 available${NC}"
+    echo -e "${GREEN}✓ Port 8888 available${NC}"
 elif echo "$PORT_CHECK" | grep -q "bun"; then
-    echo -e "${GREEN}✅ Port 8888 used by voice server (bun)${NC}"
+    echo -e "${GREEN}✓ Port 8888 used by voice server (bun)${NC}"
 else
-    echo -e "${RED}❌ Port 8888 used by another service${NC}"
+    echo -e "${RED}✗ Port 8888 used by another service${NC}"
     echo "   Stop the conflicting service or change PORT in ~/.env"
     ISSUES_FOUND=$((ISSUES_FOUND + 1))
 fi
 
 echo ""
-echo "🔑 Checking API Configuration:"
+echo "Checking API Configuration:"
 echo ""
 
 # Check ~/.env file exists
 if [ -f ~/.env ]; then
-    echo -e "${GREEN}✅ ~/.env file exists${NC}"
+    echo -e "${GREEN}✓ ~/.env file exists${NC}"
     
     # Check for ElevenLabs API key
     if grep -q "ELEVENLABS_API_KEY=" ~/.env 2>/dev/null; then
@@ -97,13 +97,13 @@ if [ -f ~/.env ]; then
                 "false" \
                 "Replace placeholder with actual API key from https://elevenlabs.io"
         else
-            echo -e "${GREEN}✅ ElevenLabs API key configured${NC}"
+            echo -e "${GREEN}✓ ElevenLabs API key configured${NC}"
             
             # Check if voice ID is set
             if grep -q "ELEVENLABS_VOICE_ID=" ~/.env 2>/dev/null; then
-                echo -e "${GREEN}✅ Custom voice ID configured${NC}"
+                echo -e "${GREEN}✓ Custom voice ID configured${NC}"
             else
-                echo -e "${BLUE}ℹ️  Using default voice (Kai)${NC}"
+                echo -e "${BLUE} Using default voice (Kai)${NC}"
             fi
         fi
     else
@@ -118,12 +118,12 @@ else
 fi
 
 echo ""
-echo "🚀 Checking Service Status:"
+echo "Checking Service Status:"
 echo ""
 
 # Check if service is installed
 if [ -f ~/Library/LaunchAgents/com.paivoice.server.plist ]; then
-    echo -e "${GREEN}✅ Service is installed${NC}"
+    echo -e "${GREEN}✓ Service is installed${NC}"
     
     # Check if service is running
     if launchctl list | grep -q "com.paivoice.server"; then
@@ -131,51 +131,51 @@ if [ -f ~/Library/LaunchAgents/com.paivoice.server.plist ]; then
         PID=$(echo "$STATUS_LINE" | awk '{print $1}')
         
         if [ "$PID" != "-" ]; then
-            echo -e "${GREEN}✅ Service is running (PID: $PID)${NC}"
+            echo -e "${GREEN}✓ Service is running (PID: $PID)${NC}"
             
             # Test server endpoint
             if curl -s http://localhost:8888/health > /dev/null 2>&1; then
-                echo -e "${GREEN}✅ Server is responding${NC}"
+                echo -e "${GREEN}✓ Server is responding${NC}"
             else
-                echo -e "${RED}❌ Server not responding${NC}"
+                echo -e "${RED}✗ Server not responding${NC}"
                 echo "   Check logs: tail -f \$PAI_DIR/VoiceServer/logs/voice-server-error.log"
                 ISSUES_FOUND=$((ISSUES_FOUND + 1))
             fi
         else
-            echo -e "${YELLOW}⚠️  Service is loaded but not running${NC}"
+            echo -e "${YELLOW} Service is loaded but not running${NC}"
             echo "   Start with: launchctl start com.paivoice.server"
             WARNINGS_FOUND=$((WARNINGS_FOUND + 1))
         fi
     else
-        echo -e "${YELLOW}⚠️  Service is installed but not loaded${NC}"
+        echo -e "${YELLOW} Service is installed but not loaded${NC}"
         echo "   Load with: launchctl load ~/Library/LaunchAgents/com.paivoice.server.plist"
         WARNINGS_FOUND=$((WARNINGS_FOUND + 1))
     fi
 else
-    echo -e "${BLUE}ℹ️  Service not installed${NC}"
+    echo -e "${BLUE} Service not installed${NC}"
     echo "   Install with: ./install.sh"
 fi
 
 echo ""
-echo "📊 Summary:"
+echo "Summary:"
 echo "=========="
 
 if [ $ISSUES_FOUND -eq 0 ] && [ $WARNINGS_FOUND -eq 0 ]; then
-    echo -e "${GREEN}✨ Everything looks good! Your setup is complete.${NC}"
+    echo -e "${GREEN}★ Everything looks good! Your setup is complete.${NC}"
     echo ""
     echo "Test the server with:"
     echo "  ./voice-server-ctl.sh test"
 elif [ $ISSUES_FOUND -eq 0 ]; then
-    echo -e "${YELLOW}⚠️  Setup is functional with $WARNINGS_FOUND warning(s)${NC}"
+    echo -e "${YELLOW} Setup is functional with $WARNINGS_FOUND warning(s)${NC}"
     echo "The server will work but some features may be limited."
 else
-    echo -e "${RED}❌ Found $ISSUES_FOUND critical issue(s) and $WARNINGS_FOUND warning(s)${NC}"
+    echo -e "${RED}✗ Found $ISSUES_FOUND critical issue(s) and $WARNINGS_FOUND warning(s)${NC}"
     echo "Please fix the critical issues before proceeding."
     exit 1
 fi
 
 echo ""
-echo "📚 Quick Commands:"
+echo "Quick Commands:"
 echo "  Install service:  ./install.sh"
 echo "  Test server:      ./voice-server-ctl.sh test"
 echo "  View logs:        ./voice-server-ctl.sh logs"

@@ -34,7 +34,7 @@ elif [ -d "/Applications/BitBar.app" ]; then
         PLUGIN_DIR="$HOME/BitBar"
     else
         PLUGIN_DIR="$HOME/Documents/BitBarPlugins"
-        echo -e "${YELLOW}▶ Creating BitBar plugin directory...${NC}"
+        echo -e "${YELLOW}► Creating BitBar plugin directory...${NC}"
         mkdir -p "$PLUGIN_DIR"
     fi
 else
@@ -60,7 +60,7 @@ chmod +x "$MENUBAR_SCRIPT"
 mkdir -p "$PLUGIN_DIR"
 
 # Copy or link the script
-echo -e "${YELLOW}▶ Installing menu bar plugin...${NC}"
+echo -e "${YELLOW}► Installing menu bar plugin...${NC}"
 
 # Remove existing plugin if it exists
 rm -f "$PLUGIN_DIR/pai-voice.5s.sh" 2>/dev/null || true
@@ -72,19 +72,19 @@ echo -e "${GREEN}✓ Menu bar plugin installed${NC}"
 
 # Refresh SwiftBar/BitBar
 if [ "$MENUBAR_APP" = "SwiftBar" ]; then
-    echo -e "${YELLOW}▶ Refreshing SwiftBar...${NC}"
+    echo -e "${YELLOW}► Refreshing SwiftBar...${NC}"
     if pgrep -x "SwiftBar" > /dev/null; then
         # SwiftBar refresh via URL scheme
         open -g "swiftbar://refreshall"
         echo -e "${GREEN}✓ SwiftBar refreshed${NC}"
     else
-        echo -e "${YELLOW}▶ Starting SwiftBar...${NC}"
+        echo -e "${YELLOW}► Starting SwiftBar...${NC}"
         open -a SwiftBar
         sleep 2
         echo -e "${GREEN}✓ SwiftBar started${NC}"
     fi
 else
-    echo -e "${YELLOW}▶ Refreshing BitBar...${NC}"
+    echo -e "${YELLOW}► Refreshing BitBar...${NC}"
     if pgrep -x "BitBar" > /dev/null; then
         killall BitBar 2>/dev/null || true
         sleep 1
@@ -98,11 +98,11 @@ echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━
 echo -e "${GREEN}     ✓ Menu Bar Installation Complete${NC}"
 echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo
-echo -e "${BLUE}You should now see a 🎙️ icon in your menu bar!${NC}"
+echo -e "${BLUE}You should now see a icon in your menu bar!${NC}"
 echo
 echo "The icon shows:"
-echo "  • 🎙️ (colored) - Server is running"
-echo "  • 🎙️⚫ (gray) - Server is stopped"
+echo "  • (colored) - Server is running"
+echo "  • ● (gray) - Server is stopped"
 echo
 echo "Click the icon to:"
 echo "  • Start/Stop the server"

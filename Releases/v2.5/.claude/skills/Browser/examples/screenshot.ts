@@ -45,19 +45,19 @@ async function main() {
       fullPage
     })
 
-    console.log(`\n✅ Screenshot saved: ${output}`)
+    console.log(`\n✓ Screenshot saved: ${output}`)
 
     // Token savings calculation
     const mcpTokens = 13700
     const codeTokens = 150
     const savings = ((mcpTokens - codeTokens) / mcpTokens * 100).toFixed(1)
 
-    console.log(`\n📊 Token savings: ${savings}%`)
+    console.log(`\nToken savings: ${savings}%`)
     console.log(`   MCP approach: ~${mcpTokens} tokens`)
     console.log(`   Code approach: ~${codeTokens} tokens`)
 
   } catch (error) {
-    console.error('❌ Error:', error instanceof Error ? error.message : error)
+    console.error('✗ Error:', error instanceof Error ? error.message : error)
     process.exit(1)
   } finally {
     await browser.close()

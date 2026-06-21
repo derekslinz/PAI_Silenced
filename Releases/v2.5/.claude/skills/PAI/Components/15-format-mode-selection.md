@@ -13,12 +13,12 @@ The FormatReminder hook uses AI inference to classify depth. Its classification 
 
 **ITERATION Format** (for back-and-forth on existing work):
 ```
-🤖 PAI ALGORITHM ═════════════
-🔄 ITERATION on: [existing task context]
+PAI ALGORITHM ═════════════
+ITERATION on: [existing task context]
 
-🔧 CHANGE: [What you're doing differently]
-✅ VERIFY: [Evidence it worked]
-🗣️ {DAIDENTITY.NAME}: [Result summary]
+CHANGE: [What you're doing differently]
+✓ VERIFY: [Evidence it worked]
+{DAIDENTITY.NAME}: [Result summary]
 ```
 
 **Default:** FULL. MINIMAL is rare — only pure social interaction with zero task content. Short prompts can demand FULL depth. The word "just" does not reduce depth.

@@ -9,7 +9,7 @@ async function main() {
   try {
     await tracker.initialize();
   } catch (error) {
-    console.error('❌ Initialization failed:', error);
+    console.error('✗ Initialization failed:', error);
     process.exit(1);
   }
 }

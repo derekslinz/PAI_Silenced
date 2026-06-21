@@ -146,17 +146,17 @@ Merge Thread 1 results into a unified context object covering: TELOS goals/focus
 For each discovery from Thread 2 (and candidate from Thread 3):
 
 **0. Prior State match (FIRST GATE)** — search Thread 0 inventory for the proposed concept/file/pattern/capability:
-- Found with same semantics → ✅ **DONE** → Skipped Content with evidence.
-- Subset present → 🔶 **PARTIAL** → scope to missing delta only.
-- Deferred idea in ISA/KNOWLEDGE → 💬 **DISCUSSED** → only re-surface if reason changed; cite the change.
-- Explicit rejection → 🚫 **REJECTED** → skip unless context warrants revisit; name what changed.
-- Not found → 🆕 **NEW**.
+- Found with same semantics → ✓ **DONE** → Skipped Content with evidence.
+- Subset present → **PARTIAL** → scope to missing delta only.
+- Deferred idea in ISA/KNOWLEDGE → **DISCUSSED** → only re-surface if reason changed; cite the change.
+- Explicit rejection → **REJECTED** → skip unless context warrants revisit; name what changed.
+- Not found → **NEW**.
 
 **1. Relevance check** — does this relate to user's tech stack / goals / projects?
 **2. Score relevance** (1-10), **impact** (1-10), **effort** (1-10, 10=easy).
 **3. Priority** = (relevance × 2) + impact + effort.
 
-Filter out relevance < 3. Filter out ✅ DONE (move to Skipped with file:line evidence).
+Filter out relevance < 3. Filter out ✓ DONE (move to Skipped with file:line evidence).
 
 **Mandatory before emitting:** every recommendation row has a Prior Status tag AND file:line evidence from Thread 0.
 
@@ -164,10 +164,10 @@ Filter out relevance < 3. Filter out ✅ DONE (move to Skipped with file:line ev
 
 Sort by priority and tier:
 
-- **🔴 CRITICAL** — score > 30, relevance > 8.
-- **🟠 HIGH** — score 22-30, relevance > 6.
-- **🟡 MEDIUM** — score 14-21, relevance > 4.
-- **🟢 LOW** — score < 14, or relevance 3-4.
+- **● CRITICAL** — score > 30, relevance > 8.
+- **● HIGH** — score 22-30, relevance > 6.
+- **● MEDIUM** — score 14-21, relevance > 4.
+- **● LOW** — score < 14, or relevance 3-4.
 
 Each recommendation: short action name, PAI Relevance (primary framing — WHY it matters), effort (Low/Med/High), files affected.
 
@@ -210,11 +210,11 @@ For each CRITICAL/HIGH recommendation, evaluate against the gate:
 
 Output:
 ```markdown
-## 🔄 Registry Update Proposals
+## Registry Update Proposals
 
 | Discovery | Gate Pass? | Integration Target | Proposed Change |
 |-----------|-----------|--------------------|-----------------|
-| [name] | ✅ All 5 | Algorithm table / SKILL.md | [specific text to add] |
+| [name] | ✓ All 5 | Algorithm table / SKILL.md | [specific text to add] |
 ```
 
 If none pass: "No registry updates needed this cycle."
@@ -244,7 +244,7 @@ Scan `~/.claude/projects/-$(whoami)--claude/memory/MEMORY.md` and each reference
 
 Output:
 ```
-🧹 MEMORY MAINTENANCE:
+MEMORY MAINTENANCE:
  Scanned: [N] memory files
  Deleted: [N] (redundant/stale/resolved)
  Migrated: [N] (moved to steering rules)

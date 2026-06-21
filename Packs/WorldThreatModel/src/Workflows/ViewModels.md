@@ -46,20 +46,20 @@ If it doesn't exist: "No world models found. Run 'update world models' to create
 ### Step 4: Staleness Check
 
 For each model, compare `last_updated` to today:
-- **< 7 days**: 🟢 Fresh
-- **7-30 days**: 🟡 Current
-- **30-90 days**: 🟠 Aging — recommend refresh
-- **> 90 days**: 🔴 Stale — strongly recommend update
+- **< 7 days**: ● Fresh
+- **7-30 days**: ● Current
+- **30-90 days**: ● Aging — recommend refresh
+- **> 90 days**: ● Stale — strongly recommend update
 
 ### Step 5: Output
 
 ```markdown
-# 🌍 World Threat Model Status
+# World Threat Model Status
 
 | Horizon | Last Updated | Version | Confidence | Freshness |
 |---------|-------------|---------|------------|-----------|
-| 6 months | YYYY-MM-DD | N | HIGH | 🟢 Fresh |
-| 1 year | YYYY-MM-DD | N | MEDIUM | 🟡 Current |
+| 6 months | YYYY-MM-DD | N | HIGH | ● Fresh |
+| 1 year | YYYY-MM-DD | N | MEDIUM | ● Current |
 | ... | ... | ... | ... | ... |
 
 ## Summaries

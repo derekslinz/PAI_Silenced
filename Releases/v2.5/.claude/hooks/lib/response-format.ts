@@ -25,7 +25,7 @@ export function getResponseFormatSpec(): string {
     try {
       const content = readFileSync(PAI_SKILL_PATH, 'utf-8');
       // Extract the Response Format section
-      const match = content.match(/## 🚨 Response Format[\s\S]*?(?=\n## |$)/);
+      const match = content.match(/## Response Format[\s\S]*?(?=\n## |$)/);
       formatSpec = match ? match[0] : '';
     } catch {
       formatSpec = '';
@@ -206,6 +206,6 @@ export function getVoiceFallback(): string {
  * Short and non-generic
  */
 export function getTabFallback(stage: 'start' | 'end' = 'start'): string {
-  // NOTE: Do NOT include state symbols (✓, ⚠, ⚙️) here - tab-state.ts adds those based on state
+  // NOTE: Do NOT include state symbols (✓, , ) here - tab-state.ts adds those based on state
   return stage === 'end' ? 'Done.' : 'Working.';
 }

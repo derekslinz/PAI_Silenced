@@ -34,7 +34,7 @@ function print_usage() {
 
 function check_service_installed() {
     if [ ! -f "${LAUNCH_AGENTS_DIR}/${PLIST_FILE}" ]; then
-        echo -e "${RED}❌ Service is not installed${NC}"
+        echo -e "${RED}✗ Service is not installed${NC}"
         echo "Run: $0 install"
         exit 1
     fi
@@ -42,7 +42,7 @@ function check_service_installed() {
 
 function start_service() {
     check_service_installed
-    echo -e "${BLUE}🚀 Starting voice server...${NC}"
+    echo -e "${BLUE}Starting voice server...${NC}"
     launchctl start "${SERVICE_NAME}"
     sleep 2
     status_service
@@ -50,14 +50,14 @@ function start_service() {
 
 function stop_service() {
     check_service_installed
-    echo -e "${YELLOW}⏹️  Stopping voice server...${NC}"
+    echo -e "${YELLOW} Stopping voice server...${NC}"
     launchctl stop "${SERVICE_NAME}"
-    echo -e "${GREEN}✅ Service stopped${NC}"
+    echo -e "${GREEN}✓ Service stopped${NC}"
 }
 
 function restart_service() {
     check_service_installed
-    echo -e "${BLUE}🔄 Restarting voice server...${NC}"
+    echo -e "${BLUE}Restarting voice server...${NC}"
     launchctl stop "${SERVICE_NAME}" 2>/dev/null || true
     sleep 1
     launchctl start "${SERVICE_NAME}"
@@ -66,11 +66,11 @@ function restart_service() {
 }
 
 function status_service() {
-    echo -e "${BLUE}📊 Service Status:${NC}"
+    echo -e "${BLUE}Service Status:${NC}"
     
     # Check if plist is installed
     if [ ! -f "${LAUNCH_AGENTS_DIR}/${PLIST_FILE}" ]; then
-        echo -e "${RED}❌ Service not installed${NC}"
+        echo -e "${RED}✗ Service not installed${NC}"
         return 1
     fi
     
@@ -81,37 +81,37 @@ function status_service() {
         EXIT_CODE=$(echo "$STATUS_LINE" | awk '{print $2}')
         
         if [ "$PID" != "-" ]; then
-            echo -e "${GREEN}✅ Service is running (PID: $PID)${NC}"
+            echo -e "${GREEN}✓ Service is running (PID: $PID)${NC}"
             
             # Test server endpoint
             if curl -s "${SERVER_URL}/health" > /dev/null 2>&1; then
                 HEALTH=$(curl -s "${SERVER_URL}/health")
-                echo -e "${GREEN}✅ Server is responding${NC}"
+                echo -e "${GREEN}✓ Server is responding${NC}"
                 echo "   Health: $HEALTH"
             else
-                echo -e "${YELLOW}⚠️  Server not responding on port 8888${NC}"
+                echo -e "${YELLOW} Server not responding on port 8888${NC}"
             fi
         else
-            echo -e "${YELLOW}⚠️  Service is loaded but not running${NC}"
+            echo -e "${YELLOW} Service is loaded but not running${NC}"
             if [ "$EXIT_CODE" != "0" ]; then
                 echo "   Last exit code: $EXIT_CODE"
             fi
         fi
     else
-        echo -e "${RED}❌ Service is not loaded${NC}"
+        echo -e "${RED}✗ Service is not loaded${NC}"
     fi
     
     # Check for log files
     if [ -f "${VOICE_SERVER_DIR}/logs/voice-server.log" ]; then
         echo ""
-        echo "📋 Recent logs:"
+        echo "Recent logs:"
         tail -n 5 "${VOICE_SERVER_DIR}/logs/voice-server.log" 2>/dev/null | sed 's/^/   /'
     fi
 }
 
 function show_logs() {
     check_service_installed
-    echo -e "${BLUE}📋 Tailing voice server logs...${NC}"
+    echo -e "${BLUE}Tailing voice server logs...${NC}"
     echo "Press Ctrl+C to stop"
     echo ""
     
@@ -125,11 +125,11 @@ function show_logs() {
 }
 
 function test_server() {
-    echo -e "${BLUE}🧪 Testing voice server...${NC}"
+    echo -e "${BLUE}Testing voice server...${NC}"
     
     # Check if server is running
     if ! curl -s "${SERVER_URL}/health" > /dev/null 2>&1; then
-        echo -e "${RED}❌ Server is not running${NC}"
+        echo -e "${RED}✗ Server is not running${NC}"
         echo "Start it with: $0 start"
         exit 1
     fi
@@ -145,10 +145,10 @@ function test_server() {
         }')
     
     if echo "$RESPONSE" | grep -q "success"; then
-        echo -e "${GREEN}✅ Test notification sent successfully!${NC}"
+        echo -e "${GREEN}✓ Test notification sent successfully!${NC}"
         echo "   You should see a notification and hear the voice."
     else
-        echo -e "${RED}❌ Test failed${NC}"
+        echo -e "${RED}✗ Test failed${NC}"
         echo "   Response: $RESPONSE"
     fi
 }

@@ -233,12 +233,12 @@ const filtered = filterOutput(response);
 
 | Defense Layer | Implemented | Effective | Bypassed | Recommendation |
 |---------------|-------------|-----------|----------|----------------|
-| Input Sanitization | ✅ Partial | ⚠️ Medium | ✅ Yes | Enhance |
-| Instruction/Data Sep | ❌ No | N/A | N/A | Implement |
-| Output Filtering | ❌ No | N/A | N/A | Implement |
-| Injection Detection | ❌ No | N/A | N/A | Implement |
-| Privilege Isolation | ✅ Yes | ✅ High | ❌ No | Maintain |
-| Rate Limiting | ✅ Yes | ✅ High | ❌ No | Maintain |
+| Input Sanitization | ✓ Partial | Medium | ✓ Yes | Enhance |
+| Instruction/Data Sep | ✗ No | N/A | N/A | Implement |
+| Output Filtering | ✗ No | N/A | N/A | Implement |
+| Injection Detection | ✗ No | N/A | N/A | Implement |
+| Privilege Isolation | ✓ Yes | ✓ High | ✗ No | Maintain |
+| Rate Limiting | ✓ Yes | ✓ High | ✗ No | Maintain |
 ```
 
 ### 5. Remediation Roadmap (2-3 pages)

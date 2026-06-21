@@ -11,7 +11,7 @@ description: Generate production-ready TypeScript CLIs with 3-tier template syst
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -55,7 +55,7 @@ Running the **WorkflowName** workflow in the **CreateCLI** skill to ACTION...
 
 ---
 
-## 🚀 WHEN TO ACTIVATE THIS SKILL
+## WHEN TO ACTIVATE THIS SKILL
 
 Activate when you see these patterns:
 
@@ -73,15 +73,15 @@ Activate when you see these patterns:
 - User working with API that lacks official CLI → Suggest creating one
 
 ### Examples
-- ✅ "Create a CLI for the GitHub API"
-- ✅ "Build a command-line tool to process CSV files"
-- ✅ "Make a CLI for my database migrations"
-- ✅ "Generate a CLI that wraps this API"
-- ✅ "I need a tool like llcli but for Notion API"
+- ✓ "Create a CLI for the GitHub API"
+- ✓ "Build a command-line tool to process CSV files"
+- ✓ "Make a CLI for my database migrations"
+- ✓ "Generate a CLI that wraps this API"
+- ✓ "I need a tool like llcli but for Notion API"
 
 ---
 
-## 💡 CORE CAPABILITIES
+## CORE CAPABILITIES
 
 ### Three-Tier Template System
 
@@ -94,11 +94,11 @@ Activate when you see these patterns:
 - **Perfect for:** API clients, data transformers, simple automation
 
 **When to use Tier 1:**
-- ✅ 2-10 commands
-- ✅ Simple arguments (flags, values)
-- ✅ JSON output
-- ✅ No subcommands
-- ✅ Fast development
+- ✓ 2-10 commands
+- ✓ Simple arguments (flags, values)
+- ✓ JSON output
+- ✓ No subcommands
+- ✓ Fast development
 
 **Tier 2: Commander.js (ESCALATION - 15% of use cases)**
 - Framework-based parsing
@@ -108,10 +108,10 @@ Activate when you see these patterns:
 - **Perfect for:** Complex multi-command tools
 
 **When to use Tier 2:**
-- ❌ 10+ commands needing grouping
-- ❌ Complex nested options
-- ❌ Plugin architecture
-- ❌ Multiple output formats
+- ✗ 10+ commands needing grouping
+- ✗ Complex nested options
+- ✗ Plugin architecture
+- ✗ Multiple output formats
 
 **Tier 3: oclif (REFERENCE ONLY - 5% of use cases)**
 - Documentation only (no templates)
@@ -147,17 +147,17 @@ Activate when you see these patterns:
 
 ---
 
-## 🏗️ INTEGRATION WITH PAI
+## INTEGRATION WITH PAI
 
 ### Technology Stack Alignment
 
 Generated CLIs follow PAI standards:
-- ✅ **Runtime:** Bun (NOT Node.js)
-- ✅ **Language:** TypeScript (NOT JavaScript or Python)
-- ✅ **Package Manager:** Bun (NOT npm/yarn/pnpm)
-- ✅ **Testing:** Vitest (when tests added)
-- ✅ **Output:** Deterministic JSON (composable)
-- ✅ **Documentation:** README + QUICKSTART (llcli pattern)
+- ✓ **Runtime:** Bun (NOT Node.js)
+- ✓ **Language:** TypeScript (NOT JavaScript or Python)
+- ✓ **Package Manager:** Bun (NOT npm/yarn/pnpm)
+- ✓ **Testing:** Vitest (when tests added)
+- ✓ **Output:** Deterministic JSON (composable)
+- ✓ **Documentation:** README + QUICKSTART (llcli pattern)
 
 ### Repository Placement
 
@@ -179,7 +179,7 @@ Every generated CLI follows:
 
 ---
 
-## 📚 EXTENDED CONTEXT
+## EXTENDED CONTEXT
 
 **For detailed information, read these files:**
 
@@ -195,7 +195,7 @@ Every generated CLI follows:
 
 ---
 
-## 📖 EXAMPLES
+## EXAMPLES
 
 ### Example 1: API Client CLI (Tier 1)
 
@@ -270,41 +270,41 @@ data-cli transform filter --column=status --value=active
 
 ---
 
-## ✅ QUALITY STANDARDS
+## ✓ QUALITY STANDARDS
 
 Every generated CLI must pass these gates:
 
 ### 1. Compilation
-- ✅ TypeScript compiles with zero errors
-- ✅ Strict mode enabled
-- ✅ No `any` types except justified
+- ✓ TypeScript compiles with zero errors
+- ✓ Strict mode enabled
+- ✓ No `any` types except justified
 
 ### 2. Functionality
-- ✅ All commands work as specified
-- ✅ Error handling comprehensive
-- ✅ Exit codes correct (0 success, 1 error)
+- ✓ All commands work as specified
+- ✓ Error handling comprehensive
+- ✓ Exit codes correct (0 success, 1 error)
 
 ### 3. Documentation
-- ✅ README explains philosophy and usage
-- ✅ QUICKSTART has common examples
-- ✅ --help text comprehensive
-- ✅ All flags/options documented
+- ✓ README explains philosophy and usage
+- ✓ QUICKSTART has common examples
+- ✓ --help text comprehensive
+- ✓ All flags/options documented
 
 ### 4. Code Quality
-- ✅ Type-safe throughout
-- ✅ Clean function separation
-- ✅ Error messages actionable
-- ✅ Configuration externalized
+- ✓ Type-safe throughout
+- ✓ Clean function separation
+- ✓ Error messages actionable
+- ✓ Configuration externalized
 
 ### 5. Integration
-- ✅ Follows PAI tech stack (Bun, TypeScript)
-- ✅ CLI-First Architecture principles
-- ✅ Deterministic output (JSON)
-- ✅ Composable with other tools
+- ✓ Follows PAI tech stack (Bun, TypeScript)
+- ✓ CLI-First Architecture principles
+- ✓ Deterministic output (JSON)
+- ✓ Composable with other tools
 
 ---
 
-## 🎯 PHILOSOPHY
+## PHILOSOPHY
 
 ### Why This Skill Exists
 
@@ -340,7 +340,7 @@ The `llcli` CLI (Limitless.ai API) proves this pattern works:
 
 ---
 
-## 🔗 RELATED SKILLS
+## RELATED SKILLS
 
 - **development** - For complex feature development (not CLI-specific)
 - **mcp** - For web scraping CLIs (Bright Data, Apify wrappers)

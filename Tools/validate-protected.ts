@@ -57,7 +57,7 @@ const RESET = '\x1b[0m';
 
 function loadManifest(): ProtectedManifest {
   if (!existsSync(MANIFEST_PATH)) {
-    console.error(`${RED}❌ Protected files manifest not found: ${MANIFEST_PATH}${RESET}`);
+    console.error(`${RED}✗ Protected files manifest not found: ${MANIFEST_PATH}${RESET}`);
     process.exit(1);
   }
 
@@ -338,7 +338,7 @@ async function main() {
   const args = process.argv.slice(2);
   const stagedOnly = args.includes('--staged');
 
-  console.log(`\n${BLUE}🛡️  PAI Protected Files Validator${RESET}\n`);
+  console.log(`\n${BLUE} PAI Protected Files Validator${RESET}\n`);
   console.log('='.repeat(60));
 
   const manifest = loadManifest();
@@ -353,12 +353,12 @@ async function main() {
     // Check for forbidden directories FIRST
     const forbiddenViolations = checkForbiddenDirectories(stagedFiles, manifest);
     if (forbiddenViolations.length > 0) {
-      console.log(`\n${RED}🚫 FORBIDDEN DIRECTORIES DETECTED${RESET}\n`);
+      console.log(`\n${RED}FORBIDDEN DIRECTORIES DETECTED${RESET}\n`);
       for (const violation of forbiddenViolations) {
-        console.log(`${RED}❌${RESET} ${violation}`);
+        console.log(`${RED}✗${RESET} ${violation}`);
       }
       console.log('\n' + '='.repeat(60));
-      console.log(`\n${RED}🚫 COMMIT BLOCKED${RESET}\n`);
+      console.log(`\n${RED}COMMIT BLOCKED${RESET}\n`);
       console.log('These directories contain private Kai data and must NOT be in public PAI.');
       console.log('\n' + YELLOW + 'To fix:' + RESET);
       console.log('  1. git reset HEAD <file> to unstage');
@@ -372,15 +372,15 @@ async function main() {
     const sensitiveResults = scanAllFilesForSensitiveContent(stagedFiles, manifest);
 
     if (sensitiveResults.length > 0) {
-      console.log(`${RED}🚫 SENSITIVE CONTENT DETECTED${RESET}\n`);
+      console.log(`${RED}SENSITIVE CONTENT DETECTED${RESET}\n`);
       for (const result of sensitiveResults) {
-        console.log(`${RED}❌${RESET} ${result.file}`);
+        console.log(`${RED}✗${RESET} ${result.file}`);
         for (const violation of result.violations) {
           console.log(`   ${RED}→${RESET} ${violation}`);
         }
       }
       console.log('\n' + '='.repeat(60));
-      console.log(`\n${RED}🚫 COMMIT BLOCKED${RESET}\n`);
+      console.log(`\n${RED}COMMIT BLOCKED${RESET}\n`);
       console.log('Files contain sensitive content that must NOT be in public PAI:\n');
       console.log('  Categories checked:');
       console.log('  - api_keys          (Anthropic, OpenAI, AWS, Stripe, etc.)');
@@ -407,13 +407,13 @@ async function main() {
       process.exit(1);
     }
 
-    console.log(`${GREEN}✅ No sensitive content found in staged files${RESET}\n`);
+    console.log(`${GREEN}✓ No sensitive content found in staged files${RESET}\n`);
     console.log('='.repeat(60));
 
     filesToCheck = allProtectedFiles.filter(f => stagedFiles.includes(f));
 
     if (filesToCheck.length === 0) {
-      console.log(`\n${GREEN}✅ No protected files staged for commit${RESET}\n`);
+      console.log(`\n${GREEN}✓ No protected files staged for commit${RESET}\n`);
       process.exit(0);
     }
 
@@ -439,9 +439,9 @@ async function main() {
   // Print results
   for (const result of results) {
     if (result.valid) {
-      console.log(`${GREEN}✅${RESET} ${result.file}`);
+      console.log(`${GREEN}✓${RESET} ${result.file}`);
     } else {
-      console.log(`${RED}❌${RESET} ${result.file}`);
+      console.log(`${RED}✗${RESET} ${result.file}`);
       for (const violation of result.violations) {
         console.log(`   ${RED}→${RESET} ${violation}`);
       }
@@ -451,17 +451,17 @@ async function main() {
   console.log('\n' + '='.repeat(60));
 
   if (hasViolations) {
-    console.log(`\n${RED}🚫 VALIDATION FAILED${RESET}\n`);
+    console.log(`\n${RED}VALIDATION FAILED${RESET}\n`);
     console.log('Protected files contain content that should not be in public PAI.');
     console.log('\n' + YELLOW + 'Common fixes:' + RESET);
     console.log('  1. Remove API keys and secrets');
     console.log('  2. Remove personal email addresses');
     console.log('  3. Remove references to private Kai data');
     console.log('  4. Ensure PAI-specific files reference "PAI" not "Kai"');
-    console.log('\n📖 See .pai-protected.json for details\n');
+    console.log('\nSee .pai-protected.json for details\n');
     process.exit(1);
   } else {
-    console.log(`\n${GREEN}✅ All protected files validated successfully!${RESET}\n`);
+    console.log(`\n${GREEN}✓ All protected files validated successfully!${RESET}\n`);
     console.log('Safe to commit to PAI repository.\n');
     process.exit(0);
   }

@@ -11,21 +11,21 @@ extracted_from: SKILL.md lines 339-401
 
 ---
 
-## 📚 Documentation Index & Route Triggers
+## Documentation Index & Route Triggers
 
 **All documentation files are in `~/.claude/skills/PAI/` with SYSTEM/ and USER/ subdirectories. Read these files when you need deeper context.**
 
 **Core Architecture & Philosophy:**
-- `SYSTEM/PAISYSTEMARCHITECTURE.md` - System architecture and philosophy, foundational principles (CLI-First, Deterministic Code, Prompts Wrap Code) | ⭐ PRIMARY REFERENCE | Triggers: "system architecture", "how does the system work", "system principles"
+- `SYSTEM/PAISYSTEMARCHITECTURE.md` - System architecture and philosophy, foundational principles (CLI-First, Deterministic Code, Prompts Wrap Code) | ★ PRIMARY REFERENCE | Triggers: "system architecture", "how does the system work", "system principles"
 - `SYSTEM/SYSTEM_USER_EXTENDABILITY.md` - Two-tier SYSTEM/USER architecture for extensibility | Triggers: "two tier", "system vs user", "how to extend", "customization pattern"
 - `SYSTEM/CLIFIRSTARCHITECTURE.md` - CLI-First pattern details
-- `SYSTEM/SKILLSYSTEM.md` - Custom skill system with triggers and workflow routing | ⭐ CRITICAL | Triggers: "how to structure a skill", "skill routing", "create new skill"
+- `SYSTEM/SKILLSYSTEM.md` - Custom skill system with triggers and workflow routing | ★ CRITICAL | Triggers: "how to structure a skill", "skill routing", "create new skill"
 
 **Skill Execution:**
 
 When a skill is invoked, follow the SKILL.md instructions step-by-step: execute voice notifications, use the routing table to find the workflow, and follow the workflow instructions in order.
 
-**🚨 MANDATORY USE WHEN FORMAT (Always Active):**
+**MANDATORY USE WHEN FORMAT (Always Active):**
 
 Every skill description MUST use this format:
 ```
@@ -64,7 +64,7 @@ See `SYSTEM/SKILLSYSTEM.md` for complete documentation.
 - `SYSTEM/TERMINALTABS.md` - Terminal tab state system (colors + suffixes for working/completed/awaiting/error states) | Triggers: "tab colors", "tab state", "kitty tabs"
 
 **Reference Data:**
-- `USER/ASSETMANAGEMENT.md` - Digital assets registry for instant recognition & vulnerability management | ⭐ CRITICAL | Triggers: "my site", "vulnerability", "what uses React", "upgrade path", "tech stack"
+- `USER/ASSETMANAGEMENT.md` - Digital assets registry for instant recognition & vulnerability management | ★ CRITICAL | Triggers: "my site", "vulnerability", "what uses React", "upgrade path", "tech stack"
 - `USER/CONTACTS.md` - Complete contact directory | Triggers: "who is Angela", "Bunny's email", "show contacts" | Top 7 quick ref below
 - `USER/DEFINITIONS.md` - Canonical definitions | Triggers: "definition of AGI", "how do we define X"
 - `SYSTEM/PAISECURITYSYSTEM/` - Security architecture, patterns, and defense protocols | Triggers: "security system", "security patterns", "prompt injection"

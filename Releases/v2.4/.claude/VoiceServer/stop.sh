@@ -11,7 +11,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo -e "${YELLOW}▶ Stopping Voice Server...${NC}"
+echo -e "${YELLOW}► Stopping Voice Server...${NC}"
 
 # Check if service is loaded
 if launchctl list | grep -q "$SERVICE_NAME" 2>/dev/null; then
@@ -25,12 +25,12 @@ if launchctl list | grep -q "$SERVICE_NAME" 2>/dev/null; then
         exit 1
     fi
 else
-    echo -e "${YELLOW}⚠ Voice server is not running${NC}"
+    echo -e "${YELLOW}Voice server is not running${NC}"
 fi
 
 # Kill any remaining processes on port 8888
 if lsof -i :8888 > /dev/null 2>&1; then
-    echo -e "${YELLOW}▶ Cleaning up port 8888...${NC}"
+    echo -e "${YELLOW}► Cleaning up port 8888...${NC}"
     lsof -ti :8888 | xargs kill -9 2>/dev/null
     echo -e "${GREEN}✓ Port 8888 cleared${NC}"
 fi

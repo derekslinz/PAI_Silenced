@@ -97,7 +97,7 @@ function searchSkills(query: string, index: SkillIndex): SearchResult[] {
 
 function formatResult(result: SearchResult): string {
   const { skill, score, matchedTriggers } = result;
-  const tierIcon = skill.tier === 'always' ? '🔒' : '📦';
+  const tierIcon = skill.tier === 'always' ? '' : '';
 
   let output = `\n${'─'.repeat(60)}\n`;
   output += `${tierIcon} **${skill.name}** (score: ${score})\n`;
@@ -122,22 +122,22 @@ function formatResult(result: SearchResult): string {
 }
 
 function listSkills(index: SkillIndex, tier?: 'always' | 'deferred'): void {
-  console.log(`\n📚 Skill Index (generated: ${index.generated})\n`);
+  console.log(`\nSkill Index (generated: ${index.generated})\n`);
 
   const skills = Object.values(index.skills)
     .filter(s => !tier || s.tier === tier)
     .sort((a, b) => a.name.localeCompare(b.name));
 
   if (tier === 'always') {
-    console.log('🔒 Always-Loaded Skills (full descriptions in context):\n');
+    console.log('Always-Loaded Skills (full descriptions in context):\n');
   } else if (tier === 'deferred') {
-    console.log('📦 Deferred Skills (minimal descriptions, search for details):\n');
+    console.log('Deferred Skills (minimal descriptions, search for details):\n');
   } else {
     console.log('All Skills:\n');
   }
 
   for (const skill of skills) {
-    const tierIcon = skill.tier === 'always' ? '🔒' : '📦';
+    const tierIcon = skill.tier === 'always' ? '' : '';
     const triggerPreview = skill.triggers.slice(0, 5).join(', ');
     console.log(`  ${tierIcon} ${skill.name.padEnd(20)} │ ${triggerPreview}`);
   }
@@ -148,7 +148,7 @@ function listSkills(index: SkillIndex, tier?: 'always' | 'deferred'): void {
 async function main() {
   // Check if index exists
   if (!existsSync(INDEX_FILE)) {
-    console.error('❌ Skill index not found. Run GenerateSkillIndex.ts first:');
+    console.error('✗ Skill index not found. Run GenerateSkillIndex.ts first:');
     console.error('   bun run ~/.claude/skills/PAI/Tools/GenerateSkillIndex.ts');
     process.exit(1);
   }
@@ -177,7 +177,7 @@ async function main() {
 
   // Search mode
   const query = args.join(' ');
-  console.log(`\n🔍 Searching for: "${query}"\n`);
+  console.log(`\nSearching for: "${query}"\n`);
 
   const results = searchSkills(query, index);
 

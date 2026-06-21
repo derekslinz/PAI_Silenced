@@ -9,7 +9,7 @@ YELLOW='\033[1;33m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-echo -e "${YELLOW}▶ Restarting Voice Server...${NC}"
+echo -e "${YELLOW}► Restarting Voice Server...${NC}"
 
 # Stop the server
 "$SCRIPT_DIR/stop.sh"

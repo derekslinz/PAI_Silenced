@@ -20,7 +20,7 @@ agents:
     display_name: PAI
     archetype: enthusiast
     role: Primary AI Assistant
-    emoji: "🤖"
+    emoji: ""
     voice:
       voice_id: s3TPKV1kjDlVtZbl4Ksh
       voice_name: Jamie (Premium)
@@ -49,7 +49,7 @@ agents:
     display_name: Ava (Claude)
     archetype: analyst
     role: Strategic Research Analyst
-    emoji: "🎯"
+    emoji: ""
     voice:
       voice_id: AXdMgz6evoL7OPd7eU12
       voice_name: Ava (Premium)
@@ -76,7 +76,7 @@ agents:
     display_name: Alex (Gemini)
     archetype: analyst
     role: Multi-Perspective Research Analyst
-    emoji: "🔀"
+    emoji: ""
     voice:
       voice_id: 2zRM7PkgwBPiau2jvVXc
       voice_name: Multi-perspective
@@ -104,7 +104,7 @@ agents:
     display_name: Marcus
     archetype: leader
     role: Senior Engineering Leader
-    emoji: "⚙️"
+    emoji: ""
     voice:
       voice_id: iLVmqjzCGGvqtMCk6vVQ
       voice_name: Marcus (Premium)
@@ -131,7 +131,7 @@ agents:
     display_name: Serena
     archetype: leader
     role: System Architect
-    emoji: "🏛️"
+    emoji: ""
     voice:
       voice_id: muZKMsIDGYtIkjjiUS82
       voice_name: Serena (Premium)
@@ -159,7 +159,7 @@ agents:
     display_name: Aditi
     archetype: critic
     role: UX/UI Designer
-    emoji: "🎨"
+    emoji: ""
     voice:
       voice_id: ZF6FPAbjXT4488VcRRnw
       voice_name: Isha (Premium)
@@ -186,7 +186,7 @@ agents:
     display_name: Priya
     archetype: enthusiast
     role: Visual Content Creator
-    emoji: "🖼️"
+    emoji: ""
     voice:
       voice_id: ZF6FPAbjXT4488VcRRnw
       voice_name: Isha (Premium)
@@ -214,7 +214,7 @@ agents:
     display_name: Rook
     archetype: enthusiast
     role: Security Specialist
-    emoji: "🔐"
+    emoji: ""
     voice:
       voice_id: xvHLFjaUEpx4BOf7EiDd
       voice_name: Oliver (Enhanced)
@@ -242,7 +242,7 @@ agents:
     display_name: Emma
     archetype: professional
     role: Technical Writer
-    emoji: "✍️"
+    emoji: ""
     voice:
       voice_id: gfRt6Z3Z8aTbpLfexQ7N
       voice_name: Serena (Premium)
@@ -270,7 +270,7 @@ agents:
     display_name: Dev
     archetype: enthusiast
     role: High-Agency Generalist
-    emoji: "🚀"
+    emoji: ""
     voice:
       voice_id: d3MFdIuCfbAIwiu7jC4a
       voice_name: High-energy genius

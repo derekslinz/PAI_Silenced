@@ -39,39 +39,39 @@ Generate wallpapers that:
 
 ## Critical Lessons Learned (Validation Checklist)
 
-### ❌ COMMON FAILURES TO AVOID
+### ✗ COMMON FAILURES TO AVOID
 
 **1. Wrong Logo Treatment**
-- ❌ Literal text "brand name" instead of the logo shape
-- ❌ Logo overlaid/floating instead of embossed into surface
-- ❌ Logo placed in empty/blank area instead of integrated into design
-- ❌ Logo too large and prominent
-- ❌ Logo glowing or different color than surroundings
-- ✅ CORRECT: Logo shape from reference image, embossed as texture, small, within visual content
+- ✗ Literal text "brand name" instead of the logo shape
+- ✗ Logo overlaid/floating instead of embossed into surface
+- ✗ Logo placed in empty/blank area instead of integrated into design
+- ✗ Logo too large and prominent
+- ✗ Logo glowing or different color than surroundings
+- ✓ CORRECT: Logo shape from reference image, embossed as texture, small, within visual content
 
 **2. Wrong Colors**
-- ❌ Matrix green (#00ff41)
-- ❌ Pink/magenta neon
-- ❌ Bright saturated neons
-- ❌ Any colors outside the UL palette
-- ✅ CORRECT: Blue (#4a90d9 or muted #3a6a9a), Purple (#8b5cf6 or muted #6b4c96), Cyan (#06b6d4 or muted #4a9a9a)
+- ✗ Matrix green (#00ff41)
+- ✗ Pink/magenta neon
+- ✗ Bright saturated neons
+- ✗ Any colors outside the UL palette
+- ✓ CORRECT: Blue (#4a90d9 or muted #3a6a9a), Purple (#8b5cf6 or muted #6b4c96), Cyan (#06b6d4 or muted #4a9a9a)
 
 **3. Wrong Style**
-- ❌ Simple, cartoony, flat vector art
-- ❌ Too bright, loud, gaudy
-- ❌ Clean lines without texture or depth
-- ✅ CORRECT: Sophisticated, photorealistic or stylized with depth, muted/subdued, dense detail
+- ✗ Simple, cartoony, flat vector art
+- ✗ Too bright, loud, gaudy
+- ✗ Clean lines without texture or depth
+- ✓ CORRECT: Sophisticated, photorealistic or stylized with depth, muted/subdued, dense detail
 
 **4. Wrong Composition**
-- ❌ Logo in empty/blank corner
-- ❌ Visual content clustered in center with empty edges
-- ❌ Logo too prominent/centered
-- ✅ CORRECT: Visual content fills entire canvas, logo small in bottom left WITHIN the design
+- ✗ Logo in empty/blank corner
+- ✗ Visual content clustered in center with empty edges
+- ✗ Logo too prominent/centered
+- ✓ CORRECT: Visual content fills entire canvas, logo small in bottom left WITHIN the design
 
 **5. Missing Reference Images**
-- ❌ Not using ul-blue.png as reference for logo shape
-- ❌ Not checking existing wallpapers for quality benchmark
-- ✅ CORRECT: Always use --reference-image with the logo file
+- ✗ Not using ul-blue.png as reference for logo shape
+- ✗ Not checking existing wallpapers for quality benchmark
+- ✓ CORRECT: Always use --reference-image with the logo file
 
 ---
 

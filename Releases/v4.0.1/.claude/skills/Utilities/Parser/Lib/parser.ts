@@ -33,8 +33,8 @@ async function main() {
   }
 
   const urls = args;
-  console.log(`🚀 System Parser v${SCHEMA_VERSION}`);
-  console.log(`📄 Processing ${urls.length} URL(s)\n`);
+  console.log(`System Parser v${SCHEMA_VERSION}`);
+  console.log(`Processing ${urls.length} URL(s)\n`);
 
   let successCount = 0;
   let failCount = 0;
@@ -47,23 +47,23 @@ async function main() {
     try {
       const result = await parseContent(url);
       successCount++;
-      console.log(`✅ Success: ${result.filename}`);
-      console.log(`📊 Stats: ${result.stats}`);
-      console.log(`🎯 Confidence: ${result.confidence}`);
+      console.log(`✓ Success: ${result.filename}`);
+      console.log(`Stats: ${result.stats}`);
+      console.log(`Confidence: ${result.confidence}`);
       if (result.warnings.length > 0) {
-        console.log(`⚠️  Warnings: ${result.warnings.length}`);
+        console.log(` Warnings: ${result.warnings.length}`);
         result.warnings.forEach(w => console.log(`   - ${w}`));
       }
     } catch (error) {
       failCount++;
-      console.error(`❌ Failed: ${error instanceof Error ? error.message : String(error)}`);
+      console.error(`✗ Failed: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 
   console.log("\n" + "=".repeat(80));
-  console.log(`📊 Batch Processing Complete`);
-  console.log(`✅ Successful: ${successCount}/${urls.length}`);
-  console.log(`❌ Failed: ${failCount}/${urls.length}`);
+  console.log(`Batch Processing Complete`);
+  console.log(`✓ Successful: ${successCount}/${urls.length}`);
+  console.log(`✗ Failed: ${failCount}/${urls.length}`);
 }
 
 /**
@@ -76,26 +76,26 @@ async function parseContent(url: string): Promise<{
   warnings: string[];
 }> {
   // Step 1: Detect content type
-  console.log("1️⃣  Detecting content type...");
+  console.log("1⃣  Detecting content type...");
   const contentType = await detectContentType(url);
   console.log(`   Type: ${contentType}`);
 
   // Step 2: Extract content using appropriate method
-  console.log("2️⃣  Extracting content...");
+  console.log("2⃣  Extracting content...");
   const rawContent = await extractContent(url, contentType);
   console.log(`   Extracted: ${rawContent.word_count} words`);
 
   // Step 3: Analyze with Gemini (entity extraction, summarization, etc.)
-  console.log("3️⃣  Analyzing with Gemini...");
+  console.log("3⃣  Analyzing with Gemini...");
   const analyzed = await analyzeWithGemini(rawContent);
   console.log(`   People: ${analyzed.people.length}, Companies: ${analyzed.companies.length}`);
 
   // Step 4: Populate schema
-  console.log("4️⃣  Populating schema...");
+  console.log("4⃣  Populating schema...");
   const schema = populateSchema(url, contentType, rawContent, analyzed);
 
   // Step 5: Validate
-  console.log("5️⃣  Validating schema...");
+  console.log("5⃣  Validating schema...");
   const validation = validateContentSchema(schema);
   if (!validation.valid) {
     throw new Error(`Validation failed: ${validation.errors.map(e => e.message).join(", ")}`);
@@ -103,7 +103,7 @@ async function parseContent(url: string): Promise<{
   console.log(`   Valid: ✓ (${validation.warnings.length} warnings)`);
 
   // Step 6: Output JSON
-  console.log("6️⃣  Writing output...");
+  console.log("6⃣  Writing output...");
   const filename = await writeOutput(schema);
   console.log(`   File: ${filename}`);
 

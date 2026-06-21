@@ -133,13 +133,13 @@ The Ring plugin supports these config options:
 ```
 
 **By default**, Ring plugin exposes:
-- ✅ Cameras (all models)
-- ✅ Doorbells
-- ✅ Motion sensors
-- ✅ Contact sensors
-- ✅ Flood/freeze sensors
-- ✅ Smoke/CO alarms
-- ❌ Shadow adapters (hidden by default)
+- ✓ Cameras (all models)
+- ✓ Doorbells
+- ✓ Motion sensors
+- ✓ Contact sensors
+- ✓ Flood/freeze sensors
+- ✓ Smoke/CO alarms
+- ✗ Shadow adapters (hidden by default)
 
 ---
 

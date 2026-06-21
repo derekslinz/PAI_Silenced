@@ -7,12 +7,12 @@ PAI_DIR="${PAI_DIR:-$HOME/.claude}"
 
 # Check if ports are in use
 if lsof -Pi :4000 -sTCP:LISTEN -t >/dev/null 2>&1; then
-    echo "❌ Port 4000 in use. Run: $PAI_DIR/Observability/manage.sh stop"
+    echo "✗ Port 4000 in use. Run: $PAI_DIR/Observability/manage.sh stop"
     exit 1
 fi
 
 if lsof -Pi :5172 -sTCP:LISTEN -t >/dev/null 2>&1; then
-    echo "❌ Port 5172 in use. Run: $PAI_DIR/Observability/manage.sh stop"
+    echo "✗ Port 5172 in use. Run: $PAI_DIR/Observability/manage.sh stop"
     exit 1
 fi
 
@@ -39,7 +39,7 @@ for i in {1..10}; do
 done
 
 # Confirm startup
-echo "✅ Observability Dashboard Running"
+echo "✓ Observability Dashboard Running"
 echo "   Dashboard: http://localhost:5172"
 echo "   API: http://localhost:4000"
 

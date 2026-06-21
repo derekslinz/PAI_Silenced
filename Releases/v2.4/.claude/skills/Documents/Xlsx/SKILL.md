@@ -5,7 +5,7 @@ description: Excel file processing. USE WHEN xlsx, Excel, spreadsheet. SkillSear
 
 # Requirements for Outputs
 
-## 🎯 Load Full PAI Context
+## Load Full PAI Context
 
 **Before starting any task with this skill, load complete PAI context:**
 
@@ -19,7 +19,7 @@ This provides access to:
 - Voice IDs for agent routing (ElevenLabs)
 - Personal preferences and operating instructions
 
-## 🔀 When to Use This Sub-Skill
+## When to Use This Sub-Skill
 
 This sub-skill activates when the user's request involves Excel spreadsheets (.xlsx, .xlsm, .csv, .tsv).
 
@@ -154,7 +154,7 @@ df.to_excel('output.xlsx', index=False)
 
 **Always use Excel formulas instead of calculating values in Python and hardcoding them.** This ensures the spreadsheet remains dynamic and updateable.
 
-### ❌ WRONG - Hardcoding Calculated Values
+### ✗ WRONG - Hardcoding Calculated Values
 ```python
 # Bad: Calculating in Python and hardcoding result
 total = df['Sales'].sum()
@@ -169,7 +169,7 @@ avg = sum(values) / len(values)
 sheet['D20'] = avg  # Hardcodes 42.5
 ```
 
-### ✅ CORRECT - Using Excel Formulas
+### ✓ CORRECT - Using Excel Formulas
 ```python
 # Good: Let Excel calculate the sum
 sheet['B10'] = '=SUM(B2:B9)'

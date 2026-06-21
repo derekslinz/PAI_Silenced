@@ -15,7 +15,7 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
 **Infrastructure and Network Reconnaissance**
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 

@@ -20,7 +20,7 @@ Timestamped log line. Use the `refined:` prefix when the decision changes the Go
 ```
 - YYYY-MM-DD HH:MM: <decision text>
 - YYYY-MM-DD HH:MM: refined: <what was refined and why>
-- YYYY-MM-DD HH:MM: ❌ DEAD END: Tried <X> — failed because <Y> (don't retry)
+- YYYY-MM-DD HH:MM: ✗ DEAD END: Tried <X> — failed because <Y> (don't retry)
 ```
 
 **Inputs:** `text` (required), `kind` (optional: `decision` | `refined` | `dead-end`)

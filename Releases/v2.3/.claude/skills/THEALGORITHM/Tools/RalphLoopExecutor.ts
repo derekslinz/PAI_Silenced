@@ -136,7 +136,7 @@ function formatStatus(state: RalphLoopState | null): string {
   }
 
   const lines = [
-    "🔄 RALPH LOOP STATUS",
+    "RALPH LOOP STATUS",
     "═══════════════════════════════════════",
     "",
     `Active: ${state.active}`,
@@ -228,7 +228,7 @@ EXAMPLES:
     if (values.output === "json") {
       console.log(JSON.stringify({ cancelled: success }));
     } else {
-      console.log(success ? "✅ Ralph loop cancelled." : "No active Ralph loop to cancel.");
+      console.log(success ? "✓ Ralph loop cancelled." : "No active Ralph loop to cancel.");
     }
     return;
   }
@@ -243,7 +243,7 @@ EXAMPLES:
   // Check if loop already active
   const existingState = getStatus();
   if (existingState?.active) {
-    console.error("⚠️  Ralph loop already active!");
+    console.error(" Ralph loop already active!");
     console.error(`   Iteration: ${existingState.iteration}`);
     console.error(`   Prompt: ${existingState.prompt.substring(0, 50)}...`);
     console.error("");
@@ -272,7 +272,7 @@ EXAMPLES:
     console.log(JSON.stringify(result, null, 2));
   } else {
     console.log(`
-🔄 Ralph Loop Activated for THEALGORITHM
+Ralph Loop Activated for THEALGORITHM
 ═══════════════════════════════════════════════════════════
 
 Prompt: ${config.prompt}

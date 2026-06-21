@@ -2,7 +2,7 @@
 
 **Mode:** Iterative progressive research | **Single-run or Loop mode**
 
-## 🚨 CRITICAL: URL Verification Required
+## CRITICAL: URL Verification Required
 
 **BEFORE delivering any research results with URLs:**
 1. Verify EVERY URL using WebFetch or curl

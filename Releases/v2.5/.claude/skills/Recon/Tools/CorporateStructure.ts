@@ -542,16 +542,16 @@ if (options.domainsOnly) {
   // Human-readable output
   const h = result.hierarchy;
 
-  console.log(`\n🏢 Corporate Structure: ${h.target}`);
-  console.log(`⏱️  ${result.timestamp}\n`);
+  console.log(`\nCorporate Structure: ${h.target}`);
+  console.log(` ${result.timestamp}\n`);
 
   if (h.parent) {
-    console.log(`📍 Parent Company: ${h.parent.name}`);
+    console.log(`Parent Company: ${h.parent.name}`);
     console.log();
   }
 
   if (h.siblings.length > 0) {
-    console.log(`👥 Sibling Companies (${h.siblings.length}):`);
+    console.log(`Sibling Companies (${h.siblings.length}):`);
     console.log("   *Same parent - potential shared infrastructure*\n");
     for (const sib of h.siblings.slice(0, 10)) {
       console.log(`   ${sib.name}`);
@@ -564,7 +564,7 @@ if (options.domainsOnly) {
   }
 
   if (h.children.length > 0) {
-    console.log(`🏭 Subsidiaries/Acquisitions (${h.children.length}):`);
+    console.log(`Subsidiaries/Acquisitions (${h.children.length}):`);
     console.log("   *Often legacy systems, separate security teams*\n");
     for (const child of h.children) {
       const price = child.acquisitionPrice ? ` - ${child.acquisitionPrice}` : "";
@@ -575,17 +575,17 @@ if (options.domainsOnly) {
     console.log();
   }
 
-  console.log(`🌐 Total Related Domains: ${h.allDomains.length}`);
+  console.log(`Total Related Domains: ${h.allDomains.length}`);
 
   if (result.errors.length > 0) {
-    console.log("\n📝 Notes:");
+    console.log("\nNotes:");
     for (const err of result.errors) {
       console.log(`   ${err}`);
     }
   }
 
   if (h.allDomains.length > 0) {
-    console.log(`\n💡 Next steps:`);
+    console.log(`\nNext steps:`);
     console.log(`   bun CorporateStructure.ts "${company}" --domains-only | head -5`);
     console.log(`   bun CorporateStructure.ts "${company}" --context > assessment-context.md`);
   }

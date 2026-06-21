@@ -165,18 +165,18 @@ function buildReminder(
   thinking: string[],
 ): string {
   const capabilitySection = capabilities.length > 0
-    ? `\n⚡ DETECTED CAPABILITIES (based on your request):\n${capabilities.map(c => {
+    ? `\nDETECTED CAPABILITIES (based on your request):\n${capabilities.map(c => {
         const cap = CAPABILITY_MAP[c];
         return cap ? `• ${cap.name} → ${cap.agents}` : '';
       }).filter(Boolean).join('\n')}\n\nYou SHOULD spawn these agents in BUILD/EXECUTE phases.`
     : '';
 
   const skillSection = skills.length > 0
-    ? `\n🎯 DETECTED SKILLS (Pass 1 hints — validate in THINK against ISC):\n${skills.map(s => `• ${s}`).join('\n')}`
+    ? `\nDETECTED SKILLS (Pass 1 hints — validate in THINK against ISC):\n${skills.map(s => `• ${s}`).join('\n')}`
     : '';
 
   const thinkingSection = thinking.length > 0
-    ? `\n🧠 SUGGESTED THINKING TOOLS (Pass 1 hints — run justify-exclusion in THINK):\n${thinking.map(t => {
+    ? `\nSUGGESTED THINKING TOOLS (Pass 1 hints — run justify-exclusion in THINK):\n${thinking.map(t => {
         const tool = THINKING_MAP[t];
         return tool ? `• ${tool.name} — ${tool.description}` : '';
       }).filter(Boolean).join('\n')}`
@@ -187,7 +187,7 @@ function buildReminder(
       return `<system-reminder>
 ALGORITHM REQUIRED — DEPTH: FULL
 Nothing escapes the Algorithm. Your response MUST use the 7-phase format:
-- Start with: 🤖 PAI ALGORITHM header
+- Start with: PAI ALGORITHM header
 - Include ALL phases: OBSERVE → THINK → PLAN → BUILD → EXECUTE → VERIFY → LEARN
 - Use TaskCreate for ISC criteria, TaskList to display them
 - End with voice line
@@ -198,11 +198,11 @@ ${capabilitySection}${skillSection}${thinkingSection}
       return `<system-reminder>
 ALGORITHM REQUIRED — DEPTH: ITERATION
 Nothing escapes the Algorithm. Use condensed format:
-🤖 PAI ALGORITHM ═════
-🔄 ITERATION on: [context]
-🔧 CHANGE: [what's different]
-✅ VERIFY: [evidence]
-🗣️ ${getDAName()}: [result]
+PAI ALGORITHM ═════
+ITERATION on: [context]
+CHANGE: [what's different]
+✓ VERIFY: [evidence]
+${getDAName()}: [result]
 ${capabilitySection}${skillSection}${thinkingSection}
 </system-reminder>`;
 
@@ -210,10 +210,10 @@ ${capabilitySection}${skillSection}${thinkingSection}
       return `<system-reminder>
 ALGORITHM REQUIRED — DEPTH: MINIMAL
 Nothing escapes the Algorithm. Use header format:
-🤖 PAI ALGORITHM (v0.2.23) ═════
+PAI ALGORITHM (v0.2.23) ═════
    Task: [6 words]
-📋 SUMMARY: [what was done]
-🗣️ ${getDAName()}: [voice line]
+SUMMARY: [what was done]
+${getDAName()}: [voice line]
 </system-reminder>`;
   }
 }
@@ -249,7 +249,7 @@ async function main() {
     console.log(`<system-reminder>
 ALGORITHM REQUIRED — DEPTH: FULL
 Nothing escapes the Algorithm. Your response MUST use the 7-phase format:
-- Start with: 🤖 PAI ALGORITHM header
+- Start with: PAI ALGORITHM header
 - Include ALL phases: OBSERVE → THINK → PLAN → BUILD → EXECUTE → VERIFY → LEARN
 - Use TaskCreate for ISC criteria, TaskList to display them
 - End with voice line

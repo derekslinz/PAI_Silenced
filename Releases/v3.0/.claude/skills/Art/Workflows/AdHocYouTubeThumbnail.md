@@ -21,10 +21,10 @@ Running **AdHocYouTubeThumbnail** in **Art**...
 - **Fresh AI-generated** each time using Nano Banana Pro with reference images
 - Reference image is used for likeness, NOT the actual headshot
 - **Position is dynamic**: left, center, or right (based on content/preference)
-- **🚨 FACE ONLY**: Forehead to chin, ear to ear - **NO shoulders, NO neck, NO body**
+- **FACE ONLY**: Forehead to chin, ear to ear - **NO shoulders, NO neck, NO body**
 - Face fills 95% of the image area (ComposeThumbnail auto-crops)
 - **Transparent background**: Must run RemoveBg after generation
-- **🚨 MUST VARY** between thumbnails (see Variation Requirements below)
+- **MUST VARY** between thumbnails (see Variation Requirements below)
 
 ### 2. Dramatic Tech Background
 - **Style**: Futuristic, sci-fi aesthetic (hexagonal circuits, glowing edges, 3D depth)
@@ -35,7 +35,7 @@ Running **AdHocYouTubeThumbnail** in **Art**...
 ### 3. Text - BILLBOARD STYLE
 - **Title**: Up to 6 words, CAPITALIZED, **CYAN** by default (vibrant, not white)
 - **Subtitle**: Up to 12 words, CAPITALIZED, white text
-- **🚨 TEXT FILLS THE SPACE** - takes up most of available area opposite headshot
+- **TEXT FILLS THE SPACE** - takes up most of available area opposite headshot
 - **BOLD STROKE OUTLINE** (4px title, 3px subtitle) - visible at 320px thumbnail size
 - **Visually centered** in safe zone (NEVER overlaps headshot)
 - **Grouped as a unit** - title and subtitle together as text block
@@ -140,13 +140,13 @@ bun run ~/.claude/skills/Art/Tools/Generate.ts \
 
 ## Step 3: Headshot Generation
 
-**🚨 MANDATORY: Generate a FRESH, VARIED, FACE-ONLY headshot EVERY time.**
+**MANDATORY: Generate a FRESH, VARIED, FACE-ONLY headshot EVERY time.**
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  FACE ONLY: Forehead to chin, ear to ear                        ⚠️
-⚠️  NO shoulders, NO neck, NO body visible                         ⚠️
-⚠️  If shoulders/body visible → REGENERATE IMMEDIATELY             ⚠️
+ FACE ONLY: Forehead to chin, ear to ear                        
+ NO shoulders, NO neck, NO body visible                         
+ If shoulders/body visible → REGENERATE IMMEDIATELY             
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -170,7 +170,7 @@ bun run ~/.claude/skills/Art/Tools/Generate.ts \
 - Rembrandt lighting pattern
 
 ### Base Headshot Requirements (always include)
-- **🚨 FACE ONLY** - forehead to chin, ear to ear
+- **FACE ONLY** - forehead to chin, ear to ear
 - **NO shoulders, NO neck, NO body** - face fills entire frame
 - Pure black background (for easy removal)
 - Full beard along jawline, NO mustache (clean-shaven upper lip)
@@ -262,13 +262,13 @@ bun ~/.claude/skills/Art/Tools/ComposeThumbnail.ts \
 
 ## Step 5: Quality Validation
 
-**🚨 MANDATORY: ALL checks must pass before presenting to the user.**
+**MANDATORY: ALL checks must pass before presenting to the user.**
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  THE 320x180 TEST IS MANDATORY                                  ⚠️
-⚠️  If text isn't readable at thumbnail size → FAIL                ⚠️
-⚠️  If it looks like ass at any size → FAIL                        ⚠️
+ THE 320x180 TEST IS MANDATORY                                  
+ If text isn't readable at thumbnail size → FAIL                
+ If it looks like ass at any size → FAIL                        
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -298,7 +298,7 @@ magick identify -format "%wx%h" ~/Downloads/yt-thumbnail-${TIMESTAMP}.png
 open ~/Downloads/yt-thumbnail-${TIMESTAMP}.png
 # Confirm: Face only (no body), text fills space, cyan color visible
 
-# 3. 🚨 MANDATORY: Test at YouTube thumbnail size
+# 3. MANDATORY: Test at YouTube thumbnail size
 magick ~/Downloads/yt-thumbnail-${TIMESTAMP}.png -resize 320x180 /tmp/yt-preview.png
 open /tmp/yt-preview.png
 # Confirm: Title READABLE, face RECOGNIZABLE, colors POP

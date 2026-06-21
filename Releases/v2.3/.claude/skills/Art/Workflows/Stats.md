@@ -71,7 +71,7 @@ Charcoal #2D2D2D — Context description text
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+## MANDATORY WORKFLOW STEPS
 
 ### Step 1: Select Statistic
 

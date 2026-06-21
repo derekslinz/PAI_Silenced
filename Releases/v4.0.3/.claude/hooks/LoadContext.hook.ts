@@ -74,7 +74,7 @@ function loadSettings(paiDir: string): Settings {
     try {
       return JSON.parse(readFileSync(settingsPath, 'utf-8'));
     } catch (err) {
-      console.error(`⚠️ Failed to parse settings.json: ${err}`);
+      console.error(`Failed to parse settings.json: ${err}`);
     }
   }
   return {};
@@ -92,15 +92,15 @@ function loadStartupFiles(paiDir: string, settings: Settings): string | null {
   for (const relPath of config.files) {
     const fullPath = join(paiDir, relPath);
     if (!existsSync(fullPath)) {
-      console.error(`⚠️ loadAtStartup: file not found: ${relPath}`);
+      console.error(`loadAtStartup: file not found: ${relPath}`);
       continue;
     }
     try {
       const content = readFileSync(fullPath, 'utf-8').trim();
       parts.push(content);
-      console.error(`📄 Force-loaded: ${relPath} (${content.length} chars)`);
+      console.error(`Force-loaded: ${relPath} (${content.length} chars)`);
     } catch (err) {
-      console.error(`⚠️ loadAtStartup: failed to read ${relPath}: ${err}`);
+      console.error(`loadAtStartup: failed to read ${relPath}: ${err}`);
     }
   }
 
@@ -139,7 +139,7 @@ function loadRelationshipContext(paiDir: string): string | null {
         parts.push(highConfidence.slice(0, 6).join('\n'));
       }
     } catch (err) {
-      console.error(`⚠️ Failed to load opinions: ${err}`);
+      console.error(`Failed to load opinions: ${err}`);
     }
   }
 
@@ -322,7 +322,7 @@ function getRecentWorkSessions(paiDir: string): WorkSession[] {
       } catch { /* skip malformed */ }
     }
   } catch (err) {
-    console.error(`⚠️ Error scanning WORK dirs: ${err}`);
+    console.error(`Error scanning WORK dirs: ${err}`);
   }
 
   return sessions;
@@ -375,7 +375,7 @@ function getProjectProgress(paiDir: string): WorkSession[] {
       } catch { /* skip malformed */ }
     }
   } catch (err) {
-    console.error(`⚠️ Error reading progress files: ${err}`);
+    console.error(`Error reading progress files: ${err}`);
   }
 
   return sessions;
@@ -392,12 +392,12 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
     return null;
   }
 
-  let summary = '\n📋 ACTIVE WORK:\n';
+  let summary = '\nACTIVE WORK:\n';
 
   if (recentSessions.length > 0) {
     summary += '\n  ── Recent Sessions (last 48h) ──\n';
     for (const s of recentSessions) {
-      summary += `\n  ⚡ ${s.title}\n`;
+      summary += `\n  ${s.title}\n`;
       summary += `     ${s.timestamp} | Status: ${s.status}\n`;
       if (s.prd) {
         summary += `     PRD: ${s.prd.id} (${s.prd.status}, ${s.prd.progress})\n`;
@@ -408,8 +408,8 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
   if (projects.length > 0) {
     summary += '\n  ── Tracked Projects ──\n';
     for (const proj of projects) {
-      const staleTag = proj.stale ? ' ⚠️ STALE (>14d)' : '';
-      summary += `\n  ${proj.stale ? '🟡' : '🔵'} ${proj.name}${staleTag}\n`;
+      const staleTag = proj.stale ? ' STALE (>14d)' : '';
+      summary += `\n  ${proj.stale ? '●' : '●'} ${proj.name}${staleTag}\n`;
 
       if (proj.objectives && proj.objectives.length > 0) {
         summary += '     Objectives:\n';
@@ -427,8 +427,8 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
     }
   }
 
-  summary += '\n💡 To resume project: `bun run ~/.claude/PAI/Tools/SessionProgress.ts resume <project>`\n';
-  summary += '💡 To complete project: `bun run ~/.claude/PAI/Tools/SessionProgress.ts complete <project>`\n';
+  summary += '\nTo resume project: `bun run ~/.claude/PAI/Tools/SessionProgress.ts resume <project>`\n';
+  summary += 'To complete project: `bun run ~/.claude/PAI/Tools/SessionProgress.ts complete <project>`\n';
 
   return summary;
 }
@@ -441,7 +441,7 @@ async function main() {
                       process.env.CLAUDE_AGENT_TYPE !== undefined;
 
     if (isSubagent) {
-      console.error('🤖 Subagent session - skipping context loading');
+      console.error('Subagent session - skipping context loading');
       process.exit(0);
     }
 
@@ -451,11 +451,11 @@ async function main() {
 
     // Record session start time for notification timing
     recordSessionStart();
-    console.error('⏱️ Session start time recorded');
+    console.error('Session start time recorded');
 
     // Load settings for dynamic context controls
     const settings = loadSettings(paiDir);
-    console.error('✅ Loaded settings.json');
+    console.error('✓ Loaded settings.json');
 
     // Force-load startup files from settings.json → loadAtStartup
     const startupContent = loadStartupFiles(paiDir, settings);
@@ -468,10 +468,10 @@ async function main() {
     if (isDynamicEnabled(settings, 'relationshipContext')) {
       relationshipContext = loadRelationshipContext(paiDir);
       if (relationshipContext) {
-        console.error(`💕 Loaded relationship context (${relationshipContext.length} chars)`);
+        console.error(`Loaded relationship context (${relationshipContext.length} chars)`);
       }
     } else {
-      console.error('⏭️ Skipped relationship context (disabled)');
+      console.error('Skipped relationship context (disabled)');
     }
 
     // Load learning readback context
@@ -493,10 +493,10 @@ async function main() {
         : '';
 
       if (learningParts.length > 0) {
-        console.error(`📚 Loaded learning context: ${learningParts.length} sections (${learningContext.length} chars)`);
+        console.error(`Loaded learning context: ${learningParts.length} sections (${learningContext.length} chars)`);
       }
     } else {
-      console.error('⏭️ Skipped learning readback (disabled)');
+      console.error('Skipped learning readback (disabled)');
     }
 
     // Inject dynamic context if we have any
@@ -509,9 +509,9 @@ Dynamic context loaded. Core identity, rules, and format are in CLAUDE.md.
 </system-reminder>`;
 
       console.log(message);
-      console.log('\n✅ PAI dynamic context loaded...');
+      console.log('\n✓ PAI dynamic context loaded...');
     } else {
-      console.log('\n✅ PAI session ready...');
+      console.log('\n✓ PAI session ready...');
     }
 
     // Active work summary
@@ -519,16 +519,16 @@ Dynamic context loaded. Core identity, rules, and format are in CLAUDE.md.
       const activeProgress = await checkActiveProgress(paiDir);
       if (activeProgress) {
         console.log(activeProgress);
-        console.error(`📋 Active work summary loaded (${activeProgress.length} chars)`);
+        console.error(`Active work summary loaded (${activeProgress.length} chars)`);
       }
     } else {
-      console.error('⏭️ Skipped active work summary (disabled)');
+      console.error('Skipped active work summary (disabled)');
     }
 
-    console.error('✅ PAI session initialization complete (v4.0)');
+    console.error('✓ PAI session initialization complete (v4.0)');
     process.exit(0);
   } catch (error) {
-    console.error('❌ Error in LoadContext hook:', error);
+    console.error('✗ Error in LoadContext hook:', error);
     process.exit(0); // Non-fatal — don't block session startup
   }
 }

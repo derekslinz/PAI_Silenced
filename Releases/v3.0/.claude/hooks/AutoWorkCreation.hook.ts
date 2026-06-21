@@ -167,25 +167,25 @@ prompt: |
 
 ## Phase Log
 
-### 👀 OBSERVE Phase
+### OBSERVE Phase
 _Pending..._
 
-### 🧠 THINK Phase
+### THINK Phase
 _Pending..._
 
-### 📋 PLAN Phase
+### PLAN Phase
 _Pending..._
 
-### 🔨 BUILD Phase
+### BUILD Phase
 _Pending..._
 
-### ▶️ EXECUTE Phase
+### ►EXECUTE Phase
 _Pending..._
 
-### ✅ VERIFY Phase
+### ✓ VERIFY Phase
 _Pending..._
 
-### 🎓 LEARN Phase
+### LEARN Phase
 _Pending..._
 
 ---

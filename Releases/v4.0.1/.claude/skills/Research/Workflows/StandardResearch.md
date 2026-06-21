@@ -2,7 +2,7 @@
 
 **Mode:** 2 different researcher types, 1 query each | **Timeout:** 1 minute
 
-## 🚨 CRITICAL: URL Verification Required
+## CRITICAL: URL Verification Required
 
 **BEFORE delivering any research results with URLs:**
 1. Verify EVERY URL using WebFetch or curl
@@ -79,15 +79,15 @@ WebFetch(url, "Confirm article exists and summarize main point")
 ### Step 5: Return Results
 
 ```markdown
-📋 SUMMARY: Research on [topic]
-🔍 ANALYSIS: [Key findings from 2 perspectives]
-⚡ ACTIONS: 2 researchers × 1 query each
-✅ RESULTS: [Synthesized answer]
-📊 STATUS: Standard mode - 2 agents, 1 query each
-📁 CAPTURE: [Key facts]
-➡️ NEXT: [Suggest extensive if more depth needed]
-📖 STORY EXPLANATION: [5-8 numbered points]
-🎯 COMPLETED: Research on [topic] complete
+SUMMARY: Research on [topic]
+ANALYSIS: [Key findings from 2 perspectives]
+ACTIONS: 2 researchers × 1 query each
+✓ RESULTS: [Synthesized answer]
+STATUS: Standard mode - 2 agents, 1 query each
+CAPTURE: [Key facts]
+→NEXT: [Suggest extensive if more depth needed]
+STORY EXPLANATION: [5-8 numbered points]
+COMPLETED: Research on [topic] complete
 ```
 
 ## Speed Target

@@ -73,16 +73,16 @@ Present a unified report:
 # Upgrade Check Results
 **Date:** [timestamp]
 
-## 🔥 HIGH PRIORITY
+## HIGH PRIORITY
 [Must-review features/changes for PAI]
 
-## 📌 MEDIUM PRIORITY
+## MEDIUM PRIORITY
 [Interesting updates to check]
 
-## 📝 LOW PRIORITY
+## LOW PRIORITY
 [FYI information]
 
-## 🎬 New Videos
+## New Videos
 [List of new videos with transcripts and key insights]
 ```
 

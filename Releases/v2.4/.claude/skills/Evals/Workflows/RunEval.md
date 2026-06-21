@@ -71,16 +71,16 @@ Results are stored in:
 Use structured response format:
 
 ```markdown
-📋 SUMMARY: Evaluation completed for <use-case>
+SUMMARY: Evaluation completed for <use-case>
 
-📊 STATUS:
+STATUS:
 | Metric | Value |
 |--------|-------|
 | Pass Rate | X% |
 | Mean Score | X.XX |
 | Failed Tests | X |
 
-📖 STORY EXPLANATION:
+STORY EXPLANATION:
 1. Ran evaluation against <N> test cases
 2. Deterministic scorers completed first
 3. AI judges evaluated accuracy and style
@@ -90,7 +90,7 @@ Use structured response format:
 7. <Key finding 2>
 8. <Recommendation>
 
-🎯 COMPLETED: Evaluation finished with X% pass rate.
+COMPLETED: Evaluation finished with X% pass rate.
 ```
 
 ## Error Handling

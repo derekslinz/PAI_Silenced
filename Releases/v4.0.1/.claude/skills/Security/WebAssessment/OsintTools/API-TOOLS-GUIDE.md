@@ -565,7 +565,7 @@ if __name__ == "__main__":
 
 ## Legal & Ethical Considerations
 
-### ⚠️ CRITICAL: Authorization Requirements
+### CRITICAL: Authorization Requirements
 
 **YOU MUST:**
 - Obtain explicit written authorization before testing any target
@@ -809,11 +809,11 @@ logging.basicConfig(level=logging.DEBUG)
 This guide provides complete setup and usage instructions for integrating Shodan, Dehashed, and OSINT Industries into your webassessment workflow. These tools are essential for modern security assessments but must be used responsibly and legally.
 
 **Key Takeaways:**
-- ✅ All three services require API keys (configure in `${PAI_DIR}/.env`)
-- ✅ Python wrapper provides unified interface
-- ✅ CLI tool available for quick queries
-- ✅ Always obtain authorization before testing
-- ✅ Respect rate limits and Terms of Service
-- ✅ Start small and scale as needed
+- ✓ All three services require API keys (configure in `${PAI_DIR}/.env`)
+- ✓ Python wrapper provides unified interface
+- ✓ CLI tool available for quick queries
+- ✓ Always obtain authorization before testing
+- ✓ Respect rate limits and Terms of Service
+- ✓ Start small and scale as needed
 
-**Happy (ethical) hunting! 🔍**
+**Happy (ethical) hunting! **

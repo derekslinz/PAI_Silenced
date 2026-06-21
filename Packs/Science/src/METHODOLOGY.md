@@ -468,8 +468,8 @@ Always keep raw data. Derived metrics can be recalculated; raw data cannot be re
 **Goal Comparison:**
 | Success Criteria | Required | Actual | Status |
 |-----------------|----------|--------|--------|
-| [Metric 1] | [Value] | [Value] | ✅/❌ |
-| [Metric 2] | [Value] | [Value] | ✅/❌ |
+| [Metric 1] | [Value] | [Value] | ✓/✗ |
+| [Metric 2] | [Value] | [Value] | ✓/✗ |
 
 **Hypothesis Status:** [CONFIRMED / REFUTED / INCONCLUSIVE]
 

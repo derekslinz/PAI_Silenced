@@ -8,7 +8,7 @@ effort: medium
 
 **Auto-invoked by the Algorithm when work can be parallelized or requires agent specialization.**
 
-## 🚨 CRITICAL ROUTING — Two COMPLETELY Different Systems
+## CRITICAL ROUTING — Two COMPLETELY Different Systems
 
 | the user Says | System | Tool | What Happens |
 |-------------|--------|------|-------------|
@@ -33,7 +33,7 @@ effort: medium
 
 ### 1. Built-In Agents
 
-**⚠️ Built-in agents are for internal workflow routing ONLY.** When the user asks for custom, specialized, or uniquely-voiced agents, use the Agents skill (section 4 below) instead.
+**Built-in agents are for internal workflow routing ONLY.** When the user asks for custom, specialized, or uniquely-voiced agents, use the Agents skill (section 4 below) instead.
 
 Use `Task(subagent_type="AgentType")` with these specialized agents:
 

@@ -22,9 +22,9 @@ BOLD='\033[1m'
 ITALIC='\033[3m'
 
 # ─── Helpers ──────────────────────────────────────────────
-info()    { echo -e "  ${BLUE}ℹ${RESET} $1"; }
+info()    { echo -e "  ${BLUE}${RESET} $1"; }
 success() { echo -e "  ${GREEN}✓${RESET} $1"; }
-warn()    { echo -e "  ${YELLOW}⚠${RESET} $1"; }
+warn()    { echo -e "  ${YELLOW}${RESET} $1"; }
 error()   { echo -e "  ${RED}✗${RESET} $1"; }
 
 # ─── Banner ───────────────────────────────────────────────
@@ -43,7 +43,7 @@ echo ""
 echo -e "           ${NAVY}████████████████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${GRAY}\"${RESET}${LIGHT_BLUE}Lean and Mean${RESET}${GRAY}\"${RESET}"
 echo -e "           ${NAVY}████████████████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${BAR}"
 echo -e "           ${NAVY}████${RESET}        ${NAVY}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${NAVY}⬢${RESET}  ${GRAY}PAI${RESET}       ${SILVER}v4.0.3${RESET}"
-echo -e "           ${NAVY}████${RESET}        ${NAVY}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${NAVY}⚙${RESET}  ${GRAY}Algo${RESET}      ${SILVER}v3.7.0${RESET}"
+echo -e "           ${NAVY}████${RESET}        ${NAVY}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${NAVY}${RESET}  ${GRAY}Algo${RESET}      ${SILVER}v3.7.0${RESET}"
 echo -e "           ${NAVY}████████████████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${LIGHT_BLUE}✦${RESET}  ${GRAY}Installer${RESET} ${SILVER}v4.0${RESET}"
 echo -e "           ${NAVY}████████████████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${BAR}"
 echo -e "           ${NAVY}████${RESET}        ${BLUE}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}"

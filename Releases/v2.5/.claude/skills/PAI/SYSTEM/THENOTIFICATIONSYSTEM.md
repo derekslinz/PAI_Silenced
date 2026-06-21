@@ -26,7 +26,7 @@ This system provides:
    [Doing what {PRINCIPAL.NAME} asked]...
    ```
 
-**Skip curl for conversational responses** (greetings, acknowledgments, simple Q&A). The 🎯 COMPLETED line already drives voice output—adding curl creates redundant voice messages.
+**Skip curl for conversational responses** (greetings, acknowledgments, simple Q&A). The COMPLETED line already drives voice output—adding curl creates redundant voice messages.
 
 ---
 
@@ -276,11 +276,11 @@ Topic name acts as password - use random string for security.
 
 | Option | Status | Notes |
 |--------|--------|-------|
-| **ntfy.sh** | ✅ RECOMMENDED | Same result (phone alert), zero hassle |
-| **Textbelt** | ❌ Blocked | Free tier disabled for US due to abuse |
-| **AppleScript + Messages.app** | ⚠️ Requires permissions | Works if you grant automation access |
-| **Twilio Toll-Free** | ⚠️ Simpler | 5-14 day verification (vs 3-5 weeks for 10DLC) |
-| **Email-to-SMS** | ⚠️ Carrier-dependent | `number@vtext.com` (Verizon), `@txt.att.net` (AT&T) |
+| **ntfy.sh** | ✓ RECOMMENDED | Same result (phone alert), zero hassle |
+| **Textbelt** | ✗ Blocked | Free tier disabled for US due to abuse |
+| **AppleScript + Messages.app** | Requires permissions | Works if you grant automation access |
+| **Twilio Toll-Free** | Simpler | 5-14 day verification (vs 3-5 weeks for 10DLC) |
+| **Email-to-SMS** | Carrier-dependent | `number@vtext.com` (Verizon), `@txt.att.net` (AT&T) |
 
 **Bottom line:** ntfy.sh already alerts your phone. SMS adds carrier bureaucracy for the same outcome.
 

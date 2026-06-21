@@ -5,7 +5,7 @@
  * in the voice and tab title systems. NOT related to Algorithm format.
  *
  * Tab title validators enforce the state machine:
- *   - Working titles (⚙️): gerund start ("Fixing auth bug.")
+ *   - Working titles (): gerund start ("Fixing auth bug.")
  *   - Completion titles (✓): past tense, NO gerund ("Fixed auth bug.")
  *   - Question titles: noun phrase, no period ("Auth method")
  *
@@ -114,7 +114,7 @@ function isValidTitleBase(text: string): { valid: boolean; firstWord: string } {
 
 /**
  * Working-phase title: MUST start with gerund (-ing verb).
- * Used by UpdateTabTitle for 🧠/⚙️ titles.
+ * Used by UpdateTabTitle for /titles.
  */
 export function isValidWorkingTitle(text: string): boolean {
   const { valid, firstWord } = isValidTitleBase(text);

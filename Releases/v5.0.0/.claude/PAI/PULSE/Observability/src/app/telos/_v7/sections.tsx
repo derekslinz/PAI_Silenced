@@ -144,7 +144,7 @@ export function MissionGoals({ telos, missionId, onMission, onTrace, onOpenGoal,
                     }}
                     style={{ marginLeft: "auto", background: "transparent", color: "#9ACBFF", border: "1px solid #1A2A4D", borderRadius: 4, cursor: "pointer" }}
                   >
-                    ↗
+                    
                   </button>
                 )}
               </div>
@@ -233,7 +233,7 @@ export function Metrics({ telos, onTrace, showIds, openFile }: CommonSectionProp
                 {m.value}<span className="metric-unit muted">{m.unit}</span>
               </span>
               <span className={"metric-trend " + (m.trend > 0 ? "up" : m.trend < 0 ? "down" : "flat")}>
-                {m.trend > 0 ? "↗" : m.trend < 0 ? "↘" : "·"} {Math.abs(m.trend)}
+                {m.trend > 0 ? "" : m.trend < 0 ? "" : "·"} {Math.abs(m.trend)}
               </span>
             </div>
             <MetricSpark pts={m.spark} color="#9ACBFF" />

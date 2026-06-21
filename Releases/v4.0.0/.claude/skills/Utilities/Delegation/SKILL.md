@@ -7,7 +7,7 @@ description: Parallelize work via background/foreground agents, built-in types, 
 
 **Auto-invoked by the Algorithm when work can be parallelized or requires agent specialization.**
 
-## 🚨 CRITICAL ROUTING — Two COMPLETELY Different Systems
+## CRITICAL ROUTING — Two COMPLETELY Different Systems
 
 | {PRINCIPAL.NAME} Says | System | Tool | What Happens |
 |-------------|--------|------|-------------|

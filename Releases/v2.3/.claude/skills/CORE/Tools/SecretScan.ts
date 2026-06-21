@@ -54,8 +54,8 @@ async function runTruffleHog(targetDir: string, options: string[]): Promise<stri
   return new Promise((resolve, reject) => {
     const args = ['filesystem', targetDir, '--json', '--no-update', ...options];
     
-    console.log(`🔍 Running TruffleHog scan on: ${targetDir}\n`);
-    console.log(`⏳ This may take a moment...\n`);
+    console.log(`Running TruffleHog scan on: ${targetDir}\n`);
+    console.log(`This may take a moment...\n`);
     
     const trufflehog = spawn('trufflehog', args);
     let output = '';
@@ -103,11 +103,11 @@ function parseTruffleHogOutput(output: string): TruffleHogFinding[] {
 
 function formatFindings(findings: TruffleHogFinding[], verbose: boolean) {
   if (findings.length === 0) {
-    console.log('✅ No sensitive information found!');
+    console.log('✓ No sensitive information found!');
     return;
   }
   
-  console.log(`🚨 Found ${findings.length} potential secret${findings.length > 1 ? 's' : ''}:\n`);
+  console.log(`Found ${findings.length} potential secret${findings.length > 1 ? 's' : ''}:\n`);
   console.log('─'.repeat(60));
   
   // Group by severity
@@ -115,7 +115,7 @@ function formatFindings(findings: TruffleHogFinding[], verbose: boolean) {
   const unverified = findings.filter(f => !f.Verified);
   
   if (verified.length > 0) {
-    console.log('\n🔴 VERIFIED SECRETS (ACTIVE CREDENTIALS!)');
+    console.log('\n● VERIFIED SECRETS (ACTIVE CREDENTIALS!)');
     console.log('─'.repeat(60));
     for (const finding of verified) {
       displayFinding(finding, verbose);
@@ -123,7 +123,7 @@ function formatFindings(findings: TruffleHogFinding[], verbose: boolean) {
   }
   
   if (unverified.length > 0) {
-    console.log('\n⚠️  POTENTIAL SECRETS (Unverified)');
+    console.log('\n POTENTIAL SECRETS (Unverified)');
     console.log('─'.repeat(60));
     for (const finding of unverified) {
       displayFinding(finding, verbose);
@@ -131,18 +131,18 @@ function formatFindings(findings: TruffleHogFinding[], verbose: boolean) {
   }
   
   // Summary
-  console.log('\n📋 SUMMARY & URGENT ACTIONS:');
+  console.log('\nSUMMARY & URGENT ACTIONS:');
   console.log('─'.repeat(60));
   
   if (verified.length > 0) {
-    console.log('\n🚨 CRITICAL - VERIFIED ACTIVE CREDENTIALS FOUND:');
+    console.log('\nCRITICAL - VERIFIED ACTIVE CREDENTIALS FOUND:');
     console.log('1. IMMEDIATELY rotate/revoke these credentials');
     console.log('2. Check if these were ever pushed to a public repository');
     console.log('3. Audit logs for any unauthorized access');
     console.log('4. Move all secrets to environment variables or secret vaults');
   }
   
-  console.log('\n🛡️  RECOMMENDATIONS:');
+  console.log('\n RECOMMENDATIONS:');
   console.log('1. Never commit secrets to git repositories');
   console.log('2. Use .env files for local development (add to .gitignore)');
   console.log('3. Use secret management services for production');
@@ -156,7 +156,7 @@ function displayFinding(finding: TruffleHogFinding, verbose: boolean) {
   const type = finding.DetectorType;
   const verified = finding.Verified ? '✓ VERIFIED' : '✗ Unverified';
   
-  console.log(`\n📄 ${file}`);
+  console.log(`\n${file}`);
   console.log(`   Type: ${type} ${verified}`);
   console.log(`   Line: ${line}`);
   
@@ -181,7 +181,7 @@ function displayFinding(finding: TruffleHogFinding, verbose: boolean) {
     .find(([key]) => String(type).includes(key))?.[1] || 
     'Remove from code and use secure secret management';
     
-  console.log(`   💡 Fix: ${recommendation}`);
+  console.log(`   Fix: ${recommendation}`);
 }
 
 async function main() {
@@ -191,7 +191,7 @@ async function main() {
   const verify = process.argv.includes('--verify');
   
   if (!existsSync(targetDir)) {
-    console.error(`❌ Directory not found: ${targetDir}`);
+    console.error(`✗ Directory not found: ${targetDir}`);
     process.exit(1);
   }
   
@@ -199,7 +199,7 @@ async function main() {
   try {
     await runTruffleHog('--help', []);
   } catch (error) {
-    console.error('❌ TruffleHog is not installed or not in PATH');
+    console.error('✗ TruffleHog is not installed or not in PATH');
     console.error('Install with: brew install trufflehog');
     process.exit(1);
   }
@@ -225,7 +225,7 @@ async function main() {
       process.exit(1);
     }
   } catch (error) {
-    console.error(`❌ Error running TruffleHog: ${error.message}`);
+    console.error(`✗ Error running TruffleHog: ${error.message}`);
     process.exit(1);
   }
 }

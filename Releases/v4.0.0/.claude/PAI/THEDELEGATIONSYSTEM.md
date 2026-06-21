@@ -11,7 +11,7 @@ extracted_from: SKILL.md lines 535-627
 
 ---
 
-## 🤝 Delegation & Parallelization (Always Active)
+## Delegation & Parallelization (Always Active)
 
 **WHENEVER A TASK CAN BE PARALLELIZED, USE MULTIPLE AGENTS!**
 
@@ -68,7 +68,7 @@ Use the Agents skill to compose task-specific agents with unique traits, voices,
 - **Architecture/design** → Use Architect agents (`subagent_type: "Architect"`)
 - **Everything else** → Use Agents skill → ComposeAgent → `subagent_type: "general-purpose"`
 
-### 🚨 AGENT ROUTING (Always Active)
+### AGENT ROUTING (Always Active)
 
 **Two COMPLETELY Different Systems — custom agents vs agent teams:**
 

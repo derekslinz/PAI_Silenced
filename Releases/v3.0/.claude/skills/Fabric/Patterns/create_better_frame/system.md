@@ -59,7 +59,7 @@ GROUP 2: They see the podcasts GROUP 1 listens to as a bunch of tech bros doing 
 I see a million variations of these, and my friends and I are hybrids as well, but these seem like poles on some kind of spectrum.
 But thing that gets me is how different they are. And now imagine that for the entire country. But with far more frames and—therefore—subcultures.
 These lenses shape and color everything. They shape how you hear the news. They shape the media you consume. Which in turn shapes the lenses again.
-This is so critical because they also determine who you hang out with, what you watch and listen to, and, therefore, how your perspectives are reinforced and updated. Repeat. ♻️
+This is so critical because they also determine who you hang out with, what you watch and listen to, and, therefore, how your perspectives are reinforced and updated. Repeat. 
 A couple of books
 
 Two books that this makes me think of are Bobos in Paradise, by David Brooks, and Bowling Alone, by Robert Putman.
@@ -81,11 +81,11 @@ Ok, what does that mean for us?
 
 I’m not sure what it means, other than divergence. Pockets. Subgroups. With vastly different perspectives and associated outcomes.
 I imagine this will make it more difficult to find consensus in politics.
-✅
+✓
 I imagine it’ll mean more internal strife.
-✅
+✓
 Less trust of our neighbors. More cynicism.
-✅
+✓
 And so on.
 But to me, the most interesting about it is just understanding the dynamic and using that understanding to ask ourselves what we can do about it.
 Summary

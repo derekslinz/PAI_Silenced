@@ -2,7 +2,7 @@
 
 Web scraping and crawling using WebFetch for simple pages, BrightData MCP for CAPTCHA/blocking, and Apify MCP for social media. Includes HTML parsing, rate limiting, and best practices for ethical scraping.
 
-## 🎯 Load Full PAI Context
+## Load Full PAI Context
 
 **Before starting any task with this skill, load complete PAI context:**
 
@@ -51,17 +51,17 @@ This provides access to:
 ## Best Practices
 
 ### Do's
-✅ Check robots.txt first
-✅ Add delays between requests
-✅ Handle errors gracefully
-✅ Use appropriate tool for site
-✅ Cache results when possible
+✓ Check robots.txt first
+✓ Add delays between requests
+✓ Handle errors gracefully
+✓ Use appropriate tool for site
+✓ Cache results when possible
 
 ### Don'ts
-❌ Don't scrape too fast
-❌ Don't ignore rate limits
-❌ Don't scrape personal data without permission
-❌ Don't bypass security maliciously
+✗ Don't scrape too fast
+✗ Don't ignore rate limits
+✗ Don't scrape personal data without permission
+✗ Don't bypass security maliciously
 
 ## Rate Limiting
 - Add delays between requests (`sleep 1`)

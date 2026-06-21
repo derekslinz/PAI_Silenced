@@ -514,11 +514,11 @@ const result = await runEndpointDiscovery(target, options);
 if (options.json) {
   console.log(JSON.stringify(result, null, 2));
 } else {
-  console.log(`\n🔍 Endpoint Discovery: ${result.target}`);
-  console.log(`⏱️  ${result.timestamp}`);
-  console.log(`📁 Mode: ${result.mode}`);
-  console.log(`📄 JS Files Processed: ${result.jsFilesProcessed}`);
-  console.log(`\n📊 Stats:`);
+  console.log(`\nEndpoint Discovery: ${result.target}`);
+  console.log(` ${result.timestamp}`);
+  console.log(`Mode: ${result.mode}`);
+  console.log(`JS Files Processed: ${result.jsFilesProcessed}`);
+  console.log(`\nStats:`);
   console.log(`   Total Endpoints: ${result.stats.totalEndpoints}`);
   console.log(`   Unique Paths: ${result.stats.uniquePaths}`);
 
@@ -527,7 +527,7 @@ if (options.json) {
   }
 
   if (result.endpoints.length > 0) {
-    console.log(`\n🎯 Endpoints by Type:\n`);
+    console.log(`\nEndpoints by Type:\n`);
 
     // Group by type
     const byType = new Map<string, Endpoint[]>();
@@ -550,7 +550,7 @@ if (options.json) {
   }
 
   if (result.secrets.length > 0) {
-    console.log(`\n🔑 Potential Secrets (${result.secrets.length}):\n`);
+    console.log(`\nPotential Secrets (${result.secrets.length}):\n`);
     for (const secret of result.secrets.slice(0, 10)) {
       console.log(`  [${secret.type}] ${secret.value}`);
     }
@@ -560,14 +560,14 @@ if (options.json) {
   }
 
   if (result.errors.length > 0) {
-    console.log("\n⚠️  Errors:");
+    console.log("\n Errors:");
     for (const err of result.errors) {
       console.log(`  ${err}`);
     }
   }
 
   if (result.endpoints.length > 0) {
-    console.log(`\n💡 Next: Pipe to PathDiscovery for fuzzing`);
+    console.log(`\nNext: Pipe to PathDiscovery for fuzzing`);
     console.log(`   bun EndpointDiscovery.ts "${target}" --json | jq -r '.endpoints[].path'`);
   }
 }

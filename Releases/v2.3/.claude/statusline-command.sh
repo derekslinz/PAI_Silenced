@@ -421,23 +421,23 @@ fi
 case "$MODE" in
     nano)
         bar=$(render_context_bar 5 $context_pct)
-        printf "${CTX_PRIMARY}◉${RESET} ${bar} ${pct_color}${context_pct}%%${RESET} ${CTX_ACCENT}⏱${RESET} ${SLATE_300}${time_display}${RESET}\n"
+        printf "${CTX_PRIMARY}◉${RESET} ${bar} ${pct_color}${context_pct}%%${RESET} ${CTX_ACCENT}${RESET} ${SLATE_300}${time_display}${RESET}\n"
         ;;
     micro)
         bar=$(render_context_bar 6 $context_pct)
-        printf "${CTX_PRIMARY}◉${RESET} ${bar} ${pct_color}${context_pct}%%${RESET} ${SLATE_500}(${context_k}k)${RESET} ${CTX_ACCENT}⏱${RESET} ${SLATE_300}${time_display}${RESET}\n"
+        printf "${CTX_PRIMARY}◉${RESET} ${bar} ${pct_color}${context_pct}%%${RESET} ${SLATE_500}(${context_k}k)${RESET} ${CTX_ACCENT}${RESET} ${SLATE_300}${time_display}${RESET}\n"
         ;;
     mini)
         bar=$(render_context_bar 8 $context_pct)
         printf "${CTX_PRIMARY}◉${RESET} ${CTX_SECONDARY}CONTEXT:${RESET} ${bar} "
         printf "${pct_color}${context_pct}%%${RESET} ${SLATE_500}(${context_k}k/${max_k}k)${RESET} "
-        printf "${CTX_ACCENT}⏱${RESET} ${SLATE_300}${time_display}${RESET}\n"
+        printf "${CTX_ACCENT}${RESET} ${SLATE_300}${time_display}${RESET}\n"
         ;;
     normal)
         bar=$(render_context_bar 16 $context_pct)
         printf "${CTX_PRIMARY}◉${RESET} ${CTX_SECONDARY}CONTEXT:${RESET} ${bar} "
         printf "${LAST_BUCKET_COLOR}${context_pct}%%${RESET} ${SLATE_500}(${context_k}k/${max_k}k)${RESET}"
-        printf " ${SLATE_600}│${RESET} ${CTX_ACCENT}⏱${RESET} ${SLATE_300}${time_display}${RESET}\n"
+        printf " ${SLATE_600}│${RESET} ${CTX_ACCENT}${RESET} ${SLATE_300}${time_display}${RESET}\n"
         ;;
 esac
 
@@ -544,19 +544,19 @@ fi
 
 case "$MODE" in
     nano)
-        printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}📁${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET}\n"
+        printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET}\n"
         ;;
     micro)
-        printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}📁${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET}\n"
+        printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET}\n"
         ;;
     mini)
         printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_SECONDARY}LEARNING:${RESET} "
-        printf "${LEARN_WORK}📁${RESET}${SLATE_300}${work_count}${RESET} "
+        printf "${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} "
         printf "${SLATE_600}│${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET}\n"
         ;;
     normal)
         printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_SECONDARY}LEARNING:${RESET} "
-        printf "${LEARN_WORK}📁${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_WORK}Work${RESET} "
+        printf "${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_WORK}Work${RESET} "
         printf "${SLATE_600}│${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} ${LEARN_SIGNALS}Ratings${RESET}\n"
         ;;
 esac
@@ -675,8 +675,8 @@ if [ -f "$RATINGS_FILE" ] && [ -s "$RATINGS_FILE" ]; then
     if [ "$total_count" -gt 0 ] 2>/dev/null; then
         # Trend icon/color
         case "$trend" in
-            up)   trend_icon="↗"; trend_color="$EMERALD" ;;
-            down) trend_icon="↘"; trend_color="$ROSE" ;;
+            up)   trend_icon=""; trend_color="$EMERALD" ;;
+            down) trend_icon=""; trend_color="$ROSE" ;;
             *)    trend_icon="→"; trend_color="$SLATE_400" ;;
         esac
 

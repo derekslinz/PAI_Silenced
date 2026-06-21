@@ -3,7 +3,7 @@ name: Remotion
 description: Programmatic video creation with React. USE WHEN video, animation, motion graphics, video rendering, React video, intro video, YouTube video, TikTok video, video production, render video.
 ---
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 

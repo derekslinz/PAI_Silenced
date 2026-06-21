@@ -5,7 +5,7 @@ When the TestIdea workflow completes, present results in this format.
 ## Header
 
 ```markdown
-# 🌍 World Threat Model Analysis
+# World Threat Model Analysis
 
 **Idea/Strategy:** {user's input, summarized in 1-2 sentences}
 **Tier:** {Fast | Standard | Deep}
@@ -32,7 +32,7 @@ For EACH of the 11 horizons, present a clearly separated section:
 ```markdown
 ## ━━━ {HORIZON} Horizon ━━━
 
-**Verdict:** {🟢 FAVORABLE | 🟡 NEUTRAL | 🔴 UNFAVORABLE}
+**Verdict:** {● FAVORABLE | ● NEUTRAL | ● UNFAVORABLE}
 **Confidence:** {HIGH | MEDIUM | LOW}
 
 ### Key Factors
@@ -104,10 +104,10 @@ and what drives the transitions.}
 
 | Section | Fast | Standard | Deep |
 |---------|------|----------|------|
-| Header | ✅ | ✅ | ✅ |
-| Executive Verdict | ✅ | ✅ | ✅ |
-| Per-Horizon (abbreviated) | ✅ (verdict + 2-3 bullets only) | — | — |
-| Per-Horizon (full) | — | ✅ | ✅ |
-| Cross-Horizon Synthesis | — | ✅ | ✅ |
-| Council Deliberation | — | — | ✅ |
-| Footer | ✅ | ✅ | ✅ |
+| Header | ✓ | ✓ | ✓ |
+| Executive Verdict | ✓ | ✓ | ✓ |
+| Per-Horizon (abbreviated) | ✓ (verdict + 2-3 bullets only) | — | — |
+| Per-Horizon (full) | — | ✓ | ✓ |
+| Cross-Horizon Synthesis | — | ✓ | ✓ |
+| Council Deliberation | — | — | ✓ |
+| Footer | ✓ | ✓ | ✓ |

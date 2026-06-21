@@ -44,11 +44,11 @@ open -a "$BROWSER" "<url>"  # BROWSER from tech stack prefs
 bun run ~/.claude/skills/Browser/Tools/Browse.ts https://example.com
 
 # Output:
-# 📸 Screenshot: /tmp/browse-1704614400.png
-# 🔴 Console Errors (2): ...
-# 🌐 Failed Requests (1): ...
-# 📊 Network: 34 requests | 1.2MB | avg 120ms
-# ✅ Page: "Example" loaded successfully
+# Screenshot: /tmp/browse-1704614400.png
+# ● Console Errors (2): ...
+# Failed Requests (1): ...
+# Network: 34 requests | 1.2MB | avg 120ms
+# ✓ Page: "Example" loaded successfully
 ```
 
 Session auto-starts. No setup needed.
@@ -109,16 +109,16 @@ bun run Browse.ts stop        # Stop session (rarely needed)
 # Step 1: Load the page
 $ bun run Browse.ts https://myapp.com/users
 
-📸 Screenshot: /tmp/browse-xxx.png
+Screenshot: /tmp/browse-xxx.png
 
-🔴 Console Errors (1):
+● Console Errors (1):
    • TypeError: Cannot read property 'map' of undefined
 
-🌐 Failed Requests (1):
+Failed Requests (1):
    • GET /api/users → 500 Internal Server Error
 
-📊 Network: 23 requests | 847KB | avg 89ms
-⚠️ Page: "Users" loaded with issues
+Network: 23 requests | 847KB | avg 89ms
+Page: "Users" loaded with issues
 ```
 
 **Immediately know:**

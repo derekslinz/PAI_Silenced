@@ -34,7 +34,7 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Stop the service if running
-echo -e "${YELLOW}▶ Stopping voice server...${NC}"
+echo -e "${YELLOW}► Stopping voice server...${NC}"
 if launchctl list | grep -q "$SERVICE_NAME" 2>/dev/null; then
     launchctl unload "$PLIST_PATH" 2>/dev/null
     echo -e "${GREEN}✓ Voice server stopped${NC}"
@@ -43,7 +43,7 @@ else
 fi
 
 # Remove LaunchAgent plist
-echo -e "${YELLOW}▶ Removing LaunchAgent...${NC}"
+echo -e "${YELLOW}► Removing LaunchAgent...${NC}"
 if [ -f "$PLIST_PATH" ]; then
     rm "$PLIST_PATH"
     echo -e "${GREEN}✓ LaunchAgent removed${NC}"
@@ -53,7 +53,7 @@ fi
 
 # Kill any remaining processes
 if lsof -i :8888 > /dev/null 2>&1; then
-    echo -e "${YELLOW}▶ Cleaning up port 8888...${NC}"
+    echo -e "${YELLOW}► Cleaning up port 8888...${NC}"
     lsof -ti :8888 | xargs kill -9 2>/dev/null
     echo -e "${GREEN}✓ Port 8888 cleared${NC}"
 fi

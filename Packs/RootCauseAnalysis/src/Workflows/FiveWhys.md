@@ -96,7 +96,7 @@ Ensures the solution is as rigorous as the diagnosis.
 ## Output Format
 
 ```
-🔍 5 WHYS ANALYSIS: [problem, 12 words]
+5 WHYS ANALYSIS: [problem, 12 words]
 
 PROBLEM: [precise statement]
 

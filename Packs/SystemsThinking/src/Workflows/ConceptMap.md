@@ -19,11 +19,11 @@ Concept maps come from Joseph Novak's work on meaningful learning (Cornell, 1972
 ## The Structure
 
 ```
-[CONCEPT A]  ──"contains"──▶  [CONCEPT B]
+[CONCEPT A]  ──"contains"──►  [CONCEPT B]
     │
     │"interacts with"
     ▼
-[CONCEPT C]  ──"depends on"──▶  [CONCEPT D]
+[CONCEPT C]  ──"depends on"──►  [CONCEPT D]
 ```
 
 **Components:**
@@ -115,7 +115,7 @@ Mermaid or graphviz both work. Mermaid renders inline in most editors; graphviz 
 ## Output
 
 ```
-📊 CONCEPT MAP: [topic]
+CONCEPT MAP: [topic]
 
 FOCUS QUESTION: [...]
 

@@ -48,7 +48,7 @@ References:
 
 - [Why We'll Have AGI by 2025-2028](https://danielmiessler.com/blog/why-well-have-agi-by-2028)
  
-Status: `IN PROGRESS` 🔄
+Status: `IN PROGRESS` 
 
 Notes:
 

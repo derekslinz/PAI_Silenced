@@ -98,14 +98,14 @@ Maximize information entropy by:
 
 ## Example Question Transformations
 
-❌ **Boring**: "What problem are you solving?"
-✅ **Interesting**: "What problem did you initially *think* you were solving, and when did you realize you were actually solving something completely different?"
+✗ **Boring**: "What problem are you solving?"
+✓ **Interesting**: "What problem did you initially *think* you were solving, and when did you realize you were actually solving something completely different?"
 
-❌ **Boring**: "How are you different from competitors?"
-✅ **Interesting**: "If your top competitor called you for advice on what they should build next, what would you tell them - and what would you deliberately leave out?"
+✗ **Boring**: "How are you different from competitors?"
+✓ **Interesting**: "If your top competitor called you for advice on what they should build next, what would you tell them - and what would you deliberately leave out?"
 
-❌ **Boring**: "What's your vision for the future?"
-✅ **Interesting**: "If you woke up in 2030 and your company had failed, what would be the most likely reason - and what could make that failure look obvious in retrospect?"
+✗ **Boring**: "What's your vision for the future?"
+✓ **Interesting**: "If you woke up in 2030 and your company had failed, what would be the most likely reason - and what could make that failure look obvious in retrospect?"
 
 ## Research Command
 

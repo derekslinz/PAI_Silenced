@@ -687,7 +687,7 @@ async function runParallelIteration(
   );
 
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(0);
-  console.log(`\x1b[90m  ⏱ Agents finished in ${elapsed}s\x1b[0m`);
+  console.log(`\x1b[90m  Agents finished in ${elapsed}s\x1b[0m`);
   console.log("");
 
   // Parse agent stdout for RESULT lines — agents report pass/fail via stdout only
@@ -1055,7 +1055,7 @@ async function runLoop(prdPath: string, maxOverride?: number, agentCount: number
         console.log(`  \x1b[33mAgent ${a.agentId}\x1b[0m → ${detail.id}: ${desc}`);
       }
       console.log("");
-      console.log(`  \x1b[90m⏳ ${assignments.length} agents working...\x1b[0m`);
+      console.log(`  \x1b[90m${assignments.length} agents working...\x1b[0m`);
 
       // Run parallel iteration (async)
       await runParallelIteration(absPath, assignments, newIteration);

@@ -177,11 +177,11 @@ White #FFFFFF — Clean background
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+## MANDATORY WORKFLOW STEPS
 
 ### Step 1: Run Story Explanation on Content (MANDATORY)
 
-**🎯 CRITICAL: You MUST use /cse (Create Story Explanation) with 24-item length.**
+**CRITICAL: You MUST use /cse (Create Story Explanation) with 24-item length.**
 
 This extracts the full narrative arc and identifies the STRUCTURE that needs to be diagrammed.
 

@@ -11,7 +11,7 @@ extracted_from: SKILL.md lines 993-1022
 
 ---
 
-## 🌐 Web Scraping & MCP Systems
+## Web Scraping & MCP Systems
 
 ### Route Triggers
 - User says "use the MCP" or "use Bright Data" or "use Apify" → Use MCP Skill

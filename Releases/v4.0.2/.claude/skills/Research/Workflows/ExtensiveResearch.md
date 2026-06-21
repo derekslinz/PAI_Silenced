@@ -2,7 +2,7 @@
 
 **Mode:** 3 researcher types × multiple threads each | **Timeout:** 5 minutes
 
-## 🚨 CRITICAL: URL Verification Required
+## CRITICAL: URL Verification Required
 
 **BEFORE delivering any research results with URLs:**
 1. Verify EVERY URL using WebFetch or curl
@@ -122,17 +122,17 @@ WebFetch(url, "Confirm article exists and summarize main point")
 ### Step 5: Return Results
 
 ```markdown
-📋 SUMMARY: Extensive research on [topic]
-🔍 ANALYSIS: [Comprehensive findings by theme]
-⚡ ACTIONS: 3 researcher types × 3 threads = 9 parallel agents
-✅ RESULTS: [Full synthesized report]
-📊 STATUS: Extensive mode - 9 agents, 5 min timeout
-📁 CAPTURE: [Key discoveries]
-➡️ NEXT: [Follow-up recommendations]
-📖 STORY EXPLANATION: [8 numbered points]
-🎯 COMPLETED: Extensive research on [topic] complete
+SUMMARY: Extensive research on [topic]
+ANALYSIS: [Comprehensive findings by theme]
+ACTIONS: 3 researcher types × 3 threads = 9 parallel agents
+✓ RESULTS: [Full synthesized report]
+STATUS: Extensive mode - 9 agents, 5 min timeout
+CAPTURE: [Key discoveries]
+→NEXT: [Follow-up recommendations]
+STORY EXPLANATION: [8 numbered points]
+COMPLETED: Extensive research on [topic] complete
 
-📈 RESEARCH METRICS:
+RESEARCH METRICS:
 - Total Agents: 9 (3 types × 3 each)
 - Researcher Types: Claude, Gemini, Grok
 - Confidence Level: [%]

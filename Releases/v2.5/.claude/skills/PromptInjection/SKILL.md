@@ -11,7 +11,7 @@ description: Prompt injection testing. USE WHEN prompt injection, jailbreak, LLM
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -32,27 +32,27 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
 
 # PromptInjection Skill
 
-## 🔒 AUTHORIZATION & ETHICAL USE REQUIREMENTS
+## AUTHORIZATION & ETHICAL USE REQUIREMENTS
 
-**⚠️ CRITICAL - READ BEFORE USE ⚠️**
+**CRITICAL - READ BEFORE USE **
 
 This skill is part of a **Security Practice** run by a security professional with extensive experience in offensive security testing.
 
 ### Legal Requirements
 
 **AUTHORIZATION IS MANDATORY:**
-- ✅ **ONLY test systems you own** or have **explicit written permission** to test
-- ✅ **ONLY use these techniques** as part of authorized penetration testing engagements
-- ✅ **ALWAYS document authorization** before beginning any testing
-- ✅ **RESPECT scope boundaries** defined in testing agreements
-- ✅ **FOLLOW responsible disclosure** practices for any vulnerabilities discovered
+- ✓ **ONLY test systems you own** or have **explicit written permission** to test
+- ✓ **ONLY use these techniques** as part of authorized penetration testing engagements
+- ✓ **ALWAYS document authorization** before beginning any testing
+- ✓ **RESPECT scope boundaries** defined in testing agreements
+- ✓ **FOLLOW responsible disclosure** practices for any vulnerabilities discovered
 
 **UNAUTHORIZED TESTING IS ILLEGAL:**
-- ❌ **NEVER test systems** without explicit written permission
-- ❌ **NEVER exceed** authorized scope boundaries
-- ❌ **NEVER use these techniques** for malicious purposes
-- ❌ **NEVER disclose vulnerabilities** publicly before vendor remediation
-- ❌ **NEVER exfiltrate** real user data during testing
+- ✗ **NEVER test systems** without explicit written permission
+- ✗ **NEVER exceed** authorized scope boundaries
+- ✗ **NEVER use these techniques** for malicious purposes
+- ✗ **NEVER disclose vulnerabilities** publicly before vendor remediation
+- ✗ **NEVER exfiltrate** real user data during testing
 
 ### Ethical Framework
 
@@ -254,13 +254,13 @@ User: "what are the latest jailbreaking methods?"
 
 ---
 
-**🔒 REMINDER: AUTHORIZED USE ONLY 🔒**
+**REMINDER: AUTHORIZED USE ONLY **
 
 This skill contains powerful security testing techniques. Use only for:
-- ✅ Systems you own
-- ✅ Systems with explicit written authorization
-- ✅ Ethical security research
-- ✅ Defensive security purposes
+- ✓ Systems you own
+- ✓ Systems with explicit written authorization
+- ✓ Ethical security research
+- ✓ Defensive security purposes
 
 Unauthorized use is illegal and unethical.
 

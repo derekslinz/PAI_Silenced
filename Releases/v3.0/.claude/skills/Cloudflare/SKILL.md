@@ -11,7 +11,7 @@ description: Deploy Cloudflare Workers/Pages. USE WHEN Cloudflare, worker, deplo
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -61,7 +61,7 @@ Running the **WorkflowName** workflow in the **Cloudflare** skill to ACTION...
 
 ### Pages Deployment
 
-**🚨 CRITICAL: ALL env tokens lack Pages permissions. MUST unset them to use OAuth:**
+**CRITICAL: ALL env tokens lack Pages permissions. MUST unset them to use OAuth:**
 
 ```bash
 # ALWAYS unset tokens for Pages - OAuth login works, tokens don't
@@ -76,7 +76,7 @@ Running the **WorkflowName** workflow in the **Cloudflare** skill to ACTION...
 ## Critical Notes
 
 - **Workers:** Unset `CF_API_TOKEN` and `CLOUDFLARE_API_TOKEN` before deploying - they interfere with wrangler login-based auth
-- **Pages:** 🚨 **UNSET ALL TOKENS** - None of the API tokens have Pages permissions. OAuth-based wrangler login is the ONLY method that works.
+- **Pages:** **UNSET ALL TOKENS** - None of the API tokens have Pages permissions. OAuth-based wrangler login is the ONLY method that works.
 
 ## Examples
 

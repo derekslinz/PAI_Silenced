@@ -359,26 +359,26 @@ Deep dive conversation with Dario Amodei, CEO of Anthropic, covering the company
 
 **Successful extraction:**
 ```
-✅ Extracted YouTube video
-📺 Title: Building AGI: Interview with Anthropic CEO
-⏱️ Duration: 1h 23m
-📝 Transcript: 8,500 words
-👥 People: 2 (Dario Amodei, Interviewer)
-🏢 Companies: 3 (Anthropic, OpenAI, Google)
-🔗 Links: 7 (from description)
-🎯 Confidence: 0.92
+✓ Extracted YouTube video
+Title: Building AGI: Interview with Anthropic CEO
+Duration: 1h 23m
+Transcript: 8,500 words
+People: 2 (Dario Amodei, Interviewer)
+Companies: 3 (Anthropic, OpenAI, Google)
+Links: 7 (from description)
+Confidence: 0.92
 ```
 
 **Partial extraction (no transcript):**
 ```
-⚠️ Extracted YouTube video (metadata only - no transcript)
-📺 Title: Building AGI: Interview with Anthropic CEO
-⏱️ Duration: 1h 23m
-📝 Transcript: Not available
-👥 People: 1 (channel owner)
-🔗 Links: 5 (from description)
-🎯 Confidence: 0.45
-⚠️ Warning: Captions disabled, transcript unavailable
+Extracted YouTube video (metadata only - no transcript)
+Title: Building AGI: Interview with Anthropic CEO
+Duration: 1h 23m
+Transcript: Not available
+People: 1 (channel owner)
+Links: 5 (from description)
+Confidence: 0.45
+Warning: Captions disabled, transcript unavailable
 ```
 
 ---

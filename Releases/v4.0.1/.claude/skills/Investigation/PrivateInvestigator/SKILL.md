@@ -11,7 +11,7 @@ description: Ethical people-finding using 15 parallel research agents (45 search
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -168,19 +168,19 @@ filetype:pdf resume "Jane Doe" "San Francisco"
 ## Legal & Ethical Boundaries
 
 ### GREEN ZONE (Allowed)
-✅ Search public records (property, court, voter, business)
-✅ Access publicly posted social media content
-✅ Use people search aggregator sites
-✅ Perform reverse lookups on public data
-✅ Google dorking with public search operators
+✓ Search public records (property, court, voter, business)
+✓ Access publicly posted social media content
+✓ Use people search aggregator sites
+✓ Perform reverse lookups on public data
+✓ Google dorking with public search operators
 
 ### RED ZONE (Never Cross)
-❌ Access data behind login walls without authorization
-❌ Bypass authentication or security measures
-❌ Use pretexting or impersonation
-❌ Access private databases (credit, financial, medical)
-❌ Stalk, harass, or intimidate subjects
-❌ Access PI-only databases without license
+✗ Access data behind login walls without authorization
+✗ Bypass authentication or security measures
+✗ Use pretexting or impersonation
+✗ Access private databases (credit, financial, medical)
+✗ Stalk, harass, or intimidate subjects
+✗ Access PI-only databases without license
 
 ## When to STOP
 

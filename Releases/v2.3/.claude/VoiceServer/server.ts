@@ -33,7 +33,7 @@ const PORT = parseInt(process.env.PORT || "8888");
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
 
 if (!ELEVENLABS_API_KEY) {
-  console.error('⚠️  ELEVENLABS_API_KEY not found in ~/.env');
+  console.error(' ELEVENLABS_API_KEY not found in ~/.env');
   console.error('Add: ELEVENLABS_API_KEY=your_key_here');
 }
 
@@ -68,7 +68,7 @@ try {
     const jsonMatch = markdownContent.match(/```json\n([\s\S]*?)\n```/);
     if (jsonMatch && jsonMatch[1]) {
       voicesConfig = JSON.parse(jsonMatch[1]);
-      console.log('✅ Loaded voice personalities from CORE/SYSTEM/AGENTPERSONALITIES.md');
+      console.log('✓ Loaded voice personalities from CORE/SYSTEM/AGENTPERSONALITIES.md');
     }
   } else {
     // Fallback to local voices.json (deprecated)
@@ -76,11 +76,11 @@ try {
     if (existsSync(voicesPath)) {
       const voicesContent = readFileSync(voicesPath, 'utf-8');
       voicesConfig = JSON.parse(voicesContent);
-      console.log('⚠️  Loaded from voices.json (deprecated - use CORE/agent-personalities.md)');
+      console.log(' Loaded from voices.json (deprecated - use CORE/agent-personalities.md)');
     }
   }
 } catch (error) {
-  console.warn('⚠️  Failed to load voice personalities, using defaults');
+  console.warn(' Failed to load voice personalities, using defaults');
 }
 
 // Escape special characters for AppleScript
@@ -287,10 +287,10 @@ async function sendNotification(
         : DEFAULT_VOICE_SETTINGS;
 
       if (voiceConfig) {
-        console.log(`👤 Voice: ${voiceConfig.description}`);
+        console.log(`Voice: ${voiceConfig.description}`);
       }
 
-      console.log(`🎙️  Generating speech (voice: ${voice}, stability: ${voiceSettings.stability}, boost: ${voiceSettings.similarity_boost})`);
+      console.log(` Generating speech (voice: ${voice}, stability: ${voiceSettings.stability}, boost: ${voiceSettings.similarity_boost})`);
 
       const audioBuffer = await generateSpeech(safeMessage, voice, voiceSettings);
       await playAudio(audioBuffer);
@@ -372,7 +372,7 @@ const server = serve({
           throw new Error('Invalid voice_id');
         }
 
-        console.log(`📨 Notification: "${title}" - "${message}" (voice: ${voiceEnabled}, voiceId: ${voiceId || DEFAULT_VOICE_ID})`);
+        console.log(`Notification: "${title}" - "${message}" (voice: ${voiceEnabled}, voiceId: ${voiceId || DEFAULT_VOICE_ID})`);
 
         await sendNotification(title, message, voiceEnabled, voiceId);
 
@@ -401,7 +401,7 @@ const server = serve({
         const title = data.title || "PAI Assistant";
         const message = data.message || "Task completed";
 
-        console.log(`🤖 PAI notification: "${title}" - "${message}"`);
+        console.log(`PAI notification: "${title}" - "${message}"`);
 
         await sendNotification(title, message, true, null);
 
@@ -447,8 +447,8 @@ const server = serve({
   },
 });
 
-console.log(`🚀 Voice Server running on port ${PORT}`);
-console.log(`🎙️  Using ElevenLabs TTS (default voice: ${DEFAULT_VOICE_ID})`);
-console.log(`📡 POST to http://localhost:${PORT}/notify`);
-console.log(`🔒 Security: CORS restricted to localhost, rate limiting enabled`);
-console.log(`🔑 API Key: ${ELEVENLABS_API_KEY ? '✅ Configured' : '❌ Missing'}`);
+console.log(`Voice Server running on port ${PORT}`);
+console.log(` Using ElevenLabs TTS (default voice: ${DEFAULT_VOICE_ID})`);
+console.log(`POST to http://localhost:${PORT}/notify`);
+console.log(`Security: CORS restricted to localhost, rate limiting enabled`);
+console.log(`API Key: ${ELEVENLABS_API_KEY ? '✓ Configured' : '✗ Missing'}`);

@@ -6,7 +6,7 @@ license: Complete terms in LICENSE.txt
 
 # Web Application Testing
 
-## 🎯 Load Full PAI Context
+## Load Full PAI Context
 
 **Before starting any task with this skill, load complete PAI context:**
 
@@ -91,8 +91,8 @@ with sync_playwright() as p:
 
 ## Common Pitfall
 
-❌ **Don't** inspect the DOM before waiting for `networkidle` on dynamic apps
-✅ **Do** wait for `page.wait_for_load_state('networkidle')` before inspection
+✗ **Don't** inspect the DOM before waiting for `networkidle` on dynamic apps
+✓ **Do** wait for `page.wait_for_load_state('networkidle')` before inspection
 
 ## Best Practices
 

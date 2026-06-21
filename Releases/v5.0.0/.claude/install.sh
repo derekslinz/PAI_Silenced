@@ -22,7 +22,7 @@ BOLD='\033[1m'
 ITALIC='\033[3m'
 
 #  Helpers 
-info()    { echo -e "  ${BLUE}ℹ${RESET} $1"; }
+info()    { echo -e "  ${BLUE}${RESET} $1"; }
 success() { echo -e "  ${GREEN}${RESET} $1"; }
 warn()    { echo -e "  ${YELLOW}${RESET} $1"; }
 error()   { echo -e "  ${RED}${RESET} $1"; }

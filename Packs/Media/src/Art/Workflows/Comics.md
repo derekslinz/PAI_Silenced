@@ -80,7 +80,7 @@ Varied per panel — Different cream/light tones for panel differentiation
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+## MANDATORY WORKFLOW STEPS
 
 ### Step 1: Define Comic Narrative
 

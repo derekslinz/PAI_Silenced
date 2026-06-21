@@ -108,27 +108,27 @@ Unemployment Rate (UNRATE)
 
 **Analyze interrelationships between categories:**
 
-1. **Inflation ↔ Employment** (Phillips Curve dynamics)
+1. **Inflation Employment** (Phillips Curve dynamics)
    - CPI vs. Unemployment correlation
    - Wage growth vs. inflation relationship
 
-2. **Monetary Policy ↔ Economy**
+2. **Monetary Policy Economy**
    - Fed Funds Rate impact on mortgage rates, housing
    - Yield curve (10Y-2Y spread) as recession indicator
 
-3. **Consumer Health ↔ Economic Output**
+3. **Consumer Health Economic Output**
    - Sentiment vs. retail sales correlation
    - Saving rate vs. consumer spending
 
-4. **Housing ↔ Broader Economy**
+4. **Housing Broader Economy**
    - Home prices vs. inflation
    - Housing starts as leading indicator
 
-5. **Energy ↔ Inflation**
+5. **Energy Inflation**
    - Oil/gas prices impact on CPI
    - Energy component of consumer budgets
 
-6. **Fiscal ↔ Financial Markets**
+6. **Fiscal Financial Markets**
    - Debt growth vs. Treasury yields
    - Deficit spending impact on GDP
 

@@ -36,7 +36,7 @@ const PORT = parseInt(process.env.PORT || "8888");
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
 
 if (!ELEVENLABS_API_KEY) {
-  console.error('⚠️  ELEVENLABS_API_KEY not found in ~/.env');
+  console.error(' ELEVENLABS_API_KEY not found in ~/.env');
   console.error('Add: ELEVENLABS_API_KEY=your_key_here');
 }
 
@@ -67,7 +67,7 @@ function loadPronunciations(): void {
   const pronPath = join(import.meta.dir, 'pronunciations.json');
   try {
     if (!existsSync(pronPath)) {
-      console.warn('⚠️  No pronunciations.json found — TTS will use default pronunciations');
+      console.warn(' No pronunciations.json found — TTS will use default pronunciations');
       return;
     }
     const content = readFileSync(pronPath, 'utf-8');
@@ -79,12 +79,12 @@ function loadPronunciations(): void {
       phonetic: entry.phonetic,
     }));
 
-    console.log(`📖 Loaded ${pronunciationRules.length} pronunciation rules`);
+    console.log(`Loaded ${pronunciationRules.length} pronunciation rules`);
     for (const entry of config.replacements) {
       console.log(`   ${entry.term} → ${entry.phonetic} (${entry.note || ''})`);
     }
   } catch (error) {
-    console.error('⚠️  Failed to load pronunciations.json:', error);
+    console.error(' Failed to load pronunciations.json:', error);
   }
 }
 
@@ -154,7 +154,7 @@ function loadVoiceConfig(): LoadedVoiceConfig {
 
   try {
     if (!existsSync(settingsPath)) {
-      console.warn('⚠️  settings.json not found — using fallback voice defaults');
+      console.warn(' settings.json not found — using fallback voice defaults');
       return { defaultVoiceId: '', voices: {}, voicesByVoiceId: {}, desktopNotifications: true };
     }
 
@@ -190,14 +190,14 @@ function loadVoiceConfig(): LoadedVoiceConfig {
     const defaultVoiceId = voices.main?.voiceId || daidentity.mainDAVoiceID || '';
 
     const voiceNames = Object.keys(voices);
-    console.log(`✅ Loaded ${voiceNames.length} voice config(s) from settings.json: ${voiceNames.join(', ')}`);
+    console.log(`✓ Loaded ${voiceNames.length} voice config(s) from settings.json: ${voiceNames.join(', ')}`);
     for (const [name, entry] of Object.entries(voices)) {
       console.log(`   ${name}: ${entry.voiceName || entry.voiceId} (speed: ${entry.speed}, stability: ${entry.stability})`);
     }
 
     return { defaultVoiceId, voices, voicesByVoiceId, desktopNotifications };
   } catch (error) {
-    console.error('⚠️  Failed to load settings.json voice config:', error);
+    console.error(' Failed to load settings.json voice config:', error);
     return { defaultVoiceId: '', voices: {}, voicesByVoiceId: {}, desktopNotifications: true };
   }
 }
@@ -342,7 +342,7 @@ async function generateSpeech(
   // Apply pronunciation replacements before sending to TTS
   const pronouncedText = applyPronunciations(text);
   if (pronouncedText !== text) {
-    console.log(`📖 Pronunciation: "${text}" → "${pronouncedText}"`);
+    console.log(`Pronunciation: "${text}" → "${pronouncedText}"`);
   }
 
   const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`;
@@ -476,18 +476,18 @@ async function sendNotification(
           use_speaker_boost: callerVoiceSettings.use_speaker_boost ?? FALLBACK_VOICE_SETTINGS.use_speaker_boost,
         };
         resolvedVolume = callerVolume ?? FALLBACK_VOLUME;
-        console.log(`🔗 Voice settings: pass-through from caller`);
+        console.log(`Voice settings: pass-through from caller`);
       } else {
         // Tier 2/3: Look up by voiceId, fall back to main
         const voiceEntry = lookupVoiceByVoiceId(voice) || voiceConfig.voices.main;
         if (voiceEntry) {
           resolvedSettings = voiceEntryToSettings(voiceEntry);
           resolvedVolume = callerVolume ?? voiceEntry.volume ?? FALLBACK_VOLUME;
-          console.log(`📋 Voice settings: from settings.json (${voiceEntry.voiceName || voice})`);
+          console.log(`Voice settings: from settings.json (${voiceEntry.voiceName || voice})`);
         } else {
           resolvedSettings = { ...FALLBACK_VOICE_SETTINGS };
           resolvedVolume = callerVolume ?? FALLBACK_VOLUME;
-          console.log(`⚠️  Voice settings: fallback defaults (no config found for ${voice})`);
+          console.log(` Voice settings: fallback defaults (no config found for ${voice})`);
         }
       }
 
@@ -498,10 +498,10 @@ async function sendNotification(
           stability: EMOTIONAL_PRESETS[emotion].stability,
           similarity_boost: EMOTIONAL_PRESETS[emotion].similarity_boost,
         };
-        console.log(`🎭 Emotion overlay: ${emotion}`);
+        console.log(`Emotion overlay: ${emotion}`);
       }
 
-      console.log(`🎙️  Generating speech (voice: ${voice}, speed: ${resolvedSettings.speed}, stability: ${resolvedSettings.stability}, boost: ${resolvedSettings.similarity_boost}, style: ${resolvedSettings.style}, volume: ${resolvedVolume})`);
+      console.log(` Generating speech (voice: ${voice}, speed: ${resolvedSettings.speed}, stability: ${resolvedSettings.stability}, boost: ${resolvedSettings.similarity_boost}, style: ${resolvedSettings.style}, volume: ${resolvedVolume})`);
 
       const audioBuffer = await generateSpeech(safeMessage, voice, resolvedSettings);
       await playAudio(audioBuffer, resolvedVolume);
@@ -591,7 +591,7 @@ const server = serve({
           throw new Error('Invalid voice_id');
         }
 
-        console.log(`📨 Notification: "${title}" - "${message}" (voice: ${voiceEnabled}, voiceId: ${voiceId || DEFAULT_VOICE_ID})`);
+        console.log(`Notification: "${title}" - "${message}" (voice: ${voiceEnabled}, voiceId: ${voiceId || DEFAULT_VOICE_ID})`);
 
         const result = await sendNotification(title, message, voiceEnabled, voiceId, voiceSettings, volume);
 
@@ -631,7 +631,7 @@ const server = serve({
         const data = await req.json();
         const message = data.message || "Notification";
 
-        console.log(`🎭 Personality notification: "${message}"`);
+        console.log(`Personality notification: "${message}"`);
 
         await sendNotification("PAI Notification", message, true, null);
 
@@ -660,7 +660,7 @@ const server = serve({
         const title = data.title || "PAI Assistant";
         const message = data.message || "Task completed";
 
-        console.log(`🤖 PAI notification: "${title}" - "${message}"`);
+        console.log(`PAI notification: "${title}" - "${message}"`);
 
         await sendNotification(title, message, true, null);
 
@@ -708,9 +708,9 @@ const server = serve({
   },
 });
 
-console.log(`🚀 Voice Server running on port ${PORT}`);
-console.log(`🎙️  Using ElevenLabs TTS (default voice: ${DEFAULT_VOICE_ID})`);
-console.log(`📡 POST to http://localhost:${PORT}/notify`);
-console.log(`🔒 Security: CORS restricted to localhost, rate limiting enabled`);
-console.log(`🔑 API Key: ${ELEVENLABS_API_KEY ? '✅ Configured' : '❌ Missing'}`);
-console.log(`📖 Pronunciations: ${pronunciationRules.length} rules loaded`);
+console.log(`Voice Server running on port ${PORT}`);
+console.log(` Using ElevenLabs TTS (default voice: ${DEFAULT_VOICE_ID})`);
+console.log(`POST to http://localhost:${PORT}/notify`);
+console.log(`Security: CORS restricted to localhost, rate limiting enabled`);
+console.log(`API Key: ${ELEVENLABS_API_KEY ? '✓ Configured' : '✗ Missing'}`);
+console.log(`Pronunciations: ${pronunciationRules.length} rules loaded`);

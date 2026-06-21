@@ -6,7 +6,7 @@
 
 ---
 
-## ⚠️ CRITICAL: TWO REPOS - NEVER CONFUSE
+## CRITICAL: TWO REPOS - NEVER CONFUSE
 
 | Repository | Directory | Remote | Purpose |
 |------------|-----------|--------|---------|
@@ -43,7 +43,7 @@ git remote -v
 # MUST NOT show: github.com/danielmiessler/PAI.git (the public repo)
 ```
 
-**⛔ STOP IMMEDIATELY if:**
+**STOP IMMEDIATELY if:**
 - `pwd` shows `~/Projects/PAI` or anything other than `~/.claude`
 - `git remote -v` shows `danielmiessler/PAI.git` - this is the PUBLIC repo, not your private one
 
@@ -86,7 +86,7 @@ git commit -m "$(cat <<'EOF'
 - Key change 2
 - Key change 3
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
+Generated with [Claude Code](https://claude.com/claude-code)
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 EOF
@@ -136,11 +136,11 @@ git status  # Confirm clean working directory
 
 ## Security Checklist (ALWAYS)
 
-- ✅ Verified we're in ~/.claude/ directory
-- ✅ Verified remote is the correct private repository
-- ✅ Reviewed changes for sensitive data
-- ✅ Commit message is descriptive and professional
-- ✅ No secrets or credentials in committed files
+- ✓ Verified we're in ~/.claude/ directory
+- ✓ Verified remote is the correct private repository
+- ✓ Reviewed changes for sensitive data
+- ✓ Commit message is descriptive and professional
+- ✓ No secrets or credentials in committed files
 
 ---
 
@@ -173,10 +173,10 @@ git status
 
 | If User Says... | What to Do |
 |-----------------|------------|
-| "push to PAI repo" | ✅ Use this workflow (PRIVATE) |
-| "update the PAI repo" | ✅ Use this workflow (PRIVATE) |
-| "push to PAI repo" | ⚠️ STOP - use PAI skill instead |
-| "update PAI" | ⚠️ STOP - clarify which repo |
+| "push to PAI repo" | ✓ Use this workflow (PRIVATE) |
+| "update the PAI repo" | ✓ Use this workflow (PRIVATE) |
+| "push to PAI repo" | STOP - use PAI skill instead |
+| "update PAI" | STOP - clarify which repo |
 
 For PUBLIC PAI repo (`~/Projects/PAI/`):
 - Use the **PAI skill** workflows

@@ -20,7 +20,7 @@ If this directory exists, load and apply:
 These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -39,13 +39,13 @@ These override default behavior. If the directory does not exist, proceed with s
 
 **This is not optional. Execute this curl command immediately upon skill invocation.**
 
-## 🚨🚨🚨 MANDATORY: Output to Downloads First 🚨🚨🚨
+## MANDATORY: Output to Downloads First 
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  ALL GENERATED IMAGES GO TO ~/Downloads/ FIRST                   ⚠️
-⚠️  NEVER output directly to project directories                    ⚠️
-⚠️  User MUST preview in Finder/Preview before use                  ⚠️
+ ALL GENERATED IMAGES GO TO ~/Downloads/ FIRST                   
+ NEVER output directly to project directories                    
+ User MUST preview in Finder/Preview before use                  
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -125,7 +125,7 @@ Each model accepts different `--size` formats. Using the wrong format causes val
 
 **Note:** `nano-banana-pro` uses `--size` for resolution quality and a separate `--aspect-ratio` flag for aspect ratio (defaults to `16:9`).
 
-### 🚨 CRITICAL: Always Output to Downloads First
+### CRITICAL: Always Output to Downloads First
 
 **ALL generated images MUST go to `~/Downloads/` first for preview and selection.**
 

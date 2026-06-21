@@ -286,7 +286,7 @@ function createNavyBanner(stats: SystemStats, width: number): string {
     `${C.navy}\u2B22${RESET}  ${C.slate}PAI${RESET}       ${C.silver}v${stats.paiVersion}${RESET}`,                            // ⬢ hexagon (tech/AI)
     `${C.lightBlue}\u2726${RESET}  ${C.slate}Skills${RESET}    ${C.silver}${stats.skills}${RESET}`,            // ✦ four-pointed star (capabilities)
     `${C.skyBlue}\u21BB${RESET}  ${C.slate}Workflows${RESET} ${C.iceBlue}${stats.workflows}${RESET}`,          // ↻ cycle (process flow)
-    `${C.royalBlue}\u21AA${RESET}  ${C.slate}Hooks${RESET}     ${C.periwinkle}${stats.hooks}${RESET}`,         // ↪ hook arrow
+    `${C.royalBlue}\u21AA${RESET}  ${C.slate}Hooks${RESET}     ${C.periwinkle}${stats.hooks}${RESET}`,         // hook arrow
     `${C.medBlue}\u2726${RESET}  ${C.slate}Signals${RESET}   ${C.skyBlue}${stats.learnings}${RESET}`,          // ✦ star (user sentiment signals)
     `${C.navy}\u2261${RESET}  ${C.slate}Files${RESET}     ${C.lightBlue}${stats.userFiles}${RESET}`,           // ≡ identical to (files/menu)
     `${C.steel}${BOX.h.repeat(24)}${RESET}`,

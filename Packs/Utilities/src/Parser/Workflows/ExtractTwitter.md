@@ -105,7 +105,7 @@ Running the **ExtractTwitter** workflow in the **Parser** skill to parse tweets.
 
 **Example:**
 ```
-Tweet 1/10: Let me explain why GPT-4 is such a big deal 🧵
+Tweet 1/10: Let me explain why GPT-4 is such a big deal 
 
 Tweet 2/10: First, the multimodal capabilities mean it can process both text and images natively. This opens up entirely new use cases.
 
@@ -116,7 +116,7 @@ Tweet 3/10: Second, the reasoning improvements are substantial. On the bar exam,
 
 **Full text with markers:**
 ```
-[1/10] Let me explain why GPT-4 is such a big deal 🧵
+[1/10] Let me explain why GPT-4 is such a big deal 
 
 [2/10] First, the multimodal capabilities...
 
@@ -365,7 +365,7 @@ Comprehensive thread breaking down why GPT-4 represents a major advancement in A
 
 **Private/protected account:**
 ```
-❌ Tweet is from private account
+✗ Tweet is from private account
 → Cannot access content
 → Return minimal metadata (author handle, tweet ID)
 → Confidence: 0.1
@@ -374,7 +374,7 @@ Comprehensive thread breaking down why GPT-4 represents a major advancement in A
 
 **Deleted tweet:**
 ```
-❌ Tweet has been deleted
+✗ Tweet has been deleted
 → Check archive.org or cached versions
 → If unavailable, return error
 → Warning: "Tweet no longer available"
@@ -382,7 +382,7 @@ Comprehensive thread breaking down why GPT-4 represents a major advancement in A
 
 **Rate limiting:**
 ```
-⚠️ Twitter API rate limit reached
+Twitter API rate limit reached
 → Back off and retry
 → Use alternative scraping methods
 → May reduce data quality
@@ -391,7 +391,7 @@ Comprehensive thread breaking down why GPT-4 represents a major advancement in A
 
 **Thread not fully loaded:**
 ```
-⚠️ Could not fetch entire thread
+Could not fetch entire thread
 → Extract partial thread
 → Note: "Partial thread (X of Y tweets)"
 → Lower confidence score
@@ -403,25 +403,25 @@ Comprehensive thread breaking down why GPT-4 represents a major advancement in A
 
 **Successful extraction:**
 ```
-✅ Extracted Twitter thread
-🐦 Author: @username (Display Name)
-📝 Thread: 10 tweets, 850 words
-💬 Engagement: 15k likes, 3k retweets, 500 replies
-🔗 Links: 5
-👥 Mentions: 3
-#️⃣ Hashtags: 4
-🎯 Confidence: 0.85
-🔥 Trending potential: High
+✓ Extracted Twitter thread
+Author: @username (Display Name)
+Thread: 10 tweets, 850 words
+Engagement: 15k likes, 3k retweets, 500 replies
+Links: 5
+Mentions: 3
+#⃣ Hashtags: 4
+Confidence: 0.85
+Trending potential: High
 ```
 
 **Partial extraction:**
 ```
-⚠️ Extracted Twitter thread (partial)
-🐦 Author: @username
-📝 Thread: 6 of 10 tweets (some tweets unavailable)
-🔗 Links: 3
-🎯 Confidence: 0.60
-⚠️ Warning: Could not fetch complete thread
+Extracted Twitter thread (partial)
+Author: @username
+Thread: 6 of 10 tweets (some tweets unavailable)
+Links: 3
+Confidence: 0.60
+Warning: Could not fetch complete thread
 ```
 
 ---

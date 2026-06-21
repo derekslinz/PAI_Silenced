@@ -167,19 +167,19 @@ filetype:pdf resume "Jane Doe" "San Francisco"
 ## Legal & Ethical Boundaries
 
 ### GREEN ZONE (Allowed)
-✅ Search public records (property, court, voter, business)
-✅ Access publicly posted social media content
-✅ Use people search aggregator sites
-✅ Perform reverse lookups on public data
-✅ Google dorking with public search operators
+✓ Search public records (property, court, voter, business)
+✓ Access publicly posted social media content
+✓ Use people search aggregator sites
+✓ Perform reverse lookups on public data
+✓ Google dorking with public search operators
 
 ### RED ZONE (Never Cross)
-❌ Access data behind login walls without authorization
-❌ Bypass authentication or security measures
-❌ Use pretexting or impersonation
-❌ Access private databases (credit, financial, medical)
-❌ Stalk, harass, or intimidate subjects
-❌ Access PI-only databases without license
+✗ Access data behind login walls without authorization
+✗ Bypass authentication or security measures
+✗ Use pretexting or impersonation
+✗ Access private databases (credit, financial, medical)
+✗ Stalk, harass, or intimidate subjects
+✗ Access PI-only databases without license
 
 ## When to STOP
 

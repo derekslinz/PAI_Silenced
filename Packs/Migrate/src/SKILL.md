@@ -5,7 +5,7 @@ description: "Intakes existing content from external sources, classifies each ch
 
 # Migrate — external-content intake and classification
 
-## 🚨 MANDATORY: Voice Notification
+## MANDATORY: Voice Notification
 
 ```bash
 curl -s -X POST http://localhost:31337/notify \
@@ -76,12 +76,12 @@ Show the user the routing proposal in a scannable format:
 ```
 Found 47 chunks from 3 files. Proposed routing:
 
-  📂 TELOS/GOALS.md              12 chunks  (78% avg confidence)
-  📂 TELOS/WISDOM.md              8 chunks  (65% avg confidence)
-  📂 TELOS/BELIEFS.md             6 chunks  (71% avg confidence)
-  📂 MEMORY/KNOWLEDGE/Ideas      15 chunks  (52% avg confidence)
-  🧠 memory/feedback              4 chunks  (85% avg confidence)
-  ❓ UNCLEAR                      2 chunks  (needs your call)
+  TELOS/GOALS.md              12 chunks  (78% avg confidence)
+  TELOS/WISDOM.md              8 chunks  (65% avg confidence)
+  TELOS/BELIEFS.md             6 chunks  (71% avg confidence)
+  MEMORY/KNOWLEDGE/Ideas      15 chunks  (52% avg confidence)
+  memory/feedback              4 chunks  (85% avg confidence)
+  UNCLEAR                      2 chunks  (needs your call)
 
 Options:
   - Approve everything trusted (confidence ≥60%)?

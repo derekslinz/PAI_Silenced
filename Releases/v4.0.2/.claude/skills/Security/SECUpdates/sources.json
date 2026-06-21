@@ -52,17 +52,17 @@
   "categories": {
     "news": {
       "name": "Security News",
-      "emoji": "🔴",
+      "emoji": "●",
       "description": "Breaches, incidents, exploits in the wild"
     },
     "research": {
       "name": "Security Research",
-      "emoji": "🔬",
+      "emoji": "",
       "description": "CVEs, vulnerabilities, techniques, papers"
     },
     "ideas": {
       "name": "Security Ideas",
-      "emoji": "💡",
+      "emoji": "",
       "description": "Opinions, trends, strategy, career"
     }
   },

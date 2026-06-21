@@ -333,23 +333,23 @@ switch (command) {
 if (options.json) {
   console.log(JSON.stringify(result, null, 2));
 } else {
-  console.log(`\n🎯 Bug Bounty Programs - ${result.command}`);
-  console.log(`⏱️  Timestamp: ${result.timestamp}`);
-  console.log(`📊 Total: ${result.totalPrograms} programs\n`);
+  console.log(`\nBug Bounty Programs - ${result.command}`);
+  console.log(` Timestamp: ${result.timestamp}`);
+  console.log(`Total: ${result.totalPrograms} programs\n`);
 
   if (command === "update") {
     if (result.errors.length === 0) {
-      console.log(`✅ Cache updated with ${result.totalPrograms} programs`);
+      console.log(`✓ Cache updated with ${result.totalPrograms} programs`);
     } else {
-      console.log(`❌ Update failed: ${result.errors.join(", ")}`);
+      console.log(`✗ Update failed: ${result.errors.join(", ")}`);
     }
   } else if (result.programs.length === 0) {
     console.log("  No programs found");
   } else {
     for (const p of result.programs.slice(0, 30)) {
       const badges = [];
-      if (p.bounty) badges.push("💰");
-      if (p.swag) badges.push("🎁");
+      if (p.bounty) badges.push("");
+      if (p.swag) badges.push("");
       console.log(`  ${badges.join("")} ${p.name}`);
       console.log(`     URL: ${p.url}`);
       if (p.domains.length > 0) {
@@ -367,7 +367,7 @@ if (options.json) {
   }
 
   if (result.errors.length > 0 && command !== "update") {
-    console.log("\n📝 Notes:");
+    console.log("\nNotes:");
     for (const err of result.errors) {
       console.log(`  ${err}`);
     }

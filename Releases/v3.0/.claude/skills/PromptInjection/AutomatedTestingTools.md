@@ -125,15 +125,15 @@ tests:
 
 ### Strengths
 
-✅ Excellent for continuous security testing
-✅ Easy to integrate into existing workflows
-✅ AI-generated attacks find novel bypasses
-✅ Good documentation and community
+✓ Excellent for continuous security testing
+✓ Easy to integrate into existing workflows
+✓ AI-generated attacks find novel bypasses
+✓ Good documentation and community
 
 ### Weaknesses
 
-⚠️ Requires some configuration overhead
-⚠️ Focus on automated testing (less manual control)
+Requires some configuration overhead
+Focus on automated testing (less manual control)
 
 ### Best Use Cases
 
@@ -214,32 +214,32 @@ garak --model_type openai --model_name gpt-4 \
 ```
 garak 0.9 (c) 2023 Leon Derczynski
 
-📜 Loading probe: promptinject.InjectPrefix
-🎯 Testing: gpt-4
-⚡ Probe: promptinject.InjectPrefix
-   ✅ Pass rate: 85%
-   ❌ Fail rate: 15%
-   ⚠️  3/20 prompts succeeded in injection
+Loading probe: promptinject.InjectPrefix
+Testing: gpt-4
+Probe: promptinject.InjectPrefix
+   ✓ Pass rate: 85%
+   ✗ Fail rate: 15%
+    3/20 prompts succeeded in injection
 
-📜 Loading probe: jailbreak.Dan
-🎯 Testing: gpt-4
-⚡ Probe: jailbreak.Dan
-   ✅ Pass rate: 92%
-   ❌ Fail rate: 8%
-   ⚠️  2/25 jailbreak attempts succeeded
+Loading probe: jailbreak.Dan
+Testing: gpt-4
+Probe: jailbreak.Dan
+   ✓ Pass rate: 92%
+   ✗ Fail rate: 8%
+    2/25 jailbreak attempts succeeded
 ```
 
 ### Strengths
 
-✅ Comprehensive, research-backed probe library
-✅ Simple to run (minimal configuration)
-✅ Reproducible results
-✅ Good for baseline security assessment
+✓ Comprehensive, research-backed probe library
+✓ Simple to run (minimal configuration)
+✓ Reproducible results
+✓ Good for baseline security assessment
 
 ### Weaknesses
 
-⚠️ Static probes (less adaptive than AI-generated)
-⚠️ Less integration-focused (more standalone tool)
+Static probes (less adaptive than AI-generated)
+Less integration-focused (more standalone tool)
 
 ### Best Use Cases
 
@@ -331,16 +331,16 @@ result = orchestrator.run()
 
 ### Strengths
 
-✅ Maximum flexibility for custom testing
-✅ Enterprise Azure integration
-✅ AI-vs-AI adaptive attacks
-✅ Microsoft-backed with enterprise support
+✓ Maximum flexibility for custom testing
+✓ Enterprise Azure integration
+✓ AI-vs-AI adaptive attacks
+✓ Microsoft-backed with enterprise support
 
 ### Weaknesses
 
-⚠️ Steeper learning curve
-⚠️ Requires Python programming
-⚠️ Azure-focused (though supports other providers)
+Steeper learning curve
+Requires Python programming
+Azure-focused (though supports other providers)
 
 ### Best Use Cases
 

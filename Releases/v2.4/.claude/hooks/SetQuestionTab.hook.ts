@@ -47,7 +47,7 @@ const TAB_TEXT = '#FFFFFF';
 const INACTIVE_TEXT = '#A0A0A0';
 
 // Simple question indicator - teal background does the work
-const QUESTION_TITLE = '❓ Question';
+const QUESTION_TITLE = 'Question';
 
 async function main() {
   try {

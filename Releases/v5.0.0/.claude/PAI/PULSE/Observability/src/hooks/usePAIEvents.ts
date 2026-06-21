@@ -27,28 +27,71 @@ export function usePAIEvents() {
 
   useEffect(() => {
     let active = true;
-    const makeKey = (e: PAIEvent) => `${e.timestamp}|${e.session_id}|${e.type}|${e.source}`;
+    let eventSource: EventSource | null = null;
+    let isPollingFallback = false;
 
-    const poll = async () => {
-      try {
-        const data = await localOnlyApiCall<PAIEvent[] | { events: PAIEvent[] }>("/api/events/recent");
-        // Handle both {events: [...]} and flat [...] response formats
-        const eventList = Array.isArray(data) ? data : data.events;
-        if (active && eventList?.length) {
-          setEvents(eventList.slice(-MAX_BUFFER));
+    const startPolling = () => {
+      if (!active || isPollingFallback) return;
+      isPollingFallback = true;
+
+      const poll = async () => {
+        try {
+          const data = await localOnlyApiCall<PAIEvent[] | { events: PAIEvent[] }>("/api/events/recent");
+          const eventList = Array.isArray(data) ? data : data.events;
+          if (active && eventList?.length) {
+            setEvents(eventList.slice(-MAX_BUFFER));
+          }
+        } catch {
+          // Polling errors expected when data is unavailable
         }
-      } catch {
-        // Polling errors are expected when data is unavailable
-      }
-      if (active) {
-        pollTimerRef.current = setTimeout(poll, POLL_INTERVAL);
+        if (active) {
+          pollTimerRef.current = setTimeout(poll, POLL_INTERVAL);
+        }
+      };
+      poll();
+    };
+
+    const connectSSE = () => {
+      try {
+        eventSource = new EventSource("/api/events/stream");
+
+        eventSource.onmessage = (event) => {
+          if (!active) return;
+          try {
+            const data = JSON.parse(event.data);
+            const eventList = Array.isArray(data) ? data : data.events;
+            if (eventList?.length) {
+              setEvents(eventList.slice(-MAX_BUFFER));
+            }
+          } catch (err) {
+            console.error("[usePAIEvents] Failed to parse SSE data", err);
+          }
+        };
+
+        eventSource.onerror = () => {
+          if (active && !isPollingFallback) {
+            if (eventSource) {
+              eventSource.close();
+              eventSource = null;
+            }
+            startPolling();
+          }
+        };
+      } catch (err) {
+        startPolling();
       }
     };
 
-    poll();
+    connectSSE();
+
     return () => {
       active = false;
-      clearTimeout(pollTimerRef.current);
+      if (eventSource) {
+        eventSource.close();
+      }
+      if (pollTimerRef.current) {
+        clearTimeout(pollTimerRef.current);
+      }
     };
   }, []);
 

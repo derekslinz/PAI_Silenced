@@ -43,19 +43,19 @@ This workflow leverages Gemini 3 Pro's native multimodal capabilities to process
 ### Advantages Over Traditional Tools
 
 **Gemini 3 Pro Advantages:**
-- ✅ Native multimodal (processes PDF directly, no conversion)
-- ✅ 1M context window (entire large PDFs in single request)
-- ✅ Understands images, tables, diagrams, charts within PDFs
-- ✅ Better extraction of complex layouts
-- ✅ Preserves document structure and relationships
-- ✅ Can answer questions about visual content
+- ✓ Native multimodal (processes PDF directly, no conversion)
+- ✓ 1M context window (entire large PDFs in single request)
+- ✓ Understands images, tables, diagrams, charts within PDFs
+- ✓ Better extraction of complex layouts
+- ✓ Preserves document structure and relationships
+- ✓ Can answer questions about visual content
 
 **Traditional Tool Limitations:**
-- ❌ Text-only extraction (pdfplumber, pdftotext)
-- ❌ Loses visual context (tables become text)
-- ❌ Poor handling of complex layouts
-- ❌ Cannot understand diagrams or charts
-- ❌ Requires multiple tools for different content types
+- ✗ Text-only extraction (pdfplumber, pdftotext)
+- ✗ Loses visual context (tables become text)
+- ✗ Poor handling of complex layouts
+- ✗ Cannot understand diagrams or charts
+- ✗ Requires multiple tools for different content types
 
 ## Prerequisites
 
@@ -331,7 +331,7 @@ async function convertToParserSchema(geminiOutput: GeminiOutput) {
   };
 
   await writeFile('parser-output.json', JSON.stringify(parserSchema, null, 2));
-  console.log('✅ Converted to parser schema: parser-output.json');
+  console.log('✓ Converted to parser schema: parser-output.json');
 }
 ```
 
@@ -354,9 +354,9 @@ SUMMARY_LENGTH=$(jq -r '.summary | length' validated.json)
 echo "Summary length: $SUMMARY_LENGTH characters"
 
 if [ $SUMMARY_LENGTH -gt 500 ]; then
-  echo "✅ Summary looks comprehensive"
+  echo "✓ Summary looks comprehensive"
 else
-  echo "⚠️  Summary may be too short"
+  echo " Summary may be too short"
 fi
 ```
 
@@ -526,7 +526,7 @@ import { parserSchema } from './parser-output.json';
 import { insertNewsletterContent } from '~/.claude/skills/parser/db';
 
 await insertNewsletterContent(parserSchema);
-console.log('✅ Newsletter content added to database');
+console.log('✓ Newsletter content added to database');
 ```
 
 ### Batch Process Multiple PDFs
@@ -541,10 +541,10 @@ for pdf in *.pdf; do
   llm -m gemini-3-pro-preview "Extract all content from this PDF" \
     --attach "$pdf" > "${pdf%.pdf}.json"
 
-  echo "✅ Completed: ${pdf%.pdf}.json"
+  echo "✓ Completed: ${pdf%.pdf}.json"
 done
 
-echo "✅ Batch processing complete"
+echo "✓ Batch processing complete"
 ```
 
 ## Troubleshooting
@@ -664,10 +664,10 @@ cat raw.json | sed 's/```json//g' | sed 's/```//g' | jq '.' > clean.json
 ## Summary
 
 **This workflow enables:**
-- ✅ Comprehensive extraction from complex PDFs
-- ✅ Multimodal understanding (text + images + tables)
-- ✅ Structured data output ready for database import
-- ✅ Superior quality vs traditional text-only tools
-- ✅ Integration with parser for newsletter database
+- ✓ Comprehensive extraction from complex PDFs
+- ✓ Multimodal understanding (text + images + tables)
+- ✓ Structured data output ready for database import
+- ✓ Superior quality vs traditional text-only tools
+- ✓ Integration with parser for newsletter database
 
 **Key advantage:** Gemini 3 Pro processes PDFs as humans do - understanding visual layout, diagrams, and relationships between content elements, not just extracting text.

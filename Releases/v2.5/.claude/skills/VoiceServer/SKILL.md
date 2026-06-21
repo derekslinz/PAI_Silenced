@@ -86,7 +86,7 @@ cd ~/.claude/VoiceServerV1 && bun run server.ts
 
 All algorithm completions include a voice line that gets spoken:
 ```
-🗣️ Kai: [16 words max - THIS IS SPOKEN ALOUD]
+Kai: [16 words max - THIS IS SPOKEN ALOUD]
 ```
 
 This line is extracted by hooks and sent to the voice server automatically.

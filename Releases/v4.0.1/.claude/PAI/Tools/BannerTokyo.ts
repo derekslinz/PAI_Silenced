@@ -136,9 +136,9 @@ ${BLUE}│${RESET}  ${DARK}0x${hex()}${hex()}${RESET}  ${BOLD}${MAGENTA}K${BLUE}
 ${BLUE}│${RESET}
 ${BLUE}│${RESET}  ${COMMENT}welcome to your pai system${RESET}
 ${BLUE}│${RESET}
-${BLUE}│${RESET}  ${GREEN}▪${RESET} ${FG}core${RESET}     ${DARK}────────${RESET} ${GREEN}online${RESET}
-${BLUE}│${RESET}  ${GREEN}▪${RESET} ${FG}skills${RESET}   ${DARK}────────${RESET} ${GREEN}63 loaded${RESET}
-${BLUE}│${RESET}  ${GREEN}▪${RESET} ${FG}memory${RESET}   ${DARK}────────${RESET} ${GREEN}active${RESET}
+${BLUE}│${RESET}  ${GREEN}${RESET} ${FG}core${RESET}     ${DARK}────────${RESET} ${GREEN}online${RESET}
+${BLUE}│${RESET}  ${GREEN}${RESET} ${FG}skills${RESET}   ${DARK}────────${RESET} ${GREEN}63 loaded${RESET}
+${BLUE}│${RESET}  ${GREEN}${RESET} ${FG}memory${RESET}   ${DARK}────────${RESET} ${GREEN}active${RESET}
 ${BLUE}│${RESET}
 ${BLUE}╰──────────────────────────────────────────────────────────────────
 `;

@@ -203,7 +203,7 @@ function resumeProgress(project: string): void {
   if (progress.blockers.length > 0) {
     const unresolvedBlockers = progress.blockers.filter(b => !b.resolution);
     if (unresolvedBlockers.length > 0) {
-      console.log(`\n⚠️ ACTIVE BLOCKERS:`);
+      console.log(`\nACTIVE BLOCKERS:`);
       unresolvedBlockers.forEach(b => {
         console.log(`  • ${b.blocker}`);
       });
@@ -211,12 +211,12 @@ function resumeProgress(project: string): void {
   }
 
   if (progress.handoff_notes) {
-    console.log(`\n📝 HANDOFF NOTES:`);
+    console.log(`\nHANDOFF NOTES:`);
     console.log(`  ${progress.handoff_notes}`);
   }
 
   if (progress.next_steps.length > 0) {
-    console.log(`\n➡️ NEXT STEPS:`);
+    console.log(`\n→NEXT STEPS:`);
     progress.next_steps.forEach((s, i) => console.log(`  ${i + 1}. ${s}`));
   }
 
@@ -242,9 +242,9 @@ function listActive(): void {
   for (const file of files) {
     const progress = JSON.parse(readFileSync(join(PROGRESS_DIR, file), 'utf-8')) as SessionProgress;
     const statusIcon = {
-      active: '🔵',
-      completed: '✅',
-      blocked: '🔴'
+      active: '●',
+      completed: '✓',
+      blocked: '●'
     }[progress.status];
 
     console.log(`${statusIcon} ${progress.project} (${progress.status})`);

@@ -141,7 +141,7 @@ execution:
     type: iterative_loop
     model: sonnet
     effort_min: QUICK
-    icon: "🔄"
+    icon: ""
     keywords:
       - "iterate until"
       - "keep trying"

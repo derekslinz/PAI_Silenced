@@ -22,9 +22,9 @@ BOLD='\033[1m'
 ITALIC='\033[3m'
 
 # ─── Helpers ──────────────────────────────────────────────
-info()    { echo -e "  ${BLUE}ℹ${RESET} $1"; }
+info()    { echo -e "  ${BLUE}${RESET} $1"; }
 success() { echo -e "  ${GREEN}✓${RESET} $1"; }
-warn()    { echo -e "  ${YELLOW}⚠${RESET} $1"; }
+warn()    { echo -e "  ${YELLOW}${RESET} $1"; }
 error()   { echo -e "  ${RED}✗${RESET} $1"; }
 
 # ─── Banner ───────────────────────────────────────────────
@@ -43,11 +43,11 @@ echo ""
 echo -e "           ${NAVY}████████████████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${GRAY}\"${RESET}${LIGHT_BLUE}Kai here, ready to go${RESET}${GRAY}...\"${RESET}"
 echo -e "           ${NAVY}████████████████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${BAR}"
 echo -e "           ${NAVY}████${RESET}        ${NAVY}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${NAVY}⬢${RESET}  ${GRAY}PAI${RESET}       ${SILVER}v3.0${RESET}"
-echo -e "           ${NAVY}████${RESET}        ${NAVY}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${NAVY}⚙${RESET}  ${GRAY}Algo${RESET}      ${SILVER}v1.4.0${RESET}"
+echo -e "           ${NAVY}████${RESET}        ${NAVY}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${NAVY}${RESET}  ${GRAY}Algo${RESET}      ${SILVER}v1.4.0${RESET}"
 echo -e "           ${NAVY}████████████████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${LIGHT_BLUE}✦${RESET}  ${GRAY}Installer${RESET} ${SILVER}v3.0${RESET}"
 echo -e "           ${NAVY}████████████████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${BAR}"
 echo -e "           ${NAVY}████${RESET}        ${BLUE}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}"
-echo -e "           ${NAVY}████${RESET}        ${BLUE}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${YELLOW}⚠  Alpha — rough edges expected${RESET}"
+echo -e "           ${NAVY}████${RESET}        ${BLUE}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${YELLOW} Alpha — rough edges expected${RESET}"
 echo -e "           ${NAVY}████${RESET}        ${BLUE}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}"
 echo -e "           ${NAVY}████${RESET}        ${BLUE}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}"
 echo ""

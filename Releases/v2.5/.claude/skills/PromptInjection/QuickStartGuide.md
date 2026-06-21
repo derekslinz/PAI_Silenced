@@ -4,21 +4,21 @@
 
 ### Before You Begin
 
-**🔒 CRITICAL - Authorization:**
+**CRITICAL - Authorization:**
 - [ ] Written authorization obtained (SOW, pentesting agreement)
 - [ ] Authorized contact person identified
 - [ ] Scope clearly defined and documented
 - [ ] Out-of-scope areas explicitly noted
 - [ ] Testing window agreed upon (if restricted)
 
-**🛠️ Environment Setup:**
+**Environment Setup:**
 - [ ] Browser automation functional (`BrowserAutomation` skill)
 - [ ] Testing tools installed (optional: Promptfoo, Garak, PyRIT)
 - [ ] Documentation template ready
 - [ ] Screenshot/evidence capture configured
 - [ ] Communication channel with client established
 
-**📚 Knowledge Prep:**
+**Knowledge Prep:**
 - [ ] Read attack taxonomy: `Resources/COMPREHENSIVE-ATTACK-TAXONOMY.md`
 - [ ] Review reconnaissance methodology: `Resources/APPLICATION-RECONNAISSANCE-METHODOLOGY.md`
 - [ ] Understand target application's purpose
@@ -40,7 +40,7 @@
 **Scope:** [URLs/features in scope]
 **Contacts:** [Primary contact email/phone]
 
-Authorization confirmed ✅
+Authorization confirmed ✓
 ```
 
 ### Step 2: Quick Reconnaissance (10 minutes)
@@ -159,7 +159,7 @@ Actual: [Document]
 
 ## Common Mistakes to Avoid
 
-### ❌ Don't:
+### ✗ Don't:
 1. **Test without written authorization** - Always illegal
 2. **Skip documentation** - If it's not documented, it didn't happen
 3. **Test only obvious injection points** - File uploads, URLs often overlooked
@@ -169,7 +169,7 @@ Actual: [Document]
 7. **Disclose publicly before remediation** - Follow responsible disclosure
 8. **Test production with real user data** - Use test accounts only
 
-### ✅ Do:
+### ✓ Do:
 1. **Document everything** - Every test, every result
 2. **Save evidence** - Screenshots, logs, full conversations
 3. **Test systematically** - Follow methodology, don't skip categories

@@ -10,7 +10,7 @@ the most important and surprising insights without missing subtle but profound i
 
 # Extract Alpha - Deep Content Analysis
 
-## 🎯 Load Full PAI Context
+## Load Full PAI Context
 
 **Before starting any task with this skill, load complete PAI context:**
 

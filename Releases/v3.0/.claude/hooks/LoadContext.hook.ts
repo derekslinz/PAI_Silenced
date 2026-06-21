@@ -58,7 +58,7 @@ function resetTabTitle(sessionId?: string): void {
     // would blow away the working title and show "Kai ready…" during work.
     const current = readTabState(sessionId);
     if (current && (current.state === 'working' || current.state === 'thinking')) {
-      console.error(`🔄 Tab in ${current.state} state — preserving title through compaction`);
+      console.error(`Tab in ${current.state} state — preserving title through compaction`);
       return;
     }
 
@@ -98,7 +98,7 @@ function loadSettings(paiDir: string): Settings {
     try {
       return JSON.parse(readFileSync(settingsPath, 'utf-8'));
     } catch (err) {
-      console.error(`⚠️ Failed to parse settings.json: ${err}`);
+      console.error(`Failed to parse settings.json: ${err}`);
     }
   }
   return {};
@@ -124,9 +124,9 @@ function loadContextFiles(paiDir: string, settings: Settings): string {
       const content = readFileSync(fullPath, 'utf-8');
       if (combinedContent) combinedContent += '\n\n---\n\n';
       combinedContent += content;
-      console.error(`✅ Loaded ${relativePath} (${content.length} chars)`);
+      console.error(`✓ Loaded ${relativePath} (${content.length} chars)`);
     } else {
-      console.error(`⚠️ Context file not found: ${relativePath}`);
+      console.error(`Context file not found: ${relativePath}`);
     }
   }
 
@@ -174,7 +174,7 @@ function loadRelationshipContext(paiDir: string): string | null {
         parts.push(highConfidence.slice(0, 6).join('\n'));
       }
     } catch (err) {
-      console.error(`⚠️ Failed to load opinions: ${err}`);
+      console.error(`Failed to load opinions: ${err}`);
     }
   }
 
@@ -343,7 +343,7 @@ function getRecentWorkSessions(paiDir: string): WorkSession[] {
       }
     }
   } catch (err) {
-    console.error(`⚠️ Error scanning WORK dirs: ${err}`);
+    console.error(`Error scanning WORK dirs: ${err}`);
   }
 
   return sessions;
@@ -388,7 +388,7 @@ function getProjectProgress(paiDir: string): WorkSession[] {
       }
     }
   } catch (err) {
-    console.error(`⚠️ Error reading progress files: ${err}`);
+    console.error(`Error reading progress files: ${err}`);
   }
 
   return sessions;
@@ -405,13 +405,13 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
     return null;
   }
 
-  let summary = '\n📋 ACTIVE WORK:\n';
+  let summary = '\nACTIVE WORK:\n';
 
   // Recent sessions first (last 48h, most relevant)
   if (recentSessions.length > 0) {
     summary += '\n  ── Recent Sessions (last 48h) ──\n';
     for (const s of recentSessions) {
-      summary += `\n  ⚡ ${s.title}\n`;
+      summary += `\n  ${s.title}\n`;
       summary += `     ${s.timestamp} | Status: ${s.status}\n`;
       if (s.prd) {
         summary += `     PRD: ${s.prd.id} (${s.prd.status}, ${s.prd.progress})\n`;
@@ -423,8 +423,8 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
   if (projects.length > 0) {
     summary += '\n  ── Tracked Projects ──\n';
     for (const proj of projects) {
-      const staleTag = proj.stale ? ' ⚠️ STALE (>14d)' : '';
-      summary += `\n  ${proj.stale ? '🟡' : '🔵'} ${proj.name}${staleTag}\n`;
+      const staleTag = proj.stale ? ' STALE (>14d)' : '';
+      summary += `\n  ${proj.stale ? '●' : '●'} ${proj.name}${staleTag}\n`;
 
       if (proj.objectives && proj.objectives.length > 0) {
         summary += '     Objectives:\n';
@@ -442,8 +442,8 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
     }
   }
 
-  summary += '\n💡 To resume project: `bun run ~/.claude/skills/PAI/Tools/SessionProgress.ts resume <project>`\n';
-  summary += '💡 To complete project: `bun run ~/.claude/skills/PAI/Tools/SessionProgress.ts complete <project>`\n';
+  summary += '\nTo resume project: `bun run ~/.claude/skills/PAI/Tools/SessionProgress.ts resume <project>`\n';
+  summary += 'To complete project: `bun run ~/.claude/skills/PAI/Tools/SessionProgress.ts complete <project>`\n';
 
   return summary;
 }
@@ -457,7 +457,7 @@ async function main() {
 
     if (isSubagent) {
       // Subagent sessions don't need PAI context loading
-      console.error('🤖 Subagent session - skipping PAI context loading');
+      console.error('Subagent session - skipping PAI context loading');
       process.exit(0);
     }
 
@@ -469,7 +469,7 @@ async function main() {
 
     // Record session start time for notification timing
     recordSessionStart();
-    console.error('⏱️ Session start time recorded for notification timing');
+    console.error('Session start time recorded for notification timing');
 
     // Only rebuild SKILL.md if source components are newer than the output
     // This saves ~200-500ms on most session starts
@@ -508,7 +508,7 @@ async function main() {
             const settingsStat = require('fs').statSync(settingsPath);
             if (settingsStat.mtimeMs > skillMdStat.mtimeMs) {
               needsRebuild = true;
-              console.error('🔨 settings.json changed — triggering SKILL.md rebuild');
+              console.error('settings.json changed — triggering SKILL.md rebuild');
             }
           }
         }
@@ -518,39 +518,39 @@ async function main() {
     }
 
     if (needsRebuild) {
-      console.error('🔨 Rebuilding SKILL.md (components changed)...');
+      console.error('Rebuilding SKILL.md (components changed)...');
       try {
         execSync('bun ~/.claude/skills/PAI/Tools/RebuildPAI.ts', {
           cwd: paiDir,
           stdio: 'pipe',
           timeout: 5000
         });
-        console.error('✅ SKILL.md rebuilt from latest components');
+        console.error('✓ SKILL.md rebuilt from latest components');
       } catch (err) {
-        console.error(`⚠️ Failed to rebuild SKILL.md: ${err}`);
-        console.error('⚠️ Continuing with existing SKILL.md...');
+        console.error(`Failed to rebuild SKILL.md: ${err}`);
+        console.error('Continuing with existing SKILL.md...');
       }
     } else {
-      console.error('✅ SKILL.md up-to-date (skipped rebuild)');
+      console.error('✓ SKILL.md up-to-date (skipped rebuild)');
     }
 
-    console.error('📚 Reading PAI core context...');
+    console.error('Reading PAI core context...');
 
     // Load settings.json to get contextFiles array
     const settings = loadSettings(paiDir);
-    console.error(`✅ Loaded settings.json`);
+    console.error(`✓ Loaded settings.json`);
 
     // Load all context files from settings.json array
     const contextContent = loadContextFiles(paiDir, settings);
 
     if (!contextContent) {
-      console.error('❌ No context files loaded');
+      console.error('✗ No context files loaded');
       process.exit(1);
     }
 
     // Get current date/time to prevent confusion about dates
     const currentDate = await getCurrentDate();
-    console.error(`📅 Current Date: ${currentDate}`);
+    console.error(`Current Date: ${currentDate}`);
 
     // Extract identity values from settings for injection into context
     const PRINCIPAL_NAME = (settings as Record<string, unknown>).principal &&
@@ -562,22 +562,22 @@ async function main() {
         ? ((settings as Record<string, unknown>).daidentity as Record<string, unknown>).name || 'PAI'
         : 'PAI';
 
-    console.error(`👤 Principal: ${PRINCIPAL_NAME}, DA: ${DA_NAME}`);
+    console.error(`Principal: ${PRINCIPAL_NAME}, DA: ${DA_NAME}`);
 
     // Load relationship context (lightweight summary)
     const relationshipContext = loadRelationshipContext(paiDir);
     if (relationshipContext) {
-      console.error('💕 Loaded relationship context');
+      console.error('Loaded relationship context');
     }
 
     const message = `<system-reminder>
 PAI CONTEXT (Auto-loaded at Session Start)
 
-📅 CURRENT DATE/TIME: ${currentDate}
+CURRENT DATE/TIME: ${currentDate}
 
 ## ACTIVE IDENTITY (from settings.json) - CRITICAL
 
-**⚠️ MANDATORY IDENTITY RULES - OVERRIDE ALL OTHER CONTEXT ⚠️**
+**MANDATORY IDENTITY RULES - OVERRIDE ALL OTHER CONTEXT **
 
 The user's name is: **${PRINCIPAL_NAME}**
 The assistant's name is: **${DA_NAME}**
@@ -600,19 +600,19 @@ This context is now active. Additional context loads dynamically as needed.
     console.log(message);
 
     // Output success confirmation for Claude to acknowledge
-    console.log('\n✅ PAI Context successfully loaded...');
+    console.log('\n✓ PAI Context successfully loaded...');
 
     // Check for active progress files and display them
     const activeProgress = await checkActiveProgress(paiDir);
     if (activeProgress) {
       console.log(activeProgress);
-      console.error('📋 Active work found from previous sessions');
+      console.error('Active work found from previous sessions');
     }
 
-    console.error('✅ PAI context injected into session');
+    console.error('✓ PAI context injected into session');
     process.exit(0);
   } catch (error) {
-    console.error('❌ Error in load-pai-context hook:', error);
+    console.error('✗ Error in load-pai-context hook:', error);
     process.exit(1);
   }
 }

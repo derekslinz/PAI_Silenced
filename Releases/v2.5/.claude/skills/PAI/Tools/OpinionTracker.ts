@@ -234,7 +234,7 @@ function generateNotification(
   evidenceType: Evidence['type']
 ): string {
   const direction = newConfidence > oldConfidence ? 'increased' : 'decreased';
-  const emoji = newConfidence > oldConfidence ? '📈' : '📉';
+  const emoji = newConfidence > oldConfidence ? '' : '';
 
   return `
 ${emoji} Opinion Confidence ${direction.toUpperCase()}
@@ -253,7 +253,7 @@ This change exceeds the notification threshold (${NOTIFICATION_THRESHOLD * 100}%
 function listOpinions(): void {
   const opinions = parseOpinions();
 
-  console.log('\n📊 Current Opinions\n');
+  console.log('\nCurrent Opinions\n');
 
   const categories = new Map<string, Opinion[]>();
   for (const opinion of opinions.values()) {
@@ -288,7 +288,7 @@ function showOpinion(statement: string): void {
   }
 
   console.log(`
-📋 Opinion Details
+Opinion Details
 
 **Statement:** ${opinion.statement}
 **Confidence:** ${(opinion.confidence * 100).toFixed(0)}%
@@ -334,7 +334,7 @@ async function main() {
       }
 
       const opinion = addOpinion(statement, category);
-      console.log(`✅ Added opinion: "${statement}" (${category}, confidence: 50%)`);
+      console.log(`✓ Added opinion: "${statement}" (${category}, confidence: 50%)`);
       break;
     }
 
@@ -372,14 +372,14 @@ async function main() {
 
       try {
         const result = addEvidence(statement, evidenceType, description);
-        console.log(`✅ Added ${evidenceType} evidence to "${statement}"`);
+        console.log(`✓ Added ${evidenceType} evidence to "${statement}"`);
         console.log(`   Confidence: ${(result.opinion.confidence * 100).toFixed(0)}% (${result.confidenceChange > 0 ? '+' : ''}${(result.confidenceChange * 100).toFixed(1)}%)`);
 
         if (result.needsNotification) {
-          console.log('\n⚠️  SIGNIFICANT CHANGE - Principal should be notified');
+          console.log('\n SIGNIFICANT CHANGE - Principal should be notified');
         }
       } catch (err) {
-        console.error(`❌ ${err}`);
+        console.error(`✗ ${err}`);
         process.exit(1);
       }
       break;

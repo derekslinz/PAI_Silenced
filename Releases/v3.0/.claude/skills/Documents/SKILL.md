@@ -11,7 +11,7 @@ description: Document processing. USE WHEN document, process file. SkillSearch('
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -32,7 +32,7 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
 
 # Documents Skill
 
-## 🎯 Load Full PAI Context
+## Load Full PAI Context
 
 **Before starting any task with this skill, load complete PAI context:**
 
@@ -65,7 +65,7 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
 - User needs to work with Excel tables, charts, or pivot tables
 - User wants to convert spreadsheets to/from other formats
 
-## 🔀 Document Type Routing
+## Document Type Routing
 
 This skill organizes document processing across 4 document types plus specialized workflows:
 
@@ -197,7 +197,7 @@ This skill organizes document processing across 4 document types plus specialize
 - Error detection and validation
 - Preserve formatting and formulas when editing
 
-## 📋 Document Processing Principles
+## Document Processing Principles
 
 ### DOCX Best Practices
 1. **Tracked Changes** - Use redlining workflow for professional document review
@@ -263,7 +263,7 @@ User: "Create a consulting report from the assessment data"
 → Outputs McKinsey-quality A4 PDF with TOC, diagrams, color boxes
 ```
 
-## 🔗 Integration with Other Skills
+## Integration with Other Skills
 
 ### Feeds Into:
 - **writing** skill - Creating documents for blog posts and newsletters
@@ -275,7 +275,7 @@ User: "Create a consulting report from the assessment data"
 - **development** skill - Building document processing automation
 - **system** skill - Command-line tools and scripting
 
-## 🎯 Key Principles
+## Key Principles
 
 ### Document Creation
 1. **Quality First** - Professional formatting and structure from the start
@@ -295,7 +295,7 @@ User: "Create a consulting report from the assessment data"
 3. **Format Awareness** - Understand document structure (OOXML, PDF structure, etc.)
 4. **Performance** - Use efficient methods for large documents
 
-## 📚 Full Reference Documentation
+## Full Reference Documentation
 
 **Word Documents (DOCX):**
 - Main Guide: `~/.claude/skills/Documents/Docx/SKILL.md`

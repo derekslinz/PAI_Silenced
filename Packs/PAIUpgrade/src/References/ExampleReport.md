@@ -16,7 +16,7 @@ User: "check for upgrades"
 
 ---
 
-## ✨ Discoveries
+## ★ Discoveries
 
 Everything interesting we found, ranked by how cool it is.
 
@@ -28,31 +28,31 @@ Everything interesting we found, ranked by how cool it is.
 
 ---
 
-## 🔥 Recommendations
+## Recommendations
 
-### 🔴 CRITICAL — Integrate immediately
-
-| # | Recommendation | Prior Status | Evidence | PAI Relevance | Effort | Files Affected |
-|---|---------------|-------------|----------|---------------|--------|----------------|
-| 1 | Add PreToolUse additionalContext to security hooks | 🆕 NEW | `hooks/SecurityPipeline.hook.ts:42` returns binary deny/allow only | SecurityValidator currently hard-blocks commands — additionalContext enables reasoning-based security that adapts to context | Low | `hooks/SecurityValidator.hook.ts` |
-
-### 🟠 HIGH — Integrate this week
+### ● CRITICAL — Integrate immediately
 
 | # | Recommendation | Prior Status | Evidence | PAI Relevance | Effort | Files Affected |
 |---|---------------|-------------|----------|---------------|--------|----------------|
-| 2 | Replace session ID hacks with native ${CLAUDE_SESSION_ID} | 🔶 PARTIAL | `skills/_PAI/Workflows/DocumentSession.md:15` uses extraction hack | Session documentation workflows have manual extraction workarounds — native variable eliminates fragile code | Low | `skills/_PAI/Workflows/DocumentSession.md` |
+| 1 | Add PreToolUse additionalContext to security hooks | NEW | `hooks/SecurityPipeline.hook.ts:42` returns binary deny/allow only | SecurityValidator currently hard-blocks commands — additionalContext enables reasoning-based security that adapts to context | Low | `hooks/SecurityValidator.hook.ts` |
+
+### ● HIGH — Integrate this week
+
+| # | Recommendation | Prior Status | Evidence | PAI Relevance | Effort | Files Affected |
+|---|---------------|-------------|----------|---------------|--------|----------------|
+| 2 | Replace session ID hacks with native ${CLAUDE_SESSION_ID} | PARTIAL | `skills/_PAI/Workflows/DocumentSession.md:15` uses extraction hack | Session documentation workflows have manual extraction workarounds — native variable eliminates fragile code | Low | `skills/_PAI/Workflows/DocumentSession.md` |
 
 (MEDIUM and LOW tiers omitted — no items.)
 
 ---
 
-## 🎯 Technique Details
+## Technique Details
 
 ### From Release Notes
 
 #### 1. PreToolUse Additional Context
 **Source:** GitHub claude-code v2.1.16
-**Priority:** 🔴 CRITICAL
+**Priority:** ● CRITICAL
 
 **What It Is:** PreToolUse hooks can now return an additionalContext field that gets injected into the model's context before tool execution, enabling reasoning-based security rather than hard blocks.
 
@@ -69,7 +69,7 @@ return { decision: "allow", additionalContext: "WARNING: Protected file." };
 
 #### 2. Session ID Substitution
 **Source:** GitHub claude-code v2.1.16
-**Priority:** 🟠 HIGH
+**Priority:** ● HIGH
 
 **What It Is:** Native environment variable ${CLAUDE_SESSION_ID} is now available in all hooks and commands, eliminating the need for custom session ID extraction or workaround code.
 
@@ -84,24 +84,24 @@ echo "Session: ${CLAUDE_SESSION_ID}"
 
 ---
 
-## 📊 Summary
+## Summary
 
 | # | Technique | Source | Priority | PAI Component | Effort |
 |---|-----------|--------|----------|---------------|--------|
-| 1 | PreToolUse Additional Context | claude-code v2.1.16 | 🔴 | SecurityValidator hook | Low |
-| 2 | Session ID Substitution | claude-code v2.1.16 | 🟠 | DocumentSession workflow | Low |
+| 1 | PreToolUse Additional Context | claude-code v2.1.16 | ● | SecurityValidator hook | Low |
+| 2 | Session ID Substitution | claude-code v2.1.16 | ● | DocumentSession workflow | Low |
 
 **Totals:** 1 Critical | 1 High | 0 Medium | 0 Low | 4 Skipped
 
-## ⏭️ Skipped Content
+## Skipped Content
 
 | Content | Source | Why Skipped | Evidence |
 |---------|--------|-------------|----------|
-| MCP auto mode | claude-code v2.1.16 | ✅ DONE — already enabled by default | `settings.json:18` |
+| MCP auto mode | claude-code v2.1.16 | ✓ DONE — already enabled by default | `settings.json:18` |
 | Gemini 3 videos | YouTube | Not relevant to Claude-centric stack | — |
 | Agent Experts video | YouTube | No concrete technique identified | — |
 | SDK update v0.78 | GitHub | PAI uses CLI, not raw SDK | `CLAUDE.md:12` |
 
-## 🔍 Sources Processed
+## Sources Processed
 30 Anthropic sources, 5 YouTube videos, 0 custom → 2 relevant findings
 ```

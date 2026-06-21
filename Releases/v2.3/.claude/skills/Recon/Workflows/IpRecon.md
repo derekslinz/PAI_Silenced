@@ -232,13 +232,13 @@ for (const offset of offsets) {
 **AUTHORIZATION CHECK:**
 ```typescript
 function checkAuthorization(): boolean {
-  console.log("⚠️  ACTIVE RECONNAISSANCE REQUIRES AUTHORIZATION");
+  console.log(" ACTIVE RECONNAISSANCE REQUIRES AUTHORIZATION");
   console.log("Do you have authorization to scan this IP? (pentest engagement, bug bounty, owned asset)");
 
   const authorized = await askUserConfirmation();
 
   if (authorized) {
-    console.log("📝 Documenting authorization for audit trail");
+    console.log("Documenting authorization for audit trail");
     logAuthorizationEvent({
       target: ip,
       timestamp: new Date(),
@@ -383,7 +383,7 @@ echo "1.2.3.4" | httpx -tech-detect -cdn -method
 - **IP Address:** 1.2.3.4
 - **IP Type:** IPv4 Public
 - **Reverse DNS:** server.example.com
-- **Hostname Verified:** ✅ Forward/reverse match
+- **Hostname Verified:** ✓ Forward/reverse match
 
 ### Geolocation
 - **City:** San Francisco
@@ -409,11 +409,11 @@ echo "1.2.3.4" | httpx -tech-detect -cdn -method
 - **Organization URL:** examplehosting.com
 
 ### Privacy & Proxy Detection
-- **VPN:** ❌ No
-- **Proxy:** ❌ No
-- **Tor Exit Node:** ❌ No
-- **Hosting:** ✅ Yes (Data Center IP)
-- **Relay:** ❌ No
+- **VPN:** ✗ No
+- **Proxy:** ✗ No
+- **Tor Exit Node:** ✗ No
+- **Hosting:** ✓ Yes (Data Center IP)
+- **Relay:** ✗ No
 
 ---
 
@@ -506,24 +506,24 @@ Strict-Transport-Security: max-age=31536000
 - **Security Headers:** Partial (missing CSP)
 
 ### Security Headers Assessment
-- ✅ X-Frame-Options: SAMEORIGIN
-- ✅ X-Content-Type-Options: nosniff
-- ✅ Strict-Transport-Security: Present (HSTS)
-- ⚠️ Content-Security-Policy: Missing
-- ⚠️ X-XSS-Protection: Not set (deprecated but still used)
-- ✅ Referrer-Policy: Implicitly strict
+- ✓ X-Frame-Options: SAMEORIGIN
+- ✓ X-Content-Type-Options: nosniff
+- ✓ Strict-Transport-Security: Present (HSTS)
+- Content-Security-Policy: Missing
+- X-XSS-Protection: Not set (deprecated but still used)
+- ✓ Referrer-Policy: Implicitly strict
 
 ---
 
 ## SSL/TLS Configuration
 
 ### TLS Versions Supported
-- ✅ TLS 1.3
-- ✅ TLS 1.2
-- ❌ TLS 1.1 (disabled)
-- ❌ TLS 1.0 (disabled)
-- ❌ SSL 3.0 (disabled)
-- ❌ SSL 2.0 (disabled)
+- ✓ TLS 1.3
+- ✓ TLS 1.2
+- ✗ TLS 1.1 (disabled)
+- ✗ TLS 1.0 (disabled)
+- ✗ SSL 3.0 (disabled)
+- ✗ SSL 2.0 (disabled)
 
 ### Cipher Suites (TLS 1.3)
 - TLS_AES_256_GCM_SHA384
@@ -536,10 +536,10 @@ Strict-Transport-Security: max-age=31536000
 - ECDHE-RSA-CHACHA20-POLY1305
 
 ### TLS Security Assessment
-- ✅ Modern TLS only (1.2+)
-- ✅ Strong cipher suites
-- ✅ Forward secrecy (ECDHE)
-- ✅ No known vulnerabilities
+- ✓ Modern TLS only (1.2+)
+- ✓ Strong cipher suites
+- ✓ Forward secrecy (ECDHE)
+- ✓ No known vulnerabilities
 - **Grade:** A (Strong)
 
 ---
@@ -581,12 +581,12 @@ All belong to same organization (Example Hosting Inc)
 ## Risk Assessment
 
 ### Indicators
-- ✅ Legitimate hosting provider (Example Hosting Inc)
-- ✅ Clean IP reputation (no blocklists)
-- ✅ Valid SSL certificate
-- ✅ Modern security configurations
-- ⚠️ Database server in same subnet (1.2.3.50)
-- ⚠️ Multiple services on single IP (segmentation)
+- ✓ Legitimate hosting provider (Example Hosting Inc)
+- ✓ Clean IP reputation (no blocklists)
+- ✓ Valid SSL certificate
+- ✓ Modern security configurations
+- Database server in same subnet (1.2.3.50)
+- Multiple services on single IP (segmentation)
 
 ### Security Observations
 1. **Positive:**
@@ -719,21 +719,21 @@ if (ipReport.ports.includes(80) || ipReport.ports.includes(443)) {
 ## Success Criteria
 
 ### Passive Recon Complete
-- ✅ IPInfo data retrieved
-- ✅ Reverse DNS checked
-- ✅ WHOIS netblock info gathered
-- ✅ Certificate search performed
-- ✅ Related IPs identified
-- ✅ Report generated
+- ✓ IPInfo data retrieved
+- ✓ Reverse DNS checked
+- ✓ WHOIS netblock info gathered
+- ✓ Certificate search performed
+- ✓ Related IPs identified
+- ✓ Report generated
 
 ### Active Recon Complete (if authorized)
-- ✅ Authorization documented
-- ✅ Port scan completed
-- ✅ Service detection performed
-- ✅ Technology fingerprinting done
-- ✅ SSL/TLS analyzed
-- ✅ Security assessment included
-- ✅ No DoS or destructive techniques used
+- ✓ Authorization documented
+- ✓ Port scan completed
+- ✓ Service detection performed
+- ✓ Technology fingerprinting done
+- ✓ SSL/TLS analyzed
+- ✓ Security assessment included
+- ✓ No DoS or destructive techniques used
 
 ---
 

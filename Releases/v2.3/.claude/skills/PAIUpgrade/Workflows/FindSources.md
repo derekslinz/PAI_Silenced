@@ -99,9 +99,9 @@ For each potential source, score:
 | Stack Alignment | 10% | |
 
 **Priority Assignment:**
-- Score ≥ 4.0 → 🔥 HIGH - Add immediately
-- Score 3.0-3.9 → 📌 MEDIUM - Consider adding
-- Score < 3.0 → 💡 LOW - Monitor occasionally
+- Score ≥ 4.0 → HIGH - Add immediately
+- Score 3.0-3.9 → MEDIUM - Consider adding
+- Score < 3.0 → LOW - Monitor occasionally
 
 ---
 
@@ -111,7 +111,7 @@ For each potential source, score:
 # New Source Recommendations
 **Discovery Date:** [date]
 
-## 🔥 HIGH PRIORITY (Add Now)
+## HIGH PRIORITY (Add Now)
 
 ### [Source Name]
 **Type:** YouTube / Blog / GitHub / Other
@@ -132,13 +132,13 @@ For each potential source, score:
 
 ---
 
-## 📌 MEDIUM PRIORITY (Consider)
+## MEDIUM PRIORITY (Consider)
 
 [Similar format]
 
 ---
 
-## 💡 LOW PRIORITY (Optional)
+## LOW PRIORITY (Optional)
 
 [Similar format]
 

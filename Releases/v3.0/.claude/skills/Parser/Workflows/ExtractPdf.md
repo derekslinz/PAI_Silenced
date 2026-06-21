@@ -292,7 +292,7 @@ Presents the Transformer, a novel neural network architecture that relies entire
 
 **Password-protected PDF:**
 ```
-⚠️ PDF is password-protected
+PDF is password-protected
 → Extract metadata only
 → Confidence: 0.2
 → Warning: "Cannot extract text - PDF is encrypted"
@@ -300,7 +300,7 @@ Presents the Transformer, a novel neural network architecture that relies entire
 
 **Scanned PDF (images, no text):**
 ```
-⚠️ PDF contains scanned images
+PDF contains scanned images
 → Attempt OCR if available
 → If OCR fails, extract metadata only
 → Lower confidence score
@@ -309,7 +309,7 @@ Presents the Transformer, a novel neural network architecture that relies entire
 
 **Corrupted PDF:**
 ```
-❌ PDF file is corrupted
+✗ PDF file is corrupted
 → Cannot extract content
 → Log error
 → Return minimal metadata from URL/filename
@@ -321,24 +321,24 @@ Presents the Transformer, a novel neural network architecture that relies entire
 
 **Successful extraction (research paper):**
 ```
-✅ Extracted PDF (research paper)
-📄 Title: Attention Is All You Need
-✍️ Authors: Vaswani et al. (8 authors)
-📅 Published: 2017-06-12
-📝 Content: 7,500 words (15 pages)
-👥 People: 8 authors
-🏢 Companies: 2 (Google Brain, Google Research)
-📚 Citations: 42 references
-🎯 Confidence: 0.88
+✓ Extracted PDF (research paper)
+Title: Attention Is All You Need
+Authors: Vaswani et al. (8 authors)
+Published: 2017-06-12
+Content: 7,500 words (15 pages)
+People: 8 authors
+Companies: 2 (Google Brain, Google Research)
+Citations: 42 references
+Confidence: 0.88
 ```
 
 **Partial extraction (encrypted PDF):**
 ```
-⚠️ Extracted PDF metadata only (encrypted)
-📄 Title: Proprietary Research Report
-📝 Content: Text extraction failed (password-protected)
-🎯 Confidence: 0.25
-⚠️ Warning: PDF is encrypted, cannot extract full text
+Extracted PDF metadata only (encrypted)
+Title: Proprietary Research Report
+Content: Text extraction failed (password-protected)
+Confidence: 0.25
+Warning: PDF is encrypted, cannot extract full text
 ```
 
 ---

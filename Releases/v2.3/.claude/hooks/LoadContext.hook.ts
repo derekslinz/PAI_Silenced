@@ -113,10 +113,10 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
     }
 
     // Build summary of active work
-    let summary = '\n📋 ACTIVE WORK (from previous sessions):\n';
+    let summary = '\nACTIVE WORK (from previous sessions):\n';
 
     for (const proj of activeProjects) {
-      summary += `\n🔵 ${proj.project}\n`;
+      summary += `\n● ${proj.project}\n`;
 
       if (proj.objectives && proj.objectives.length > 0) {
         summary += '   Objectives:\n';
@@ -133,8 +133,8 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
       }
     }
 
-    summary += '\n💡 To resume: `bun run ~/.claude/skills/CORE/Tools/SessionProgress.ts resume <project>`\n';
-    summary += '💡 To complete: `bun run ~/.claude/skills/CORE/Tools/SessionProgress.ts complete <project>`\n';
+    summary += '\nTo resume: `bun run ~/.claude/skills/CORE/Tools/SessionProgress.ts resume <project>`\n';
+    summary += 'To complete: `bun run ~/.claude/skills/CORE/Tools/SessionProgress.ts complete <project>`\n';
 
     return summary;
   } catch (error) {
@@ -152,40 +152,40 @@ async function main() {
 
     if (isSubagent) {
       // Subagent sessions don't need PAI context loading
-      console.error('🤖 Subagent session - skipping PAI context loading');
+      console.error('Subagent session - skipping PAI context loading');
       process.exit(0);
     }
 
     // Record session start time for notification timing
     recordSessionStart();
-    console.error('⏱️ Session start time recorded for notification timing');
+    console.error('Session start time recorded for notification timing');
 
     const paiDir = getPaiDir();
     const paiSkillPath = join(paiDir, 'skills/CORE/SKILL.md');
 
     // Verify PAI skill file exists
     if (!existsSync(paiSkillPath)) {
-      console.error(`❌ PAI skill not found at: ${paiSkillPath}`);
+      console.error(`✗ PAI skill not found at: ${paiSkillPath}`);
       process.exit(1);
     }
 
-    console.error('📚 Reading PAI core context from skill file...');
+    console.error('Reading PAI core context from skill file...');
 
     // Read the PAI SKILL.md file content
     const paiContent = readFileSync(paiSkillPath, 'utf-8');
 
-    console.error(`✅ Read ${paiContent.length} characters from PAI SKILL.md`);
+    console.error(`✓ Read ${paiContent.length} characters from PAI SKILL.md`);
 
     // Get current date/time to prevent confusion about dates
     const currentDate = await getCurrentDate();
-    console.error(`📅 Current Date: ${currentDate}`);
+    console.error(`Current Date: ${currentDate}`);
 
     // Output the PAI content as a system-reminder
     // This will be injected into Claude's context at session start
     const message = `<system-reminder>
 PAI CORE CONTEXT (Auto-loaded at Session Start)
 
-📅 CURRENT DATE/TIME: ${currentDate}
+CURRENT DATE/TIME: ${currentDate}
 
 The following context has been loaded from ${paiSkillPath}:
 
@@ -198,19 +198,19 @@ This context is now active for this session. Follow all instructions, preference
     console.log(message);
 
     // Output success confirmation for Claude to acknowledge
-    console.log('\n✅ PAI Context successfully loaded...');
+    console.log('\n✓ PAI Context successfully loaded...');
 
     // Check for active progress files and display them
     const activeProgress = await checkActiveProgress(paiDir);
     if (activeProgress) {
       console.log(activeProgress);
-      console.error('📋 Active work found from previous sessions');
+      console.error('Active work found from previous sessions');
     }
 
-    console.error('✅ PAI context injected into session');
+    console.error('✓ PAI context injected into session');
     process.exit(0);
   } catch (error) {
-    console.error('❌ Error in load-core-context hook:', error);
+    console.error('✗ Error in load-core-context hook:', error);
     process.exit(1);
   }
 }

@@ -300,7 +300,7 @@ Examples:
   }
 
   if (result.warnings.length > 0) {
-    console.log(`\n⚠ Warnings (${result.warnings.length}):`);
+    console.log(`\nWarnings (${result.warnings.length}):`);
     result.warnings.forEach(w => console.log(`  - ${w}`));
   }
 

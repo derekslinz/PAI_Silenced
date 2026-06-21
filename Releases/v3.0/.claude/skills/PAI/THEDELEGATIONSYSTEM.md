@@ -11,7 +11,7 @@ extracted_from: SKILL.md lines 535-627
 
 ---
 
-## 🤝 Delegation & Parallelization (Always Active)
+## Delegation & Parallelization (Always Active)
 
 **WHENEVER A TASK CAN BE PARALLELIZED, USE MULTIPLE AGENTS!**
 
@@ -72,7 +72,7 @@ The Intern Agent is your high-agency genius generalist - perfect for parallel ex
 - If task involves writing code → Use Development Skill with Engineer Agents
 - Interns can delegate to engineers when code changes are needed
 
-### 🚨 CUSTOM AGENTS vs GENERIC AGENTS (Always Active)
+### CUSTOM AGENTS vs GENERIC AGENTS (Always Active)
 
 **The word "custom" is the KEY trigger:**
 

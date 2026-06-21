@@ -59,7 +59,7 @@ The FormatReminder hook runs AI inference on the raw prompt and suggests capabil
 With the full context of reverse-engineering and ISC criteria, the THINK phase validates every suggestion. Skills get added, removed, or confirmed. Pass 2 is authoritative.
 
 ```
-🔍 SKILL CHECK (validate hook hints against ISC):
+SKILL CHECK (validate hook hints against ISC):
 │ Hook suggested:   CreateSkill:UpdateSkill
 │ ISC requires:     Architecture design (not just skill update)
 │ Final skills:     CreateSkill:UpdateSkill + Architect consultation
@@ -76,7 +76,7 @@ v2.4 had thinking tools (Council, RedTeam, FirstPrinciples, etc.) but they were 
 For every request, the Algorithm must evaluate each thinking tool and justify why it is NOT being used:
 
 ```
-🔍 THINKING TOOLS ASSESSMENT (justify exclusion):
+THINKING TOOLS ASSESSMENT (justify exclusion):
 │ Council:          EXCLUDE — single clear approach, no alternatives to debate
 │ RedTeam:          INCLUDE — proposal could fail in non-obvious ways
 │ FirstPrinciples:  INCLUDE — requirement rests on unexamined assumption
@@ -131,7 +131,7 @@ Capabilities now combine using 7 named patterns, making orchestration explicit a
 | Pattern | Shape | Example | When |
 |---------|-------|---------|------|
 | **Pipeline** | A → B → C | Explore → Architect → Engineer | Sequential domain handoff |
-| **TDD Loop** | A ↔ B | Engineer ↔ QA | Build-verify cycle until ISC passes |
+| **TDD Loop** | A B | Engineer QA | Build-verify cycle until ISC passes |
 | **Fan-out** | → [A, B, C] | 3 Researchers in parallel | Multiple perspectives needed |
 | **Fan-in** | [A, B, C] → D | Researchers → Synthesis | Merging parallel results |
 | **Gate** | A → check → B or retry | Engineer → QA → Deploy or fix | Quality gate before progression |
@@ -141,7 +141,7 @@ Capabilities now combine using 7 named patterns, making orchestration explicit a
 The full Capability Selection block in THINK phase now looks like:
 
 ```
-🎯 CAPABILITY SELECTION:
+CAPABILITY SELECTION:
 │ Skills:     CreateSkill:UpdateSkill
 │ Thinking:   FirstPrinciples, RedTeam
 │ Primary:    Architect  — system design decision (ISC #1)

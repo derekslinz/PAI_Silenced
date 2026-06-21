@@ -112,7 +112,7 @@ interface ContentStructure {
 - Conclusion: 90 frames (3 seconds)
 - Total = 90 + (sections × 150) + 90
 
-### 3.5 Verify Logical Coherence ⚠️ CRITICAL GATE
+### 3.5 Verify Logical Coherence CRITICAL GATE
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -282,24 +282,24 @@ function verifyAnimationPlan(
 const verification = verifyAnimationPlan(structure, plan)
 
 if (!verification.passed) {
-  console.error('❌ LOGICAL COHERENCE CHECK FAILED:')
+  console.error('✗ LOGICAL COHERENCE CHECK FAILED:')
   verification.errors.forEach(err => console.error(`  - ${err}`))
   throw new Error('Cannot proceed - fix logical issues before rendering')
 }
 
 if (verification.warnings.length > 0) {
-  console.warn('⚠️  COHERENCE WARNINGS (review recommended):')
+  console.warn(' COHERENCE WARNINGS (review recommended):')
   verification.warnings.forEach(warn => console.warn(`  - ${warn}`))
 }
 
-console.log('✅ Logical coherence verified - proceeding to component generation')
+console.log('✓ Logical coherence verified - proceeding to component generation')
 ```
 
 **Example output:**
 
 **PASS:**
 ```
-✅ Logical coherence verified - proceeding to component generation
+✓ Logical coherence verified - proceeding to component generation
 
 Checks passed:
   ✓ Narrative flow: All sections connect logically
@@ -309,7 +309,7 @@ Checks passed:
 
 **FAIL:**
 ```
-❌ LOGICAL COHERENCE CHECK FAILED:
+✗ LOGICAL COHERENCE CHECK FAILED:
 
   - Narrative: Section 2 → 3 weak connection (5% overlap, need ≥15%)
   - Timing: Scene 3 text too fast to read (6.2 words/sec, max 4.0)
@@ -321,12 +321,12 @@ Cannot proceed - fix logical issues before rendering
 
 **WARN:**
 ```
-⚠️  COHERENCE WARNINGS (review recommended):
+ COHERENCE WARNINGS (review recommended):
 
   - Narrative: Section 3 → 4 transition lacks bridge concept
   - Timing: Scene 2 duration near minimum bound (2.1s per point)
 
-✅ Logical coherence verified - proceeding to component generation
+✓ Logical coherence verified - proceeding to component generation
 ```
 
 **Why this matters:**

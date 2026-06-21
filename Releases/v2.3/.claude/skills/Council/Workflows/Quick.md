@@ -43,16 +43,16 @@ This is a quick sanity check, not a full debate.
 ```markdown
 ### Perspectives
 
-**🏛️ Architect (Serena):**
+**Architect (Serena):**
 [Brief take]
 
-**🎨 Designer (Aditi):**
+**Designer (Aditi):**
 [Brief take]
 
-**⚙️ Engineer (Marcus):**
+**Engineer (Marcus):**
 [Brief take]
 
-**🔍 Researcher (Ava):**
+**Researcher (Ava):**
 [Brief take]
 
 ### Quick Summary
@@ -67,7 +67,7 @@ This is a quick sanity check, not a full debate.
 If the quick check reveals significant disagreement or complex trade-offs, recommend:
 
 ```
-⚠️ This topic has enough complexity for a full council debate.
+This topic has enough complexity for a full council debate.
 Run: "Council: [topic]" for 3-round structured discussion.
 ```
 

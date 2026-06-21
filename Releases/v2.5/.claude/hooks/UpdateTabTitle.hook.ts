@@ -9,7 +9,7 @@
  *
  * VOICE: Announces the inference-generated sentence when prompt is received
  * (e.g., "Checking the config.", "Fixing the bug."). Same as tab title.
- * Task completion voice happens via StopOrchestrator using the 🗣️ line.
+ * Task completion voice happens via StopOrchestrator using the line.
  * Uses ElevenLabs TTS via the voice server on port 8888.
  *
  * TRIGGER: UserPromptSubmit
@@ -43,8 +43,8 @@
  * - MUST RUN AFTER: None
  *
  * TAB COLOR SCHEME (inactive tab only - active tab stays dark blue):
- * - Dark purple (#1E0A3C): AI inference/thinking (🧠 prefix)
- * - Dark orange (#804000): Actively working (⚙️ prefix)
+ * - Dark purple (#1E0A3C): AI inference/thinking (prefix)
+ * - Dark orange (#804000): Actively working (prefix)
  * - Dark teal (#085050): Waiting for user input (SetQuestionTab)
  * - Dark blue (#002B80): Active tab always uses this
  *
@@ -371,7 +371,7 @@ async function main() {
 
     // Set quick fallback title immediately with inference state (purple + "…")
     const quickFallback = quickTitle(prompt);
-    setTabTitle(`🧠${quickFallback}`, 'inference');  // Brain = AI thinking/inference
+    setTabTitle(`${quickFallback}`, 'inference');  // Brain = AI thinking/inference
 
     // Get summary from Sonnet inference with conversation context
     const { summary: rawSummary, fromInference } = await summarizePrompt(prompt, data.transcript_path);
@@ -400,7 +400,7 @@ async function main() {
 
     // Update tab with SHORT title (5 words max - gerund + topic) + working state
     const shortTitle = summary.split(/\s+/).slice(0, 5).join(' ');
-    setTabTitle(`⚙️${shortTitle}`, 'working');  // Orange = actively working on task
+    setTabTitle(`${shortTitle}`, 'working');  // Orange = actively working on task
 
     // Voice announcement - speaks the inference-generated summary (e.g., "Checking config")
     // ONLY announce if we got a REAL summary from inference, NOT fallbacks

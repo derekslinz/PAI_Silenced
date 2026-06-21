@@ -6,7 +6,7 @@
 # @raycast.mode fullOutput
 
 # Optional parameters:
-# @raycast.icon 🧠
+# @raycast.icon 
 # @raycast.argument1 { "type": "text", "placeholder": "Input text", "optional": false, "percentEncoded": true}
 
 # Documentation:

@@ -163,8 +163,8 @@ Loop mode displays a live progress dashboard:
   Agent 3 → ISC-API-1: All endpoints return standard error format
   Agent 4 → ISC-TEST-1: Integration test suite passes completely
 
-  ⏳ 4 agents working...
-  ⏱ Agents finished in 45s
+  4 agents working...
+  Agents finished in 45s
 
   Agent Results:
     Agent 1 ✓ PASS    ISC-AUTH-1: JWT middleware validates token...

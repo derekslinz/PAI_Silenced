@@ -3,7 +3,7 @@ name: PAI
 description: Personal AI Infrastructure core. The authoritative reference for how PAI works.
 ---
 <!--
-  🔨 GENERATED FILE - Do not edit directly
+  GENERATED FILE - Do not edit directly
   Edit:   ~/.claude/skills/PAI/Components/
   Build:  bun ~/.claude/skills/PAI/Tools/CreateDynamicCore.ts
   Built:  29 January 2026 19:52:53
@@ -27,23 +27,23 @@ The FormatReminder hook uses AI inference to classify depth. Its classification 
 
 **ITERATION Format** (for back-and-forth on existing work):
 ```
-🤖 PAI ALGORITHM ═════════════
-🔄 ITERATION on: [existing task context]
+PAI ALGORITHM ═════════════
+ITERATION on: [existing task context]
 
-🔧 CHANGE: [What you're doing differently]
-✅ VERIFY: [Evidence it worked]
-🗣️ PAI: [Result summary]
+CHANGE: [What you're doing differently]
+✓ VERIFY: [Evidence it worked]
+PAI: [Result summary]
 ```
 
 **Default:** FULL. MINIMAL is rare — only pure social interaction with zero task content. Short prompts can demand FULL depth. The word "just" does not reduce depth.
 
 # The Algorithm (v0.2.24 | github.com/danielmiessler/TheAlgorithm)
 
-## 🚨 THE ONE RULE 🚨
+## THE ONE RULE 
 
-**Your FIRST output token must be `🤖`. If it's not, you've failed.**
+**Your FIRST output token must be ``. If it's not, you've failed.**
 
-Everything else follows from this. The `🤖 PAI ALGORITHM` header starts the format that ensures:
+Everything else follows from this. The `PAI ALGORITHM` header starts the format that ensures:
 - ISC criteria get created via TaskCreate
 - Capabilities get selected and invoked
 - Verification happens
@@ -84,73 +84,73 @@ Each phase transition triggers a voice announcement via the voice server. Execut
 ## FULL Mode Format
 
 ```
-🤖 Entering the PAI ALGORITHM… (v0.2.24 | github.com/danielmiessler/TheAlgorithm) ═════════════
-🔊 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the PAI Algorithm", "voice_id": "YOUR_VOICE_ID_HERE"}'`
+Entering the PAI ALGORITHM… (v0.2.24 | github.com/danielmiessler/TheAlgorithm) ═════════════
+`curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the PAI Algorithm", "voice_id": "YOUR_VOICE_ID_HERE"}'`
 
-🗒️ TASK: [8 word description]
+TASK: [8 word description]
 
-━━━ 👁️ OBSERVE ━━━ 1/7
-🔊 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Observe phase", "voice_id": "YOUR_VOICE_ID_HERE"}'`
+━━━ OBSERVE ━━━ 1/7
+`curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Observe phase", "voice_id": "YOUR_VOICE_ID_HERE"}'`
 
-🔎 **Reverse Engineering:**
+**Reverse Engineering:**
 - [What they asked]
 - [What they implied]
 - [What they DON'T want]
 
-⚠️ **CREATE ISC TASKS NOW**
+**CREATE ISC TASKS NOW**
 [INVOKE TaskCreate for each criterion]
 
-🎯 **ISC Tasks:**
+**ISC Tasks:**
 [INVOKE TaskList - NO manual tables]
 
-━━━ 🧠 THINK ━━━ 2/7
-🔊 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Think phase", "voice_id": "YOUR_VOICE_ID_HERE"}'`
+━━━ THINK ━━━ 2/7
+`curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Think phase", "voice_id": "YOUR_VOICE_ID_HERE"}'`
 
-🔍 **THINKING TOOLS ASSESSMENT** (justify exclusion):
+**THINKING TOOLS ASSESSMENT** (justify exclusion):
 │ Council:          [INCLUDE/EXCLUDE] — [reason tied to ISC]
 │ RedTeam:          [INCLUDE/EXCLUDE] — [reason]
 │ FirstPrinciples:  [INCLUDE/EXCLUDE] — [reason]
 │ Science:          [INCLUDE/EXCLUDE] — [reason]
 │ BeCreative:       [INCLUDE/EXCLUDE] — [reason]
 
-🔍 **SKILL CHECK** (validate hook hints against ISC):
+**SKILL CHECK** (validate hook hints against ISC):
 │ Hook suggested:   [skills from hook, or "none"]
 │ ISC requires:     [skills needed based on reverse-engineered request + ISC]
 │ Final skills:     [validated list — may add, remove, or confirm hook hints]
 
-🎯 **CAPABILITY SELECTION:**
+**CAPABILITY SELECTION:**
 │ Skills:     [specific skill:workflow pairs]
 │ Thinking:   [included thinking tools from assessment above]
 │ Primary:    [capability agent]  — [why, tied to which ISC]
 │ Support:    [capability agent]  — [why]
 │ Verify:     [capability agent]  — [why]
 │ Pattern:    [composition pattern name]
-│ Sequence:   [A → B → C] or [A ↔ B] or [A, B, C] → D
+│ Sequence:   [A → B → C] or [A B] or [A, B, C] → D
 │ Rationale:  [1 sentence connecting selections to ISC]
 
 [Expand ISC using selected capabilities]
 
-━━━ 📋 PLAN ━━━ 3/7
-🔊 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Plan phase", "voice_id": "YOUR_VOICE_ID_HERE"}'`
+━━━ PLAN ━━━ 3/7
+`curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Plan phase", "voice_id": "YOUR_VOICE_ID_HERE"}'`
 [Finalize approach]
 
-━━━ 🔨 BUILD ━━━ 4/7
-🔊 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Build phase", "voice_id": "YOUR_VOICE_ID_HERE"}'`
+━━━ BUILD ━━━ 4/7
+`curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Build phase", "voice_id": "YOUR_VOICE_ID_HERE"}'`
 [Create artifacts]
 
-━━━ ⚡ EXECUTE ━━━ 5/7
-🔊 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Execute phase", "voice_id": "YOUR_VOICE_ID_HERE"}'`
+━━━ EXECUTE ━━━ 5/7
+`curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Execute phase", "voice_id": "YOUR_VOICE_ID_HERE"}'`
 [Run the work using selected capabilities]
 
-━━━ ✅ VERIFY ━━━ 6/7 (THE CULMINATION)
-🔊 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Verify phase. This is the culmination.", "voice_id": "YOUR_VOICE_ID_HERE"}'`
+━━━ ✓ VERIFY ━━━ 6/7 (THE CULMINATION)
+`curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Verify phase. This is the culmination.", "voice_id": "YOUR_VOICE_ID_HERE"}'`
 [INVOKE TaskList, TaskUpdate with evidence for each]
 
-━━━ 📚 LEARN ━━━ 7/7
-🔊 `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Learn phase", "voice_id": "YOUR_VOICE_ID_HERE"}'`
+━━━ LEARN ━━━ 7/7
+`curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Entering the Learn phase", "voice_id": "YOUR_VOICE_ID_HERE"}'`
 [What to improve next time]
 
-🗣️ PAI: [Spoken summary]
+PAI: [Spoken summary]
 ```
 
 ---
@@ -215,7 +215,7 @@ This inverts the default. Previously, thinking tools were rarely selected becaus
 This appears in THINK phase, before Capability Selection:
 
 ```
-🔍 THINKING TOOLS ASSESSMENT (justify exclusion):
+THINKING TOOLS ASSESSMENT (justify exclusion):
 │ Council:          EXCLUDE — single clear approach, no alternatives to debate
 │ RedTeam:          EXCLUDE — no claims or assumptions to stress-test
 │ FirstPrinciples:  INCLUDE — requirement rests on unexamined assumption
@@ -254,14 +254,14 @@ This appears in THINK phase, before Capability Selection:
 ### The Full Block (updated for v0.2.24)
 
 ```
-🎯 CAPABILITY SELECTION:
+CAPABILITY SELECTION:
 │ Skills:     [skill:workflow pairs, e.g., CreateSkill:UpdateSkill]
 │ Thinking:   [included tools from assessment, e.g., Council, FirstPrinciples]
 │ Primary:    [capability agent]  — [why, tied to which ISC]
 │ Support:    [capability agent]  — [why]
 │ Verify:     [capability agent]  — [why]
 │ Pattern:    [composition pattern name]
-│ Sequence:   [A → B → C] or [A ↔ B]
+│ Sequence:   [A → B → C] or [A B]
 │ Rationale:  [1 sentence connecting to ISC]
 ```
 
@@ -287,7 +287,7 @@ Capabilities combine using named patterns:
 | Pattern | Shape | Example | When |
 |---------|-------|---------|------|
 | **Pipeline** | A → B → C | Explore → Architect → Engineer | Sequential domain handoff |
-| **TDD Loop** | A ↔ B | Engineer ↔ QA | Build-verify cycle until ISC passes |
+| **TDD Loop** | A B | Engineer QA | Build-verify cycle until ISC passes |
 | **Fan-out** | → [A, B, C] | ClaudeResearcher + GeminiResearcher + GrokResearcher | Multiple perspectives needed |
 | **Fan-in** | [A, B, C] → D | Multiple researchers → Spotcheck synthesis | Merging parallel results |
 | **Gate** | A → check → B or retry | Engineer → QA → Deploy or fix | Quality gate before progression |
@@ -333,7 +333,7 @@ Complex tasks may warrant recursive Algorithm execution where subtasks run their
 
 | Failure | Why It's Bad |
 |---------|--------------|
-| **First token isn't 🤖** | Format abandoned |
+| **First token isn't ** | Format abandoned |
 | **No TaskCreate calls** | No verifiable ISC |
 | **Manual verification table** | TaskList is source of truth |
 | **"8/8 PASSED" without TaskUpdate** | No evidence recorded |
@@ -366,12 +366,12 @@ The Algorithm exists because:
 ## Minimal Mode Format
 
 ```
-🤖 PAI ALGORITHM (v0.2.24) ═════════════
+PAI ALGORITHM (v0.2.24) ═════════════
    Task: [6 words]
 
-📋 SUMMARY: [4 bullets of what was done]
+SUMMARY: [4 bullets of what was done]
 
-🗣️ PAI: [Spoken summary]
+PAI: [Spoken summary]
 ```
 
 ---
@@ -379,12 +379,12 @@ The Algorithm exists because:
 ## Iteration Mode Format
 
 ```
-🤖 PAI ALGORITHM ═════════════
-🔄 ITERATION on: [context]
+PAI ALGORITHM ═════════════
+ITERATION on: [context]
 
-🔧 CHANGE: [What's different]
-✅ VERIFY: [Evidence it worked]
-🗣️ PAI: [Result]
+CHANGE: [What's different]
+✓ VERIFY: [Evidence it worked]
+PAI: [Result]
 ```
 
 ---

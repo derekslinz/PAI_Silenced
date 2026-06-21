@@ -297,24 +297,24 @@ Before closing an iteration, capture:
 ## Common Pitfalls
 
 ### Pitfall 1: Premature Stopping
-❌ Giving up after one failed hypothesis
-✅ Systematic exploration of hypothesis space
+✗ Giving up after one failed hypothesis
+✓ Systematic exploration of hypothesis space
 
 ### Pitfall 2: Refusing to Stop
-❌ Endless iteration seeking perfection
-✅ Shipping when goal is achieved
+✗ Endless iteration seeking perfection
+✓ Shipping when goal is achieved
 
 ### Pitfall 3: Not Learning from Failure
-❌ "That didn't work, let's try something else"
-✅ "That didn't work because X, which teaches us Y"
+✗ "That didn't work, let's try something else"
+✓ "That didn't work because X, which teaches us Y"
 
 ### Pitfall 4: Ignoring Paradigm Shifts
-❌ Staying in the same frame despite evidence it's wrong
-✅ Recognizing when fundamental reframing is needed
+✗ Staying in the same frame despite evidence it's wrong
+✓ Recognizing when fundamental reframing is needed
 
 ### Pitfall 5: No Documentation
-❌ Moving on without recording learnings
-✅ Capturing insights for future reference
+✗ Moving on without recording learnings
+✓ Capturing insights for future reference
 
 ---
 

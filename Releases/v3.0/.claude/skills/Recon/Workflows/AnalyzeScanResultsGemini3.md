@@ -75,7 +75,7 @@ Gemini 3 deep reasoning:
 
 ## Authorization Disclaimer
 
-**⚠️ CRITICAL: AUTHORIZED USE ONLY**
+**CRITICAL: AUTHORIZED USE ONLY**
 
 This workflow analyzes scan results from authorized security testing:
 - Penetration testing engagements (written SOW/contract)
@@ -909,11 +909,11 @@ llm -m gemini-3-pro-preview "Compare these monthly scans and identify:
 
 This deep analysis using Gemini 3 Pro's multi-step reasoning has identified:
 
-✅ **12 critical domain controllers vulnerable to EternalBlue** (trivial domain compromise)
-✅ **Network segmentation flaws** enabling DMZ→Internal pivoting
-✅ **Statistical patterns** indicating inconsistent patch management
-✅ **Anomalous hosts** suggesting honeypots or compromised systems
-✅ **Clear attack path** from external web server to full domain control in <7 hours
+✓ **12 critical domain controllers vulnerable to EternalBlue** (trivial domain compromise)
+✓ **Network segmentation flaws** enabling DMZ→Internal pivoting
+✓ **Statistical patterns** indicating inconsistent patch management
+✓ **Anomalous hosts** suggesting honeypots or compromised systems
+✓ **Clear attack path** from external web server to full domain control in <7 hours
 
 **Bottom Line:** This network is highly vulnerable to sophisticated attack. Immediate remediation of SMB vulnerabilities and network segmentation is critical.
 
@@ -1041,22 +1041,22 @@ Provide:
 ## Success Criteria
 
 **Minimum viable analysis:**
-- ✅ Scan data successfully loaded (no truncation)
-- ✅ Gemini 3 Pro deep reasoning applied
-- ✅ High-value targets identified
-- ✅ Attack path recommendations provided
-- ✅ Report generated in markdown format
+- ✓ Scan data successfully loaded (no truncation)
+- ✓ Gemini 3 Pro deep reasoning applied
+- ✓ High-value targets identified
+- ✓ Attack path recommendations provided
+- ✓ Report generated in markdown format
 
 **Comprehensive analysis:**
-- ✅ Multi-step logical reasoning evident in analysis
-- ✅ Pattern detection across entire dataset
-- ✅ Statistical anomaly detection performed
-- ✅ Vulnerability correlation with CVEs
-- ✅ Risk prioritization matrix created
-- ✅ Actionable penetration testing plan
-- ✅ Remediation recommendations by priority
-- ✅ Architecture insights and segmentation analysis
-- ✅ Report saved to history/scratchpad
+- ✓ Multi-step logical reasoning evident in analysis
+- ✓ Pattern detection across entire dataset
+- ✓ Statistical anomaly detection performed
+- ✓ Vulnerability correlation with CVEs
+- ✓ Risk prioritization matrix created
+- ✓ Actionable penetration testing plan
+- ✓ Remediation recommendations by priority
+- ✓ Architecture insights and segmentation analysis
+- ✓ Report saved to history/scratchpad
 
 ## Troubleshooting
 

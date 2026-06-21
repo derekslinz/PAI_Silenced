@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 CORE PATTERNS
+## CORE PATTERNS
 
 ### 1. Configuration Loading
 
@@ -467,7 +467,7 @@ describe('CLI', () => {
 
 ---
 
-## ✅ PATTERN CHECKLIST
+## ✓ PATTERN CHECKLIST
 
 When building a CLI, use these patterns:
 

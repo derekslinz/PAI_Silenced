@@ -1,6 +1,6 @@
 # Apify Integration Guide
 
-**Status:** Production Ready ✅
+**Status:** Production Ready ✓
 **Token Savings:** 90-98% vs traditional MCP approach
 **Execution Time:** ~10 seconds typical
 
@@ -121,18 +121,18 @@ bun ~/.claude/filesystem-mcps/apify/get-latest-tweet.ts
 ## Best Practices
 
 ### DO:
-✅ Use appropriate script for the task
-✅ Let script filter data before returning
-✅ Trust token savings calculations
-✅ Run from `~/.claude/filesystem-mcps/apify/` directory or use full path
-✅ Check execution time (~10 seconds expected)
+✓ Use appropriate script for the task
+✓ Let script filter data before returning
+✓ Trust token savings calculations
+✓ Run from `~/.claude/filesystem-mcps/apify/` directory or use full path
+✓ Check execution time (~10 seconds expected)
 
 ### DON'T:
-❌ Fall back to MCP tools for Twitter operations
-❌ Fetch unfiltered data into model context
-❌ Re-implement filtering logic (use existing scripts)
-❌ Skip error handling (scripts handle common errors)
-❌ Ignore token savings metrics in output
+✗ Fall back to MCP tools for Twitter operations
+✗ Fetch unfiltered data into model context
+✗ Re-implement filtering logic (use existing scripts)
+✗ Skip error handling (scripts handle common errors)
+✗ Ignore token savings metrics in output
 
 ## Performance Expectations
 
@@ -226,10 +226,10 @@ A: Use `debug-tweet-structure.ts` to inspect raw data, check console output.
 ## Success Metrics
 
 **Achieved:**
-- ✅ 90-98% token reduction vs MCP
-- ✅ ~10 second execution time
-- ✅ Production integration in social skill
-- ✅ 4 production-ready scripts
-- ✅ Comprehensive documentation
+- ✓ 90-98% token reduction vs MCP
+- ✓ ~10 second execution time
+- ✓ Production integration in social skill
+- ✓ 4 production-ready scripts
+- ✓ Comprehensive documentation
 
 **This is now the standard for all Twitter operations in PAI.**

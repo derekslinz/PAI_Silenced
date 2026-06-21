@@ -176,7 +176,7 @@ function renderDetection(data) {
   grid.className = 'detection-grid';
   grid.innerHTML = items.map(i =>
     `<div class="detection-item">
-      <span class="${i.icon}">${i.icon === 'check' ? '✓' : i.icon === 'cross' ? '✗' : 'ℹ'}</span>
+      <span class="${i.icon}">${i.icon === 'check' ? '✓' : i.icon === 'cross' ? '✗' : ''}</span>
       <span>${i.label}: ${i.value}</span>
     </div>`
   ).join('');
@@ -294,8 +294,8 @@ function playPreview(src, btn) {
   currentAudio = new Audio(src);
   currentAudio.volume = 0.8;
   currentAudio.play().catch(() => {});
-  btn.textContent = '⏹ Playing';
-  currentAudio.onended = () => { btn.textContent = '▶ Preview'; currentAudio = null; };
+  btn.textContent = 'Playing';
+  currentAudio.onended = () => { btn.textContent = '► Preview'; currentAudio = null; };
 }
 
 function submitChoice(requestId, value, btn) {
@@ -347,7 +347,7 @@ function renderValidation(checks) {
   list.className = 'validation-list';
   list.innerHTML = checks.map(c =>
     `<div class="validation-item">
-      <span class="v-icon">${c.passed ? '✓' : c.critical ? '✗' : '⚠'}</span>
+      <span class="v-icon">${c.passed ? '✓' : c.critical ? '✗' : ''}</span>
       <span class="v-name">${c.name}</span>
       <span class="v-detail">${c.detail}</span>
     </div>`

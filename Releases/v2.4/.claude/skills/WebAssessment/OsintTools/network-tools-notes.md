@@ -6,7 +6,7 @@
 
 ---
 
-## 🛠️ Installed Tools
+## Installed Tools
 
 ### 1. DNSRecon - Active DNS Enumeration & Reconnaissance
 
@@ -338,7 +338,7 @@ nmap [options] <target>
 - Firewall/IDS evasion techniques
 
 **Safety Notes:**
-⚠️ **CRITICAL WARNINGS:**
+**CRITICAL WARNINGS:**
 - Only scan networks/hosts you own or have permission to test
 - Port scanning without authorization may be illegal
 - Use `-T2` or lower timing for stealthier scans
@@ -347,16 +347,16 @@ nmap [options] <target>
 
 ---
 
-## 🔐 Security & Legal Considerations
+## Security & Legal Considerations
 
 **IMPORTANT:** These tools are powerful and can be used for both defensive and offensive purposes.
 
 **Legal Requirements:**
-- ✅ Only use on systems you own
-- ✅ Get written authorization before testing client systems
-- ✅ Use example.com or localhost for practice
-- ❌ Never scan without permission
-- ❌ Never use for malicious purposes
+- ✓ Only use on systems you own
+- ✓ Get written authorization before testing client systems
+- ✓ Use example.com or localhost for practice
+- ✗ Never scan without permission
+- ✗ Never use for malicious purposes
 
 **Best Practices:**
 1. Document all authorized scans
@@ -367,7 +367,7 @@ nmap [options] <target>
 
 ---
 
-## 📊 Integration with WebAssessment Skill
+## Integration with WebAssessment Skill
 
 These tools are part of PAI webassessment skill workflow for:
 
@@ -387,7 +387,7 @@ These tools are part of PAI webassessment skill workflow for:
 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 **DNSRecon Issues:**
 - If import errors occur, reinstall dependencies: `pip3 install -r requirements.txt`
@@ -408,7 +408,7 @@ These tools are part of PAI webassessment skill workflow for:
 
 ---
 
-## 📚 Additional Resources
+## Additional Resources
 
 **DNSRecon:**
 - GitHub: https://github.com/darkoperator/dnsrecon
@@ -433,7 +433,7 @@ These tools are part of PAI webassessment skill workflow for:
 
 ---
 
-## 🎯 Quick Reference Commands
+## Quick Reference Commands
 
 **DNS Enumeration:**
 ```bash
@@ -461,4 +461,4 @@ nmap -sV -sC -oA scan_results TARGET
 
 **Last Updated:** 2025-11-11
 **Maintained By:** PAI Security Infrastructure
-**Status:** Production Ready ✅
+**Status:** Production Ready ✓

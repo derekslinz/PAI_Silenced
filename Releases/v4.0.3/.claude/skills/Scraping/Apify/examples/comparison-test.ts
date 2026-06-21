@@ -41,7 +41,7 @@ async function demonstrateMCPApproach() {
   console.log('  → Additional model call to process and filter')
   console.log('  → Context includes all 100 items again')
 
-  console.log('\n📊 MCP Total Token Usage:')
+  console.log('\nMCP Total Token Usage:')
   console.log('  Tool definitions:    5,000 tokens')
   console.log('  Search results:      1,000 tokens')
   console.log('  Run info:            1,000 tokens')
@@ -104,15 +104,15 @@ return filtered
   console.log('  → Filtered dataset: 10 items (~500 tokens)')
   console.log('  → Model sees only what it needs')
 
-  console.log('\n📊 Code-First Total Token Usage:')
+  console.log('\nCode-First Total Token Usage:')
   console.log('  README discovery:      200 tokens')
   console.log('  Code execution:        300 tokens')
   console.log('  Filtered results:      500 tokens')
   console.log('  ────────────────────────────────')
   console.log('  TOTAL:              ~1,000 tokens')
-  console.log('\n  💰 TOKEN SAVINGS: 98.2% reduction!')
-  console.log('  ⚡ PERFORMANCE: Faster (no model round-trips)')
-  console.log('  🔒 PRIVACY: Intermediate data never in model context\n')
+  console.log('\n  TOKEN SAVINGS: 98.2% reduction!')
+  console.log('  PERFORMANCE: Faster (no model round-trips)')
+  console.log('  PRIVACY: Intermediate data never in model context\n')
 }
 
 async function demonstrateFilteringComparison() {
@@ -157,7 +157,7 @@ async function demonstrateFilteringComparison() {
   console.log('  2. Only 10 items returned to model')
   console.log(`  Total: ~${filteredTokens} tokens\n`)
 
-  console.log(`💡 Key Insight: Code-first prevents ${fullDataset.length - filtered.length} irrelevant items`)
+  console.log(`Key Insight: Code-first prevents ${fullDataset.length - filtered.length} irrelevant items`)
   console.log('   from ever entering the model context!\n')
 }
 
@@ -177,11 +177,11 @@ async function main() {
 
   console.log('=== CONCLUSION ===\n')
   console.log('Code-first Apify integration provides:')
-  console.log('  ✅ 98%+ token reduction through in-code filtering')
-  console.log('  ✅ Faster execution (no model round-trips for control flow)')
-  console.log('  ✅ Better privacy (intermediate data stays in execution env)')
-  console.log('  ✅ Progressive disclosure (load only what you need)')
-  console.log('  ✅ More maintainable (standard TypeScript, not tool schemas)\n')
+  console.log('  ✓ 98%+ token reduction through in-code filtering')
+  console.log('  ✓ Faster execution (no model round-trips for control flow)')
+  console.log('  ✓ Better privacy (intermediate data stays in execution env)')
+  console.log('  ✓ Progressive disclosure (load only what you need)')
+  console.log('  ✓ More maintainable (standard TypeScript, not tool schemas)\n')
 
   console.log('When to use:')
   console.log('  • Data-heavy operations (scraping, large datasets)')

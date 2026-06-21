@@ -46,7 +46,7 @@ MANDATORY skill creation framework for ALL skill creation requests.
 
 **Maximum depth:** `skills/SkillName/Category/`
 
-### ✅ ALLOWED (2 levels max)
+### ✓ ALLOWED (2 levels max)
 
 ```
 skills/SkillName/SKILL.md                    # Skill root
@@ -56,7 +56,7 @@ skills/SkillName/QuickStartGuide.md          # Context file - in root - GOOD
 skills/SkillName/Examples.md                 # Context file - in root - GOOD
 ```
 
-### ❌ FORBIDDEN (Too deep OR wrong location)
+### ✗ FORBIDDEN (Too deep OR wrong location)
 
 ```
 skills/SkillName/Resources/Guide.md              # Context files go in root, NOT Resources/
@@ -113,7 +113,7 @@ skills/SkillName/Tools/Utils/Helper.ts           # THREE levels - NO
 - They provide specific handling instructions
 - Can reference Workflows/, Tools/, etc.
 
-### 🚨 CRITICAL: NO Context/ Subdirectory 🚨
+### CRITICAL: NO Context/ Subdirectory 
 
 **NEVER create Context/ or Docs/ subdirectories.**
 
@@ -123,7 +123,7 @@ Additional .md files ARE the context files. They live **directly in skill root**
 ```
 skills/Art/
 ├── SKILL.md
-└── Context/              ❌ NEVER CREATE THIS
+└── Context/              ✗ NEVER CREATE THIS
     └── Aesthetic.md
 ```
 
@@ -131,9 +131,9 @@ skills/Art/
 ```
 skills/Art/
 ├── SKILL.md
-├── Aesthetic.md          ✅ Context file in skill root
-├── Examples.md           ✅ Context file in skill root
-└── Tools.md              ✅ Context file in skill root
+├── Aesthetic.md          ✓ Context file in skill root
+├── Examples.md           ✓ Context file in skill root
+└── Tools.md              ✓ Context file in skill root
 ```
 
 **The skill directory IS the context.**
@@ -181,13 +181,13 @@ Brief description.
 
 ### When To Use
 
-✅ **Use dynamic loading for:**
+✓ **Use dynamic loading for:**
 - SKILL.md > 100 lines
 - Multiple documentation sections
 - Extensive API reference
 - Detailed examples
 
-❌ **Don't use for:**
+✗ **Don't use for:**
 - Simple skills (< 50 lines)
 - Pure utility wrappers (use CORE/Tools.md instead)
 

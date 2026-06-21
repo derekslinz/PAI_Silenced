@@ -19,7 +19,7 @@ This plan outlines the phases for auditing and simplifying code files under `Rel
   - Run discovery to identify target files in `Releases/v5.0.0` requiring simplification.
   - Document findings in a Scout Report.
   - Link: [phase-01-scout-and-research.md](file:///Users/lderek/GitHub/Personal_AI_Infrastructure/plans/260621-1332-simplify-releases-v5/phase-01-scout-and-research.md)
-  - Status: In Progress
+  - Status: Completed
 
 - **Phase 2: statusline-command.sh Simplification**
   - Focus on simplifying functions, checks, and structure of statusline script.

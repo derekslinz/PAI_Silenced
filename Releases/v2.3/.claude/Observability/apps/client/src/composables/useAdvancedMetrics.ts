@@ -310,13 +310,13 @@ export function useAdvancedMetrics(
         const isSlow = avgDuration > 2000; // Consider slow if avg > 2 seconds
 
         // Determine health indicator
-        let healthIndicator = '✅';
+        let healthIndicator = '✓';
         if (hasErrors && successRate < 90) {
-          healthIndicator = '⚠️';
+          healthIndicator = '';
         } else if (isSlow) {
-          healthIndicator = '🐌';
+          healthIndicator = '';
         } else if (hasErrors) {
-          healthIndicator = '⚠️';
+          healthIndicator = '';
         }
 
         return {

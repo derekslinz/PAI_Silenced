@@ -178,7 +178,7 @@ Claude Code supports the following hook events (from `~/.claude/hooks/lib/observ
 
 **StopOrchestrator.hook.ts** - Unified Stop Event Handler
 - Single orchestrator that delegates to specialized handlers in `${PAI_DIR}/hooks/handlers/`:
-  - `voice.ts` - Voice TTS delivery (extracts `🗣️ {DAIDENTITY.NAME}:` line, POSTs to voice server)
+  - `voice.ts` - Voice TTS delivery (extracts `{DAIDENTITY.NAME}:` line, POSTs to voice server)
   - `capture.ts` - Work/learning capture (updates WORK items, writes learnings, sends observability)
   - `tab-state.ts` - Tab color/title state (sets completed/awaiting/error visual state)
 
@@ -190,7 +190,7 @@ Claude Code supports the following hook events (from `~/.claude/hooks/lib/observ
 **Handler Details:**
 
 `handlers/voice.ts` - Voice TTS Delivery
-- Extracts `🗣️ {DAIDENTITY.NAME}:` line from response
+- Extracts `{DAIDENTITY.NAME}:` line from response
 - POSTs to `http://localhost:8888/notify` with configured voice ID
 - Voice server handles sanitization and TTS conversion
 
@@ -498,13 +498,13 @@ if (isLearning) {
 ```
 
 **Structured Sections Parsed:**
-- `📋 SUMMARY:` - Brief overview
-- `🔍 ANALYSIS:` - Key findings
-- `⚡ ACTIONS:` - Steps taken
-- `✅ RESULTS:` - Outcomes
-- `📊 STATUS:` - Current state
-- `➡️ NEXT:` - Follow-up actions
-- `🎯 COMPLETED:` - **Voice notification line**
+- `SUMMARY:` - Brief overview
+- `ANALYSIS:` - Key findings
+- `ACTIONS:` - Steps taken
+- `✓ RESULTS:` - Outcomes
+- `STATUS:` - Current state
+- `→NEXT:` - Follow-up actions
+- `COMPLETED:` - **Voice notification line**
 
 ---
 
@@ -578,8 +578,8 @@ await sendEventToObservability({
 
 | Event | Hook | Tab Title | Inactive Color | State |
 |-------|------|-----------|----------------|-------|
-| UserPromptSubmit | `UpdateTabTitle.hook.ts` | `⚙️ Summary…` | Orange `#B35A00` | Working |
-| Inference | `UpdateTabTitle.hook.ts` | `🧠 Analyzing…` | Orange `#B35A00` | Inference |
+| UserPromptSubmit | `UpdateTabTitle.hook.ts` | `Summary…` | Orange `#B35A00` | Working |
+| Inference | `UpdateTabTitle.hook.ts` | `Analyzing…` | Orange `#B35A00` | Inference |
 | Stop (success) | `handlers/tab-state.ts` | `Summary` | Green `#022800` | Completed |
 | Stop (question) | `handlers/tab-state.ts` | `Summary?` | Teal `#0D6969` | Awaiting Input |
 | Stop (error) | `handlers/tab-state.ts` | `Summary!` | Orange `#B35A00` | Error |
@@ -594,7 +594,7 @@ await sendEventToObservability({
 
 **State Detection (in Stop hook):**
 1. Check transcript for `AskUserQuestion` tool → `awaitingInput`
-2. Check `📊 STATUS:` for error patterns → `error`
+2. Check `STATUS:` for error patterns → `error`
 3. Default → `completed`
 
 **Text Colors:**
@@ -604,8 +604,8 @@ await sendEventToObservability({
 **Active Tab Background:** Dark Blue `#002B80` (always - state colors only affect inactive tabs)
 
 **Tab Icons:**
-- 🧠 Brain - AI inference in progress (Haiku/Sonnet thinking)
-- ⚙️ Gear - Processing/working state
+- Brain - AI inference in progress (Haiku/Sonnet thinking)
+- Gear - Processing/working state
 
 **Full Documentation:** See `~/.claude/skills/CORE/SYSTEM/TERMINALTABS.md`
 
@@ -844,7 +844,7 @@ curl -X POST http://localhost:8888/notify \
 **Common Issues:**
 - Wrong voice_id → Silent failure (invalid ID)
 - Voice server offline → Hook continues (graceful failure)
-- No `🎯 COMPLETED:` line → No voice notification extracted
+- No `COMPLETED:` line → No voice notification extracted
 
 ---
 
@@ -940,7 +940,7 @@ grep '"event_type":"PostToolUse"' ~/.claude/MEMORY/RAW/$(date +%Y-%m)/$(date +%Y
 
 **Check:**
 1. Is `~/.claude/MEMORY/STATE/agent-sessions.json` writable?
-2. Is `[AGENT:type]` tag in `🎯 COMPLETED:` line?
+2. Is `[AGENT:type]` tag in `COMPLETED:` line?
 3. Is agent running from correct directory? (`/agents/name/`)
 
 **Debug:**
@@ -1206,8 +1206,8 @@ LoadContext.hook.ts             PAI context loading
 SecurityValidator.hook.ts       Security validation for Bash commands
 
 TAB STATE SYSTEM:
-Inference: 🧠…  Orange #B35A00  (AI thinking)
-Working:   ⚙️…  Orange #B35A00  (processing)
+Inference: …  Orange #B35A00  (AI thinking)
+Working:   …  Orange #B35A00  (processing)
 Completed:      Green  #022800  (task done)
 Awaiting:  ?    Teal   #0D6969  (needs input)
 Error:     !    Orange #B35A00  (problem detected)

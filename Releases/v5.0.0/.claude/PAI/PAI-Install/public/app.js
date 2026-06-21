@@ -214,7 +214,7 @@ function renderDetection(data) {
   grid.className = 'detection-grid';
   grid.innerHTML = items.map(i =>
     `<div class="detection-item">
-      <span class="${i.icon}">${i.icon === 'check' ? '' : i.icon === 'cross' ? '' : 'ℹ'}</span>
+      <span class="${i.icon}">${i.icon === 'check' ? '' : i.icon === 'cross' ? '' : ''}</span>
       <span>${i.label}: ${i.value}</span>
     </div>`
   ).join('');

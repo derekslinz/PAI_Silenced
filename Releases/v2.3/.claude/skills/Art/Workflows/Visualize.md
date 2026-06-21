@@ -24,7 +24,7 @@ The Visualize workflow is the **intelligent visualization orchestrator**. Unlike
 
 ---
 
-## 🚨 INFOGRAPHICS: Use Excalidraw Whiteboard Style
+## INFOGRAPHICS: Use Excalidraw Whiteboard Style
 
 **Infographics use the EXCALIDRAW whiteboard sketch aesthetic** — hand-drawn with wobbly boxes, sketchy lines, and imperfect organic shapes. This is the same style as mermaid.md technical diagrams but with richer graphics and narrative.
 
@@ -54,12 +54,12 @@ STYLE: Excalidraw whiteboard sketch with rich graphics
 ### AVOID
 
 ```
-❌ Perfect geometric shapes
-❌ Ruler-straight lines and arrows
-❌ Digital precision
-❌ Smooth polished vectors
-❌ Perfect alignment
-❌ Clean corporate infographic style
+✗ Perfect geometric shapes
+✗ Ruler-straight lines and arrows
+✗ Digital precision
+✗ Smooth polished vectors
+✗ Perfect alignment
+✗ Clean corporate infographic style
 ```
 
 ### Color Usage
@@ -193,11 +193,11 @@ CRITICAL:
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+## MANDATORY WORKFLOW STEPS
 
 ### Step 1: Deep Content Analysis (MANDATORY - Use deep thinking)
 
-**🎯 CRITICAL: Use extended thinking to analyze content thoroughly before proceeding.**
+**CRITICAL: Use extended thinking to analyze content thoroughly before proceeding.**
 
 Analyze the content across these dimensions:
 

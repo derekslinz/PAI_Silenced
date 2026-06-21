@@ -291,7 +291,7 @@ Flag any issues for follow-up.`,
 
 ## Common Mistakes to Avoid
 
-**❌ WRONG: Sequential execution**
+**✗ WRONG: Sequential execution**
 ```typescript
 await Task({ ... }); // Agent 1 (blocks)
 await Task({ ... }); // Agent 2 (waits for 1)
@@ -299,7 +299,7 @@ await Task({ ... }); // Agent 3 (waits for 2)
 // Takes 3x as long!
 ```
 
-**✅ RIGHT: Parallel execution**
+**✓ RIGHT: Parallel execution**
 ```typescript
 // Send ONE message with multiple Task calls:
 Task({ ... })  // Agent 1
@@ -308,7 +308,7 @@ Task({ ... })  // Agent 3
 // All run simultaneously
 ```
 
-**❌ WRONG: Using the deprecated Intern agent type**
+**✗ WRONG: Using the deprecated Intern agent type**
 ```typescript
 // Intern type has been removed from the system
 Task({
@@ -319,7 +319,7 @@ Task({
 })
 ```
 
-**✅ RIGHT: Use general-purpose agents or agents composed via ComposeAgent**
+**✓ RIGHT: Use general-purpose agents or agents composed via ComposeAgent**
 ```typescript
 // For simple parallel work, use general-purpose type
 Task({
@@ -332,13 +332,13 @@ Task({
 // or use a specialized type like "Engineer", "Architect", etc.
 ```
 
-**❌ WRONG: Skipping spotcheck**
+**✗ WRONG: Skipping spotcheck**
 ```typescript
 // Launch agents, get results, done
 // No validation = potential inconsistencies
 ```
 
-**✅ RIGHT: Always spotcheck**
+**✓ RIGHT: Always spotcheck**
 ```typescript
 // Launch agents
 // Get results
@@ -346,7 +346,7 @@ Task({
 // THEN report as complete
 ```
 
-**❌ WRONG: Using opus for simple parallel tasks**
+**✗ WRONG: Using opus for simple parallel tasks**
 ```typescript
 // Each agent uses opus = slow + expensive
 Task({ ..., model: "opus" })
@@ -354,7 +354,7 @@ Task({ ..., model: "opus" })
 Task({ ..., model: "opus" })
 ```
 
-**✅ RIGHT: Use haiku for grunt work**
+**✓ RIGHT: Use haiku for grunt work**
 ```typescript
 // 10-20x faster, sufficient for simple tasks
 Task({ ..., model: "haiku" })

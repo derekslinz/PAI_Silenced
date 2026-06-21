@@ -75,7 +75,7 @@ function sanitizeFilename(name: string): string {
 }
 
 async function fetchReportPage(url: string): Promise<string> {
-  console.log(`📥 Fetching: ${url}`);
+  console.log(`Fetching: ${url}`);
 
   try {
     const response = await fetch(url, {
@@ -96,7 +96,7 @@ async function fetchReportPage(url: string): Promise<string> {
 
     return response.text();
   } catch (error) {
-    console.error(`⚠️ Fetch failed: ${error}`);
+    console.error(`Fetch failed: ${error}`);
     return `[Fetch failed: ${error}]`;
   }
 }
@@ -151,11 +151,11 @@ ${preview}${text.length > 2000 ? '\n\n[Truncated - see full page at URL above]' 
 
 function listCachedReports(): void {
   if (!existsSync(REPORTS_DIR)) {
-    console.log('📁 No cached reports yet');
+    console.log('No cached reports yet');
     return;
   }
 
-  console.log('📁 Cached Reports:\n');
+  console.log('Cached Reports:\n');
 
   const vendors = readdirSync(REPORTS_DIR, { withFileTypes: true })
     .filter(d => d.isDirectory())
@@ -166,7 +166,7 @@ function listCachedReports(): void {
     const files = readdirSync(vendorDir);
 
     if (files.length > 0) {
-      console.log(`📂 ${vendor}/`);
+      console.log(`${vendor}/`);
       for (const file of files) {
         console.log(`   └─ ${file}`);
       }
@@ -207,7 +207,7 @@ async function main() {
     };
 
     const filepath = createSummaryFile(report, content);
-    console.log(`✅ Summary saved: ${filepath}`);
+    console.log(`✓ Summary saved: ${filepath}`);
     return;
   }
 
@@ -220,27 +220,27 @@ async function main() {
     const report = findReport(sources, vendor, reportName);
 
     if (!report) {
-      console.log(`❌ Report not found: ${vendor} "${reportName}"`);
+      console.log(`✗ Report not found: ${vendor} "${reportName}"`);
       console.log('');
       console.log('Try searching:');
       console.log(`  bun run ListSources.ts --search ${vendor}`);
       return;
     }
 
-    console.log(`📄 Found: ${report.vendor} - ${report.name}`);
+    console.log(`Found: ${report.vendor} - ${report.name}`);
     console.log(`   URL: ${report.url}\n`);
 
     const content = await fetchReportPage(report.url);
     const filepath = createSummaryFile(report, content);
 
-    console.log(`\n✅ Summary saved: ${filepath}`);
+    console.log(`\n✓ Summary saved: ${filepath}`);
     console.log('');
-    console.log('📝 Note: Most reports require registration for full PDF.');
+    console.log('Note: Most reports require registration for full PDF.');
     console.log('   Visit the URL above to download the complete report.');
     return;
   }
 
-  console.log('❌ Invalid arguments. Run without args for usage.');
+  console.log('✗ Invalid arguments. Run without args for usage.');
 }
 
 main();

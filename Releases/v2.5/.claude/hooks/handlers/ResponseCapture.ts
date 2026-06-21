@@ -308,7 +308,7 @@ async function captureWorkSummary(text: string, structured: StructuredResponse):
       const content = generateLearningContent(structured, text, timestamp);
 
       writeFileSync(filePath, content, 'utf-8');
-      console.log(`✅ Captured learning to: ${filePath}`);
+      console.log(`✓ Captured learning to: ${filePath}`);
     }
   } catch (error) {
     // Error capturing work summary - non-critical
@@ -334,7 +334,7 @@ export async function handleCapture(parsed: ParsedTranscript, hookInput: HookInp
 
   const hasError = lastMessage && (
     /error|failed|exception|crash/i.test(lastMessage) &&
-    /📊\s*STATUS:.*(?:error|failed|broken)/i.test(lastMessage)
+    /\s*STATUS:.*(?:error|failed|broken)/i.test(lastMessage)
   );
 
   if (hasError) {

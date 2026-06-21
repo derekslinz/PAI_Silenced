@@ -153,11 +153,11 @@ When executing a pipeline, display progress using this exact format:
 ```
 Pipeline: Blog_Publish-Post
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[1/5] ⏳ Blog_Validate-Frontmatter     PENDING
-[2/5] ⏳ Blog_Validate-Images          PENDING
-[3/5] ⏳ Blog_Proofread                PENDING
-[4/5] ⏳ Blog_Deploy                   PENDING
-[5/5] ⏳ Blog_Visual-Verify            PENDING
+[1/5] Blog_Validate-Frontmatter     PENDING
+[2/5] Blog_Validate-Images          PENDING
+[3/5] Blog_Proofread                PENDING
+[4/5] Blog_Deploy                   PENDING
+[5/5] Blog_Visual-Verify            PENDING
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Status: 0/5 complete | Starting pipeline...
 ```
@@ -167,17 +167,17 @@ Status: 0/5 complete | Starting pipeline...
 ```
 Pipeline: Blog_Publish-Post
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[1/5] ✅ Blog_Validate-Frontmatter     PASS
-      ├─ ✅ All required fields present
-      ├─ ✅ Status is draft
-      └─ ✅ Slug format valid
+[1/5] ✓ Blog_Validate-Frontmatter     PASS
+      ├─ ✓ All required fields present
+      ├─ ✓ Status is draft
+      └─ ✓ Slug format valid
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[2/5] 🔄 Blog_Validate-Images          RUNNING
+[2/5] Blog_Validate-Images          RUNNING
       └─ Checking header image...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[3/5] ⏳ Blog_Proofread                PENDING
-[4/5] ⏳ Blog_Deploy                   PENDING
-[5/5] ⏳ Blog_Visual-Verify            PENDING
+[3/5] Blog_Proofread                PENDING
+[4/5] Blog_Deploy                   PENDING
+[5/5] Blog_Visual-Verify            PENDING
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Status: 1/5 complete | Running step 2...
 ```
@@ -187,13 +187,13 @@ Status: 1/5 complete | Running step 2...
 ```
 Pipeline: Blog_Publish-Post
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[1/5] ✅ Blog_Validate-Frontmatter     PASS
-[2/5] ✅ Blog_Validate-Images          PASS
-[3/5] ✅ Blog_Proofread                PASS
-[4/5] ✅ Blog_Deploy                   PASS
-[5/5] ✅ Blog_Visual-Verify            PASS
+[1/5] ✓ Blog_Validate-Frontmatter     PASS
+[2/5] ✓ Blog_Validate-Images          PASS
+[3/5] ✓ Blog_Proofread                PASS
+[4/5] ✓ Blog_Deploy                   PASS
+[5/5] ✓ Blog_Visual-Verify            PASS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Pipeline: COMPLETE ✅
+Pipeline: COMPLETE ✓
 Total time: 3m 42s
 ```
 
@@ -201,11 +201,11 @@ Total time: 3m 42s
 
 | Icon | State | Meaning |
 |------|-------|---------|
-| ⏳ | PENDING | Not yet started |
-| 🔄 | RUNNING | Currently executing |
-| ✅ | PASS | Completed successfully |
-| ❌ | FAIL | Failed verification |
-| ⚠️ | WARN | Passed with warnings |
+| | PENDING | Not yet started |
+| | RUNNING | Currently executing |
+| ✓ | PASS | Completed successfully |
+| ✗ | FAIL | Failed verification |
+| | WARN | Passed with warnings |
 
 ---
 
@@ -306,8 +306,8 @@ Include the starting state with all steps in PENDING:
 ```
 Pipeline: [Pipeline_Name]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[1/N] ⏳ Action_One                    PENDING
-[2/N] ⏳ Action_Two                    PENDING
+[1/N] Action_One                    PENDING
+[2/N] Action_Two                    PENDING
 ...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Status: 0/N complete | Starting pipeline...

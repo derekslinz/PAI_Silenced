@@ -240,7 +240,7 @@ function verifyFeatures(project: string): void {
   let allPassing = true;
 
   for (const feature of registry.features) {
-    const icon = feature.status === 'passing' ? '✅' : '❌';
+    const icon = feature.status === 'passing' ? '✓' : '✗';
     console.log(`${icon} ${feature.id}: ${feature.name}`);
 
     if (feature.status !== 'passing') {
@@ -261,9 +261,9 @@ function verifyFeatures(project: string): void {
 
   console.log(`═══════════════════════════════════════`);
   if (allPassing) {
-    console.log(`✅ ALL FEATURES PASSING - Ready for completion`);
+    console.log(`✓ ALL FEATURES PASSING - Ready for completion`);
   } else {
-    console.log(`❌ INCOMPLETE - Some features not passing`);
+    console.log(`✗ INCOMPLETE - Some features not passing`);
   }
 }
 

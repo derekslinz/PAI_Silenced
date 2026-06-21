@@ -17,13 +17,13 @@ Invoked for:
 ## Notation
 
 ```
-  A  ──(+)──▶  B        A increases → B increases (same direction)
+  A  ──(+)──►  B        A increases → B increases (same direction)
                          A decreases → B decreases
 
-  A  ──(−)──▶  B        A increases → B decreases (opposite direction)
+  A  ──(−)──►  B        A increases → B decreases (opposite direction)
                          A decreases → B increases
 
-  A  ═══(+/−)═══▶  B    Same as above but with a DELAY (drawn thicker or with ||)
+  A  ═══(+/−)═══►  B    Same as above but with a DELAY (drawn thicker or with ||)
 
 
   Loop labels:
@@ -120,7 +120,7 @@ Side effects: [variables changed that weren't targeted]
 ### Step 7: Output
 
 ```
-🔄 CAUSAL LOOP DIAGRAM: [topic]
+CAUSAL LOOP DIAGRAM: [topic]
 
 QUESTION: [what this CLD answers]
 

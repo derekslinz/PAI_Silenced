@@ -343,7 +343,7 @@ export async function runPrerequisites(
       } else {
         await emit({
           event: "message",
-          content: "⚠️  Could not install 'unzip' automatically. Bun requires it.\n   Please install manually: sudo apt install unzip (Debian/Ubuntu) or sudo dnf install unzip (Fedora/RHEL)",
+          content: " Could not install 'unzip' automatically. Bun requires it.\n   Please install manually: sudo apt install unzip (Debian/Ubuntu) or sudo dnf install unzip (Fedora/RHEL)",
         });
       }
     }

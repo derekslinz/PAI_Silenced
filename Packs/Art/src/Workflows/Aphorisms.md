@@ -83,7 +83,7 @@ Deep Purple #4A148C — Bold brand (white text)
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+## MANDATORY WORKFLOW STEPS
 
 ### Step 1: Select Aphorism
 

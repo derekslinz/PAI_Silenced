@@ -229,7 +229,7 @@ START EXAMPLE
 
 JFrog’s Andrey Polkovnichenko, Brian Moussalli and Shachar Menashe found a leaked GitHub access token (PAT) with admin privileges to Python's core repositories in a public Docker container, which could have allowed an attacker to insert malicious code into any Python package or even the language itself. The access token initially slipped through because it was in a compiled Python file (__pycache__/build.cpython-311.pyc).
 
-💡 Secrets can leak in all sorts of sneaky ways beyond just direct source code files: compiled code like in this case, .env files that accidentally get committed, Dockerfiles whose commands subtly copy the current working directory into the image (including .env files or other creds), etc. 😅
+Secrets can leak in all sorts of sneaky ways beyond just direct source code files: compiled code like in this case, .env files that accidentally get committed, Dockerfiles whose commands subtly copy the current working directory into the image (including .env files or other creds), etc. 
 
 END EXAMPLE
 
@@ -239,7 +239,7 @@ Phantom Secrets: Undetected Secrets Expose Major Corporations
 Aqua’s Yakir Kadkoda and Ilay Goldman scanned the top 100 organizations on GitHub, ranked by stars, which together have >50K repos, and found that nearly 18% of secrets are missed by traditional scanning tools.
 They deep dive into why secrets may not be discovered, highlighting the difference between git clone and git clone --mirror , and outline four different strategies to retrieve SCM cached view commits. Here there be dragons.
 
-💡 This post is a great example of taking a specific topic, going deep, teaching some technical nuance (e.g. git internals), finding a bunch of subtle cases, and applying a methodology at scale. Highly recommend reading.
+This post is a great example of taking a specific topic, going deep, teaching some technical nuance (e.g. git internals), finding a bunch of subtle cases, and applying a methodology at scale. Highly recommend reading.
 
 END EXAMPLE
 

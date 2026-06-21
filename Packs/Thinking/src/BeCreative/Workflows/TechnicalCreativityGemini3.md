@@ -552,19 +552,19 @@ For each solution provide:
 ```
 
 **When to use this workflow:**
-- ✅ Algorithm design
-- ✅ System architecture
-- ✅ Performance optimization
-- ✅ Data structure selection
-- ✅ Protocol design
-- ✅ Engineering trade-off analysis
+- ✓ Algorithm design
+- ✓ System architecture
+- ✓ Performance optimization
+- ✓ Data structure selection
+- ✓ Protocol design
+- ✓ Engineering trade-off analysis
 
 **When to use main be-creative:**
-- ✅ Creative writing
-- ✅ Marketing/content ideas
-- ✅ Narrative approaches
-- ✅ Product naming
-- ✅ Artistic creativity
+- ✓ Creative writing
+- ✓ Marketing/content ideas
+- ✓ Narrative approaches
+- ✓ Product naming
+- ✓ Artistic creativity
 
 ---
 

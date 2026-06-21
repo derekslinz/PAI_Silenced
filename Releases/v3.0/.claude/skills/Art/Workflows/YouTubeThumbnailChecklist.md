@@ -337,53 +337,53 @@ AFTER FIX → RERUN ENTIRE POST-GENERATION CHECKLIST
 **These are the most common ways thumbnails fail. Check these TWICE:**
 
 1. **Wrong Font Family**
-   - ❌ Using Helvetica instead of Inter/Montserrat
-   - ❌ Using system serif instead of Playfair Display (Audio)
-   - ✅ Confirm font name with: `magick -list font | grep [name]`
+   - ✗ Using Helvetica instead of Inter/Montserrat
+   - ✗ Using system serif instead of Playfair Display (Audio)
+   - ✓ Confirm font name with: `magick -list font | grep [name]`
 
 2. **Wrong Font Weight**
-   - ❌ Using Bold (700) when should be Extra Bold (800)
-   - ❌ Using Regular when should be Bold
-   - ✅ Check example closely for weight
+   - ✗ Using Bold (700) when should be Extra Bold (800)
+   - ✗ Using Regular when should be Bold
+   - ✓ Check example closely for weight
 
 3. **Wrong Border Color**
-   - ❌ Using #3b82f6 (too bright) instead of #4A90D9
-   - ❌ Using #00FF00 at 100% (neon) instead of subtle green
-   - ✅ Use Digital Color Meter to sample exact hex from example
+   - ✗ Using #3b82f6 (too bright) instead of #4A90D9
+   - ✗ Using #00FF00 at 100% (neon) instead of subtle green
+   - ✓ Use Digital Color Meter to sample exact hex from example
 
 4. **Wrong Canvas Size**
-   - ❌ Using 1920x1080 instead of 1280x720
-   - ✅ Confirm with: `magick identify [file]`
+   - ✗ Using 1920x1080 instead of 1280x720
+   - ✓ Confirm with: `magick identify [file]`
 
 5. **Reused Headshot**
-   - ❌ Using same headshot from previous thumbnail
-   - ❌ Not generating custom headshot for this specific thumbnail
-   - ✅ Generate NEW headshot OR select appropriate existing photo
+   - ✗ Using same headshot from previous thumbnail
+   - ✗ Not generating custom headshot for this specific thumbnail
+   - ✓ Generate NEW headshot OR select appropriate existing photo
 
 6. **Reused Background Art**
-   - ❌ Using same art from previous thumbnail
-   - ❌ Generic art that doesn't match topic
-   - ✅ Generate NEW art specific to this thumbnail's topic
+   - ✗ Using same art from previous thumbnail
+   - ✗ Generic art that doesn't match topic
+   - ✓ Generate NEW art specific to this thumbnail's topic
 
 7. **Light Background Art**
-   - ❌ Art with beige/cream/light colors
-   - ❌ Art that doesn't blend with dark navy background
-   - ✅ Explicitly specify dark palette in generation prompt
+   - ✗ Art with beige/cream/light colors
+   - ✗ Art that doesn't blend with dark navy background
+   - ✓ Explicitly specify dark palette in generation prompt
 
 8. **Wrong Text Positioning**
-   - ❌ Text too high (not enough top padding)
-   - ❌ Text too cramped (insufficient line spacing)
-   - ✅ Measure exact Y positions from example
+   - ✗ Text too high (not enough top padding)
+   - ✗ Text too cramped (insufficient line spacing)
+   - ✓ Measure exact Y positions from example
 
 9. **Wrong Logo**
-   - ❌ Using UL logo instead of TI: mark
-   - ❌ Wrong logo size or position
-   - ✅ Check example for exact logo style and placement
+   - ✗ Using UL logo instead of TI: mark
+   - ✗ Wrong logo size or position
+   - ✓ Check example for exact logo style and placement
 
 10. **Insufficient Validation**
-    - ❌ Calling thumbnail "done" without side-by-side comparison
-    - ❌ Not checking at small size
-    - ✅ Complete ENTIRE post-generation checklist
+    - ✗ Calling thumbnail "done" without side-by-side comparison
+    - ✗ Not checking at small size
+    - ✓ Complete ENTIRE post-generation checklist
 
 ---
 

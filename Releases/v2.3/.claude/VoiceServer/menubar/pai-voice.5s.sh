@@ -9,9 +9,9 @@ VOICE_DIR="$PAI_DIR/VoiceServer"
 # Check if server is running
 if curl -s -f http://localhost:8888/health > /dev/null 2>&1; then
     # Server is running - show green indicator with size
-    echo "🎙️ | size=18"
+    echo "| size=18"
     echo "---"
-    echo "Voice Server: ✅ Running"
+    echo "Voice Server: ✓ Running"
     
     # Check for ElevenLabs
     if [ -f ~/.env ] && grep -q "ELEVENLABS_API_KEY=" ~/.env 2>/dev/null; then
@@ -31,9 +31,9 @@ if curl -s -f http://localhost:8888/health > /dev/null 2>&1; then
     echo "Restart Server | bash='$VOICE_DIR/restart.sh' terminal=false refresh=true"
 else
     # Server is not running - show gray indicator with size
-    echo "🎙️⚫ | size=18"
+    echo "● | size=18"
     echo "---"
-    echo "Voice Server: ⚫ Stopped"
+    echo "Voice Server: ● Stopped"
     echo "---"
     echo "Start Server | bash='$VOICE_DIR/start.sh' terminal=false refresh=true"
 fi

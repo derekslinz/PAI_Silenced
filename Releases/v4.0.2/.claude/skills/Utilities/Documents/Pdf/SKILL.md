@@ -5,7 +5,7 @@ description: Create, merge, split, extract text/tables from PDFs, fill forms, ad
 
 # PDF Processing Guide
 
-## 🎯 Load Full PAI Context
+## Load Full PAI Context
 
 **Before starting any task with this skill, load complete PAI context:**
 
@@ -38,7 +38,7 @@ This provides access to:
 - User mentions form filling automation or batch PDF processing
 - User needs to process PDFs programmatically at scale
 
-## 🔀 PDF Workflow Routing
+## PDF Workflow Routing
 
 This skill supports multiple PDF processing workflows:
 

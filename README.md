@@ -33,8 +33,8 @@
 ![Repo Size](https://img.shields.io/github/repo-size/danielmiessler/Personal_AI_Infrastructure?style=flat&logo=database&label=Repo%20Size&color=D97706)
 
 <!-- Content -->
-[![Get Started](https://img.shields.io/badge/🚀_Get_Started-Install-22C55E?style=flat)](#-installation)
-[![Release v5.0.0](https://img.shields.io/badge/📦_Release-v5.0.0-8B5CF6?style=flat)](Releases/v5.0.0/)
+[![Get Started](https://img.shields.io/badge/_Get_Started-Install-22C55E?style=flat)](#-installation)
+[![Release v5.0.0](https://img.shields.io/badge/_Release-v5.0.0-8B5CF6?style=flat)](Releases/v5.0.0/)
 [![Algorithm v6.3.0](https://img.shields.io/badge/Algorithm-v6.3.0-D97706?style=flat)](Releases/v5.0.0/.claude/PAI/ALGORITHM/v6.3.0.md)
 [![Pulse](https://img.shields.io/badge/Pulse-included-3B82F6?style=flat)](Releases/v5.0.0/.claude/PAI/PULSE/)
 [![Contributors](https://img.shields.io/github/contributors/danielmiessler/Personal_AI_Infrastructure?style=flat&logo=githubsponsors&logoColor=white&label=Contributors&color=EC4899)](https://github.com/danielmiessler/Personal_AI_Infrastructure/graphs/contributors)
@@ -161,7 +161,7 @@ A meaningful library of custom thinking skills — first principles, council deb
 
 ---
 
-## 🚀 Installation
+## Installation
 
 > [!CAUTION]
 > **Project in Active Development** — PAI is evolving rapidly. Expect breaking changes, restructuring, and frequent updates.
@@ -240,7 +240,7 @@ If you had personal content in v4.x (notes, project state, custom rules), tell y
 
 ---
 
-## 📦 PAI Packs
+## PAI Packs
 
 Packs are standalone, AI-installable capabilities you can add to any AI coding harness without installing PAI. Each pack is a self-contained prompt your DA can read and execute — point it at the pack directory and say "install this," and it handles the rest.
 
@@ -248,7 +248,7 @@ Packs are standalone, AI-installable capabilities you can add to any AI coding h
 
 ---
 
-## ❓ FAQ
+## FAQ
 
 ### How is PAI different from just using Claude Code?
 
@@ -296,7 +296,7 @@ Recovery is straightforward:
 
 ---
 
-## 🎯 Roadmap
+## Roadmap
 
 | Feature | Description |
 |---------|-------------|
@@ -308,7 +308,7 @@ Recovery is straightforward:
 
 ---
 
-## 🌐 Community
+## Community
 
 **GitHub Discussions:** [Join the conversation](https://github.com/danielmiessler/Personal_AI_Infrastructure/discussions)
 
@@ -330,7 +330,7 @@ Recovery is straightforward:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! See our [GitHub Issues](https://github.com/danielmiessler/Personal_AI_Infrastructure/issues) for open tasks.
 
@@ -341,13 +341,13 @@ We welcome contributions! See our [GitHub Issues](https://github.com/danielmiess
 
 ---
 
-## 📜 License
+## License
 
 MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-## 🙏 Credits
+## Credits
 
 **Anthropic and the Claude Code team** — First and foremost. You are moving AI further and faster than anyone right now. Claude Code is the foundation that makes all of this possible.
 
@@ -361,11 +361,11 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-## 💜 Support This Project
+## Support This Project
 
 <div align="center">
 
-<a href="https://github.com/sponsors/danielmiessler"><img src="https://img.shields.io/badge/Sponsor-❤️-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white" alt="Sponsor"></a>
+<a href="https://github.com/sponsors/danielmiessler"><img src="https://img.shields.io/badge/Sponsor--EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white" alt="Sponsor"></a>
 
 **PAI is free and open-source forever. If you find it valuable, you can [sponsor the project](https://github.com/sponsors/danielmiessler).**
 
@@ -373,7 +373,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-## 📚 Related Reading
+## Related Reading
 
 - [The Real Internet of Things](https://danielmiessler.com/blog/the-real-internet-of-things) — The vision behind PAI
 - [AI's Predictable Path: 7 Components](https://danielmiessler.com/blog/ai-predictable-path-7-components-2024) — Visual walkthrough of where AI is heading
@@ -382,7 +382,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 ---
 
 <details>
-<summary><strong>📜 Update History</strong></summary>
+<summary><strong>Update History</strong></summary>
 
 <br/>
 
@@ -471,7 +471,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 <div align="center">
 
-**Built with ❤️ by [Daniel Miessler](https://danielmiessler.com) and the PAI community**
+**Built with by [Daniel Miessler](https://danielmiessler.com) and the PAI community**
 
 *Augment yourself.*
 

@@ -149,7 +149,7 @@ Layer 1 (Events) — lowest leverage, fastest
 ### Step 6: Output
 
 ```
-🧊 ICEBERG ANALYSIS: [topic]
+ICEBERG ANALYSIS: [topic]
 
 EVENTS (Layer 1):
 - [Specific event 1]

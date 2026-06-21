@@ -114,7 +114,7 @@
       <!-- Scrollable sections -->
       <div v-if="allSections.length > 0" class="flex-1 overflow-y-auto">
 
-        <!-- 🔥 ACTIVE WORK -->
+        <!-- ACTIVE WORK -->
         <div v-if="activeSection.length > 0">
           <div class="px-4 py-2.5 bg-blue-500/10 border-b border-blue-500/20 flex items-center gap-2 sticky top-0 z-10">
             <Loader2 class="w-4 h-4 text-blue-400 animate-spin" />
@@ -130,7 +130,7 @@
           />
         </div>
 
-        <!-- 📋 QUEUED — NEEDS TRIAGE (alert-worthy) -->
+        <!-- QUEUED — NEEDS TRIAGE (alert-worthy) -->
         <div v-if="queuedSection.length > 0">
           <div class="px-4 py-2.5 bg-red-500/10 border-b border-red-500/20 flex items-center gap-2 sticky top-0 z-10">
             <AlertCircle class="w-4 h-4 text-red-300" />
@@ -147,7 +147,7 @@
           />
         </div>
 
-        <!-- 🚫 BLOCKED / NEEDS HUMAN -->
+        <!-- BLOCKED / NEEDS HUMAN -->
         <div v-if="blockedSection.length > 0">
           <div class="px-4 py-2.5 bg-amber-500/10 border-b border-amber-500/20 flex items-center gap-2 sticky top-0 z-10">
             <AlertTriangle class="w-4 h-4 text-amber-400" />
@@ -163,7 +163,7 @@
           />
         </div>
 
-        <!-- ✅ TRIAGED & PRIORITIZED -->
+        <!-- ✓ TRIAGED & PRIORITIZED -->
         <div v-if="triagedSection.length > 0">
           <div class="px-4 py-2.5 bg-green-500/10 border-b border-green-500/20 flex items-center gap-2 sticky top-0 z-10">
             <CheckCircle2 class="w-4 h-4 text-green-400" />
@@ -180,7 +180,7 @@
           />
         </div>
 
-        <!-- 📁 PROJECTS -->
+        <!-- PROJECTS -->
         <div v-if="projectsSection.length > 0">
           <div class="px-4 py-2.5 bg-indigo-500/10 border-b border-indigo-500/20 flex items-center gap-2 sticky top-0 z-10">
             <FolderKanban class="w-4 h-4 text-indigo-400" />
@@ -197,7 +197,7 @@
           />
         </div>
 
-        <!-- ⏰ REMINDERS -->
+        <!-- REMINDERS -->
         <div v-if="remindersSection.length > 0">
           <div class="px-4 py-2.5 bg-purple-500/10 border-b border-purple-500/20 flex items-center gap-2 sticky top-0 z-10">
             <Clock class="w-4 h-4 text-purple-400" />
@@ -213,7 +213,7 @@
           />
         </div>
 
-        <!-- ✅ COMPLETED -->
+        <!-- ✓ COMPLETED -->
         <div v-if="showClosed && completedSection.length > 0">
           <div class="px-4 py-2.5 bg-[var(--theme-bg-secondary)] border-b border-[var(--theme-bg-tertiary)] flex items-center gap-2 sticky top-0 z-10">
             <CheckCircle2 class="w-4 h-4 text-[var(--theme-text-secondary)]" />
@@ -298,7 +298,7 @@ function sortByPriority(a: ULWorkIssue, b: ULWorkIssue): number {
   return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
 }
 
-// 🔥 Active Work (in-progress, ai-working)
+// Active Work (in-progress, ai-working)
 const activeSection = computed(() =>
   props.issues
     .filter(i => {
@@ -308,14 +308,14 @@ const activeSection = computed(() =>
     .sort(sortByPriority)
 );
 
-// 📋 Queued — Needs Triage (alert-worthy!)
+// Queued — Needs Triage (alert-worthy!)
 const queuedSection = computed(() =>
   props.issues
     .filter(i => getWorkState(i) === 'needs-triage')
     .sort(sortByPriority)
 );
 
-// 🚫 Blocked / Needs Human
+// Blocked / Needs Human
 const blockedSection = computed(() =>
   props.issues
     .filter(i => {
@@ -325,7 +325,7 @@ const blockedSection = computed(() =>
     .sort(sortByPriority)
 );
 
-// ✅ Triaged & Prioritized (includes 'ready' and 'triaged')
+// ✓ Triaged & Prioritized (includes 'ready' and 'triaged')
 const triagedSection = computed(() =>
   props.issues
     .filter(i => {
@@ -335,21 +335,21 @@ const triagedSection = computed(() =>
     .sort(sortByPriority)
 );
 
-// 📁 Projects
+// Projects
 const projectsSection = computed(() =>
   props.issues
     .filter(i => getWorkState(i) === 'project')
     .sort(sortByPriority)
 );
 
-// ⏰ Reminders
+// Reminders
 const remindersSection = computed(() =>
   props.issues
     .filter(i => getWorkState(i) === 'reminder')
     .sort(sortByPriority)
 );
 
-// ✅ Recently Completed
+// ✓ Recently Completed
 const completedSection = computed(() =>
   props.issues
     .filter(i => getWorkState(i) === 'completed')

@@ -8,8 +8,8 @@ The PAI skill is the heart of PAI - it defines The Algorithm and all core system
 
 ```
 PAI/
-  SKILL.md                 # ⚠️ GENERATED - do not edit directly
-  Components/              # 📝 SOURCE OF TRUTH - edit these
+  SKILL.md                 # GENERATED - do not edit directly
+  Components/              # SOURCE OF TRUTH - edit these
     00-frontmatter.md
     10-pai-intro.md
     20-algorithm-core.md

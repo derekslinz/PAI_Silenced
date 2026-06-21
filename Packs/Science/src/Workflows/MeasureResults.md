@@ -260,24 +260,24 @@ Observations, feedback, anomalies, surprises.
 ## Common Pitfalls
 
 ### Pitfall 1: Confirmation Peeking
-❌ Checking results early and stopping when they look good
-✅ Completing planned data collection before analysis
+✗ Checking results early and stopping when they look good
+✓ Completing planned data collection before analysis
 
 ### Pitfall 2: Selective Reporting
-❌ Only recording measurements that support the hypothesis
-✅ Recording all measurements, especially unexpected ones
+✗ Only recording measurements that support the hypothesis
+✓ Recording all measurements, especially unexpected ones
 
 ### Pitfall 3: Lost Context
-❌ Raw numbers without notes on conditions
-✅ Every measurement includes relevant context
+✗ Raw numbers without notes on conditions
+✓ Every measurement includes relevant context
 
 ### Pitfall 4: Destroyed Raw Data
-❌ Only keeping summarized/derived metrics
-✅ Preserving original data files unmodified
+✗ Only keeping summarized/derived metrics
+✓ Preserving original data files unmodified
 
 ### Pitfall 5: Measurement Interference
-❌ The act of measuring changes the outcome
-✅ Using non-intrusive measurement methods
+✗ The act of measuring changes the outcome
+✓ Using non-intrusive measurement methods
 
 ---
 

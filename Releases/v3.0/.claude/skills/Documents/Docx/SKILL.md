@@ -5,7 +5,7 @@ description: Word document processing. USE WHEN docx, Word document. SkillSearch
 
 # DOCX creation, editing, and analysis
 
-## 🎯 Load Full PAI Context
+## Load Full PAI Context
 
 **Before starting any task with this skill, load complete PAI context:**
 

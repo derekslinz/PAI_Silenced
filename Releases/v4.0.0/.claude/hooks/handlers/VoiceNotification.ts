@@ -3,7 +3,7 @@
  *
  * PURPOSE:
  * Sends completion messages to the voice server for TTS playback.
- * Extracts the 🗣️ voice line from responses and sends to ElevenLabs via voice server.
+ * Extracts the voice line from responses and sends to ElevenLabs via voice server.
  *
  * Pure handler: receives pre-parsed transcript data, sends to voice server.
  * No I/O for transcript reading - that's done by VoiceCompletion.hook.ts.

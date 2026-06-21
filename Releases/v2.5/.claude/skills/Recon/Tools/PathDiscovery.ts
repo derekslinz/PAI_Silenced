@@ -391,10 +391,10 @@ const result = await runPathDiscovery(url, options);
 if (options.json) {
   console.log(JSON.stringify(result, null, 2));
 } else {
-  console.log(`\n🔍 Path Discovery: ${result.target}`);
-  console.log(`📚 Wordlist: ${result.wordlist}`);
-  console.log(`⏱️  Timestamp: ${result.timestamp}`);
-  console.log(`\n📁 Found ${result.totalFound} paths:\n`);
+  console.log(`\nPath Discovery: ${result.target}`);
+  console.log(`Wordlist: ${result.wordlist}`);
+  console.log(` Timestamp: ${result.timestamp}`);
+  console.log(`\nFound ${result.totalFound} paths:\n`);
 
   if (result.paths.length === 0) {
     console.log("  No paths discovered");
@@ -420,7 +420,7 @@ if (options.json) {
   }
 
   if (result.errors.length > 0) {
-    console.log("\n⚠️  Errors:");
+    console.log("\n Errors:");
     for (const err of result.errors) {
       console.log(`  ${err}`);
     }

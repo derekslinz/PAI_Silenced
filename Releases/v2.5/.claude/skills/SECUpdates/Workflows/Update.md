@@ -34,9 +34,9 @@ For each extracted item, categorize into:
 
 | Category | Criteria |
 |----------|----------|
-| **🔴 News** | Breaches, incidents, active attacks, exploitations |
-| **🔬 Research** | CVEs, vulnerabilities, techniques, tools, papers |
-| **💡 Ideas** | Opinions, trends, strategy, predictions, career |
+| **● News** | Breaches, incidents, active attacks, exploitations |
+| **Research** | CVEs, vulnerabilities, techniques, tools, papers |
+| **Ideas** | Opinions, trends, strategy, predictions, career |
 
 ### 4. Rank by Importance
 
@@ -81,25 +81,25 @@ Write new state to `State/last-check.json`:
 
 ---
 
-## 🔴 Security News (Breaches & Incidents)
+## ● Security News (Breaches & Incidents)
 
 [Ranked items, 1-2 sentences each, source attribution]
 
 ---
 
-## 🔬 Security Research
+## Security Research
 
 [Ranked items, 1-2 sentences each, source attribution]
 
 ---
 
-## 💡 Security Ideas
+## Security Ideas
 
 [Ranked items, 1-2 sentences each, source attribution]
 
 ---
 
-## 📊 Summary
+## Summary
 | Category | Count | Top Item |
 |----------|-------|----------|
 | News | X | [headline] |

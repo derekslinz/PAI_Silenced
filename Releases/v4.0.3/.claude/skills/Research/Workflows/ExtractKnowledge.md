@@ -84,40 +84,40 @@ If `--focus` is not specified, auto-detect from content:
 Generate structured knowledge extraction with:
 
 ```
-🎯 KNOWLEDGE EXTRACTION RESULTS
+KNOWLEDGE EXTRACTION RESULTS
 ══════════════════════════════════════════════════
-📍 Source: <source>
-🔍 Type: <detected_type>
-🎯 Domain: <detected_domain>
-⭐ Quality Rating: <1-10>/10
-🎯 Confidence: <1-10>/10
+Source: <source>
+Type: <detected_type>
+Domain: <detected_domain>
+★ Quality Rating: <1-10>/10
+Confidence: <1-10>/10
 
-📋 CONTENT SUMMARY:
+CONTENT SUMMARY:
 <2-3 sentence summary>
 
-💡 KEY INSIGHTS:
+KEY INSIGHTS:
 • <insight 1>
 • <insight 2>
 • <insight 3>
 
-📡 SIGNAL POINTS:
+SIGNAL POINTS:
 • <signal point 1>
 • <signal point 2>
 • <signal point 3>
 
-⚡ ACTIONABLE RECOMMENDATIONS:
-✅ <recommendation 1>
-✅ <recommendation 2>
-✅ <recommendation 3>
+ACTIONABLE RECOMMENDATIONS:
+✓ <recommendation 1>
+✓ <recommendation 2>
+✓ <recommendation 3>
 
-🔗 RELATED CONCEPTS:
+RELATED CONCEPTS:
 <comma-separated list of key terms>
 
 [Optional sections based on domain:]
-🧠 EXTRACTED WISDOM: (for wisdom content)
+EXTRACTED WISDOM: (for wisdom content)
 "<key quotes and insights>"
 
-🛠️ TECHNICAL DETAILS: (for security/research content)
+TECHNICAL DETAILS: (for security/research content)
 • <technical detail 1>
 • <technical detail 2>
 

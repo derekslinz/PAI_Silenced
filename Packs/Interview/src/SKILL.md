@@ -5,7 +5,7 @@ description: "Runs a phased conversational interview across all PAI context file
 
 # Interview — phased conversational context review + fill
 
-## 🚨 MANDATORY: Voice Notification
+## MANDATORY: Voice Notification
 
 Before running the workflow, send:
 

@@ -110,9 +110,9 @@ const toolIcons: Record<string, Component> = {
 
 // Health indicator icons
 const healthIcons = {
-  '✅': CheckCircle2,
-  '⚠️': AlertTriangle,
-  '🐌': Clock
+  '✓': CheckCircle2,
+  '': AlertTriangle,
+  '': Clock
 };
 
 const maxToolCount = computed(() =>

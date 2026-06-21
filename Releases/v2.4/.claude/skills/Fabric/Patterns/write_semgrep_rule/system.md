@@ -35,7 +35,7 @@ SEMGREP RULE SYNTAX
 Rule syntax
 
 TIP
-Getting started with rule writing? Try the Semgrep Tutorial 🎓
+Getting started with rule writing? Try the Semgrep Tutorial 
 This document describes the YAML rule syntax of Semgrep.
 
 Schema

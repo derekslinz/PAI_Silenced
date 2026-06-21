@@ -26,7 +26,7 @@ if launchctl list | grep -q "$SERVICE_NAME" 2>/dev/null; then
     if [ "$PID" != "-" ]; then
         echo -e "  ${GREEN}✓ Service is loaded (PID: $PID)${NC}"
     else
-        echo -e "  ${YELLOW}⚠ Service is loaded but not running${NC}"
+        echo -e "  ${YELLOW}Service is loaded but not running${NC}"
     fi
 else
     echo -e "  ${RED}✗ Service is not loaded${NC}"
@@ -53,7 +53,7 @@ if lsof -i :8888 > /dev/null 2>&1; then
     echo -e "  ${GREEN}✓ Port 8888 is in use${NC}"
     echo "  $PROCESS" | awk '{print "  Process: " $1 " (PID: " $2 ")"}'
 else
-    echo -e "  ${YELLOW}⚠ Port 8888 is not in use${NC}"
+    echo -e "  ${YELLOW}Port 8888 is not in use${NC}"
 fi
 
 # Check ElevenLabs configuration
@@ -68,10 +68,10 @@ if [ -f "$ENV_FILE" ] && grep -q "ELEVENLABS_API_KEY=" "$ENV_FILE"; then
             echo "  Voice ID: $VOICE_ID"
         fi
     else
-        echo -e "  ${YELLOW}⚠ Using macOS 'say' (no API key)${NC}"
+        echo -e "  ${YELLOW}Using macOS 'say' (no API key)${NC}"
     fi
 else
-    echo -e "  ${YELLOW}⚠ Using macOS 'say' (no configuration)${NC}"
+    echo -e "  ${YELLOW}Using macOS 'say' (no configuration)${NC}"
 fi
 
 # Check logs
@@ -84,7 +84,7 @@ if [ -f "$LOG_PATH" ]; then
         echo "    $line"
     done
 else
-    echo -e "  ${YELLOW}⚠ No log file found${NC}"
+    echo -e "  ${YELLOW}No log file found${NC}"
 fi
 
 # Show commands

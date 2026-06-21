@@ -113,7 +113,7 @@ Task({
 Each agent's prompt includes:
 - Their assigned voice_id from ComposeAgent
 - Instructions to call `curl -X POST http://localhost:8888/notify` with their voice_id
-- The requirement to voice their `🎯 COMPLETED:` message
+- The requirement to voice their `COMPLETED:` message
 
 **Fallback:** If an agent fails to voice itself, you can manually voice their result:
 ```bash
@@ -210,7 +210,7 @@ bun run ComposeAgent.ts --traits "research,analytical,synthesizing" --task "Anal
 
 ## Common Mistakes to Avoid
 
-**❌ WRONG: Using same traits for all agents**
+**✗ WRONG: Using same traits for all agents**
 ```bash
 # All agents get same voice!
 bun run ComposeAgent.ts --traits "research,analytical" # Agent 1
@@ -218,7 +218,7 @@ bun run ComposeAgent.ts --traits "research,analytical" # Agent 2 (same voice!)
 bun run ComposeAgent.ts --traits "research,analytical" # Agent 3 (same voice!)
 ```
 
-**✅ RIGHT: Varying traits for unique voices**
+**✓ RIGHT: Varying traits for unique voices**
 ```bash
 # Each agent gets different voice
 bun run ComposeAgent.ts --traits "research,enthusiastic,exploratory"  # Jeremy
@@ -226,7 +226,7 @@ bun run ComposeAgent.ts --traits "research,skeptical,systematic"      # George
 bun run ComposeAgent.ts --traits "research,creative,synthesizing"     # Freya
 ```
 
-**❌ WRONG: Launching agents sequentially**
+**✗ WRONG: Launching agents sequentially**
 ```typescript
 // Slow - waits for each to finish
 await Task({ ... }); // Agent 1
@@ -234,7 +234,7 @@ await Task({ ... }); // Agent 2 (waits for 1)
 await Task({ ... }); // Agent 3 (waits for 2)
 ```
 
-**✅ RIGHT: Launching agents in parallel**
+**✓ RIGHT: Launching agents in parallel**
 ```typescript
 // Fast - all run simultaneously (single message, multiple calls)
 Task({ ... })  // Agent 1

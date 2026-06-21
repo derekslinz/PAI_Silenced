@@ -488,11 +488,11 @@ Spinoza's philosophical language might need more context than Feynman's accessib
 ### Ongoing Research
 
 **Track research progress:**
-- Hitchens: ✅ Complete (15 quotes added)
-- Feynman: ✅ Complete (12 quotes added)
-- Harris: 🔄 In progress
-- Deutsch: ⏳ Planned
-- Spinoza: ⏳ Planned
+- Hitchens: ✓ Complete (15 quotes added)
+- Feynman: ✓ Complete (12 quotes added)
+- Harris: In progress
+- Deutsch: Planned
+- Spinoza: Planned
 
 ### Iterative Enhancement
 

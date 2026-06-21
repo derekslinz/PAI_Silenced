@@ -33,7 +33,7 @@ interface Sources {
 }
 
 async function fetchUpstreamReadme(): Promise<string> {
-  console.log('📥 Fetching upstream README...');
+  console.log('Fetching upstream README...');
   const response = await fetch(UPSTREAM_URL);
   if (!response.ok) {
     throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
@@ -176,12 +176,12 @@ async function main() {
 
   try {
     const markdown = await fetchUpstreamReadme();
-    console.log(`✅ Fetched ${markdown.length} bytes\n`);
+    console.log(`✓ Fetched ${markdown.length} bytes\n`);
 
     const parsed = parseMarkdownReports(markdown);
     const current = loadCurrentSources();
 
-    console.log('📊 Parsing results:');
+    console.log('Parsing results:');
     let parsedTotal = 0;
     for (const [key, reports] of parsed) {
       console.log(`  ${key}: ${reports.length} reports`);
@@ -190,18 +190,18 @@ async function main() {
     console.log(`  Total parsed: ${parsedTotal}\n`);
 
     const comparison = compareReports(current, parsed);
-    console.log('📈 Changes detected:');
+    console.log('Changes detected:');
     console.log(`  New reports: ${comparison.added}`);
     console.log(`  Removed reports: ${comparison.removed}`);
     console.log(`  Updated URLs: ${comparison.updated}\n`);
 
     if (dryRun) {
-      console.log('🔍 Dry run - no changes saved');
+      console.log('Dry run - no changes saved');
       return;
     }
 
     if (showDiff) {
-      console.log('📝 Detailed diff:');
+      console.log('Detailed diff:');
       // Show what would change
       for (const [key, reports] of parsed) {
         const [section, category] = key.split('_', 2);
@@ -222,15 +222,15 @@ async function main() {
     current.metadata.totalReports = countReports(current);
 
     writeFileSync(SOURCES_PATH, JSON.stringify(current, null, 2));
-    console.log('✅ Updated sources.json');
+    console.log('✓ Updated sources.json');
     console.log(`   Total reports: ${current.metadata.totalReports}`);
     console.log(`   Last updated: ${current.metadata.lastUpdated}`);
 
-    console.log('\n💡 For full upstream sync, manually review changes at:');
+    console.log('\nFor full upstream sync, manually review changes at:');
     console.log(`   ${UPSTREAM_URL.replace('/README.md', '')}`);
 
   } catch (error) {
-    console.error('❌ Error:', error);
+    console.error('✗ Error:', error);
     process.exit(1);
   }
 }

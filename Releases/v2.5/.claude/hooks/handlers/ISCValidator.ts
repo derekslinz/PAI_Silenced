@@ -182,7 +182,7 @@ export async function handleISCValidation(
   // Check if OBSERVE phase was attempted (algorithm was run)
   const responseText = parsed.plainCompletion || '';
   const algorithmAttempted = responseText.includes('OBSERVE') ||
-                              responseText.includes('📦 CAPABILITIES') ||
+                              responseText.includes('CAPABILITIES') ||
                               responseText.includes('ISC TRACKER');
 
   // BLOCKING LOGIC: If algorithm was attempted but ISC is empty, block

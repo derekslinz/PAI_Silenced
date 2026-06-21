@@ -24,52 +24,52 @@ You are executing the analyze-ai-trends command to perform deep trend analysis a
 3. **Present comprehensive trend report** in this format:
 
 ```
-📊 AI INDUSTRY TREND ANALYSIS
+AI INDUSTRY TREND ANALYSIS
 
-📅 Analysis Period: [First Date] to [Latest Date]
-📁 Sources Analyzed: [Number] news digests
+Analysis Period: [First Date] to [Latest Date]
+Sources Analyzed: [Number] news digests
 
-🔥 EVOLVING TRENDS
+EVOLVING TRENDS
 [Detailed analysis of how trends are changing over time]
 
-🔄 RECURRING THEMES
+RECURRING THEMES
 - [Theme 1]: [Frequency and significance]
 - [Theme 2]: [Frequency and significance]
 
-📈 TRAJECTORY ANALYSIS
+TRAJECTORY ANALYSIS
 [Analysis of where the industry is heading]
 
-💫 PARADIGM SHIFTS
+PARADIGM SHIFTS
 - [Shift 1]: [What changed and when]
 - [Shift 2]: [What changed and when]
 
-⚔️ COMPETITIVE LANDSCAPE
+COMPETITIVE LANDSCAPE
 [Analysis of competition between models, tools, companies]
 
-⚡ INNOVATION VELOCITY
+INNOVATION VELOCITY
 [Analysis of pace of change]
 
-🏆 EMERGING WINNERS
+EMERGING WINNERS
 - [Winner 1]: [Why they're succeeding]
 - [Winner 2]: [Why they're succeeding]
 
-📉 DECLINING AREAS
+DECLINING AREAS
 - [Area 1]: [Why it's declining]
 
-🎯 SURPRISING PATTERNS
+SURPRISING PATTERNS
 - [Pattern 1]: [Why it's unexpected]
 
-🔮 FUTURE PREDICTIONS
+FUTURE PREDICTIONS
 - [Prediction 1]: [Based on which trends]
 - [Prediction 2]: [Based on which trends]
 - [Prediction 3]: [Based on which trends]
 
-📌 KEY INSIGHTS
+KEY INSIGHTS
 1. [Most important insight]
 2. [Second most important insight]
 3. [Third most important insight]
 
-💡 ACTIONABLE RECOMMENDATIONS
+ACTIONABLE RECOMMENDATIONS
 - [Action 1]: [Based on trend analysis]
 - [Action 2]: [Based on trend analysis]
 ```

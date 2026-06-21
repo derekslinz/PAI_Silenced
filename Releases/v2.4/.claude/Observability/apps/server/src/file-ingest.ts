@@ -41,7 +41,7 @@ const PROJECTS_DIR = join(homedir(), '.claude', 'projects', `-Users-${process.en
  */
 function getRecentSessionFiles(limit: number = 50): string[] {
   if (!existsSync(PROJECTS_DIR)) {
-    console.log('⚠️  Projects directory not found:', PROJECTS_DIR);
+    console.log(' Projects directory not found:', PROJECTS_DIR);
     return [];
   }
 
@@ -237,7 +237,7 @@ function storeEvents(newEvents: HookEvent[]): void {
     events.splice(0, events.length - MAX_EVENTS);
   }
 
-  console.log(`✅ Received ${newEvents.length} event(s) (${events.length} in memory)`);
+  console.log(`✓ Received ${newEvents.length} event(s) (${events.length} in memory)`);
 
   // Notify subscribers (WebSocket clients)
   if (onEventsReceived) {
@@ -252,7 +252,7 @@ function loadAgentSessions(): void {
   const sessionsFile = join(homedir(), '.claude', 'MEMORY', 'STATE', 'agent-sessions.json');
 
   if (!existsSync(sessionsFile)) {
-    console.log('⚠️  agent-sessions.json not found, agent names will be "unknown"');
+    console.log(' agent-sessions.json not found, agent names will be "unknown"');
     return;
   }
 
@@ -265,9 +265,9 @@ function loadAgentSessions(): void {
       agentSessions.set(sessionId, agentName as string);
     });
 
-    console.log(`✅ Loaded ${agentSessions.size} agent sessions`);
+    console.log(`✓ Loaded ${agentSessions.size} agent sessions`);
   } catch (error) {
-    console.error('❌ Error loading agent-sessions.json:', error);
+    console.error('✗ Error loading agent-sessions.json:', error);
   }
 }
 
@@ -278,21 +278,21 @@ function watchAgentSessions(): void {
   const sessionsFile = join(homedir(), '.claude', 'MEMORY', 'STATE', 'agent-sessions.json');
 
   if (!existsSync(sessionsFile)) {
-    console.log('⚠️  agent-sessions.json not found, skipping watch');
+    console.log(' agent-sessions.json not found, skipping watch');
     return;
   }
 
-  console.log('👀 Watching agent-sessions.json for changes');
+  console.log('Watching agent-sessions.json for changes');
 
   const watcher = watch(sessionsFile, (eventType) => {
     if (eventType === 'change') {
-      console.log('🔄 agent-sessions.json changed, reloading...');
+      console.log('agent-sessions.json changed, reloading...');
       loadAgentSessions();
     }
   });
 
   watcher.on('error', (error) => {
-    console.error('❌ Error watching agent-sessions.json:', error);
+    console.error('✗ Error watching agent-sessions.json:', error);
   });
 }
 
@@ -383,7 +383,7 @@ function watchFile(filePath: string): void {
     return;
   }
 
-  console.log(`👀 Watching: ${filePath.split('/').pop()}`);
+  console.log(`Watching: ${filePath.split('/').pop()}`);
   watchedFiles.add(filePath);
 
   // Set file position to END - only read NEW events from now on
@@ -411,11 +411,11 @@ function watchFile(filePath: string): void {
  */
 function watchProjectsDirectory(): void {
   if (!existsSync(PROJECTS_DIR)) {
-    console.log('⚠️  Projects directory not found, skipping watch');
+    console.log(' Projects directory not found, skipping watch');
     return;
   }
 
-  console.log('👀 Watching projects directory for new sessions');
+  console.log('Watching projects directory for new sessions');
 
   const watcher = watch(PROJECTS_DIR, (eventType, filename) => {
     if (filename && filename.endsWith('.jsonl')) {
@@ -428,7 +428,7 @@ function watchProjectsDirectory(): void {
   });
 
   watcher.on('error', (error) => {
-    console.error('❌ Error watching projects directory:', error);
+    console.error('✗ Error watching projects directory:', error);
   });
 }
 
@@ -437,8 +437,8 @@ function watchProjectsDirectory(): void {
  * @param callback Optional callback to be notified when new events arrive
  */
 export function startFileIngestion(callback?: (events: HookEvent[]) => void): void {
-  console.log('🚀 Starting projects-based event streaming (in-memory only)');
-  console.log(`📂 Reading from ${PROJECTS_DIR}/`);
+  console.log('Starting projects-based event streaming (in-memory only)');
+  console.log(`Reading from ${PROJECTS_DIR}/`);
 
   // Set the callback for event notifications
   if (callback) {
@@ -451,7 +451,7 @@ export function startFileIngestion(callback?: (events: HookEvent[]) => void): vo
 
   // Get recent session files and watch them
   const recentFiles = getRecentSessionFiles(20);
-  console.log(`📁 Found ${recentFiles.length} recent session files`);
+  console.log(`Found ${recentFiles.length} recent session files`);
 
   for (const filePath of recentFiles) {
     watchFile(filePath);
@@ -460,7 +460,7 @@ export function startFileIngestion(callback?: (events: HookEvent[]) => void): vo
   // Watch for new session files
   watchProjectsDirectory();
 
-  console.log('✅ Projects streaming started');
+  console.log('✓ Projects streaming started');
 }
 
 /**
@@ -498,7 +498,7 @@ if (import.meta.main) {
   console.log('Press Ctrl+C to stop');
 
   process.on('SIGINT', () => {
-    console.log('\n👋 Shutting down...');
+    console.log('\nShutting down...');
     process.exit(0);
   });
 }

@@ -948,7 +948,7 @@ For example, if you used clusterbomb or pitchfork as attack type and defined onl
 Nuclei engine supports multiple attack types, including batteringram as default type which generally used to fuzz single parameter, clusterbomb and pitchfork for fuzzing multiple parameters which works same as classical burp intruder.
 
 Type	batteringram	pitchfork	clusterbomb
-Support	✔	✔	✔
+Support	✓	✓	✓
 ​
 batteringram
 The battering ram attack type places the same payload value in all positions. It uses only one payload set. It loops through the payload set and replaces all positions with the payload value.

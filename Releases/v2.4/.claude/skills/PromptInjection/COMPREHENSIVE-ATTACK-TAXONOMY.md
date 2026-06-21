@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Executive Summary
+## Executive Summary
 
 This taxonomy synthesizes extensive research into prompt injection vulnerabilities for use in authorized penetration testing and security assessments. All techniques documented here are for **defensive security research and authorized testing only**.
 
@@ -15,7 +15,7 @@ This taxonomy synthesizes extensive research into prompt injection vulnerabiliti
 
 ---
 
-## 📊 Master Attack Taxonomy
+## Master Attack Taxonomy
 
 ### Level 1: Attack Types (Strategic)
 
@@ -653,7 +653,7 @@ This is not a bug - it's an architectural limitation requiring fundamental redes
 
 ---
 
-## 🛡️ Comprehensive Defense Framework
+## Comprehensive Defense Framework
 
 ### Multi-Layered Defense Strategy
 
@@ -743,7 +743,7 @@ This is not a bug - it's an architectural limitation requiring fundamental redes
 
 ---
 
-## 🧪 Automated Testing Tools & Frameworks
+## Automated Testing Tools & Frameworks
 
 ### Major Frameworks
 
@@ -813,7 +813,7 @@ This is not a bug - it's an architectural limitation requiring fundamental redes
 
 ---
 
-## 📈 Effectiveness & Success Rates Summary
+## Effectiveness & Success Rates Summary
 
 ### Attack Success Rates (Documented)
 
@@ -838,7 +838,7 @@ This is not a bug - it's an architectural limitation requiring fundamental redes
 
 ---
 
-## 🚨 Critical Gaps & Future Threats
+## Critical Gaps & Future Threats
 
 ### Current Limitations
 
@@ -889,7 +889,7 @@ This is not a bug - it's an architectural limitation requiring fundamental redes
 
 ---
 
-## 📚 Research Sources
+## Research Sources
 
 ### Primary Research (2025-11-07)
 
@@ -919,7 +919,7 @@ This is not a bug - it's an architectural limitation requiring fundamental redes
 
 ---
 
-## 🎯 Conclusion
+## Conclusion
 
 This comprehensive taxonomy synthesizes cutting-edge research on prompt injection vulnerabilities into a structured framework for authorized security testing. All techniques documented are for **defensive security research and authorized penetration testing only**.
 

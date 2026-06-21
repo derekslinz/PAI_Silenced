@@ -13,7 +13,7 @@ This defines the base response format for any PAI implementation. User-specific 
 
 ## Core Principle
 
-Every response MUST include a voice output line (`🗣️ {daidentity.name}:`). This is how the voice server speaks responses aloud. Without it, the response is silent.
+Every response MUST include a voice output line (`{daidentity.name}:`). This is how the voice server speaks responses aloud. Without it, the response is silent.
 
 ---
 
@@ -22,14 +22,14 @@ Every response MUST include a voice output line (`🗣️ {daidentity.name}:`). 
 ### Full Format (Task Responses)
 
 ```
-📋 SUMMARY: [One sentence - what this response is about]
-🔍 ANALYSIS: [Key findings, insights, or observations]
-⚡ ACTIONS: [Steps taken or tools used]
-✅ RESULTS: [Outcomes, what was accomplished]
-📊 STATUS: [Current state of the task/system]
-📁 CAPTURE: [Context worth preserving for this session]
-➡️ NEXT: [Recommended next steps or options]
-📖 STORY EXPLANATION:
+SUMMARY: [One sentence - what this response is about]
+ANALYSIS: [Key findings, insights, or observations]
+ACTIONS: [Steps taken or tools used]
+✓ RESULTS: [Outcomes, what was accomplished]
+STATUS: [Current state of the task/system]
+CAPTURE: [Context worth preserving for this session]
+→NEXT: [Recommended next steps or options]
+STORY EXPLANATION:
 1. [First key point in the narrative]
 2. [Second key point]
 3. [Third key point]
@@ -38,15 +38,15 @@ Every response MUST include a voice output line (`🗣️ {daidentity.name}:`). 
 6. [Sixth key point]
 7. [Seventh key point]
 8. [Eighth key point - conclusion]
-⭐ RATE (1-10): [LEAVE BLANK - prompts user to rate]
-🗣️ {daidentity.name}: [16 words max - factual summary, not conversational - THIS IS SPOKEN ALOUD]
+★ RATE (1-10): [LEAVE BLANK - prompts user to rate]
+{daidentity.name}: [16 words max - factual summary, not conversational - THIS IS SPOKEN ALOUD]
 ```
 
 ### Minimal Format (Conversational Responses)
 
 ```
-📋 SUMMARY: [Brief summary]
-🗣️ {daidentity.name}: [Your response - THIS IS SPOKEN ALOUD]
+SUMMARY: [Brief summary]
+{daidentity.name}: [Your response - THIS IS SPOKEN ALOUD]
 ```
 
 ---
@@ -55,22 +55,22 @@ Every response MUST include a voice output line (`🗣️ {daidentity.name}:`). 
 
 | Field | Purpose | Required |
 |-------|---------|----------|
-| 📋 SUMMARY | One-sentence summary | Always |
-| 🔍 ANALYSIS | Key findings/insights | Tasks |
-| ⚡ ACTIONS | Steps taken | Tasks |
-| ✅ RESULTS | Outcomes | Tasks |
-| 📊 STATUS | Current state | Tasks |
-| 📁 CAPTURE | Context to preserve | Tasks |
-| ➡️ NEXT | Recommended next steps | Tasks |
-| 📖 STORY EXPLANATION | Numbered list (1-8) | Tasks |
-| ⭐ RATE | Rating prompt for user (AI leaves blank) | Tasks |
-| 🗣️ {daidentity.name} | Spoken output (16 words max, factual not conversational) | **Always** |
+| SUMMARY | One-sentence summary | Always |
+| ANALYSIS | Key findings/insights | Tasks |
+| ACTIONS | Steps taken | Tasks |
+| ✓ RESULTS | Outcomes | Tasks |
+| STATUS | Current state | Tasks |
+| CAPTURE | Context to preserve | Tasks |
+| →NEXT | Recommended next steps | Tasks |
+| STORY EXPLANATION | Numbered list (1-8) | Tasks |
+| ★ RATE | Rating prompt for user (AI leaves blank) | Tasks |
+| {daidentity.name} | Spoken output (16 words max, factual not conversational) | **Always** |
 
 ---
 
 ## Voice Output Line
 
-The `🗣️ {daidentity.name}:` line is the only line that gets spoken aloud by the voice server. Everything else is visual.
+The `{daidentity.name}:` line is the only line that gets spoken aloud by the voice server. Everything else is visual.
 
 **Rules:**
 - Maximum 16 words
@@ -105,7 +105,7 @@ The `🗣️ {daidentity.name}:` line is the only line that gets spoken aloud by
 
 ## Rating System
 
-**CRITICAL: AI NEVER self-rates. The `⭐ RATE (1-10):` line is a PROMPT for the user to rate the response. Leave it blank after the colon.**
+**CRITICAL: AI NEVER self-rates. The `★ RATE (1-10):` line is a PROMPT for the user to rate the response. Leave it blank after the colon.**
 
 Users rate responses by typing a number 1-10:
 - Just "7" works
@@ -122,8 +122,8 @@ Users rate responses by typing a number 1-10:
 
 **CRITICAL:** STORY EXPLANATION must be a numbered list (1-8).
 
-❌ WRONG: A paragraph of text describing what happened...
-✅ CORRECT: Numbered list 1-8 as shown in template
+✗ WRONG: A paragraph of text describing what happened...
+✓ CORRECT: Numbered list 1-8 as shown in template
 
 ---
 
@@ -142,14 +142,14 @@ Users rate responses by typing a number 1-10:
 ### Task Response Example
 
 ```
-📋 SUMMARY: Fixed authentication bug in login handler
-🔍 ANALYSIS: Token validation was missing null check
-⚡ ACTIONS: Added null check, updated tests
-✅ RESULTS: All tests passing, login working
-📊 STATUS: Ready for deployment
-📁 CAPTURE: Auth bug pattern - always validate tokens before use
-➡️ NEXT: Deploy to staging, then production
-📖 STORY EXPLANATION:
+SUMMARY: Fixed authentication bug in login handler
+ANALYSIS: Token validation was missing null check
+ACTIONS: Added null check, updated tests
+✓ RESULTS: All tests passing, login working
+STATUS: Ready for deployment
+CAPTURE: Auth bug pattern - always validate tokens before use
+→NEXT: Deploy to staging, then production
+STORY EXPLANATION:
 1. User reported login failures
 2. Investigated auth handler
 3. Found missing null check on tokens
@@ -158,15 +158,15 @@ Users rate responses by typing a number 1-10:
 6. Ran full test suite
 7. All tests now passing
 8. Ready for deployment
-⭐ RATE (1-10):
-🗣️ {daidentity.name}: Auth bug fixed by adding null check on token validation. All 47 tests passing.
+★ RATE (1-10):
+{daidentity.name}: Auth bug fixed by adding null check on token validation. All 47 tests passing.
 ```
 
 ### Conversational Example
 
 ```
-📋 SUMMARY: Confirmed push status
-🗣️ {daidentity.name}: Changes pushed to origin/main. Commit includes auth fix and updated tests.
+SUMMARY: Confirmed push status
+{daidentity.name}: Changes pushed to origin/main. Commit includes auth fix and updated tests.
 ```
 
 ---

@@ -432,7 +432,7 @@ if (import.meta.main) {
     const daysLeft = daysUntilExpiration(info);
     if (daysLeft !== null) {
       console.log(
-        `Days Until Expiration: ${daysLeft} ${daysLeft < 30 ? "⚠️  EXPIRING SOON" : ""}`
+        `Days Until Expiration: ${daysLeft} ${daysLeft < 30 ? " EXPIRING SOON" : ""}`
       );
     }
 
@@ -441,7 +441,7 @@ if (import.meta.main) {
     console.log(`DNSSEC: ${info.dnssec ? "Enabled" : "Disabled"}`);
 
     if (hasPrivacyProtection(info)) {
-      console.log(`Privacy Protection: ✅ Enabled`);
+      console.log(`Privacy Protection: ✓ Enabled`);
     }
 
     const emails = extractEmails(info);

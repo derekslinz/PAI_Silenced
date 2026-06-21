@@ -11,7 +11,7 @@ description: Voice server management. USE WHEN voice server, TTS server, voice n
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -42,7 +42,7 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
 
 ### OBSERVE
 - **Key sources**: Operation type (status/notify/manage), message content, voice selection
-- **Critical**: Voice relies on `🎯 COMPLETED:` line - without it, user won't hear response
+- **Critical**: Voice relies on `COMPLETED:` line - without it, user won't hear response
 
 ### THINK
 - **Voice selection**: Match agent to voice ID (see routing table below)
@@ -76,7 +76,7 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
 Configure voice IDs in your environment or `~/.claude/VoiceServer/voices.json`
 
 **Prosody Quick Reference**:
-- Emotional: `[💥 excited]` `[✨ success]` `[⚠️ caution]` `[🚨 urgent]`
+- Emotional: `[excited]` `[★ success]` `[caution]` `[urgent]`
 - Emphasis: `**bold**` for key words, `...` for pause, `--` for break
 
 **Infrastructure**: Server at `~/.claude/VoiceServer/`, Port 8888, Config `voices.json`

@@ -211,7 +211,7 @@ export function graduateSuite(suiteName: string): boolean {
 export function formatSuiteSummary(suite: EvalSuite, saturation?: SaturationStatus): string {
   const lines: string[] = [];
 
-  const typeIcon = suite.type === 'capability' ? '🎯' : '🔒';
+  const typeIcon = suite.type === 'capability' ? '' : '';
   lines.push(`## ${typeIcon} ${suite.name}`);
   lines.push('');
   lines.push(`**Type:** ${suite.type}`);
@@ -224,7 +224,7 @@ export function formatSuiteSummary(suite: EvalSuite, saturation?: SaturationStat
   if (saturation) {
     lines.push('### Saturation Status');
     lines.push('');
-    const satIcon = saturation.saturated ? '⚠️' : '✅';
+    const satIcon = saturation.saturated ? '' : '✓';
     lines.push(`${satIcon} **Saturated:** ${saturation.saturated ? 'Yes' : 'No'}`);
     lines.push(`**Consecutive above ${(suite.saturation_threshold ?? 0.95) * 100}%:** ${saturation.consecutive_above_threshold}/3`);
     lines.push(`**Recommendation:** ${saturation.recommended_action.replace(/_/g, ' ')}`);
@@ -316,7 +316,7 @@ Examples:
       const suites = listSuites(type);
       console.log(`\n${type ? type.charAt(0).toUpperCase() + type.slice(1) : 'All'} Suites:\n`);
       for (const suite of suites) {
-        const icon = suite.type === 'capability' ? '🎯' : '🔒';
+        const icon = suite.type === 'capability' ? '' : '';
         console.log(`  ${icon} ${suite.name} (${suite.tasks.length} tasks)`);
       }
       break;
@@ -358,7 +358,7 @@ Examples:
       }
       const status = checkSaturation(args[0]);
       console.log(`\nSaturation Status: ${args[0]}\n`);
-      console.log(`  Saturated: ${status.saturated ? '⚠️ Yes' : '✅ No'}`);
+      console.log(`  Saturated: ${status.saturated ? 'Yes' : '✓ No'}`);
       console.log(`  Consecutive above threshold: ${status.consecutive_above_threshold}/3`);
       console.log(`  Recommendation: ${status.recommended_action}`);
       break;

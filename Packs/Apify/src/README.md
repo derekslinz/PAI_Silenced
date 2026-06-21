@@ -348,16 +348,16 @@ console.log('Code tokens:', estimateTokens(filtered)) // ~500
 ## When to Use Code-First vs MCP
 
 **Use Code-First (this API):**
-- ✅ Need to filter/transform large datasets
-- ✅ Processing 100+ results and want top 10
-- ✅ Multiple operations in sequence (search → call → filter)
-- ✅ Control flow (loops, conditionals)
-- ✅ Privacy-sensitive data that shouldn't enter model context
+- ✓ Need to filter/transform large datasets
+- ✓ Processing 100+ results and want top 10
+- ✓ Multiple operations in sequence (search → call → filter)
+- ✓ Control flow (loops, conditionals)
+- ✓ Privacy-sensitive data that shouldn't enter model context
 
 **Use MCP:**
-- ❌ Simple single operations with small results
-- ❌ Need to expose to non-code-capable models
-- ❌ Provider-specific features not in this wrapper
+- ✗ Simple single operations with small results
+- ✗ Need to expose to non-code-capable models
+- ✗ Provider-specific features not in this wrapper
 
 ## Links
 

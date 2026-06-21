@@ -4,7 +4,7 @@ A voice notification server for the Personal AI Infrastructure (PAI) system that
 
 > **Quick Start**: See [QUICKSTART.md](QUICKSTART.md) for a 5-minute setup guide.
 
-## 🎯 Features
+## Features
 
 - **ElevenLabs Integration**: High-quality AI voices for notifications
 - **Fallback Support**: Uses macOS `say` command when ElevenLabs is not configured
@@ -13,13 +13,13 @@ A voice notification server for the Personal AI Infrastructure (PAI) system that
 - **Menu Bar Indicator**: Visual status indicator in macOS menu bar
 - **Simple HTTP API**: Easy integration with any tool or script
 
-## 📋 Prerequisites
+## Prerequisites
 
 - macOS (tested on macOS 11+)
 - [Bun](https://bun.sh) runtime installed
 - ElevenLabs API key (optional, for AI voices)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Install Bun (if not already installed)
 ```bash
@@ -48,7 +48,7 @@ This will:
 - Verify the installation
 - Optionally install menu bar indicator (requires SwiftBar/BitBar)
 
-## 🛠️ Service Management
+## Service Management
 
 ### Start Server
 ```bash
@@ -80,7 +80,7 @@ launchctl unload ~/Library/LaunchAgents/com.pai.voice-server.plist
 ```
 This will stop the service and remove the LaunchAgent.
 
-## 📡 API Usage
+## API Usage
 
 ### Send a Voice Notification
 ```bash
@@ -114,7 +114,7 @@ Artist:                  ZF6FPAbjXT4488VcRRnw  // Artist agent
 Writer:                  gfRt6Z3Z8aTbpLfexQ7N  // Content agent
 ```
 
-## 🖥️ Menu Bar Indicator
+## Menu Bar Indicator
 
 The voice server includes an optional menu bar indicator that shows the server status.
 
@@ -134,7 +134,7 @@ cd ~/.claude/voice-server/menubar
 ```
 
 ### Menu Bar Features
-- **Visual Status**: 🎙️ (running) or 🎙️⚫ (stopped)
+- **Visual Status**: (running) or ● (stopped)
 - **Quick Controls**: Start/Stop/Restart server from menu
 - **Status Info**: Shows voice type (ElevenLabs/macOS Say)
 - **Quick Test**: Test voice with one click
@@ -146,7 +146,7 @@ If you prefer manual installation:
 2. Make it executable: `chmod +x pai-voice.5s.sh`
 3. Refresh SwiftBar/BitBar
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 Create or edit `~/.claude/.env` in your home directory:
@@ -168,7 +168,7 @@ PORT=8888
 3. Click "Use" and copy the Voice ID
 4. Update `ELEVENLABS_VOICE_ID` in your `~/.claude/.env`
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Server won't start
 ```bash
@@ -209,7 +209,7 @@ launchctl load ~/Library/LaunchAgents/com.pai.voice-server.plist
 tail -f ~/Library/Logs/pai-voice-server.log
 ```
 
-## 📁 File Structure
+## File Structure
 ```
 ~/.claude/voice-server/
 ├── server.ts              # Main server code
@@ -231,14 +231,14 @@ tail -f ~/Library/Logs/pai-voice-server.log
 └── pai-voice-server.log        # Server logs
 ```
 
-## 🔐 Security Notes
+## Security Notes
 
 - **No hardcoded API keys**: All sensitive data is read from `~/.claude/.env`
 - **Local only**: Server only listens on localhost (127.0.0.1)
 - **User-specific**: Each user maintains their own API keys
 - **Safe for public repos**: No sensitive data in the codebase
 
-## 🤝 Integration with PAI System
+## Integration with PAI System
 
 This voice server integrates with the PAI (Personal AI Infrastructure) system to provide voice notifications when:
 - Tasks are completed
@@ -248,11 +248,11 @@ This voice server integrates with the PAI (Personal AI Infrastructure) system to
 
 The PAI hooks automatically send notifications to this server when configured.
 
-## 📝 License
+## License
 
 Part of the PAI (Personal AI Infrastructure) system.
 
-## 🆘 Support
+## Support
 
 For issues or questions:
 1. Check the troubleshooting section above

@@ -77,7 +77,7 @@ function log(message: string, emoji = "") {
 
 
 function error(message: string) {
-  console.error(`❌ ${message}`);
+  console.error(`✗ ${message}`);
   process.exit(1);
 }
 
@@ -172,7 +172,7 @@ function mergeMcpConfigs(mcpFiles: string[]): object {
   for (const file of mcpFiles) {
     const filepath = join(MCP_DIR, file);
     if (!existsSync(filepath)) {
-      log(`Warning: MCP file not found: ${file}`, "⚠️");
+      log(`Warning: MCP file not found: ${file}`, "");
       continue;
     }
     try {
@@ -181,7 +181,7 @@ function mergeMcpConfigs(mcpFiles: string[]): object {
         Object.assign(merged.mcpServers, config.mcpServers);
       }
     } catch (e) {
-      log(`Warning: Failed to parse ${file}`, "⚠️");
+      log(`Warning: Failed to parse ${file}`, "");
     }
   }
 
@@ -201,8 +201,8 @@ function setMcpProfile(profile: string) {
 
   // Create symlink
   symlinkSync(profileFile, ACTIVE_MCP);
-  log(`Switched to '${profile}' profile`, "✅");
-  log("Restart Claude Code to apply", "⚠️");
+  log(`Switched to '${profile}' profile`, "✓");
+  log("Restart Claude Code to apply", "");
 }
 
 function setMcpCustom(mcpNames: string[]) {
@@ -236,7 +236,7 @@ function setMcpCustom(mcpNames: string[]) {
 
   const serverCount = Object.keys((merged as any).mcpServers || {}).length;
   if (serverCount > 0) {
-    log(`Configured ${serverCount} MCP server(s): ${mcpNames.join(", ")}`, "✅");
+    log(`Configured ${serverCount} MCP server(s): ${mcpNames.join(", ")}`, "✓");
   }
 }
 
@@ -279,7 +279,7 @@ function findWallpaper(query: string): string | null {
 function setWallpaper(filename: string): boolean {
   const fullPath = join(WALLPAPER_DIR, filename);
   if (!existsSync(fullPath)) {
-    log(`Wallpaper not found: ${fullPath}`, "❌");
+    log(`Wallpaper not found: ${fullPath}`, "✗");
     return false;
   }
 
@@ -289,13 +289,13 @@ function setWallpaper(filename: string): boolean {
   try {
     const kittyResult = spawnSync(["kitty", "@", "set-background-image", fullPath]);
     if (kittyResult.exitCode === 0) {
-      log("Kitty background set", "✅");
+      log("Kitty background set", "✓");
     } else {
-      log("Failed to set Kitty background", "⚠️");
+      log("Failed to set Kitty background", "");
       success = false;
     }
   } catch {
-    log("Kitty not available", "⚠️");
+    log("Kitty not available", "");
   }
 
   // Set macOS desktop background
@@ -303,13 +303,13 @@ function setWallpaper(filename: string): boolean {
     const script = `tell application "System Events" to tell every desktop to set picture to "${fullPath}"`;
     const macResult = spawnSync(["osascript", "-e", script]);
     if (macResult.exitCode === 0) {
-      log("macOS desktop set", "✅");
+      log("macOS desktop set", "✓");
     } else {
-      log("Failed to set macOS desktop", "⚠️");
+      log("Failed to set macOS desktop", "");
       success = false;
     }
   } catch {
-    log("Could not set macOS desktop", "⚠️");
+    log("Could not set macOS desktop", "");
   }
 
   return success;
@@ -324,14 +324,14 @@ function cmdWallpaper(args: string[]) {
 
   // No args or --list: show available wallpapers
   if (args.length === 0 || args[0] === "--list" || args[0] === "-l" || args[0] === "list") {
-    log("Available wallpapers:", "🖼️");
+    log("Available wallpapers:", "");
     console.log();
     wallpapers.forEach((w, i) => {
       console.log(`  ${i + 1}. ${getWallpaperName(w)}`);
     });
     console.log();
-    log("Usage: k -w <name>", "💡");
-    log("Example: k -w circuit-board", "💡");
+    log("Usage: k -w <name>", "");
+    log("Example: k -w circuit-board", "");
     return;
   }
 
@@ -340,18 +340,18 @@ function cmdWallpaper(args: string[]) {
   const match = findWallpaper(query);
 
   if (!match) {
-    log(`No wallpaper matching "${query}"`, "❌");
+    log(`No wallpaper matching "${query}"`, "✗");
     console.log("\nAvailable wallpapers:");
     wallpapers.forEach((w) => console.log(`  - ${getWallpaperName(w)}`));
     process.exit(1);
   }
 
   const name = getWallpaperName(match);
-  log(`Switching to: ${name}`, "🖼️");
+  log(`Switching to: ${name}`, "");
 
   const success = setWallpaper(match);
   if (success) {
-    log(`Wallpaper set to ${name}`, "✅");
+    log(`Wallpaper set to ${name}`, "✓");
     notifyVoice(`Wallpaper changed to ${name}`);
   } else {
     error("Failed to set wallpaper");
@@ -387,7 +387,7 @@ async function cmdLaunch(options: { mcp?: string; resume?: boolean; skipPerms?: 
   }
 
   // Voice notification (using focused marker for calmer tone)
-  notifyVoice(`[🎯 focused] ${getDAName()} here, ready to go.`);
+  notifyVoice(`[focused] ${getDAName()} here, ready to go.`);
 
   // Launch Claude
   const proc = spawn(args, {
@@ -400,7 +400,7 @@ async function cmdLaunch(options: { mcp?: string; resume?: boolean; skipPerms?: 
 }
 
 async function cmdUpdate() {
-  log("Checking for updates...", "🔍");
+  log("Checking for updates...", "");
 
   const current = getCurrentVersion();
   const latest = await getLatestVersion();
@@ -416,28 +416,28 @@ async function cmdUpdate() {
 
   // Skip if already up to date
   if (latest && compareVersions(current, latest) >= 0) {
-    log("Already up to date", "✅");
+    log("Already up to date", "✓");
     return;
   }
 
-  log("Updating Claude Code...", "🔄");
+  log("Updating Claude Code...", "");
 
   // Step 1: Update Bun
-  log("Step 1/2: Updating Bun...", "📦");
+  log("Step 1/2: Updating Bun...", "");
   const bunResult = spawnSync(["brew", "upgrade", "bun"]);
   if (bunResult.exitCode !== 0) {
-    log("Bun update skipped (may already be latest)", "⚠️");
+    log("Bun update skipped (may already be latest)", "");
   } else {
-    log("Bun updated", "✅");
+    log("Bun updated", "✓");
   }
 
   // Step 2: Update Claude Code
-  log("Step 2/2: Installing latest Claude Code...", "🤖");
+  log("Step 2/2: Installing latest Claude Code...", "");
   const claudeResult = spawnSync(["bash", "-c", "curl -fsSL https://claude.ai/install.sh | bash"]);
   if (claudeResult.exitCode !== 0) {
     error("Claude Code installation failed");
   }
-  log("Claude Code updated", "✅");
+  log("Claude Code updated", "✓");
 
   // Show final version
   const newVersion = getCurrentVersion();
@@ -447,7 +447,7 @@ async function cmdUpdate() {
 }
 
 async function cmdVersion() {
-  log("Checking versions...", "🔍");
+  log("Checking versions...", "");
 
   const current = getCurrentVersion();
   const latest = await getLatestVersion();
@@ -461,17 +461,17 @@ async function cmdVersion() {
     console.log(`Latest:  v${latest}`);
     const cmp = compareVersions(current, latest);
     if (cmp >= 0) {
-      log("Up to date", "✅");
+      log("Up to date", "✓");
     } else {
-      log("Update available (run 'k update')", "⚠️");
+      log("Update available (run 'k update')", "");
     }
   } else {
-    log("Could not fetch latest version", "⚠️");
+    log("Could not fetch latest version", "");
   }
 }
 
 function cmdProfiles() {
-  log("Available MCP Profiles:", "📋");
+  log("Available MCP Profiles:", "");
   console.log();
 
   const current = getCurrentProfile();
@@ -487,15 +487,15 @@ function cmdProfiles() {
   }
 
   console.log();
-  log("Usage: k mcp set <profile>", "💡");
+  log("Usage: k mcp set <profile>", "");
 }
 
 function cmdMcpList() {
-  log("Available MCPs:", "📋");
+  log("Available MCPs:", "");
   console.log();
 
   // Individual MCPs
-  log("Individual MCPs (use with -m):", "📦");
+  log("Individual MCPs (use with -m):", "");
   const mcps = getIndividualMcps();
   for (const mcp of mcps) {
     const shortcut = Object.entries(MCP_SHORTCUTS)
@@ -506,7 +506,7 @@ function cmdMcpList() {
   }
 
   console.log();
-  log("Profiles (use with 'k mcp set'):", "📁");
+  log("Profiles (use with 'k mcp set'):", "");
   const profiles = getMcpProfiles();
   for (const profile of profiles) {
     const desc = PROFILE_DESCRIPTIONS[profile] || "";
@@ -514,7 +514,7 @@ function cmdMcpList() {
   }
 
   console.log();
-  log("Examples:", "💡");
+  log("Examples:", "");
   console.log("  k -m bd          # Bright Data only");
   console.log("  k -m bd,ap       # Bright Data + Apify");
   console.log("  k mcp set research  # Full research profile");

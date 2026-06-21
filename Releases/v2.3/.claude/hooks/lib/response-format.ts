@@ -24,7 +24,7 @@ export function getResponseFormatSpec(): string {
     try {
       const content = readFileSync(CORE_SKILL_PATH, 'utf-8');
       // Extract the Response Format section
-      const match = content.match(/## 🚨 Response Format[\s\S]*?(?=\n## |$)/);
+      const match = content.match(/## Response Format[\s\S]*?(?=\n## |$)/);
       formatSpec = match ? match[0] : '';
     } catch {
       formatSpec = '';
@@ -148,7 +148,7 @@ export function getVoiceFallback(): string {
  * Returns complete sentence starting with gerund
  */
 export function getTabFallback(stage: 'start' | 'end' = 'start'): string {
-  // NOTE: Do NOT include state symbols (✓, ⚠, ⚙️) here - tab-state.ts adds those based on state
+  // NOTE: Do NOT include state symbols (✓, , ) here - tab-state.ts adds those based on state
   // Complete sentence format: "[Gerund] the [object]."
   return stage === 'end' ? 'Finishing the task.' : 'Processing the request.';
 }

@@ -153,9 +153,9 @@ The `ISC.json` file captures the Ideal State Criteria from PAI Algorithm executi
 **Why JSON over JSONL:** ISC is bounded versioned state (<10KB), not an unbounded log. JSON with `current` + `history` explicitly models what verification tools need (current criteria) vs debugging needs (history).
 
 **Parsing Source:** ResponseCapture extracts ISC from algorithm output patterns:
-- `✅ CRITERIA:` / `❌ ANTI-CRITERIA:` blocks → Initial criteria
-- `♻︎ Updated the ISC…` blocks → Phase updates
-- `📊 ISC Satisfaction:` → Final verification results
+- `✓ CRITERIA:` / `✗ ANTI-CRITERIA:` blocks → Initial criteria
+- `︎ Updated the ISC…` blocks → Phase updates
+- `ISC Satisfaction:` → Final verification results
 
 ### LEARNING/ - Categorized Learnings
 

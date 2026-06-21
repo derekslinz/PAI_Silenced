@@ -2,11 +2,11 @@
 
 Intelligent bug bounty program tracking with two-tier detection strategy using GitHub Compare API.
 
-## 🎯 Overview
+## Overview
 
 Automatically tracks new bug bounty programs across HackerOne, Bugcrowd, Intigriti, YesWeHack, and other platforms. Uses a smart two-tier detection system to minimize bandwidth while maximizing discovery speed.
 
-## 🏗️ Architecture
+## Architecture
 
 ### Two-Tier Detection Strategy
 
@@ -26,7 +26,7 @@ Automatically tracks new bug bounty programs across HackerOne, Bugcrowd, Intigri
 - **Platforms**: HackerOne, Bugcrowd, Intigriti, YesWeHack, Federacy
 - **Update frequency**: Check as often as needed without hitting rate limits
 
-## 📦 Installation
+## Installation
 
 ```bash
 cd ~/.claude/skills/hacking/bug-bounties
@@ -34,7 +34,7 @@ bun install
 ./bounty.sh init
 ```
 
-## 🚀 Usage
+## Usage
 
 ### Initialize (First Time)
 
@@ -51,9 +51,9 @@ Establishes baseline by recording current commit SHAs for all tracked files.
 ```
 
 Checks for:
-- 🆕 New programs launched
-- 📈 Scope expansions on existing programs
-- 💰 VDP → Paid bounty upgrades
+- New programs launched
+- Scope expansions on existing programs
+- VDP → Paid bounty upgrades
 
 ### Show Recent Discoveries
 
@@ -81,43 +81,43 @@ Checks for:
 ./bounty.sh search "hackerone"
 ```
 
-## 📊 Output Examples
+## Output Examples
 
 ### Update Command
 
 ```
-🔍 Checking for new bug bounty programs...
+Checking for new bug bounty programs...
 
-📊 TIER 1: Fast change detection
-🆕 Changes detected! 3 commits since last check
+TIER 1: Fast change detection
+Changes detected! 3 commits since last check
 
-🔬 TIER 2: Detailed analysis of platform changes
+TIER 2: Detailed analysis of platform changes
   Checking hackerone...
-    🔄 2 commits found
+    2 commits found
   Checking bugcrowd...
     ✓ No changes
   Checking intigriti...
-    🔄 1 commits found
+    1 commits found
   Checking yeswehack...
     ✓ No changes
 
-⏱️  Completed in 2.3s
+ Completed in 2.3s
 
 ============================================================
-📊 UPDATE SUMMARY
+UPDATE SUMMARY
 ============================================================
-🆕 New programs:        3
-📈 Scope expansions:    2
-💰 Upgraded to paid:    1
-✅ Platforms checked:   5
-⏱️  Duration:            2.3s
+New programs:        3
+Scope expansions:    2
+Upgraded to paid:    1
+✓ Platforms checked:   5
+ Duration:            2.3s
 ============================================================
 
-🆕 NEW PROGRAMS:
+NEW PROGRAMS:
 
 1. [HACKERONE] Example Corp
    URL: https://hackerone.com/example
-   Bounty: 💰 Yes
+   Bounty: Yes
    Max Severity: critical
    Scopes: *.example.com, api.example.com, admin.example.com...
 ```
@@ -125,12 +125,12 @@ Checks for:
 ### Show Command
 
 ```
-📋 Bug bounty programs discovered in the last 24h
+Bug bounty programs discovered in the last 24h
 
 1. [HACKERONE] Robinhood Markets (new_program)
    URL: https://hackerone.com/robinhood_markets
-   Bounty: ❌ VDP only
-   Max Severity: 🔴 CRITICAL
+   Bounty: ✗ VDP only
+   Max Severity: ● CRITICAL
    Scopes (8):
      - *.robinhood.com
      - *.robinhood.net
@@ -140,8 +140,8 @@ Checks for:
 
 2. [BUGCROWD] Acme Corp (upgraded_to_paid)
    URL: https://bugcrowd.com/acme
-   Bounty: 💰 Paid
-   Max Severity: 🟠 HIGH
+   Bounty: Paid
+   Max Severity: ● HIGH
    Scopes (3):
      - *.acme.com
      - api.acme.io
@@ -149,10 +149,10 @@ Checks for:
 
 Total: 2 program(s)
 
-💡 Tip: Use "initiate-recon <number>" to start testing a program
+Tip: Use "initiate-recon <number>" to start testing a program
 ```
 
-## 🗂️ File Structure
+## File Structure
 
 ```
 bug-bounties/
@@ -176,7 +176,7 @@ bug-bounties/
     └── discovery.jsonl                # Audit trail
 ```
 
-## 🎨 Integration with Hacking Skill
+## Integration with Hacking Skill
 
 This system integrates with the main hacking skill to enable:
 
@@ -184,7 +184,7 @@ This system integrates with the main hacking skill to enable:
 2. **Quick Browsing**: "Show new bounties from last 24h" → instant results
 3. **Automated Recon**: "Initiate recon on #2" → launches pentester agent
 
-## 🔧 Technical Details
+## Technical Details
 
 ### API Usage
 
@@ -205,7 +205,7 @@ Detects three types of changes:
 2. **Scope expansions**: More domains/scopes added
 3. **Upgraded to paid**: `offers_bounties: false → true`
 
-## 📝 State File Format
+## State File Format
 
 ```json
 {
@@ -221,7 +221,7 @@ Detects three types of changes:
 }
 ```
 
-## 🎯 Next Steps
+## Next Steps
 
 After discovering interesting programs, you can:
 
@@ -230,7 +230,7 @@ After discovering interesting programs, you can:
 3. **Set up monitoring**: Track changes to specific programs
 4. **Start testing**: Begin systematic vulnerability assessment
 
-## 🔗 Resources
+## Resources
 
 - **Data source**: [arkadiyt/bounty-targets-data](https://github.com/arkadiyt/bounty-targets-data)
 - **Alternative**: [projectdiscovery/public-bugbounty-programs](https://github.com/projectdiscovery/public-bugbounty-programs)
@@ -240,7 +240,7 @@ After discovering interesting programs, you can:
   - Intigriti: https://intigriti.com
   - YesWeHack: https://yeswehack.com
 
-## 🎓 Design Philosophy
+## Design Philosophy
 
 This system implements **Option D: Intelligent Two-Tier Hybrid** from the deep thinking analysis:
 

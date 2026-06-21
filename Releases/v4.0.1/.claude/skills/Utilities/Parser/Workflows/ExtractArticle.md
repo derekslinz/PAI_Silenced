@@ -447,26 +447,26 @@ OpenAI has released GPT-4, the latest iteration of its large language model, fea
 
 **Successful extraction:**
 ```
-✅ Extracted article
-📰 Title: OpenAI Announces GPT-4
-✍️ Author: Sam Altman
-📅 Published: 2024-01-15
-📝 Content: 1,500 words (~6 min read)
-👥 People: 3
-🏢 Companies: 5
-🔗 Links: 12
-📚 Sources: 4
-🎯 Confidence: 0.91
+✓ Extracted article
+Title: OpenAI Announces GPT-4
+Author: Sam Altman
+Published: 2024-01-15
+Content: 1,500 words (~6 min read)
+People: 3
+Companies: 5
+Links: 12
+Sources: 4
+Confidence: 0.91
 ```
 
 **Partial extraction:**
 ```
-⚠️ Extracted article (partial - paywall detected)
-📰 Title: Premium Content Article
-📝 Content: 300 words visible (full text unavailable)
-🔗 Links: 3 (from visible portion)
-🎯 Confidence: 0.52
-⚠️ Warning: Content behind paywall, extracted preview only
+Extracted article (partial - paywall detected)
+Title: Premium Content Article
+Content: 300 words visible (full text unavailable)
+Links: 3 (from visible portion)
+Confidence: 0.52
+Warning: Content behind paywall, extracted preview only
 ```
 
 ---

@@ -54,7 +54,7 @@ PAI uses a **hybrid agent system** that combines:
 
 **{PRINCIPAL.NAME} never touches tools.** {DAIDENTITY.NAME} composes agents internally based on the request.
 
-### 🚨 CRITICAL TRIGGER: Agent Type Selection
+### CRITICAL TRIGGER: Agent Type Selection
 
 **THREE DISTINCT PATTERNS - KNOW THE DIFFERENCE:**
 
@@ -120,7 +120,7 @@ Task(prompt="Research Company B...", subagent_type="general-purpose", model="hai
 
 ---
 
-### ❌ WRONG PATTERNS (NEVER DO THESE)
+### ✗ WRONG PATTERNS (NEVER DO THESE)
 
 ```bash
 # WRONG: User says "custom agents" but you use a static agent type

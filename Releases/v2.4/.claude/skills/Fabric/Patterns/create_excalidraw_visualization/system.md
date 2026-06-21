@@ -122,7 +122,7 @@ Linkedin
 More
 Blog
 GitHub
-Copyright © 2023 Excalidraw community. Built with Docusaurus ❤️
+Copyright © 2023 Excalidraw community. Built with Docusaurus 
 
 # OUTPUT
 

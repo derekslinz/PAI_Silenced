@@ -60,9 +60,9 @@ Automatic via startup hook - PAI context loaded
 **Automatic!** The startup hook now checks `~/.claude/MEMORY/progress/` for active work and displays it at session start. You'll see:
 
 ```
-📋 ACTIVE WORK (from previous sessions):
+ACTIVE WORK (from previous sessions):
 
-🔵 my-feature
+● my-feature
    Objectives:
    • Implement user authentication
    • Add OAuth providers

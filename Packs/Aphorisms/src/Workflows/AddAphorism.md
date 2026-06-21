@@ -81,9 +81,9 @@ WebSearch("misattributed quotes [author name]")
 ```
 
 **Output:**
-- ✅ Verified exact text
-- ✅ Confirmed correct attribution
-- ✅ Source identified (if available)
+- ✓ Verified exact text
+- ✓ Confirmed correct attribution
+- ✓ Source identified (if available)
 
 ---
 
@@ -273,7 +273,7 @@ Edit(
 **Summary for User:**
 
 ```markdown
-✅ **Aphorism Added Successfully**
+✓ **Aphorism Added Successfully**
 
 **Quote:** "[quote text]"
 **Author:** [Author Name]
@@ -508,7 +508,7 @@ Use Edit tool to insert in appropriate section
 
 ### Step 10: Confirm
 ```markdown
-✅ **Aphorism Added Successfully**
+✓ **Aphorism Added Successfully**
 
 **Quote:** "The important thing is not to stop questioning. Curiosity has its own reason for existing."
 **Author:** Albert Einstein

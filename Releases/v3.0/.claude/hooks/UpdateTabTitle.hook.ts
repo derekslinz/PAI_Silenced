@@ -17,9 +17,9 @@
  * 7. No first-person pronouns
  *
  * FLOW:
- * 1. Extract quick title from prompt (deterministic, instant) → 🧠 purple
+ * 1. Extract quick title from prompt (deterministic, instant) → purple
  * 2. Run inference for better summary → validate with isValidWorkingTitle
- * 3. Show validated title → ⚙️ orange
+ * 3. Show validated title → orange
  * 4. If validation fails both paths → getWorkingFallback()
  *
  * VOICE: Announces inference-generated summary on prompt receipt.
@@ -204,12 +204,12 @@ async function main() {
     // Phase 1: Immediate deterministic title (purple = thinking)
     const quickTitle = extractPromptTitle(prompt);
     const thinkingTitle = quickTitle || getWorkingFallback();
-    setTabState({ title: `🧠 ${prefix}${thinkingTitle}`, state: 'thinking', sessionId: data.session_id });
+    setTabState({ title: `${prefix}${thinkingTitle}`, state: 'thinking', sessionId: data.session_id });
 
     // Phase 2: Inference for a validated title (orange = working)
     const inferredTitle = await summarizePrompt(prompt);
     const finalTitle = inferredTitle || (quickTitle && isValidWorkingTitle(quickTitle) ? quickTitle : getWorkingFallback());
-    setTabState({ title: `⚙️ ${prefix}${finalTitle}`, state: 'working', sessionId: data.session_id });
+    setTabState({ title: `${prefix}${finalTitle}`, state: 'working', sessionId: data.session_id });
 
     // Voice feedback — announce what's being worked on
     // Only speak inference result (a proper sentence). If inference failed,

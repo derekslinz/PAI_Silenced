@@ -177,18 +177,18 @@ console.log(ipInfo.organization, ipInfo.cidr);
 ## Authorization Framework
 
 ### Passive Techniques (No Auth Required)
-- ✅ WHOIS lookups
-- ✅ DNS queries
-- ✅ Certificate transparency
-- ✅ IPInfo API
-- ✅ Public database searches
+- ✓ WHOIS lookups
+- ✓ DNS queries
+- ✓ Certificate transparency
+- ✓ IPInfo API
+- ✓ Public database searches
 
 ### Active Techniques (Auth Required)
-- ⚠️ Port scanning
-- ⚠️ Service detection
-- ⚠️ Banner grabbing
-- ⚠️ Subdomain brute forcing
-- ⚠️ Network scanning
+- Port scanning
+- Service detection
+- Banner grabbing
+- Subdomain brute forcing
+- Network scanning
 
 ### Authorization Types
 1. **Pentest Engagement** - Written SOW/contract

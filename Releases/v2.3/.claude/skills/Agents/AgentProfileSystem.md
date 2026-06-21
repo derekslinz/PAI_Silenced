@@ -2,7 +2,7 @@
 
 **Simple agent context loading for specialized agent types.**
 
-**Status:** ✅ Redesigned (v2.0.0 - Simplified)
+**Status:** ✓ Redesigned (v2.0.0 - Simplified)
 **Date:** 2025-12-18
 
 ---
@@ -23,17 +23,17 @@ When spawning specialized agents (Architect, Engineer, Designer, etc.), each age
 **SIMPLE, NOT ELABORATE**
 
 This system does NOT:
-- ❌ Duplicate content from CORE (CORE auto-loads at session start)
-- ❌ Use elaborate YAML structures with memory blocks
-- ❌ Create redundant init prompts
-- ❌ Use multiple files with different names per agent
+- ✗ Duplicate content from CORE (CORE auto-loads at session start)
+- ✗ Use elaborate YAML structures with memory blocks
+- ✗ Create redundant init prompts
+- ✗ Use multiple files with different names per agent
 
 This system DOES:
-- ✅ Reference existing Skills (doesn't duplicate them)
-- ✅ Use ONE markdown context file per agent type
-- ✅ Supplement what CORE already provides
-- ✅ Act as a curated "reading list" for each agent
-- ✅ Leverage our existing Skills system
+- ✓ Reference existing Skills (doesn't duplicate them)
+- ✓ Use ONE markdown context file per agent type
+- ✓ Supplement what CORE already provides
+- ✓ Act as a curated "reading list" for each agent
+- ✓ Leverage our existing Skills system
 
 ---
 

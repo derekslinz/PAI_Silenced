@@ -210,14 +210,14 @@ Ship a redesigned `duck --help` template (≤ 100 lines, 80-col safe) that opens
 ## Decisions
 
 - 2026-04-11 02:15: Three top-level sections — Summary+Examples / Flag Reference / See Also — locked. Resists the "one more category" temptation that ate the last help redesign attempt.
-- 2026-04-12 14:00: ❌ DEAD END: Tried 5 categories instead of 4. Users in pilot test split 60/40 on which category three flags belonged to. Reverted to 4 categories with clearer names. Don't retry.
+- 2026-04-12 14:00: ✗ DEAD END: Tried 5 categories instead of 4. Users in pilot test split 60/40 on which category three flags belonged to. Reverted to 4 categories with clearer names. Don't retry.
 - 2026-04-13 09:00: refined: ISC-19 sharpened from "examples reflect common usage" to "examples are the two highest-frequency invocations from 30-day telemetry" — the first phrasing let me cherry-pick aspirational examples; the second forced honesty.
 - 2026-04-13 22:00: refined: ISC-8 sharpened from "flags formatted clearly" to "exactly 2 lines per flag, line 1 fixed-width, line 2 indented 4 spaces" — vague aesthetic claims are how help screens drift back to inconsistent layout over time.
-- 2026-04-14 11:30: ❌ DEAD END: Tried inline color highlighting for flag names. Broke piping to `grep` and `less` for users without color-aware pagers. Reverted to plain text. Don't retry.
+- 2026-04-14 11:30: ✗ DEAD END: Tried inline color highlighting for flag names. Broke piping to `grep` and `less` for users without color-aware pagers. Reverted to plain text. Don't retry.
 - 2026-04-15 16:00: refined: ISC-16 added a 30-day post-ship probe (ISC-30) — without it, the redesign passes its launch test but could regress in 90 days as new flags are added without category discipline.
 
 <!--
 E3 design ISA. Required sections: Problem, Vision, Out of Scope, Constraints, Goal, Criteria, Features, Test Strategy.
 Optional Principles included — the design has experiential goals (first 30 seconds, recognition, intuition) and principles do real work in the design pass.
-ISC count of 36 exceeds the E3 floor of 32. Three Antecedent ISCs (ISC-18, 19, 20) carry the experiential contract: hard-to-vary one-sentence summary, telemetry-grounded examples, and intuitive categories. Anti-criteria (ISC-24, 25, 26, 27) cover scope, regression, drift, and density. The Decisions section shows two ❌ DEAD ENDs and three refinements — typical for a redesign where every aesthetic temptation needs to be tested against actual users.
+ISC count of 36 exceeds the E3 floor of 32. Three Antecedent ISCs (ISC-18, 19, 20) carry the experiential contract: hard-to-vary one-sentence summary, telemetry-grounded examples, and intuitive categories. Anti-criteria (ISC-24, 25, 26, 27) cover scope, regression, drift, and density. The Decisions section shows two ✗ DEAD ENDs and three refinements — typical for a redesign where every aesthetic temptation needs to be tested against actual users.
 -->

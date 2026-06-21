@@ -40,7 +40,7 @@
 
 ### When NOT to Use SOCMINT
 
-**⚠️ STOP - Do Not Proceed Without Authorization:**
+**STOP - Do Not Proceed Without Authorization:**
 - Personal relationship research beyond professional scope
 - Stalking or harassment investigations
 - Background checks without legal authority
@@ -238,7 +238,7 @@ done < ../username-candidates.txt
 
 **Objective:** Extract detailed intelligence from Instagram accounts.
 
-**⚠️ ETHICAL WARNING:** Osintgram is EXTREMELY invasive. Use only for:
+**ETHICAL WARNING:** Osintgram is EXTREMELY invasive. Use only for:
 - Authorized security testing
 - Your own accounts for testing
 - Accounts with explicit authorization
@@ -402,7 +402,7 @@ from:john_smith (SIEM OR firewall OR IDS OR WAF)
 
 **Objective:** Map organizational structure and professional relationships.
 
-**⚠️ NOTE:** LinkedIn has strict terms of service. Use manual browsing, not automated scraping.
+**NOTE:** LinkedIn has strict terms of service. Use manual browsing, not automated scraping.
 
 **Step 1: Employee Enumeration**
 

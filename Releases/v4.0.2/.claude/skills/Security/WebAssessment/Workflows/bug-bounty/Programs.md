@@ -139,7 +139,7 @@ Brief overview of the vulnerability (2-3 sentences)
 
 ## Bug Bounty Best Practices
 
-### Do's ✅
+### Do's ✓
 - **Read the policy** - Understand scope and rules completely
 - **Start broad** - Wide reconnaissance first
 - **Quality over quantity** - Focus on high-severity issues
@@ -148,7 +148,7 @@ Brief overview of the vulnerability (2-3 sentences)
 - **Respect timelines** - Follow disclosure deadlines
 - **Learn from duplicates** - Understand why it was a dup
 
-### Don'ts ❌
+### Don'ts ✗
 - **Don't test out of scope** - Strict scope adherence
 - **Don't spam** - Multiple low-quality reports hurts reputation
 - **Don't argue about bounties** - Accept triage decisions gracefully

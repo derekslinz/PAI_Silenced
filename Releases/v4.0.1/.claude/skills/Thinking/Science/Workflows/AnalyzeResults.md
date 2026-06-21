@@ -25,9 +25,9 @@ Pull up the goals defined in DefineGoal. Compare directly.
 
 | Success Criterion | Required | Actual | Status |
 |-------------------|----------|--------|--------|
-| [Criterion 1]     | [Value]  | [Value] | ✅/❌ |
-| [Criterion 2]     | [Value]  | [Value] | ✅/❌ |
-| [Criterion 3]     | [Value]  | [Value] | ✅/❌ |
+| [Criterion 1]     | [Value]  | [Value] | ✓/✗ |
+| [Criterion 2]     | [Value]  | [Value] | ✓/✗ |
+| [Criterion 3]     | [Value]  | [Value] | ✓/✗ |
 
 **Overall Goal Status:** [ACHIEVED / PARTIALLY ACHIEVED / NOT ACHIEVED]
 ```
@@ -176,7 +176,7 @@ When sample sizes and quantitative data warrant it:
 
 ## Analysis Quality Checklist
 
-| Criterion | Question | ✅ |
+| Criterion | Question | ✓ |
 |-----------|----------|---|
 | **Pre-Committed** | Comparing to criteria defined before data? | |
 | **Objective** | Letting data speak, not forcing interpretation? | |
@@ -198,7 +198,7 @@ When sample sizes and quantitative data warrant it:
 ## Goal Comparison
 | Criterion | Required | Achieved | Status |
 |-----------|----------|----------|--------|
-| [Crit 1]  | [Value]  | [Value]  | ✅/❌  |
+| [Crit 1]  | [Value]  | [Value]  | ✓/✗  |
 
 **Overall:** [ACHIEVED / NOT ACHIEVED]
 
@@ -228,24 +228,24 @@ When sample sizes and quantitative data warrant it:
 ## Common Pitfalls
 
 ### Pitfall 1: Moving Goalposts
-❌ "We didn't hit the number, but qualitatively it's better..."
-✅ "We didn't hit the number. That's a failure. What did we learn?"
+✗ "We didn't hit the number, but qualitatively it's better..."
+✓ "We didn't hit the number. That's a failure. What did we learn?"
 
 ### Pitfall 2: Cherry-Picking
-❌ Highlighting only data that supports the hypothesis
-✅ Presenting all data, including contradictory evidence
+✗ Highlighting only data that supports the hypothesis
+✓ Presenting all data, including contradictory evidence
 
 ### Pitfall 3: Over-Interpreting
-❌ Drawing sweeping conclusions from limited data
-✅ Matching confidence to evidence strength
+✗ Drawing sweeping conclusions from limited data
+✓ Matching confidence to evidence strength
 
 ### Pitfall 4: Dismissing Failures
-❌ "The experiment didn't work, let's move on"
-✅ "The experiment failed - why? What does that teach us?"
+✗ "The experiment didn't work, let's move on"
+✓ "The experiment failed - why? What does that teach us?"
 
 ### Pitfall 5: Confirmation Interpretation
-❌ Interpreting ambiguous data as supporting your belief
-✅ Explicitly considering alternative interpretations
+✗ Interpreting ambiguous data as supporting your belief
+✓ Explicitly considering alternative interpretations
 
 ---
 

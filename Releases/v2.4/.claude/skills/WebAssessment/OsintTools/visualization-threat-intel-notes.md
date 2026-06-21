@@ -6,9 +6,9 @@
 
 ---
 
-## 🎨 Gephi - Social Network Visualization
+## Gephi - Social Network Visualization
 
-### Installation Status: ✅ INSTALLED & READY
+### Installation Status: ✓ INSTALLED & READY
 
 **Location:** `/Applications/Gephi.app`
 **Version:** 0.10.1
@@ -107,9 +107,9 @@ Source,Target,Type,Weight
 
 ---
 
-## 🕵️ OpenCTI - Open Cyber Threat Intelligence Platform
+## OpenCTI - Open Cyber Threat Intelligence Platform
 
-### Installation Status: ❌ NOT INSTALLED (Documented for Future Use)
+### Installation Status: ✗ NOT INSTALLED (Documented for Future Use)
 
 **Repository:** https://github.com/OpenCTI-Platform/opencti
 **Documentation:** https://docs.opencti.io/
@@ -245,9 +245,9 @@ OpenCTI has 100+ connectors for automated threat intelligence ingestion:
 
 ---
 
-## 🔗 MISP - Malware Information Sharing Platform
+## MISP - Malware Information Sharing Platform
 
-### Installation Status: ❌ NOT INSTALLED (Documented for Future Use)
+### Installation Status: ✗ NOT INSTALLED (Documented for Future Use)
 
 **Repository:** https://github.com/MISP/MISP
 **Documentation:** https://www.misp-project.org/documentation/
@@ -403,14 +403,14 @@ MISP integrates with numerous OSINT and security tools:
 
 ---
 
-## 🎯 Decision Framework: When to Install What?
+## Decision Framework: When to Install What?
 
 ### For Most OSINT Research (Lightweight Approach)
 
 **Install Now:**
-- ✅ **Gephi** - Visual relationship mapping
-- ✅ **Maltego** - Automated reconnaissance and transforms
-- ✅ **Individual OSINT tools** (theHarvester, Shodan CLI, Spiderfoot, etc.)
+- ✓ **Gephi** - Visual relationship mapping
+- ✓ **Maltego** - Automated reconnaissance and transforms
+- ✓ **Individual OSINT tools** (theHarvester, Shodan CLI, Spiderfoot, etc.)
 
 **Workflow:**
 1. Collect data with OSINT tools
@@ -460,11 +460,11 @@ MISP integrates with numerous OSINT and security tools:
 ### Current Needs (Recommendation)
 
 **Currently Installed & Ready:**
-- ✅ **Gephi** - Immediate value for visualizing OSINT data
+- ✓ **Gephi** - Immediate value for visualizing OSINT data
 
 **Document for Future:**
-- 📄 **OpenCTI** - Install when building formal threat intelligence program
-- 📄 **MISP** - Install when needing IoC sharing and correlation
+- **OpenCTI** - Install when building formal threat intelligence program
+- **MISP** - Install when needing IoC sharing and correlation
 
 **Rationale:**
 - Gephi provides immediate visualization value with zero infrastructure overhead
@@ -480,17 +480,17 @@ MISP integrates with numerous OSINT and security tools:
 
 ---
 
-## 📊 Resource Comparison
+## Resource Comparison
 
 | Tool | RAM Required | Disk Space | Complexity | Install Time | Ready to Use |
 |------|--------------|------------|------------|--------------|--------------|
-| **Gephi** | Included in Java (~200 MB) | 500 MB | Low | 5 min | ✅ YES |
-| **OpenCTI** | 8+ GB dedicated | 50+ GB | High | 30-60 min | ❌ NO |
-| **MISP** | 4+ GB dedicated | 20+ GB | Moderate-High | 20-60 min | ❌ NO |
+| **Gephi** | Included in Java (~200 MB) | 500 MB | Low | 5 min | ✓ YES |
+| **OpenCTI** | 8+ GB dedicated | 50+ GB | High | 30-60 min | ✗ NO |
+| **MISP** | 4+ GB dedicated | 20+ GB | Moderate-High | 20-60 min | ✗ NO |
 
 ---
 
-## 🚀 Quick Start with Gephi
+## Quick Start with Gephi
 
 ### Example: Visualizing Domain Infrastructure
 
@@ -533,7 +533,7 @@ Source,Target,Type
 
 ---
 
-## 📚 Additional Resources
+## Additional Resources
 
 ### Gephi
 - Official Documentation: https://gephi.org/users/
@@ -552,15 +552,15 @@ Source,Target,Type
 
 ---
 
-## ✅ Installation Summary
+## ✓ Installation Summary
 
 | Tool | Status | Location | Command to Launch |
 |------|--------|----------|-------------------|
-| **Gephi** | ✅ INSTALLED | /Applications/Gephi.app | `open -a Gephi` |
-| **OpenCTI** | 📄 DOCUMENTED | Not installed | See installation section above |
-| **MISP** | 📄 DOCUMENTED | Not installed | See installation section above |
+| **Gephi** | ✓ INSTALLED | /Applications/Gephi.app | `open -a Gephi` |
+| **OpenCTI** | DOCUMENTED | Not installed | See installation section above |
+| **MISP** | DOCUMENTED | Not installed | See installation section above |
 
-**Java Runtime:** ✅ OpenJDK 25 installed and working
+**Java Runtime:** ✓ OpenJDK 25 installed and working
 
 ---
 

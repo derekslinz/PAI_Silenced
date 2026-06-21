@@ -62,7 +62,7 @@ White #FFFFFF or Light Cream #F5E6D3
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+## MANDATORY WORKFLOW STEPS
 
 ### Step 1: Define Timeline Structure
 

@@ -3,7 +3,7 @@ name: Telos
 description: Life OS and project analysis — goals, dependencies, beliefs, wisdom, books, movies, narrative points, interview extraction, McKinsey reports, and project dashboards. USE WHEN Telos, life goals, projects, dependencies, books, movies, beliefs, wisdom, update TELOS, narrative points, interview extraction, write report, McKinsey report, TELOS report, project analysis, dashboard, n=24.
 ---
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 

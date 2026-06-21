@@ -231,7 +231,7 @@ THIRD-ORDER:
 ## Output
 
 ```
-🎯 LEVERAGE POINT ANALYSIS: [system]
+LEVERAGE POINT ANALYSIS: [system]
 
 SYSTEM GOAL (implicit): [...]
 DESIRED BEHAVIOR: [...]

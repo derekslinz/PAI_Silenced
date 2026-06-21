@@ -22,17 +22,17 @@ async function test(name: string, fn: () => Promise<void>): Promise<void> {
   try {
     await fn()
     results.push({ name, status: 'PASS', duration: Date.now() - start })
-    console.log(`✅ ${name}`)
+    console.log(`✓ ${name}`)
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error)
     results.push({ name, status: 'FAIL', error: msg, duration: Date.now() - start })
-    console.log(`❌ ${name}: ${msg}`)
+    console.log(`✗ ${name}: ${msg}`)
   }
 }
 
 function skip(name: string, reason: string): void {
   results.push({ name, status: 'SKIP', error: reason })
-  console.log(`⏭️  ${name}: ${reason}`)
+  console.log(` ${name}: ${reason}`)
 }
 
 async function main() {
@@ -392,10 +392,10 @@ async function main() {
   const failed = results.filter(r => r.status === 'FAIL').length
   const skipped = results.filter(r => r.status === 'SKIP').length
 
-  console.log(`\n✅ Passed:  ${passed}`)
-  console.log(`❌ Failed:  ${failed}`)
-  console.log(`⏭️  Skipped: ${skipped}`)
-  console.log(`📊 Total:   ${results.length}`)
+  console.log(`\n✓ Passed:  ${passed}`)
+  console.log(`✗ Failed:  ${failed}`)
+  console.log(` Skipped: ${skipped}`)
+  console.log(`Total:   ${results.length}`)
 
   if (failed > 0) {
     console.log('\n--- FAILURES ---')
@@ -406,7 +406,7 @@ async function main() {
   }
 
   const totalDuration = results.reduce((sum, r) => sum + (r.duration || 0), 0)
-  console.log(`\n⏱️  Total time: ${(totalDuration / 1000).toFixed(2)}s`)
+  console.log(`\n Total time: ${(totalDuration / 1000).toFixed(2)}s`)
 
   process.exit(failed > 0 ? 1 : 0)
 }

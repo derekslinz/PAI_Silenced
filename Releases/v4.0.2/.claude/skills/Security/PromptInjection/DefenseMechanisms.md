@@ -16,10 +16,10 @@ Effective prompt injection defense requires **multiple layers** - no single cont
 - Validate input format against expected schema
 
 **Effectiveness:**
-- ✅ Blocks basic token manipulation
-- ✅ Prevents simple obfuscation
-- ⚠️ Can be bypassed with sophisticated encoding
-- ⚠️ May break legitimate special characters
+- ✓ Blocks basic token manipulation
+- ✓ Prevents simple obfuscation
+- Can be bypassed with sophisticated encoding
+- May break legitimate special characters
 
 **Implementation:**
 ```typescript
@@ -65,10 +65,10 @@ messages = [
 ```
 
 **Effectiveness:**
-- ✅ Clear boundary between instructions and data
-- ✅ Harder to override system instructions
-- ⚠️ Some models still mix instruction/data
-- ⚠️ Doesn't prevent indirect injection
+- ✓ Clear boundary between instructions and data
+- ✓ Harder to override system instructions
+- Some models still mix instruction/data
+- Doesn't prevent indirect injection
 
 ### Layer 3: Output Filtering
 
@@ -104,10 +104,10 @@ function filterOutput(llmOutput: string): string {
 ```
 
 **Effectiveness:**
-- ✅ Catches leaked sensitive information
-- ✅ Provides defense even if prompt is compromised
-- ⚠️ Can't catch all leak patterns
-- ⚠️ May over-filter legitimate outputs
+- ✓ Catches leaked sensitive information
+- ✓ Provides defense even if prompt is compromised
+- Can't catch all leak patterns
+- May over-filter legitimate outputs
 
 ### Layer 4: Privilege Isolation & Least Privilege
 
@@ -129,10 +129,10 @@ LLM API credentials:
 ```
 
 **Effectiveness:**
-- ✅ Limits impact of successful injection
-- ✅ Prevents privilege escalation
-- ⚠️ Doesn't prevent injection itself
-- ⚠️ May limit functionality
+- ✓ Limits impact of successful injection
+- ✓ Prevents privilege escalation
+- Doesn't prevent injection itself
+- May limit functionality
 
 ### Layer 5: Prompt Injection Detection
 
@@ -174,10 +174,10 @@ function detectInjection(input: string): boolean {
 - Alert security team (for repeated attempts)
 
 **Effectiveness:**
-- ✅ Provides visibility into attacks
-- ✅ Can block obvious injection attempts
-- ⚠️ High false positive rate
-- ⚠️ Sophisticated attacks evade detection
+- ✓ Provides visibility into attacks
+- ✓ Can block obvious injection attempts
+- High false positive rate
+- Sophisticated attacks evade detection
 
 ### Layer 6: Prompt Hardening
 
@@ -211,9 +211,9 @@ PRIORITY 2 INSTRUCTIONS (FLEXIBLE):
 ```
 
 **Effectiveness:**
-- ✅ Makes accidental instruction override harder
-- ⚠️ Sophisticated attacks can still succeed
-- ⚠️ Increases prompt complexity and cost
+- ✓ Makes accidental instruction override harder
+- Sophisticated attacks can still succeed
+- Increases prompt complexity and cost
 
 ### Layer 7: RAG-Specific Defenses
 
@@ -248,10 +248,10 @@ function sanitizeBeforeIndexing(document: string): string {
 - Limit retrieved content length
 
 **Effectiveness:**
-- ✅ Prevents cross-user RAG poisoning
-- ✅ Reduces document upload injection
-- ⚠️ Can impact legitimate retrieval
-- ⚠️ Sophisticated injections still possible
+- ✓ Prevents cross-user RAG poisoning
+- ✓ Reduces document upload injection
+- Can impact legitimate retrieval
+- Sophisticated injections still possible
 
 ### Layer 8: Rate Limiting & Abuse Prevention
 
@@ -279,28 +279,28 @@ function checkRateLimit(userId: string, request: string): boolean {
 ```
 
 **Effectiveness:**
-- ✅ Slows down automated testing
-- ✅ Provides detection signal
-- ⚠️ Can impact legitimate heavy users
-- ⚠️ Doesn't prevent manual testing
+- ✓ Slows down automated testing
+- ✓ Provides detection signal
+- Can impact legitimate heavy users
+- Doesn't prevent manual testing
 
 ## Defense Effectiveness Matrix
 
 | Defense Layer | Basic Injection | Obfuscated | Multi-Stage | RAG Poisoning | Indirect |
 |---------------|----------------|------------|-------------|---------------|----------|
-| Input Sanitization | ✅ High | ⚠️ Medium | ❌ Low | ❌ Low | ❌ Low |
-| Instruction/Data Separation | ✅ High | ✅ High | ⚠️ Medium | ⚠️ Medium | ⚠️ Medium |
-| Output Filtering | ⚠️ Medium | ⚠️ Medium | ⚠️ Medium | ⚠️ Medium | ⚠️ Medium |
+| Input Sanitization | ✓ High | Medium | ✗ Low | ✗ Low | ✗ Low |
+| Instruction/Data Separation | ✓ High | ✓ High | Medium | Medium | Medium |
+| Output Filtering | Medium | Medium | Medium | Medium | Medium |
 | Privilege Isolation | N/A (Limits impact) | N/A | N/A | N/A | N/A |
-| Injection Detection | ✅ High | ⚠️ Medium | ❌ Low | ⚠️ Medium | ⚠️ Medium |
-| Prompt Hardening | ⚠️ Medium | ⚠️ Medium | ❌ Low | ❌ Low | ❌ Low |
-| RAG-Specific | N/A | N/A | N/A | ✅ High | ✅ High |
-| Rate Limiting | ⚠️ Medium | ⚠️ Medium | ❌ Low | ⚠️ Medium | ⚠️ Medium |
+| Injection Detection | ✓ High | Medium | ✗ Low | Medium | Medium |
+| Prompt Hardening | Medium | Medium | ✗ Low | ✗ Low | ✗ Low |
+| RAG-Specific | N/A | N/A | N/A | ✓ High | ✓ High |
+| Rate Limiting | Medium | Medium | ✗ Low | Medium | Medium |
 
 **Legend:**
-- ✅ High effectiveness
-- ⚠️ Medium effectiveness
-- ❌ Low effectiveness
+- ✓ High effectiveness
+- Medium effectiveness
+- ✗ Low effectiveness
 - N/A: Not applicable to attack type
 
 ## Recommended Defense Stack

@@ -8,16 +8,16 @@ Comprehensive prompt injection security testing framework for authorized penetra
 
 ---
 
-## 🔒 Authorization Required
+## Authorization Required
 
-**⚠️ CRITICAL: This skill is for AUTHORIZED testing only ⚠️**
+**CRITICAL: This skill is for AUTHORIZED testing only **
 
-- ✅ Systems you own
-- ✅ Systems with explicit written permission
-- ✅ Professional security engagements
-- ✅ Ethical security research
+- ✓ Systems you own
+- ✓ Systems with explicit written permission
+- ✓ Professional security engagements
+- ✓ Ethical security research
 
-❌ **NEVER use without authorization** - Unauthorized testing is illegal
+✗ **NEVER use without authorization** - Unauthorized testing is illegal
 
 ---
 
@@ -307,16 +307,16 @@ browser network-logs /api/
 **For authorized security testing only.**
 
 This skill and all associated materials are for:
-- ✅ Authorized security testing
-- ✅ Defensive security research
-- ✅ Educational purposes (with proper authorization)
-- ✅ Professional security engagements
+- ✓ Authorized security testing
+- ✓ Defensive security research
+- ✓ Educational purposes (with proper authorization)
+- ✓ Professional security engagements
 
 **Prohibited uses:**
-- ❌ Unauthorized testing
-- ❌ Malicious purposes
-- ❌ Illegal activities
-- ❌ Unethical exploitation
+- ✗ Unauthorized testing
+- ✗ Malicious purposes
+- ✗ Illegal activities
+- ✗ Unethical exploitation
 
 ---
 
@@ -343,7 +343,7 @@ This skill and all associated materials are for:
 
 ---
 
-**🔒 AUTHORIZATION REQUIRED - ETHICAL USE ONLY 🔒**
+**AUTHORIZATION REQUIRED - ETHICAL USE ONLY **
 
 This is professional security testing infrastructure for authorized use only.
 

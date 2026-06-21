@@ -1,10 +1,10 @@
-# Humanize: Turn stiff AI text 🤖 into human-sounding gold 🪙
+# Humanize: Turn stiff AI text into human-sounding gold 
 
 **Humanize** aims to help make AI writing sound more like a real person wrote it. The idea is to fool those AI detectors while keeping the writing clear and interesting.
 
 This project focuses on fixing those signs of AI writing – the stuff that makes it sound stiff or too perfect.
 
-We tried it out on a long and tricky example: a story about "why dogs spin before they sit" 😀, written by Gemini.  Here's how the output did on some AI checkers:
+We tried it out on a long and tricky example: a story about "why dogs spin before they sit" , written by Gemini.  Here's how the output did on some AI checkers:
 
 * Quillbot: 59% AI
 * ZeroGPT: 54% AI
@@ -13,7 +13,7 @@ We tried it out on a long and tricky example: a story about "why dogs spin befor
 
 Other example give 0% score, so it reall depends on the input text, which AI and which scanner you use.
 
-Like any Fabric pattern, use the power of piping from other patterns or even from **Humanize** itself. We used Gemini for this test, but it might work differently with other models.  So play around and see what you find... and yes, this text have been Humanized (and revised) 😉
+Like any Fabric pattern, use the power of piping from other patterns or even from **Humanize** itself. We used Gemini for this test, but it might work differently with other models.  So play around and see what you find... and yes, this text have been Humanized (and revised) 
 
 Have fun using **Humanize**!
 

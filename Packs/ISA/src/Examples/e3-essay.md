@@ -114,7 +114,7 @@ Ship a 1400–1600-word essay in three sections that opens with a concrete first
 - [ ] ISC-31: A "what I cut" file is preserved at `cuts.md` showing what was edited out (probe: file exists, ≥ 500 words of cuts).
 - [ ] ISC-32: The frontmatter `started` and `published_at` timestamps reflect the actual ≥ 4-day gestation (probe: timestamps).
 - [ ] ISC-33: A short Decisions entry captures which paragraph caused the most rewriting and why (lessons for next essay).
-- [ ] ISC-34: At least one ❌ DEAD END Decisions entry exists (a draft direction that was tried and abandoned).
+- [ ] ISC-34: At least one ✗ DEAD END Decisions entry exists (a draft direction that was tried and abandoned).
 
 ## Test Strategy
 
@@ -187,14 +187,14 @@ Ship a 1400–1600-word essay in three sections that opens with a concrete first
 ## Decisions
 
 - 2026-03-17 03:30: Three sections, no subheaders, locked. The form constraint forces the through-line to be load-bearing.
-- 2026-03-18 11:00: ❌ DEAD END: Tried opening with a quote from a public figure. Felt borrowed; reader's recognition stayed external. Reverted to a concrete-situation opener. Don't retry.
+- 2026-03-18 11:00: ✗ DEAD END: Tried opening with a quote from a public figure. Felt borrowed; reader's recognition stayed external. Reverted to a concrete-situation opener. Don't retry.
 - 2026-03-19 22:30: refined: ISC-13 sharpened from "readers find the opening relatable" to "≥ 3/5 founder readers mark 'yes, that's me' to the second paragraph specifically." The first phrasing was unfalsifiable; the second isolates the load-bearing moment.
-- 2026-03-20 09:00: ❌ DEAD END: Tried structuring the middle as five examples instead of three. The fifth and fourth examples started repeating each other; cut to three with one extended. Don't retry.
+- 2026-03-20 09:00: ✗ DEAD END: Tried structuring the middle as five examples instead of three. The fifth and fourth examples started repeating each other; cut to three with one extended. Don't retry.
 - 2026-03-20 14:30: refined: ISC-7 sharpened from "close offers a takeaway" to "close names a specific calibration tool the reader can apply within 24 hours." Vague closes are why most essays of this shape fail to land.
 - 2026-03-21 09:00: refined: ISC-12 added (≤ 5 first-person plural) after a draft read like a "we should all" sermon. The essay is observation, not exhortation.
 
 <!--
 E3 art ISA. Required sections: Problem, Vision, Out of Scope, Constraints, Goal, Criteria, Features, Test Strategy.
 Optional Principles included because the essay is experiential and the principles do real work in the writing pass.
-ISC count of 34 exceeds the E3 floor of 32. Three Antecedent ISCs (ISC-13, 14, 15) carry the experiential-goal contract: they name the preconditions that reliably produce the target reader experience. Without them, ISC-29 and ISC-30 (post-publish reception) would be unfalsifiable hopes rather than testable claims. Anti-criteria (ISC-18, 19, 20, 21) cover scope, regression, voice, and a future-essay-drift trap. The Decisions section shows two ❌ DEAD ENDs and three refinements — typical density for a first draft of an essay that knows its shape but is still finding its load-bearing moments.
+ISC count of 34 exceeds the E3 floor of 32. Three Antecedent ISCs (ISC-13, 14, 15) carry the experiential-goal contract: they name the preconditions that reliably produce the target reader experience. Without them, ISC-29 and ISC-30 (post-publish reception) would be unfalsifiable hopes rather than testable claims. Anti-criteria (ISC-18, 19, 20, 21) cover scope, regression, voice, and a future-essay-drift trap. The Decisions section shows two ✗ DEAD ENDs and three refinements — typical density for a first draft of an essay that knows its shape but is still finding its load-bearing moments.
 -->

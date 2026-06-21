@@ -131,8 +131,8 @@ export function extractVoiceCompletion(text: string): string {
 
   // Use global flag and find LAST match (voice line is at end of response)
   const completedPatterns = [
-    new RegExp(`🗣️\\s*\\*{0,2}${DA_IDENTITY.name}:?\\*{0,2}\\s*(.+?)(?:\\n|$)`, 'gi'),
-    /🎯\s*\*{0,2}COMPLETED:?\*{0,2}\s*(.+?)(?:\n|$)/gi,
+    new RegExp(`\\s*\\*{0,2}${DA_IDENTITY.name}:?\\*{0,2}\\s*(.+?)(?:\\n|$)`, 'gi'),
+    /\s*\*{0,2}COMPLETED:?\*{0,2}\s*(.+?)(?:\n|$)/gi,
   ];
 
   for (const pattern of completedPatterns) {
@@ -163,8 +163,8 @@ export function extractCompletionPlain(text: string): string {
 
   // Use global flag and find LAST match (voice line is at end of response)
   const completedPatterns = [
-    new RegExp(`🗣️\\s*\\*{0,2}${DA_IDENTITY.name}:?\\*{0,2}\\s*(.+?)(?:\\n|$)`, 'gi'),
-    /🎯\s*\*{0,2}COMPLETED:?\*{0,2}\s*(.+?)(?:\n|$)/gi,
+    new RegExp(`\\s*\\*{0,2}${DA_IDENTITY.name}:?\\*{0,2}\\s*(.+?)(?:\\n|$)`, 'gi'),
+    /\s*\*{0,2}COMPLETED:?\*{0,2}\s*(.+?)(?:\n|$)/gi,
   ];
 
   for (const pattern of completedPatterns) {
@@ -186,7 +186,7 @@ export function extractCompletionPlain(text: string): string {
   }
 
   // Fallback: try to extract something meaningful from the response
-  const summaryMatch = text.match(/📋\s*\*{0,2}SUMMARY:?\*{0,2}\s*(.+?)(?:\n|$)/i);
+  const summaryMatch = text.match(/\s*\*{0,2}SUMMARY:?\*{0,2}\s*(.+?)(?:\n|$)/i);
   if (summaryMatch && summaryMatch[1]) {
     let summary = summaryMatch[1].trim().slice(0, 30);
     return summary.length > 27 ? summary.slice(0, 27) + '…' : summary;
@@ -205,14 +205,14 @@ export function extractStructuredSections(text: string): StructuredResponse {
   text = text.replace(/<system-reminder>[\s\S]*?<\/system-reminder>/g, '');
 
   const patterns: Record<keyof StructuredResponse, RegExp> = {
-    date: /📅\s*(.+?)(?:\n|$)/i,
-    summary: /📋\s*SUMMARY:\s*(.+?)(?:\n|$)/i,
-    analysis: /🔍\s*ANALYSIS:\s*(.+?)(?:\n|$)/i,
-    actions: /⚡\s*ACTIONS:\s*(.+?)(?:\n|$)/i,
-    results: /✅\s*RESULTS:\s*(.+?)(?:\n|$)/i,
-    status: /📊\s*STATUS:\s*(.+?)(?:\n|$)/i,
-    next: /➡️\s*NEXT:\s*(.+?)(?:\n|$)/i,
-    completed: new RegExp(`(?:🗣️\\s*${DA_IDENTITY.name}:|🎯\\s*COMPLETED:)\\s*(.+?)(?:\\n|$)`, 'i'),
+    date: /\s*(.+?)(?:\n|$)/i,
+    summary: /\s*SUMMARY:\s*(.+?)(?:\n|$)/i,
+    analysis: /\s*ANALYSIS:\s*(.+?)(?:\n|$)/i,
+    actions: /\s*ACTIONS:\s*(.+?)(?:\n|$)/i,
+    results: /✓\s*RESULTS:\s*(.+?)(?:\n|$)/i,
+    status: /\s*STATUS:\s*(.+?)(?:\n|$)/i,
+    next: /→\s*NEXT:\s*(.+?)(?:\n|$)/i,
+    completed: new RegExp(`(?:\\s*${DA_IDENTITY.name}:|\\s*COMPLETED:)\\s*(.+?)(?:\\n|$)`, 'i'),
   };
 
   for (const [key, pattern] of Object.entries(patterns)) {
@@ -263,12 +263,12 @@ export function detectResponseState(lastMessage: string, transcriptContent: stri
   }
 
   // Check for error indicators
-  if (/📊\s*STATUS:.*(?:error|failed|broken|problem|issue)/i.test(lastMessage)) {
+  if (/\s*STATUS:.*(?:error|failed|broken|problem|issue)/i.test(lastMessage)) {
     return 'error';
   }
 
   const hasErrorKeyword = /\b(?:error|failed|exception|crash|broken)\b/i.test(lastMessage);
-  const hasErrorEmoji = /❌|🚨|⚠️/.test(lastMessage);
+  const hasErrorEmoji = /✗||/.test(lastMessage);
   if (hasErrorKeyword && hasErrorEmoji) {
     return 'error';
   }

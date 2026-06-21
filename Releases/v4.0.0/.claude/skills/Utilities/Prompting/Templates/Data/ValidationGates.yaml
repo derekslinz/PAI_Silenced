@@ -237,13 +237,13 @@ templates:
       **Category:** {{gate.category}}
       **Action on Fail:** {{gate.action_on_fail}}
 
-      **🚨 MANDATORY (if ANY missing, {{gate.action_on_fail}}):**
+      **MANDATORY (if ANY missing, {{gate.action_on_fail}}):**
       {{#each gate.mandatory}}
       - [ ] **{{name}}** — {{description}}
       {{/each}}
 
       {{#if gate.recommended}}
-      **✅ RECOMMENDED:**
+      **✓ RECOMMENDED:**
       {{#each gate.recommended}}
       - [ ] {{name}} — {{description}}
       {{/each}}

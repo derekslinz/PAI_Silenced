@@ -2,7 +2,7 @@
 
 Intelligent multi-layer content retrieval system for DIFFICULT content retrieval. Uses built-in tools (WebFetch, WebSearch), BrightData MCP (CAPTCHA handling, advanced scraping), and Apify MCP (RAG browser, Actor ecosystem). USE ONLY WHEN user indicates difficulty: 'can't get this', 'having trouble', 'site is blocking', 'protected site', 'keeps giving CAPTCHA', 'won't let me scrape'. DO NOT use for simple 'read this page' or 'get content from' without indication of difficulty.
 
-## 🎯 Load Full PAI Context
+## Load Full PAI Context
 
 **Before starting any task with this skill, load complete PAI context:**
 
@@ -18,9 +18,9 @@ This provides access to:
 
 ## When to Use This Skill
 
-**⚠️ IMPORTANT:** This skill is for CHALLENGING content retrieval only, not routine fetching.
+**IMPORTANT:** This skill is for CHALLENGING content retrieval only, not routine fetching.
 
-**✅ DO USE this skill when user indicates difficulty:**
+**✓ DO USE this skill when user indicates difficulty:**
 - "I can't get this content"
 - "Having trouble retrieving this"
 - "Site is blocking me"
@@ -32,7 +32,7 @@ This provides access to:
 - "Tried to fetch but failed"
 - "Need advanced scraping for this"
 
-**❌ DO NOT use this skill for simple requests:**
+**✗ DO NOT use this skill for simple requests:**
 - "Read this page" → Use WebFetch directly
 - "Get content from [URL]" → Use WebFetch directly
 - "What does this site say" → Use WebFetch directly
@@ -43,7 +43,7 @@ This provides access to:
 
 **NOT for research questions** - use the research skill instead for "research X" or "find information about X"
 
-## 🎯 Intelligent Retrieval Strategy
+## Intelligent Retrieval Strategy
 
 The Retrieve skill uses a **3-layer fallback strategy** to ensure content can always be retrieved:
 
@@ -275,7 +275,7 @@ mcp__Apify__call-actor({
 - Layer 1 and 2 failed
 - Need platform-specific extraction logic
 
-## 🔄 Complete Retrieval Workflow
+## Complete Retrieval Workflow
 
 ### Example: Retrieve Article Content
 
@@ -362,22 +362,22 @@ mcp__Apify__apify-slash-rag-web-browser({
 })
 ```
 
-## 📊 Layer Comparison Matrix
+## Layer Comparison Matrix
 
 | Feature | Layer 1 (Built-in) | Layer 2 (BrightData) | Layer 3 (Apify) |
 |---------|-------------------|----------------------|-----------------|
 | **Speed** | Fast (< 5s) | Medium (10-30s) | Slower (30-60s) |
-| **Bot Detection Bypass** | ❌ No | ✅ Yes | ✅ Yes |
-| **CAPTCHA Handling** | ❌ No | ✅ Yes | ✅ Yes |
-| **JavaScript Rendering** | ⚠️ Limited | ✅ Full | ✅ Full |
-| **Batch Operations** | Manual | ✅ Up to 10 | ✅ Unlimited |
-| **Search Integration** | ✅ Basic | ✅ Multi-engine | ✅ Google only |
-| **Markdown Output** | ✅ Yes | ✅ Yes | ✅ Optimized |
-| **Specialized Extraction** | ❌ No | ❌ No | ✅ Yes (Actors) |
+| **Bot Detection Bypass** | ✗ No | ✓ Yes | ✓ Yes |
+| **CAPTCHA Handling** | ✗ No | ✓ Yes | ✓ Yes |
+| **JavaScript Rendering** | Limited | ✓ Full | ✓ Full |
+| **Batch Operations** | Manual | ✓ Up to 10 | ✓ Unlimited |
+| **Search Integration** | ✓ Basic | ✓ Multi-engine | ✓ Google only |
+| **Markdown Output** | ✓ Yes | ✓ Yes | ✓ Optimized |
+| **Specialized Extraction** | ✗ No | ✗ No | ✓ Yes (Actors) |
 | **Cost** | Free | Paid | Paid |
 | **Best For** | Simple pages | Protected sites | Specialized scraping |
 
-## 🚨 Error Handling & Escalation
+## Error Handling & Escalation
 
 **Layer 1 Errors → Escalate to Layer 2:**
 - HTTP 403 (Forbidden)
@@ -399,7 +399,7 @@ mcp__Apify__apify-slash-rag-web-browser({
 - Requires manual intervention or login
 - Legal/ethical concerns with scraping
 
-## 📁 Scratch → History Pattern
+## Scratch → History Pattern
 
 **Working Directory (Scratch):** `~/.claude/MEMORY/WORK/{current_work}/scratch/`
 
@@ -490,7 +490,7 @@ mcp__Apify__apify-slash-rag-web-browser({
 [Any limitations, challenges, or follow-up needed]
 ```
 
-## 🎯 Quick Reference Card
+## Quick Reference Card
 
 **Start with Layer 1 (Built-in):**
 - Simple public webpages

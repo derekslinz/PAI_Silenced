@@ -104,4 +104,4 @@ Ship a single-file `arxiv.ts` CLI that takes paper IDs as arguments, queries the
 ## Decisions
 
 - 2026-02-01 18:00: Hand-rolled XML parse over a library — Bun has no built-in XML, the response shape is bounded, and adding a dep would violate the zero-deps constraint.
-- 2026-02-08 22:30: ❌ DEAD END: Tried Promise.all() with 100-IDs — arxiv rate-limited after request 12. Reverted to a 3-concurrency queue. Don't retry.
+- 2026-02-08 22:30: ✗ DEAD END: Tried Promise.all() with 100-IDs — arxiv rate-limited after request 12. Reverted to a 3-concurrency queue. Don't retry.

@@ -123,23 +123,23 @@ async function main() {
   }
   const full = await getDimensions(args.input);
   const bgColor = args.bgColor === "auto" ? await detectBgColor(args.input) : args.bgColor;
-  console.log(`📐 input: ${full.w}x${full.h}  bg-color: ${bgColor}  fuzz: ${args.fuzz}%`);
+  console.log(`input: ${full.w}x${full.h}  bg-color: ${bgColor}  fuzz: ${args.fuzz}%`);
 
   let bbox: Geometry;
   try {
     bbox = await getBbox(args.input, bgColor, args.fuzz);
   } catch (e) {
-    console.error(`❌ bbox detection failed: ${(e as Error).message}`);
+    console.error(`✗ bbox detection failed: ${(e as Error).message}`);
     console.error(`   try a different --bg-color or larger --fuzz`);
     process.exit(1);
   }
 
   const before = marginPercents(bbox, full);
-  console.log(`📏 before: bbox ${bbox.width}x${bbox.height}+${bbox.offsetX}+${bbox.offsetY}  margins T:${before.top.toFixed(1)}%  B:${before.bottom.toFixed(1)}%  L:${before.left.toFixed(1)}%  R:${before.right.toFixed(1)}%`);
+  console.log(`before: bbox ${bbox.width}x${bbox.height}+${bbox.offsetX}+${bbox.offsetY}  margins T:${before.top.toFixed(1)}%  B:${before.bottom.toFixed(1)}%  L:${before.left.toFixed(1)}%  R:${before.right.toFixed(1)}%`);
 
   const maxMarginBefore = Math.max(before.top, before.bottom, before.left, before.right);
   if (maxMarginBefore <= args.maxMargin) {
-    console.log(`✅ already full-frame (max margin ${maxMarginBefore.toFixed(1)}% ≤ ${args.maxMargin}%)`);
+    console.log(`✓ already full-frame (max margin ${maxMarginBefore.toFixed(1)}% ≤ ${args.maxMargin}%)`);
     if (!args.reportOnly && args.input !== args.output) {
       await $`cp ${args.input} ${args.output}`.quiet();
     }
@@ -147,7 +147,7 @@ async function main() {
   }
 
   if (args.reportOnly) {
-    console.log(`⚠️  margins exceed ${args.maxMargin}% threshold — refill needed`);
+    console.log(` margins exceed ${args.maxMargin}% threshold — refill needed`);
     process.exit(1);
   }
 
@@ -165,7 +165,7 @@ async function main() {
   const sqXClamped = Math.min(sqX, full.w - sq);
   const sqYClamped = Math.min(sqY, full.h - sq);
 
-  console.log(`✂️  cropping to ${sq}x${sq}+${sqXClamped}+${sqYClamped} then resizing to ${args.targetSize}x${args.targetSize}`);
+  console.log(` cropping to ${sq}x${sq}+${sqXClamped}+${sqYClamped} then resizing to ${args.targetSize}x${args.targetSize}`);
 
   await $`magick ${args.input} -crop ${`${sq}x${sq}+${sqXClamped}+${sqYClamped}`} +repage -resize ${`${args.targetSize}x${args.targetSize}`} ${args.output}`.quiet();
 
@@ -173,18 +173,18 @@ async function main() {
   const outFull = await getDimensions(args.output);
   const outBbox = await getBbox(args.output, bgColor, args.fuzz);
   const after = marginPercents(outBbox, outFull);
-  console.log(`📏 after:  bbox ${outBbox.width}x${outBbox.height}+${outBbox.offsetX}+${outBbox.offsetY}  margins T:${after.top.toFixed(1)}%  B:${after.bottom.toFixed(1)}%  L:${after.left.toFixed(1)}%  R:${after.right.toFixed(1)}%`);
+  console.log(`after:  bbox ${outBbox.width}x${outBbox.height}+${outBbox.offsetX}+${outBbox.offsetY}  margins T:${after.top.toFixed(1)}%  B:${after.bottom.toFixed(1)}%  L:${after.left.toFixed(1)}%  R:${after.right.toFixed(1)}%`);
 
   const maxAfter = Math.max(after.top, after.bottom, after.left, after.right);
   if (maxAfter > args.maxMargin) {
-    console.error(`❌ margins still exceed ${args.maxMargin}% after refill (max ${maxAfter.toFixed(1)}%)`);
+    console.error(`✗ margins still exceed ${args.maxMargin}% after refill (max ${maxAfter.toFixed(1)}%)`);
     process.exit(1);
   }
-  console.log(`✅ refilled to full frame (max margin ${maxAfter.toFixed(1)}% ≤ ${args.maxMargin}%)`);
+  console.log(`✓ refilled to full frame (max margin ${maxAfter.toFixed(1)}% ≤ ${args.maxMargin}%)`);
   console.log(`   ${args.output} (${(statSync(args.output).size / 1024).toFixed(0)} KB)`);
 }
 
 main().catch((e) => {
-  console.error(`❌ ${(e as Error).message}`);
+  console.error(`✗ ${(e as Error).message}`);
   process.exit(1);
 });

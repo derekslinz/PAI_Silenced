@@ -45,17 +45,17 @@ function formatCategoryName(key: string): string {
 }
 
 function listCategories(sources: Sources): void {
-  console.log('📊 Annual Security Reports\n');
+  console.log('Annual Security Reports\n');
   console.log(`Source: ${sources.metadata.source}`);
   console.log(`Last Updated: ${sources.metadata.lastUpdated}`);
   console.log(`Total Reports: ${sources.metadata.totalReports}\n`);
 
-  console.log('📋 ANALYSIS REPORTS:');
+  console.log('ANALYSIS REPORTS:');
   for (const [key, reports] of Object.entries(sources.categories.analysis)) {
     console.log(`  ${formatCategoryName(key)}: ${reports.length} reports`);
   }
 
-  console.log('\n📋 SURVEY REPORTS:');
+  console.log('\nSURVEY REPORTS:');
   for (const [key, reports] of Object.entries(sources.categories.survey)) {
     console.log(`  ${formatCategoryName(key)}: ${reports.length} reports`);
   }
@@ -79,14 +79,14 @@ function listCategory(sources: Sources, categoryName: string): void {
   }
 
   if (!reports) {
-    console.log(`❌ Category not found: ${categoryName}`);
+    console.log(`✗ Category not found: ${categoryName}`);
     console.log('\nAvailable categories:');
     console.log('Analysis:', Object.keys(sources.categories.analysis).join(', '));
     console.log('Survey:', Object.keys(sources.categories.survey).join(', '));
     return;
   }
 
-  console.log(`📊 ${formatCategoryName(normalizedName)} (${foundIn})\n`);
+  console.log(`${formatCategoryName(normalizedName)} (${foundIn})\n`);
   console.log(`${reports.length} reports:\n`);
 
   for (const report of reports) {
@@ -124,11 +124,11 @@ function searchReports(sources: Sources, term: string): void {
   }
 
   if (results.length === 0) {
-    console.log(`❌ No reports found matching: ${term}`);
+    console.log(`✗ No reports found matching: ${term}`);
     return;
   }
 
-  console.log(`🔍 Search results for "${term}": ${results.length} reports\n`);
+  console.log(`Search results for "${term}": ${results.length} reports\n`);
 
   for (const { category, type, report } of results) {
     console.log(`• ${report.vendor}: ${report.name}`);
@@ -160,11 +160,11 @@ function listVendor(sources: Sources, vendorName: string): void {
   }
 
   if (results.length === 0) {
-    console.log(`❌ No reports found from vendor: ${vendorName}`);
+    console.log(`✗ No reports found from vendor: ${vendorName}`);
     return;
   }
 
-  console.log(`🏢 Reports from "${vendorName}": ${results.length} reports\n`);
+  console.log(`Reports from "${vendorName}": ${results.length} reports\n`);
 
   for (const { category, type, report } of results) {
     console.log(`• ${report.name}`);

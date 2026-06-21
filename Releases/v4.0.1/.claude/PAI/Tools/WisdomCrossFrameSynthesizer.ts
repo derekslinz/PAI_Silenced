@@ -156,7 +156,7 @@ function findCrossPrinciples(frames: FrameData[]): CrossPrinciple[] {
       );
       if (!existing) {
         crossPrinciples.push({
-          principle: `Explicit connection: ${frame.domain} ↔ ${targetDomain}`,
+          principle: `Explicit connection: ${frame.domain} ${targetDomain}`,
           domains: [frame.domain, targetDomain],
           confidence: frame.confidence,
           evidence: `Declared in ${frame.domain} frame cross-connections`,
@@ -269,7 +269,7 @@ function generateHealthReport(healthData: FrameHealth[]): string {
 | Domain | Health | Confidence | Observations | Last Updated | Principles | Anti-Patterns |
 |--------|--------|-----------|-------------|-------------|------------|---------------|
 ${healthData.map(h => {
-    const icon = h.health === 'growing' ? '🟢' : h.health === 'stable' ? '🟡' : '🔴';
+    const icon = h.health === 'growing' ? '●' : h.health === 'stable' ? '●' : '●';
     return `| ${h.domain} | ${icon} ${h.health} | ${h.confidence}% | ${h.observationCount}+ | ${h.lastCrystallized} | ${h.principleCount} | ${h.antiPatternCount} |`;
   }).join('\n')}
 
@@ -323,7 +323,7 @@ Output: WISDOM/PRINCIPLES/verified.md and WISDOM/META/frame-health.md
     process.exit(0);
   }
 
-  console.log(`📊 Loading ${frameFiles.length} frames...`);
+  console.log(`Loading ${frameFiles.length} frames...`);
   const frames = frameFiles.map(f => parseFrame(join(FRAMES_DIR, f)));
 
   if (values.health) {
@@ -335,13 +335,13 @@ Output: WISDOM/PRINCIPLES/verified.md and WISDOM/META/frame-health.md
     } else {
       if (!existsSync(META_DIR)) mkdirSync(META_DIR, { recursive: true });
       writeFileSync(join(META_DIR, 'frame-health.md'), report);
-      console.log(`✅ Health report written to WISDOM/META/frame-health.md`);
+      console.log(`✓ Health report written to WISDOM/META/frame-health.md`);
     }
     process.exit(0);
   }
 
   // Run cross-frame synthesis
-  console.log('🔍 Analyzing cross-frame principles...');
+  console.log('Analyzing cross-frame principles...');
   const crossPrinciples = findCrossPrinciples(frames);
   console.log(`   Found ${crossPrinciples.length} cross-domain principles`);
 
@@ -352,13 +352,13 @@ Output: WISDOM/PRINCIPLES/verified.md and WISDOM/META/frame-health.md
   } else {
     if (!existsSync(PRINCIPLES_DIR)) mkdirSync(PRINCIPLES_DIR, { recursive: true });
     writeFileSync(join(PRINCIPLES_DIR, 'verified.md'), report);
-    console.log(`✅ Principles report written to WISDOM/PRINCIPLES/verified.md`);
+    console.log(`✓ Principles report written to WISDOM/PRINCIPLES/verified.md`);
 
     // Also generate health report
     const healthData = frames.map(assessHealth);
     const healthReport = generateHealthReport(healthData);
     if (!existsSync(META_DIR)) mkdirSync(META_DIR, { recursive: true });
     writeFileSync(join(META_DIR, 'frame-health.md'), healthReport);
-    console.log(`✅ Health report written to WISDOM/META/frame-health.md`);
+    console.log(`✓ Health report written to WISDOM/META/frame-health.md`);
   }
 }

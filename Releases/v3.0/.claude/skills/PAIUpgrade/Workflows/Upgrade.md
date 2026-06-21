@@ -281,10 +281,10 @@ Filter out discoveries with relevance < 3.
 
 Sort by priority score and categorize into FOUR tiers:
 
-- **🔴 CRITICAL:** Score > 30, relevance > 8. Fixes gaps, security issues, or unlocks capabilities PAI should already have. Integrate immediately.
-- **🟠 HIGH:** Score 22-30, relevance > 6. Significantly improves PAI capabilities or efficiency. Integrate this week.
-- **🟡 MEDIUM:** Score 14-21, relevance > 4. Adds useful capabilities or aligns with ecosystem best practices. Integrate when convenient.
-- **🟢 LOW:** Score < 14, or relevance 3-4. Nice-to-know, future reference, or will become relevant later.
+- **● CRITICAL:** Score > 30, relevance > 8. Fixes gaps, security issues, or unlocks capabilities PAI should already have. Integrate immediately.
+- **● HIGH:** Score 22-30, relevance > 6. Significantly improves PAI capabilities or efficiency. Integrate this week.
+- **● MEDIUM:** Score 14-21, relevance > 4. Adds useful capabilities or aligns with ecosystem best practices. Integrate when convenient.
+- **● LOW:** Score < 14, or relevance 3-4. Nice-to-know, future reference, or will become relevant later.
 
 For each recommendation, include:
 - Short action name (what to do)
@@ -298,9 +298,9 @@ For each recommendation, include:
 
 Generate the final report following SKILL.md's "Primary Output Format". The report has THREE major sections:
 
-1. **✨ Discoveries** — Everything interesting found, ranked by coolness/interestingness, with source and PAI relevance. This is the "what's out there" overview {PRINCIPAL.NAME} reads first.
-2. **🔥 Recommendations** — What to actually integrate, organized by four priority tiers.
-3. **🎯 Technique Details** — Full extracted techniques with code examples as reference.
+1. **★ Discoveries** — Everything interesting found, ranked by coolness/interestingness, with source and PAI relevance. This is the "what's out there" overview {PRINCIPAL.NAME} reads first.
+2. **Recommendations** — What to actually integrate, organized by four priority tiers.
+3. **Technique Details** — Full extracted techniques with code examples as reference.
 
 ```markdown
 # PAI Upgrade Report
@@ -310,7 +310,7 @@ Generate the final report following SKILL.md's "Primary Output Format". The repo
 
 ---
 
-## ✨ Discoveries
+## ★ Discoveries
 
 Everything interesting we found, ranked by how compelling it is. This is NOT implementation priority — it's "how cool is this."
 
@@ -324,30 +324,30 @@ Everything interesting we found, ranked by how compelling it is. This is NOT imp
 
 ---
 
-## 🔥 Recommendations
+## Recommendations
 
 What to actually DO with these discoveries, organized by urgency and impact.
 
-### 🔴 CRITICAL — Integrate immediately
+### ● CRITICAL — Integrate immediately
 [Fixes gaps, security issues, or unlocks capabilities PAI should already have]
 
 | # | Recommendation | PAI Relevance | Effort | Files Affected |
 |---|---------------|---------------|--------|----------------|
 | [N] | [Short action] | [Why PAI needs this NOW] | [Low/Med/High] | `[files]` |
 
-### 🟠 HIGH — Integrate this week
+### ● HIGH — Integrate this week
 [Significantly improves PAI capabilities or efficiency]
 
 | # | Recommendation | PAI Relevance | Effort | Files Affected |
 |---|---------------|---------------|--------|----------------|
 
-### 🟡 MEDIUM — Integrate when convenient
+### ● MEDIUM — Integrate when convenient
 [Useful capabilities or ecosystem alignment]
 
 | # | Recommendation | PAI Relevance | Effort | Files Affected |
 |---|---------------|---------------|--------|----------------|
 
-### 🟢 LOW — Awareness / future reference
+### ● LOW — Awareness / future reference
 [Nice-to-know or will become relevant later]
 
 | # | Recommendation | PAI Relevance | Effort | Files Affected |
@@ -355,7 +355,7 @@ What to actually DO with these discoveries, organized by urgency and impact.
 
 ---
 
-## 🎯 Technique Details
+## Technique Details
 
 [For EACH technique, numbered to match recommendations above:]
 
@@ -363,7 +363,7 @@ What to actually DO with these discoveries, organized by urgency and impact.
 
 #### [N]. [Technique Name]
 **Source:** [Exact source with version/timestamp]
-**Priority:** 🔴 CRITICAL | 🟠 HIGH | 🟡 MEDIUM | 🟢 LOW
+**Priority:** ● CRITICAL | ● HIGH | ● MEDIUM | ● LOW
 
 **What It Is (16-32 words):**
 [Describe the technique itself. Must be 16-32 words, concrete and specific.]
@@ -382,7 +382,7 @@ What to actually DO with these discoveries, organized by urgency and impact.
 
 ---
 
-## 🪞 Internal Reflections
+## Internal Reflections
 
 Upgrade candidates mined from our own algorithm reflections (Thread 3). These are recurring patterns in what went wrong or could be improved, based on post-algorithm self-reflection.
 
@@ -403,7 +403,7 @@ Upgrade candidates mined from our own algorithm reflections (Thread 3). These ar
 
 ---
 
-## 📊 Summary
+## Summary
 
 | # | Technique | Source | Priority | PAI Component | Effort |
 |---|-----------|--------|----------|---------------|--------|
@@ -413,24 +413,24 @@ Upgrade candidates mined from our own algorithm reflections (Thread 3). These ar
 
 ---
 
-## ⏭️ Skipped Content
+## Skipped Content
 
 | Content | Source | Why Skipped |
 |---------|--------|-------------|
 
 ---
 
-## 🔍 Sources Processed
+## Sources Processed
 
 [What was actually analyzed, with extraction counts]
 ```
 
 **CRITICAL Output Rules:**
-1. **DISCOVERIES TABLE COMES FIRST** - The ✨ Discoveries table is the very first section after the header. This is the comprehensive "what's out there" overview ranked by interestingness. It should feel like a substantial inventory of everything cool that was found.
+1. **DISCOVERIES TABLE COMES FIRST** - The ★ Discoveries table is the very first section after the header. This is the comprehensive "what's out there" overview ranked by interestingness. It should feel like a substantial inventory of everything cool that was found.
 2. **DISCOVERIES ≠ RECOMMENDATIONS** - The Discoveries table ranks by "how cool is this" (interestingness). The Recommendations section ranks by "how urgently should PAI integrate this" (priority). These are DIFFERENT orderings. A LOW-priority item can be Discovery #1 if it's the most interesting thing found.
-3. **RECOMMENDATIONS COME SECOND** - The 🔥 Recommendations section with four priority tiers follows the Discoveries table.
+3. **RECOMMENDATIONS COME SECOND** - The Recommendations section with four priority tiers follows the Discoveries table.
 4. **PAI RELEVANCE IS PRIMARY** - In BOTH the Discoveries table AND the Recommendation tables, explain WHY this matters for PAI.
-5. **FOUR TIERS, NO EXCEPTIONS** - Every technique maps to exactly one of: 🔴 CRITICAL, 🟠 HIGH, 🟡 MEDIUM, 🟢 LOW. Empty tiers are fine — show them anyway.
+5. **FOUR TIERS, NO EXCEPTIONS** - Every technique maps to exactly one of: ● CRITICAL, ● HIGH, ● MEDIUM, ● LOW. Empty tiers are fine — show them anyway.
 6. **NUMBERED CROSS-REFERENCES** - Techniques are numbered consistently across Discoveries, Recommendations, and Technique Details.
 7. **QUOTE THE SOURCE** - Every technique must include actual quoted content or code
 8. **MAP TO PAI** - Every technique must name a specific PAI file or component it improves
@@ -495,7 +495,7 @@ User: "check for upgrades"
 
 ---
 
-## ✨ Discoveries
+## ★ Discoveries
 
 Everything interesting we found, ranked by how cool it is.
 
@@ -507,37 +507,37 @@ Everything interesting we found, ranked by how cool it is.
 
 ---
 
-## 🔥 Recommendations
+## Recommendations
 
-### 🔴 CRITICAL — Integrate immediately
+### ● CRITICAL — Integrate immediately
 
 | # | Recommendation | PAI Relevance | Effort | Files Affected |
 |---|---------------|---------------|--------|----------------|
 | 1 | Add PreToolUse additionalContext to security hooks | SecurityValidator currently hard-blocks commands — additionalContext enables reasoning-based security that adapts to context | Low | `hooks/SecurityValidator.hook.ts` |
 
-### 🟠 HIGH — Integrate this week
+### ● HIGH — Integrate this week
 
 | # | Recommendation | PAI Relevance | Effort | Files Affected |
 |---|---------------|---------------|--------|----------------|
 | 2 | Replace session ID hacks with native ${CLAUDE_SESSION_ID} | Session documentation workflows have manual extraction workarounds — native variable eliminates fragile code | Low | `skills/_SYSTEM/Workflows/DocumentSession.md` |
 
-### 🟡 MEDIUM — Integrate when convenient
+### ● MEDIUM — Integrate when convenient
 
 (none this run)
 
-### 🟢 LOW — Awareness / future reference
+### ● LOW — Awareness / future reference
 
 (none this run)
 
 ---
 
-## 🎯 Technique Details
+## Technique Details
 
 ### From Release Notes
 
 #### 1. PreToolUse Additional Context
 **Source:** GitHub claude-code v2.1.16
-**Priority:** 🔴 CRITICAL
+**Priority:** ● CRITICAL
 
 **What It Is (16-32 words):**
 PreToolUse hooks can now return an additionalContext field that gets injected into the model's context before tool execution, enabling reasoning-based security rather than hard blocks.
@@ -556,7 +556,7 @@ return { decision: "allow", additionalContext: "WARNING: Protected file." };
 
 #### 2. Session ID Substitution
 **Source:** GitHub claude-code v2.1.16
-**Priority:** 🟠 HIGH
+**Priority:** ● HIGH
 
 **What It Is (16-32 words):**
 Native environment variable ${CLAUDE_SESSION_ID} is now available in all hooks and commands, eliminating the need for custom session ID extraction or workaround code.
@@ -573,16 +573,16 @@ echo "Session: ${CLAUDE_SESSION_ID}"
 
 ---
 
-## 📊 Summary
+## Summary
 
 | # | Technique | Source | Priority | PAI Component | Effort |
 |---|-----------|--------|----------|---------------|--------|
-| 1 | PreToolUse Additional Context | claude-code v2.1.16 | 🔴 | SecurityValidator hook | Low |
-| 2 | Session ID Substitution | claude-code v2.1.16 | 🟠 | DocumentSession workflow | Low |
+| 1 | PreToolUse Additional Context | claude-code v2.1.16 | ● | SecurityValidator hook | Low |
+| 2 | Session ID Substitution | claude-code v2.1.16 | ● | DocumentSession workflow | Low |
 
 **Totals:** 1 Critical | 1 High | 0 Medium | 0 Low | 4 Skipped
 
-## ⏭️ Skipped Content
+## Skipped Content
 
 | Content | Source | Why Skipped |
 |---------|--------|-------------|
@@ -591,7 +591,7 @@ echo "Session: ${CLAUDE_SESSION_ID}"
 | Agent Experts video | YouTube | No concrete technique identified |
 | SDK update v0.78 | GitHub | PAI uses CLI, not raw SDK |
 
-## 🔍 Sources Processed
+## Sources Processed
 30 Anthropic sources, 5 YouTube videos, 0 custom → 2 relevant findings
 ```
 

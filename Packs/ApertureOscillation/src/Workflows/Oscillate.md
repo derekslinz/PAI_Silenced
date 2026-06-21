@@ -28,9 +28,9 @@ If invoked without explicit inputs, extract them from the conversation:
 Clearly state both inputs before beginning passes:
 
 ```
-🔭 APERTURE OSCILLATION
- 🎯 Tactical Target: [the specific thing — 1-2 sentences]
- 🌐 Strategic Context: [the bigger picture — 1-2 sentences]
+APERTURE OSCILLATION
+ Tactical Target: [the specific thing — 1-2 sentences]
+ Strategic Context: [the bigger picture — 1-2 sentences]
 ```
 
 If the tactical target and strategic context are essentially the same thing (no meaningful scope difference), abort and recommend IterativeDepth instead.
@@ -49,7 +49,7 @@ Focus on:
 
 ```
 ┌─────────────────────────────────────────────┐
-│ 🔬 PASS 1/3 — NARROW APERTURE (Tactical)   │
+│ PASS 1/3 — NARROW APERTURE (Tactical)   │
 │                                              │
 │ Framing: "[tactical target] is primary.      │
 │ [strategic context] is background."          │
@@ -80,7 +80,7 @@ Focus on:
 
 ```
 ┌─────────────────────────────────────────────┐
-│ 🔭 PASS 2/3 — WIDE APERTURE (Strategic)    │
+│ PASS 2/3 — WIDE APERTURE (Strategic)    │
 │                                              │
 │ Framing: "[strategic context] is primary.    │
 │ [tactical target] is derived."              │
@@ -111,7 +111,7 @@ Focus on:
 
 ```
 ┌─────────────────────────────────────────────┐
-│ ⚡ PASS 3/3 — OSCILLATION (Synthesis)       │
+│ PASS 3/3 — OSCILLATION (Synthesis)       │
 │                                              │
 │ Divergences Found:                           │
 │ - [Where tactical and strategic disagree]    │
@@ -119,8 +119,8 @@ Focus on:
 │ - [What wide aperture missed]                │
 │                                              │
 │ Design Tensions:                             │
-│ ⚡ [Tension 1: description + resolution]     │
-│ ⚡ [Tension 2: description + resolution]     │
+│ [Tension 1: description + resolution]     │
+│ [Tension 2: description + resolution]     │
 │                                              │
 │ Alignment Status:                            │
 │ [ALIGNED | DIVERGENT — summary]              │
@@ -130,22 +130,22 @@ Focus on:
 ### Step 5: Output
 
 ```
-🔭 APERTURE OSCILLATION COMPLETE (3 passes)
+APERTURE OSCILLATION COMPLETE (3 passes)
 
-📊 Results:
+Results:
 - Tactical findings: {count}
 - Strategic findings: {count}
 - Divergences found: {count}
 - Design tensions: {count}
 - Alignment: [ALIGNED | DIVERGENT]
 
-⚡ DESIGN TENSIONS:
+DESIGN TENSIONS:
 [Each tension with resolution recommendation]
 
-📋 ISC IMPLICATIONS:
+ISC IMPLICATIONS:
 [New criteria, refined criteria, or anti-criteria surfaced by the oscillation]
 
-💡 Key Insight: [The most important thing that single-scope analysis would have missed]
+Key Insight: [The most important thing that single-scope analysis would have missed]
 ```
 
 ## Integration with Algorithm Phases

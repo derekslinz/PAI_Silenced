@@ -231,10 +231,10 @@ export function readTabState(sessionId?: string): { title: string; state: TabSta
 
 /**
  * Strip emoji prefix from a tab title to get raw text.
- * Handles both working-state prefixes (🧠⚙️✓❓) and Algorithm phase symbols (👁️📋🔨⚡✅📚).
+ * Handles both working-state prefixes (✓) and Algorithm phase symbols (✓).
  */
 export function stripPrefix(title: string): string {
-  return title.replace(/^(?:🧠|⚙️|⚙|✓|❓|👁️|📋|🔨|⚡|✅|📚)\s*/, '').trim();
+  return title.replace(/^(?:|||✓||||||✓|)\s*/, '').trim();
 }
 
 // Noise words to skip when extracting the session label
@@ -294,10 +294,10 @@ export function setPhaseTab(phase: AlgorithmTabPhase, sessionId: string, summary
   // Build title based on phase
   let title: string;
   if (phase === 'COMPLETE' && summary) {
-    title = `✅ ${summary}`;
+    title = `✓ ${summary}`;
   } else if (phase === 'COMPLETE') {
     // No summary extracted — use session name instead of generic "Done."
-    title = `✅ ${oneWord}`;
+    title = `✓ ${oneWord}`;
   } else if (phase === 'IDLE') {
     title = oneWord;
   } else {

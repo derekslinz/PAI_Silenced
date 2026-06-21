@@ -12,7 +12,7 @@ context: fork
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -81,7 +81,7 @@ The output provides SPECIFIC TECHNIQUES extracted from actual content, not links
 
 ---
 
-## 🎯 Extracted Techniques
+## Extracted Techniques
 
 These are SPECIFIC techniques pulled from actual content. Each one maps to your PAI system.
 
@@ -151,7 +151,7 @@ These are SPECIFIC techniques pulled from actual content. Each one maps to your 
 
 ---
 
-## 📊 Technique Summary
+## Technique Summary
 
 | # | Technique | Source | PAI Component | Impact |
 |---|-----------|--------|---------------|--------|
@@ -160,7 +160,7 @@ These are SPECIFIC techniques pulled from actual content. Each one maps to your 
 
 ---
 
-## ⏭️ Skipped Content
+## Skipped Content
 
 | Content | Source | Why Skipped |
 |---------|--------|-------------|
@@ -168,7 +168,7 @@ These are SPECIFIC techniques pulled from actual content. Each one maps to your 
 
 ---
 
-## 🔍 Sources Processed
+## Sources Processed
 
 **Release Notes Parsed:**
 - claude-code v2.1.14, v2.1.15, v2.1.16 → [N] techniques extracted
@@ -198,11 +198,11 @@ These are SPECIFIC techniques pulled from actual content. Each one maps to your 
 6. **Skip, don't dilute** - If content has no extractable technique, put it in Skipped Content with reason
 
 **Anti-patterns to AVOID:**
-- ❌ "Check out this video for more"
-- ❌ "This release has improvements"
-- ❌ "Consider looking into this"
-- ❌ Vague summaries without specific techniques
-- ❌ Links without extracted content
+- ✗ "Check out this video for more"
+- ✗ "This release has improvements"
+- ✗ "Consider looking into this"
+- ✗ Vague summaries without specific techniques
+- ✗ Links without extracted content
 
 **Source Type Labels:**
 | Label | Meaning |
@@ -405,7 +405,7 @@ User: "check Anthropic only"
 
 These output patterns are **FAILURES**. If you produce these, you have not completed the skill correctly:
 
-| ❌ Bad Output | Why It's Wrong | ✅ Correct Output |
+| ✗ Bad Output | Why It's Wrong | ✓ Correct Output |
 |---------------|----------------|-------------------|
 | "Check out R Amjad's video on Claude Code" | Points to content instead of extracting it | "@ 5:42, R Amjad shows this technique: [quote]" |
 | "v2.1.16 has task management improvements" | Vague summary, no technique | "v2.1.16 adds `addBlockedBy` parameter: [code example]" |

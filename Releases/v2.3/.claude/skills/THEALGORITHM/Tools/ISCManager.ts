@@ -44,7 +44,7 @@ interface ISCRow {
   status: Status;
   parallel: boolean; // Can run in parallel with others
   capability?: string; // Assigned capability (e.g., "research.perplexity", "thinking.deep thinking")
-  capabilityIcon?: string; // Icon for display (e.g., "🔬", "💡", "🤖")
+  capabilityIcon?: string; // Icon for display (e.g., "", "", "")
   result?: string;
   adjustedReason?: string;
   blockedReason?: string;
@@ -85,14 +85,14 @@ const CURRENT_ISC_PATH = `${ISC_DIR}/current-isc.json`;
 
 // Capability category to icon mapping
 const CAPABILITY_ICONS: Record<string, string> = {
-  research: "🔬",
-  thinking: "💡",
-  debate: "🗣️",
-  analysis: "🔍",
-  execution: "🤖",
-  verification: "✅",
-  models: "⚡",
-  composition: "🧩",
+  research: "",
+  thinking: "",
+  debate: "",
+  analysis: "",
+  execution: "",
+  verification: "✓",
+  models: "",
+  composition: "",
 };
 
 function ensureDir() {
@@ -434,7 +434,7 @@ function setCapability(
   row.capability = capability;
   // Extract category from capability name (e.g., "research.perplexity" → "research")
   const category = capability.split(".")[0];
-  row.capabilityIcon = CAPABILITY_ICONS[category] || "🤖";
+  row.capabilityIcon = CAPABILITY_ICONS[category] || "";
 
   isc.log.push(
     `[${new Date().toISOString()}] Row ${rowId}: capability → ${capability}`
@@ -459,7 +459,7 @@ function incrementIteration(isc: ISCTable) {
 }
 
 function formatTable(isc: ISCTable): string {
-  let output = `## 🎯 IDEAL STATE CRITERIA\n\n`;
+  let output = `## IDEAL STATE CRITERIA\n\n`;
   output += `**Request:** ${isc.request}\n`;
   output += `**Effort:** ${isc.effort} | **Phase:** ${isc.phase} | **Iteration:** ${isc.iteration}\n\n`;
   output += `| # | What Ideal Looks Like | Source | Capability | Verify | Status |\n`;
@@ -474,16 +474,16 @@ function formatTable(isc: ISCTable): string {
       desc += ` *(blocked: ${row.blockedReason})*`;
     }
     if (row.research_warning && !row.research_warning.acknowledged) {
-      desc += ` ⚠️`;
+      desc += ` `;
     }
     if (row.is_nested) {
-      desc += ` 🪆 [${row.child_isc_status || "?"}]`;
+      desc += ` [${row.child_isc_status || "?"}]`;
     }
 
     // Format capability with icon
     let capDisplay = "—";
     if (row.capability) {
-      const icon = row.capabilityIcon || "🤖";
+      const icon = row.capabilityIcon || "";
       const capName = row.capability.split(".").pop() || row.capability;
       capDisplay = `${icon} ${capName}`;
       if (row.parallel) {
@@ -495,31 +495,31 @@ function formatTable(isc: ISCTable): string {
     let verifyDisplay = "—";
     if (row.verification) {
       const verifyIcons: Record<VerifyMethod, string> = {
-        browser: "🌐",
-        test: "🧪",
-        grep: "🔎",
-        api: "📡",
-        lint: "✨",
-        manual: "👁️",
-        agent: "🤖",
-        inferred: "💫",
+        browser: "",
+        test: "",
+        grep: "",
+        api: "",
+        lint: "★",
+        manual: "",
+        agent: "",
+        inferred: "",
       };
-      const icon = verifyIcons[row.verification.method] || "❓";
+      const icon = verifyIcons[row.verification.method] || "";
       verifyDisplay = `${icon} ${row.verification.method}`;
       if (row.verification.result) {
-        verifyDisplay += row.verification.result === "PASS" ? " ✅" : " ❌";
+        verifyDisplay += row.verification.result === "PASS" ? " ✓" : " ✗";
       }
     }
 
     // Status emoji
     const statusEmoji: Record<Status, string> = {
-      PENDING: "⏳",
-      CLAIMED: "🔒",
-      ACTIVE: "🔄",
-      DONE: "✅",
-      ADJUSTED: "🔧",
-      BLOCKED: "🚫",
-      VERIFIED: "✔️",
+      PENDING: "",
+      CLAIMED: "",
+      ACTIVE: "",
+      DONE: "✓",
+      ADJUSTED: "",
+      BLOCKED: "",
+      VERIFIED: "✓",
     };
     let statusDisplay = `${statusEmoji[row.status]} ${row.status}`;
     if (row.claimed_by) {
@@ -529,8 +529,8 @@ function formatTable(isc: ISCTable): string {
     output += `| ${row.id} | ${desc} | ${row.source} | ${capDisplay} | ${verifyDisplay} | ${statusDisplay} |\n`;
   }
 
-  output += `\n**Legend:** 🔬 Research | 💡 Thinking | 🗣️ Debate | 🔍 Analysis | 🤖 Execution | ✅ Verify | × Parallel | 🪆 Nested | ⚠️ Research Warning\n`;
-  output += `**Verify:** 🌐 browser | 🧪 test | 🔎 grep | 📡 api | ✨ lint | 👁️ manual | 🤖 agent | 💫 inferred\n`;
+  output += `\n**Legend:** Research | Thinking | Debate | Analysis | Execution | ✓ Verify | × Parallel | Nested | Research Warning\n`;
+  output += `**Verify:** browser | test | grep | api | ★ lint | manual | agent | inferred\n`;
 
   return output;
 }

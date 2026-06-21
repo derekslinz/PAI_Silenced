@@ -1076,21 +1076,21 @@ printf "${SLATE_600}────────────────────
 
 case "$MODE" in
     nano)
-        printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}📁${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} ${LEARN_SESSIONS}⊕${RESET}${SLATE_300}${sessions_count}${RESET} ${LEARN_RESEARCH}◇${RESET}${SLATE_300}${research_count}${RESET}\n"
+        printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} ${LEARN_SESSIONS}⊕${RESET}${SLATE_300}${sessions_count}${RESET} ${LEARN_RESEARCH}◇${RESET}${SLATE_300}${research_count}${RESET}\n"
         ;;
     micro)
-        printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}📁${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} ${LEARN_SESSIONS}⊕${RESET}${SLATE_300}${sessions_count}${RESET} ${LEARN_RESEARCH}◇${RESET}${SLATE_300}${research_count}${RESET}\n"
+        printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} ${LEARN_SESSIONS}⊕${RESET}${SLATE_300}${sessions_count}${RESET} ${LEARN_RESEARCH}◇${RESET}${SLATE_300}${research_count}${RESET}\n"
         ;;
     mini)
         printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_SECONDARY}MEMORY:${RESET} "
-        printf "${LEARN_WORK}📁${RESET}${SLATE_300}${work_count}${RESET} "
+        printf "${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} "
         printf "${SLATE_600}│${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} "
         printf "${SLATE_600}│${RESET} ${LEARN_SESSIONS}⊕${RESET}${SLATE_300}${sessions_count}${RESET} "
         printf "${SLATE_600}│${RESET} ${LEARN_RESEARCH}◇${RESET}${SLATE_300}${research_count}${RESET}\n"
         ;;
     normal)
         printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_SECONDARY}MEMORY:${RESET} "
-        printf "${LEARN_WORK}📁${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_WORK}Work${RESET} "
+        printf "${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_WORK}Work${RESET} "
         printf "${SLATE_600}│${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} ${LEARN_SIGNALS}Ratings${RESET} "
         printf "${SLATE_600}│${RESET} ${LEARN_SESSIONS}⊕${RESET}${SLATE_300}${sessions_count}${RESET} ${LEARN_SESSIONS}Sessions${RESET} "
         printf "${SLATE_600}│${RESET} ${LEARN_RESEARCH}◇${RESET}${SLATE_300}${research_count}${RESET} ${LEARN_RESEARCH}Research${RESET}\n"
@@ -1255,8 +1255,8 @@ CACHE_EOF
     if [ "$total_count" -gt 0 ] 2>/dev/null; then
         # Trend icon/color
         case "$trend" in
-            up)   trend_icon="↗"; trend_color="$EMERALD" ;;
-            down) trend_icon="↘"; trend_color="$ROSE" ;;
+            up)   trend_icon=""; trend_color="$EMERALD" ;;
+            down) trend_icon=""; trend_color="$ROSE" ;;
             *)    trend_icon="→"; trend_color="$SLATE_400" ;;
         esac
 

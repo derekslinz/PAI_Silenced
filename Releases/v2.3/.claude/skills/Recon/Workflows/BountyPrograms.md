@@ -48,7 +48,7 @@ bun ~/.claude/skills/Recon/Tools/BountyPrograms.ts list --json > bounty-programs
 
 The tool returns:
 - Program name and URL
-- Bounty type (💰 cash, 🎁 swag)
+- Bounty type (cash, swag)
 - In-scope domains
 - Platform information
 

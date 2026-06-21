@@ -348,9 +348,8 @@ async function handleAgentsApi(): Promise<Response> {
   return Response.json(events.reverse())
 }
 
-// ── /api/events/recent ──
-
-async function handleEventsRecentApi(): Promise<Response> {
+// Helper to query and sort recent events
+async function getRecentEventsPayload() {
   const [toolFailuresRaw, subagentEventsRaw, toolActivityRaw] = await Promise.all([
     readJsonlTail(TOOL_FAILURES_PATH, 50),
     readJsonlTail(SUBAGENT_EVENTS_PATH, 50),
@@ -380,7 +379,95 @@ async function handleEventsRecentApi(): Promise<Response> {
     return tb - ta
   })
 
-  return Response.json({ events: all.slice(0, 200) })
+  return { events: all.slice(0, 200) }
+}
+
+// ── /api/events/recent ──
+
+async function handleEventsRecentApi(): Promise<Response> {
+  const payload = await getRecentEventsPayload()
+  return Response.json(payload)
+}
+
+// ── /api/events/stream (Server-Sent Events) ──
+
+const sseClients = new Set<ReadableStreamDefaultController>()
+let obsFolderWatcher: ReturnType<typeof watch> | null = null
+let debounceWatchTimeout: ReturnType<typeof setTimeout> | null = null
+const OBS_DIR = join(MEMORY_DIR, "OBSERVABILITY")
+
+function startWatchingEventsDir() {
+  if (obsFolderWatcher) return
+
+  try {
+    if (!existsSync(OBS_DIR)) return
+    obsFolderWatcher = watch(OBS_DIR, (eventType, filename) => {
+      if (filename && filename.endsWith(".jsonl")) {
+        if (debounceWatchTimeout) clearTimeout(debounceWatchTimeout)
+        debounceWatchTimeout = setTimeout(async () => {
+          try {
+            const payload = await getRecentEventsPayload()
+            const msg = `data: ${JSON.stringify(payload)}\n\n`
+            for (const client of sseClients) {
+              try {
+                client.enqueue(msg)
+              } catch {
+                sseClients.delete(client)
+              }
+            }
+          } catch {
+            // Ignore push failure
+          }
+        }, 100)
+      }
+    })
+  } catch (err) {
+    console.error("[Observability] Failed to initialize SSE directory watch:", err)
+  }
+}
+
+function handleEventsStreamApi(): Response {
+  startWatchingEventsDir()
+
+  let controllerRef: ReadableStreamDefaultController | null = null
+  let keepAliveInterval: any
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      controllerRef = controller
+      sseClients.add(controller)
+
+      // Send initial state immediately
+      try {
+        const payload = await getRecentEventsPayload()
+        controller.enqueue(`data: ${JSON.stringify(payload)}\n\n`)
+      } catch (err) {
+        // Ignore
+      }
+
+      // Ping to keep connection alive
+      keepAliveInterval = setInterval(() => {
+        try {
+          controller.enqueue(":\n\n")
+        } catch {
+          clearInterval(keepAliveInterval)
+          sseClients.delete(controller)
+        }
+      }, 30000)
+    },
+    cancel() {
+      if (keepAliveInterval) clearInterval(keepAliveInterval)
+      if (controllerRef) sseClients.delete(controllerRef)
+    }
+  })
+
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      "Connection": "keep-alive",
+    },
+  })
 }
 
 // ── /api/observability/tool-failures ──
@@ -2562,6 +2649,7 @@ export async function handleObservabilityRequest(req: Request): Promise<Response
 
     // Merged recent events
     if (pathname === "/api/events/recent") return handleEventsRecentApi()
+    if (pathname === "/api/events/stream") return handleEventsStreamApi()
 
     // Ladder pipeline
     if (pathname === "/api/ladder") return handleLadderApi()

@@ -20,13 +20,13 @@ Running the **AddCommand** workflow in the **CreateCLI** skill to add CLI comman
 
 ---
 
-## 🎯 PURPOSE
+## PURPOSE
 
 Add one or more commands to an existing CLI without breaking existing functionality.
 
 ---
 
-## 📍 WHEN TO USE
+## WHEN TO USE
 
 - User requests: "Add [command] to [CLI]"
 - "Extend [CLI] with [feature]"
@@ -34,7 +34,7 @@ Add one or more commands to an existing CLI without breaking existing functional
 
 ---
 
-## 📋 STEPS
+## STEPS
 
 ### 1. Locate Existing CLI
 
@@ -132,7 +132,7 @@ Add to command list and examples section.
 
 ---
 
-## ✅ QUALITY CHECKLIST
+## ✓ QUALITY CHECKLIST
 
 - [ ] Command function implemented
 - [ ] Added to switch statement

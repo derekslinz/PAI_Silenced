@@ -34,15 +34,15 @@
 Present results clearly for user to evaluate:
 
 ```markdown
-## 🎯 FINAL ISC
+## FINAL ISC
 
 **Request:** [original request]
 **Effort:** [LEVEL] | **Iterations:** [count]
 
 | # | What Ideal Looks Like | Source | Capability | Status |
 |---|----------------------|--------|------------|--------|
-| 1 | [row 1] | EXPLICIT | 🔬 perplexity | ✅ DONE |
-| 2 | [row 2] | INFERRED | 🤖 engineer | ✅ DONE |
+| 1 | [row 1] | EXPLICIT | perplexity | ✓ DONE |
+| 2 | [row 2] | INFERRED | engineer | ✓ DONE |
 ...
 
 ## Deliverables

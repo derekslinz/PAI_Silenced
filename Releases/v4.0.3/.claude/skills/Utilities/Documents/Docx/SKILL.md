@@ -5,7 +5,7 @@ description: Create, edit, and analyze Word documents — tracked changes, table
 
 # DOCX creation, editing, and analysis
 
-## 🎯 Load Full PAI Context
+## Load Full PAI Context
 
 **Before starting any task with this skill, load complete PAI context:**
 

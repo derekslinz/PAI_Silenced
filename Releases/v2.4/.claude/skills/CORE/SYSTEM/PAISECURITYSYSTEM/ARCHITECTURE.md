@@ -44,7 +44,7 @@ The result: you get meaningful protection without the friction that drives peopl
 
 ## Permission Model
 
-> **⚠️ NEVER TEST DANGEROUS COMMANDS** — Do not attempt to run blocked commands to verify the security system works. The patterns below are intentionally misspelled to prevent accidental execution. Trust the unit tests.
+> **NEVER TEST DANGEROUS COMMANDS** — Do not attempt to run blocked commands to verify the security system works. The patterns below are intentionally misspelled to prevent accidental execution. Trust the unit tests.
 
 ### Allow (no prompts)
 - All standard tools: Bash, Read, Write, Edit, Glob, Grep, etc.

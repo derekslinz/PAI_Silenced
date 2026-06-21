@@ -3,7 +3,7 @@
 
 verification_methods:
   browser:
-    icon: "🌐"
+    icon: ""
     description: "Visual verification via browser automation"
     when_to_use:
       - "UI/UX changes"
@@ -19,7 +19,7 @@ verification_methods:
       - "Dark mode toggle changes theme"
 
   test:
-    icon: "🧪"
+    icon: ""
     description: "Automated test suite verification"
     when_to_use:
       - "Function behavior"
@@ -36,7 +36,7 @@ verification_methods:
       - "No test regressions"
 
   grep:
-    icon: "🔎"
+    icon: ""
     description: "Pattern search in code/files"
     when_to_use:
       - "Code conventions (TypeScript, imports)"
@@ -53,7 +53,7 @@ verification_methods:
       - "Consistent naming across codebase"
 
   api:
-    icon: "📡"
+    icon: ""
     description: "HTTP request verification"
     when_to_use:
       - "API endpoint responses"
@@ -69,7 +69,7 @@ verification_methods:
       - "No error in response body"
 
   lint:
-    icon: "✨"
+    icon: "★"
     description: "Code quality and style verification"
     when_to_use:
       - "Code formatting"
@@ -86,7 +86,7 @@ verification_methods:
       - "Consistent formatting"
 
   manual:
-    icon: "👁️"
+    icon: ""
     description: "Human verification required"
     when_to_use:
       - "Subjective quality (is it good?)"
@@ -102,7 +102,7 @@ verification_methods:
       - "Design matches mockup"
 
   agent:
-    icon: "🤖"
+    icon: ""
     description: "Verification by specialized agent"
     when_to_use:
       - "Complex multi-step verification"
@@ -118,7 +118,7 @@ verification_methods:
       - "Performance within bounds"
 
   inferred:
-    icon: "💫"
+    icon: ""
     description: "Verification covered by other tests"
     when_to_use:
       - "Implicit in other tests"
@@ -132,7 +132,7 @@ verification_methods:
       - "E2E tests cover this path"
 
   eval:
-    icon: "📊"
+    icon: ""
     description: "Evaluation suite verification"
     when_to_use:
       - "Agent behavior validation"

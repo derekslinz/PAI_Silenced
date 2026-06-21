@@ -35,7 +35,7 @@ This command implements a recursive test-fix-verify loop:
 6. **Re-deploy**: Push fixes to trigger new deployment
 7. **Repeat**: Loop until deployment succeeds AND site works correctly
 
-**🚨 CRITICAL**: This command uses Chrome MCP tools (PRIMARY) to ACTUALLY TEST the deployed site, not just check if the deployment succeeded!
+**CRITICAL**: This command uses Chrome MCP tools (PRIMARY) to ACTUALLY TEST the deployed site, not just check if the deployment succeeded!
 
 # NEVER USE FUCKING CURL, ONLY BROWSER-AUTOMATION (or Chrome MCP fallback)
 
@@ -101,7 +101,7 @@ function loadApiToken(): string {
 
     return match[1].trim();
   } catch (error) {
-    console.error("❌ Error loading API token:", error);
+    console.error("✗ Error loading API token:", error);
     throw error;
   }
 }
@@ -124,13 +124,13 @@ async function getLatestDeployment(apiToken: string): Promise<DeploymentInfo | n
     const data = await response.json();
 
     if (!data.success || !data.result || data.result.length === 0) {
-      console.error("❌ Failed to fetch deployments:", data.errors);
+      console.error("✗ Failed to fetch deployments:", data.errors);
       return null;
     }
 
     return data.result[0]; // Latest deployment
   } catch (error) {
-    console.error("❌ Error fetching deployment:", error);
+    console.error("✗ Error fetching deployment:", error);
     return null;
   }
 }
@@ -153,7 +153,7 @@ async function getDeploymentLogs(apiToken: string, deploymentId: string): Promis
     const data = await response.json();
 
     if (!data.success) {
-      console.error("❌ Failed to fetch logs:", data.errors);
+      console.error("✗ Failed to fetch logs:", data.errors);
       return "Failed to fetch logs";
     }
 
@@ -161,7 +161,7 @@ async function getDeploymentLogs(apiToken: string, deploymentId: string): Promis
     const logs = data.result.data || [];
     return logs.map((log: any) => `[${log.timestamp}] ${log.message}`).join("\n");
   } catch (error) {
-    console.error("❌ Error fetching logs:", error);
+    console.error("✗ Error fetching logs:", error);
     return `Error fetching logs: ${error}`;
   }
 }
@@ -171,7 +171,7 @@ async function getDeploymentLogs(apiToken: string, deploymentId: string): Promis
  * This is where we verify the deployment ACTUALLY WORKS
  */
 async function testDeploymentWithChrome(url: string): Promise<TestResult> {
-  console.log("\n🧪 Testing deployment with Chrome MCP...");
+  console.log("\nTesting deployment with Chrome MCP...");
   console.log(`   URL: ${url}`);
 
   const result: TestResult = {
@@ -236,7 +236,7 @@ function analyzeLogs(logs: string): string[] {
  * Main troubleshooting workflow
  */
 async function main() {
-  console.log("🔍 Cloudflare Deployment Troubleshooter");
+  console.log("Cloudflare Deployment Troubleshooter");
   console.log("========================================\n");
 
   const apiToken = loadApiToken();
@@ -245,15 +245,15 @@ async function main() {
 
   while (attemptCount < MAX_RETRIES && !deploymentFixed) {
     attemptCount++;
-    console.log(`\n📋 Attempt ${attemptCount}/${MAX_RETRIES}`);
+    console.log(`\nAttempt ${attemptCount}/${MAX_RETRIES}`);
     console.log("─".repeat(50));
 
     // Step 1: Get latest deployment
-    console.log("\n1️⃣ Checking deployment status...");
+    console.log("\n1⃣ Checking deployment status...");
     const deployment = await getLatestDeployment(apiToken);
 
     if (!deployment) {
-      console.log("❌ Could not fetch deployment information");
+      console.log("✗ Could not fetch deployment information");
       process.exit(1);
     }
 
@@ -264,16 +264,16 @@ async function main() {
 
     // Step 2: If deployment in progress, wait
     if (deployment.status === "in_progress") {
-      console.log(`\n⏳ Deployment in progress, waiting ${DEPLOYMENT_WAIT_TIME / 1000} seconds...`);
+      console.log(`\nDeployment in progress, waiting ${DEPLOYMENT_WAIT_TIME / 1000} seconds...`);
       await new Promise(resolve => setTimeout(resolve, DEPLOYMENT_WAIT_TIME));
       continue;
     }
 
     // Step 3: If deployment failed, analyze logs
     if (deployment.status === "failure") {
-      console.log("\n2️⃣ Fetching deployment logs...");
+      console.log("\n2⃣ Fetching deployment logs...");
       const logs = await getDeploymentLogs(apiToken, deployment.id);
-      console.log("\n📄 Deployment Logs:");
+      console.log("\nDeployment Logs:");
       console.log("─".repeat(50));
       console.log(logs);
       console.log("─".repeat(50));
@@ -281,19 +281,19 @@ async function main() {
       // Analyze logs for issues
       const issues = analyzeLogs(logs);
       if (issues.length > 0) {
-        console.log("\n3️⃣ Identified Issues:");
+        console.log("\n3⃣ Identified Issues:");
         issues.forEach((issue, i) => {
           console.log(`   ${i + 1}. ${issue}`);
         });
 
-        console.log("\n🔧 AGENT ACTION REQUIRED:");
+        console.log("\nAGENT ACTION REQUIRED:");
         console.log("   → Analyze the logs above");
         console.log("   → Identify the root cause");
         console.log("   → Apply fixes to the codebase");
         console.log("   → Commit and push fixes");
         console.log("   → Re-run this command to verify");
       } else {
-        console.log("\n⚠️ No obvious issues found in logs");
+        console.log("\nNo obvious issues found in logs");
         console.log("   Manual investigation required");
       }
 
@@ -301,39 +301,39 @@ async function main() {
     }
 
     // Step 4: Deployment succeeded, now TEST with Chrome MCP
-    console.log("\n4️⃣ Deployment succeeded! Now testing with Chrome MCP...");
+    console.log("\n4⃣ Deployment succeeded! Now testing with Chrome MCP...");
 
     const testResult = await testDeploymentWithChrome(deployment.url);
 
     if (!testResult.passed) {
-      console.log("\n❌ Deployment succeeded but site has issues!");
-      console.log("\n🔍 Issues Found:");
+      console.log("\n✗ Deployment succeeded but site has issues!");
+      console.log("\nIssues Found:");
       testResult.issues.forEach((issue, i) => {
         console.log(`   ${i + 1}. ${issue}`);
       });
 
       if (testResult.consoleErrors.length > 0) {
-        console.log("\n📋 Console Errors:");
+        console.log("\nConsole Errors:");
         testResult.consoleErrors.forEach(err => {
           console.log(`   → ${err.message}`);
         });
       }
 
       if (testResult.networkErrors.length > 0) {
-        console.log("\n🌐 Network Errors:");
+        console.log("\nNetwork Errors:");
         testResult.networkErrors.forEach(err => {
           console.log(`   → ${err.url} (${err.status})`);
         });
       }
 
       if (testResult.visualIssues.length > 0) {
-        console.log("\n👁️ Visual Issues:");
+        console.log("\nVisual Issues:");
         testResult.visualIssues.forEach(issue => {
           console.log(`   → ${issue}`);
         });
       }
 
-      console.log("\n🔧 AGENT ACTION REQUIRED:");
+      console.log("\nAGENT ACTION REQUIRED:");
       console.log("   → Review issues above");
       console.log("   → Fix problems in codebase");
       console.log("   → Test locally first!");
@@ -344,13 +344,13 @@ async function main() {
     }
 
     // Success!
-    console.log("\n✅ Deployment successful and site is working!");
-    console.log(`   🌐 Live at: ${deployment.url}`);
+    console.log("\n✓ Deployment successful and site is working!");
+    console.log(`   Live at: ${deployment.url}`);
     deploymentFixed = true;
   }
 
   if (!deploymentFixed) {
-    console.log(`\n❌ Failed to fix deployment after ${MAX_RETRIES} attempts`);
+    console.log(`\n✗ Failed to fix deployment after ${MAX_RETRIES} attempts`);
     console.log("   Manual intervention required");
     process.exit(1);
   }
@@ -395,7 +395,7 @@ troubleshoot-cloudflare-deployment
 - Displays identified issues
 
 ### 3. Test with Chrome MCP (if succeeded)
-**🚨 CRITICAL**: This is where we verify deployment ACTUALLY WORKS!
+**CRITICAL**: This is where we verify deployment ACTUALLY WORKS!
 
 The agent should use Chrome MCP to:
 - Navigate to the deployment URL
@@ -447,7 +447,7 @@ const failedReqs = networkReqs.filter(req => req.status >= 400);
 
 // Report findings
 if (errors.length > 0 || failedReqs.length > 0) {
-  console.log("❌ Issues found during Chrome testing!");
+  console.log("✗ Issues found during Chrome testing!");
   // List specific issues...
 }
 ```
@@ -497,21 +497,21 @@ if (errors.length > 0 || failedReqs.length > 0) {
 ## Example Output
 
 ```
-🔍 Cloudflare Deployment Troubleshooter
+Cloudflare Deployment Troubleshooter
 ========================================
 
-📋 Attempt 1/5
+Attempt 1/5
 ──────────────────────────────────────────────────
 
-1️⃣ Checking deployment status...
+1⃣ Checking deployment status...
    Status: failure
    URL: https://abc123.website.pages.dev
    Created: 2025-01-10T14:30:00Z
    Stage: build_and_deploy (failed)
 
-2️⃣ Fetching deployment logs...
+2⃣ Fetching deployment logs...
 
-📄 Deployment Logs:
+Deployment Logs:
 ──────────────────────────────────────────────────
 [14:30:15] Installing dependencies...
 [14:30:20] Running build command: bun run build
@@ -519,11 +519,11 @@ if (errors.length > 0 || failedReqs.length > 0) {
 [14:30:25] Build failed with exit code 1
 ──────────────────────────────────────────────────
 
-3️⃣ Identified Issues:
+3⃣ Identified Issues:
    1. Missing module dependency
    2. Build process failed
 
-🔧 AGENT ACTION REQUIRED:
+AGENT ACTION REQUIRED:
    → Analyze the logs above
    → Identify the root cause
    → Apply fixes to the codebase

@@ -3,7 +3,7 @@ name: Research
 description: Comprehensive research and content extraction — quick/standard/extensive/deep modes with multi-agent parallel research, content retrieval, AI trends analysis, and 242+ Fabric patterns. USE WHEN research, do research, quick research, extensive research, deep investigation, find information, investigate, extract alpha, analyze content, retrieve content, use fabric, AI trends, Claude research, enhance content, extract knowledge, interview research, web scraping, YouTube extraction, standard research.
 ---
 
-## ⚠️ MANDATORY TRIGGER
+## MANDATORY TRIGGER
 
 **When user says "research" (in any form), ALWAYS invoke this skill.**
 
@@ -24,7 +24,7 @@ description: Comprehensive research and content extraction — quick/standard/ex
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 

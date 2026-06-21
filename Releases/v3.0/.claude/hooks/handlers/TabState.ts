@@ -26,7 +26,7 @@ function extractTabTitle(voiceLine: string): string | null {
   const daPattern = new RegExp(`^${daName}:\\s*`, 'i');
 
   const cleaned = voiceLine
-    .replace(/^🗣️\s*/, '')
+    .replace(/^\s*/, '')
     .replace(daPattern, '')
     .replace(/^(Done\.?\s*)/i, '')
     .replace(/^(I've\s+|I\s+)/i, '')
@@ -65,8 +65,8 @@ function extractTabTitle(voiceLine: string): string | null {
 function extractFromResponseContent(responseText: string): string | null {
   if (!responseText || responseText.length < 10) return null;
 
-  // Strategy 1: Extract from 🗒️ TASK: line (e.g., "Fix broken tab title update system")
-  const taskMatch = responseText.match(/🗒️\s*TASK:\s*(.+?)(?:\n|$)/i);
+  // Strategy 1: Extract from TASK: line (e.g., "Fix broken tab title update system")
+  const taskMatch = responseText.match(/\s*TASK:\s*(.+?)(?:\n|$)/i);
   if (taskMatch && taskMatch[1]) {
     const taskDesc = taskMatch[1].trim();
     const words = taskDesc.split(/\s+/);
@@ -95,8 +95,8 @@ function extractFromResponseContent(responseText: string): string | null {
     }
   }
 
-  // Strategy 2: Extract from 📋 SUMMARY: line
-  const summaryMatch = responseText.match(/📋\s*SUMMARY:\s*(.+?)(?:\n|$)/i);
+  // Strategy 2: Extract from SUMMARY: line
+  const summaryMatch = responseText.match(/\s*SUMMARY:\s*(.+?)(?:\n|$)/i);
   if (summaryMatch && summaryMatch[1]) {
     const summary = summaryMatch[1].trim().replace(/^\[?\d+\s*bullets?\]?\s*/i, '');
     const words = summary.split(/\s+/).slice(0, 4);
@@ -164,8 +164,8 @@ export async function handleTabState(parsed: ParsedTranscript, sessionId?: strin
       setPhaseTab('COMPLETE', sessionId, shortTitle?.replace(/\.$/, '') || undefined);
       console.error(`[TabState] Completion: "${shortTitle || '(session name fallback)'}"`);
     } else {
-      // No session ID fallback: "✅ summary"
-      const tabTitle = `✅ ${shortTitle || 'Done.'}`;
+      // No session ID fallback: "✓ summary"
+      const tabTitle = `✓ ${shortTitle || 'Done.'}`;
       console.error(`[TabState] ${parsed.responseState}: "${tabTitle}"`);
       setTabState({ title: tabTitle, state: 'completed', sessionId: undefined });
     }

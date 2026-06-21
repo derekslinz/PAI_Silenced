@@ -32,14 +32,14 @@ const exec = promisify(require('child_process').exec);
 const originalQuestion = process.argv.slice(2).join(' ');
 
 if (!originalQuestion) {
-  console.error('❌ Please provide a research question');
+  console.error('✗ Please provide a research question');
   console.error('Usage: bun ${PAI_DIR}/commands/perform-claude-research.md "your question here"');
   process.exit(1);
 }
 
-console.log('📅 ' + new Date().toISOString());
-console.log('\n📋 SUMMARY: Intelligent web research with query decomposition using Claude WebSearch\n');
-console.log('🔍 ANALYSIS: Decomposing research question into targeted queries...\n');
+console.log('' + new Date().toISOString());
+console.log('\nSUMMARY: Intelligent web research with query decomposition using Claude WebSearch\n');
+console.log('ANALYSIS: Decomposing research question into targeted queries...\n');
 console.log('Original question:', originalQuestion);
 
 // Generate search queries based on the question
@@ -77,14 +77,14 @@ function generateSearchQueries(question: string): string[] {
   try {
     const searchQueries = generateSearchQueries(originalQuestion);
 
-    console.log('\n⚡ ACTIONS: Generated', searchQueries.length, 'targeted search queries:\n');
+    console.log('\nACTIONS: Generated', searchQueries.length, 'targeted search queries:\n');
     searchQueries.forEach((q, i) => console.log(`  ${i + 1}. ${q}`));
 
-    console.log('\n✅ RESULTS: Executing searches via Claude WebSearch...\n');
+    console.log('\n✓ RESULTS: Executing searches via Claude WebSearch...\n');
     console.log('═'.repeat(60));
 
     // Output instructions for the claude-researcher agent
-    console.log('\n📊 SEARCH QUERIES TO EXECUTE:\n');
+    console.log('\nSEARCH QUERIES TO EXECUTE:\n');
     console.log('The claude-researcher agent should execute these WebSearch queries:\n');
 
     searchQueries.forEach((query, index) => {
@@ -95,12 +95,12 @@ function generateSearchQueries(question: string): string[] {
 
     console.log('═'.repeat(60));
 
-    console.log('\n📊 STATUS: Query decomposition complete');
-    console.log('➡️ NEXT: Claude-Researcher agent will execute these searches using WebSearch tool\n');
-    console.log('🎯 COMPLETED: Completed query decomposition for web research');
+    console.log('\nSTATUS: Query decomposition complete');
+    console.log('→NEXT: Claude-Researcher agent will execute these searches using WebSearch tool\n');
+    console.log('COMPLETED: Completed query decomposition for web research');
 
   } catch (error) {
-    console.error('❌ Error during research planning:', error);
+    console.error('✗ Error during research planning:', error);
     process.exit(1);
   }
 })();

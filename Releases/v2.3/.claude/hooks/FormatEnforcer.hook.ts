@@ -30,7 +30,7 @@
  * - MUST RUN AFTER: LoadContext (needs identity configuration)
  *
  * FORMAT RULES INJECTED:
- * - Voice line requirement (🗣️ line spoken aloud)
+ * - Voice line requirement (line spoken aloud)
  * - Full vs minimal format selection
  * - 16-word maximum for voice lines
  * - Factual summary style (not conversational)
@@ -90,22 +90,22 @@ function main() {
 **You MUST follow this format for EVERY response.**
 
 ### Voice Line (REQUIRED)
-🗣️ ${identity.name}: [16 words max - factual summary of what was done]
+${identity.name}: [16 words max - factual summary of what was done]
 
 This line is spoken aloud. Without it, your response is SILENT.
 
 ### Full Format (for tasks)
-📋 SUMMARY: [One sentence]
-🔍 ANALYSIS: [Key findings]
-⚡ ACTIONS: [Steps taken]
-✅ RESULTS: [Outcomes]
-📊 STATUS: [Current state]
-➡️ NEXT: [Next steps]
-🗣️ ${identity.name}: [16 words max - factual, not conversational]
+SUMMARY: [One sentence]
+ANALYSIS: [Key findings]
+ACTIONS: [Steps taken]
+✓ RESULTS: [Outcomes]
+STATUS: [Current state]
+→NEXT: [Next steps]
+${identity.name}: [16 words max - factual, not conversational]
 
 ### Minimal Format (for simple responses)
-📋 SUMMARY: [Brief summary]
-🗣️ ${identity.name}: [Your response]
+SUMMARY: [Brief summary]
+${identity.name}: [Your response]
 
 ### Voice Line Rules
 - WRONG: "Done." / "Ready." / "Happy to help!"

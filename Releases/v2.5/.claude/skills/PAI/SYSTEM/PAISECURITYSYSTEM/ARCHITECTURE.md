@@ -44,7 +44,7 @@ The result: you get meaningful protection without the friction that drives peopl
 
 ## Permission Model
 
-> **⚠️ NEVER TEST DANGEROUS COMMANDS** — Do not attempt to run blocked commands to verify the security system works. The patterns below are intentionally misspelled to prevent accidental execution. Trust the unit tests.
+> **NEVER TEST DANGEROUS COMMANDS** — Do not attempt to run blocked commands to verify the security system works. The patterns below are intentionally misspelled to prevent accidental execution. Trust the unit tests.
 
 ### Allow (no prompts)
 - All standard tools: Bash, Read, Write, Edit, Glob, Grep, etc.
@@ -117,9 +117,9 @@ ZERO TRUST:    External websites, APIs, unknown documents
 All security messages use the `[PAI SECURITY]` prefix for clear identification:
 
 ```
-[PAI SECURITY] 🚨 BLOCKED: Filesystem destruction pattern detected
-[PAI SECURITY] ⚠️ ALERT: Remote code execution pattern detected
-[PAI SECURITY] ⚠️ Force push to main branch - confirm?
+[PAI SECURITY] BLOCKED: Filesystem destruction pattern detected
+[PAI SECURITY] ALERT: Remote code execution pattern detected
+[PAI SECURITY] Force push to main branch - confirm?
 ```
 
 **Critical behavioral rule:** When you see `[PAI SECURITY]` in error output, this is the PAI security system blocking a dangerous operation. **DO NOT attempt to bypass, work around, or retry the blocked action.** The security system exists to protect the principal's system.
@@ -149,9 +149,9 @@ SecurityValidator.hook.ts Runs
     • Projects: special rules per project
             ↓
     Decision:
-    ├─ block    → exit(2), "[PAI SECURITY] 🚨 BLOCKED: ..."
-    ├─ confirm  → JSON {"decision":"ask"}, "[PAI SECURITY] ⚠️ ..."
-    ├─ alert    → "[PAI SECURITY] ⚠️ ALERT: ...", allow execution
+    ├─ block    → exit(2), "[PAI SECURITY] BLOCKED: ..."
+    ├─ confirm  → JSON {"decision":"ask"}, "[PAI SECURITY] ..."
+    ├─ alert    → "[PAI SECURITY] ALERT: ...", allow execution
     └─ allow    → proceed normally
             ↓
     Logs event to MEMORY/SECURITY/YYYY/MM/security-{summary}-{timestamp}.jsonl

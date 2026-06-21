@@ -59,18 +59,18 @@ Use these as starting points, not final prescriptions. Blending two is fine; pic
 
 Claude Design (like any model) defaults to generic when the brief is vague. Explicit directions block:
 
-- ❌ Inter / Roboto / Arial / system-ui-only
-- ❌ Purple gradients on white
-- ❌ Space Grotesk (overused)
-- ❌ Identical card-grid layouts
-- ❌ Timid, evenly-distributed color palettes
+- ✗ Inter / Roboto / Arial / system-ui-only
+- ✗ Purple gradients on white
+- ✗ Space Grotesk (overused)
+- ✗ Identical card-grid layouts
+- ✗ Timid, evenly-distributed color palettes
 
 Request:
 
-- ✅ Distinctive display + body font pair (name both)
-- ✅ Dominant color + sharp accents (specify hex or named)
-- ✅ Asymmetric or grid-breaking layout
-- ✅ One orchestrated animation moment (not scattered micro-interactions)
+- ✓ Distinctive display + body font pair (name both)
+- ✓ Dominant color + sharp accents (specify hex or named)
+- ✓ Asymmetric or grid-breaking layout
+- ✓ One orchestrated animation moment (not scattered micro-interactions)
 
 ## Reference Images
 

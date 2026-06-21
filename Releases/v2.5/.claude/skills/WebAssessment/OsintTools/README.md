@@ -2,7 +2,7 @@
 
 This directory contains social media Open Source Intelligence (OSINT) tools for the PAI webassessment skill. These tools enable username tracking, Instagram analysis, and Twitter/X intelligence gathering for penetration testing and social media reconnaissance.
 
-## 🚀 Quick Start
+## Quick Start
 
 **All tools are installed in a Python 3.14 virtual environment for maximum compatibility.**
 
@@ -24,7 +24,7 @@ deactivate
 
 ---
 
-## 📦 Installed Tools
+## Installed Tools
 
 ### 1. Sherlock - Username Search Across 600+ Platforms
 
@@ -74,7 +74,7 @@ sherlock --version
 - Must use virtual environment (Python 3.14) for compatibility
 
 **Version:** 0.16.0
-**Status:** ✅ Fully functional - tested and verified
+**Status:** ✓ Fully functional - tested and verified
 
 ---
 
@@ -144,7 +144,7 @@ geolocation         # Get location data from posts
 - **Session Expiry:** May need to re-authenticate periodically
 - Some features may break with Instagram API changes
 
-**Status:** ✅ Installed and tested - requires Instagram credentials for use
+**Status:** ✓ Installed and tested - requires Instagram credentials for use
 
 ---
 
@@ -211,11 +211,11 @@ python tinfoleak.py -u target_username
 - **Python Warnings:** Has deprecation warnings due to legacy code (still functional)
 - Consider this tool **limited functionality** until API access is configured
 
-**Status:** ✅ Installed and tested - requires Twitter API credentials for use
+**Status:** ✓ Installed and tested - requires Twitter API credentials for use
 
 ---
 
-## 🔧 Installation Summary
+## Installation Summary
 
 **Date Installed:** 2025-11-11
 
@@ -250,42 +250,42 @@ pip install tweepy pillow exifread jinja2 oauth2
 ```
 
 **Verification:**
-- ✅ Sherlock v0.16.0 tested successfully
-- ✅ Osintgram --help verified
-- ✅ Tinfoleak invocation tested
-- ✅ All dependencies installed in virtual environment
+- ✓ Sherlock v0.16.0 tested successfully
+- ✓ Osintgram --help verified
+- ✓ Tinfoleak invocation tested
+- ✓ All dependencies installed in virtual environment
 
 ---
 
-## 🚀 Quick Start Guide
+## Quick Start Guide
 
 ### First Time Setup Checklist
 
 1. **Virtual Environment:**
-   - ✅ Python 3.14 virtual environment created (`osint-venv/`)
-   - ✅ All tools and dependencies installed
-   - ℹ️ Always activate with: `source osint-venv/bin/activate`
+   - ✓ Python 3.14 virtual environment created (`osint-venv/`)
+   - ✓ All tools and dependencies installed
+   - Always activate with: `source osint-venv/bin/activate`
 
 2. **Sherlock:**
-   - ✅ Installed and tested (v0.16.0)
-   - ✅ Fully functional - ready to use
-   - ℹ️ No API credentials required
+   - ✓ Installed and tested (v0.16.0)
+   - ✓ Fully functional - ready to use
+   - No API credentials required
 
 3. **Osintgram:**
-   - ✅ Dependencies installed and verified
-   - ❌ **TODO:** Create `config/credentials.ini` with Instagram credentials
-   - ❌ **TODO:** First authentication run
-   - ⚠️ Use dedicated OSINT account, not personal
+   - ✓ Dependencies installed and verified
+   - ✗ **TODO:** Create `config/credentials.ini` with Instagram credentials
+   - ✗ **TODO:** First authentication run
+   - Use dedicated OSINT account, not personal
 
 4. **Tinfoleak:**
-   - ✅ Dependencies installed and tested
-   - ❌ **TODO:** Register for Twitter Developer account
-   - ❌ **TODO:** Configure `tinfoleak.conf` with API credentials
-   - ⚠️ Note: May have limited functionality due to Twitter API restrictions
+   - ✓ Dependencies installed and tested
+   - ✗ **TODO:** Register for Twitter Developer account
+   - ✗ **TODO:** Configure `tinfoleak.conf` with API credentials
+   - Note: May have limited functionality due to Twitter API restrictions
 
 ---
 
-## 📖 Use Cases
+## Use Cases
 
 **Username Reconnaissance:**
 - Track usernames across multiple platforms (Sherlock)
@@ -306,7 +306,7 @@ pip install tweepy pillow exifread jinja2 oauth2
 
 ---
 
-## ⚠️ Security and Legal Considerations
+## Security and Legal Considerations
 
 **IMPORTANT:**
 - These tools are for **authorized security assessments only**
@@ -326,7 +326,7 @@ pip install tweepy pillow exifread jinja2 oauth2
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 **Virtual Environment Not Activated:**
 ```
@@ -358,7 +358,7 @@ ModuleNotFoundError: No module named 'X'
 
 ---
 
-## 📚 Additional Resources
+## Additional Resources
 
 **Sherlock:**
 - GitHub: https://github.com/sherlock-project/sherlock
@@ -374,7 +374,7 @@ ModuleNotFoundError: No module named 'X'
 
 ---
 
-## 🔄 Updates and Maintenance
+## Updates and Maintenance
 
 **Updating Tools:**
 ```bash
@@ -406,7 +406,7 @@ pip install tweepy pillow exifread jinja2 oauth2 --upgrade
 
 ---
 
-## 📋 Integration with WebAssessment Skill
+## Integration with WebAssessment Skill
 
 These tools are designed to be used by the PAI webassessment skill for social media reconnaissance during security assessments. The skill can:
 

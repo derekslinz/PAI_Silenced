@@ -122,10 +122,10 @@ To integrate with the actual parser backend:
 
 ## Browser Compatibility
 
-- Chrome/Edge: ✅ Full support
-- Firefox: ✅ Full support
-- Safari: ✅ Full support
-- Mobile browsers: ✅ Responsive design
+- Chrome/Edge: ✓ Full support
+- Firefox: ✓ Full support
+- Safari: ✓ Full support
+- Mobile browsers: ✓ Responsive design
 
 ## Keyboard Shortcuts
 

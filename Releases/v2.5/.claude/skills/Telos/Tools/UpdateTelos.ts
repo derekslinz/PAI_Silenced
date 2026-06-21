@@ -87,7 +87,7 @@ async function main() {
   const args = process.argv.slice(2);
 
   if (args.length < 3) {
-    console.error('❌ Usage: update-telos <file> "<content>" "<change-description>"');
+    console.error('✗ Usage: update-telos <file> "<content>" "<change-description>"');
     console.error('\nExample: update-telos BOOKS.md "- New Book Title" "Added favorite book"');
     console.error('\nValid files:', VALID_FILES.join(', '));
     process.exit(1);
@@ -97,7 +97,7 @@ async function main() {
 
   // Validate filename
   if (!VALID_FILES.includes(filename)) {
-    console.error(`❌ Invalid file: ${filename}`);
+    console.error(`✗ Invalid file: ${filename}`);
     console.error(`Valid files: ${VALID_FILES.join(', ')}`);
     process.exit(1);
   }
@@ -106,7 +106,7 @@ async function main() {
 
   // Check if file exists
   if (!existsSync(targetFile)) {
-    console.error(`❌ File does not exist: ${targetFile}`);
+    console.error(`✗ File does not exist: ${targetFile}`);
     process.exit(1);
   }
 
@@ -117,9 +117,9 @@ async function main() {
 
   try {
     copyFileSync(targetFile, backupPath);
-    console.log(`✅ Backup created: ${backupFilename}`);
+    console.log(`✓ Backup created: ${backupFilename}`);
   } catch (error) {
-    console.error(`❌ Failed to create backup: ${error}`);
+    console.error(`✗ Failed to create backup: ${error}`);
     process.exit(1);
   }
 
@@ -128,9 +128,9 @@ async function main() {
     const currentContent = readFileSync(targetFile, 'utf-8');
     const updatedContent = currentContent.trimEnd() + '\n' + content + '\n';
     writeFileSync(targetFile, updatedContent, 'utf-8');
-    console.log(`✅ Updated: ${filename}`);
+    console.log(`✓ Updated: ${filename}`);
   } catch (error) {
-    console.error(`❌ Failed to update file: ${error}`);
+    console.error(`✗ Failed to update file: ${error}`);
     process.exit(1);
   }
 
@@ -164,19 +164,19 @@ async function main() {
 
       const updatedUpdates = beforeMarker + headerSection + logEntry + changesList;
       writeFileSync(UPDATES_FILE, updatedUpdates, 'utf-8');
-      console.log(`✅ Change logged in updates.md`);
+      console.log(`✓ Change logged in updates.md`);
     } else {
       // Fallback: just append
       const updatedUpdates = updatesContent.trimEnd() + '\n' + logEntry;
       writeFileSync(UPDATES_FILE, updatedUpdates, 'utf-8');
-      console.log(`✅ Change logged in updates.md (appended)`);
+      console.log(`✓ Change logged in updates.md (appended)`);
     }
   } catch (error) {
-    console.error(`❌ Failed to update updates.md: ${error}`);
+    console.error(`✗ Failed to update updates.md: ${error}`);
     process.exit(1);
   }
 
-  console.log('\n🎯 TELOS update complete!');
+  console.log('\nTELOS update complete!');
   console.log(`   File: ${filename}`);
   console.log(`   Backup: backups/${backupFilename}`);
   console.log(`   Change: ${changeDescription}`);

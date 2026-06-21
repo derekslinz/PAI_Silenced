@@ -62,7 +62,7 @@ async function main() {
       }
     }
 
-    setTabState({ title: '⚙️' + restoredTitle, state: 'working', sessionId });
+    setTabState({ title: '' + restoredTitle, state: 'working', sessionId });
 
     console.error('[QuestionAnswered] Tab reset to working state (orange on inactive only)');
   } catch (error) {

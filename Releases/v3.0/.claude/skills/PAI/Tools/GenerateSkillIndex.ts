@@ -216,14 +216,14 @@ async function main() {
         index.deferredCount++;
       }
 
-      console.log(`  ${skill.tier === 'always' ? '🔒' : '📦'} ${skill.name}: ${skill.triggers.length} triggers, ${skill.workflows.length} workflows`);
+      console.log(`  ${skill.tier === 'always' ? '' : ''} ${skill.name}: ${skill.triggers.length} triggers, ${skill.workflows.length} workflows`);
     }
   }
 
   // Write the index
   await writeFile(OUTPUT_FILE, JSON.stringify(index, null, 2));
 
-  console.log(`\n✅ Index generated: ${OUTPUT_FILE}`);
+  console.log(`\n✓ Index generated: ${OUTPUT_FILE}`);
   console.log(`   Total: ${index.totalSkills} skills`);
   console.log(`   Always loaded: ${index.alwaysLoadedCount}`);
   console.log(`   Deferred: ${index.deferredCount}`);
@@ -235,7 +235,7 @@ async function main() {
   const newTokens = (index.alwaysLoadedCount * avgFullTokens) + (index.deferredCount * avgMinimalTokens);
   const savings = ((currentTokens - newTokens) / currentTokens * 100).toFixed(1);
 
-  console.log(`\n📊 Estimated token impact:`);
+  console.log(`\nEstimated token impact:`);
   console.log(`   Current: ~${currentTokens.toLocaleString()} tokens`);
   console.log(`   After:   ~${newTokens.toLocaleString()} tokens`);
   console.log(`   Savings: ~${savings}%`);

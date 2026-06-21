@@ -78,7 +78,7 @@ White #FFFFFF — Clean empty space around territories
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+## MANDATORY WORKFLOW STEPS
 
 ### Step 1: Define Conceptual Geography
 

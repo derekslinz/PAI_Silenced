@@ -364,7 +364,7 @@ for (const ipInfo of domainReport.infrastructure) {
 **AUTHORIZATION CHECK:**
 ```typescript
 if (activeMode && !isAuthorized()) {
-  console.log("⚠️  Active subdomain probing requires authorization");
+  console.log(" Active subdomain probing requires authorization");
   console.log("Passive enumeration complete. Switch to passive-only mode.");
   return passiveReport;
 }
@@ -479,7 +479,7 @@ curl -s "https://crt.sh/?q=example.com&output=json" | \
 - **Status:**
   - clientTransferProhibited
   - clientUpdateProhibited
-- **DNSSEC:** ❌ Unsigned
+- **DNSSEC:** ✗ Unsigned
 
 ### Registrant (Privacy Protected)
 - **Organization:** Privacy Protected
@@ -489,7 +489,7 @@ curl -s "https://crt.sh/?q=example.com&output=json" | \
 - ns1.example.com (1.2.3.5)
 - ns2.example.com (5.6.7.9)
 - ns3.example.com (10.20.30.40)
-- **Analysis:** ⚠️ All name servers in same domain (potential SPOF)
+- **Analysis:** All name servers in same domain (potential SPOF)
 
 ---
 
@@ -529,7 +529,7 @@ _dmarc.example.com: v=DMARC1; p=quarantine; rua=mailto:dmarc@example.com
 - **Record:** `v=spf1 include:_spf.example.com include:_spf.google.com ~all`
 - **Mechanism:** Softfail (~all)
 - **Includes:** example.com mail servers + Google Workspace
-- **Assessment:** ✅ Properly configured
+- **Assessment:** ✓ Properly configured
 - **Recommendation:** Consider hardfail (-all) for stricter enforcement
 
 ### DMARC (Domain-based Message Authentication)
@@ -538,19 +538,19 @@ _dmarc.example.com: v=DMARC1; p=quarantine; rua=mailto:dmarc@example.com
 - **Aggregate Reports:** dmarc@example.com
 - **Forensic Reports:** Not configured
 - **Percentage:** 100% (default)
-- **Assessment:** ✅ Good (quarantine policy)
+- **Assessment:** ✓ Good (quarantine policy)
 - **Recommendation:** Monitor reports, consider p=reject when confident
 
 ### DKIM (DomainKeys Identified Mail)
 - **Selectors Found:**
-  - default._domainkey.example.com ✅
-  - google._domainkey.example.com ✅
-  - k1._domainkey.example.com ✅
-- **Assessment:** ✅ Multiple selectors configured
+  - default._domainkey.example.com ✓
+  - google._domainkey.example.com ✓
+  - k1._domainkey.example.com ✓
+- **Assessment:** ✓ Multiple selectors configured
 - **Providers:** In-house + Google Workspace
 
 ### MTA-STS (Mail Transfer Agent Strict Transport Security)
-- **Status:** ❌ Not configured
+- **Status:** ✗ Not configured
 - **Recommendation:** Consider implementing MTA-STS for enhanced email security
 
 ---
@@ -560,7 +560,7 @@ _dmarc.example.com: v=DMARC1; p=quarantine; rua=mailto:dmarc@example.com
 ### Discovery Summary
 - **Certificate Transparency:** 47 subdomains
 - **Common Name Enumeration:** 12 additional
-- **Zone Transfer:** ❌ Failed (expected)
+- **Zone Transfer:** ✗ Failed (expected)
 - **Total Unique:** 59 subdomains
 
 ### Full Subdomain List
@@ -769,7 +769,7 @@ _dmarc.example.com: v=DMARC1; p=quarantine; rua=mailto:dmarc@example.com
 - **Key Size:** 2048 bit RSA
 
 ### Wildcard Certificate
-- ✅ Wildcard (*.example.com) included
+- ✓ Wildcard (*.example.com) included
 - Covers all first-level subdomains
 - Does NOT cover nested subdomains (e.g., api.admin.example.com)
 
@@ -798,7 +798,7 @@ _dmarc.example.com: v=DMARC1; p=quarantine; rua=mailto:dmarc@example.com
 - **API Endpoints:** 2 APIs (v1 and v2)
 
 ### Concerning Exposures
-⚠️ **High Priority:**
+**High Priority:**
 1. **admin.example.com** - Administrative interface publicly accessible
 2. **dashboard.example.com** - Dashboard accessible (403 but discoverable)
 3. **internal.example.com** - Internal systems exposed
@@ -806,7 +806,7 @@ _dmarc.example.com: v=DMARC1; p=quarantine; rua=mailto:dmarc@example.com
 5. **gitlab.example.com** - Source code repository
 6. **jenkins.example.com** - CI/CD pipeline
 
-⚠️ **Medium Priority:**
+**Medium Priority:**
 1. **dev/staging/uat/qa.example.com** - Non-production environments
 2. **vpn.example.com** - VPN endpoint (potential target)
 3. **sso.example.com** - Authentication provider
@@ -815,19 +815,19 @@ _dmarc.example.com: v=DMARC1; p=quarantine; rua=mailto:dmarc@example.com
 ### Security Posture
 
 **Positive Indicators:**
-- ✅ Email security configured (SPF, DMARC, DKIM)
-- ✅ HTTPS enforced on all web services
-- ✅ Modern TLS certificates (Let's Encrypt)
-- ✅ CDN usage (Cloudflare) for DDoS protection
-- ✅ Regular certificate renewals
+- ✓ Email security configured (SPF, DMARC, DKIM)
+- ✓ HTTPS enforced on all web services
+- ✓ Modern TLS certificates (Let's Encrypt)
+- ✓ CDN usage (Cloudflare) for DDoS protection
+- ✓ Regular certificate renewals
 
 **Areas of Concern:**
-- ⚠️ Administrative interfaces publicly discoverable
-- ⚠️ Database servers exposed in DNS
-- ⚠️ Non-production environments accessible
-- ⚠️ All name servers in same domain (SPOF)
-- ⚠️ No MTA-STS for email security
-- ⚠️ DNSSEC not enabled
+- Administrative interfaces publicly discoverable
+- Database servers exposed in DNS
+- Non-production environments accessible
+- All name servers in same domain (SPOF)
+- No MTA-STS for email security
+- DNSSEC not enabled
 
 ---
 
@@ -952,22 +952,22 @@ if (authorized) {
 ## Success Criteria
 
 ### Passive Recon Complete
-- ✅ WHOIS data retrieved
-- ✅ DNS records enumerated (A, AAAA, MX, NS, TXT, SOA)
-- ✅ Email security assessed (SPF, DMARC, DKIM)
-- ✅ Certificate transparency searched
-- ✅ Subdomains enumerated (passive methods)
-- ✅ IP addresses identified
-- ✅ Hosting providers mapped
-- ✅ Report generated
+- ✓ WHOIS data retrieved
+- ✓ DNS records enumerated (A, AAAA, MX, NS, TXT, SOA)
+- ✓ Email security assessed (SPF, DMARC, DKIM)
+- ✓ Certificate transparency searched
+- ✓ Subdomains enumerated (passive methods)
+- ✓ IP addresses identified
+- ✓ Hosting providers mapped
+- ✓ Report generated
 
 ### Active Recon Complete (if authorized)
-- ✅ Authorization documented
-- ✅ Live web applications probed
-- ✅ Technology stack detected
-- ✅ Screenshots captured
-- ✅ Comprehensive attack surface mapped
-- ✅ No aggressive techniques used
+- ✓ Authorization documented
+- ✓ Live web applications probed
+- ✓ Technology stack detected
+- ✓ Screenshots captured
+- ✓ Comprehensive attack surface mapped
+- ✓ No aggressive techniques used
 
 ---
 

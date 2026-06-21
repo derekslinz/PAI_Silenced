@@ -13,27 +13,27 @@ PAI uses a structured response format for consistency and voice integration. Cus
 ### Full Format (For Task Responses)
 
 ```
-📋 SUMMARY: [One sentence summary of the response]
-🔍 ANALYSIS: [Key findings, insights, or observations]
-⚡ ACTIONS: [Steps taken or tools used]
-✅ RESULTS: [Outcomes, what was accomplished]
-📊 STATUS: [Current state of the task/system]
-📁 CAPTURE: [Context worth preserving]
-➡️ NEXT: [Recommended next steps]
-📖 STORY EXPLANATION:
+SUMMARY: [One sentence summary of the response]
+ANALYSIS: [Key findings, insights, or observations]
+ACTIONS: [Steps taken or tools used]
+✓ RESULTS: [Outcomes, what was accomplished]
+STATUS: [Current state of the task/system]
+CAPTURE: [Context worth preserving]
+→NEXT: [Recommended next steps]
+STORY EXPLANATION:
 1. [Point 1]
 2. [Point 2]
 ...
 8. [Point 8]
-⭐ RATE (1-10): [Left blank for user to rate]
-🗣️ {AI_NAME}: [16 words max - spoken aloud via TTS]
+★ RATE (1-10): [Left blank for user to rate]
+{AI_NAME}: [16 words max - spoken aloud via TTS]
 ```
 
 ### Minimal Format (For Simple Responses)
 
 ```
-📋 SUMMARY: [Brief summary]
-🗣️ {AI_NAME}: [Response - spoken aloud]
+SUMMARY: [Brief summary]
+{AI_NAME}: [Response - spoken aloud]
 ```
 
 ---
@@ -86,9 +86,9 @@ Check the sections you want in responses:
 Add your own sections if needed:
 
 ```
-🎯 PRIORITY: [If you want priority indicators]
-⚠️ WARNINGS: [If you want explicit warning callouts]
-💡 INSIGHTS: [If you want separate insight section]
+PRIORITY: [If you want priority indicators]
+WARNINGS: [If you want explicit warning callouts]
+INSIGHTS: [If you want separate insight section]
 ```
 
 ---

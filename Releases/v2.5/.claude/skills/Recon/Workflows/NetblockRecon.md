@@ -45,7 +45,7 @@ Perform reconnaissance on network blocks (CIDR ranges) to:
 
 ## CRITICAL WARNING
 
-**⚠️ AUTHORIZATION ABSOLUTELY REQUIRED FOR ACTIVE SCANNING**
+**AUTHORIZATION ABSOLUTELY REQUIRED FOR ACTIVE SCANNING**
 
 Scanning network ranges you don't own is:
 - **Illegal** in most jurisdictions
@@ -278,7 +278,7 @@ curl "https://api.bgpview.io/asn/12345/prefixes"
 
 ```typescript
 async function checkNetblockAuthorization(cidr: string): Promise<boolean> {
-  console.log("⚠️  NETWORK BLOCK SCANNING AUTHORIZATION REQUIRED");
+  console.log(" NETWORK BLOCK SCANNING AUTHORIZATION REQUIRED");
   console.log(`Target: ${cidr}`);
   console.log(`This is ACTIVE scanning that will generate significant network traffic.`);
   console.log("");
@@ -292,7 +292,7 @@ async function checkNetblockAuthorization(cidr: string): Promise<boolean> {
   const response = await askUser("Do you have proper authorization? (yes/no)");
 
   if (response.toLowerCase() !== 'yes') {
-    console.log("❌ Authorization not confirmed. Stopping.");
+    console.log("✗ Authorization not confirmed. Stopping.");
     return false;
   }
 
@@ -616,9 +616,9 @@ function categorizeHosts(liveHosts: HostInfo[]): CategorizedHosts {
 - .201-.254: IoT devices and printers
 
 **Segmentation Assessment:**
-- ⚠️ **Poor Segmentation:** All devices in single /24
-- ⚠️ **Security Concern:** Databases accessible from workstation range
-- ✅ **Logical Organization:** IP assignment follows pattern
+- **Poor Segmentation:** All devices in single /24
+- **Security Concern:** Databases accessible from workstation range
+- ✓ **Logical Organization:** IP assignment follows pattern
 
 **Recommendations:**
 1. Implement VLANs to separate:
@@ -637,18 +637,18 @@ function categorizeHosts(liveHosts: HostInfo[]): CategorizedHosts {
 ## Security Observations
 
 ### Positive Indicators
-- ✅ SSH enabled on most systems (remote management)
-- ✅ HTTPS used on web services
-- ✅ Consistent naming convention (aids management)
+- ✓ SSH enabled on most systems (remote management)
+- ✓ HTTPS used on web services
+- ✓ Consistent naming convention (aids management)
 
 ### Security Concerns
-⚠️ **High Priority:**
+**High Priority:**
 1. **Database Exposure:** MySQL/PostgreSQL accessible from workstation range
 2. **Flat Network:** No network segmentation (single broadcast domain)
 3. **SSH Version Mix:** Inconsistent patching (security risk)
 4. **Unknown Hosts:** 8 hosts without rDNS (shadow IT?)
 
-⚠️ **Medium Priority:**
+**Medium Priority:**
 1. **IoT Devices:** Printers on same network as production
 2. **No Apparent Monitoring:** No IDS/IPS detected
 3. **Reverse DNS:** Not all hosts have rDNS entries
@@ -778,21 +778,21 @@ for (const netblock of netblocks) {
 ## Success Criteria
 
 ### Passive Recon Complete
-- ✅ CIDR parsed and validated
-- ✅ WHOIS netblock info retrieved
-- ✅ ASN identified
-- ✅ Sample IPs investigated
-- ✅ BGP prefixes identified
-- ✅ Report generated
+- ✓ CIDR parsed and validated
+- ✓ WHOIS netblock info retrieved
+- ✓ ASN identified
+- ✓ Sample IPs investigated
+- ✓ BGP prefixes identified
+- ✓ Report generated
 
 ### Active Recon Complete (if authorized)
-- ✅ Authorization documented
-- ✅ Live hosts discovered
-- ✅ Port scans completed
-- ✅ Services detected
-- ✅ Patterns identified
-- ✅ Rate limiting applied (no DoS)
-- ✅ Coordination maintained (if required)
+- ✓ Authorization documented
+- ✓ Live hosts discovered
+- ✓ Port scans completed
+- ✓ Services detected
+- ✓ Patterns identified
+- ✓ Rate limiting applied (no DoS)
+- ✓ Coordination maintained (if required)
 
 ---
 

@@ -389,7 +389,7 @@ grep "open" masscan-results.txt | awk '{print $4":"$3}' | \
   xargs -I {} nmap -sV -p {} -oA nmap-masscan-followup
 ```
 
-**⚠️ WARNING:** Masscan is EXTREMELY noisy and will trigger IDS/IPS. Only use with explicit authorization.
+**WARNING:** Masscan is EXTREMELY noisy and will trigger IDS/IPS. Only use with explicit authorization.
 
 ### Phase 6: Technology Fingerprinting
 

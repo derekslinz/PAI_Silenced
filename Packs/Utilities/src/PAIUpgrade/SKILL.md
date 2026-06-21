@@ -11,7 +11,7 @@ description: Extract system improvements from content AND monitor external sourc
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -88,7 +88,7 @@ The output has THREE major sections:
 
 ---
 
-## ✨ Discoveries
+## ★ Discoveries
 
 Everything interesting we found, ranked by how compelling it is for PAI. This is the "what's out there" overview.
 
@@ -102,11 +102,11 @@ Everything interesting we found, ranked by how compelling it is for PAI. This is
 
 ---
 
-## 🔥 Recommendations
+## Recommendations
 
 What to actually DO with these discoveries, organized by urgency and impact.
 
-### 🔴 CRITICAL — Integrate immediately
+### ● CRITICAL — Integrate immediately
 
 These fix gaps, security issues, or unlock capabilities that PAI should already have.
 
@@ -114,7 +114,7 @@ These fix gaps, security issues, or unlock capabilities that PAI should already 
 |---|---------------|---------------|--------|----------------|
 | 1 | [Short action name] | [Why this matters for PAI — what gap it fills or what breaks without it] | [Low/Med/High] | `[file1]`, `[file2]` |
 
-### 🟠 HIGH — Integrate this week
+### ● HIGH — Integrate this week
 
 These significantly improve PAI's capabilities or efficiency.
 
@@ -122,7 +122,7 @@ These significantly improve PAI's capabilities or efficiency.
 |---|---------------|---------------|--------|----------------|
 | 2 | [Short action name] | [Which PAI component improves and how] | [Low/Med/High] | `[file1]` |
 
-### 🟡 MEDIUM — Integrate when convenient
+### ● MEDIUM — Integrate when convenient
 
 These add useful capabilities or align PAI with ecosystem best practices.
 
@@ -130,7 +130,7 @@ These add useful capabilities or align PAI with ecosystem best practices.
 |---|---------------|---------------|--------|----------------|
 | 3 | [Short action name] | [What becomes possible for PAI] | [Low/Med/High] | `[file1]` |
 
-### 🟢 LOW — Awareness / future reference
+### ● LOW — Awareness / future reference
 
 These are nice-to-know or will become relevant later.
 
@@ -140,7 +140,7 @@ These are nice-to-know or will become relevant later.
 
 ---
 
-## 🎯 Technique Details
+## Technique Details
 
 Full extracted techniques for reference. Each recommendation above maps to one or more techniques below.
 
@@ -148,7 +148,7 @@ Full extracted techniques for reference. Each recommendation above maps to one o
 
 #### [N]. [Feature/Change Name]
 **Source:** GitHub claude-code v2.1.16, commit abc123
-**Priority:** 🔴 CRITICAL | 🟠 HIGH | 🟡 MEDIUM | 🟢 LOW
+**Priority:** ● CRITICAL | ● HIGH | ● MEDIUM | ● LOW
 
 **What It Is (16-32 words):**
 [Describe the technique itself - what it does, how it works, what capability it provides. Must be 16-32 words, concrete and specific.]
@@ -175,7 +175,7 @@ Full extracted techniques for reference. Each recommendation above maps to one o
 
 #### [N]. [Specific Technique Name]
 **Source:** R Amjad - "Video Title" @ 12:34
-**Priority:** 🔴 CRITICAL | 🟠 HIGH | 🟡 MEDIUM | 🟢 LOW
+**Priority:** ● CRITICAL | ● HIGH | ● MEDIUM | ● LOW
 
 **What It Is (16-32 words):**
 [Describe the technique itself]
@@ -196,7 +196,7 @@ Full extracted techniques for reference. Each recommendation above maps to one o
 
 #### [N]. [Specific Capability/Pattern]
 **Source:** Claude Docs - Tool Use section, updated 2026-01-20
-**Priority:** 🔴 CRITICAL | 🟠 HIGH | 🟡 MEDIUM | 🟢 LOW
+**Priority:** ● CRITICAL | ● HIGH | ● MEDIUM | ● LOW
 
 **What It Is (16-32 words):**
 [Describe the technique itself]
@@ -213,17 +213,17 @@ Full extracted techniques for reference. Each recommendation above maps to one o
 
 ---
 
-## 📊 Summary
+## Summary
 
 | # | Technique | Source | Priority | PAI Component | Effort |
 |---|-----------|--------|----------|---------------|--------|
-| 1 | [name] | [source] | 🔴/🟠/🟡/🟢 | [component] | Low/Med/High |
+| 1 | [name] | [source] | ●/●/●/● | [component] | Low/Med/High |
 
 **Totals:** [N] Critical | [N] High | [N] Medium | [N] Low | [N] Skipped
 
 ---
 
-## ⏭️ Skipped Content
+## Skipped Content
 
 | Content | Source | Why Skipped |
 |---------|--------|-------------|
@@ -231,7 +231,7 @@ Full extracted techniques for reference. Each recommendation above maps to one o
 
 ---
 
-## 🔍 Sources Processed
+## Sources Processed
 
 **Release Notes Parsed:**
 - claude-code v2.1.14, v2.1.15, v2.1.16 → [N] techniques extracted
@@ -261,11 +261,11 @@ Full extracted techniques for reference. Each recommendation above maps to one o
 6. **Skip, don't dilute** - If content has no extractable technique, put it in Skipped Content with reason
 
 **Anti-patterns to AVOID:**
-- ❌ "Check out this video for more"
-- ❌ "This release has improvements"
-- ❌ "Consider looking into this"
-- ❌ Vague summaries without specific techniques
-- ❌ Links without extracted content
+- ✗ "Check out this video for more"
+- ✗ "This release has improvements"
+- ✗ "Consider looking into this"
+- ✗ Vague summaries without specific techniques
+- ✗ Links without extracted content
 
 **Source Type Labels:**
 | Label | Meaning |
@@ -471,7 +471,7 @@ User: "check Anthropic only"
 
 These output patterns are **FAILURES**. If you produce these, you have not completed the skill correctly:
 
-| ❌ Bad Output | Why It's Wrong | ✅ Correct Output |
+| ✗ Bad Output | Why It's Wrong | ✓ Correct Output |
 |---------------|----------------|-------------------|
 | "Check out R Amjad's video on Claude Code" | Points to content instead of extracting it | "@ 5:42, R Amjad shows this technique: [quote]" |
 | "v2.1.16 has task management improvements" | Vague summary, no technique | "v2.1.16 adds `addBlockedBy` parameter: [code example]" |
@@ -480,8 +480,8 @@ These output patterns are **FAILURES**. If you produce these, you have not compl
 | "Several videos covered AI agents" | Count without content | "[N] videos skipped - no extractable techniques" |
 | "This helps because it improves things" | Vague benefit, no word count | "How It Helps PAI (16-32 words): Our SecurityValidator currently only blocks commands. This technique enables injecting reasoning context before tool execution, making security decisions more nuanced." |
 | "A new hook feature" | No description of what it IS | "What It Is (16-32 words): PreToolUse hooks can return additionalContext that gets injected into the model's context before execution, enabling reasoning-based decisions rather than binary blocks." |
-| "Top 3 Actions" or flat recommendation list | No priority tiers — everything looks equally important | Recommendations section with 🔴 CRITICAL / 🟠 HIGH / 🟡 MEDIUM / 🟢 LOW tiers, each with PAI Relevance column |
-| Recommendations at the bottom of the report | Actionable items buried after technique dump | 🔥 Recommendations section appears FIRST, technique details are reference material below |
+| "Top 3 Actions" or flat recommendation list | No priority tiers — everything looks equally important | Recommendations section with ● CRITICAL / ● HIGH / ● MEDIUM / ● LOW tiers, each with PAI Relevance column |
+| Recommendations at the bottom of the report | Actionable items buried after technique dump | Recommendations section appears FIRST, technique details are reference material below |
 
 **The test:** If you can say "show me the technique" and there's nothing to show, you've failed.
 

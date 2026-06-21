@@ -1,15 +1,15 @@
 const eventTypeToEmoji: Record<string, string> = {
-  'PreToolUse': '🔧',
-  'PostToolUse': '✅',
-  'Notification': '🔔',
-  'Stop': '🛑',
-  'SubagentStop': '👥',
-  'PreCompact': '📦',
-  'UserPromptSubmit': '💬',
-  'SessionStart': '🚀',
-  'SessionEnd': '🏁',
+  'PreToolUse': '',
+  'PostToolUse': '✓',
+  'Notification': '',
+  'Stop': '',
+  'SubagentStop': '',
+  'PreCompact': '',
+  'UserPromptSubmit': '',
+  'SessionStart': '',
+  'SessionEnd': '',
   // Default
-  'default': '❓'
+  'default': ''
 };
 
 export function useEventEmojis() {

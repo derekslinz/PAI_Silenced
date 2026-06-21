@@ -165,7 +165,7 @@ For each minimal cut set:
 ## Output Format
 
 ```
-🌲 FAULT TREE ANALYSIS: [top event]
+FAULT TREE ANALYSIS: [top event]
 
 TOP EVENT: [...]
 
@@ -199,7 +199,7 @@ PRIORITY MITIGATION:
 1. Basic 4 — highest single-event cut set; eliminate or reduce
 2. Basic 3 — second-highest single; same logic
 3. {Basic 1, Basic 2} — 2-event AND, acceptable if independence holds
-   ⚠ Common-mode check: are 1 and 2 truly independent?
+   Common-mode check: are 1 and 2 truly independent?
 
 COMMON-MODE FAILURES (flagged):
 - [Potential correlated failure between events, explained]

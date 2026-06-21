@@ -106,7 +106,7 @@ Scan for folders deeper than 2 levels:
 find ~/.claude/skills/[SkillName]/ -type d -mindepth 2 -maxdepth 3
 ```
 
-### ❌ Common Violations to Fix
+### ✗ Common Violations to Fix
 
 **Nested Workflows:**
 ```

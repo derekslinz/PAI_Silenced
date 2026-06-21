@@ -25,7 +25,7 @@ echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━�
 echo
 
 # Check for Bun
-echo -e "${YELLOW}▶ Checking prerequisites...${NC}"
+echo -e "${YELLOW}► Checking prerequisites...${NC}"
 if ! command -v bun &> /dev/null; then
     echo -e "${RED}✗ Bun is not installed${NC}"
     echo "  Please install Bun first:"
@@ -36,11 +36,11 @@ echo -e "${GREEN}✓ Bun is installed${NC}"
 
 # Check for existing installation
 if launchctl list | grep -q "$SERVICE_NAME" 2>/dev/null; then
-    echo -e "${YELLOW}⚠ Voice server is already installed${NC}"
+    echo -e "${YELLOW}Voice server is already installed${NC}"
     read -p "Do you want to reinstall? (y/n): " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo -e "${YELLOW}▶ Stopping existing service...${NC}"
+        echo -e "${YELLOW}► Stopping existing service...${NC}"
         launchctl unload "$PLIST_PATH" 2>/dev/null || true
         echo -e "${GREEN}✓ Existing service stopped${NC}"
     else
@@ -50,19 +50,19 @@ if launchctl list | grep -q "$SERVICE_NAME" 2>/dev/null; then
 fi
 
 # Check for ElevenLabs configuration
-echo -e "${YELLOW}▶ Checking ElevenLabs configuration...${NC}"
+echo -e "${YELLOW}► Checking ElevenLabs configuration...${NC}"
 if [ -f "$ENV_FILE" ] && grep -q "ELEVENLABS_API_KEY=" "$ENV_FILE"; then
     API_KEY=$(grep "ELEVENLABS_API_KEY=" "$ENV_FILE" | cut -d'=' -f2)
     if [ "$API_KEY" != "your_api_key_here" ] && [ -n "$API_KEY" ]; then
         echo -e "${GREEN}✓ ElevenLabs API key configured${NC}"
         ELEVENLABS_CONFIGURED=true
     else
-        echo -e "${YELLOW}⚠ ElevenLabs API key not configured${NC}"
+        echo -e "${YELLOW}ElevenLabs API key not configured${NC}"
         echo "  Voice server will use macOS 'say' command as fallback"
         ELEVENLABS_CONFIGURED=false
     fi
 else
-    echo -e "${YELLOW}⚠ No ElevenLabs configuration found${NC}"
+    echo -e "${YELLOW}No ElevenLabs configuration found${NC}"
     echo "  Voice server will use macOS 'say' command as fallback"
     ELEVENLABS_CONFIGURED=false
 fi
@@ -76,7 +76,7 @@ if [ "$ELEVENLABS_CONFIGURED" = false ]; then
 fi
 
 # Create LaunchAgent plist
-echo -e "${YELLOW}▶ Creating LaunchAgent configuration...${NC}"
+echo -e "${YELLOW}► Creating LaunchAgent configuration...${NC}"
 mkdir -p "$HOME/Library/LaunchAgents"
 
 cat > "$PLIST_PATH" << EOF
@@ -126,7 +126,7 @@ EOF
 echo -e "${GREEN}✓ LaunchAgent configuration created${NC}"
 
 # Load the LaunchAgent
-echo -e "${YELLOW}▶ Starting voice server service...${NC}"
+echo -e "${YELLOW}► Starting voice server service...${NC}"
 launchctl load "$PLIST_PATH" 2>/dev/null || {
     echo -e "${RED}✗ Failed to load LaunchAgent${NC}"
     echo "  Try manually: launchctl load $PLIST_PATH"
@@ -137,12 +137,12 @@ launchctl load "$PLIST_PATH" 2>/dev/null || {
 sleep 2
 
 # Test the server
-echo -e "${YELLOW}▶ Testing voice server...${NC}"
+echo -e "${YELLOW}► Testing voice server...${NC}"
 if curl -s -f -X GET http://localhost:8888/health > /dev/null 2>&1; then
     echo -e "${GREEN}✓ Voice server is running${NC}"
     
     # Send test notification
-    echo -e "${YELLOW}▶ Sending test notification...${NC}"
+    echo -e "${YELLOW}► Sending test notification...${NC}"
     curl -s -X POST http://localhost:8888/notify \
         -H "Content-Type: application/json" \
         -d '{"message": "Voice server installed successfully"}' > /dev/null
@@ -194,12 +194,12 @@ echo
 read -p "Would you like to install a menu bar indicator? (y/n): " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo -e "${YELLOW}▶ Installing menu bar indicator...${NC}"
+    echo -e "${YELLOW}► Installing menu bar indicator...${NC}"
     if [ -f "$SCRIPT_DIR/menubar/install-menubar.sh" ]; then
         chmod +x "$SCRIPT_DIR/menubar/install-menubar.sh"
         "$SCRIPT_DIR/menubar/install-menubar.sh"
     else
-        echo -e "${YELLOW}⚠ Menu bar installer not found${NC}"
+        echo -e "${YELLOW}Menu bar installer not found${NC}"
         echo "  You can install it manually later from:"
         echo "  $SCRIPT_DIR/menubar/install-menubar.sh"
     fi

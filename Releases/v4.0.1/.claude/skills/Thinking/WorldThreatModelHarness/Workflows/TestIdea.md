@@ -64,7 +64,7 @@ Read all 11 model files from `~/.claude/MEMORY/RESEARCH/WorldModels/`.
 #### Fast Tier (~2 min)
 Single-agent analysis:
 1. Read all 11 models sequentially
-2. For each horizon, generate: Verdict (🟢/🟡/🔴) + 2-3 bullet points
+2. For each horizon, generate: Verdict (●/●/●) + 2-3 bullet points
 3. Write Executive Verdict
 4. Output using abbreviated format from OutputFormat.md
 

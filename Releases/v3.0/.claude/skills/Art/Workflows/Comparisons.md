@@ -90,7 +90,7 @@ Left: Light Purple tint, Right: Light Teal tint (very subtle)
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+## MANDATORY WORKFLOW STEPS
 
 ### Step 1: Define Comparison
 

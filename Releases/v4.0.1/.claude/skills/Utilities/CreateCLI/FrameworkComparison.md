@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Quick Recommendation Matrix
+## Quick Recommendation Matrix
 
 | Use Case | Framework | Why |
 |----------|-----------|-----|
@@ -17,11 +17,11 @@
 
 ---
 
-## 📊 Framework Comparison Table
+## Framework Comparison Table
 
 | Framework | Stars | Bundle Size | TypeScript | Best For | Tier |
 |-----------|-------|-------------|------------|----------|----------|
-| **Manual Parsing** | N/A | 0 KB | Native | Simple CLIs (llcli) | Tier 1 ⭐ DEFAULT |
+| **Manual Parsing** | N/A | 0 KB | Native | Simple CLIs (llcli) | Tier 1 ★ DEFAULT |
 | **Commander.js** | 25K+ | ~100 KB | Built-in | General CLIs | Tier 2 |
 | **oclif** | 12K+ | 22+ MB | First-class | Enterprise plugins | Tier 3 (ref only) |
 | **cleye** | N/A | Small | Schema inference | Modern TS CLIs | Alternative |
@@ -30,7 +30,7 @@
 
 ---
 
-## 1️⃣ TIER 1: Manual Parsing (llcli Pattern)
+## 1⃣ TIER 1: Manual Parsing (llcli Pattern)
 
 ### Pattern
 
@@ -77,29 +77,29 @@ main().catch(error => {
 ```
 
 ### Pros
-- ✅ Zero dependencies (no node_modules bloat)
-- ✅ Complete control over parsing logic
-- ✅ Type-safe with TypeScript interfaces
-- ✅ 300-400 lines total (easy to understand)
-- ✅ Fast development (no framework learning curve)
-- ✅ Proven pattern (llcli is production-ready)
-- ✅ Perfect for Bun runtime
-- ✅ Deterministic behavior
+- ✓ Zero dependencies (no node_modules bloat)
+- ✓ Complete control over parsing logic
+- ✓ Type-safe with TypeScript interfaces
+- ✓ 300-400 lines total (easy to understand)
+- ✓ Fast development (no framework learning curve)
+- ✓ Proven pattern (llcli is production-ready)
+- ✓ Perfect for Bun runtime
+- ✓ Deterministic behavior
 
 ### Cons
-- ❌ Manual help text (but this ensures quality)
-- ❌ Manual argument parsing (but simple)
-- ❌ No built-in subcommand routing (use Tier 2 if needed)
-- ❌ Repetitive for 20+ commands (escalate at that point)
+- ✗ Manual help text (but this ensures quality)
+- ✗ Manual argument parsing (but simple)
+- ✗ No built-in subcommand routing (use Tier 2 if needed)
+- ✗ Repetitive for 20+ commands (escalate at that point)
 
 ### When to Use (DEFAULT)
-- ✅ 2-10 commands
-- ✅ API client wrappers
-- ✅ Data transformers
-- ✅ File processors
-- ✅ Simple automation tools
-- ✅ JSON output only
-- ✅ Fast development priority
+- ✓ 2-10 commands
+- ✓ API client wrappers
+- ✓ Data transformers
+- ✓ File processors
+- ✓ Simple automation tools
+- ✓ JSON output only
+- ✓ Fast development priority
 
 ### Reference Implementation
 **Location:** `~/.claude/Bin/llcli/llcli.ts` (327 lines)
@@ -108,7 +108,7 @@ main().catch(error => {
 
 ---
 
-## 2️⃣ TIER 2: Commander.js
+## 2⃣ TIER 2: Commander.js
 
 ### Pattern
 
@@ -147,29 +147,29 @@ program.parse();
 ```
 
 ### Pros
-- ✅ Auto-generated help (from command definitions)
-- ✅ Subcommand routing built-in
-- ✅ Fluent API (readable, chainable)
-- ✅ TypeScript definitions included
-- ✅ Large community (25K+ stars)
-- ✅ Well-documented
-- ✅ Option parsing automatic
-- ✅ Lightweight (~100 KB, zero sub-dependencies)
+- ✓ Auto-generated help (from command definitions)
+- ✓ Subcommand routing built-in
+- ✓ Fluent API (readable, chainable)
+- ✓ TypeScript definitions included
+- ✓ Large community (25K+ stars)
+- ✓ Well-documented
+- ✓ Option parsing automatic
+- ✓ Lightweight (~100 KB, zero sub-dependencies)
 
 ### Cons
-- ❌ Framework dependency (not zero-dep like Tier 1)
-- ❌ Learning curve (need to understand API)
-- ❌ Opinionated structure
-- ❌ Overkill for simple CLIs (use Tier 1 instead)
-- ❌ Bun may prefer zero-dep approach
+- ✗ Framework dependency (not zero-dep like Tier 1)
+- ✗ Learning curve (need to understand API)
+- ✗ Opinionated structure
+- ✗ Overkill for simple CLIs (use Tier 1 instead)
+- ✗ Bun may prefer zero-dep approach
 
 ### When to Use (ESCALATION)
-- ❌ 10+ commands needing organization
-- ❌ Subcommands (e.g., `cli convert json csv` vs `cli convert csv json`)
-- ❌ Plugin architecture needed
-- ❌ Complex option combinations
-- ❌ Multiple output format engines
-- ❌ Git-style command groups
+- ✗ 10+ commands needing organization
+- ✗ Subcommands (e.g., `cli convert json csv` vs `cli convert csv json`)
+- ✗ Plugin architecture needed
+- ✗ Complex option combinations
+- ✗ Multiple output format engines
+- ✗ Git-style command groups
 
 ### Example Use Case
 ```bash
@@ -185,7 +185,7 @@ data-cli analyze trends data.csv --window 7d
 
 ---
 
-## 3️⃣ TIER 3: oclif (Reference Only)
+## 3⃣ TIER 3: oclif (Reference Only)
 
 ### Pattern
 
@@ -220,20 +220,20 @@ export default class Hello extends Command {
 ```
 
 ### Pros
-- ✅ Enterprise-grade plugin system
-- ✅ Code generation (`oclif generate command`)
-- ✅ Topics for hierarchical commands
-- ✅ Auto-updates mechanism
-- ✅ Multi-command CLIs (Heroku, Salesforce scale)
-- ✅ Class-based commands (OOP style)
-- ✅ ES modules + CommonJS compatible
+- ✓ Enterprise-grade plugin system
+- ✓ Code generation (`oclif generate command`)
+- ✓ Topics for hierarchical commands
+- ✓ Auto-updates mechanism
+- ✓ Multi-command CLIs (Heroku, Salesforce scale)
+- ✓ Class-based commands (OOP style)
+- ✓ ES modules + CommonJS compatible
 
 ### Cons
-- ❌ Heavy bundle size (22+ MB)
-- ❌ Steep learning curve
-- ❌ Complex setup
-- ❌ Overkill for 99% of CLIs
-- ❌ Not aligned with PAI's minimal approach
+- ✗ Heavy bundle size (22+ MB)
+- ✗ Steep learning curve
+- ✗ Complex setup
+- ✗ Overkill for 99% of CLIs
+- ✗ Not aligned with PAI's minimal approach
 
 ### When to Reference (RARE)
 - Enterprise plugin systems (Heroku CLI scale)
@@ -245,7 +245,7 @@ export default class Hello extends Command {
 
 ---
 
-## 🔬 RESEARCH FINDINGS: Type-Safe Frameworks
+## RESEARCH FINDINGS: Type-Safe Frameworks
 
 ### cleye (Schema-Driven Inference)
 
@@ -333,7 +333,7 @@ runMain(convert);
 
 ---
 
-## 📈 DECISION CRITERIA
+## DECISION CRITERIA
 
 ### Choose Manual Parsing (Tier 1) If:
 - [ ] CLI has 2-10 simple commands
@@ -370,7 +370,7 @@ runMain(convert);
 
 ---
 
-## 🎯 llcli Pattern Analysis
+## llcli Pattern Analysis
 
 ### Why Manual Parsing Works
 
@@ -401,7 +401,7 @@ runMain(convert);
 
 ---
 
-## 💡 Best Practices
+## Best Practices
 
 ### 1. **Start Tier 1, Escalate When Proven**
 Don't guess complexity. Build simple first.
@@ -429,7 +429,7 @@ Check dist/ folder size. Tier 1 CLIs are <100 KB.
 
 ---
 
-## 📚 Additional Research
+## Additional Research
 
 ### Yargs (NOT Recommended for PAI)
 
@@ -457,7 +457,7 @@ Check dist/ folder size. Tier 1 CLIs are <100 KB.
 
 ---
 
-## ✅ Final Recommendation
+## ✓ Final Recommendation
 
 **For PAI createcli skill:**
 

@@ -221,13 +221,13 @@ export function convertAllFailures(suiteName?: string): Task[] {
  */
 function formatFailure(failure: FailureLog): string {
   const severityIcon = {
-    low: '🟡',
-    medium: '🟠',
-    high: '🔴',
-    critical: '💥',
+    low: '●',
+    medium: '●',
+    high: '●',
+    critical: '',
   }[failure.severity];
 
-  const converted = failure.converted_to_task ? '✅' : '⏳';
+  const converted = failure.converted_to_task ? '✓' : '';
 
   return `${converted} ${severityIcon} [${failure.category}] ${failure.description.slice(0, 60)}...`;
 }

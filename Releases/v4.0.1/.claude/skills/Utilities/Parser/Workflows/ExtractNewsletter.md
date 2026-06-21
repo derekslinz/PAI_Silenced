@@ -304,15 +304,15 @@ Author commentary: "This is a significant milestone, though real-world legal wor
 
 **Successful extraction:**
 ```
-✅ Extracted newsletter
-📧 Title: AI Weekly #42 - GPT-4 and More
-📅 Published: 2024-01-15
-📝 Content: 2,000 words (~8 min read)
-📰 Issue: #42
-🔗 Links: 18 (across all sections)
-👥 People: 7
-🏢 Companies: 12
-🎯 Confidence: 0.89
+✓ Extracted newsletter
+Title: AI Weekly #42 - GPT-4 and More
+Published: 2024-01-15
+Content: 2,000 words (~8 min read)
+Issue: #42
+Links: 18 (across all sections)
+People: 7
+Companies: 12
+Confidence: 0.89
 ```
 
 ---

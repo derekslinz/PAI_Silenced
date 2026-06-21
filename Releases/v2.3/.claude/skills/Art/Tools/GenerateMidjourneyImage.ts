@@ -96,7 +96,7 @@ class CLIError extends Error {
 
 function handleError(error: unknown): never {
   if (error instanceof MidjourneyError) {
-    console.error(`\n❌ Midjourney Error: ${error.message}`);
+    console.error(`\n✗ Midjourney Error: ${error.message}`);
     console.error(`   Type: ${error.type}`);
     if (error.originalPrompt) {
       console.error(`   Prompt: ${error.originalPrompt}`);
@@ -108,17 +108,17 @@ function handleError(error: unknown): never {
   }
 
   if (error instanceof CLIError) {
-    console.error(`❌ Error: ${error.message}`);
+    console.error(`✗ Error: ${error.message}`);
     process.exit(error.exitCode);
   }
 
   if (error instanceof Error) {
-    console.error(`❌ Unexpected error: ${error.message}`);
+    console.error(`✗ Unexpected error: ${error.message}`);
     console.error(error.stack);
     process.exit(1);
   }
 
-  console.error(`❌ Unknown error:`, error);
+  console.error(`✗ Unknown error:`, error);
   process.exit(1);
 }
 
@@ -304,7 +304,7 @@ async function main() {
       timeout: args.timeout,
     });
 
-    console.log('🤖 Midjourney Image Generation');
+    console.log('Midjourney Image Generation');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log(`Prompt: ${args.prompt}`);
     console.log(`Aspect Ratio: ${args.aspectRatio}`);
@@ -348,7 +348,7 @@ async function main() {
       await discordBot.downloadImage(result.imageUrl, args.output);
 
       console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.log('✅ Success!');
+      console.log('✓ Success!');
       console.log(`   Image URL: ${result.imageUrl}`);
       console.log(`   Saved to: ${args.output}`);
       console.log(`   Message ID: ${result.messageId}`);

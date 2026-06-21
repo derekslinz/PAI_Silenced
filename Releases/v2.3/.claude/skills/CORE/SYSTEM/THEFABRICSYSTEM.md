@@ -11,7 +11,7 @@ extracted_from: SKILL.md lines 950-991
 
 ---
 
-## 🧵 Native Fabric Patterns (Always Active)
+## Native Fabric Patterns (Always Active)
 
 **Location:** `~/.claude/skills/CORE/Tools/fabric/Patterns/`
 

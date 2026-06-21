@@ -230,7 +230,7 @@ OSINT is **NOT a standalone activity** - it feeds directly into:
 - Organizational structure mapping
 - Personal information gathering
 
-**⚠️ ETHICAL WARNING:** Social media intelligence can easily cross ethical boundaries. Always:
+**ETHICAL WARNING:** Social media intelligence can easily cross ethical boundaries. Always:
 - Have explicit authorization
 - Respect privacy expectations
 - Document justification
@@ -283,7 +283,7 @@ OSINT is **NOT a standalone activity** - it feeds directly into:
 - Organizational breach assessment
 - Incident response investigation
 
-**⚠️ LEGAL WARNING:** Accessing or using compromised credentials without authorization is illegal. Use only for:
+**LEGAL WARNING:** Accessing or using compromised credentials without authorization is illegal. Use only for:
 - Authorized security testing
 - Defensive breach notification
 - Incident response with proper authority

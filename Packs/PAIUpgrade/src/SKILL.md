@@ -11,7 +11,7 @@ effort: high
 
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -59,7 +59,7 @@ The skill runs **four parallel agent threads** that converge into personalized r
 
 Section order: Discoveries → Recommendations → Technique Details → Internal Reflections → Summary → Skipped → Sources Processed.
 
-**Print only non-empty Recommendation tiers** (no empty `🟡 MEDIUM` headers).
+**Print only non-empty Recommendation tiers** (no empty `● MEDIUM` headers).
 
 ## Extraction Rules
 
@@ -68,7 +68,7 @@ Section order: Discoveries → Recommendations → Technique Details → Interna
 1. **Every output item is a TECHNIQUE** — a specific pattern, code snippet, configuration, or approach.
 2. **Quote or code-block the actual content** — show exactly what was said/written.
 3. **Map to PAI components** — every technique connects to a specific file, skill, workflow, or system component.
-4. **Verify Prior State (Thread 0 gate)** — Before emitting ANY recommendation, confirm against Thread 0 inventory: is it already in Algorithm / PATTERNS.yaml / hooks / SKILL files / KNOWLEDGE / prior ISAs? Assign a Prior Status emoji and cite evidence. Items that are ✅ DONE go to Skipped, not Recommendations.
+4. **Verify Prior State (Thread 0 gate)** — Before emitting ANY recommendation, confirm against Thread 0 inventory: is it already in Algorithm / PATTERNS.yaml / hooks / SKILL files / KNOWLEDGE / prior ISAs? Assign a Prior Status emoji and cite evidence. Items that are ✓ DONE go to Skipped, not Recommendations.
 5. **Two mandatory description fields, ≤2 sentences each, concrete and specific:**
    - **What It Is:** the technique itself — what it does, how it works, what capability it provides
    - **How It Helps PAI:** the specific benefit — which component improves, what gap it fills
@@ -120,7 +120,7 @@ Section order: Discoveries → Recommendations → Technique Details → Interna
 
 These output patterns are **FAILURES**:
 
-| ❌ Bad Output | Why It's Wrong | ✅ Correct Output |
+| ✗ Bad Output | Why It's Wrong | ✓ Correct Output |
 |---------------|----------------|-------------------|
 | "Check out R Amjad's video on Claude Code" | Points to content instead of extracting it | "@ 5:42, R Amjad shows this technique: [quote]" |
 | "v2.1.16 has task management improvements" | Vague summary, no technique | "v2.1.16 adds `addBlockedBy` parameter: [code example]" |
@@ -129,8 +129,8 @@ These output patterns are **FAILURES**:
 | "Several videos covered AI agents" | Count without content | "[N] videos skipped — no extractable techniques" |
 | "This helps because it improves things" | Vague benefit | "How It Helps PAI: SecurityValidator currently only blocks commands. additionalContext enables reasoning context before tool execution, making decisions more nuanced." |
 | "A new hook feature" | No description of what it IS | "What It Is: PreToolUse hooks can return additionalContext that gets injected into the model's context before execution, enabling reasoning-based decisions rather than binary blocks." |
-| "Top 3 Actions" or flat recommendation list | No priority tiers | Recommendations section with 🔴/🟠/🟡/🟢 tiers, each with PAI Relevance column |
-| Recommendations at the bottom | Actionable items buried after technique dump | 🔥 Recommendations section appears SECOND, technique details third |
+| "Top 3 Actions" or flat recommendation list | No priority tiers | Recommendations section with ●/●/●/● tiers, each with PAI Relevance column |
+| Recommendations at the bottom | Actionable items buried after technique dump | Recommendations section appears SECOND, technique details third |
 | **Recommending something already implemented** | Wastes user trust | Move to Skipped with file:line evidence |
 | **Re-surfacing rejected ideas without new context** | Drift from prior decisions | Only re-recommend if reason has changed; say what changed |
 | **Missing Prior Status column** | Bypasses Thread 0 gate | Every recommendation row cites evidence from Thread 0's inventory |

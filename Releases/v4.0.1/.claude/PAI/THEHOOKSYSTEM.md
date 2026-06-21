@@ -207,7 +207,7 @@ Each Stop hook is a self-contained `.hook.ts` file that reads stdin via shared `
 - Calls `handlers/TabState.ts` to set completed state
 - Converts working gerund title to past tense
 
-**`VoiceCompletion.hook.ts`** — Send 🗣️ voice line to TTS server
+**`VoiceCompletion.hook.ts`** — Send voice line to TTS server
 - Calls `handlers/VoiceNotification.ts` for voice delivery
 - Voice gate: only main sessions (checks `kitty-sessions/{sessionId}.json`)
 - Subagents have no kitty-sessions file → voice blocked
@@ -520,13 +520,13 @@ if (isLearning) {
 ```
 
 **Structured Sections Parsed:**
-- `📋 SUMMARY:` - Brief overview
-- `🔍 ANALYSIS:` - Key findings
-- `⚡ ACTIONS:` - Steps taken
-- `✅ RESULTS:` - Outcomes
-- `📊 STATUS:` - Current state
-- `➡️ NEXT:` - Follow-up actions
-- `🎯 COMPLETED:` - **Voice notification line**
+- `SUMMARY:` - Brief overview
+- `ANALYSIS:` - Key findings
+- `ACTIONS:` - Steps taken
+- `✓ RESULTS:` - Outcomes
+- `STATUS:` - Current state
+- `→NEXT:` - Follow-up actions
+- `COMPLETED:` - **Voice notification line**
 
 ---
 
@@ -574,8 +574,8 @@ else if (hookData.cwd && hookData.cwd.includes('/agents/')) {
 
 | Event | Hook | Tab Title | Inactive Color | State |
 |-------|------|-----------|----------------|-------|
-| UserPromptSubmit | `UpdateTabTitle.hook.ts` | `⚙️ Summary…` | Orange `#B35A00` | Working |
-| Inference | `UpdateTabTitle.hook.ts` | `🧠 Analyzing…` | Orange `#B35A00` | Inference |
+| UserPromptSubmit | `UpdateTabTitle.hook.ts` | `Summary…` | Orange `#B35A00` | Working |
+| Inference | `UpdateTabTitle.hook.ts` | `Analyzing…` | Orange `#B35A00` | Inference |
 | Stop (success) | `handlers/TabState.ts` | `Summary` | Green `#022800` | Completed |
 | Stop (question) | `handlers/TabState.ts` | `Summary?` | Teal `#0D4F4F` | Awaiting Input |
 | Stop (error) | `handlers/TabState.ts` | `Summary!` | Orange `#B35A00` | Error |
@@ -590,7 +590,7 @@ else if (hookData.cwd && hookData.cwd.includes('/agents/')) {
 
 **State Detection (in Stop hook):**
 1. Check transcript for `AskUserQuestion` tool → `awaitingInput`
-2. Check `📊 STATUS:` for error patterns → `error`
+2. Check `STATUS:` for error patterns → `error`
 3. Default → `completed`
 
 **Text Colors:**
@@ -600,8 +600,8 @@ else if (hookData.cwd && hookData.cwd.includes('/agents/')) {
 **Active Tab Background:** Dark Blue `#002B80` (always - state colors only affect inactive tabs)
 
 **Tab Icons:**
-- 🧠 Brain - AI inference in progress (Haiku/Sonnet thinking)
-- ⚙️ Gear - Processing/working state
+- Brain - AI inference in progress (Haiku/Sonnet thinking)
+- Gear - Processing/working state
 
 **Full Documentation:** See `~/.claude/PAI/TERMINALTABS.md`
 
@@ -840,7 +840,7 @@ curl -X POST http://localhost:8888/notify \
 **Common Issues:**
 - Wrong voice_id → Silent failure (invalid ID)
 - Voice server offline → Hook continues (graceful failure)
-- No `🎯 COMPLETED:` line → No voice notification extracted
+- No `COMPLETED:` line → No voice notification extracted
 
 ---
 
@@ -886,7 +886,7 @@ tail ~/.claude/MEMORY/RAW/$(date +%Y-%m)/$(date +%Y-%m-%d)_all-events.jsonl
 
 **Check:**
 1. Is `~/.claude/MEMORY/STATE/agent-sessions.json` writable?
-2. Is `[AGENT:type]` tag in `🎯 COMPLETED:` line?
+2. Is `[AGENT:type]` tag in `COMPLETED:` line?
 3. Is agent running from correct directory? (`/agents/name/`)
 
 **Debug:**
@@ -1140,8 +1140,8 @@ Import: import { inference } from '../PAI/Tools/Inference'
 Levels: fast (haiku/15s) | standard (sonnet/30s) | smart (opus/90s)
 
 TAB STATE SYSTEM:
-Inference: 🧠…  Orange #B35A00  (AI thinking)
-Working:   ⚙️…  Orange #B35A00  (processing)
+Inference: …  Orange #B35A00  (AI thinking)
+Working:   …  Orange #B35A00  (processing)
 Completed:      Green  #022800  (task done)
 Awaiting:  ?    Teal   #0D4F4F  (needs input)
 Error:     !    Orange #B35A00  (problem detected)

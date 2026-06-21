@@ -135,8 +135,8 @@ In production systems, consistency beats creativity:
 
 Prompts should never replicate functionality that code can provide:
 
-❌ **Bad:** Prompt AI to parse JSON, transform data, format output
-✅ **Good:** Write TypeScript to parse/transform/format, prompt AI to call it
+✗ **Bad:** Prompt AI to parse JSON, transform data, format output
+✓ **Good:** Write TypeScript to parse/transform/format, prompt AI to call it
 
 **Key Takeaway:** Code is cheaper, faster, and more reliable than prompts.
 

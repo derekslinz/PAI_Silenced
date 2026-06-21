@@ -344,7 +344,7 @@ if (sessionFiles.length === 0) {
   process.exit(0);
 }
 
-console.log(`🔍 Scanning ${sessionFiles.length} session(s)...`);
+console.log(`Scanning ${sessionFiles.length} session(s)...`);
 
 // Harvest learnings from each session
 let totalLearnings = 0;
@@ -355,34 +355,34 @@ for (const sessionFile of sessionFiles) {
   const learnings = harvestLearnings(sessionFile);
 
   if (learnings.length > 0) {
-    console.log(`  📂 ${sessionName}: ${learnings.length} learning(s)`);
+    console.log(`  ${sessionName}: ${learnings.length} learning(s)`);
     allLearnings.push(...learnings);
     totalLearnings += learnings.length;
   }
 }
 
 if (totalLearnings === 0) {
-  console.log("✅ No new learnings found");
+  console.log("✓ No new learnings found");
   process.exit(0);
 }
 
-console.log(`\n📊 Found ${totalLearnings} learning(s)`);
+console.log(`\nFound ${totalLearnings} learning(s)`);
 console.log(`   - Corrections: ${allLearnings.filter(l => l.type === 'correction').length}`);
 console.log(`   - Errors: ${allLearnings.filter(l => l.type === 'error').length}`);
 console.log(`   - Insights: ${allLearnings.filter(l => l.type === 'insight').length}`);
 
 if (values["dry-run"]) {
-  console.log("\n🔍 DRY RUN - Would write:");
+  console.log("\nDRY RUN - Would write:");
   for (const learning of allLearnings) {
     const monthDir = getMonthDir(learning.category);
     const filename = generateLearningFilename(learning);
     console.log(`   ${learning.category}/${path.basename(monthDir)}/${filename}`);
   }
 } else {
-  console.log("\n✍️  Writing learning files...");
+  console.log("\n Writing learning files...");
   for (const learning of allLearnings) {
     const result = writeLearning(learning);
-    console.log(`   ✅ ${path.basename(result)}`);
+    console.log(`   ✓ ${path.basename(result)}`);
   }
-  console.log(`\n✅ Harvested ${totalLearnings} learning(s) to MEMORY/LEARNING/`);
+  console.log(`\n✓ Harvested ${totalLearnings} learning(s) to MEMORY/LEARNING/`);
 }

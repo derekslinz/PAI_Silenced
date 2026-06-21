@@ -20,7 +20,7 @@ Running the **CreateCli** workflow in the **CreateCLI** skill to generate new CL
 
 ---
 
-## 🎯 PURPOSE
+## PURPOSE
 
 This workflow generates a complete, immediately usable TypeScript CLI tool with:
 - Full type safety and error handling
@@ -31,7 +31,7 @@ This workflow generates a complete, immediately usable TypeScript CLI tool with:
 
 ---
 
-## 📍 WHEN TO USE
+## WHEN TO USE
 
 Activate this workflow when user requests:
 - "Create a CLI for [API/service/tool]"
@@ -42,7 +42,7 @@ Activate this workflow when user requests:
 
 ---
 
-## 🔀 TIER DECISION TREE
+## TIER DECISION TREE
 
 **Use this deterministic decision tree to select complexity tier:**
 
@@ -67,26 +67,26 @@ START: User describes CLI requirements
 ```
 
 **Tier 1 Indicators (DEFAULT):**
-- ✅ 2-10 simple commands
-- ✅ API client wrapper
-- ✅ Data transformer
-- ✅ File processor
-- ✅ Simple automation
-- ✅ JSON output
-- ✅ Fast development needed
+- ✓ 2-10 simple commands
+- ✓ API client wrapper
+- ✓ Data transformer
+- ✓ File processor
+- ✓ Simple automation
+- ✓ JSON output
+- ✓ Fast development needed
 
 **Tier 2 Indicators (ESCALATION):**
-- ❌ 10+ commands needing organization
-- ❌ Plugin/extension system
-- ❌ Subcommands (convert json csv, convert csv json)
-- ❌ Multiple output format engines
-- ❌ Complex option combinations
+- ✗ 10+ commands needing organization
+- ✗ Plugin/extension system
+- ✗ Subcommands (convert json csv, convert csv json)
+- ✗ Multiple output format engines
+- ✗ Complex option combinations
 
 **Rule of Thumb:** If user doesn't explicitly need Tier 2 features, use Tier 1.
 
 ---
 
-## 📋 WORKFLOW STEPS
+## WORKFLOW STEPS
 
 ### Step 1: Gather Requirements
 
@@ -595,11 +595,11 @@ See: ~/.claude/Bin/{{CLI_NAME}}/README.md
 ### Step 10: Validate and Report
 
 **Quality Gates:**
-1. ✅ TypeScript compiles without errors
-2. ✅ All commands work with test inputs
-3. ✅ Help text displays correctly
-4. ✅ README is comprehensive
-5. ✅ File permissions set (chmod +x)
+1. ✓ TypeScript compiles without errors
+2. ✓ All commands work with test inputs
+3. ✓ Help text displays correctly
+4. ✓ README is comprehensive
+5. ✓ File permissions set (chmod +x)
 
 **Validation Commands:**
 ```bash
@@ -611,7 +611,7 @@ chmod +x {{CLI_NAME}}.ts
 
 **Report to user:**
 ```
-✅ CLI Created: ~/.claude/Bin/{{CLI_NAME}}/
+✓ CLI Created: ~/.claude/Bin/{{CLI_NAME}}/
 
 Files generated:
 - {{CLI_NAME}}.ts ({{LINE_COUNT}} lines)
@@ -631,14 +631,14 @@ Documentation: ~/.claude/Bin/{{CLI_NAME}}/README.md
 
 ---
 
-## 📤 OUTPUT EXAMPLE
+## OUTPUT EXAMPLE
 
 **User Request:**
 "Create a CLI for the Notion API to list databases and create pages"
 
 **Generated Output:**
 ```
-✅ CLI Created: ~/.claude/Bin/notioncli/
+✓ CLI Created: ~/.claude/Bin/notioncli/
 
 Files generated:
 - notioncli.ts (342 lines)
@@ -665,7 +665,7 @@ and comprehensive documentation.
 
 ---
 
-## 🔗 RELATED WORKFLOWS
+## RELATED WORKFLOWS
 
 **After creating CLI:**
 - `add-command.md` - Add more commands to existing CLI
@@ -677,7 +677,7 @@ and comprehensive documentation.
 
 ---
 
-## 📖 REAL-WORLD EXAMPLES
+## REAL-WORLD EXAMPLES
 
 ### Example 1: API Client
 
@@ -727,7 +727,7 @@ db-migrate create --name users   # Generate new migration
 
 ---
 
-## ✅ BEST PRACTICES
+## ✓ BEST PRACTICES
 
 ### 1. **Default to Tier 1**
 Start simple. 80% of CLIs don't need a framework.
@@ -755,7 +755,7 @@ Use proven structure from ~/.claude/Bin/llcli/ as reference.
 
 ---
 
-## 🐛 TROUBLESHOOTING
+## TROUBLESHOOTING
 
 **"Should I use Tier 1 or Tier 2?"**
 → Follow decision tree. If uncertain, use Tier 1. You can upgrade later.
@@ -774,7 +774,7 @@ Use proven structure from ~/.claude/Bin/llcli/ as reference.
 
 ---
 
-## 📊 QUALITY CHECKLIST
+## QUALITY CHECKLIST
 
 Before reporting CLI as complete, verify:
 

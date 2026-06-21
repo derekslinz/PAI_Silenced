@@ -296,10 +296,10 @@ function createNavyBanner(stats: SystemStats, width: number): string {
     `${C.slate}"${RESET}${C.lightBlue}${stats.catchphrase}${RESET}${C.slate}..."${RESET}`,
     `${C.steel}${BOX.h.repeat(24)}${RESET}`,
     `${C.navy}\u2B22${RESET}  ${C.slate}PAI${RESET}       ${C.silver}v${stats.paiVersion}${RESET}`,                            // ⬢ hexagon (tech/AI)
-    `${C.navy}\u2699${RESET}  ${C.slate}Algo${RESET}      ${C.silver}v${stats.algorithmVersion}${RESET}`,                      // ⚙ gear (algorithm)
+    `${C.navy}\u2699${RESET}  ${C.slate}Algo${RESET}      ${C.silver}v${stats.algorithmVersion}${RESET}`,                      // gear (algorithm)
     `${C.lightBlue}\u2726${RESET}  ${C.slate}SK${RESET}        ${C.silver}${stats.skills}${RESET}`,             // ✦ four-pointed star (skills)
     `${C.skyBlue}\u21BB${RESET}  ${C.slate}WF${RESET}        ${C.iceBlue}${stats.workflows}${RESET}`,           // ↻ cycle (workflows)
-    `${C.royalBlue}\u21AA${RESET}  ${C.slate}Hooks${RESET}     ${C.periwinkle}${stats.hooks}${RESET}`,         // ↪ hook arrow
+    `${C.royalBlue}\u21AA${RESET}  ${C.slate}Hooks${RESET}     ${C.periwinkle}${stats.hooks}${RESET}`,         // hook arrow
     `${C.medBlue}\u2726${RESET}  ${C.slate}Signals${RESET}   ${C.skyBlue}${stats.learnings}${RESET}`,          // ✦ star (user sentiment signals)
     `${C.navy}\u2261${RESET}  ${C.slate}Files${RESET}     ${C.lightBlue}${stats.userFiles}${RESET}`,           // ≡ identical to (files/menu)
     `${C.steel}${BOX.h.repeat(24)}${RESET}`,

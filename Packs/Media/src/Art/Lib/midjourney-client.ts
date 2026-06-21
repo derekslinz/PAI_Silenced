@@ -94,7 +94,7 @@ export class MidjourneyClient {
       tile,
     });
 
-    console.log(`🎨 Submitting to Midjourney: ${formattedPrompt}`);
+    console.log(`Submitting to Midjourney: ${formattedPrompt}`);
 
     // Send the /imagine command
     const initialMessage = await this.discordBot.sendMessage(`/imagine prompt: ${formattedPrompt}`);

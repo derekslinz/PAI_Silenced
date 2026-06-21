@@ -511,9 +511,9 @@
   --theme-bg-quaternary: #292e42;
 
   /* Text colors - IMPROVED FOR READABILITY */
-  --theme-text-primary: #c0caf5;      /* 10.59:1 contrast ✅ - Perfect for primary text */
-  --theme-text-secondary: #a9b1d6;    /* 8.10:1 contrast ✅ - Good for secondary text */
-  --theme-text-tertiary: #9aa5ce;     /* IMPROVED from #787c99 - Now 5.2:1 contrast ✅ */
+  --theme-text-primary: #c0caf5;      /* 10.59:1 contrast ✓ - Perfect for primary text */
+  --theme-text-secondary: #a9b1d6;    /* 8.10:1 contrast ✓ - Good for secondary text */
+  --theme-text-tertiary: #9aa5ce;     /* IMPROVED from #787c99 - Now 5.2:1 contrast ✓ */
   --theme-text-quaternary: #7e89ac;   /* IMPROVED from #565f89 - Now 3.8:1 contrast (AA for large text) */
 
   /* Border colors - IMPROVED FOR VISIBILITY */

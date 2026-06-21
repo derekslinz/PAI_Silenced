@@ -5,7 +5,7 @@ description: Expert guidance for ffuf web fuzzing during penetration testing, in
 
 # FFUF (Fuzz Faster U Fool) Skill
 
-## 🎯 Load Full PAI Context
+## Load Full PAI Context
 
 **Before starting any task with this skill, load complete PAI context:**
 

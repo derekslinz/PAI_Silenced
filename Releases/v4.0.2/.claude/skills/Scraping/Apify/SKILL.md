@@ -11,7 +11,7 @@ description: Social media scraping, business data, e-commerce via Apify actors �
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -34,7 +34,7 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
 
 Direct TypeScript access to 9 popular Apify actors with 99% token savings.
 
-## 🔌 File-Based MCP
+## File-Based MCP
 
 This skill is a **file-based MCP** - a code-first API wrapper that replaces token-heavy MCP protocol calls.
 
@@ -42,11 +42,11 @@ This skill is a **file-based MCP** - a code-first API wrapper that replaces toke
 
 **Architecture:** See `~/.claude/PAI/DOCUMENTATION/FileBasedMCPs.md`
 
-## 🎯 Overview
+## Overview
 
 Direct TypeScript access to the 9 most popular Apify actors without MCP overhead. Filter and transform data in code BEFORE it reaches the model context.
 
-## 📊 Available Actors
+## Available Actors
 
 ### Social Media (5 platforms)
 - **Instagram** (145k users, 4.60★) - Profiles, posts, hashtags, comments
@@ -66,7 +66,7 @@ Direct TypeScript access to the 9 most popular Apify actors without MCP overhead
 ### Web Scraping
 - **Web Scraper** (94k users, 4.39★) - General-purpose, works with ANY website
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Basic Usage Pattern
 
@@ -86,7 +86,7 @@ const viral = profile.latestPosts?.filter(p => p.likesCount > 10000)
 console.log(viral) // ~10 posts instead of 50
 ```
 
-## 📚 Examples by Use Case
+## Examples by Use Case
 
 ### Social Media Monitoring
 
@@ -266,7 +266,7 @@ const affordable = products.filter(p =>
 )
 ```
 
-## 🎨 Advanced Patterns
+## Advanced Patterns
 
 ### Pattern 1: Multi-Platform Social Listening
 
@@ -360,7 +360,7 @@ async function analyzeCompetitor(username: string) {
 }
 ```
 
-## 💰 Token Savings Calculator
+## Token Savings Calculator
 
 **Example: Instagram profile with 100 posts**
 
@@ -389,7 +389,7 @@ const top = profile.latestPosts
 
 **Savings: 99% reduction (52,000 → 500 tokens)**
 
-## 🔧 Actor Reference
+## Actor Reference
 
 ### Social Media
 
@@ -438,7 +438,7 @@ const top = profile.latestPosts
 - `scrapeWebsite(input)` - Custom multi-page crawling
 - `scrapePage(url, pageFunction)` - Single page extraction
 
-## ⚙️ Configuration
+## Configuration
 
 **Environment Variables:**
 ```bash
@@ -455,21 +455,21 @@ APIFY_TOKEN=apify_api_xxxxx...
 }
 ```
 
-## 🎯 When to Use This vs MCP
+## When to Use This vs MCP
 
 **Use File-Based (this skill):**
-- ✅ Need to filter large datasets (>100 results)
-- ✅ Want to transform/aggregate data in code
-- ✅ Multiple sequential operations
-- ✅ Control flow (loops, conditionals)
-- ✅ Maximum token efficiency
+- ✓ Need to filter large datasets (>100 results)
+- ✓ Want to transform/aggregate data in code
+- ✓ Multiple sequential operations
+- ✓ Control flow (loops, conditionals)
+- ✓ Maximum token efficiency
 
 **Use MCP:**
-- ❌ Simple single operations with small results (<10 items)
-- ❌ One-off exploratory queries
-- ❌ Don't want to write code
+- ✗ Simple single operations with small results (<10 items)
+- ✗ One-off exploratory queries
+- ✗ Don't want to write code
 
-## 🔗 Links
+## Links
 
 - Apify Platform: https://apify.com
 - Actor Store: https://apify.com/store

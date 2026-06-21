@@ -116,10 +116,10 @@ Tracked in `extraction_metadata.version` field.
 bun run lib/parser.ts https://anthropic.com/news/claude-3
 
 # Output:
-# ✅ Parsed: Claude 3 Model Family Announcement
-# 📄 Output: 20251114-153045_claude-3-announcement.json
-# 📊 Stats: 2,500 words, 5 people, 3 companies, 12 links
-# 🎯 Confidence: 0.92
+# ✓ Parsed: Claude 3 Model Family Announcement
+# Output: 20251114-153045_claude-3-announcement.json
+# Stats: 2,500 words, 5 people, 3 companies, 12 links
+# Confidence: 0.92
 ```
 
 ### YouTube Video
@@ -127,10 +127,10 @@ bun run lib/parser.ts https://anthropic.com/news/claude-3
 bun run lib/parser.ts https://youtube.com/watch?v=abc123
 
 # Output:
-# ✅ Parsed: AI Safety Interview with Anthropic CEO
-# 📄 Output: 20251114-153120_ai-safety-interview.json
-# 📊 Stats: 8,000 words (transcript), 3 people, 5 companies, 7 links
-# 🎯 Confidence: 0.88
+# ✓ Parsed: AI Safety Interview with Anthropic CEO
+# Output: 20251114-153120_ai-safety-interview.json
+# Stats: 8,000 words (transcript), 3 people, 5 companies, 7 links
+# Confidence: 0.88
 ```
 
 ### Batch Processing
@@ -141,8 +141,8 @@ bun run lib/parser.ts \
   https://newsletter.substack.com/p/issue-42
 
 # Output:
-# 📊 Batch Processing Complete
-# ✅ Successful: 3/3
+# Batch Processing Complete
+# ✓ Successful: 3/3
 # Output files:
 # - 20251114-153215_attention-all-you-need.json (PDF)
 # - 20251114-153340_ai-breakthrough-thread.json (Twitter)

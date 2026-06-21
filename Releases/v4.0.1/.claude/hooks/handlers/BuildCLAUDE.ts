@@ -16,6 +16,6 @@ const needs = needsRebuild();
 if (needs) {
   const result = build();
   if (result.rebuilt) {
-    console.error("🔄 CLAUDE.md rebuilt from template (will take effect next session)");
+    console.error("CLAUDE.md rebuilt from template (will take effect next session)");
   }
 }

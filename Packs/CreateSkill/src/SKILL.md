@@ -12,7 +12,7 @@ effort: medium
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -86,17 +86,17 @@ Ask: **"Could this skill be dropped, as-is, into a stranger's `~/.claude/skills/
 
 ONLY templated, safe, public, ready content. Period.
 
-- ✅ Generic instructions any PAI user could follow
-- ✅ Templated patterns with placeholders for user-specific values
-- ✅ Public API references and dependencies on public tools
-- ❌ Real names (people, products, companies, customers)
-- ❌ Real domains, hostnames, IPs, internal URLs
-- ❌ API keys, tokens, credentials, session cookies, OAuth secrets — even example-looking ones
-- ❌ Private repo paths or references (`github.com/<org>/<private-repo>`)
-- ❌ Customer data, customer-specific workflows, customer engagement context
-- ❌ First-person war stories tied to a specific incident, project, or person
-- ❌ User-specific filesystem paths (`/Users/<name>/...`, `/home/<name>/...`)
-- ❌ Identity-bound preferences (DA name, principal name, partner name, pet name, financial figures, health data)
+- ✓ Generic instructions any PAI user could follow
+- ✓ Templated patterns with placeholders for user-specific values
+- ✓ Public API references and dependencies on public tools
+- ✗ Real names (people, products, companies, customers)
+- ✗ Real domains, hostnames, IPs, internal URLs
+- ✗ API keys, tokens, credentials, session cookies, OAuth secrets — even example-looking ones
+- ✗ Private repo paths or references (`github.com/<org>/<private-repo>`)
+- ✗ Customer data, customer-specific workflows, customer engagement context
+- ✗ First-person war stories tied to a specific incident, project, or person
+- ✗ User-specific filesystem paths (`/Users/<name>/...`, `/home/<name>/...`)
+- ✗ Identity-bound preferences (DA name, principal name, partner name, pet name, financial figures, health data)
 
 **Private skill (`_ALLCAPS`) — content rule:**
 
@@ -154,7 +154,7 @@ Zero matches = ready for public release. Any match = either scrub it, move it to
 
 **Maximum depth:** `skills/SkillName/Category/`
 
-### ✅ ALLOWED (2 levels max)
+### ✓ ALLOWED (2 levels max)
 
 ```
 skills/SkillName/SKILL.md                    # Skill root
@@ -164,7 +164,7 @@ skills/SkillName/QuickStartGuide.md          # Context file - in root - GOOD
 skills/SkillName/Examples.md                 # Context file - in root - GOOD
 ```
 
-### ❌ FORBIDDEN (Too deep OR wrong location)
+### ✗ FORBIDDEN (Too deep OR wrong location)
 
 ```
 skills/SkillName/Resources/Guide.md              # Context files go in root, NOT Resources/
@@ -222,7 +222,7 @@ skills/SkillName/Tools/Utils/Helper.ts           # THREE levels - NO
 - They provide specific handling instructions
 - Can reference Workflows/, Tools/, etc.
 
-### 🚨 CRITICAL: NO Context/ Subdirectory 🚨
+### CRITICAL: NO Context/ Subdirectory 
 
 **NEVER create Context/ or Docs/ subdirectories.**
 
@@ -232,7 +232,7 @@ Additional .md files ARE the context files. They live **directly in skill root**
 ```
 skills/Art/
 ├── SKILL.md
-└── Context/              ❌ NEVER CREATE THIS
+└── Context/              ✗ NEVER CREATE THIS
     └── Aesthetic.md
 ```
 
@@ -240,9 +240,9 @@ skills/Art/
 ```
 skills/Art/
 ├── SKILL.md
-├── Aesthetic.md          ✅ Context file in skill root
-├── Examples.md           ✅ Context file in skill root
-└── Tools.md              ✅ Context file in skill root
+├── Aesthetic.md          ✓ Context file in skill root
+├── Examples.md           ✓ Context file in skill root
+└── Tools.md              ✓ Context file in skill root
 ```
 
 **The skill directory IS the context.**
@@ -290,13 +290,13 @@ Brief description.
 
 ### When To Use
 
-✅ **Use dynamic loading for:**
+✓ **Use dynamic loading for:**
 - SKILL.md > 100 lines
 - Multiple documentation sections
 - Extensive API reference
 - Detailed examples
 
-❌ **Don't use for:**
+✗ **Don't use for:**
 - Simple skills (< 50 lines)
 - Pure utility wrappers (use PAI/TOOLS.md instead)
 

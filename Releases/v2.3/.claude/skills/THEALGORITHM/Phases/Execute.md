@@ -20,30 +20,30 @@ Execute ISC rows in phases based on their assigned capabilities:
 
 ```
 PHASE A: RESEARCH (first - parallel)
-├─ 🔬 research.perplexity → Task(subagent_type: PerplexityResearcher)
-├─ 🔬 research.gemini → Task(subagent_type: GeminiResearcher)
-├─ 🔬 research.grok → Task(subagent_type: GrokResearcher)
-├─ 🔬 research.claude → Task(subagent_type: ClaudeResearcher)
-└─ 🔬 research.codex → Task(subagent_type: CodexResearcher)
+├─ research.perplexity → Task(subagent_type: PerplexityResearcher)
+├─ research.gemini → Task(subagent_type: GeminiResearcher)
+├─ research.grok → Task(subagent_type: GrokResearcher)
+├─ research.claude → Task(subagent_type: ClaudeResearcher)
+└─ research.codex → Task(subagent_type: CodexResearcher)
 
 PHASE B: THINKING (synthesis - sequential)
-├─ 💡 thinking.deep thinking → Skill(BeCreative)
-├─ 💡 thinking.tree_of_thought → Skill(BeCreative, workflow: TreeOfThoughts)
-├─ 🔍 analysis.first_principles → Skill(FirstPrinciples)
-├─ 🔍 analysis.science → Skill(Science)
-└─ 🗣️ debate.council → Skill(Council)
+├─ thinking.deep thinking → Skill(BeCreative)
+├─ thinking.tree_of_thought → Skill(BeCreative, workflow: TreeOfThoughts)
+├─ analysis.first_principles → Skill(FirstPrinciples)
+├─ analysis.science → Skill(Science)
+└─ debate.council → Skill(Council)
 
 PHASE C: EXECUTION (implementation - parallel where marked)
-├─ 🤖 execution.intern → Task(subagent_type: Intern, model: haiku)
-├─ 🤖 execution.engineer → Task(subagent_type: Engineer)
-├─ 🤖 execution.designer → Task(subagent_type: Designer)
-├─ 🤖 execution.architect → Task(subagent_type: Architect, model: opus)
-├─ 🤖 execution.pentester → Task(subagent_type: Pentester)
-└─ 🔄 execution.ralph_loop → RalphLoopExecutor (iterative until success)
+├─ execution.intern → Task(subagent_type: Intern, model: haiku)
+├─ execution.engineer → Task(subagent_type: Engineer)
+├─ execution.designer → Task(subagent_type: Designer)
+├─ execution.architect → Task(subagent_type: Architect, model: opus)
+├─ execution.pentester → Task(subagent_type: Pentester)
+└─ execution.ralph_loop → RalphLoopExecutor (iterative until success)
 
 PHASE D: VERIFICATION (validation - last)
-├─ ✅ verification.browser → Skill(Browser)
-└─ ✅ verification.skeptical_verifier → Task with skeptical,meticulous,adversarial traits
+├─ ✓ verification.browser → Skill(Browser)
+└─ ✓ verification.skeptical_verifier → Task with skeptical,meticulous,adversarial traits
 ```
 
 ## Spawning Agents by Capability
@@ -83,7 +83,7 @@ Skill({
 })
 ```
 
-### Ralph Loop Execution (🔄)
+### Ralph Loop Execution ()
 
 For ISC rows assigned `execution.ralph_loop` - persistent iteration until success:
 
@@ -112,10 +112,10 @@ bun run ~/.claude/skills/THEALGORITHM/Tools/RalphLoopExecutor.ts \
 - Any task with clear, verifiable success criteria
 
 **ISC Status for Ralph rows:**
-- `⏳ PENDING` - Not started
-- `🔄 LOOPING` - Ralph loop active (custom status)
-- `✅ DONE` - Completion promise detected
-- `🚫 BLOCKED` - Max iterations exhausted without success
+- `PENDING` - Not started
+- `LOOPING` - Ralph loop active (custom status)
+- `✓ DONE` - Completion promise detected
+- `BLOCKED` - Max iterations exhausted without success
 
 **Monitoring Ralph loops:**
 ```bash
@@ -178,13 +178,13 @@ bun run ISCManager.ts update --row 1 --status ADJUSTED --reason "Used REST inste
 ```markdown
 | # | What Ideal Looks Like | Capability | Status |
 |---|----------------------|------------|--------|
-| 1 | Research good patterns | 🔬 perplexity× | ⏳ PENDING |
-| 2 | Research competitor impl | 🔬 gemini× | ⏳ PENDING |
-| 3 | Synthesize findings | 💡 deep thinking | ⏳ PENDING |
-| 4 | Design component | 🤖 designer | ⏳ PENDING |
-| 5 | Implement component | 🤖 engineer× | ⏳ PENDING |
-| 6 | Implement styling | 🤖 engineer× | ⏳ PENDING |
-| 7 | Browser verify | ✅ browser | ⏳ PENDING |
+| 1 | Research good patterns | perplexity× | PENDING |
+| 2 | Research competitor impl | gemini× | PENDING |
+| 3 | Synthesize findings | deep thinking | PENDING |
+| 4 | Design component | designer | PENDING |
+| 5 | Implement component | engineer× | PENDING |
+| 6 | Implement styling | engineer× | PENDING |
+| 7 | Browser verify | ✓ browser | PENDING |
 ```
 
 **Execution flow:**
@@ -226,13 +226,13 @@ Skill({ skill: "Browser", args: "Verify component renders correctly" })
 ```markdown
 | # | What Ideal Looks Like | Capability | Status |
 |---|----------------------|------------|--------|
-| 1 | Research good patterns | 🔬 perplexity× | ✅ DONE |
-| 2 | Research competitor impl | 🔬 gemini× | ✅ DONE |
-| 3 | Synthesize findings | 💡 deep thinking | ✅ DONE |
-| 4 | Design component | 🤖 designer | ✅ DONE |
-| 5 | Implement component | 🤖 engineer× | ✅ DONE |
-| 6 | Implement styling | 🤖 engineer× | ✅ DONE |
-| 7 | Browser verify | ✅ browser | ✅ DONE |
+| 1 | Research good patterns | perplexity× | ✓ DONE |
+| 2 | Research competitor impl | gemini× | ✓ DONE |
+| 3 | Synthesize findings | deep thinking | ✓ DONE |
+| 4 | Design component | designer | ✓ DONE |
+| 5 | Implement component | engineer× | ✓ DONE |
+| 6 | Implement styling | engineer× | ✓ DONE |
+| 7 | Browser verify | ✓ browser | ✓ DONE |
 ```
 
 ## Commands

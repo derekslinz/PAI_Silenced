@@ -295,8 +295,8 @@ This prevents moving goalposts and confirmation bias.
 ### Primary Outcome
 | Pre-Registered Criterion | Required | Achieved | Status |
 |-------------------------|----------|----------|--------|
-| [Criterion 1]           | [Value]  | [Value]  | ✅/❌  |
-| [Criterion 2]           | [Value]  | [Value]  | ✅/❌  |
+| [Criterion 1]           | [Value]  | [Value]  | ✓/✗  |
+| [Criterion 2]           | [Value]  | [Value]  | ✓/✗  |
 
 ### Hypothesis Verdicts
 | Hypothesis | Prior | Posterior | Verdict | Confidence |

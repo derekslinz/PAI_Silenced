@@ -11,7 +11,7 @@ case "${1:-}" in
     start)
         # Check if already running
         if lsof -Pi :4000 -sTCP:LISTEN -t >/dev/null 2>&1; then
-            echo "❌ Already running. Use: manage.sh restart"
+            echo "✗ Already running. Use: manage.sh restart"
             exit 1
         fi
 
@@ -37,7 +37,7 @@ case "${1:-}" in
             sleep 1
         done
 
-        echo "✅ Observability running at http://localhost:5172"
+        echo "✓ Observability running at http://localhost:5172"
 
         # Cleanup on exit
         cleanup() {
@@ -67,11 +67,11 @@ case "${1:-}" in
         # Clean SQLite WAL files
         rm -f "$SCRIPT_DIR/apps/server/events.db-wal" "$SCRIPT_DIR/apps/server/events.db-shm" 2>/dev/null
 
-        echo "✅ Observability stopped"
+        echo "✓ Observability stopped"
         ;;
 
     restart)
-        echo "🔄 Restarting..."
+        echo "Restarting..."
         "$0" stop 2>/dev/null
         sleep 1
         exec "$0" start
@@ -79,16 +79,16 @@ case "${1:-}" in
 
     status)
         if lsof -Pi :4000 -sTCP:LISTEN -t >/dev/null 2>&1; then
-            echo "✅ Running at http://localhost:5172"
+            echo "✓ Running at http://localhost:5172"
         else
-            echo "❌ Not running"
+            echo "✗ Not running"
         fi
         ;;
 
     start-detached)
         # Check if already running
         if lsof -Pi :4000 -sTCP:LISTEN -t >/dev/null 2>&1; then
-            echo "❌ Already running. Use: manage.sh restart"
+            echo "✗ Already running. Use: manage.sh restart"
             exit 1
         fi
 
@@ -114,7 +114,7 @@ case "${1:-}" in
             sleep 1
         done
 
-        echo "✅ Observability running at http://localhost:5172"
+        echo "✓ Observability running at http://localhost:5172"
         ;;
 
     *)

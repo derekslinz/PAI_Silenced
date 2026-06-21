@@ -39,7 +39,7 @@ async function main() {
     await browser.navigate(url)
     const loadTime = Date.now() - startTime
 
-    console.log(`   ✅ Page loaded in ${loadTime}ms`)
+    console.log(`   ✓ Page loaded in ${loadTime}ms`)
 
     // Get page title
     const title = await browser.getTitle()
@@ -48,7 +48,7 @@ async function main() {
     // Get current URL (check for redirects)
     const finalUrl = browser.getUrl()
     if (finalUrl !== url) {
-      console.log(`   ⚠️  Redirected to: ${finalUrl}`)
+      console.log(`    Redirected to: ${finalUrl}`)
     }
 
     // Check for specific selector if provided
@@ -57,27 +57,27 @@ async function main() {
       try {
         await browser.waitForSelector(selector, { timeout: 5000 })
         const text = await browser.getVisibleText(selector)
-        console.log(`   ✅ Found! Content: "${text.slice(0, 100)}${text.length > 100 ? '...' : ''}"`)
+        console.log(`   ✓ Found! Content: "${text.slice(0, 100)}${text.length > 100 ? '...' : ''}"`)
       } catch {
-        console.log(`   ❌ Selector not found within 5s`)
+        console.log(`   ✗ Selector not found within 5s`)
       }
     }
 
     // Check console for errors
     const errors = browser.getConsoleLogs({ type: 'error' })
     if (errors.length > 0) {
-      console.log(`\n⚠️  Console errors (${errors.length}):`)
+      console.log(`\n Console errors (${errors.length}):`)
       errors.slice(0, 3).forEach(err => {
         console.log(`   - ${err.text.slice(0, 100)}`)
       })
     } else {
-      console.log('\n✅ No console errors')
+      console.log('\n✓ No console errors')
     }
 
     console.log('\n=== Verification Complete ===')
 
   } catch (error) {
-    console.error('❌ Error:', error instanceof Error ? error.message : error)
+    console.error('✗ Error:', error instanceof Error ? error.message : error)
     process.exit(1)
   } finally {
     await browser.close()

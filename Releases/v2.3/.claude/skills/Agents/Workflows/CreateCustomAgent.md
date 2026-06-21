@@ -93,7 +93,7 @@ Task({
 **CRITICAL: The parent session voices agent output, not the agents themselves.**
 
 After receiving agent results:
-1. Extract the `🎯 COMPLETED:` line from each agent's output
+1. Extract the `COMPLETED:` line from each agent's output
 2. Send voice notification using that agent's voice_id:
 
 ```bash
@@ -182,7 +182,7 @@ bun run AgentFactory.ts --traits "research,analytical,synthesizing" --task "Anal
 
 ## Common Mistakes to Avoid
 
-**❌ WRONG: Using same traits for all agents**
+**✗ WRONG: Using same traits for all agents**
 ```bash
 # All agents get same voice!
 bun run AgentFactory.ts --traits "research,analytical" # Agent 1
@@ -190,7 +190,7 @@ bun run AgentFactory.ts --traits "research,analytical" # Agent 2 (same voice!)
 bun run AgentFactory.ts --traits "research,analytical" # Agent 3 (same voice!)
 ```
 
-**✅ RIGHT: Varying traits for unique voices**
+**✓ RIGHT: Varying traits for unique voices**
 ```bash
 # Each agent gets different voice
 bun run AgentFactory.ts --traits "research,enthusiastic,exploratory"  # Jeremy
@@ -198,7 +198,7 @@ bun run AgentFactory.ts --traits "research,skeptical,systematic"      # George
 bun run AgentFactory.ts --traits "research,creative,synthesizing"     # Freya
 ```
 
-**❌ WRONG: Launching agents sequentially**
+**✗ WRONG: Launching agents sequentially**
 ```typescript
 // Slow - waits for each to finish
 await Task({ ... }); // Agent 1
@@ -206,7 +206,7 @@ await Task({ ... }); // Agent 2 (waits for 1)
 await Task({ ... }); // Agent 3 (waits for 2)
 ```
 
-**✅ RIGHT: Launching agents in parallel**
+**✓ RIGHT: Launching agents in parallel**
 ```typescript
 // Fast - all run simultaneously (single message, multiple calls)
 Task({ ... })  // Agent 1

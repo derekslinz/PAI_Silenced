@@ -391,16 +391,16 @@ for (const prefix of prefixes) {
 
 ### SPF (Sender Policy Framework)
 - **Record:** v=spf1 include:_spf.example.com ~all
-- **Assessment:** ✅ Configured (softfail)
+- **Assessment:** ✓ Configured (softfail)
 
 ### DMARC
 - **Record:** v=DMARC1; p=quarantine; rua=mailto:dmarc@example.com
 - **Policy:** Quarantine
-- **Assessment:** ✅ Configured
+- **Assessment:** ✓ Configured
 
 ### DKIM
 - **Selectors Found:** default, google, k1
-- **Assessment:** ✅ Configured
+- **Assessment:** ✓ Configured
 
 ## Subdomains (Certificate Transparency)
 
@@ -497,10 +497,10 @@ for (const prefix of prefixes) {
 - **Non-production environments** exposed (staging, dev)
 
 ### Security Posture
-- ✅ Email security configured (SPF, DMARC, DKIM)
-- ✅ Modern TLS certificates (Let's Encrypt)
-- ⚠️ Administrative subdomains publicly discoverable
-- ⚠️ Development/staging environments exposed
+- ✓ Email security configured (SPF, DMARC, DKIM)
+- ✓ Modern TLS certificates (Let's Encrypt)
+- Administrative subdomains publicly discoverable
+- Development/staging environments exposed
 
 ## Recommendations
 
@@ -611,22 +611,22 @@ if (authorized) {
 ## Success Criteria
 
 **Minimum viable recon:**
-- ✅ WHOIS data retrieved
-- ✅ Core DNS records enumerated (A, MX, NS)
-- ✅ At least one IP address identified
-- ✅ ASN determined
-- ✅ Report generated
+- ✓ WHOIS data retrieved
+- ✓ Core DNS records enumerated (A, MX, NS)
+- ✓ At least one IP address identified
+- ✓ ASN determined
+- ✓ Report generated
 
 **Comprehensive recon:**
-- ✅ All DNS record types queried
-- ✅ Certificate transparency searched
-- ✅ All subdomains enumerated
-- ✅ All IPs analyzed with IPInfo
-- ✅ Email security assessed
-- ✅ Netblock ownership mapped
-- ✅ ASN relationships documented
-- ✅ Recommendations generated
-- ✅ Report saved to scratchpad or history
+- ✓ All DNS record types queried
+- ✓ Certificate transparency searched
+- ✓ All subdomains enumerated
+- ✓ All IPs analyzed with IPInfo
+- ✓ Email security assessed
+- ✓ Netblock ownership mapped
+- ✓ ASN relationships documented
+- ✓ Recommendations generated
+- ✓ Report saved to scratchpad or history
 
 ---
 

@@ -12,7 +12,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo -e "${YELLOW}▶ Starting Voice Server...${NC}"
+echo -e "${YELLOW}► Starting Voice Server...${NC}"
 
 # Check if LaunchAgent exists
 if [ ! -f "$PLIST_PATH" ]; then
@@ -23,7 +23,7 @@ fi
 
 # Check if already running
 if launchctl list | grep -q "$SERVICE_NAME" 2>/dev/null; then
-    echo -e "${YELLOW}⚠ Voice server is already running${NC}"
+    echo -e "${YELLOW}Voice server is already running${NC}"
     echo "  To restart, use: ./restart.sh"
     exit 0
 fi
@@ -41,7 +41,7 @@ if [ $? -eq 0 ]; then
         echo "  Port: 8888"
         echo "  Test: curl -X POST http://localhost:8888/notify -H 'Content-Type: application/json' -d '{\"message\":\"Test\"}'"
     else
-        echo -e "${YELLOW}⚠ Server started but not responding yet${NC}"
+        echo -e "${YELLOW}Server started but not responding yet${NC}"
         echo "  Check logs: tail -f ~/Library/Logs/pai-voice-server.log"
     fi
 else

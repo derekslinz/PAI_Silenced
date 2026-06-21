@@ -308,7 +308,7 @@ async function captureWorkSummary(text: string, structured: StructuredResponse):
       const content = generateLearningContent(structured, text, timestamp);
 
       writeFileSync(filePath, content, 'utf-8');
-      console.log(`✅ Captured learning to: ${filePath}`);
+      console.log(`✓ Captured learning to: ${filePath}`);
     }
   } catch (error) {
     console.error('[Capture] Error capturing work summary:', error);
@@ -331,12 +331,12 @@ export async function handleCapture(parsed: ParsedTranscript, hookInput: HookInp
   // Push notifications for long tasks
   const duration = getSessionDurationMinutes();
   if (duration > 0) {
-    console.error(`⏱️ Session duration: ${duration.toFixed(1)} minutes`);
+    console.error(`Session duration: ${duration.toFixed(1)} minutes`);
   }
 
   const hasError = lastMessage && (
     /error|failed|exception|crash/i.test(lastMessage) &&
-    /📊\s*STATUS:.*(?:error|failed|broken)/i.test(lastMessage)
+    /\s*STATUS:.*(?:error|failed|broken)/i.test(lastMessage)
   );
 
   if (hasError) {

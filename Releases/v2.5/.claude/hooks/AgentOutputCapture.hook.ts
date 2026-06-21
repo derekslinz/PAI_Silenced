@@ -41,8 +41,8 @@
  *
  * AGENT OUTPUT FORMAT:
  * Searches for completion messages in two formats:
- * - NEW: 🗣️ AgentName: [completion message]
- * - LEGACY: 🎯 COMPLETED: [AGENT:type] [message]
+ * - NEW: AgentName: [completion message]
+ * - LEGACY: COMPLETED: [AGENT:type] [message]
  */
 
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'fs';
@@ -193,35 +193,35 @@ function extractCompletionMessage(taskOutput: string): { message: string | null,
   // Debug extraction from task output
 
   // Look for the COMPLETED section in the agent's output
-  // Priority: 1) New 🗣️ format, 2) Legacy [AGENT:type] format
+  // Priority: 1) New format, 2) Legacy [AGENT:type] format
   const agentPatterns = [
-    // NEW FORMAT: 🗣️ AgentName: [text] (primary)
+    // NEW FORMAT: AgentName: [text] (primary)
     // Captures agent name dynamically from the line
-    /🗣️\s*\*{0,2}([\w-]+):?\*{0,2}\s*(.+?)(?:\n|$)/is,
+    /\s*\*{0,2}([\w-]+):?\*{0,2}\s*(.+?)(?:\n|$)/is,
 
-    // LEGACY FORMAT: 🎯 COMPLETED: [AGENT:type] [text] (backward compatibility)
+    // LEGACY FORMAT: COMPLETED: [AGENT:type] [text] (backward compatibility)
     // Handle markdown formatting with asterisks - same line
-    /\*+🎯\s*COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
-    /\*+🎯\s+COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /\*+\s*COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /\*+\s+COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
     // Non-markdown patterns - same line
-    /🎯\s*COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /\s*COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
     /COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
 
     // Multi-line patterns (emoji/COMPLETED on one line, AGENT tag on next)
-    /🎯\s*COMPLETED[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
-    /##\s*🎯\s*COMPLETED[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
-    /\*+🎯\s*COMPLETED\*+[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /\s*COMPLETED[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /##\s*\s*COMPLETED[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /\*+\s*COMPLETED\*+[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
 
     // Generic pattern for current format
-    /🎯.*COMPLETED.*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /.*COMPLETED.*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
 
     // OLD: Handle legacy "I completed" format (for backward compatibility)
-    /\*+🎯\s*COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
-    /\*+🎯\s+COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
-    /🎯\s*COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
+    /\*+\s*COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
+    /\*+\s+COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
+    /\s*COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
     /COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
     /\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\.|!|\n|$)/is,
-    /🎯.*COMPLETED.*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is
+    /.*COMPLETED.*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is
   ];
 
   // First try to match agent-specific patterns
@@ -253,14 +253,14 @@ function extractCompletionMessage(taskOutput: string): { message: string | null,
 
   // Fall back to generic patterns but try to extract agent type
   const genericPatterns = [
-    // NEW FORMAT: 🗣️ [text] (without specific name - fallback)
-    /🗣️\s*(.+?)(?:\n|$)/i,
+    // NEW FORMAT: [text] (without specific name - fallback)
+    /\s*(.+?)(?:\n|$)/i,
     // LEGACY FORMAT (backward compatibility)
     // Handle markdown formatting
-    /\*+🎯\s*COMPLETED:\*+\s*(.+?)(?:\n|$)/i,
+    /\*+\s*COMPLETED:\*+\s*(.+?)(?:\n|$)/i,
     /\*+COMPLETED:\*+\s*(.+?)(?:\n|$)/i,
     // Non-markdown patterns
-    /🎯\s*COMPLETED:\s*(.+?)(?:\n|$)/i,
+    /\s*COMPLETED:\s*(.+?)(?:\n|$)/i,
     /COMPLETED:\s*(.+?)(?:\n|$)/i,
     /Sub-agent\s+\w+\s+completed\s+(.+?)(?:\.|!|\n|$)/i,
     /Agent\s+completed\s+(.+?)(?:\.|!|\n|$)/i
@@ -307,7 +307,7 @@ async function main() {
     // No stderr output - write to debug log file only
   }
 
-  debug('🔍 SubagentStop hook started');
+  debug('SubagentStop hook started');
   // Read input from stdin with timeout
   let input = '';
   try {
@@ -388,7 +388,7 @@ async function main() {
   // NOTE: Voice notifications are now handled by agents themselves
   // The hook only logs completion messages and captures to history
   const agentName = finalAgentType.charAt(0).toUpperCase() + finalAgentType.slice(1);
-  debug(`📝 Agent completed: [${agentName}] ${completionMessage}`);
+  debug(`Agent completed: [${agentName}] ${completionMessage}`);
 
   // Capture agent output to RESEARCH directory
   try {
@@ -401,7 +401,7 @@ async function main() {
   // Check if this was a background agent (run_in_background: true)
   const isBackground = toolInput?.run_in_background === true;
   if (isBackground) {
-    debug(`📱 Sending push notification for background agent: ${finalAgentType}`);
+    debug(`Sending push notification for background agent: ${finalAgentType}`);
     notifyBackgroundAgent(finalAgentType, completionMessage).catch(() => {
       // Fire and forget
     });
@@ -534,7 +534,7 @@ ${taskOutput}
   const filePath = join(outputDir, filename);
   writeFileSync(filePath, document);
 
-  console.log(`📝 UOCS: Captured agent output to ${category}/${yearMonth}/${filename}`);
+  console.log(`UOCS: Captured agent output to ${category}/${yearMonth}/${filename}`);
 }
 
 main().catch(() => { /* silent fail */ });

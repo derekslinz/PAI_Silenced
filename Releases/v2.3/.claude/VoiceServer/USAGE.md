@@ -173,10 +173,10 @@ POST http://localhost:8888/notify
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `message` | string | ✅ Yes | The text to speak |
-| `voice_id` | string | ❌ No | ElevenLabs voice ID (defaults to Kai) |
-| `title` | string | ❌ No | Notification title (default: "PAI Notification") |
-| `voice_enabled` | boolean | ❌ No | Whether to speak the notification (default: true) |
+| `message` | string | ✓ Yes | The text to speak |
+| `voice_id` | string | ✗ No | ElevenLabs voice ID (defaults to Kai) |
+| `title` | string | ✗ No | Notification title (default: "PAI Notification") |
+| `voice_enabled` | boolean | ✗ No | Whether to speak the notification (default: true) |
 
 ### Voice IDs
 

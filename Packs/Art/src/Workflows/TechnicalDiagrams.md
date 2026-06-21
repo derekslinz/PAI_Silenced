@@ -35,12 +35,12 @@ Technical diagrams for system architectures, process flows, and board presentati
 4. **Strategic color** — Purple #4A148C for key elements, Teal #00796B for flows
 5. **White primary** — 80% of elements in grey/black colors, color is accent only
 
-### 🚨🚨🚨 MANDATORY: BOLD / HIGH-CONTRAST / SATURATED 🚨🚨🚨
+### MANDATORY: BOLD / HIGH-CONTRAST / SATURATED 
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  Nano Banana Pro DEFAULTS to thin/pastel — REJECTED by the user. ⚠️
-⚠️  You MUST push the prompt HARD for bold, saturated, crisp.     ⚠️
+ Nano Banana Pro DEFAULTS to thin/pastel — REJECTED by the user. 
+ You MUST push the prompt HARD for bold, saturated, crisp.     
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 

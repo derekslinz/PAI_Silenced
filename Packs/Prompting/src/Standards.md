@@ -57,14 +57,14 @@ When extended thinking is disabled:
 
 **CRITICAL: We use markdown for ALL prompt structure. Never use XML tags.**
 
-❌ **NEVER use XML-style tags:**
+✗ **NEVER use XML-style tags:**
 ```
 <instructions>Do something</instructions>
 <context>Some context</context>
 <output_format>JSON</output_format>
 ```
 
-✅ **ALWAYS use markdown headers:**
+✓ **ALWAYS use markdown headers:**
 ```markdown
 ## Instructions
 
@@ -100,12 +100,12 @@ Claude 4.x requires clear, specific direction rather than vague requests.
 
 Explain *why* certain behavior matters to help Claude understand goals.
 
-✅ **Good:**
+✓ **Good:**
 ```
 Your response will be read aloud by text-to-speech, so never use ellipses or incomplete sentences.
 ```
 
-❌ **Bad:**
+✗ **Bad:**
 ```
 NEVER use ellipses.
 ```
@@ -116,12 +116,12 @@ Claude generalizes well from reasoning provided in context.
 
 Frame instructions positively rather than as prohibitions.
 
-✅ **Good:**
+✓ **Good:**
 ```
 Compose smoothly flowing prose paragraphs with natural transitions.
 ```
 
-❌ **Bad:**
+✗ **Bad:**
 ```
 Do not use markdown or bullet points.
 ```
@@ -462,7 +462,7 @@ Explicit specification of desired response structure
 
 ## Clarity Over Completeness
 
-✅ **Good:**
+✓ **Good:**
 ```markdown
 ## Instructions
 - Validate user input before processing
@@ -470,7 +470,7 @@ Explicit specification of desired response structure
 - Log all failed attempts
 ```
 
-❌ **Bad:**
+✗ **Bad:**
 ```markdown
 ## Instructions
 You should always make sure to validate the user's input before you process it because invalid input could cause problems. When you encounter errors, you should return them in JSON format so that the calling system can parse them properly.
@@ -478,12 +478,12 @@ You should always make sure to validate the user's input before you process it b
 
 ## Be Direct and Specific
 
-✅ **Good:**
+✓ **Good:**
 ```markdown
 Use the `calculate_tax` tool with amount and jurisdiction parameters.
 ```
 
-❌ **Bad:**
+✗ **Bad:**
 ```markdown
 You might want to consider using the calculate_tax tool if you need to determine tax amounts, and you should probably pass in the amount and jurisdiction if you have them available.
 ```
@@ -545,9 +545,9 @@ Each tool should:
 
 ## Clear Purpose and Scope
 
-✅ **Good:** `calculate_shipping_cost(origin, destination, weight, service_level)`
+✓ **Good:** `calculate_shipping_cost(origin, destination, weight, service_level)`
 
-❌ **Bad:** `process_order(order_data)` - Too broad, unclear what it does
+✗ **Bad:** `process_order(order_data)` - Too broad, unclear what it does
 
 ## Tool Description Language (Claude 4.5 Specific)
 
@@ -632,31 +632,31 @@ When creating or reviewing prompts:
 
 # Anti-Patterns to Avoid
 
-❌ **Verbose Explanations**
+✗ **Verbose Explanations**
 Don't explain reasoning behind every instruction. Be direct.
 
-❌ **Negative-Only Constraints**
+✗ **Negative-Only Constraints**
 Don't just say what NOT to do—tell what TO do instead.
 
-❌ **Aggressive Tool Language**
+✗ **Aggressive Tool Language**
 "CRITICAL: You MUST use this tool" causes overtriggering in Claude 4.5.
 
-❌ **Misaligned Examples**
+✗ **Misaligned Examples**
 Examples shape behavior—misaligned examples cause unintended outcomes.
 
-❌ **Historical Context Dumping**
+✗ **Historical Context Dumping**
 Don't include how things evolved unless critical.
 
-❌ **Premature Information Loading**
+✗ **Premature Information Loading**
 Don't load detailed data until actually needed.
 
-❌ **Vague Instructions**
+✗ **Vague Instructions**
 Don't use "might", "could", "should consider"—be direct.
 
-❌ **Example Overload**
+✗ **Example Overload**
 Don't provide 10 examples when 2 would suffice.
 
-❌ **Using "Think" with Extended Thinking Disabled**
+✗ **Using "Think" with Extended Thinking Disabled**
 Use "consider", "evaluate", "reflect" instead.
 
 ---
@@ -872,7 +872,7 @@ Track progress using:
 
 ## Quick Reference: Claude 4.x Transformations
 
-| ❌ Avoid | ✅ Use Instead |
+| ✗ Avoid | ✓ Use Instead |
 |----------|---------------|
 | "CRITICAL: You MUST use this tool" | "Use this tool when..." |
 | "Don't use markdown" | "Write in flowing prose paragraphs" |
@@ -1145,7 +1145,7 @@ Reusable quality and completion checks.
 ### {{gate.name}} Checklist
 
 {{#if gate.mandatory}}
-**🚨 MANDATORY (if ANY missing, {{gate.action_on_fail}}):**
+**MANDATORY (if ANY missing, {{gate.action_on_fail}}):**
 {{/if}}
 
 {{#each gate.items}}

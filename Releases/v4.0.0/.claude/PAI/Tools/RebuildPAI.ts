@@ -34,7 +34,7 @@ function loadVariables(): Record<string, string> {
       "{DAIDENTITY.ALGORITHMVOICEID}": settings.daidentity?.voices?.algorithm?.voiceId || "",
     };
   } catch {
-    console.warn("⚠️ Could not read settings.json, using defaults");
+    console.warn("Could not read settings.json, using defaults");
     return {
       "{DAIDENTITY.NAME}": "PAI",
       "{DAIDENTITY.FULLNAME}": "Personal AI",
@@ -90,7 +90,7 @@ const components = readdirSync(COMPONENTS_DIR)
   });
 
 if (components.length === 0) {
-  console.error("❌ No component files found in Components/");
+  console.error("✗ No component files found in Components/");
   process.exit(1);
 }
 
@@ -131,12 +131,12 @@ const resolvedCount = Object.entries(variables)
   .filter(([key]) => output.includes(key) === false)
   .length;
 
-console.log(`✅ Built SKILL.md from ${components.length} components:`);
+console.log(`✓ Built SKILL.md from ${components.length} components:`);
 components.forEach((c, i) => {
   console.log(`   ${(i + 1).toString().padStart(2)}. ${c}`);
 });
-console.log(`\n🔄 Resolved ${Object.keys(variables).length} template variables:`);
+console.log(`\nResolved ${Object.keys(variables).length} template variables:`);
 for (const [key, value] of Object.entries(variables)) {
   console.log(`   ${key} → ${value}`);
 }
-console.log(`\n📄 Output: ${OUTPUT_FILE}`);
+console.log(`\nOutput: ${OUTPUT_FILE}`);

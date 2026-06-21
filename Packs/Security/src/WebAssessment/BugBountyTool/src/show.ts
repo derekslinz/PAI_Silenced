@@ -34,10 +34,10 @@ async function main() {
     let programs;
 
     if (searchQuery) {
-      console.log(`🔍 Searching for: "${searchQuery}"\n`);
+      console.log(`Searching for: "${searchQuery}"\n`);
       programs = await tracker.searchPrograms(searchQuery);
     } else {
-      console.log(`📋 Bug bounty programs discovered in the last ${hours}h\n`);
+      console.log(`Bug bounty programs discovered in the last ${hours}h\n`);
       programs = await tracker.getRecentDiscoveries(hours);
     }
 
@@ -49,15 +49,15 @@ async function main() {
     programs.forEach((p, i) => {
       console.log(`${i + 1}. [${p.platform.toUpperCase()}] ${p.name}${p.change_type ? ` (${p.change_type.replace(/_/g, ' ')})` : ''}`);
       console.log(`   URL: ${p.url}`);
-      console.log(`   Bounty: ${p.offers_bounties ? '💰 Paid' : '❌ VDP only'}`);
+      console.log(`   Bounty: ${p.offers_bounties ? 'Paid' : '✗ VDP only'}`);
 
       if (p.max_severity) {
         const severityEmoji = {
-          critical: '🔴',
-          high: '🟠',
-          medium: '🟡',
-          low: '🟢',
-        }[p.max_severity] || '⚪';
+          critical: '●',
+          high: '●',
+          medium: '●',
+          low: '●',
+        }[p.max_severity] || '○';
         console.log(`   Max Severity: ${severityEmoji} ${p.max_severity.toUpperCase()}`);
       }
 
@@ -76,10 +76,10 @@ async function main() {
 
     console.log(`\nTotal: ${programs.length} program(s)`);
 
-    console.log('\n💡 Tip: Use "initiate-recon <number>" to start testing a program');
+    console.log('\nTip: Use "initiate-recon <number>" to start testing a program');
 
   } catch (error) {
-    console.error('❌ Failed to show programs:', error);
+    console.error('✗ Failed to show programs:', error);
     process.exit(1);
   }
 }

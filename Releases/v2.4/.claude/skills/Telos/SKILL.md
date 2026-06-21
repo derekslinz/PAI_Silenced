@@ -3,7 +3,7 @@ name: Telos
 description: Life OS and project analysis. USE WHEN TELOS, life goals, projects, dependencies, books, movies. SkillSearch('telos') for docs.
 ---
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 

@@ -271,10 +271,10 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
     }
 
     // Build summary of active work
-    let summary = '\n📋 ACTIVE WORK (from previous sessions):\n';
+    let summary = '\nACTIVE WORK (from previous sessions):\n';
 
     for (const proj of activeProjects) {
-      summary += `\n🔵 ${proj.project}\n`;
+      summary += `\n● ${proj.project}\n`;
 
       if (proj.objectives && proj.objectives.length > 0) {
         summary += '   Objectives:\n';
@@ -291,8 +291,8 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
       }
     }
 
-    summary += '\n💡 To resume: `bun run ~/.claude/skills/PAI/Tools/SessionProgress.ts resume <project>`\n';
-    summary += '💡 To complete: `bun run ~/.claude/skills/PAI/Tools/SessionProgress.ts complete <project>`\n';
+    summary += '\nTo resume: `bun run ~/.claude/skills/PAI/Tools/SessionProgress.ts resume <project>`\n';
+    summary += 'To complete: `bun run ~/.claude/skills/PAI/Tools/SessionProgress.ts complete <project>`\n';
 
     return summary;
   } catch (error) {
@@ -411,11 +411,11 @@ async function main() {
     const message = `<system-reminder>
 PAI CONTEXT (Auto-loaded at Session Start)
 
-📅 CURRENT DATE/TIME: ${currentDate}
+CURRENT DATE/TIME: ${currentDate}
 
 ## ACTIVE IDENTITY (from settings.json) - CRITICAL
 
-**⚠️ MANDATORY IDENTITY RULES - OVERRIDE ALL OTHER CONTEXT ⚠️**
+**MANDATORY IDENTITY RULES - OVERRIDE ALL OTHER CONTEXT **
 
 The user's name is: **${PRINCIPAL_NAME}**
 The assistant's name is: **${DA_NAME}**
@@ -438,7 +438,7 @@ This context is now active. Additional context loads dynamically as needed.
     console.log(message);
 
     // Output success confirmation for Claude to acknowledge
-    console.log('\n✅ PAI Context successfully loaded...');
+    console.log('\n✓ PAI Context successfully loaded...');
 
     // Check for active progress files and display them
     const activeProgress = await checkActiveProgress(paiDir);

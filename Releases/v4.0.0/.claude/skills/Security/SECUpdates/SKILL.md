@@ -54,7 +54,7 @@ curl -s -X POST http://localhost:8888/notify \
 
 ---
 
-## 🔴 Security News (Breaches & Incidents)
+## ● Security News (Breaches & Incidents)
 *Hacks, breaches, exploits in the wild, incidents*
 
 1. **[Headline]** - [1-2 sentence summary]. [Source]
@@ -63,7 +63,7 @@ curl -s -X POST http://localhost:8888/notify \
 
 ---
 
-## 🔬 Security Research
+## Security Research
 *New vulnerabilities, CVEs, techniques, papers*
 
 1. **[Title]** - [1-2 sentence summary]. [Source]
@@ -72,7 +72,7 @@ curl -s -X POST http://localhost:8888/notify \
 
 ---
 
-## 💡 Security Ideas
+## Security Ideas
 *Opinions, strategies, industry trends, career*
 
 1. **[Title]** - [1-2 sentence summary]. [Source]
@@ -81,7 +81,7 @@ curl -s -X POST http://localhost:8888/notify \
 
 ---
 
-## 📊 Summary
+## Summary
 | Category | Count | Top Item |
 |----------|-------|----------|
 | News | X | [headline] |
@@ -95,7 +95,7 @@ curl -s -X POST http://localhost:8888/notify \
 
 ## Category Definitions
 
-### 🔴 Security News (Breaches & Incidents)
+### ● Security News (Breaches & Incidents)
 - Data breaches and leaks
 - Active exploits and attacks
 - Ransomware incidents
@@ -103,7 +103,7 @@ curl -s -X POST http://localhost:8888/notify \
 - Major vulnerability exploitations
 - Company security incidents
 
-### 🔬 Security Research
+### Security Research
 - New CVEs and vulnerabilities
 - Security research papers
 - New attack techniques
@@ -111,7 +111,7 @@ curl -s -X POST http://localhost:8888/notify \
 - Vulnerability disclosures
 - Bug bounty findings
 
-### 💡 Security Ideas
+### Security Ideas
 - Industry trends and analysis
 - Security strategy and opinions
 - Career and hiring trends
@@ -234,7 +234,7 @@ For each item found:
 
 ---
 
-## 🔴 Security News (Breaches & Incidents)
+## ● Security News (Breaches & Incidents)
 
 1. **Microsoft Azure Breach Exposes 2M Customer Records** - Misconfigured storage blob allowed unauthorized access to customer data including emails and phone numbers. [Krebs]
 2. **LockBit 4.0 Ransomware Hits Healthcare Chain** - 15 hospitals affected, patient data encrypted, $10M ransom demanded. [THN]
@@ -242,7 +242,7 @@ For each item found:
 
 ---
 
-## 🔬 Security Research
+## Security Research
 
 1. **New Spectre Variant Bypasses All Mitigations** - Researchers demonstrate "Spectre-NG" affecting Intel and AMD processors, no patch available. [tldrsec]
 2. **OAuth Token Theft via Browser Extension** - Novel technique allows stealing tokens from any site using malicious extension. [no.security]
@@ -250,7 +250,7 @@ For each item found:
 
 ---
 
-## 💡 Security Ideas
+## Security Ideas
 
 1. **The Death of Perimeter Security** - Caleb Sima argues zero-trust is no longer optional after recent breaches. [no.security]
 2. **CISO Burnout at All-Time High** - Survey shows 70% considering leaving the field within 2 years. [tldrsec]
@@ -258,7 +258,7 @@ For each item found:
 
 ---
 
-## 📊 Summary
+## Summary
 | Category | Count | Top Item |
 |----------|-------|----------|
 | News | 3 | Microsoft Azure Breach |
@@ -272,7 +272,7 @@ For each item found:
 
 ## Anti-Patterns
 
-| ❌ Bad | ✅ Good |
+| ✗ Bad | ✓ Good |
 |--------|---------|
 | Long paragraph summaries | 1-2 crisp sentences |
 | "Read more at..." | Summary + source attribution |

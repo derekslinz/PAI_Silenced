@@ -155,7 +155,7 @@ function parseFromMarkdown(filePath: string, content: string): UpdateRecord | nu
 
   // Extract impact or significance
   const impactMatch = content.match(/\*\*(?:Impact|Significance):\*\*\s*(.+)/i);
-  const impactRaw = impactMatch ? impactMatch[1].toLowerCase().replace(/[🔴🟠🟡🟢⚪]/g, '').trim() : "unknown";
+  const impactRaw = impactMatch ? impactMatch[1].toLowerCase().replace(/[●●●●○]/g, '').trim() : "unknown";
   const impact = impactRaw;
 
   // Map to new schema
@@ -327,11 +327,11 @@ function buildIndex(updates: UpdateRecord[]): UpdateIndex {
 
 function getSignificanceBadge(significance: SignificanceLabel): string {
   const badges: Record<SignificanceLabel, string> = {
-    critical: '🔴',
-    major: '🟠',
-    moderate: '🟡',
-    minor: '🟢',
-    trivial: '⚪',
+    critical: '●',
+    major: '●',
+    moderate: '●',
+    minor: '●',
+    trivial: '○',
   };
   return `${badges[significance]} ${significance}`;
 }

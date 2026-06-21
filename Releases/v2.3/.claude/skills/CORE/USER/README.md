@@ -256,11 +256,11 @@ Your most important pieces that best represent your thinking.
 
 Everything in this USER directory:
 
-- ✅ Stays on your local machine
-- ✅ Is never synced to public repositories
-- ✅ Is only read by your local AI instance
-- ✅ Survives PAI updates (never overwritten)
-- ✅ Can be backed up/encrypted as you choose
+- ✓ Stays on your local machine
+- ✓ Is never synced to public repositories
+- ✓ Is only read by your local AI instance
+- ✓ Survives PAI updates (never overwritten)
+- ✓ Can be backed up/encrypted as you choose
 
 The public PAI repository contains only empty templates in USER directories.
 

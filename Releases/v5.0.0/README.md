@@ -4,7 +4,7 @@
 
 **The biggest release in PAI history.** PAI is no longer "AI scaffolding" — it is a **Life Operating System** with a unified daemon, a Life Dashboard, a personalized Digital Assistant, and a fully-articulated execution algorithm.
 
-[![Docs](https://img.shields.io/badge/📚_Full_Docs-docs.ourpai.ai-2563EB?style=flat)](https://docs.ourpai.ai)
+[![Docs](https://img.shields.io/badge/_Full_Docs-docs.ourpai.ai-2563EB?style=flat)](https://docs.ourpai.ai)
 [![Skills](https://img.shields.io/badge/Skills-45-22C55E?style=flat)](.claude/skills/)
 [![Hooks](https://img.shields.io/badge/Hooks-37-F97316?style=flat)](.claude/hooks/)
 [![Workflows](https://img.shields.io/badge/Workflows-171-8B5CF6?style=flat)](.claude/skills/)
@@ -12,7 +12,7 @@
 [![Memory](https://img.shields.io/badge/Memory-v7.6-EC4899?style=flat)](.claude/PAI/MEMORY/)
 [![Pulse](https://img.shields.io/badge/Pulse-included-3B82F6?style=flat)](.claude/PAI/PULSE/)
 
-**📚 Full documentation lives at [docs.ourpai.ai](https://docs.ourpai.ai)** — every subsystem (Algorithm, ISA, Memory, Skills, Hooks, Pulse, Containment) has its own deep-dive page with diagrams, examples, and reference material.
+**Full documentation lives at [docs.ourpai.ai](https://docs.ourpai.ai)** — every subsystem (Algorithm, ISA, Memory, Skills, Hooks, Pulse, Containment) has its own deep-dive page with diagrams, examples, and reference material.
 
 <br />
 
@@ -404,4 +404,4 @@ If you're new to PAI, start with the [Life OS Thesis](.claude/PAI/DOCUMENTATION/
 
 **Released:** 2026-04-30
 **Source commit:** `9fa02cb00`
-**Files in release:** 1642 · **Size:** 58.9 MB · **Gates:** 12/12 ✅
+**Files in release:** 1642 · **Size:** 58.9 MB · **Gates:** 12/12 ✓

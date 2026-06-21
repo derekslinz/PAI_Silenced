@@ -563,12 +563,12 @@ Before finalizing the report:
 **CRITICAL: Remove all individual names from source attributions.**
 
 Sources should reference roles, not people:
-- ❌ "John Smith interview"
-- ❌ "Feedback from Sarah Jones"
-- ✅ "Executive interviews"
-- ✅ "Product team interviews (2)"
-- ✅ "Engineering leadership feedback"
-- ✅ "Customer success team assessment"
+- ✗ "John Smith interview"
+- ✗ "Feedback from Sarah Jones"
+- ✓ "Executive interviews"
+- ✓ "Product team interviews (2)"
+- ✓ "Engineering leadership feedback"
+- ✓ "Customer success team assessment"
 
 **Why:** Boards should evaluate findings on merit, not attribute blame or credit to individuals. Role-based sourcing maintains credibility while protecting interviewees.
 

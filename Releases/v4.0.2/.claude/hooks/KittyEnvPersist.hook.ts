@@ -40,13 +40,13 @@ if (kittyListenOn && kittyWindowId) {
 try {
   const current = readTabState();
   if (current && (current.state === 'working' || current.state === 'thinking')) {
-    console.error(`🔄 Tab in ${current.state} state — preserving title through compaction`);
+    console.error(`Tab in ${current.state} state — preserving title through compaction`);
   } else {
     setTabState({ title: `${getDAName()} ready…`, state: 'idle' });
-    console.error('🔄 Tab title reset to clean state');
+    console.error('Tab title reset to clean state');
   }
 } catch (err) {
-  console.error(`⚠️ Failed to reset tab title: ${err}`);
+  console.error(`Failed to reset tab title: ${err}`);
 }
 
 process.exit(0);

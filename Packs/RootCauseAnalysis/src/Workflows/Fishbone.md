@@ -22,7 +22,7 @@ Best tool when multiple stakeholders contribute domain knowledge, the problem pl
                ┌─────┴─────┐       ┌─────┴─────┐       ┌─────┴─────┐
                │           │       │           │       │           │
                │           │       │           │       │           │
-        ─ ─ ─ ─┴─ ─ ─ ─ ─ ─┴─ ─ ─ ─┴─ ─ ─ ─ ─ ─┴─ ─ ─ ─┴─ ─ ─ ─ ─ ─┼─ ─ ─ ─ ▶ PROBLEM
+        ─ ─ ─ ─┴─ ─ ─ ─ ─ ─┴─ ─ ─ ─┴─ ─ ─ ─ ─ ─┴─ ─ ─ ─┴─ ─ ─ ─ ─ ─┼─ ─ ─ ─ ► PROBLEM
                                                                     │
                │           │       │           │       │           │
                │           │       │           │       │           │
@@ -135,7 +135,7 @@ VERIFICATION PLAN: [how we'll test whether this is actually a contributing cause
 ## Output Format
 
 ```
-🐟 FISHBONE ANALYSIS: [problem]
+FISHBONE ANALYSIS: [problem]
 
 PROBLEM: [precise statement]
 CATEGORY SET: [6M / 4P / 8M / 8P / custom]

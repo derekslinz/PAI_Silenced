@@ -19,13 +19,13 @@ Uses architectural sketching STYLE (gestural lines, hatching, charcoal) to depic
 
 ---
 
-## 🚨🚨🚨 ALL STEPS ARE MANDATORY — NO EXCEPTIONS 🚨🚨🚨
+## ALL STEPS ARE MANDATORY — NO EXCEPTIONS 
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  EVERY SINGLE STEP BELOW IS MANDATORY. EXECUTE ALL OF THEM.  ⚠️
-⚠️  DO NOT SKIP ANY STEP. DO NOT ABBREVIATE. DO NOT SHORTCUT.   ⚠️
-⚠️  IF YOU SKIP A STEP, YOU HAVE FAILED THE WORKFLOW.           ⚠️
+ EVERY SINGLE STEP BELOW IS MANDATORY. EXECUTE ALL OF THEM.  
+ DO NOT SKIP ANY STEP. DO NOT ABBREVIATE. DO NOT SHORTCUT.   
+ IF YOU SKIP A STEP, YOU HAVE FAILED THE WORKFLOW.           
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -59,27 +59,27 @@ INPUT CONTENT
 - **DEEP PURPLE (#4A148C)** — technology, AI, capital, cold power (MANDATORY)
 - --thumbnail flag for blog headers
 
-**🚨 BOTH SIENNA AND PURPLE MUST BE PRESENT IN EVERY IMAGE.**
+**BOTH SIENNA AND PURPLE MUST BE PRESENT IN EVERY IMAGE.**
 - Sienna on human/warm elements
 - Purple on tech/capital/cold elements
 - The ratio of Sienna:Purple tells the emotional story
 - If an image is missing either color, it's INCOMPLETE
 
-**🚨 FORBIDDEN — NEVER INCLUDE:**
-- ❌ Borders or frames around the image
-- ❌ Background shading or gradients
-- ❌ Filled backgrounds of any kind
-- ❌ Decorative elements that aren't part of the subject
+**FORBIDDEN — NEVER INCLUDE:**
+- ✗ Borders or frames around the image
+- ✗ Background shading or gradients
+- ✗ Filled backgrounds of any kind
+- ✗ Decorative elements that aren't part of the subject
 - The composition should float in empty space — MINIMALIST
 
-**🚨 LOGICAL/PHILOSOPHICAL CONSISTENCY:**
+**LOGICAL/PHILOSOPHICAL CONSISTENCY:**
 - The visual MUST make logical sense with the concept
 - If "X is winning" — X should be in the dominant/winning position visually
 - If "X is heavy/powerful" — X weighs DOWN, not up
 - If using a balance scale: the winning/heavy side pushes DOWN
 - THINK about what the metaphor actually means before drawing it
 
-**⚠️ KNOWN ISSUE: Background removal may remove the signature.**
+**KNOWN ISSUE: Background removal may remove the signature.**
 If the signature is missing after generation, you must add it manually or regenerate with the signature more integrated into the composition (not isolated in corner with empty space).
 
 ---
@@ -94,7 +94,7 @@ If the signature is missing after generation, you must add it manually or regene
 4. **What should NOT be drawn?** Architecture, buildings, vast spaces — UNLESS the content is about those
 5. **Did the user provide GUIDANCE?** If the user gave direction about what to focus on, what the image should convey, or what angle to take — THIS TAKES PRIORITY over your own interpretation
 
-**🚨 USER GUIDANCE TAKES PRIORITY:**
+**USER GUIDANCE TAKES PRIORITY:**
 If the user provides specific direction like:
 - "Focus on the tension between X and Y"
 - "The image should show Z losing"
@@ -111,7 +111,7 @@ If the user provides specific direction like:
 
 **Extract the FULL narrative arc to understand the emotional core.**
 
-**🚨 ACTUALLY EXECUTE THIS COMMAND — DO NOT SKIP:**
+**ACTUALLY EXECUTE THIS COMMAND — DO NOT SKIP:**
 
 ```
 Invoke the StoryExplanation Skill with: "Create a 24-item story explanation for this content"
@@ -167,13 +167,13 @@ These are just examples. It can be really anything which you will get from the C
 
 ## Step 4: Design Composition — MANDATORY
 
-**🚨 CRITICAL: Design what to ACTUALLY DRAW based on the CONTENT — NOT defaulting to architecture.**
+**CRITICAL: Design what to ACTUALLY DRAW based on the CONTENT — NOT defaulting to architecture.**
 
 ### The Core Question
 
 **What is this content ABOUT, and what visual would represent THAT?**
 
-**🚨 IF USER PROVIDED GUIDANCE — START THERE:**
+**IF USER PROVIDED GUIDANCE — START THERE:**
 If the user gave direction in Step 1 (e.g., "focus on the tension between labor and capital", "show labor losing"), use that as your PRIMARY composition direction. The CSE-24 output SUPPORTS this direction — it doesn't replace it.
 
 Use the content from the create-story-explanation run to compose this.
@@ -185,7 +185,7 @@ Use the content from the create-story-explanation run to compose this.
 
 ### Composition Design Questions
 
-**🚨 STEP 4A: IDENTIFY THE PROBLEM (MOST CRITICAL)**
+**STEP 4A: IDENTIFY THE PROBLEM (MOST CRITICAL)**
 
 Before designing anything, extract from the CSE-24 output:
 
@@ -211,7 +211,7 @@ Before designing anything, extract from the CSE-24 output:
    | **COMPLEXITY** | Simple thing made unnecessarily complicated | Tangled vs. straight path |
    | **BLINDSPOT** | Can't see obvious thing right in front | Figure ignoring elephant |
 
-   **🚨 THE PROBLEM TYPE SHAPES THE VISUAL METAPHOR.**
+   **THE PROBLEM TYPE SHAPES THE VISUAL METAPHOR.**
    - SORTING problem → show the sorting challenge (scattered items, categories)
    - COMMUNICATION problem → show the breakdown (garbled speech, confusion)
    - DOUBLE STANDARD → show the unfairness (tilted scales, biased judge)
@@ -312,7 +312,7 @@ EMOTIONAL REGISTER: [From Step 3]
 
 TECHNIQUE — GESTURAL ARCHITECTURAL SKETCH STYLE:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚨 Architecture is the TECHNIQUE, not the required subject 🚨
+Architecture is the TECHNIQUE, not the required subject 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 - GESTURAL — quick, confident, energetic marks
 - OVERLAPPING LINES — multiple strokes suggesting form
@@ -349,7 +349,7 @@ OBJECTS (if present) — GESTURAL SUGGESTED FORMS:
 - NOT flat symbols — sketched with depth
 
 COMPOSITION — FULL FRAME IS MANDATORY:
-- 🚨 SUBJECTS MUST FILL THE ENTIRE FRAME — edge to edge horizontally and vertically
+- SUBJECTS MUST FILL THE ENTIRE FRAME — edge to edge horizontally and vertically
 - Subjects should nearly TOUCH the edges of the image
 - NO large empty margins on any side
 - If there's 20%+ empty space on any edge, the composition is WRONG
@@ -426,7 +426,7 @@ Before generating, verify:
 
 ### Default Model: nano-banana-pro
 
-### 🚨 CRITICAL: Always Output to Downloads First
+### CRITICAL: Always Output to Downloads First
 
 **ALL images go to `~/Downloads/` for preview before final placement.**
 
@@ -461,7 +461,7 @@ bun run ~/.claude/skills/art/Tools/Generate.ts \
   --output [OUTPUT_PATH]
 ```
 
-### 🚨 MANDATORY: Blog Header Images → Use `--thumbnail`
+### MANDATORY: Blog Header Images → Use `--thumbnail`
 
 **ALL blog header images MUST use the `--thumbnail` flag.**
 
@@ -484,15 +484,15 @@ bun run ~/.claude/skills/art/Tools/Generate.ts \
 - **Transparent (`output.png`):** For the blog post inline image — composites beautifully over website background
 - **Thumbnail (`output-thumb.png`):** For `thumbnail:` frontmatter field — visible in social previews, RSS readers, and anywhere that doesn't composite transparency
 
-### 🚨 CRITICAL: Blog Post Frontmatter Must Use `-thumb` Version
+### CRITICAL: Blog Post Frontmatter Must Use `-thumb` Version
 
 **ALWAYS reference the `-thumb` file in the blog post's `thumbnail:` frontmatter field:**
 
 ```yaml
-# ✅ CORRECT - Use the -thumb version with sepia background
+# ✓ CORRECT - Use the -thumb version with sepia background
 thumbnail: https://example.com/images/my-header-thumb.png
 
-# ❌ WRONG - Transparent version shows white background on social media
+# ✗ WRONG - Transparent version shows white background on social media
 thumbnail: https://example.com/images/my-header.png
 ```
 
@@ -521,7 +521,7 @@ bun ~/.claude/skills/PAI/Tools/RemoveBg.ts image1.png image2.png image3.png
 
 **See:** `~/.claude/skills/Images/Workflows/BackgroundRemoval.md` for full documentation.
 
-### 🚨 COMPOSITION: USE FULL FRAME, MINIMALIST, NO BACKGROUNDS
+### COMPOSITION: USE FULL FRAME, MINIMALIST, NO BACKGROUNDS
 
 **SUBJECTS FILL THE FRAME. FEW ELEMENTS. NO FILLED BACKGROUNDS.**
 
@@ -533,16 +533,16 @@ bun ~/.claude/skills/PAI/Tools/RemoveBg.ts image1.png image2.png image3.png
 - "Clean, uncluttered — gallery-worthy simplicity"
 
 **Common failures:**
-- ❌ WRONG: Subjects too small, too much empty space around them
-- ❌ WRONG: Busy backgrounds with lots of detail
-- ❌ WRONG: Filled-in architectural environments surrounding subject
-- ❌ WRONG: Cluttered compositions with competing elements
+- ✗ WRONG: Subjects too small, too much empty space around them
+- ✗ WRONG: Busy backgrounds with lots of detail
+- ✗ WRONG: Filled-in architectural environments surrounding subject
+- ✗ WRONG: Cluttered compositions with competing elements
 
 **The fix:**
-- ✅ RIGHT: Subjects LARGE, filling the frame
-- ✅ RIGHT: Few elements, each intentional — gallery aesthetic
-- ✅ RIGHT: No background fill — subjects float in white/transparent space
-- ✅ RIGHT: Full use of horizontal and vertical dimensions
+- ✓ RIGHT: Subjects LARGE, filling the frame
+- ✓ RIGHT: Few elements, each intentional — gallery aesthetic
+- ✓ RIGHT: No background fill — subjects float in white/transparent space
+- ✓ RIGHT: Full use of horizontal and vertical dimensions
 
 ### Alternative Models
 
@@ -561,7 +561,7 @@ open /path/to/output.png
 
 ## Step 7: Optimize Images (MANDATORY)
 
-**🚨 CRITICAL: This step happens AFTER generation and background removal, BEFORE validation.**
+**CRITICAL: This step happens AFTER generation and background removal, BEFORE validation.**
 
 ### Why This Step Matters
 
@@ -616,7 +616,7 @@ thumbnail: https://example.com/images/[name]-thumb-optimized.png
 [![Alt text](/images/[name].webp)](/images/[name].webp) <!-- width="1024" height="1024" -->
 ```
 
-**🚨 CRITICAL: Use `.webp` for inline images and `-thumb-optimized.png` for thumbnails.**
+**CRITICAL: Use `.webp` for inline images and `-thumb-optimized.png` for thumbnails.**
 
 ### Quality Settings Explained
 
@@ -661,14 +661,14 @@ brew install webp
 
 ## Step 8: Validation (MANDATORY)
 
-**🚨 CRITICAL: This step is MANDATORY. Regenerate if validation fails.**
+**CRITICAL: This step is MANDATORY. Regenerate if validation fails.**
 
-### 🚨🚨🚨 ACTUALLY LOOK AT THE IMAGE AND THINK 🚨🚨🚨
+### ACTUALLY LOOK AT THE IMAGE AND THINK 
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  DO NOT JUST CHECK BOXES. ACTUALLY ANALYZE THE IMAGE.           ⚠️
-⚠️  LOOK AT IT. THINK ABOUT IT. ASK: DOES THIS MAKE SENSE?         ⚠️
+ DO NOT JUST CHECK BOXES. ACTUALLY ANALYZE THE IMAGE.           
+ LOOK AT IT. THINK ABOUT IT. ASK: DOES THIS MAKE SENSE?         
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -678,7 +678,7 @@ brew install webp
 open /path/to/generated-image.png
 ```
 
-### 🧠 CRITICAL ANALYSIS (DO THIS FIRST — BEFORE THE CHECKLIST)
+### CRITICAL ANALYSIS (DO THIS FIRST — BEFORE THE CHECKLIST)
 
 **STOP. Look at the image. Answer these questions honestly:**
 
@@ -717,19 +717,19 @@ open /path/to/generated-image.png
 - Is the emotional register correct?
 - Does the image argue the same point as the content?
 
-**🚨 IF ANY OF THESE FAIL — STOP AND REGENERATE. DO NOT PROCEED.**
+**IF ANY OF THESE FAIL — STOP AND REGENERATE. DO NOT PROCEED.**
 
 **Example failures:**
-- ❌ Signature missing or not in bottom right corner (if signature was requested)
-- ❌ Scale shows heavy side's beam going UP (physically impossible — heavy pulls DOWN)
-- ❌ "Capital winning" but capital looks small/weak
-- ❌ "Labor losing" but labor looks strong/dominant
-- ❌ Objects floating when they should fall
-- ❌ Visual contradicts the conceptual argument
+- ✗ Signature missing or not in bottom right corner (if signature was requested)
+- ✗ Scale shows heavy side's beam going UP (physically impossible — heavy pulls DOWN)
+- ✗ "Capital winning" but capital looks small/weak
+- ✗ "Labor losing" but labor looks strong/dominant
+- ✗ Objects floating when they should fall
+- ✗ Visual contradicts the conceptual argument
 
 ### Validation Checklist
 
-**🚨 MANDATORY ELEMENTS (if ANY are missing, REGENERATE):**
+**MANDATORY ELEMENTS (if ANY are missing, REGENERATE):**
 - [ ] **SIGNATURE PRESENT** — signed small in charcoal, bottom right corner (if requested)
 - [ ] **PROBLEM TYPE VISIBLE** — the problem type (sorting, double standard, etc.) is immediately obvious
 - [ ] **Subject matches CONTENT** — drew what the piece is ABOUT, not defaulted to architecture
@@ -792,13 +792,13 @@ open /path/to/generated-image.png
 
 | Problem | Fix |
 |---------|-----|
-| **Subjects too SMALL** | 🚨 Add "LARGE SUBJECTS that FILL THE FRAME", "minimal empty space around subjects" |
-| **Too much empty space** | 🚨 Add "minimal empty space around subjects", "subjects FILL THE FRAME" |
-| **Background dominates** | 🚨 Add "subjects are DOMINANT focus", "subjects LARGE" |
+| **Subjects too SMALL** | Add "LARGE SUBJECTS that FILL THE FRAME", "minimal empty space around subjects" |
+| **Too much empty space** | Add "minimal empty space around subjects", "subjects FILL THE FRAME" |
+| **Background dominates** | Add "subjects are DOMINANT focus", "subjects LARGE" |
 | **Setting not recognizable** | Add "SETTING: [location]" with "2-3 KEY OBJECTS that establish location" — gym needs weights/bench visible |
-| **Figures look like CARTOONS** | 🚨 Add "GESTURAL ABSTRACTION", "like Paul Rudolph sketches", "Lebbeus Woods figure studies", "OVERLAPPING LINES" |
-| **Lines are SINGLE/CLEAN** | 🚨 Add "MULTIPLE OVERLAPPING LINES", "20-40 strokes per figure", "hatching for depth", "energetic gestural marks" |
-| **Figures are FLAT** | 🚨 Add "HATCHING creates depth", "figures have PRESENCE and WEIGHT", "form emerges from accumulated marks" |
+| **Figures look like CARTOONS** | Add "GESTURAL ABSTRACTION", "like Paul Rudolph sketches", "Lebbeus Woods figure studies", "OVERLAPPING LINES" |
+| **Lines are SINGLE/CLEAN** | Add "MULTIPLE OVERLAPPING LINES", "20-40 strokes per figure", "hatching for depth", "energetic gestural marks" |
+| **Figures are FLAT** | Add "HATCHING creates depth", "figures have PRESENCE and WEIGHT", "form emerges from accumulated marks" |
 | **No emotion on faces** | Add "dark charcoal strokes for eyes area", "line for mouth angle", "head TILT conveys emotion", "SUGGESTED expression" |
 | **Too illustrated/rendered** | Add "GESTURAL SKETCH quality", "quick energetic marks", "like architectural concept sketches" |
 | **Objects too detailed** | Add "objects implied through hatching", "same sketch quality as figures", "suggested forms" |
@@ -846,16 +846,16 @@ open /path/to/generated-image.png
 ### The UL Look Checklist
 
 Before submitting any image:
-- ✅ **Subject matches CONTENT** — drew what the piece is ABOUT (not defaulting to architecture)
-- ✅ **CSE-24 was run** — actually executed the story explanation command
-- ✅ **Concrete subjects visible** — key nouns/metaphors from content appear
-- ✅ Charcoal sketch TECHNIQUE — gestural, atmospheric, hatching
-- ✅ Emotional register — clear and intentional
-- ✅ Color washes — warm/cool ratio tells the story
-- ✅ Gallery-worthy — sophisticated, not generic AI
-- ✅ **--thumbnail flag used** — both transparent and sepia versions generated
-- ✅ **OPTIMIZATION COMPLETED** — resized to 1024, converted to WebP, optimized thumbnails created
-- ✅ Signature — small charcoal bottom right (optional)
+- ✓ **Subject matches CONTENT** — drew what the piece is ABOUT (not defaulting to architecture)
+- ✓ **CSE-24 was run** — actually executed the story explanation command
+- ✓ **Concrete subjects visible** — key nouns/metaphors from content appear
+- ✓ Charcoal sketch TECHNIQUE — gestural, atmospheric, hatching
+- ✓ Emotional register — clear and intentional
+- ✓ Color washes — warm/cool ratio tells the story
+- ✓ Gallery-worthy — sophisticated, not generic AI
+- ✓ **--thumbnail flag used** — both transparent and sepia versions generated
+- ✓ **OPTIMIZATION COMPLETED** — resized to 1024, converted to WebP, optimized thumbnails created
+- ✓ Signature — small charcoal bottom right (optional)
 
 ---
 

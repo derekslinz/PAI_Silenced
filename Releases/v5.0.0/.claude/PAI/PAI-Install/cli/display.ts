@@ -42,7 +42,7 @@ export function printWarning(text: string): void {
 }
 
 export function printInfo(text: string): void {
-  print(`  ${c.blue}ℹ${c.reset} ${text}`);
+  print(`  ${c.blue}${c.reset} ${text}`);
 }
 
 export function printStep(num: number, total: number, name: string): void {

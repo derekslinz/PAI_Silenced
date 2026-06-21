@@ -107,17 +107,17 @@ class CLIError extends Error {
 
 function handleError(error: unknown): never {
   if (error instanceof CLIError) {
-    console.error(`❌ Error: ${error.message}`);
+    console.error(`✗ Error: ${error.message}`);
     process.exit(error.exitCode);
   }
 
   if (error instanceof Error) {
-    console.error(`❌ Unexpected error: ${error.message}`);
+    console.error(`✗ Unexpected error: ${error.message}`);
     console.error(error.stack);
     process.exit(1);
   }
 
-  console.error(`❌ Unknown error:`, error);
+  console.error(`✗ Unknown error:`, error);
   process.exit(1);
 }
 
@@ -400,7 +400,7 @@ const execAsync = promisify(exec);
  * Uses ImageMagick to composite the transparent image onto a colored background
  */
 async function addBackgroundColor(inputPath: string, outputPath: string, hexColor: string): Promise<void> {
-  console.log(`🎨 Adding background color ${hexColor} to image...`);
+  console.log(`Adding background color ${hexColor} to image...`);
 
   // Use ImageMagick to composite the transparent image onto a colored background
   // -background sets the fill color, -flatten composites onto that background
@@ -408,7 +408,7 @@ async function addBackgroundColor(inputPath: string, outputPath: string, hexColo
 
   try {
     await execAsync(command);
-    console.log(`✅ Thumbnail saved to ${outputPath}`);
+    console.log(`✓ Thumbnail saved to ${outputPath}`);
   } catch (error) {
     throw new CLIError(`Failed to add background color: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -420,7 +420,7 @@ async function removeBackground(imagePath: string): Promise<void> {
     throw new CLIError("Missing environment variable: REMOVEBG_API_KEY");
   }
 
-  console.log("🔲 Removing background with remove.bg API...");
+  console.log("Removing background with remove.bg API...");
 
   const imageBuffer = await readFile(imagePath);
   const formData = new FormData();
@@ -442,7 +442,7 @@ async function removeBackground(imagePath: string): Promise<void> {
 
   const resultBuffer = Buffer.from(await response.arrayBuffer());
   await writeFile(imagePath, resultBuffer);
-  console.log("✅ Background removed successfully");
+  console.log("✓ Background removed successfully");
 }
 
 // ============================================================================
@@ -457,7 +457,7 @@ async function generateWithFlux(prompt: string, size: ReplicateSize, output: str
 
   const replicate = new Replicate({ auth: token });
 
-  console.log("🎨 Generating with Flux 1.1 Pro...");
+  console.log("Generating with Flux 1.1 Pro...");
 
   const result = await replicate.run("black-forest-labs/flux-1.1-pro", {
     input: {
@@ -470,7 +470,7 @@ async function generateWithFlux(prompt: string, size: ReplicateSize, output: str
   });
 
   await writeFile(output, result);
-  console.log(`✅ Image saved to ${output}`);
+  console.log(`✓ Image saved to ${output}`);
 }
 
 async function generateWithNanoBanana(prompt: string, size: ReplicateSize, output: string): Promise<void> {
@@ -481,7 +481,7 @@ async function generateWithNanoBanana(prompt: string, size: ReplicateSize, outpu
 
   const replicate = new Replicate({ auth: token });
 
-  console.log("🍌 Generating with Nano Banana...");
+  console.log("Generating with Nano Banana...");
 
   const result = await replicate.run("google/nano-banana", {
     input: {
@@ -492,7 +492,7 @@ async function generateWithNanoBanana(prompt: string, size: ReplicateSize, outpu
   });
 
   await writeFile(output, result);
-  console.log(`✅ Image saved to ${output}`);
+  console.log(`✓ Image saved to ${output}`);
 }
 
 async function generateWithGPTImage(prompt: string, size: OpenAISize, output: string): Promise<void> {
@@ -503,7 +503,7 @@ async function generateWithGPTImage(prompt: string, size: OpenAISize, output: st
 
   const openai = new OpenAI({ apiKey });
 
-  console.log("🤖 Generating with GPT-image-1...");
+  console.log("Generating with GPT-image-1...");
 
   const response = await openai.images.generate({
     model: "gpt-image-1",
@@ -519,7 +519,7 @@ async function generateWithGPTImage(prompt: string, size: OpenAISize, output: st
 
   const imageBuffer = Buffer.from(imageData, "base64");
   await writeFile(output, imageBuffer);
-  console.log(`✅ Image saved to ${output}`);
+  console.log(`✓ Image saved to ${output}`);
 }
 
 async function generateWithNanoBananaPro(
@@ -537,9 +537,9 @@ async function generateWithNanoBananaPro(
   const ai = new GoogleGenAI({ apiKey });
 
   if (referenceImages && referenceImages.length > 0) {
-    console.log(`🍌✨ Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio} with ${referenceImages.length} reference image(s)...`);
+    console.log(`★ Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio} with ${referenceImages.length} reference image(s)...`);
   } else {
-    console.log(`🍌✨ Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio}...`);
+    console.log(`★ Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio}...`);
   }
 
   // Prepare content parts
@@ -614,7 +614,7 @@ async function generateWithNanoBananaPro(
 
   const imageBuffer = Buffer.from(imageData, "base64");
   await writeFile(output, imageBuffer);
-  console.log(`✅ Image saved to ${output}`);
+  console.log(`✓ Image saved to ${output}`);
 }
 
 // ============================================================================
@@ -634,14 +634,14 @@ async function main(): Promise<void> {
       : args.prompt;
 
     if (args.transparent) {
-      console.log("🔲 Transparent background mode enabled");
-      console.log("💡 Note: Not all models support transparency natively; may require post-processing\n");
+      console.log("Transparent background mode enabled");
+      console.log("Note: Not all models support transparency natively; may require post-processing\n");
     }
 
     // Handle creative variations mode
     if (args.creativeVariations && args.creativeVariations > 1) {
-      console.log(`🎨 Creative Mode: Generating ${args.creativeVariations} variations...`);
-      console.log(`💡 Note: CLI mode uses same prompt for all variations (tests model variability)`);
+      console.log(`Creative Mode: Generating ${args.creativeVariations} variations...`);
+      console.log(`Note: CLI mode uses same prompt for all variations (tests model variability)`);
       console.log(`   For true creative diversity, use the creative workflow with be-creative skill\n`);
 
       const basePath = args.output.replace(/\.png$/, "");
@@ -671,7 +671,7 @@ async function main(): Promise<void> {
       }
 
       await Promise.all(promises);
-      console.log(`\n✅ Generated ${args.creativeVariations} variations`);
+      console.log(`\n✓ Generated ${args.creativeVariations} variations`);
       return;
     }
 
@@ -712,7 +712,7 @@ async function main(): Promise<void> {
       const thumbPath = args.output.replace(/\.png$/, "-thumb.png");
       const THUMBNAIL_BG_COLOR = "#EAE9DF"; // UL brand background color for social previews
       await addBackgroundColor(args.output, thumbPath, THUMBNAIL_BG_COLOR);
-      console.log(`\n📸 Blog header mode: Created both versions`);
+      console.log(`\nBlog header mode: Created both versions`);
       console.log(`   Transparent: ${args.output}`);
       console.log(`   Thumbnail:   ${thumbPath}`);
     }

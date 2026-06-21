@@ -182,8 +182,8 @@ When Quick Diagnosis isn't enough, or the problem requires systematic exploratio
 ### Goal Comparison
 | Success Criterion | Required | Achieved | Status |
 |-------------------|----------|----------|--------|
-| [Criterion 1]     | [Value]  | [Value]  | ✅/❌  |
-| [Criterion 2]     | [Value]  | [Value]  | ✅/❌  |
+| [Criterion 1]     | [Value]  | [Value]  | ✓/✗  |
+| [Criterion 2]     | [Value]  | [Value]  | ✓/✗  |
 
 ### Hypothesis Status
 - H1: [CONFIRMED/REFUTED/INCONCLUSIVE] - because [evidence]

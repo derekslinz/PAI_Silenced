@@ -26,7 +26,7 @@ const LATEST_PATH = join(ALGORITHM_DIR, "LATEST");
 
 function getAlgorithmVersion(): string {
   if (!existsSync(LATEST_PATH)) {
-    console.error("⚠ PAI/Algorithm/LATEST not found, defaulting to v3.7.0");
+    console.error("PAI/Algorithm/LATEST not found, defaulting to v3.7.0");
     return "v3.7.0";
   }
   return readFileSync(LATEST_PATH, "utf-8").trim();
@@ -78,7 +78,7 @@ export function needsRebuild(): boolean {
     ? JSON.parse(readFileSync(SETTINGS_PATH, "utf-8"))
     : {};
   const daName = settings.daidentity?.name || "Assistant";
-  if (!outputContent.includes(`🗣️ ${daName}:`)) return true;
+  if (!outputContent.includes(`${daName}:`)) return true;
 
   return false;
 }
@@ -115,11 +115,11 @@ if (import.meta.main) {
   const result = build();
   if (result.rebuilt) {
     const vars = loadVariables();
-    console.log("✅ Built CLAUDE.md from template");
+    console.log("✓ Built CLAUDE.md from template");
     console.log(`   Algorithm: ${vars["{{ALGO_VERSION}}"]}`);
     console.log(`   DA: ${vars["{DAIDENTITY.NAME}"]}`);
     console.log(`   Principal: ${vars["{PRINCIPAL.NAME}"]}`);
   } else {
-    console.log(`ℹ ${result.reason}`);
+    console.log(`${result.reason}`);
   }
 }

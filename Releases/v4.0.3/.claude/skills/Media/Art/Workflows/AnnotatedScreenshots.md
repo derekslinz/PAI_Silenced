@@ -72,7 +72,7 @@ Charcoal #2D2D2D — Annotation text (when not purple/teal)
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+## MANDATORY WORKFLOW STEPS
 
 ### Step 1: Prepare Screenshot
 

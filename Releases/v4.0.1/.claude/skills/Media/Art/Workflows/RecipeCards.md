@@ -77,7 +77,7 @@ White #FFFFFF — Clean modern
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+## MANDATORY WORKFLOW STEPS
 
 ### Step 1: Define Process
 

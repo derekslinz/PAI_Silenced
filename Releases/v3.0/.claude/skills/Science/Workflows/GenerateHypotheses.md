@@ -112,7 +112,7 @@ Test cheap, high-likelihood hypotheses first.
 
 For each hypothesis, verify:
 
-| Criterion | Question | ✅ |
+| Criterion | Question | ✓ |
 |-----------|----------|---|
 | **Specific** | Is it clear what this claims? | |
 | **Testable** | Can we design an experiment? | |
@@ -209,24 +209,24 @@ Merge and deduplicate the results.
 ## Common Pitfalls
 
 ### Pitfall 1: Single Hypothesis
-❌ "I think it's the database"
-✅ "It could be: database, cache, API, or client-side rendering"
+✗ "I think it's the database"
+✓ "It could be: database, cache, API, or client-side rendering"
 
 ### Pitfall 2: Unfalsifiable Hypotheses
-❌ "The code quality is poor"
-✅ "Specific module X has cyclomatic complexity > 20"
+✗ "The code quality is poor"
+✓ "Specific module X has cyclomatic complexity > 20"
 
 ### Pitfall 3: Confirmation Bias
-❌ Looking only for evidence that supports your favorite idea
-✅ Actively seeking evidence that would disprove each hypothesis
+✗ Looking only for evidence that supports your favorite idea
+✓ Actively seeking evidence that would disprove each hypothesis
 
 ### Pitfall 4: Attachment to Initial Hypothesis
-❌ "I'm 90% sure it's H1, so let's focus on that"
-✅ "Let's test the cheapest hypotheses first regardless of confidence"
+✗ "I'm 90% sure it's H1, so let's focus on that"
+✓ "Let's test the cheapest hypotheses first regardless of confidence"
 
 ### Pitfall 5: Missing the Null
-❌ Assuming something is definitely wrong
-✅ Considering: "What if this is working as intended?"
+✗ Assuming something is definitely wrong
+✓ Considering: "What if this is working as intended?"
 
 ---
 

@@ -467,6 +467,6 @@ const server = Bun.serve({
   }
 });
 
-console.log(`🚀 Server running on http://localhost:${server.port}`);
-console.log(`📊 WebSocket endpoint: ws://localhost:${server.port}/stream`);
-console.log(`📮 POST events to: http://localhost:${server.port}/events`);
+console.log(`Server running on http://localhost:${server.port}`);
+console.log(`WebSocket endpoint: ws://localhost:${server.port}/stream`);
+console.log(`POST events to: http://localhost:${server.port}/events`);

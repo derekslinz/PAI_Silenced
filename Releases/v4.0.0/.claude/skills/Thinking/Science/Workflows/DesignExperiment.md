@@ -127,7 +127,7 @@ Ask:
 
 ## Experiment Quality Checklist
 
-| Criterion | Question | ✅ |
+| Criterion | Question | ✓ |
 |-----------|----------|---|
 | **Minimal** | Is this the smallest test that gives meaningful data? | |
 | **Falsifiable** | Could this experiment prove the hypothesis wrong? | |
@@ -336,24 +336,24 @@ Hypothesis 3 ─────► Experiment 3 ─────► Results 3 ─┘
 ## Common Pitfalls
 
 ### Pitfall 1: Over-Engineering
-❌ Building elaborate test infrastructure for a simple question
-✅ Finding the minimum viable test that answers the question
+✗ Building elaborate test infrastructure for a simple question
+✓ Finding the minimum viable test that answers the question
 
 ### Pitfall 2: Confirmation Design
-❌ Designing tests that can only succeed
-✅ Designing tests that could definitively fail
+✗ Designing tests that can only succeed
+✓ Designing tests that could definitively fail
 
 ### Pitfall 3: Moving Targets
-❌ Changing success criteria after seeing results
-✅ Pre-committing to criteria before running
+✗ Changing success criteria after seeing results
+✓ Pre-committing to criteria before running
 
 ### Pitfall 4: Ignoring Confounders
-❌ Assuming all differences are due to the treatment
-✅ Identifying and controlling for other variables
+✗ Assuming all differences are due to the treatment
+✓ Identifying and controlling for other variables
 
 ### Pitfall 5: Insufficient Sample
-❌ Declaring results from N=3
-✅ Understanding minimum sample for statistical validity
+✗ Declaring results from N=3
+✓ Understanding minimum sample for statistical validity
 
 ---
 

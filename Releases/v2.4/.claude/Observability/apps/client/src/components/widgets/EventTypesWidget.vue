@@ -30,19 +30,19 @@ const props = defineProps<{
 
 // Skill icons mapping
 const skillIcons: Record<string, string> = {
-  'system': '⚙️',
-  'research': '🔍',
-  'writing': '✍️',
-  'blogging': '📝',
-  'social': '📱',
-  'development': '💻',
-  'media': '🎨',
-  'business': '💼',
-  'be-creative': '✨',
-  'personal': '👤',
-  'telos': '🎯',
-  'security': '🔒',
-  'default': '🔧'
+  'system': '',
+  'research': '',
+  'writing': '',
+  'blogging': '',
+  'social': '',
+  'development': '',
+  'media': '',
+  'business': '',
+  'be-creative': '★',
+  'personal': '',
+  'telos': '',
+  'security': '',
+  'default': ''
 };
 
 // Extract active skills from events

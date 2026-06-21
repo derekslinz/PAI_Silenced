@@ -26,7 +26,7 @@ export function getSourceIcon(source: string): string {
     facebook: "",
     reddit: "",
     hackernews: "",
-    youtube: "▶️",
+    youtube: "►",
     newsletter: "",
     "ul newsletter": "",
     tldrsec: "",

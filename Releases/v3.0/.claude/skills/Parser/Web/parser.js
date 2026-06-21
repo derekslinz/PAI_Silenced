@@ -42,7 +42,7 @@ class ParserApp {
 
             // Disable button
             this.loadBtn.disabled = true;
-            this.loadBtn.innerHTML = '<span class="btn-icon">⏳</span> Loading...';
+            this.loadBtn.innerHTML = '<span class="btn-icon"></span> Loading...';
 
             // Load index of available files
             const indexResponse = await fetch('output/index.json');
@@ -71,13 +71,13 @@ class ParserApp {
 
             // Re-enable button
             this.loadBtn.disabled = false;
-            this.loadBtn.innerHTML = '<span class="btn-icon">📂</span> Load Existing Results';
+            this.loadBtn.innerHTML = '<span class="btn-icon"></span> Load Existing Results';
 
             // Show results
             this.showResults();
         } catch (error) {
             this.loadBtn.disabled = false;
-            this.loadBtn.innerHTML = '<span class="btn-icon">📂</span> Load Existing Results';
+            this.loadBtn.innerHTML = '<span class="btn-icon"></span> Load Existing Results';
             this.showError('Failed to load existing results: ' + error.message);
         }
     }
@@ -103,7 +103,7 @@ class ParserApp {
 
         // Disable button
         this.parseBtn.disabled = true;
-        this.parseBtn.innerHTML = '<span class="btn-icon">⏳</span> Parsing...';
+        this.parseBtn.innerHTML = '<span class="btn-icon"></span> Parsing...';
 
         // Process each URL
         for (let i = 0; i < urls.length; i++) {
@@ -112,7 +112,7 @@ class ParserApp {
 
         // Re-enable button
         this.parseBtn.disabled = false;
-        this.parseBtn.innerHTML = '<span class="btn-icon">⚡</span> Parse URLs';
+        this.parseBtn.innerHTML = '<span class="btn-icon"></span> Parse URLs';
 
         // Show results
         this.showResults();
@@ -187,7 +187,7 @@ class ParserApp {
         const item = document.createElement('div');
         item.className = 'progress-item';
         item.innerHTML = `
-            <div class="progress-icon spinner">🔄</div>
+            <div class="progress-icon spinner"></div>
             <div class="progress-content">
                 <div class="progress-url">${this.escapeHtml(url)}</div>
                 <div class="progress-status">Processing ${index} of ${total}...</div>
@@ -412,10 +412,10 @@ class ParserApp {
                 </div>
                 <div class="result-actions">
                     <button class="btn-small download-btn" data-index="${index}">
-                        💾 Download
+                        Download
                     </button>
                     <button class="btn-small copy-btn" data-index="${index}">
-                        📋 Copy
+                        Copy
                     </button>
                 </div>
                 <span class="expand-icon">▼</span>

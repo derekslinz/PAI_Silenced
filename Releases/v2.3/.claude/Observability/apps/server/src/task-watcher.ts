@@ -260,7 +260,7 @@ function inferDescription(content: string, taskId: string): string {
     if (trimmed.match(/^\d{4}-\d{2}-\d{2}/) || trimmed.match(/^\[\w+\]/)) continue;
 
     // Clean up emojis and special chars
-    trimmed = trimmed.replace(/[🔍✅❌📂📊🚀👀💡⚡🎯📝🔧⚙️🌐📦🔄]/g, '').trim();
+    trimmed = trimmed.replace(/[✓✗]/g, '').trim();
 
     // Skip if too short after cleanup
     if (trimmed.length < 5) continue;
@@ -589,15 +589,15 @@ function scanAllTasks(): void {
  * Start watching for task updates
  */
 export function startTaskWatcher(callback?: (task: BackgroundTask) => void): void {
-  console.log('🔍 Starting background task watcher');
-  console.log(`📂 Watching: ${TASKS_DIR}`);
+  console.log('Starting background task watcher');
+  console.log(`Watching: ${TASKS_DIR}`);
 
   // Load API key on startup
   cachedApiKey = loadApiKey() || '';
   if (cachedApiKey) {
-    console.log('🔑 Haiku API key loaded for intelligent task naming');
+    console.log('Haiku API key loaded for intelligent task naming');
   } else {
-    console.log('⚠️ No API key found in ~/.claude/.env - using pattern matching for task names');
+    console.log('No API key found in ~/.claude/.env - using pattern matching for task names');
   }
 
   if (callback) {
@@ -606,7 +606,7 @@ export function startTaskWatcher(callback?: (task: BackgroundTask) => void): voi
 
   // Initial scan
   scanAllTasks();
-  console.log(`✅ Found ${tasks.size} background task(s)`);
+  console.log(`✓ Found ${tasks.size} background task(s)`);
 
   // Watch for new tasks and updates
   if (existsSync(TASKS_DIR)) {

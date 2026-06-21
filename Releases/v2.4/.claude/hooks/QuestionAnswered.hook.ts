@@ -47,7 +47,7 @@ async function main() {
     await Bun.$`kitten @ set-tab-color --self active_bg=${ACTIVE_TAB_BG} active_fg=${ACTIVE_TEXT} inactive_bg=${TAB_WORKING_BG} inactive_fg=${INACTIVE_TEXT}`.quiet();
 
     // Set working title
-    await Bun.$`kitty @ set-tab-title "⚙️Processing answer…"`.quiet();
+    await Bun.$`kitty @ set-tab-title "Processing answer…"`.quiet();
 
     console.error('[QuestionAnswered] Tab reset to working state (orange on inactive only)');
   } catch (error) {

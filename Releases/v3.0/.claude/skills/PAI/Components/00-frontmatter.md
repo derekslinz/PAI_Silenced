@@ -1,5 +1,5 @@
 <!--
-  🔨 GENERATED FILE - Do not edit directly
+  GENERATED FILE - Do not edit directly
   Edit:   ~/.claude/skills/PAI/Components/
   Build:  bun ~/.claude/skills/PAI/Tools/RebuildPAI.ts
 -->

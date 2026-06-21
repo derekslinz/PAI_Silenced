@@ -13,12 +13,12 @@ export class BugBountyTracker {
    * Initialize the tracker (first-time setup)
    */
   async initialize(): Promise<void> {
-    console.log('🚀 Initializing bug bounty tracker...');
+    console.log('Initializing bug bounty tracker...');
 
     const currentState = await this.state.loadState();
 
     if (currentState.initialized) {
-      console.log('✅ Tracker already initialized');
+      console.log('✓ Tracker already initialized');
       return;
     }
 
@@ -43,7 +43,7 @@ export class BugBountyTracker {
 
     await this.state.saveState(newState);
 
-    console.log('✅ Tracker initialized successfully');
+    console.log('✓ Tracker initialized successfully');
     console.log(`   Last check: ${newState.last_check}`);
     console.log(`   Tracking commits from all platforms`);
   }
@@ -54,12 +54,12 @@ export class BugBountyTracker {
    */
   async update(): Promise<DiscoveryResult> {
     const startTime = Date.now();
-    console.log('🔍 Checking for new bug bounty programs...\n');
+    console.log('Checking for new bug bounty programs...\n');
 
     const currentState = await this.state.loadState();
 
     if (!currentState.initialized) {
-      console.log('⚠️  Tracker not initialized. Run initialization first.');
+      console.log(' Tracker not initialized. Run initialization first.');
       await this.initialize();
       return {
         new_programs: [],
@@ -71,14 +71,14 @@ export class BugBountyTracker {
     }
 
     // TIER 1: Fast detection - check if domains.txt has new commits
-    console.log('📊 TIER 1: Fast change detection');
+    console.log('TIER 1: Fast change detection');
     const domainCommits = await this.github.getCommitsSince(
       CONFIG.files.domains_txt,
       currentState.last_check
     );
 
     if (domainCommits.length === 0) {
-      console.log('✅ No changes detected - all programs up to date\n');
+      console.log('✓ No changes detected - all programs up to date\n');
       return {
         new_programs: [],
         scope_expansions: [],
@@ -88,10 +88,10 @@ export class BugBountyTracker {
       };
     }
 
-    console.log(`🆕 Changes detected! ${domainCommits.length} commits since last check\n`);
+    console.log(`Changes detected! ${domainCommits.length} commits since last check\n`);
 
     // TIER 2: Detailed analysis - check each platform for changes
-    console.log('🔬 TIER 2: Detailed analysis of platform changes');
+    console.log('TIER 2: Detailed analysis of platform changes');
     const results = await this.analyzeChanges(currentState);
 
     // Update state with latest commits
@@ -121,7 +121,7 @@ export class BugBountyTracker {
     }
 
     const duration = Date.now() - startTime;
-    console.log(`\n⏱️  Completed in ${(duration / 1000).toFixed(1)}s`);
+    console.log(`\n Completed in ${(duration / 1000).toFixed(1)}s`);
 
     return {
       ...results,
@@ -158,7 +158,7 @@ export class BugBountyTracker {
         continue;
       }
 
-      console.log(`    🔄 ${commits.length} commits found`);
+      console.log(`    ${commits.length} commits found`);
 
       // Fetch latest data to compare
       const latestData = await this.github.fetchFile(CONFIG.files[fileKey]);

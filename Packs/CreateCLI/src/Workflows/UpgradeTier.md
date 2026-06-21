@@ -20,13 +20,13 @@ Running the **UpgradeTier** workflow in the **CreateCLI** skill to upgrade CLI t
 
 ---
 
-## 🎯 PURPOSE
+## PURPOSE
 
 Convert Tier 1 CLI (llcli-style) to Tier 2 (Commander.js) when complexity demands it.
 
 ---
 
-## 📍 WHEN TO USE
+## WHEN TO USE
 
 **Indicators to upgrade:**
 - 15+ commands (switch statement unwieldy)
@@ -39,7 +39,7 @@ Convert Tier 1 CLI (llcli-style) to Tier 2 (Commander.js) when complexity demand
 
 ---
 
-## 📋 MIGRATION STEPS
+## MIGRATION STEPS
 
 ### 1. Install Commander.js
 
@@ -133,7 +133,7 @@ No API changes - drop-in replacement.
 
 ---
 
-## 🔄 BEFORE/AFTER COMPARISON
+## BEFORE/AFTER COMPARISON
 
 ### Before (Tier 1)
 ```typescript
@@ -162,7 +162,7 @@ program.parse();
 
 ---
 
-## ✅ CHECKLIST
+## ✓ CHECKLIST
 
 - [ ] Commander.js installed
 - [ ] All commands converted

@@ -63,7 +63,7 @@ Present your findings as:
 ```
 ═══ CONTEXT SEARCH: $ARGUMENTS ══════════════════
 
-📋 MATCHING SESSIONS (sorted by most recent first):
+MATCHING SESSIONS (sorted by most recent first):
 
   For each match:
   • [session slug or sessionId] — [task description or user prompt]
@@ -72,13 +72,13 @@ Present your findings as:
     Key context: [1-2 sentence summary]
     Criteria status: [X passed / Y total] (if PAI PRD available)
 
-🔗 RELATED COMMITS (last 20):
+RELATED COMMITS (last 20):
   • [commit hash] [message] ([date])
 
-💬 CONVERSATION HISTORY (recent matching prompts):
+CONVERSATION HISTORY (recent matching prompts):
   • [timestamp] [project] — [user prompt excerpt]
 
-📂 WORK DIRECTORIES:
+WORK DIRECTORIES:
   • [list of matching directory names]
 
 ───────────────────────────────────────────────

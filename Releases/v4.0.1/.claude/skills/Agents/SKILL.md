@@ -3,7 +3,7 @@ name: Agents
 description: Compose CUSTOM agents from Base Traits + Voice + Specialization for specialized perspectives. USE WHEN create custom agents, spin up agents, specialized agents, agent personalities, available traits, list traits, agent voices, compose agent, load agent context, agent profile, spawn parallel agents, launch agents. NOT for agent teams/swarms (use Delegation skill → TeamCreate).
 ---
 
-## 🚨 SCOPE BOUNDARY — This Skill vs Agent Teams
+## SCOPE BOUNDARY — This Skill vs Agent Teams
 
 | {PRINCIPAL.NAME} Says | Which System | NOT This Skill? |
 |-------------|-------------|-----------------|
@@ -17,7 +17,7 @@ description: Compose CUSTOM agents from Base Traits + Voice + Specialization for
 
 ---
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 

@@ -21,7 +21,7 @@ If this directory exists, load and apply:
 These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## 🚨 MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
+## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
 
 **You MUST send this notification BEFORE doing anything else when this skill is invoked.**
 
@@ -40,17 +40,17 @@ These override default behavior. If the directory does not exist, proceed with s
 
 **This is not optional. Execute this curl command immediately upon skill invocation.**
 
-## 🚨🚨🚨 CONSTITUTIONAL: ALWAYS RUN A NAMED WORKFLOW. NEVER FREEFORM. 🚨🚨🚨
+## CONSTITUTIONAL: ALWAYS RUN A NAMED WORKFLOW. NEVER FREEFORM. 
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  EVERY image generation MUST run through a named workflow       ⚠️
-⚠️  in this skill's Workflows/ directory.                          ⚠️
-⚠️  NEVER call Tools/Generate.ts with a hand-written prompt        ⚠️
-⚠️  outside the workflow template — the workflows encode the       ⚠️
-⚠️  quality standards (TECHNIQUE, palette, composition rules,      ⚠️
-⚠️  problem-type metaphor, CSE-24 narrative arc) that the models   ⚠️
-⚠️  consistently fail to honor without them.                       ⚠️
+ EVERY image generation MUST run through a named workflow       
+ in this skill's Workflows/ directory.                          
+ NEVER call Tools/Generate.ts with a hand-written prompt        
+ outside the workflow template — the workflows encode the       
+ quality standards (TECHNIQUE, palette, composition rules,      
+ problem-type metaphor, CSE-24 narrative arc) that the models   
+ consistently fail to honor without them.                       
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -87,25 +87,25 @@ If no workflow matches the request, **stop and surface to the user** before gene
 
 ---
 
-## 🚨🚨🚨 MANDATORY: Output to Downloads First 🚨🚨🚨
+## MANDATORY: Output to Downloads First 
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  ALL GENERATED IMAGES GO TO ~/Downloads/ FIRST                   ⚠️
-⚠️  NEVER output directly to project directories                    ⚠️
-⚠️  User MUST preview in Finder/Preview before use                  ⚠️
+ ALL GENERATED IMAGES GO TO ~/Downloads/ FIRST                   
+ NEVER output directly to project directories                    
+ User MUST preview in Finder/Preview before use                  
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 **This applies to ALL workflows in this skill.**
 
-## 🚨🚨🚨 MANDATORY: Transparency Rules for Blog Headers 🚨🚨🚨
+## MANDATORY: Transparency Rules for Blog Headers 
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  INLINE (body) image → TRANSPARENT (PNG with alpha)           ⚠️
-⚠️  SOCIAL THUMBNAIL (frontmatter) → SEPIA #EAE9DF (opaque)       ⚠️
-⚠️  EVERY blog header MUST use --thumbnail (produces both)        ⚠️
+ INLINE (body) image → TRANSPARENT (PNG with alpha)           
+ SOCIAL THUMBNAIL (frontmatter) → SEPIA #EAE9DF (opaque)       
+ EVERY blog header MUST use --thumbnail (produces both)        
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -202,7 +202,7 @@ Each model accepts different `--size` formats. Using the wrong format causes val
 
 **Note:** `nano-banana-pro` uses `--size` for resolution quality and a separate `--aspect-ratio` flag for aspect ratio (defaults to `16:9`).
 
-### 🚨 CRITICAL: Always Output to Downloads First
+### CRITICAL: Always Output to Downloads First
 
 **ALL generated images MUST go to `~/Downloads/` first for preview and selection.**
 

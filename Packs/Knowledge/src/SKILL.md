@@ -233,7 +233,7 @@ For each related note found (up to 10):
 
 **Present the ripple plan to the user:**
 ```
-📥 INGEST RIPPLE PLAN:
+INGEST RIPPLE PLAN:
   PRIMARY: Ideas/new-note-slug — "Title" (created)
   PRIMARY related: frontmatter links (MANDATORY):
     → Ideas/existing-note-1 — type: extends
@@ -242,7 +242,7 @@ For each related note found (up to 10):
   RIPPLE (reverse-direction updates to existing notes):
     → Ideas/existing-note-1 — add body [[new-note-slug]] wikilink + add to its related: array (type: extends)
     → Ideas/existing-note-2 — update Evidence section with new data point + add to related:
-    → Ideas/existing-note-3 — ⚠️ CONTRADICTION: new source says X, note says Y — type: contradicts
+    → Ideas/existing-note-3 — CONTRADICTION: new source says X, note says Y — type: contradicts
   NO CHANGE: Ideas/tangentially-related — mentioned same tag but no substantive connection
 ```
 
@@ -253,7 +253,7 @@ After the user approves (or you determine updates are low-risk cross-references)
 - **Related notes**: add reverse-direction `related:` entries to their frontmatter with appropriate types
 - **Body wikilinks**: add `[[wikilinks]]` in existing prose where natural (not forced)
 - Update `updated:` date on modified notes
-- For contradictions: add a `> ⚠️ **Contradiction:** [note] claims X — see [[new-note]] for counter-evidence` callout, AND add `type: contradicts` in related: arrays
+- For contradictions: add a `> **Contradiction:** [note] claims X — see [[new-note]] for counter-evidence` callout, AND add `type: contradicts` in related: arrays
 
 ### Step 5 — Log and index
 
@@ -301,17 +301,17 @@ For each pair (up to 10 highest-overlap pairs):
 
 Present findings:
 ```
-🔍 CONTRADICTION SCAN:
+CONTRADICTION SCAN:
   Pairs checked: N
   Contradictions found: N
   Superseded claims: N
 
-  ⚠️ CONTRADICTION:
+  CONTRADICTION:
     [[note-a]] claims: "X"
     [[note-b]] claims: "Y"
     Resolution: [suggest which is correct, or flag for the user]
 
-  📅 SUPERSEDED:
+  SUPERSEDED:
     [[older-note]] (2026-01-15): "X was true"
     [[newer-note]] (2026-03-20): "X is no longer true because Y"
     Action: Update older note with correction
@@ -321,7 +321,7 @@ Present findings:
 
 If the user approves resolutions:
 - Update contradicted notes with correction callouts
-- Update superseded notes with `> 📅 **Updated:** See [[newer-note]] for current information`
+- Update superseded notes with `> **Updated:** See [[newer-note]] for current information`
 - Update `updated:` dates
 - Regenerate MOCs
 

@@ -67,11 +67,11 @@ When a tab is inactive (not focused), the background color indicates the current
 
 | State | Color | Hex | Visual Indicator |
 |-------|-------|-----|------------------|
-| **Inference/Thinking** | Dark Purple | `#1E0A3C` | 🧠 prefix, "…" suffix |
-| **Actively Working** | Dark Orange | `#804000` | ⚙️ prefix, "…" suffix |
-| **Awaiting User Input** | Dark Teal | `#085050` | ❓ prefix |
+| **Inference/Thinking** | Dark Purple | `#1E0A3C` | prefix, "…" suffix |
+| **Actively Working** | Dark Orange | `#804000` | prefix, "…" suffix |
+| **Awaiting User Input** | Dark Teal | `#085050` | prefix |
 | **Completed Successfully** | Dark Green | `#022800` | ✓ prefix |
-| **Error State** | Dark Orange | `#804000` | ⚠ prefix, "!" suffix |
+| **Error State** | Dark Orange | `#804000` | prefix, "!" suffix |
 
 **Note:** The active (focused) tab always remains dark blue (`#002B80`) regardless of state.
 
@@ -86,9 +86,9 @@ Three hooks work together to manage dynamic tab updates:
 **Trigger:** Every time a user submits a prompt
 
 **Flow:**
-1. Immediately sets tab to purple with "🧠Processing…" (inference state)
+1. Immediately sets tab to purple with "Processing…" (inference state)
 2. Calls Haiku AI to generate a 3-4 word gerund summary (e.g., "Fixing auth bug")
-3. Updates tab to orange with "⚙️[Summary]…" (working state)
+3. Updates tab to orange with "[Summary]…" (working state)
 4. Announces the summary via voice server
 
 **Summary Format:**
@@ -106,7 +106,7 @@ Three hooks work together to manage dynamic tab updates:
 
 **Trigger:** When Claude invokes the AskUserQuestion tool
 
-**Action:** Sets tab to teal with "❓𝗤𝗨𝗘𝗦𝗧𝗜𝗢𝗡" title, indicating the system is waiting for user input.
+**Action:** Sets tab to teal with "𝗤𝗨𝗘𝗦𝗧𝗜𝗢𝗡" title, indicating the system is waiting for user input.
 
 ### 3. tab-state.ts (Stop/Completion)
 
@@ -115,9 +115,9 @@ Three hooks work together to manage dynamic tab updates:
 **States:**
 - `completed` - Green background, ✓ prefix
 - `awaitingInput` - Teal background, ? suffix
-- `error` - Orange background, ⚠ prefix, ! suffix
+- `error` - Orange background, prefix, ! suffix
 
-**Title:** Extracts the voice line (🗣️) from the response for a completion summary.
+**Title:** Extracts the voice line () from the response for a completion summary.
 
 ---
 

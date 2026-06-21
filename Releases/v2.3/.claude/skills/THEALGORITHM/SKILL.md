@@ -48,12 +48,12 @@ bun run ~/.claude/skills/THEALGORITHM/Tools/AlgorithmDisplay.ts effort DETERMINE
 ```
 
 **The display shows:**
-- 🎯 Current effort level (TRIVIAL → DETERMINED) with color-coded banner
-- 📊 Phase progression bar (7 phases with completion status)
-- 📝 ISC summary (rows pending/active/done)
-- 🔊 Voice announcements when transitioning phases
+- Current effort level (TRIVIAL → DETERMINED) with color-coded banner
+- Phase progression bar (7 phases with completion status)
+- ISC summary (rows pending/active/done)
+- Voice announcements when transitioning phases
 
-**Phase Icons:** 👁️ OBSERVE → 🧠 THINK → 📋 PLAN → 🔨 BUILD → ⚡ EXECUTE → ✅ VERIFY → 📚 LEARN
+**Phase Icons:** OBSERVE → THINK → PLAN → BUILD → EXECUTE → ✓ VERIFY → LEARN
 
 ## Quick Start
 
@@ -145,21 +145,21 @@ Execute IN ORDER. Each phase mutates the ISC:
 Every non-trivial task has an ISC. **Display this prominently throughout execution:**
 
 ```markdown
-## 🎯 IDEAL STATE CRITERIA
+## IDEAL STATE CRITERIA
 
 **Request:** Add dark mode to the settings page
 **Effort:** STANDARD | **Phase:** EXECUTE | **Iteration:** 1
 
 | # | What Ideal Looks Like | Source | Capability | Status |
 |---|----------------------|--------|------------|--------|
-| 1 | Research good patterns | INFERRED | 🔬 perplexity | ⏳ PENDING |
-| 2 | Toggle component works | EXPLICIT | 🤖 engineer | 🔄 ACTIVE |
-| 3 | Theme state persists | EXPLICIT | 🤖 engineer× | ⏳ PENDING |
-| 4 | Uses TypeScript | INFERRED | — | ✅ DONE |
-| 5 | Tests pass | IMPLICIT | ✅ qa_tester | ⏳ PENDING |
-| 6 | Browser-verified | IMPLICIT | ✅ browser | ⏳ PENDING |
+| 1 | Research good patterns | INFERRED | perplexity | PENDING |
+| 2 | Toggle component works | EXPLICIT | engineer | ACTIVE |
+| 3 | Theme state persists | EXPLICIT | engineer× | PENDING |
+| 4 | Uses TypeScript | INFERRED | — | ✓ DONE |
+| 5 | Tests pass | IMPLICIT | ✓ qa_tester | PENDING |
+| 6 | Browser-verified | IMPLICIT | ✓ browser | PENDING |
 
-**Legend:** 🔬 Research | 💡 Thinking | 🗣️ Debate | 🔍 Analysis | 🤖 Execution | ✅ Verify | × Parallel
+**Legend:** Research | Thinking | Debate | Analysis | Execution | ✓ Verify | × Parallel
 ```
 
 **Source types:**
@@ -200,7 +200,7 @@ For each ISC row, select appropriate capability:
 
 ```bash
 bun run ~/.claude/skills/THEALGORITHM/Tools/CapabilitySelector.ts --row "Research best practices" --effort STANDARD
-# Returns: research.perplexity as primary, with icon 🔬
+# Returns: research.perplexity as primary, with icon 
 
 bun run ~/.claude/skills/THEALGORITHM/Tools/ISCManager.ts capability --row 1 -c research.perplexity
 ```
@@ -211,22 +211,22 @@ Execute in phases based on capability assignments:
 
 ```
 PHASE A: RESEARCH (parallel for independent queries)
-├─ Row with 🔬 research.perplexity → Spawn PerplexityResearcher
-├─ Row with 🔬 research.gemini → Spawn GeminiResearcher
-└─ Row with 🔬 research.grok → Spawn GrokResearcher
+├─ Row with research.perplexity → Spawn PerplexityResearcher
+├─ Row with research.gemini → Spawn GeminiResearcher
+└─ Row with research.grok → Spawn GrokResearcher
 
 PHASE B: THINKING (for creative/analysis needs)
-├─ Row with 💡 thinking.deep thinking → Invoke BeCreative skill
-├─ Row with 🔍 analysis.first_principles → Invoke FirstPrinciples skill
-└─ Row with 🗣️ debate.council → Invoke Council skill
+├─ Row with thinking.deep thinking → Invoke BeCreative skill
+├─ Row with analysis.first_principles → Invoke FirstPrinciples skill
+└─ Row with debate.council → Invoke Council skill
 
 PHASE C: EXECUTION (parallel agents)
-├─ Row with 🤖 execution.engineer → Spawn Engineer agent
-├─ Row with 🤖 execution.architect → Spawn Architect agent (THOROUGH+)
+├─ Row with execution.engineer → Spawn Engineer agent
+├─ Row with execution.architect → Spawn Architect agent (THOROUGH+)
 └─ Rows marked × → Run in parallel
 
 PHASE D: VERIFICATION (skeptical, different from executor)
-├─ Row with ✅ verification.browser → Browser skill validation
+├─ Row with ✓ verification.browser → Browser skill validation
 └─ All rows → Skeptical verifier agent (skeptical,meticulous,adversarial traits)
 ```
 

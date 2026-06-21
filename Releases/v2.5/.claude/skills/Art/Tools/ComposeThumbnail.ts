@@ -289,10 +289,10 @@ async function composeThumbnail(args: CLIArgs): Promise<void> {
   const intermediates = [resizedBg, croppedHeadshot, withHeadshot, withText];
 
   try {
-    console.log("🎨 Composing YouTube thumbnail...");
+    console.log("Composing YouTube thumbnail...");
 
     // Step 1: Resize background to exact dimensions
-    console.log("   📐 Resizing background to 1280x720...");
+    console.log("   Resizing background to 1280x720...");
     await runCommand("magick", [
       args.background,
       "-resize", `${LAYOUT.width}x${LAYOUT.height}^`,
@@ -302,11 +302,11 @@ async function composeThumbnail(args: CLIArgs): Promise<void> {
     ]);
 
     // Step 2: Crop headshot to FACE ONLY (remove shoulders/body)
-    console.log(`   ✂️  Cropping headshot to face only...`);
+    console.log(`    Cropping headshot to face only...`);
     await cropToFaceOnly(args.headshot, croppedHeadshot);
 
     // Step 3: Composite headshot based on position
-    console.log(`   👤 Adding headshot (${args.headshotPosition})...`);
+    console.log(`   Adding headshot (${args.headshotPosition})...`);
 
     // Calculate headshot height - FULL HEIGHT inside border
     // Face should fill ~95% of vertical space inside the border
@@ -347,7 +347,7 @@ async function composeThumbnail(args: CLIArgs): Promise<void> {
     ]);
 
     // Step 4: Add text with stroke outline
-    console.log("   📝 Adding text with stroke outlines...");
+    console.log("   Adding text with stroke outlines...");
 
     // For left/right positions: create combined text block, center in available region
     // For center position: separate title (top) and subtitle (bottom)
@@ -491,7 +491,7 @@ async function composeThumbnail(args: CLIArgs): Promise<void> {
     }
 
     // Step 5: Add colored border
-    console.log("   🖼️  Adding border...");
+    console.log("    Adding border...");
     await runCommand("magick", [
       withText,
       "-bordercolor", args.borderColor!,
@@ -500,11 +500,11 @@ async function composeThumbnail(args: CLIArgs): Promise<void> {
       args.output,
     ]);
 
-    console.log(`✅ Thumbnail saved to ${args.output}`);
+    console.log(`✓ Thumbnail saved to ${args.output}`);
 
     // Verify dimensions
     const identify = await runCommand("magick", ["identify", "-format", "%wx%h", args.output]);
-    console.log(`   📏 Dimensions: ${identify.trim()}`);
+    console.log(`   Dimensions: ${identify.trim()}`);
 
   } finally {
     // Cleanup intermediate files
@@ -530,7 +530,7 @@ async function main(): Promise<void> {
     await composeThumbnail(args);
   } catch (error) {
     if (error instanceof CLIError) {
-      console.error(`❌ Error: ${error.message}`);
+      console.error(`✗ Error: ${error.message}`);
       process.exit(error.exitCode);
     }
     throw error;

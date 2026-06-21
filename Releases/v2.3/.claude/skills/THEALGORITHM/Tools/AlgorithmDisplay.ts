@@ -50,22 +50,22 @@ const LCARS = {
 
 // Effort level colors
 const EFFORT_COLORS: Record<string, { fg: string; bg: string; emoji: string }> = {
-  TRIVIAL: { fg: LCARS.BLUE, bg: "\x1b[48;2;50;80;120m", emoji: "💭" },
-  QUICK: { fg: LCARS.GREEN, bg: "\x1b[48;2;40;100;40m", emoji: "⚡" },
-  STANDARD: { fg: LCARS.YELLOW, bg: "\x1b[48;2;120;100;20m", emoji: "📊" },
-  THOROUGH: { fg: LCARS.ORANGE, bg: "\x1b[48;2;140;80;0m", emoji: "🔬" },
-  DETERMINED: { fg: LCARS.RED, bg: "\x1b[48;2;140;40;40m", emoji: "🎯" },
+  TRIVIAL: { fg: LCARS.BLUE, bg: "\x1b[48;2;50;80;120m", emoji: "" },
+  QUICK: { fg: LCARS.GREEN, bg: "\x1b[48;2;40;100;40m", emoji: "" },
+  STANDARD: { fg: LCARS.YELLOW, bg: "\x1b[48;2;120;100;20m", emoji: "" },
+  THOROUGH: { fg: LCARS.ORANGE, bg: "\x1b[48;2;140;80;0m", emoji: "" },
+  DETERMINED: { fg: LCARS.RED, bg: "\x1b[48;2;140;40;40m", emoji: "" },
 };
 
 // Phase definitions with icons and colors
 const PHASES = [
-  { name: "OBSERVE", icon: "👁️", color: LCARS.CYAN, description: "Understanding request" },
-  { name: "THINK", icon: "🧠", color: LCARS.PURPLE, description: "Analyzing requirements" },
-  { name: "PLAN", icon: "📋", color: LCARS.BLUE, description: "Sequencing steps" },
-  { name: "BUILD", icon: "🔨", color: LCARS.YELLOW, description: "Making testable" },
-  { name: "EXECUTE", icon: "⚡", color: LCARS.ORANGE, description: "Doing the work" },
-  { name: "VERIFY", icon: "✅", color: LCARS.GREEN, description: "Testing results" },
-  { name: "LEARN", icon: "📚", color: LCARS.PINK, description: "Capturing learnings" },
+  { name: "OBSERVE", icon: "", color: LCARS.CYAN, description: "Understanding request" },
+  { name: "THINK", icon: "", color: LCARS.PURPLE, description: "Analyzing requirements" },
+  { name: "PLAN", icon: "", color: LCARS.BLUE, description: "Sequencing steps" },
+  { name: "BUILD", icon: "", color: LCARS.YELLOW, description: "Making testable" },
+  { name: "EXECUTE", icon: "", color: LCARS.ORANGE, description: "Doing the work" },
+  { name: "VERIFY", icon: "✓", color: LCARS.GREEN, description: "Testing results" },
+  { name: "LEARN", icon: "", color: LCARS.PINK, description: "Capturing learnings" },
 ] as const;
 
 type PhaseName = (typeof PHASES)[number]["name"];
@@ -179,7 +179,7 @@ function renderPhaseBar(currentPhase: string): string {
   if (idx >= 0) {
     const active = PHASES[idx];
     lines.push(`${LCARS.ORANGE}│${RESET}`);
-    lines.push(`${LCARS.ORANGE}│${RESET}  ${active.color}${BOLD}▶ ${active.name}${RESET} ${DIM}- ${active.description}${RESET}`.padEnd(width + 30) + `${LCARS.ORANGE}│${RESET}`);
+    lines.push(`${LCARS.ORANGE}│${RESET}  ${active.color}${BOLD}► ${active.name}${RESET} ${DIM}- ${active.description}${RESET}`.padEnd(width + 30) + `${LCARS.ORANGE}│${RESET}`);
   }
 
   lines.push(`${LCARS.ORANGE}╰${"━".repeat(width - 2)}╯${RESET}`);
@@ -216,8 +216,8 @@ function renderISCSummary(isc: ReturnType<typeof loadISC>): string {
   lines.push(`${LCARS.BLUE}╭────────────────────────────────╮${RESET}`);
   lines.push(`${LCARS.BLUE}│${RESET} ${BOLD}ISC STATUS${RESET} ${DIM}(${isc.rows.length} rows)${RESET}`.padEnd(45) + `${LCARS.BLUE}│${RESET}`);
   lines.push(`${LCARS.BLUE}├────────────────────────────────┤${RESET}`);
-  lines.push(`${LCARS.BLUE}│${RESET} ⏳ Pending: ${pending}  🔄 Active: ${active}`.padEnd(40) + `${LCARS.BLUE}│${RESET}`);
-  lines.push(`${LCARS.BLUE}│${RESET} ${LCARS.GREEN}✅ Done: ${done}${RESET}  ${blocked > 0 ? LCARS.RED + "🚫 Blocked: " + blocked + RESET : ""}`.padEnd(blocked > 0 ? 45 : 40) + `${LCARS.BLUE}│${RESET}`);
+  lines.push(`${LCARS.BLUE}│${RESET} Pending: ${pending}  Active: ${active}`.padEnd(40) + `${LCARS.BLUE}│${RESET}`);
+  lines.push(`${LCARS.BLUE}│${RESET} ${LCARS.GREEN}✓ Done: ${done}${RESET}  ${blocked > 0 ? LCARS.RED + "Blocked: " + blocked + RESET : ""}`.padEnd(blocked > 0 ? 45 : 40) + `${LCARS.BLUE}│${RESET}`);
   lines.push(`${LCARS.BLUE}╰────────────────────────────────╯${RESET}`);
 
   return lines.join("\n");
@@ -293,7 +293,7 @@ function renderFullDisplay(): string {
   if (phaseIdx >= 0) {
     const active = PHASES[phaseIdx];
     lines.push(`${LCARS.ORANGE}│${RESET}`);
-    lines.push(`${LCARS.ORANGE}│${RESET}  ${BOLD}${active.color}▶ ${active.name}${RESET} ${DIM}— ${active.description}${RESET}`);
+    lines.push(`${LCARS.ORANGE}│${RESET}  ${BOLD}${active.color}► ${active.name}${RESET} ${DIM}— ${active.description}${RESET}`);
   }
 
   lines.push(`${LCARS.ORANGE}│${RESET}`);
@@ -304,7 +304,7 @@ function renderFullDisplay(): string {
     const active = isc.rows.filter((r: any) => r.status === "ACTIVE").length;
     const done = isc.rows.filter((r: any) => r.status === "DONE").length;
 
-    lines.push(`${LCARS.ORANGE}│${RESET}  ${LCARS.BLUE}ISC:${RESET} ${isc.rows.length} rows  ${DIM}|${RESET}  ⏳${pending}  🔄${active}  ${LCARS.GREEN}✅${done}${RESET}`);
+    lines.push(`${LCARS.ORANGE}│${RESET}  ${LCARS.BLUE}ISC:${RESET} ${isc.rows.length} rows  ${DIM}|${RESET}  ${pending}  ${active}  ${LCARS.GREEN}✓${done}${RESET}`);
   }
 
   // Footer

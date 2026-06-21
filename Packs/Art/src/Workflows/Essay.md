@@ -19,13 +19,13 @@ Uses architectural sketching STYLE (gestural lines, hatching, charcoal) to depic
 
 ---
 
-## 🚨🚨🚨 ALL STEPS ARE MANDATORY — NO EXCEPTIONS 🚨🚨🚨
+## ALL STEPS ARE MANDATORY — NO EXCEPTIONS 
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  EVERY SINGLE STEP BELOW IS MANDATORY. EXECUTE ALL OF THEM.  ⚠️
-⚠️  DO NOT SKIP ANY STEP. DO NOT ABBREVIATE. DO NOT SHORTCUT.   ⚠️
-⚠️  IF YOU SKIP A STEP, YOU HAVE FAILED THE WORKFLOW.           ⚠️
+ EVERY SINGLE STEP BELOW IS MANDATORY. EXECUTE ALL OF THEM.  
+ DO NOT SKIP ANY STEP. DO NOT ABBREVIATE. DO NOT SHORTCUT.   
+ IF YOU SKIP A STEP, YOU HAVE FAILED THE WORKFLOW.           
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -59,27 +59,27 @@ INPUT CONTENT
 - **DEEP PURPLE (#4A148C)** — technology, AI, capital, cold power (MANDATORY)
 - --thumbnail flag for blog headers
 
-**🚨 BOTH SIENNA AND PURPLE MUST BE PRESENT IN EVERY IMAGE.**
+**BOTH SIENNA AND PURPLE MUST BE PRESENT IN EVERY IMAGE.**
 - Sienna on human/warm elements
 - Purple on tech/capital/cold elements
 - The ratio of Sienna:Purple tells the emotional story
 - If an image is missing either color, it's INCOMPLETE
 
-**🚨 FORBIDDEN — NEVER INCLUDE:**
-- ❌ Borders or frames around the image
-- ❌ Background shading or gradients
-- ❌ Filled backgrounds of any kind
-- ❌ Decorative elements that aren't part of the subject
+**FORBIDDEN — NEVER INCLUDE:**
+- ✗ Borders or frames around the image
+- ✗ Background shading or gradients
+- ✗ Filled backgrounds of any kind
+- ✗ Decorative elements that aren't part of the subject
 - The composition should float in empty space — MINIMALIST
 
-**🚨 LOGICAL/PHILOSOPHICAL CONSISTENCY:**
+**LOGICAL/PHILOSOPHICAL CONSISTENCY:**
 - The visual MUST make logical sense with the concept
 - If "X is winning" — X should be in the dominant/winning position visually
 - If "X is heavy/powerful" — X weighs DOWN, not up
 - If using a balance scale: the winning/heavy side pushes DOWN
 - THINK about what the metaphor actually means before drawing it
 
-**⚠️ KNOWN ISSUE: Background removal may remove the signature.**
+**KNOWN ISSUE: Background removal may remove the signature.**
 If the signature is missing after generation, you must add it manually or regenerate with the signature more integrated into the composition (not isolated in corner with empty space).
 
 ---
@@ -94,7 +94,7 @@ If the signature is missing after generation, you must add it manually or regene
 4. **What should NOT be drawn?** Architecture, buildings, vast spaces — UNLESS the content is about those
 5. **Did the user provide GUIDANCE?** If the user gave direction about what to focus on, what the image should convey, or what angle to take — THIS TAKES PRIORITY over your own interpretation
 
-**🚨 USER GUIDANCE TAKES PRIORITY:**
+**USER GUIDANCE TAKES PRIORITY:**
 If the user provides specific direction like:
 - "Focus on the tension between X and Y"
 - "The image should show Z losing"
@@ -111,7 +111,7 @@ If the user provides specific direction like:
 
 **Extract the FULL narrative arc to understand the emotional core.**
 
-**🚨 ACTUALLY EXECUTE THIS COMMAND — DO NOT SKIP:**
+**ACTUALLY EXECUTE THIS COMMAND — DO NOT SKIP:**
 
 ```
 Invoke the StoryExplanation Skill with: "Create a 24-item story explanation for this content"
@@ -167,13 +167,13 @@ These are just examples. It can be really anything which you will get from the C
 
 ## Step 4: Design Composition — MANDATORY
 
-**🚨 CRITICAL: Design what to ACTUALLY DRAW based on the CONTENT — NOT defaulting to architecture.**
+**CRITICAL: Design what to ACTUALLY DRAW based on the CONTENT — NOT defaulting to architecture.**
 
 ### The Core Question
 
 **What is this content ABOUT, and what visual would represent THAT?**
 
-**🚨 IF USER PROVIDED GUIDANCE — START THERE:**
+**IF USER PROVIDED GUIDANCE — START THERE:**
 If the user gave direction in Step 1 (e.g., "focus on the tension between labor and capital", "show labor losing"), use that as your PRIMARY composition direction. The CSE-24 output SUPPORTS this direction — it doesn't replace it.
 
 Use the content from the create-story-explanation run to compose this.
@@ -185,7 +185,7 @@ Use the content from the create-story-explanation run to compose this.
 
 ### Composition Design Questions
 
-**🚨 STEP 4A: IDENTIFY THE PROBLEM (MOST CRITICAL)**
+**STEP 4A: IDENTIFY THE PROBLEM (MOST CRITICAL)**
 
 Before designing anything, extract from the CSE-24 output:
 
@@ -211,7 +211,7 @@ Before designing anything, extract from the CSE-24 output:
    | **COMPLEXITY** | Simple thing made unnecessarily complicated | Tangled vs. straight path |
    | **BLINDSPOT** | Can't see obvious thing right in front | Figure ignoring elephant |
 
-   **🚨 THE PROBLEM TYPE SHAPES THE VISUAL METAPHOR.**
+   **THE PROBLEM TYPE SHAPES THE VISUAL METAPHOR.**
    - SORTING problem → show the sorting challenge (scattered items, categories)
    - COMMUNICATION problem → show the breakdown (garbled speech, confusion)
    - DOUBLE STANDARD → show the unfairness (tilted scales, biased judge)
@@ -312,7 +312,7 @@ EMOTIONAL REGISTER: [From Step 3]
 
 TECHNIQUE — GESTURAL ARCHITECTURAL SKETCH STYLE:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚨 Architecture is the TECHNIQUE, not the required subject 🚨
+Architecture is the TECHNIQUE, not the required subject 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 - GESTURAL — quick, confident, energetic marks
 - OVERLAPPING LINES — multiple strokes suggesting form
@@ -349,7 +349,7 @@ OBJECTS (if present) — GESTURAL SUGGESTED FORMS:
 - NOT flat symbols — sketched with depth
 
 COMPOSITION — FULL FRAME WITH BREATHING ROOM (target band: 7–12% margin on every edge):
-- 🚨 SUBJECTS MUST DOMINATE the frame, NOT be small islands in empty space
+- SUBJECTS MUST DOMINATE the frame, NOT be small islands in empty space
 - Target margin band: each of the four edges should have **between 7% and 12% empty space** (transparent or background-color) — not zero, not 20%+
 - Hard FAILS:
   - Any edge with **less than 5% margin** → subject is butting against the edge, looks visually clipped (the 2026-04-27 "flat against the side" failure)
@@ -386,11 +386,11 @@ Before generating, verify:
 
 ---
 
-### 🚨 Model-Specific Prompt Construction (CONTENT-LED, BOTH MODELS)
+### Model-Specific Prompt Construction (CONTENT-LED, BOTH MODELS)
 
 **The two production models reason about prompts very differently. Generic visual-spec prompts waste OpenAI's reasoning capability and starve Google's compositional fidelity. Both models need the CONTENT'S LOGIC up front — not just adjectives.**
 
-**🚨 GPT-IMAGE-1 IS DEPRECATED** (per OpenAI docs) — DO NOT USE. The current OpenAI image model is `gpt-image-2` (released Apr 21, 2026 — currently #1 on Artificial Analysis Image Arena, Elo 1331). Fallback to `gpt-image-2.5` (Dec 16, 2025) only if `gpt-image-2` is unavailable. Always pass `--model gpt-image-2`.
+**GPT-IMAGE-1 IS DEPRECATED** (per OpenAI docs) — DO NOT USE. The current OpenAI image model is `gpt-image-2` (released Apr 21, 2026 — currently #1 on Artificial Analysis Image Arena, Elo 1331). Fallback to `gpt-image-2.5` (Dec 16, 2025) only if `gpt-image-2` is unavailable. Always pass `--model gpt-image-2`.
 
 OpenAI's `gpt-image-2` is an autoregressive multimodal model with native "thinking mode" reasoning. Image tokens flow through the same transformer as text tokens, which is what gives it instruction-following depth. **But it has documented quirks** that the prompt must address explicitly:
 - **Warm-color bias** — over-weights amber/sienna, under-delivers purple/cool tones unless explicitly constrained
@@ -453,7 +453,7 @@ No text, no labels, no signatures, no watermarks, no borders. Background:
 seamless warm sepia paper that blends into a cream blog page.
 ```
 
-### 🚨 DEFAULT FOR BLOG HEADERS: MULTI-CANDIDATE FROM BOTH MODELS, AUTO-SELECT
+### DEFAULT FOR BLOG HEADERS: MULTI-CANDIDATE FROM BOTH MODELS, AUTO-SELECT
 
 **Single-generation is NOT the default for blog header essays.** Single-shot generation is acceptable for low-stakes diagrams, schematics, or technical illustrations where the visual answer is mechanical. Editorial essay headers are not those — they are creative judgment calls where one model's interpretation routinely beats the other and you cannot predict which in advance.
 
@@ -523,7 +523,7 @@ seamless warm sepia paper that blends into a cream blog page.
 
 ### Default Model: nano-banana-pro
 
-### 🚨 CRITICAL: Always Output to Downloads First — `~/Downloads/` IS THE WORKING DIRECTORY
+### CRITICAL: Always Output to Downloads First — `~/Downloads/` IS THE WORKING DIRECTORY
 
 **`~/Downloads/` is the canonical working directory for ALL Art-skill image generation. EVERY `--output` path MUST start with `~/Downloads/`. ZERO exceptions.**
 
@@ -583,7 +583,7 @@ bun run ~/.claude/skills/Art/Tools/Generate.ts \
   --output [OUTPUT_PATH]
 ```
 
-### 🚨 MANDATORY: Blog Header Images → Use `--thumbnail`
+### MANDATORY: Blog Header Images → Use `--thumbnail`
 
 **ALL blog header images MUST use the `--thumbnail` flag.**
 
@@ -593,7 +593,7 @@ The `--thumbnail` flag generates TWO versions:
 
 ```bash
 # Example: Generates both my-header.png AND my-header-thumb.png in ~/Downloads/
-# 🚨 --output MUST point to ~/Downloads/ — NEVER directly into cms/public/images/
+# --output MUST point to ~/Downloads/ — NEVER directly into cms/public/images/
 bun run ~/.claude/skills/Art/Tools/Generate.ts \
   --model nano-banana-pro \
   --prompt "[YOUR PROMPT]" \
@@ -611,15 +611,15 @@ mv ~/Downloads/my-header.png ~/Downloads/my-header-thumb.png \
 - **Transparent (`output.png`):** For the blog post inline image — composites beautifully over website background
 - **Thumbnail (`output-thumb.png`):** For `thumbnail:` frontmatter field — visible in social previews, RSS readers, and anywhere that doesn't composite transparency
 
-### 🚨 CRITICAL: Blog Post Frontmatter Must Use `-thumb` Version
+### CRITICAL: Blog Post Frontmatter Must Use `-thumb` Version
 
 **ALWAYS reference the `-thumb` file in the blog post's `thumbnail:` frontmatter field:**
 
 ```yaml
-# ✅ CORRECT - Use the -thumb version with sepia background
+# ✓ CORRECT - Use the -thumb version with sepia background
 thumbnail: https://example.com/images/my-header-thumb.png
 
-# ❌ WRONG - Transparent version shows white background on social media
+# ✗ WRONG - Transparent version shows white background on social media
 thumbnail: https://example.com/images/my-header.png
 ```
 
@@ -647,7 +647,7 @@ bun ~/.claude/PAI/TOOLS/RemoveBg.ts image1.png image2.png image3.png
 ```
 
 
-### 🚨 COMPOSITION: USE FULL FRAME, MINIMALIST, NO BACKGROUNDS
+### COMPOSITION: USE FULL FRAME, MINIMALIST, NO BACKGROUNDS
 
 **SUBJECTS FILL THE FRAME. FEW ELEMENTS. NO FILLED BACKGROUNDS.**
 
@@ -659,16 +659,16 @@ bun ~/.claude/PAI/TOOLS/RemoveBg.ts image1.png image2.png image3.png
 - "Clean, uncluttered — gallery-worthy simplicity"
 
 **Common failures:**
-- ❌ WRONG: Subjects too small, too much empty space around them
-- ❌ WRONG: Busy backgrounds with lots of detail
-- ❌ WRONG: Filled-in architectural environments surrounding subject
-- ❌ WRONG: Cluttered compositions with competing elements
+- ✗ WRONG: Subjects too small, too much empty space around them
+- ✗ WRONG: Busy backgrounds with lots of detail
+- ✗ WRONG: Filled-in architectural environments surrounding subject
+- ✗ WRONG: Cluttered compositions with competing elements
 
 **The fix:**
-- ✅ RIGHT: Subjects LARGE, filling the frame
-- ✅ RIGHT: Few elements, each intentional — gallery aesthetic
-- ✅ RIGHT: No background fill — subjects float in white/transparent space
-- ✅ RIGHT: Full use of horizontal and vertical dimensions
+- ✓ RIGHT: Subjects LARGE, filling the frame
+- ✓ RIGHT: Few elements, each intentional — gallery aesthetic
+- ✓ RIGHT: No background fill — subjects float in white/transparent space
+- ✓ RIGHT: Full use of horizontal and vertical dimensions
 
 ### Alternative Models
 
@@ -687,9 +687,9 @@ open /path/to/output.png
 
 ## Step 7: Optimize Images (MANDATORY)
 
-**🚨 CRITICAL: This step happens AFTER generation and background removal, BEFORE validation.**
+**CRITICAL: This step happens AFTER generation and background removal, BEFORE validation.**
 
-### 🚨🚨🚨 STEP 7.0 — MANDATORY FILLFRAME + PADDING PASS (deterministic margin enforcement)
+### STEP 7.0 — MANDATORY FILLFRAME + PADDING PASS (deterministic margin enforcement)
 
 **Before any other optimization, EVERY image generated by this workflow MUST pass through this two-stage margin pipeline.** Models produce one of two failure modes — wallpaper margin (subject lost in empty space) OR zero margin (subject butting against the edges and looking visually clipped). The pipeline corrects both:
 
@@ -738,7 +738,7 @@ Generated images at 2K resolution (2048x2048) are 6-8MB each - far too large for
 **For ALL blog header images, automatically execute these commands:**
 
 ```bash
-# 0. 🚨 MANDATORY: Stamp KAI signature programmatically
+# 0. MANDATORY: Stamp KAI signature programmatically
 # AI models CANNOT reliably render text — they hallucinate garbled signatures.
 # This step is NOT optional. Every image MUST be signed "KAI".
 magick "~/Downloads/[name].jpg" -gravity SouthEast -font "Bradley-Hand-Bold" -pointsize 50 -fill "rgba(200,200,200,0.5)" -annotate +35+25 "" "~/Downloads/[name].jpg"
@@ -789,7 +789,7 @@ thumbnail: https://example.com/images/[name]-thumb-optimized.png
 [![Alt text](/images/[name].webp)](/images/[name].webp) <!-- width="1024" height="1024" -->
 ```
 
-**🚨 CRITICAL: Use `.webp` for inline images and `-thumb-optimized.png` for thumbnails.**
+**CRITICAL: Use `.webp` for inline images and `-thumb-optimized.png` for thumbnails.**
 
 ### Quality Settings Explained
 
@@ -834,20 +834,20 @@ brew install webp
 
 ## Step 8: Validation (MANDATORY)
 
-**🚨 CRITICAL: This step is MANDATORY. Regenerate if validation fails.**
+**CRITICAL: This step is MANDATORY. Regenerate if validation fails.**
 
-### 🚨🚨🚨 ACTUALLY LOOK AT THE IMAGE AND THINK 🚨🚨🚨
+### ACTUALLY LOOK AT THE IMAGE AND THINK 
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  DO NOT JUST CHECK BOXES. ACTUALLY ANALYZE THE IMAGE.           ⚠️
-⚠️  LOOK AT IT. THINK ABOUT IT. ASK: DOES THIS MAKE SENSE?         ⚠️
+ DO NOT JUST CHECK BOXES. ACTUALLY ANALYZE THE IMAGE.           
+ LOOK AT IT. THINK ABOUT IT. ASK: DOES THIS MAKE SENSE?         
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ### Open and Inspect
 
-**🚨🚨🚨 AI INSPECTION GATE — MANDATORY 🚨🚨🚨**
+**AI INSPECTION GATE — MANDATORY **
 
 `open` launches the macOS Preview app on the principal's machine. **You cannot see what `open` shows.** That is a verification for the principal, not for you. To verify the image yourself you MUST load it into your own context with the Read tool:
 
@@ -867,7 +867,7 @@ Optionally also run `open` for the principal:
 open /path/to/generated-image.png
 ```
 
-### 🚨🚨🚨 CONCEPT FIDELITY GATE (MANDATORY — RUN BEFORE THE CHECKLIST) 🚨🚨🚨
+### CONCEPT FIDELITY GATE (MANDATORY — RUN BEFORE THE CHECKLIST) 
 
 **The image must carry the CONTENT'S argument, not just look pretty. Reading the image alone, a stranger should be able to intuit what the essay is about. If they can't, the image fails — regardless of how editorial or polished it looks.**
 
@@ -888,7 +888,7 @@ This is the gate that catches "beautiful but wrong" images — where every visua
 
 4. **If candidates A/B/C/D all fail** → do not ship the best of a bad lot. Regenerate with sharpened prompts that name the missing concept explicitly (e.g., "the visual MUST include a faded representation of the corporate agent doing the shedding"). The most common failure is the prompt not naming the load-bearing concept; the second most common is the model latching onto a visually pretty but argument-irrelevant element (a flame, a mountain, a brain).
 
-**🚨 4-TURN ITERATION CAP — HARD STOP**
+**4-TURN ITERATION CAP — HARD STOP**
 
 If 4 generation rounds (≈4 candidates × 4 rounds = up to 16 images) still haven't produced a candidate that clears the Concept Fidelity Gate, **STOP**. Do not keep grinding. Surface the situation to the principal:
 
@@ -901,7 +901,7 @@ The cap exists because compute spent on 16+ failed generations is compute that s
 
 ---
 
-### 🧠 CRITICAL ANALYSIS (DO THIS FIRST — BEFORE THE CHECKLIST)
+### CRITICAL ANALYSIS (DO THIS FIRST — BEFORE THE CHECKLIST)
 
 **STOP. Look at the image. Answer these questions honestly:**
 
@@ -940,19 +940,19 @@ The cap exists because compute spent on 16+ failed generations is compute that s
 - Is the emotional register correct?
 - Does the image argue the same point as the content?
 
-**🚨 IF ANY OF THESE FAIL — STOP AND REGENERATE. DO NOT PROCEED.**
+**IF ANY OF THESE FAIL — STOP AND REGENERATE. DO NOT PROCEED.**
 
 **Example failures:**
-- ❌ Signature missing or not in bottom right corner (if signature was requested)
-- ❌ Scale shows heavy side's beam going UP (physically impossible — heavy pulls DOWN)
-- ❌ "Capital winning" but capital looks small/weak
-- ❌ "Labor losing" but labor looks strong/dominant
-- ❌ Objects floating when they should fall
-- ❌ Visual contradicts the conceptual argument
+- ✗ Signature missing or not in bottom right corner (if signature was requested)
+- ✗ Scale shows heavy side's beam going UP (physically impossible — heavy pulls DOWN)
+- ✗ "Capital winning" but capital looks small/weak
+- ✗ "Labor losing" but labor looks strong/dominant
+- ✗ Objects floating when they should fall
+- ✗ Visual contradicts the conceptual argument
 
 ### Validation Checklist
 
-**🚨 MANDATORY ELEMENTS (if ANY are missing, REGENERATE):**
+**MANDATORY ELEMENTS (if ANY are missing, REGENERATE):**
 - [ ] **SIGNATURE PRESENT** — signed small in charcoal, bottom right corner (if requested)
 - [ ] **PROBLEM TYPE VISIBLE** — the problem type (sorting, double standard, etc.) is immediately obvious
 - [ ] **Subject matches CONTENT** — drew what the piece is ABOUT, not defaulted to architecture
@@ -1015,13 +1015,13 @@ The cap exists because compute spent on 16+ failed generations is compute that s
 
 | Problem | Fix |
 |---------|-----|
-| **Subjects too SMALL** | 🚨 Add "LARGE SUBJECTS that FILL THE FRAME", "minimal empty space around subjects" |
-| **Too much empty space** | 🚨 Add "minimal empty space around subjects", "subjects FILL THE FRAME" |
-| **Background dominates** | 🚨 Add "subjects are DOMINANT focus", "subjects LARGE" |
+| **Subjects too SMALL** | Add "LARGE SUBJECTS that FILL THE FRAME", "minimal empty space around subjects" |
+| **Too much empty space** | Add "minimal empty space around subjects", "subjects FILL THE FRAME" |
+| **Background dominates** | Add "subjects are DOMINANT focus", "subjects LARGE" |
 | **Setting not recognizable** | Add "SETTING: [location]" with "2-3 KEY OBJECTS that establish location" — gym needs weights/bench visible |
-| **Figures look like CARTOONS** | 🚨 Add "GESTURAL ABSTRACTION", "like Paul Rudolph sketches", "Lebbeus Woods figure studies", "OVERLAPPING LINES" |
-| **Lines are SINGLE/CLEAN** | 🚨 Add "MULTIPLE OVERLAPPING LINES", "20-40 strokes per figure", "hatching for depth", "energetic gestural marks" |
-| **Figures are FLAT** | 🚨 Add "HATCHING creates depth", "figures have PRESENCE and WEIGHT", "form emerges from accumulated marks" |
+| **Figures look like CARTOONS** | Add "GESTURAL ABSTRACTION", "like Paul Rudolph sketches", "Lebbeus Woods figure studies", "OVERLAPPING LINES" |
+| **Lines are SINGLE/CLEAN** | Add "MULTIPLE OVERLAPPING LINES", "20-40 strokes per figure", "hatching for depth", "energetic gestural marks" |
+| **Figures are FLAT** | Add "HATCHING creates depth", "figures have PRESENCE and WEIGHT", "form emerges from accumulated marks" |
 | **No emotion on faces** | Add "dark charcoal strokes for eyes area", "line for mouth angle", "head TILT conveys emotion", "SUGGESTED expression" |
 | **Too illustrated/rendered** | Add "GESTURAL SKETCH quality", "quick energetic marks", "like architectural concept sketches" |
 | **Objects too detailed** | Add "objects implied through hatching", "same sketch quality as figures", "suggested forms" |
@@ -1069,16 +1069,16 @@ The cap exists because compute spent on 16+ failed generations is compute that s
 ### The UL Look Checklist
 
 Before submitting any image:
-- ✅ **Subject matches CONTENT** — drew what the piece is ABOUT (not defaulting to architecture)
-- ✅ **CSE-24 was run** — actually executed the story explanation command
-- ✅ **Concrete subjects visible** — key nouns/metaphors from content appear
-- ✅ Charcoal sketch TECHNIQUE — gestural, atmospheric, hatching
-- ✅ Emotional register — clear and intentional
-- ✅ Color washes — warm/cool ratio tells the story
-- ✅ Gallery-worthy — sophisticated, not generic AI
-- ✅ **--thumbnail flag used** — both transparent and sepia versions generated
-- ✅ **OPTIMIZATION COMPLETED** — resized to 1024, converted to WebP, optimized thumbnails created
-- ✅ Signature — small charcoal bottom right (optional)
+- ✓ **Subject matches CONTENT** — drew what the piece is ABOUT (not defaulting to architecture)
+- ✓ **CSE-24 was run** — actually executed the story explanation command
+- ✓ **Concrete subjects visible** — key nouns/metaphors from content appear
+- ✓ Charcoal sketch TECHNIQUE — gestural, atmospheric, hatching
+- ✓ Emotional register — clear and intentional
+- ✓ Color washes — warm/cool ratio tells the story
+- ✓ Gallery-worthy — sophisticated, not generic AI
+- ✓ **--thumbnail flag used** — both transparent and sepia versions generated
+- ✓ **OPTIMIZATION COMPLETED** — resized to 1024, converted to WebP, optimized thumbnails created
+- ✓ Signature — small charcoal bottom right (optional)
 
 ---
 

@@ -2,7 +2,7 @@
 
 Comprehensive guide to delegating tasks to agents in the hybrid agent system.
 
-## 🚨 CRITICAL: Agent Type Selection
+## CRITICAL: Agent Type Selection
 
 **FIRST, determine what the user is asking for:**
 
@@ -17,12 +17,12 @@ Comprehensive guide to delegating tasks to agents in the hybrid agent system.
 - "custom agents" → AgentFactory (unique prompts + unique voices)
 - "agents" (no "custom") → Interns (same voice, parallel work)
 
-### 🚫 FORBIDDEN — Never Do This
+### FORBIDDEN — Never Do This
 
 When user says "custom agents", **NEVER** use Task tool subagent_types directly:
 
 ```typescript
-// ❌ WRONG - These are NOT custom agents
+// ✗ WRONG - These are NOT custom agents
 Task({ subagent_type: "Architect", prompt: "..." })
 Task({ subagent_type: "Designer", prompt: "..." })
 Task({ subagent_type: "Engineer", prompt: "..." })

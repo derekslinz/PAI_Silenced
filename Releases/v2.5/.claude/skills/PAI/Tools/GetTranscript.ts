@@ -51,7 +51,7 @@ if (args.includes('--help') || args.length === 0) {
 const url = args.find(arg => arg.includes('youtube.com') || arg.includes('youtu.be'));
 
 if (!url) {
-  console.error('❌ Error: No YouTube URL provided');
+  console.error('✗ Error: No YouTube URL provided');
   console.log('\nUsage: bun GetTranscript.ts <youtube-url>');
   process.exit(1);
 }
@@ -61,7 +61,7 @@ const saveIndex = args.indexOf('--save');
 const outputFile = saveIndex !== -1 ? args[saveIndex + 1] : null;
 
 // Extract transcript using fabric
-console.log(`📺 Extracting transcript from: ${url}`);
+console.log(`Extracting transcript from: ${url}`);
 
 try {
   const transcript = execSync(`fabric -y "${url}"`, {
@@ -71,15 +71,15 @@ try {
   });
 
   if (!transcript.trim()) {
-    console.error('⚠️ No transcript available for this video');
+    console.error('No transcript available for this video');
     process.exit(1);
   }
 
-  console.log(`✅ Transcript extracted: ${transcript.length} characters\n`);
+  console.log(`✓ Transcript extracted: ${transcript.length} characters\n`);
 
   if (outputFile) {
     writeFileSync(outputFile, transcript, 'utf-8');
-    console.log(`💾 Saved to: ${outputFile}`);
+    console.log(`Saved to: ${outputFile}`);
   } else {
     console.log('--- TRANSCRIPT START ---\n');
     console.log(transcript);
@@ -88,13 +88,13 @@ try {
 
 } catch (error: any) {
   if (error.status === 1) {
-    console.error('❌ Failed to extract transcript');
+    console.error('✗ Failed to extract transcript');
     console.error('Possible reasons:');
     console.error('  - Video has no captions/transcript');
     console.error('  - Video is private or restricted');
     console.error('  - Invalid URL');
   } else {
-    console.error('❌ Error:', error.message);
+    console.error('✗ Error:', error.message);
   }
   process.exit(1);
 }

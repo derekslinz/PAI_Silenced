@@ -17,14 +17,14 @@ import type { ParsedTranscript } from '../../skills/PAI/Tools/TranscriptParser';
 // ── Extraction helpers ──
 
 function extractTaskDescription(text: string): string | undefined {
-  // Match "🗒️ TASK: ..." line
-  const m = text.match(/🗒️\s*TASK:\s*(.+)/);
+  // Match "TASK: ..." line
+  const m = text.match(/\s*TASK:\s*(.+)/);
   return m ? m[1].trim() : undefined;
 }
 
 function extractSummary(text: string): string | undefined {
-  // Match "🗣️ [DA_NAME]: ..." voice line
-  const m = text.match(/🗣️\s*\w+:\s*(.+)/);
+  // Match "[DA_NAME]: ..." voice line
+  const m = text.match(/\s*\w+:\s*(.+)/);
   return m ? m[1].trim() : undefined;
 }
 

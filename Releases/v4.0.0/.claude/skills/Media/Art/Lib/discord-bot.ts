@@ -71,13 +71,13 @@ export class DiscordBotClient {
     return new Promise((resolve, reject) => {
       // Set up event handlers
       this.client.once('ready', () => {
-        console.log(`✅ Discord bot connected as ${this.client.user?.tag}`);
+        console.log(`✓ Discord bot connected as ${this.client.user?.tag}`);
         this.connected = true;
         resolve();
       });
 
       this.client.on('error', (error) => {
-        console.error('❌ Discord client error:', error);
+        console.error('✗ Discord client error:', error);
       });
 
       // Login with bot token
@@ -100,7 +100,7 @@ export class DiscordBotClient {
     }
 
     const message = await (channel as TextChannel).send(content);
-    console.log(`📤 Sent message: ${content}`);
+    console.log(`Sent message: ${content}`);
 
     return message;
   }
@@ -119,7 +119,7 @@ export class DiscordBotClient {
     const startTime = Date.now();
     const timeoutMs = timeout * 1000;
 
-    console.log(`⏳ Waiting for Midjourney response (timeout: ${timeout}s)...`);
+    console.log(`Waiting for Midjourney response (timeout: ${timeout}s)...`);
 
     while (Date.now() - startTime < timeoutMs) {
       // Fetch recent messages from channel
@@ -150,10 +150,10 @@ export class DiscordBotClient {
 
         // Check if generation is complete
         if (this.isGenerationComplete(message)) {
-          console.log(`✅ Midjourney generation complete!`);
+          console.log(`✓ Midjourney generation complete!`);
           return message;
         } else {
-          console.log(`⏳ Generation in progress... (${Math.floor((Date.now() - startTime) / 1000)}s)`);
+          console.log(`Generation in progress... (${Math.floor((Date.now() - startTime) / 1000)}s)`);
         }
       }
 
@@ -209,7 +209,7 @@ export class DiscordBotClient {
    * Download image from URL to local path
    */
   async downloadImage(url: string, outputPath: string): Promise<void> {
-    console.log(`📥 Downloading image from ${url}...`);
+    console.log(`Downloading image from ${url}...`);
 
     const response = await fetch(url);
 
@@ -222,7 +222,7 @@ export class DiscordBotClient {
 
     await writeFile(outputPath, buffer);
 
-    console.log(`✅ Image saved to ${outputPath}`);
+    console.log(`✓ Image saved to ${outputPath}`);
   }
 
   /**
@@ -235,7 +235,7 @@ export class DiscordBotClient {
 
     await this.client.destroy();
     this.connected = false;
-    console.log('👋 Discord bot disconnected');
+    console.log('Discord bot disconnected');
   }
 
   /**

@@ -4,7 +4,7 @@
 
 ---
 
-## 🚨 THREE AGENT SYSTEMS — CRITICAL DISTINCTION
+## THREE AGENT SYSTEMS — CRITICAL DISTINCTION
 
 PAI has three agent systems that serve different purposes. Confusing them causes routing failures.
 
@@ -16,17 +16,17 @@ PAI has three agent systems that serve different purposes. Confusing them causes
 
 ---
 
-## 🚫 FORBIDDEN PATTERNS
+## FORBIDDEN PATTERNS
 
 **When user says "custom agents":**
 
 ```typescript
-// ❌ WRONG - These are Task tool subagent_types, NOT custom agents
+// ✗ WRONG - These are Task tool subagent_types, NOT custom agents
 Task({ subagent_type: "Architect", prompt: "..." })
 Task({ subagent_type: "Designer", prompt: "..." })
 Task({ subagent_type: "Engineer", prompt: "..." })
 
-// ✅ RIGHT - Invoke the Agents skill for custom agents
+// ✓ RIGHT - Invoke the Agents skill for custom agents
 Skill("Agents")  // → CreateCustomAgent workflow
 // OR follow the workflow directly:
 // 1. Run AgentFactory with different trait combinations

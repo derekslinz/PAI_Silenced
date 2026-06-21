@@ -42,9 +42,9 @@ function getTrend(pulses: RatingPulse[]): { arrow: string; label: string; color:
   const avg2 = secondHalf.reduce((s, p) => s + p.value, 0) / secondHalf.length;
   const delta = avg2 - avg1;
   if (delta > 1.5) return { arrow: "↑", label: "Improving", color: "text-emerald-400" };
-  if (delta > 0.5) return { arrow: "↗", label: "Rising", color: "text-emerald-400/70" };
+  if (delta > 0.5) return { arrow: "", label: "Rising", color: "text-emerald-400/70" };
   if (delta < -1.5) return { arrow: "↓", label: "Declining", color: "text-rose-400" };
-  if (delta < -0.5) return { arrow: "↘", label: "Dipping", color: "text-orange-400" };
+  if (delta < -0.5) return { arrow: "", label: "Dipping", color: "text-orange-400" };
   return { arrow: "→", label: "Steady", color: "text-zinc-400" };
 }
 

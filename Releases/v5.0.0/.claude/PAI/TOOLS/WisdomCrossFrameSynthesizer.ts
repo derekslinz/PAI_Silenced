@@ -156,7 +156,7 @@ function findCrossPrinciples(frames: FrameData[]): CrossPrinciple[] {
       );
       if (!existing) {
         crossPrinciples.push({
-          principle: `Explicit connection: ${frame.domain} ↔ ${targetDomain}`,
+          principle: `Explicit connection: ${frame.domain} ${targetDomain}`,
           domains: [frame.domain, targetDomain],
           confidence: frame.confidence,
           evidence: `Declared in ${frame.domain} frame cross-connections`,

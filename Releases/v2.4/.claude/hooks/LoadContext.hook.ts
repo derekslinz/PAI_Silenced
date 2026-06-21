@@ -63,7 +63,7 @@ function resetTabTitle(paiDir: string): void {
         `kitten @ set-tab-color --self active_bg=#002B80 active_fg=#FFFFFF inactive_bg=none inactive_fg=#A0A0A0`,
         { stdio: 'ignore', timeout: 2000 }
       );
-      console.error('🔄 Tab title reset to clean state');
+      console.error('Tab title reset to clean state');
     }
 
     // Reset state file to prevent any stale data
@@ -74,9 +74,9 @@ function resetTabTitle(paiDir: string): void {
       state: 'idle'
     };
     writeFileSync(stateFile, JSON.stringify(cleanState, null, 2));
-    console.error('🔄 Tab state file reset');
+    console.error('Tab state file reset');
   } catch (err) {
-    console.error(`⚠️ Failed to reset tab title: ${err}`);
+    console.error(`Failed to reset tab title: ${err}`);
     // Non-fatal, continue with session
   }
 }
@@ -109,7 +109,7 @@ function loadSettings(paiDir: string): Settings {
     try {
       return JSON.parse(readFileSync(settingsPath, 'utf-8'));
     } catch (err) {
-      console.error(`⚠️ Failed to parse settings.json: ${err}`);
+      console.error(`Failed to parse settings.json: ${err}`);
     }
   }
   return {};
@@ -135,9 +135,9 @@ function loadContextFiles(paiDir: string, settings: Settings): string {
       const content = readFileSync(fullPath, 'utf-8');
       if (combinedContent) combinedContent += '\n\n---\n\n';
       combinedContent += content;
-      console.error(`✅ Loaded ${relativePath} (${content.length} chars)`);
+      console.error(`✓ Loaded ${relativePath} (${content.length} chars)`);
     } else {
-      console.error(`⚠️ Context file not found: ${relativePath}`);
+      console.error(`Context file not found: ${relativePath}`);
     }
   }
 
@@ -186,10 +186,10 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
     }
 
     // Build summary of active work
-    let summary = '\n📋 ACTIVE WORK (from previous sessions):\n';
+    let summary = '\nACTIVE WORK (from previous sessions):\n';
 
     for (const proj of activeProjects) {
-      summary += `\n🔵 ${proj.project}\n`;
+      summary += `\n● ${proj.project}\n`;
 
       if (proj.objectives && proj.objectives.length > 0) {
         summary += '   Objectives:\n';
@@ -206,8 +206,8 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
       }
     }
 
-    summary += '\n💡 To resume: `bun run ~/.claude/skills/CORE/Tools/SessionProgress.ts resume <project>`\n';
-    summary += '💡 To complete: `bun run ~/.claude/skills/CORE/Tools/SessionProgress.ts complete <project>`\n';
+    summary += '\nTo resume: `bun run ~/.claude/skills/CORE/Tools/SessionProgress.ts resume <project>`\n';
+    summary += 'To complete: `bun run ~/.claude/skills/CORE/Tools/SessionProgress.ts complete <project>`\n';
 
     return summary;
   } catch (error) {
@@ -225,7 +225,7 @@ async function main() {
 
     if (isSubagent) {
       // Subagent sessions don't need PAI context loading
-      console.error('🤖 Subagent session - skipping PAI context loading');
+      console.error('Subagent session - skipping PAI context loading');
       process.exit(0);
     }
 
@@ -237,25 +237,25 @@ async function main() {
 
     // Record session start time for notification timing
     recordSessionStart();
-    console.error('⏱️ Session start time recorded for notification timing');
+    console.error('Session start time recorded for notification timing');
 
-    console.error('📚 Reading PAI core context...');
+    console.error('Reading PAI core context...');
 
     // Load settings.json to get contextFiles array
     const settings = loadSettings(paiDir);
-    console.error(`✅ Loaded settings.json`);
+    console.error(`✓ Loaded settings.json`);
 
     // Load all context files from settings.json array
     const contextContent = loadContextFiles(paiDir, settings);
 
     if (!contextContent) {
-      console.error('❌ No context files loaded');
+      console.error('✗ No context files loaded');
       process.exit(1);
     }
 
     // Get current date/time to prevent confusion about dates
     const currentDate = await getCurrentDate();
-    console.error(`📅 Current Date: ${currentDate}`);
+    console.error(`Current Date: ${currentDate}`);
 
     // Extract identity values from settings for injection into context
     const PRINCIPAL_NAME = (settings as Record<string, unknown>).principal &&
@@ -267,16 +267,16 @@ async function main() {
         ? ((settings as Record<string, unknown>).daidentity as Record<string, unknown>).name || 'PAI'
         : 'PAI';
 
-    console.error(`👤 Principal: ${PRINCIPAL_NAME}, DA: ${DA_NAME}`);
+    console.error(`Principal: ${PRINCIPAL_NAME}, DA: ${DA_NAME}`);
 
     const message = `<system-reminder>
 PAI CORE CONTEXT (Auto-loaded at Session Start)
 
-📅 CURRENT DATE/TIME: ${currentDate}
+CURRENT DATE/TIME: ${currentDate}
 
 ## ACTIVE IDENTITY (from settings.json) - CRITICAL
 
-**⚠️ MANDATORY IDENTITY RULES - OVERRIDE ALL OTHER CONTEXT ⚠️**
+**MANDATORY IDENTITY RULES - OVERRIDE ALL OTHER CONTEXT **
 
 The user's name is: **${PRINCIPAL_NAME}**
 The assistant's name is: **${DA_NAME}**
@@ -299,19 +299,19 @@ This context is now active. Additional context loads dynamically as needed.
     console.log(message);
 
     // Output success confirmation for Claude to acknowledge
-    console.log('\n✅ PAI Context successfully loaded...');
+    console.log('\n✓ PAI Context successfully loaded...');
 
     // Check for active progress files and display them
     const activeProgress = await checkActiveProgress(paiDir);
     if (activeProgress) {
       console.log(activeProgress);
-      console.error('📋 Active work found from previous sessions');
+      console.error('Active work found from previous sessions');
     }
 
-    console.error('✅ PAI context injected into session');
+    console.error('✓ PAI context injected into session');
     process.exit(0);
   } catch (error) {
-    console.error('❌ Error in load-core-context hook:', error);
+    console.error('✗ Error in load-core-context hook:', error);
     process.exit(1);
   }
 }

@@ -1,0 +1,57 @@
+# Architectural Review: Removal of Voice and ElevenLabs Integration
+
+- **Status**: Complete
+- **Date**: 2026-06-21
+- **Architect**: Antigravity
+- **Impact Level**: Medium-High
+
+---
+
+## 1. Context and Architectural Goals
+
+### Context
+PAI (Personal AI Infrastructure) previously incorporated real-time voice synthesis and phase transition announcements driven by **ElevenLabs TTS API** and a dedicated out-of-process **Pulse Voice Daemon**. Over time, this architecture introduced:
+- **Cost Leakage Risks**: Heartbeats, task status updates, and loops generated unexpected external API calls (exemplified by the April 2026 invoice incident where background processes led to high token and TTS billing).
+- **Setup Complexity**: New installations required configuring ElevenLabs API keys, choosing voice presets, and managing audio playback dependencies.
+- **Observability Overhead**: Observability logs tracked asynchronous voice events, which had to be tailed, parsed, and rendered via complex waveform components in the frontend.
+
+### Goals of the Refactoring
+1. **Reduce External Surface Area**: Fully detach ElevenLabs dependencies, reducing runtime network failure points.
+2. **Streamline State and Notifications**: Simplify the unified Pulse daemon by consolidating alerts into a text-only framework (Telegram, Discord, ntfy, macOS Desktop).
+3. **Minimize Tech Debt**: Prune dead visual components, prompt primatives, config assets, and documentation.
+
+---
+
+## 2. Evaluation of Architectural Decisions & Tradeoffs
+
+### Decision 1: Deprecate the Voice Channel in favor of Telegram/Desktop pings
+We updated the `notification-governor.ts` and `setup.ts` to route all critical notifications to text channels (Telegram, ntfy, Desktop, Discord) and retired the `voice` channel.
+- **Tradeoff (Con)**: Loss of audible ambient status pings for hands-free workflow monitoring.
+- **Tradeoff (Pro)**: Massive simplification of quiet hours rules and daily cap checks. Telegram queueing for quiet hours is now the single system of record, eliminating complex multi-channel synchronization logic.
+
+### Decision 2: Retain Backward Read-Compatibility for Historical Log Schemas
+In `isa-utils.ts`, we kept `PhaseSource = 'voice' | 'isa' | 'merged'` to prevent breaking reads of old `work.json` logs that contain legacy events.
+- **Tradeoff (Pro)**: High system resilience. Upgrading users won't experience session history parsing crashes.
+- **Tradeoff (Con)**: Retains minor technical debt in the types layer, which can be safely cleaned up in a future major database/schema migration.
+
+### Decision 3: Remove Obsolescent Template Primitives
+Deleted the Handlebars voice layouts (`Voice.hbs`, `VoicePresets.yaml`) and custom agent template properties.
+- **Tradeoff (Pro)**: The context windows of spawned subagents are no longer cluttered with ElevenLabs voice configuration tokens (stability, similarity boost, speed), which directly reduces token costs per agent turn.
+
+---
+
+## 3. Risks & Recommendations
+
+### Risk: Missing Alert Fallback
+If the user's internet is down, or if the Telegram/ntfy webhooks fail, the user loses notifications that previously fell back to macOS local voice synthesis.
+- **Mitigation**: Ensure that local `Desktop` (terminal and system notification center alerts via standard osascript or terminal bell) works reliably as the local, offline fallback channel. PAI uses macOS native alerts which remain completely functional.
+
+### Risk: Frontend Cache Invalidation
+The Next.js Observability dashboard had compiled static routes tracking `/api/observability/voice-events`. With these routes deleted, cached assets might try to request missing resources.
+- **Mitigation**: We ran a full Next.js static build (`bun run build`) to refresh the static page assets, verifying that no invalid chunk imports or dangling waveform references exist in the production bundle.
+
+---
+
+## 4. Next Steps & Long-term Improvements
+1. **Prune Legacy Types**: In the next database release (v6.x), plan to deprecate and migrate old session logs to prune the legacy `voice` types from `isa-utils.ts` and `user-index.ts`.
+2. **Strengthen Offline Notifications**: Improve terminal-level notifications (native bells or statusline modifications) to replace lost audio notifications when working entirely offline.

@@ -986,8 +986,8 @@ if [ "$MODE" != "normal" ]; then
             _learn_score="$week_avg"
         fi
         case "$trend" in
-            up)   _learn_trend="↗" ;;
-            down) _learn_trend="↘" ;;
+            up)   _learn_trend="" ;;
+            down) _learn_trend="" ;;
             *)    _learn_trend="→" ;;
         esac
     fi

@@ -455,13 +455,13 @@ function createNeofetchBanner(): string {
   const maxSkills = 100;
   const maxHooks = 50;
 
-  statsLines.push(`${GRADIENT.cyan1}⚡${RESET} ${UI.muted}DA Name${RESET}      ${UI.text}${stats.name}${RESET}`);
-  statsLines.push(`${GRADIENT.blue1}🔧${RESET} ${UI.muted}Skills${RESET}       ${GRADIENT.blue1}${stats.skills}${RESET} ${progressBar(stats.skills, maxSkills, 10)}`);
-  statsLines.push(`${GRADIENT.purple1}⚙${RESET}  ${UI.muted}Hooks${RESET}        ${GRADIENT.purple1}${stats.hooks}${RESET} ${progressBar(stats.hooks, maxHooks, 10)}`);
-  statsLines.push(`${UI.warning}📋${RESET} ${UI.muted}Work Items${RESET}   ${UI.warning}${stats.workItems}+${RESET}`);
-  statsLines.push(`${UI.success}💡${RESET} ${UI.muted}Learnings${RESET}    ${UI.success}${stats.learnings}${RESET}`);
-  statsLines.push(`${GRADIENT.blue2}📁${RESET} ${UI.muted}User Files${RESET}   ${GRADIENT.blue2}${stats.userFiles}${RESET}`);
-  statsLines.push(`${GRADIENT.magenta}🎯${RESET} ${UI.muted}Model${RESET}        ${GRADIENT.magenta}${stats.model}${RESET}`);
+  statsLines.push(`${GRADIENT.cyan1}${RESET} ${UI.muted}DA Name${RESET}      ${UI.text}${stats.name}${RESET}`);
+  statsLines.push(`${GRADIENT.blue1}${RESET} ${UI.muted}Skills${RESET}       ${GRADIENT.blue1}${stats.skills}${RESET} ${progressBar(stats.skills, maxSkills, 10)}`);
+  statsLines.push(`${GRADIENT.purple1}${RESET}  ${UI.muted}Hooks${RESET}        ${GRADIENT.purple1}${stats.hooks}${RESET} ${progressBar(stats.hooks, maxHooks, 10)}`);
+  statsLines.push(`${UI.warning}${RESET} ${UI.muted}Work Items${RESET}   ${UI.warning}${stats.workItems}+${RESET}`);
+  statsLines.push(`${UI.success}${RESET} ${UI.muted}Learnings${RESET}    ${UI.success}${stats.learnings}${RESET}`);
+  statsLines.push(`${GRADIENT.blue2}${RESET} ${UI.muted}User Files${RESET}   ${GRADIENT.blue2}${stats.userFiles}${RESET}`);
+  statsLines.push(`${GRADIENT.magenta}${RESET} ${UI.muted}Model${RESET}        ${GRADIENT.magenta}${stats.model}${RESET}`);
   statsLines.push("");
   statsLines.push(`${UI.dim}Activity${RESET} ${sparklineHistogram(24)}`);
 
@@ -556,7 +556,7 @@ function createCompactBanner(): string {
   lines.push("");
   lines.push(`  ${UI.dim}╭──${RESET} ${paiGradient} ${UI.dim}│${RESET} ${UI.subtext}Personal AI Infrastructure${RESET} ${UI.dim}──────╮${RESET}`);
   lines.push(`  ${UI.dim}│${RESET}                                                 ${UI.dim}│${RESET}`);
-  lines.push(`  ${UI.dim}│${RESET}   ${daGradient}  ${GRADIENT.cyan1}⚡${RESET}${UI.text}${stats.skills}${RESET} ${GRADIENT.purple1}⚙${RESET}${UI.text}${stats.hooks}${RESET} ${UI.success}💡${RESET}${UI.text}${stats.learnings}${RESET} ${GRADIENT.magenta}🎯${RESET}${UI.text}${stats.model}${RESET}   ${UI.dim}│${RESET}`);
+  lines.push(`  ${UI.dim}│${RESET}   ${daGradient}  ${GRADIENT.cyan1}${RESET}${UI.text}${stats.skills}${RESET} ${GRADIENT.purple1}${RESET}${UI.text}${stats.hooks}${RESET} ${UI.success}${RESET}${UI.text}${stats.learnings}${RESET} ${GRADIENT.magenta}${RESET}${UI.text}${stats.model}${RESET}   ${UI.dim}│${RESET}`);
   lines.push(`  ${UI.dim}│${RESET}                                                 ${UI.dim}│${RESET}`);
   lines.push(`  ${UI.dim}│${RESET}   ${sparklineHistogram(28)} ${UI.success}●${RESET} ${UI.subtext}ready${RESET}   ${UI.dim}│${RESET}`);
   lines.push(`  ${UI.dim}╰──────────────────────────────────────────────────╯${RESET}`);

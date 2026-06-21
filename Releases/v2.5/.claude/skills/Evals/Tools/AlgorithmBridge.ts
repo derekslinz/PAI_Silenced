@@ -81,7 +81,7 @@ export async function runEvalForAlgorithm(
         };
       },
       onTrialComplete: (trial) => {
-        console.log(`  Trial ${trial.trial_number}: ${trial.passed ? '✅ PASS' : '❌ FAIL'} (${trial.score.toFixed(2)})`);
+        console.log(`  Trial ${trial.trial_number}: ${trial.passed ? '✓ PASS' : '✗ FAIL'} (${trial.score.toFixed(2)})`);
       },
     });
 
@@ -149,7 +149,7 @@ function saveRunResults(suiteName: string, run: EvalRun): void {
  * Format result for ISC update
  */
 export function formatForISC(result: AlgorithmEvalResult): string {
-  const icon = result.passed ? '✅' : '❌';
+  const icon = result.passed ? '✓' : '✗';
   return `${icon} Eval: ${result.summary}`;
 }
 
@@ -206,7 +206,7 @@ Examples:
   if (values['show-saturation']) {
     const status = checkSaturation(values.suite!);
     console.log(`\nSaturation Status: ${values.suite}\n`);
-    console.log(`  Saturated: ${status.saturated ? '⚠️ Yes' : '✅ No'}`);
+    console.log(`  Saturated: ${status.saturated ? 'Yes' : '✓ No'}`);
     console.log(`  Consecutive above threshold: ${status.consecutive_above_threshold}/3`);
     console.log(`  Recommendation: ${status.recommended_action}`);
     process.exit(0);
@@ -222,7 +222,7 @@ Examples:
   const result = await runEvalForAlgorithm(request);
 
   console.log(`\n${'='.repeat(50)}`);
-  console.log(`\n📊 EVAL RESULT: ${result.passed ? '✅ PASSED' : '❌ FAILED'}`);
+  console.log(`\nEVAL RESULT: ${result.passed ? '✓ PASSED' : '✗ FAILED'}`);
   console.log(`   Suite: ${result.suite}`);
   console.log(`   Score: ${(result.score * 100).toFixed(1)}%`);
   console.log(`   Summary: ${result.summary}`);

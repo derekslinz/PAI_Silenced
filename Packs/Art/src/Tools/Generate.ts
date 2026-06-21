@@ -125,17 +125,17 @@ class CLIError extends Error {
 
 function handleError(error: unknown): never {
   if (error instanceof CLIError) {
-    console.error(`❌ Error: ${error.message}`);
+    console.error(`✗ Error: ${error.message}`);
     process.exit(error.exitCode);
   }
 
   if (error instanceof Error) {
-    console.error(`❌ Unexpected error: ${error.message}`);
+    console.error(`✗ Unexpected error: ${error.message}`);
     console.error(error.stack);
     process.exit(1);
   }
 
-  console.error(`❌ Unknown error:`, error);
+  console.error(`✗ Unknown error:`, error);
   process.exit(1);
 }
 
@@ -172,7 +172,7 @@ async function saveImage(data: Buffer | Uint8Array | any, requestedPath: string)
     const requestedExt = extname(requestedPath).toLowerCase();
     if (requestedExt && requestedExt !== detected.ext) {
       const correctedPath = requestedPath.replace(/\.[^.]+$/, detected.ext);
-      console.warn(`⚠️ API returned ${detected.format.toUpperCase()} data (requested ${requestedExt.slice(1).toUpperCase()}). Saving as ${correctedPath}`);
+      console.warn(`API returned ${detected.format.toUpperCase()} data (requested ${requestedExt.slice(1).toUpperCase()}). Saving as ${correctedPath}`);
       await writeFile(correctedPath, buffer);
       return correctedPath;
     }
@@ -544,7 +544,7 @@ const execAsync = promisify(exec);
  * Uses ImageMagick to composite the transparent image onto a colored background
  */
 async function addBackgroundColor(inputPath: string, outputPath: string, hexColor: string): Promise<void> {
-  console.log(`🎨 Adding background color ${hexColor} to image...`);
+  console.log(`Adding background color ${hexColor} to image...`);
 
   // Use ImageMagick to composite the transparent image onto a colored background
   // -background sets the fill color, -flatten composites onto that background
@@ -552,7 +552,7 @@ async function addBackgroundColor(inputPath: string, outputPath: string, hexColo
 
   try {
     await execAsync(command);
-    console.log(`✅ Thumbnail saved to ${outputPath}`);
+    console.log(`✓ Thumbnail saved to ${outputPath}`);
   } catch (error) {
     throw new CLIError(`Failed to add background color: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -570,7 +570,7 @@ async function removeBackground(imagePath: string): Promise<string> {
     );
   }
 
-  console.log("🔲 Removing background with local rembg...");
+  console.log("Removing background with local rembg...");
 
   // rembg always emits PNG. Force the output path to .png so we don't end up
   // with PNG bytes inside a .jpg extension.
@@ -599,7 +599,7 @@ async function removeBackground(imagePath: string): Promise<string> {
   await rename(tempPath, finalPath);
 
   if (finalPath !== imagePath) {
-    console.log(`   ↪ renamed ${currentExt} → .png (transparency requires PNG): ${finalPath}`);
+    console.log(`   renamed ${currentExt} → .png (transparency requires PNG): ${finalPath}`);
   }
 
   // Validate output is actually PNG with alpha
@@ -611,7 +611,7 @@ async function removeBackground(imagePath: string): Promise<string> {
     );
   }
 
-  console.log("✅ Background removed successfully");
+  console.log("✓ Background removed successfully");
   return finalPath;
 }
 
@@ -627,7 +627,7 @@ async function generateWithFlux(prompt: string, size: ReplicateSize, output: str
 
   const replicate = new Replicate({ auth: token });
 
-  console.log("🎨 Generating with Flux 1.1 Pro...");
+  console.log("Generating with Flux 1.1 Pro...");
 
   const result = await replicate.run("black-forest-labs/flux-1.1-pro", {
     input: {
@@ -659,7 +659,7 @@ async function generateWithFlux(prompt: string, size: ReplicateSize, output: str
   }
 
   const finalPath = await saveImage(imageData, output);
-  console.log(`✅ Image saved to ${finalPath}`);
+  console.log(`✓ Image saved to ${finalPath}`);
   return finalPath;
 }
 
@@ -671,7 +671,7 @@ async function generateWithNanoBanana(prompt: string, size: ReplicateSize, outpu
 
   const replicate = new Replicate({ auth: token });
 
-  console.log("🍌 Generating with Nano Banana...");
+  console.log("Generating with Nano Banana...");
 
   const result = await replicate.run("google/nano-banana", {
     input: {
@@ -697,7 +697,7 @@ async function generateWithNanoBanana(prompt: string, size: ReplicateSize, outpu
     imageData = result as Buffer;
   }
   const finalPath = await saveImage(imageData, output);
-  console.log(`✅ Image saved to ${finalPath}`);
+  console.log(`✓ Image saved to ${finalPath}`);
   return finalPath;
 }
 
@@ -709,7 +709,7 @@ async function generateWithGPTImage(prompt: string, size: OpenAISize, output: st
 
   const openai = new OpenAI({ apiKey });
 
-  console.log("🤖 Generating with GPT-image-1...");
+  console.log("Generating with GPT-image-1...");
 
   const response = await openai.images.generate({
     model: "gpt-image-1",
@@ -725,7 +725,7 @@ async function generateWithGPTImage(prompt: string, size: OpenAISize, output: st
 
   const imageBuffer = Buffer.from(imageData, "base64");
   const finalPath = await saveImage(imageBuffer, output);
-  console.log(`✅ Image saved to ${finalPath}`);
+  console.log(`✓ Image saved to ${finalPath}`);
   return finalPath;
 }
 
@@ -743,7 +743,7 @@ async function generateWithGPTImage2(
 
   const openai = new OpenAI({ apiKey });
 
-  console.log(`🧠 Generating with gpt-image-2 (ChatGPT Images 2.0) — size=${size} quality=${quality} n=${n}...`);
+  console.log(`Generating with gpt-image-2 (ChatGPT Images 2.0) — size=${size} quality=${quality} n=${n}...`);
 
   const response = await openai.images.generate({
     model: "gpt-image-2",
@@ -772,7 +772,7 @@ async function generateWithGPTImage2(
     }
     const target = data.length === 1 ? outputBase : outputBase.replace(/\.[^.]+$/, `-${i + 1}.png`);
     const finalPath = await saveImage(buffer, target);
-    console.log(`✅ gpt-image-2 image saved to ${finalPath}`);
+    console.log(`✓ gpt-image-2 image saved to ${finalPath}`);
     paths.push(finalPath);
   }
   return paths;
@@ -793,9 +793,9 @@ async function generateWithNanoBananaPro(
   const ai = new GoogleGenAI({ apiKey });
 
   if (referenceImages && referenceImages.length > 0) {
-    console.log(`🍌✨ Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio} with ${referenceImages.length} reference image(s)...`);
+    console.log(`★ Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio} with ${referenceImages.length} reference image(s)...`);
   } else {
-    console.log(`🍌✨ Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio}...`);
+    console.log(`★ Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio}...`);
   }
 
   // Prepare content parts
@@ -855,7 +855,7 @@ async function generateWithNanoBananaPro(
 
   const imageBuffer = Buffer.from(imageData, "base64");
   const finalPath = await saveImage(imageBuffer, output);
-  console.log(`✅ Image saved to ${finalPath}`);
+  console.log(`✓ Image saved to ${finalPath}`);
   return finalPath;
 }
 
@@ -876,8 +876,8 @@ async function main(): Promise<void> {
       : args.prompt;
 
     if (args.transparent) {
-      console.log("🔲 Transparent background mode enabled");
-      console.log("💡 Note: Not all models support transparency natively; may require post-processing\n");
+      console.log("Transparent background mode enabled");
+      console.log("Note: Not all models support transparency natively; may require post-processing\n");
     }
 
     const n = args.creativeVariations && args.creativeVariations > 1 ? args.creativeVariations : 1;
@@ -885,7 +885,7 @@ async function main(): Promise<void> {
 
     // Compare mode: generate N images with gpt-image-2 + N with nano-banana, side-by-side
     if (args.model === "compare") {
-      console.log(`⚖️  Compare Mode: ${n} image(s) from gpt-image-2 + ${n} from nano-banana (total ${n * 2})`);
+      console.log(` Compare Mode: ${n} image(s) from gpt-image-2 + ${n} from nano-banana (total ${n * 2})`);
       const basePath = args.output.replace(/\.[^.]+$/, "");
       const gptBase = `${basePath}-gpt2.png`;
       const nanoBase = `${basePath}-nano.png`;
@@ -897,7 +897,7 @@ async function main(): Promise<void> {
         n,
         gptBase
       ).catch((err) => {
-        console.error(`❌ gpt-image-2 side failed: ${err instanceof Error ? err.message : err}`);
+        console.error(`✗ gpt-image-2 side failed: ${err instanceof Error ? err.message : err}`);
         return [] as string[];
       });
 
@@ -906,7 +906,7 @@ async function main(): Promise<void> {
         const nanoOutput = n === 1 ? nanoBase : `${basePath}-nano-${i}.png`;
         nanoPromises.push(
           generateWithNanoBanana(finalPrompt, args.aspectRatio!, nanoOutput).catch((err) => {
-            console.error(`❌ nano-banana variation ${i} failed: ${err instanceof Error ? err.message : err}`);
+            console.error(`✗ nano-banana variation ${i} failed: ${err instanceof Error ? err.message : err}`);
             return "";
           })
         );
@@ -914,7 +914,7 @@ async function main(): Promise<void> {
 
       const [gptPaths, nanoPathsRaw] = await Promise.all([gptPromise, Promise.all(nanoPromises)]);
       const nanoPaths = nanoPathsRaw.filter(Boolean);
-      console.log(`\n✅ Compare complete — gpt-image-2: ${gptPaths.length}/${n}, nano-banana: ${nanoPaths.length}/${n}`);
+      console.log(`\n✓ Compare complete — gpt-image-2: ${gptPaths.length}/${n}, nano-banana: ${nanoPaths.length}/${n}`);
       console.log(`   gpt-image-2: ${gptPaths.join(", ") || "(none)"}`);
       console.log(`   nano-banana: ${nanoPaths.join(", ") || "(none)"}`);
       return;
@@ -922,8 +922,8 @@ async function main(): Promise<void> {
 
     // Single-model multi-image (creative-variations) path
     if (n > 1) {
-      console.log(`🎨 Creative Mode: Generating ${n} variations with ${args.model}...`);
-      console.log(`💡 Note: CLI mode uses same prompt for all variations (tests model variability)`);
+      console.log(`Creative Mode: Generating ${n} variations with ${args.model}...`);
+      console.log(`Note: CLI mode uses same prompt for all variations (tests model variability)`);
       console.log(`   For true creative diversity, use the creative workflow with be-creative skill\n`);
 
       const basePath = args.output.replace(/\.[^.]+$/, "");
@@ -937,7 +937,7 @@ async function main(): Promise<void> {
           n,
           `${basePath}.png`
         );
-        console.log(`\n✅ Generated ${paths.length} variation(s)`);
+        console.log(`\n✓ Generated ${paths.length} variation(s)`);
         console.log(`   Files: ${paths.join(", ")}`);
         return;
       }
@@ -968,7 +968,7 @@ async function main(): Promise<void> {
       }
 
       const actualPaths = await Promise.all(promises);
-      console.log(`\n✅ Generated ${n} variations`);
+      console.log(`\n✓ Generated ${n} variations`);
       console.log(`   Files: ${actualPaths.join(", ")}`);
       return;
     }
@@ -1021,7 +1021,7 @@ async function main(): Promise<void> {
       const thumbPath = actualOutput.replace(/\.[^.]+$/, "-thumb.png");
       const THUMBNAIL_BG_COLOR = "#EAE9DF"; // UL brand background color for social previews
       await addBackgroundColor(actualOutput, thumbPath, THUMBNAIL_BG_COLOR);
-      console.log(`\n📸 Blog header mode: Created both versions`);
+      console.log(`\nBlog header mode: Created both versions`);
       console.log(`   Transparent: ${actualOutput}`);
       console.log(`   Thumbnail:   ${thumbPath}`);
     }

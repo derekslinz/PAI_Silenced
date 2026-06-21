@@ -34,11 +34,11 @@ async function main() {
 
     const program = programs[programIndex];
 
-    console.log('🎯 INITIATING RECONNAISSANCE\n');
+    console.log('INITIATING RECONNAISSANCE\n');
     console.log(`Target: ${program.name}`);
     console.log(`Platform: ${program.platform.toUpperCase()}`);
     console.log(`URL: ${program.url}`);
-    console.log(`Bounty: ${program.offers_bounties ? '💰 Paid' : '❌ VDP only'}`);
+    console.log(`Bounty: ${program.offers_bounties ? 'Paid' : '✗ VDP only'}`);
     console.log(`Scopes: ${program.key_scopes.length} domains\n`);
 
     // Create recon configuration file
@@ -60,11 +60,11 @@ async function main() {
 
     await writeFile(configPath, JSON.stringify(reconConfig, null, 2));
 
-    console.log(`📝 Recon configuration saved to:`);
+    console.log(`Recon configuration saved to:`);
     console.log(`   ${configPath}\n`);
 
     // Generate pentester agent prompt
-    console.log('🤖 PENTESTER AGENT INSTRUCTIONS:\n');
+    console.log('PENTESTER AGENT INSTRUCTIONS:\n');
     console.log('Use this information to launch the pentester agent:\n');
 
     console.log('```typescript');
@@ -83,7 +83,7 @@ async function main() {
     console.log('];');
     console.log('```\n');
 
-    console.log('📋 RECOMMENDED RECONNAISSANCE WORKFLOW:\n');
+    console.log('RECOMMENDED RECONNAISSANCE WORKFLOW:\n');
     console.log('Phase 1: Asset Discovery');
     console.log('  - Subdomain enumeration (Amass, Subfinder)');
     console.log('  - Live host validation (httpx)');
@@ -101,7 +101,7 @@ async function main() {
     console.log('  - Manual testing of interesting findings');
     console.log('');
 
-    console.log('💡 NEXT STEPS:\n');
+    console.log('NEXT STEPS:\n');
     console.log('1. Review program rules and guidelines:');
     console.log(`   ${program.url}`);
     console.log('');
@@ -112,7 +112,7 @@ async function main() {
     console.log('3. Document findings and submit reports');
     console.log('');
 
-    console.log('⚠️  IMPORTANT REMINDERS:\n');
+    console.log(' IMPORTANT REMINDERS:\n');
     console.log('  - Only test in-scope assets');
     console.log('  - Follow responsible disclosure guidelines');
     console.log('  - Check for rate limiting requirements');
@@ -121,7 +121,7 @@ async function main() {
     console.log('');
 
   } catch (error) {
-    console.error('❌ Failed to initiate reconnaissance:', error);
+    console.error('✗ Failed to initiate reconnaissance:', error);
     process.exit(1);
   }
 }

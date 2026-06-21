@@ -179,18 +179,18 @@ export async function handleISCValidation(
   // Log results
   if (result.errors.length > 0) {
     console.error('[ISCValidator] ERRORS:');
-    result.errors.forEach((e) => console.error(`  ❌ ${e}`));
+    result.errors.forEach((e) => console.error(`  ✗ ${e}`));
   }
 
   if (result.warnings.length > 0) {
     console.error('[ISCValidator] WARNINGS:');
-    result.warnings.forEach((w) => console.error(`  ⚠️  ${w}`));
+    result.warnings.forEach((w) => console.error(`   ${w}`));
   }
 
   // Check if OBSERVE phase was attempted (algorithm was run)
   const responseText = parsed.plainCompletion || '';
   const algorithmAttempted = responseText.includes('OBSERVE') ||
-                              responseText.includes('📦 CAPABILITIES') ||
+                              responseText.includes('CAPABILITIES') ||
                               responseText.includes('ISC TRACKER');
 
   // BLOCKING LOGIC: If algorithm was attempted but ISC is empty, block

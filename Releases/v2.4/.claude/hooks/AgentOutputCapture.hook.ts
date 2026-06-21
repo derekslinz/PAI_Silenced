@@ -41,8 +41,8 @@
  *
  * AGENT OUTPUT FORMAT:
  * Searches for completion messages in two formats:
- * - NEW: 🗣️ AgentName: [completion message]
- * - LEGACY: 🎯 COMPLETED: [AGENT:type] [message]
+ * - NEW: AgentName: [completion message]
+ * - LEGACY: COMPLETED: [AGENT:type] [message]
  */
 
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'fs';
@@ -86,7 +86,7 @@ async function delay(ms: number): Promise<void> {
 }
 
 async function findTaskResult(transcriptPath: string, maxAttempts: number = 2): Promise<{ result: string | null, agentType: string | null, description: string | null, toolInput: any | null }> {
-  console.error(`📂 Looking for Task result in transcript: ${transcriptPath}`);
+  console.error(`Looking for Task result in transcript: ${transcriptPath}`);
 
   // If the provided transcript path doesn't exist, try to find the most recent agent transcript
   let actualTranscriptPath = transcriptPath;
@@ -101,7 +101,7 @@ async function findTaskResult(transcriptPath: string, maxAttempts: number = 2): 
     }
 
     if (!existsSync(actualTranscriptPath)) {
-      console.error(`❌ Transcript file doesn't exist: ${actualTranscriptPath} (attempt ${attempt + 1}/${maxAttempts})`);
+      console.error(`✗ Transcript file doesn't exist: ${actualTranscriptPath} (attempt ${attempt + 1}/${maxAttempts})`);
 
       // Try to find agent transcript in the same directory
       const dir = require('path').dirname(transcriptPath);
@@ -114,7 +114,7 @@ async function findTaskResult(transcriptPath: string, maxAttempts: number = 2): 
 
         if (files.length > 0) {
           actualTranscriptPath = join(dir, files[0].name);
-          console.error(`🔄 Found recent agent transcript: ${actualTranscriptPath}`);
+          console.error(`Found recent agent transcript: ${actualTranscriptPath}`);
         }
       }
 
@@ -138,7 +138,7 @@ async function findTaskResult(transcriptPath: string, maxAttempts: number = 2): 
               if (content.type === 'tool_use' && content.name === 'Task') {
                 const toolInput = content.input;
                 const description = toolInput?.description || null;
-                console.error(`✅ Found Task invocation with subagent: ${toolInput?.subagent_type}, description: ${description}`);
+                console.error(`✓ Found Task invocation with subagent: ${toolInput?.subagent_type}, description: ${description}`);
                 // Found a Task invocation, now look for its result
                 // The result should be in a subsequent user message
                 for (let j = i + 1; j < lines.length; j++) {
@@ -158,7 +158,7 @@ async function findTaskResult(transcriptPath: string, maxAttempts: number = 2): 
                             .map((item: any) => item.text)
                             .join('\n');
                         } else {
-                          console.error('❌ Unexpected tool_result content type');
+                          console.error('✗ Unexpected tool_result content type');
                           continue;
                         }
 
@@ -190,40 +190,40 @@ async function findTaskResult(transcriptPath: string, maxAttempts: number = 2): 
 }
 
 function extractCompletionMessage(taskOutput: string): { message: string | null, agentType: string | null } {
-  console.error('🔍 DEBUG - Extracting from task output, length:', taskOutput.length);
-  console.error('🔍 DEBUG - First 200 chars:', taskOutput.substring(0, 200));
-  console.error('🔍 DEBUG - Last 200 chars:', taskOutput.substring(taskOutput.length - 200));
+  console.error('DEBUG - Extracting from task output, length:', taskOutput.length);
+  console.error('DEBUG - First 200 chars:', taskOutput.substring(0, 200));
+  console.error('DEBUG - Last 200 chars:', taskOutput.substring(taskOutput.length - 200));
 
   // Look for the COMPLETED section in the agent's output
-  // Priority: 1) New 🗣️ format, 2) Legacy [AGENT:type] format
+  // Priority: 1) New format, 2) Legacy [AGENT:type] format
   const agentPatterns = [
-    // NEW FORMAT: 🗣️ AgentName: [text] (primary)
+    // NEW FORMAT: AgentName: [text] (primary)
     // Captures agent name dynamically from the line
-    /🗣️\s*\*{0,2}([\w-]+):?\*{0,2}\s*(.+?)(?:\n|$)/is,
+    /\s*\*{0,2}([\w-]+):?\*{0,2}\s*(.+?)(?:\n|$)/is,
 
-    // LEGACY FORMAT: 🎯 COMPLETED: [AGENT:type] [text] (backward compatibility)
+    // LEGACY FORMAT: COMPLETED: [AGENT:type] [text] (backward compatibility)
     // Handle markdown formatting with asterisks - same line
-    /\*+🎯\s*COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
-    /\*+🎯\s+COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /\*+\s*COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /\*+\s+COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
     // Non-markdown patterns - same line
-    /🎯\s*COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /\s*COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
     /COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
 
     // Multi-line patterns (emoji/COMPLETED on one line, AGENT tag on next)
-    /🎯\s*COMPLETED[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
-    /##\s*🎯\s*COMPLETED[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
-    /\*+🎯\s*COMPLETED\*+[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /\s*COMPLETED[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /##\s*\s*COMPLETED[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /\*+\s*COMPLETED\*+[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
 
     // Generic pattern for current format
-    /🎯.*COMPLETED.*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+    /.*COMPLETED.*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
 
     // OLD: Handle legacy "I completed" format (for backward compatibility)
-    /\*+🎯\s*COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
-    /\*+🎯\s+COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
-    /🎯\s*COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
+    /\*+\s*COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
+    /\*+\s+COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
+    /\s*COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
     /COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
     /\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\.|!|\n|$)/is,
-    /🎯.*COMPLETED.*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is
+    /.*COMPLETED.*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is
   ];
 
   // First try to match agent-specific patterns
@@ -246,7 +246,7 @@ function extractCompletionMessage(taskOutput: string): { message: string | null,
         ? message  // Just the message for greetings/questions/status
         : `${agentName} completed ${message}`;  // Prepend "completed" for tasks
 
-      console.error(`✅ FOUND AGENT MATCH: [${agentType}] ${fullMessage}`);
+      console.error(`✓ FOUND AGENT MATCH: [${agentType}] ${fullMessage}`);
 
       // Return agent type and message
       return { message: fullMessage, agentType };
@@ -255,14 +255,14 @@ function extractCompletionMessage(taskOutput: string): { message: string | null,
 
   // Fall back to generic patterns but try to extract agent type
   const genericPatterns = [
-    // NEW FORMAT: 🗣️ [text] (without specific name - fallback)
-    /🗣️\s*(.+?)(?:\n|$)/i,
+    // NEW FORMAT: [text] (without specific name - fallback)
+    /\s*(.+?)(?:\n|$)/i,
     // LEGACY FORMAT (backward compatibility)
     // Handle markdown formatting
-    /\*+🎯\s*COMPLETED:\*+\s*(.+?)(?:\n|$)/i,
+    /\*+\s*COMPLETED:\*+\s*(.+?)(?:\n|$)/i,
     /\*+COMPLETED:\*+\s*(.+?)(?:\n|$)/i,
     // Non-markdown patterns
-    /🎯\s*COMPLETED:\s*(.+?)(?:\n|$)/i,
+    /\s*COMPLETED:\s*(.+?)(?:\n|$)/i,
     /COMPLETED:\s*(.+?)(?:\n|$)/i,
     /Sub-agent\s+\w+\s+completed\s+(.+?)(?:\.|!|\n|$)/i,
     /Agent\s+completed\s+(.+?)(?:\.|!|\n|$)/i
@@ -309,7 +309,7 @@ async function main() {
     console.error(msg);
   }
 
-  debug('🔍 SubagentStop hook started');
+  debug('SubagentStop hook started');
   // Read input from stdin with timeout
   let input = '';
   try {
@@ -390,7 +390,7 @@ async function main() {
   // NOTE: Voice notifications are now handled by agents themselves
   // The hook only logs completion messages and captures to history
   const agentName = finalAgentType.charAt(0).toUpperCase() + finalAgentType.slice(1);
-  debug(`📝 Agent completed: [${agentName}] ${completionMessage}`);
+  debug(`Agent completed: [${agentName}] ${completionMessage}`);
 
   // Capture agent output to RESEARCH directory
   try {
@@ -403,7 +403,7 @@ async function main() {
   // Check if this was a background agent (run_in_background: true)
   const isBackground = toolInput?.run_in_background === true;
   if (isBackground) {
-    debug(`📱 Sending push notification for background agent: ${finalAgentType}`);
+    debug(`Sending push notification for background agent: ${finalAgentType}`);
     notifyBackgroundAgent(finalAgentType, completionMessage).catch(() => {
       // Fire and forget
     });
@@ -536,7 +536,7 @@ ${taskOutput}
   const filePath = join(outputDir, filename);
   writeFileSync(filePath, document);
 
-  console.log(`📝 UOCS: Captured agent output to ${category}/${yearMonth}/${filename}`);
+  console.log(`UOCS: Captured agent output to ${category}/${yearMonth}/${filename}`);
 }
 
 main().catch(console.error);
