@@ -75,54 +75,34 @@ let assistantModule: any = null
 let performanceModule: any = null
 let syslogModule: any = null
 
+async function tryImport<T>(path: string, displayName: string): Promise<T | null> {
+  try {
+    return await import(path)
+  } catch (err) {
+    log("warn", `${displayName} module not available`, { error: String(err) })
+    return null
+  }
+}
+
 async function loadModules(config: PulseConfig) {
   if (config.observability?.enabled !== false) {
-    try {
-      observabilityModule = await import("./Observability/observability")
-    } catch (err) {
-      log("warn", "Observability module not available", { error: String(err) })
-    }
+    observabilityModule = await tryImport("./Observability/observability", "Observability")
   }
-  // Wiki module — always load (no config gate)
-  try {
-    wikiModule = await import("./modules/wiki")
-  } catch (err) {
-    log("warn", "Wiki module not available", { error: String(err) })
-  }
+  wikiModule = await tryImport("./modules/wiki", "Wiki")
   if (config.telegram?.enabled) {
-    try {
-      telegramModule = await import("./modules/telegram")
-    } catch (err) {
-      log("warn", "Telegram module not available", { error: String(err) })
-    }
+    telegramModule = await tryImport("./modules/telegram", "Telegram")
   }
   if (config.imessage?.enabled) {
-    try {
-      imessageModule = await import("./modules/imessage")
-    } catch (err) {
-      log("warn", "iMessage module not available", { error: String(err) })
-    }
+    imessageModule = await tryImport("./modules/imessage", "iMessage")
   }
   if (config.da?.enabled) {
-    try {
-      assistantModule = await import("./Assistant/module")
-    } catch (err) {
-      log("warn", "Assistant module not available", { error: String(err) })
-    }
+    assistantModule = await tryImport("./Assistant/module", "Assistant")
   }
   if (config.performance?.enabled !== false) {
-    try {
-      performanceModule = await import("./Performance/module")
-    } catch (err) {
-      log("warn", "Performance module not available", { error: String(err) })
-    }
+    performanceModule = await tryImport("./Performance/module", "Performance")
   }
   if (config.syslog?.enabled) {
-    try {
-      syslogModule = await import("./modules/syslog")
-    } catch (err) {
-      log("warn", "Syslog module not available", { error: String(err) })
-    }
+    syslogModule = await tryImport("./modules/syslog", "Syslog")
   }
 }
 

@@ -47,29 +47,19 @@ const BOOKMARKS_CSV = join(BOOKMARKS_DIR, "bookmarks.csv")
 // Algorithm view. Scan PAI_DIR once at module init.
 function resolveAlgorithmDir(paiDir: string): string | null {
   if (!existsSync(paiDir)) return null
+  const exactPath = join(paiDir, "ALGORITHM")
+  if (existsSync(exactPath)) return exactPath
+  const legacyPath = join(paiDir, "Algorithm")
+  if (existsSync(legacyPath)) return legacyPath
+
   const entries = readdirSync(paiDir, { withFileTypes: true })
-  const exact = entries.find(
-    (e) => e.name === "Algorithm" && (e.isDirectory() || e.isSymbolicLink()),
+  const match = entries.find(
+    (e) => e.name.toLowerCase() === "algorithm" && (e.isDirectory() || e.isSymbolicLink())
   )
-  if (exact) return join(paiDir, exact.name)
-  const variants = entries.filter(
-    (e) =>
-      e.name.toLowerCase() === "algorithm" &&
-      (e.isDirectory() || e.isSymbolicLink()),
-  )
-  if (variants.length > 0) {
-    // Deterministic tie-break: prefer `ALGORITHM` (v6.3.0 doctrine spelling),
-    // else raw byte-order (locale-independent, stable across Node versions).
-    // readdirSync order is FS-implementation-defined; never trust it.
-    variants.sort((a, b) => {
-      if (a.name === "ALGORITHM") return -1
-      if (b.name === "ALGORITHM") return 1
-      return a.name < b.name ? -1 : a.name > b.name ? 1 : 0
-    })
-    return join(paiDir, variants[0].name)
-  }
+  if (match) return join(paiDir, match.name)
+
   console.warn(
-    `[wiki] PAI Algorithm directory not found in ${paiDir} — Algorithm view will be empty`,
+    `[wiki] PAI Algorithm directory not found in ${paiDir} — Algorithm view will be empty`
   )
   return null
 }

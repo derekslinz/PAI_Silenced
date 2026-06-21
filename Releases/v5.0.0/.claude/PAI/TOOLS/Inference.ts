@@ -451,28 +451,25 @@ async function main() {
 
   // Advisor mode: normally task/state/question (3 args), or with --auto-state task/question (2 args)
   if (mode === 'advisor') {
+    let advisorOpts: AdvisorOptions;
     if (autoState) {
       if (positionalArgs.length < 2) {
         console.error('Usage: bun Inference.ts --mode advisor --auto-state [--json] [--timeout <ms>] <task> <question>');
         process.exit(1);
       }
       const [task, question] = positionalArgs;
-      const advisoryResult = await advisor({ task, question, autoSynthesize: true, timeout });
-      if (advisoryResult.success) {
-        console.log(advisoryResult.output);
-      } else {
-        console.error(`Advisor error: ${advisoryResult.error}`);
+      advisorOpts = { task, question, autoSynthesize: true, timeout };
+    } else {
+      if (positionalArgs.length < 3) {
+        console.error('Usage: bun Inference.ts --mode advisor [--json] [--timeout <ms>] <task> <state> <question>');
+        console.error('       bun Inference.ts --mode advisor --auto-state [--json] [--timeout <ms>] <task> <question>');
         process.exit(1);
       }
-      return;
+      const [task, state, question] = positionalArgs;
+      advisorOpts = { task, state, question, timeout };
     }
-    if (positionalArgs.length < 3) {
-      console.error('Usage: bun Inference.ts --mode advisor [--json] [--timeout <ms>] <task> <state> <question>');
-      console.error('       bun Inference.ts --mode advisor --auto-state [--json] [--timeout <ms>] <task> <question>');
-      process.exit(1);
-    }
-    const [task, state, question] = positionalArgs;
-    const advisoryResult = await advisor({ task, state, question, timeout });
+
+    const advisoryResult = await advisor(advisorOpts);
     if (advisoryResult.success) {
       console.log(advisoryResult.output);
     } else {

@@ -394,11 +394,14 @@ detect_terminal_width() {
     fi
 
     # Tier 2: Direct TTY query
-    [ -z "$width" ] || [ "$width" = "0" ] || [ "$width" = "null" ] && \
+    if [[ -z "$width" || "$width" == "0" || "$width" == "null" ]]; then
         width=$({ stty size </dev/tty; } 2>/dev/null | awk '{print $2}')
+    fi
 
     # Tier 3: tput fallback
-    [ -z "$width" ] || [ "$width" = "0" ] && width=$(tput cols 2>/dev/null)
+    if [[ -z "$width" || "$width" == "0" ]]; then
+        width=$(tput cols 2>/dev/null)
+    fi
 
     # If we got a real width, cache it for subprocess re-renders
     if [ -n "$width" ] && [ "$width" != "0" ] && [ "$width" -gt 0 ] 2>/dev/null; then
@@ -538,11 +541,13 @@ if [ "$MODE" = "mini" ] || [ "$MODE" = "normal" ]; then
     # U+1F1E6 ('A') = F0 9F 87 A6, +1 per letter through U+1F1FF ('Z').
     cc_to_flag() {
         local code="${1:-}"
-        [ "${#code}" -ne 2 ] && { printf ''; return; }
+        [ "${#code}" -ne 2 ] && return
         local c1 c2 b1 b2
         c1=$(printf '%d' "'${code:0:1}")
         c2=$(printf '%d' "'${code:1:1}")
-        [ "$c1" -lt 65 ] || [ "$c1" -gt 90 ] || [ "$c2" -lt 65 ] || [ "$c2" -gt 90 ] && { printf ''; return; }
+        if (( c1 < 65 || c1 > 90 || c2 < 65 || c2 > 90 )); then
+            return
+        fi
         b1=$(printf '%02x' $((0xA6 + c1 - 65)))
         b2=$(printf '%02x' $((0xA6 + c2 - 65)))
         printf "\xF0\x9F\x87\x${b1}\xF0\x9F\x87\x${b2}"
