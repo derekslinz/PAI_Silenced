@@ -1,44 +1,57 @@
 ---
 workflow: upgrade-tier
-purpose: Migrate CLI from Tier (manual) to Tier (Commander.js)
+purpose: Migrate CLI from Tier 1 (manual) to Tier 2 (Commander.js)
 ---
 
-Upgrade Tier Workflow
+# Upgrade Tier Workflow
 
-Migrate from manual parsing to Commander.js when CLI grows complex.
+**Migrate from manual parsing to Commander.js when CLI grows complex.**
+
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the UpgradeTier workflow in the CreateCLI skill to upgrade CLI tier"}' \
+  > /dev/null 2>&1 &
+```
+
+Running the **UpgradeTier** workflow in the **CreateCLI** skill to upgrade CLI tier...
+
 ---
 
-PURPOSE
+## PURPOSE
 
-Convert Tier CLI (llcli-style) to Tier (Commander.js) when complexity demands it.
+Convert Tier 1 CLI (llcli-style) to Tier 2 (Commander.js) when complexity demands it.
 
 ---
 
-WHEN TO USE
+## WHEN TO USE
 
-Indicators to upgrade:- + commands (switch statement unwieldy)
+**Indicators to upgrade:**
+- 15+ commands (switch statement unwieldy)
 - Need subcommands (git-style: `cli convert json csv`)
 - Plugin architecture needed
 - Complex option combinations
 - Multiple output formats
 
-Rule:Don't upgrade prematurely. Tier handles -commands fine.
+**Rule:** Don't upgrade prematurely. Tier 1 handles 10-15 commands fine.
 
 ---
 
-MIGRATION STEPS
+## MIGRATION STEPS
 
-. Install Commander.js
+### 1. Install Commander.js
 
 ```bash
 cd ~/.claude/Bin/[cli-name]/
 bun add commander
 ```
 
-. Create Commander Structure
+### 2. Create Commander Structure
 
 ```typescript
-!/usr/bin/env bun
+#!/usr/bin/env bun
 
 import { Command } from 'commander';
 
@@ -47,35 +60,37 @@ const program = new Command();
 program
   .name('[cli-name]')
   .description('[description from old CLI]')
-  .version('..'); // Bump major version
+  .version('2.0.0'); // Bump major version
 ```
 
-. Convert Commands
+### 3. Convert Commands
 
-Before (Tier ):```typescript
+**Before (Tier 1):**
+```typescript
 async function fetchData(arg: string, limit: number): Promise<void> {
   // ...
 }
 
 switch (command) {
   case 'fetch':
-    await fetchData(args[], limit);
+    await fetchData(args[1], limit);
     break;
 }
 ```
 
-After (Tier ):```typescript
+**After (Tier 2):**
+```typescript
 program
   .command('fetch <arg>')
-  .option('-l, --limit <number>', 'limit results', '')
+  .option('-l, --limit <number>', 'limit results', '20')
   .description('Fetch data')
   .action(async (arg: string, options) => {
-    const limit = parseInt(options.limit, );
+    const limit = parseInt(options.limit, 10);
     await fetchData(arg, limit);
   });
 ```
 
-. Preserve Help Quality
+### 4. Preserve Help Quality
 
 Don't let auto-generated help be worse than manual help.
 
@@ -83,16 +98,17 @@ Don't let auto-generated help be worse than manual help.
 program
   .command('fetch <query>')
   .description('Search and fetch data')
-  .option('-l, --limit <n>', 'max results', '')
+  .option('-l, --limit <n>', 'max results', '20')
   .addHelpText('after', `
 Examples:
-  $ ${program.name()} fetch "keyword" --limit   $ ${program.name()} fetch "api query"
+  $ ${program.name()} fetch "keyword" --limit 50
+  $ ${program.name()} fetch "api query"
 
 Output: JSON to stdout
 `);
 ```
 
-. Test All Commands
+### 5. Test All Commands
 
 ```bash
 ./cli.ts --help
@@ -100,14 +116,15 @@ Output: JSON to stdout
 ./cli.ts [each-command]
 ```
 
-. Update Documentation
+### 6. Update Documentation
 
 ```markdown
-Breaking Changes (v..)
+# Breaking Changes (v2.0.0)
 
 Now uses Commander.js for better command organization.
 
-Migration:- All commands work the same
+**Migration:**
+- All commands work the same
 - Help text improved
 - Added subcommand support
 
@@ -116,44 +133,45 @@ No API changes - drop-in replacement.
 
 ---
 
-BEFORE/AFTER COMPARISON
+## BEFORE/AFTER COMPARISON
 
-Before (Tier )
+### Before (Tier 1)
 ```typescript
-// Manual parsing, ~lines
+// Manual parsing, ~350 lines
 async function main() {
-  const args = process.argv.slice();
-  const command = args[];
+  const args = process.argv.slice(2);
+  const command = args[0];
   switch (command) {
-    case 'fetch': /... /
-    case 'create': /... /
-    // ... more cases
+    case 'fetch': /* ... */
+    case 'create': /* ... */
+    // ... 15 more cases
   }
 }
 ```
 
-After (Tier )
+### After (Tier 2)
 ```typescript
-// Commander.js, ~lines (cleaner)
+// Commander.js, ~250 lines (cleaner)
 program
   .command('fetch <query>').action(fetchCommand)
   .command('create <name>').action(createCommand);
-  // ... more commands
+  // ... 15 more commands
 
 program.parse();
 ```
 
 ---
 
-CHECKLIST
+## ✓ CHECKLIST
 
 - [ ] Commander.js installed
 - [ ] All commands converted
 - [ ] Help text quality maintained
 - [ ] All tests pass
 - [ ] README updated (breaking changes)
-- [ ] Version bumped to ..- [ ] Users notified if published
+- [ ] Version bumped to 2.0.0
+- [ ] Users notified if published
 
 ---
 
-Note:Most CLIs NEVER need this upgrade. Tier is production-ready indefinitely.
+**Note:** Most CLIs NEVER need this upgrade. Tier 1 is production-ready indefinitely.

@@ -1,19 +1,30 @@
-ReplayFlow Workflow
+# ReplayFlow Workflow
+
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the ReplayFlow workflow in the Interceptor skill to replay a recorded flow"}' \
+  > /dev/null 2>&1 &
+```
+
+Running **ReplayFlow** in **Interceptor**...
 
 ---
 
 Replay a previously recorded user flow to verify it still works after a deploy or code change. Executes the plan script step-by-step, captures the result at each stage, and reports any regressions.
 
-When to Use
+## When to Use
 
 - After deploying changes to a page that has a recorded flow
 - As a regression check before merging UI changes
 - To verify a bug fix by replaying the flow that exposed the bug
 - As part of a deploy verification pipeline alongside VerifyDeploy
 
-Steps
+## Steps
 
-. Locate the Flow Plan
+### 1. Locate the Flow Plan
 
 Recorded flows live in `skills/Interceptor/Flows/`. List available flows:
 
@@ -27,7 +38,7 @@ Or regenerate from a monitor session:
 interceptor monitor export <SESSION_ID> --plan
 ```
 
-. Open the Starting URL
+### 2. Open the Starting URL
 
 The plan script starts with a `interceptor tab new "<url>"` or `interceptor navigate "<url>"` command. Execute it:
 
@@ -35,18 +46,18 @@ The plan script starts with a `interceptor tab new "<url>"` or `interceptor navi
 interceptor open "<START_URL>"
 ```
 
-. Execute the Plan Step-by-Step
+### 3. Execute the Plan Step-by-Step
 
 Read the plan file and execute each command sequentially. For each action:
 
 ```bash
-Example: click a button
+# Example: click a button
 interceptor act "button:Sign In"
 
-Example: type into a field
+# Example: type into a field
 interceptor act "textbox:Email" "user@example.com"
 
-Example: wait for page update
+# Example: wait for page update
 interceptor wait-stable
 ```
 
@@ -58,9 +69,9 @@ interceptor read --text-only
 
 Check that the expected content appears. If an element is missing or content differs from expectations, flag it as a regression.
 
-. Verify Network Contracts (Optional)
+### 4. Verify Network Contracts (Optional)
 
-If the plan includes commented network cues (`correlated fetch GET /api/...`), verify those endpoints still fire:
+If the plan includes commented network cues (`# correlated fetch GET /api/...`), verify those endpoints still fire:
 
 ```bash
 interceptor net log --json
@@ -71,7 +82,7 @@ Compare against the baseline network log from the original recording. Look for:
 - Changed response status codes
 - New unexpected requests
 
-. Capture Final State
+### 5. Capture Final State
 
 ```bash
 ( cd /tmp/pai-screenshots && interceptor screenshot --save )
@@ -79,14 +90,14 @@ Compare against the baseline network log from the original recording. Look for:
 
 Compare the final screenshot against the expected end state of the flow.
 
-. Report Results
+### 6. Report Results
 
 For each step in the plan, report:
 - PASS: action succeeded, expected state confirmed
 - FAIL: action failed or unexpected state detected
 - REGRESSION: behavior changed from baseline
 
-Using Batch for Known Flows
+## Using Batch for Known Flows
 
 For well-tested flows where you trust the commands, use batch execution:
 
@@ -103,10 +114,10 @@ interceptor batch '[
 
 The `--stop-on-error` flag halts on the first failure so you can diagnose the exact regression point.
 
-Notes
+## Notes
 
-- Semantic selectors (`role:name`) are more resilient than ref IDs (`e`) — prefer them in flow plans.
+- Semantic selectors (`role:name`) are more resilient than ref IDs (`e5`) — prefer them in flow plans.
 - If a selector fails, use `interceptor find "<name>"` to locate the element under its new name.
 - Flows recorded on one environment may need URL adjustments for another (staging vs production).
-- For flows with password fields, the plan will have `TODO` comments — substitute values before replay.
+- For flows with password fields, the plan will have `# TODO` comments — substitute values before replay.
 - Screenshots from replays can be compared against baseline screenshots for visual regression detection.

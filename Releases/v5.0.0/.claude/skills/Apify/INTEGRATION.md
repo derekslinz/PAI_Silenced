@@ -1,173 +1,191 @@
-Apify Integration Guide
+# Apify Integration Guide
 
-Status:Production Ready Token Savings:-% vs traditional MCP approach
-Execution Time:~seconds typical
+**Status:** Production Ready ✓
+**Token Savings:** 90-98% vs traditional MCP approach
+**Execution Time:** ~10 seconds typical
 
-Integration with PAI Skills
+## Integration with PAI Skills
 
-Social Skill Integration
+### Social Skill Integration
 
 
-Updated Section:"Fetching Tweet Content"
+**Updated Section:** "Fetching Tweet Content"
 
 The social skill now uses code-based Apify scripts instead of `mcp__apify` MCP tool.
 
-Trigger → Script Mapping:
+**Trigger → Script Mapping:**
+
 | User Says | Script to Run |
 |-----------|---------------|
 | "my latest tweet" | `get-latest-tweet.ts` |
 | "my latest thread" | `get-latest-thread.ts` |
-| "get tweets from @user" | `get-user-tweets.ts user ` |
-| "what has @user been talking about" | `get-user-tweets.ts user ` |
+| "get tweets from @user" | `get-user-tweets.ts user 5` |
+| "what has @user been talking about" | `get-user-tweets.ts user 10` |
 
-Example Workflow:
-. User: "Turn my latest tweet into a LinkedIn post"
-. System runs: `bun ~/.claude/filesystem-mcps/apify/get-latest-tweet.ts`
-. Script returns: Tweet text + metadata (~tokens)
-. System transforms tweet into LinkedIn format
-. Token savings: %(vs fetching unfiltered profile data)
+**Example Workflow:**
 
-Research Skill Integration
+1. User: "Turn my latest tweet into a LinkedIn post"
+2. System runs: `bun ~/.claude/filesystem-mcps/apify/get-latest-tweet.ts`
+3. Script returns: Tweet text + metadata (~500 tokens)
+4. System transforms tweet into LinkedIn format
+5. **Token savings: 98%** (vs fetching unfiltered profile data)
 
-Use Case:Monitor influential developers' Twitter activity
+### Research Skill Integration
 
-```bash
-Research what ThePrimeagen is discussing
-bun ~/.claude/filesystem-mcps/apify/get-user-tweets.ts ThePrimeagen 
-Analyze Paul Graham's recent thoughts
-bun ~/.claude/filesystem-mcps/apify/get-user-tweets.ts paulg 
-Track Simon Willison's posts
-bun ~/.claude/filesystem-mcps/apify/get-user-tweets.ts simonw ```
-
-Token Efficiency:- tweets unfiltered: ~,tokens
-- tweets filtered: ~,tokens
-- Savings: %
-Writing Skill Integration
-
-Use Case:Generate blog content from Twitter discussions
+**Use Case:** Monitor influential developers' Twitter activity
 
 ```bash
-Get user's thread about AI topic
+# Research what ThePrimeagen is discussing
+bun ~/.claude/filesystem-mcps/apify/get-user-tweets.ts ThePrimeagen 10
+
+# Analyze Paul Graham's recent thoughts
+bun ~/.claude/filesystem-mcps/apify/get-user-tweets.ts paulg 20
+
+# Track Simon Willison's posts
+bun ~/.claude/filesystem-mcps/apify/get-user-tweets.ts simonw 15
+```
+
+**Token Efficiency:**
+- 10 tweets unfiltered: ~80,000 tokens
+- 10 tweets filtered: ~8,000 tokens
+- **Savings: 90%**
+
+### Writing Skill Integration
+
+**Use Case:** Generate blog content from Twitter discussions
+
+```bash
+# Get user's thread about AI topic
 bun ~/.claude/filesystem-mcps/apify/get-latest-thread.ts
 
-Expand thread into blog post format
-Token efficient: only thread content in context
+# Expand thread into blog post format
+# Token efficient: only thread content in context
 ```
 
-Available Scripts Summary
+## Available Scripts Summary
 
-. get-latest-tweet.ts
-Purpose:User's most recent single tweet
-Usage:`bun get-latest-tweet.ts`
-Returns:Text, date, URL, engagement stats
-Tokens:~
-. get-latest-thread.ts
-Purpose:User's most recent Twitter thread
-Usage:`bun get-latest-thread.ts`
-Returns:All thread tweets chronologically
-Tokens:~,(for -tweet thread)
-Savings:-% vs unfiltered
+### 1. get-latest-tweet.ts
+**Purpose:** User's most recent single tweet
+**Usage:** `bun get-latest-tweet.ts`
+**Returns:** Text, date, URL, engagement stats
+**Tokens:** ~500
 
-. get-user-tweets.ts
-Purpose:Any user's recent tweets
-Usage:`bun get-user-tweets.ts <username> <limit>`
-Returns:Recent tweets with metadata
-Tokens:~per tweet
-Savings:-% vs unfiltered
+### 2. get-latest-thread.ts
+**Purpose:** User's most recent Twitter thread
+**Usage:** `bun get-latest-thread.ts`
+**Returns:** All thread tweets chronologically
+**Tokens:** ~5,500 (for 5-tweet thread)
+**Savings:** 87-90% vs unfiltered
 
-. debug-tweet-structure.ts
-Purpose:Inspect raw API response
-Usage:`bun debug-tweet-structure.ts`
-Returns:Full JSON structure + available fields
-Use:Development/debugging only
+### 3. get-user-tweets.ts
+**Purpose:** Any user's recent tweets
+**Usage:** `bun get-user-tweets.ts <username> <limit>`
+**Returns:** Recent tweets with metadata
+**Tokens:** ~800 per tweet
+**Savings:** 90-95% vs unfiltered
 
-Migration from MCP
+### 4. debug-tweet-structure.ts
+**Purpose:** Inspect raw API response
+**Usage:** `bun debug-tweet-structure.ts`
+**Returns:** Full JSON structure + available fields
+**Use:** Development/debugging only
 
-Before (MCP Approach)
+## Migration from MCP
+
+### Before (MCP Approach)
 
 ```typescript
-// Step : Search for actors (~,tokens)
+// Step 1: Search for actors (~1,000 tokens)
 mcp__Apify__search-actors("twitter scraper")
 
-// Step : Call actor (~,tokens)
+// Step 2: Call actor (~1,000 tokens)
 mcp__Apify__call-actor(actorId, input)
 
-// Step : Get output (~,tokens unfiltered!)
+// Step 3: Get output (~50,000 tokens unfiltered!)
 mcp__Apify__get-actor-output(runId)
 
-// Total: ~,tokens
+// Total: ~57,000 tokens
 ```
 
-After (Code-Based Approach)
+### After (Code-Based Approach)
 
 ```typescript
 // All in one script, filtering in code
 bun ~/.claude/filesystem-mcps/apify/get-latest-tweet.ts
 
-// Returns only filtered result: ~tokens
-// Savings: .%
+// Returns only filtered result: ~500 tokens
+// Savings: 98.2%
 ```
 
-Best Practices
+## Best Practices
 
-DO:
-Use appropriate script for the task
-Let script filter data before returning
-Trust token savings calculations
-Run from `~/.claude/filesystem-mcps/apify/` directory or use full path
-Check execution time (~seconds expected)
+### DO:
+✓ Use appropriate script for the task
+✓ Let script filter data before returning
+✓ Trust token savings calculations
+✓ Run from `~/.claude/filesystem-mcps/apify/` directory or use full path
+✓ Check execution time (~10 seconds expected)
 
-DON'T:
-Fall back to MCP tools for Twitter operations
-Fetch unfiltered data into model context
-Re-implement filtering logic (use existing scripts)
-Skip error handling (scripts handle common errors)
-Ignore token savings metrics in output
+### DON'T:
+✗ Fall back to MCP tools for Twitter operations
+✗ Fetch unfiltered data into model context
+✗ Re-implement filtering logic (use existing scripts)
+✗ Skip error handling (scripts handle common errors)
+✗ Ignore token savings metrics in output
 
-Performance Expectations
+## Performance Expectations
 
-Execution Time:- Actor search: Eliminated (hardcoded actor ID)
-- Actor execution: ~seconds (Apify platform time)
-- Data processing: <second (TypeScript filtering)
-- Total: ~seconds
-Token Usage:- Single tweet: tokens (vs ,MCP)
-- Thread (tweets): ,tokens (vs ,unfiltered)
-- User tweets (): ,tokens (vs ,unfiltered)
+**Execution Time:**
+- Actor search: Eliminated (hardcoded actor ID)
+- Actor execution: ~10 seconds (Apify platform time)
+- Data processing: <1 second (TypeScript filtering)
+- **Total: ~10 seconds**
 
-Rate Limits:- Apify free tier: actor runs/day
+**Token Usage:**
+- Single tweet: 500 tokens (vs 57,000 MCP)
+- Thread (5 tweets): 5,500 tokens (vs 60,000 unfiltered)
+- User tweets (10): 8,000 tokens (vs 80,000 unfiltered)
+
+**Rate Limits:**
+- Apify free tier: 100 actor runs/day
 - Apify paid tier: Unlimited
 - Current usage: Well within limits
 
-Error Handling
+## Error Handling
 
 Scripts handle common errors automatically:
 
-. Missing APIFY_TOKEN→ Clear error message with setup instructions
-. Actor failure→ Reports status and exits cleanly
-. No results→ Graceful message, no crash
-. Network timeout→ Configurable timeout (s default)
+1. **Missing APIFY_TOKEN** → Clear error message with setup instructions
+2. **Actor failure** → Reports status and exits cleanly
+3. **No results** → Graceful message, no crash
+4. **Network timeout** → Configurable timeout (120s default)
 
-Manual intervention rarely needed.
-Future Enhancements
+**Manual intervention rarely needed.**
 
-Planned Features:
+## Future Enhancements
 
-. Search tweets by topic   - `search-tweets.ts <username> <query> <limit>`
+### Planned Features:
+
+1. **Search tweets by topic**
+   - `search-tweets.ts <username> <query> <limit>`
    - Example: Search user's tweets about "AI" from last month
 
-. Thread detection improvements   - Better handling of quote tweets
+2. **Thread detection improvements**
+   - Better handling of quote tweets
    - Reply chain analysis
    - Thread continuity verification
 
-. Engagement analytics   - Filter by minimum engagement threshold
+3. **Engagement analytics**
+   - Filter by minimum engagement threshold
    - Sort by engagement metrics
    - Engagement trend analysis
 
-. Export formats   - JSON output for programmatic use
+4. **Export formats**
+   - JSON output for programmatic use
    - Markdown format for documentation
    - CSV for spreadsheet analysis
 
-Migration Candidates:
+### Migration Candidates:
 
 Other Apify actors worth implementing:
 - Instagram scraping
@@ -175,22 +193,25 @@ Other Apify actors worth implementing:
 - YouTube data extraction
 - Generic web scraping
 
-Same pattern applies:Filter in code, %+ token savings expected.
+**Same pattern applies:** Filter in code, 90%+ token savings expected.
 
-Documentation
+## Documentation
 
-For Users:- Quick reference: `~/.claude/`
+**For Users:**
+- Quick reference: `~/.claude/`
 - Social skill: `~/.claude/`
 
-For Developers:- Implementation: `~/.claude/`
+**For Developers:**
+- Implementation: `~/.claude/`
 - Standards: `~/.claude/`
 - Parent guide: `~/.claude/`
 
-Support
+## Support
 
-Common Questions:
+**Common Questions:**
+
 Q: Why not use MCP?
-A: -% token savings, faster execution, better control.
+A: 90-98% token savings, faster execution, better control.
 
 Q: What if script fails?
 A: Check `APIFY_TOKEN` in `${PAI_DIR}/.env`, verify network, check Apify status.
@@ -201,12 +222,13 @@ A: Yes! Follow `STANDARDS.md` pattern, hardcode actor ID, filter in code.
 Q: How do I debug?
 A: Use `debug-tweet-structure.ts` to inspect raw data, check console output.
 
-Success Metrics
+## Success Metrics
 
-Achieved:- -% token reduction vs MCP
-- ~second execution time
-- Production integration in social skill
-- production-ready scripts
-- Comprehensive documentation
+**Achieved:**
+- ✓ 90-98% token reduction vs MCP
+- ✓ ~10 second execution time
+- ✓ Production integration in social skill
+- ✓ 4 production-ready scripts
+- ✓ Comprehensive documentation
 
-This is now the standard for all Twitter operations in PAI.
+**This is now the standard for all Twitter operations in PAI.**

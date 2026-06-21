@@ -1,13 +1,15 @@
-TypeScript Patterns for CLI Development
+# TypeScript Patterns for CLI Development
 
-Production patterns from tsx, vite, turbo, bun, and other modern TypeScript CLIs
+**Production patterns from tsx, vite, turbo, bun, and other modern TypeScript CLIs**
+
 ---
 
-Overview
+## Overview
 
 This document captures type safety patterns, modern TypeScript features, and error handling strategies from real-world production CLIs.
 
-Research Sources:- tsx (privatenumber/tsx)
+**Research Sources:**
+- tsx (privatenumber/tsx)
 - Vite (vitejs/vite)
 - Next.js (vercel/next)
 - Turbo (vercel/turbo)
@@ -17,9 +19,9 @@ Research Sources:- tsx (privatenumber/tsx)
 
 ---
 
-⃣ TYPE-SAFE ARGUMENT PARSING
+## 1⃣ TYPE-SAFE ARGUMENT PARSING
 
-Pattern : Schema-Driven Inference (cleye library - used by tsx)
+### Pattern 1: Schema-Driven Inference (cleye library - used by tsx)
 
 ```typescript
 import { cli } from 'cleye';
@@ -46,11 +48,11 @@ const argv = cli({
 // argv._.scriptPath → string | undefined
 ```
 
-Key Insight:Flags defined as `const` objects enable full type inference.
+**Key Insight:** Flags defined as `const` objects enable full type inference.
 
 ---
 
-Pattern : Manual Type Annotations (Vite - cac library)
+### Pattern 2: Manual Type Annotations (Vite - cac library)
 
 ```typescript
 interface GlobalCLIOptions {
@@ -79,11 +81,11 @@ cli
   });
 ```
 
-Key Insight:Explicit interfaces + intersections for type narrowing.
+**Key Insight:** Explicit interfaces + intersections for type narrowing.
 
 ---
 
-Pattern : Discriminated Unions (citty library)
+### Pattern 3: Discriminated Unions (citty library)
 
 ```typescript
 type ArgDef =
@@ -108,32 +110,33 @@ type ParsedCLI<Commands> = {
 const argv = parse() as ParsedCLI<'build' | 'dev' | 'test'>;
 
 switch (argv.command) {
-  case 'build': /... /; break;
-  case 'dev': /... /; break;
-  case 'test': /... /; break;
+  case 'build': /* ... */; break;
+  case 'dev': /* ... */; break;
+  case 'test': /* ... */; break;
   default:
     argv.command satisfies never; // exhaustiveness check
 }
 ```
 
-Key Insight:Discriminated unions enable exhaustive compile-time checking.
+**Key Insight:** Discriminated unions enable exhaustive compile-time checking.
 
 ---
 
-⃣ MODERN TYPESCRIPT FEATURES (.x)
+## 2⃣ MODERN TYPESCRIPT FEATURES (5.x)
 
-Pattern : `satisfies` Operator (Vite/Turbo)
+### Pattern 1: `satisfies` Operator (Vite/Turbo)
 
-Exhaustive switch validation (Vite build.ts:):
+**Exhaustive switch validation (Vite build.ts:1037):**
+
 ```typescript
 type LogLevel = 'info' | 'warn' | 'error' | 'debug';
 
 function handleLog(level: LogLevel) {
   switch (level) {
-    case 'info': /... /; break;
-    case 'warn': /... /; break;
-    case 'error': /... /; break;
-    case 'debug': /... /; break;
+    case 'info': /* ... */; break;
+    case 'warn': /* ... */; break;
+    case 'error': /* ... */; break;
+    case 'debug': /* ... */; break;
     default:
       level satisfies never; // new levels = compile error
       throw new Error(`Unknown log level: ${level}`);
@@ -141,7 +144,8 @@ function handleLog(level: LogLevel) {
 }
 ```
 
-Typed URL mechanisms (Vite build.ts:-):
+**Typed URL mechanisms (Vite build.ts:1356-1362):**
+
 ```typescript
 const urlMechanisms = {
   es: (path: string) => `import.meta.url + '${path}'`,
@@ -152,29 +156,32 @@ const urlMechanisms = {
 type Format = keyof typeof urlMechanisms; // 'es' | 'iife' | 'system'
 ```
 
-Config typing (Turbo jest.config.ts):
+**Config typing (Turbo jest.config.ts):**
+
 ```typescript
 import type { Config } from '@jest/types';
 
 const config = {
   preset: 'ts-jest/presets/js-with-ts',
   testEnvironment: 'node',
-  verbose: process.env.RUNNER_DEBUG === '',
+  verbose: process.env.RUNNER_DEBUG === '1',
 } as const satisfies Config;
 
 export default config;
 ```
 
-Benefits:- Literal types preserved
-- Type-checked against interface
-- IntelliSense on config object
-- Compile error on typos
+**Benefits:**
+- ✓ Literal types preserved
+- ✓ Type-checked against interface
+- ✓ IntelliSense on config object
+- ✓ Compile error on typos
 
 ---
 
-Pattern : Template Literal Types (Vite)
+### Pattern 2: Template Literal Types (Vite)
 
-Debug scope validation (Vite utils.ts:-):
+**Debug scope validation (Vite utils.ts:181-207):**
+
 ```typescript
 export type ViteDebugScope = `vite:${string}`;
 
@@ -183,12 +190,13 @@ function createDebugger(namespace: ViteDebugScope): void {
   // ...
 }
 
-createDebugger('vite:server'); // Valid
-createDebugger('vite:config'); // Valid
-createDebugger('app:server');  // Type error
+createDebugger('vite:server'); // ✓ Valid
+createDebugger('vite:config'); // ✓ Valid
+createDebugger('app:server');  // ✗ Type error
 ```
 
-CLI command validation:
+**CLI command validation:**
+
 ```typescript
 type CommandName = `${'build' | 'dev' | 'test'}:${string}`;
 
@@ -197,14 +205,17 @@ function runCommand<const T extends CommandName>(name: T) {
   console.log(`Running: ${name}`);
 }
 
-runCommand('build:production'); // runCommand('dev:local');        // runCommand('deploy:prod');      // Type error
+runCommand('build:production'); // ✓
+runCommand('dev:local');        // ✓
+runCommand('deploy:prod');      // ✗ Type error
 ```
 
 ---
 
-Pattern : Const Type Parameters (TS .)
+### Pattern 3: Const Type Parameters (TS 5.0)
 
-Preserve literal types in flag definitions:
+**Preserve literal types in flag definitions:**
+
 ```typescript
 function defineFlags<const T extends Record<string, string | boolean>>(
   flags: T
@@ -231,11 +242,12 @@ const flags = defineFlags({
 
 ---
 
-⃣ ERROR HANDLING PATTERNS
+## 3⃣ ERROR HANDLING PATTERNS
 
-Pattern : Custom Error Classes (pnpm)
+### Pattern 1: Custom Error Classes (pnpm)
 
-Structured errors with metadata (pnpm error/index.ts:-):
+**Structured errors with metadata (pnpm error/index.ts:3-44):**
+
 ```typescript
 export class PnpmError extends Error {
   public readonly code: string;
@@ -267,16 +279,18 @@ throw new PnpmError('NO_LOCKFILE', 'Missing pnpm-lock.yaml', {
 });
 ```
 
-Benefits:- Machine-readable error codes
+**Benefits:**
+- Machine-readable error codes
 - Actionable hints for users
 - Structured metadata (attempts, stack)
 - Type-safe error construction
 
 ---
 
-Pattern : Discriminated Fatal Errors (Shopify CLI)
+### Pattern 2: Discriminated Fatal Errors (Shopify CLI)
 
-Fatal error types (Shopify cli-kit/error.ts:-):
+**Fatal error types (Shopify cli-kit/error.ts:9-92):**
+
 ```typescript
 export enum FatalErrorType {
   Abort,        // User-facing error (bad input)
@@ -315,20 +329,22 @@ export function errorMapper(error: unknown): FatalError {
 export function handler(error: unknown): void {
   const fatalError = errorMapper(error);
   renderFatalError(fatalError);
-  process.exitCode = fatalError.type === FatalErrorType.Bug ? : ;
+  process.exitCode = fatalError.type === FatalErrorType.Bug ? 2 : 1;
 }
 ```
 
-Benefits:- Distinguish user errors from bugs
-- Different exit codes (= user, = bug)
+**Benefits:**
+- Distinguish user errors from bugs
+- Different exit codes (1 = user, 2 = bug)
 - Centralized error handling
 - Type-safe error classification
 
 ---
 
-Pattern : Result Type (Shopify CLI)
+### Pattern 3: Result Type (Shopify CLI)
 
-Result/Either monad pattern (Shopify cli-kit/result.ts:-):
+**Result/Either monad pattern (Shopify cli-kit/result.ts:3-113):**
+
 ```typescript
 export type Result<TValue, TError> = Ok<TValue, TError> | Err<TValue, TError>;
 
@@ -376,7 +392,7 @@ class Err<TValue, TError> {
 // Usage
 async function loadConfig(): Promise<Result<Config, string>> {
   try {
-    const raw = await readFile('config.json', 'utf-');
+    const raw = await readFile('config.json', 'utf-8');
     const config = JSON.parse(raw);
     return ok(config);
   } catch (e) {
@@ -390,16 +406,18 @@ const config = (await loadConfig())
   .valueOrAbort();
 ```
 
-Benefits:- No try/catch needed
+**Benefits:**
+- No try/catch needed
 - Explicit error handling in types
 - Composable with map/mapError
 - Railway-oriented programming
 
 ---
 
-Pattern : Signal Handling (tsx)
+### Pattern 4: Signal Handling (tsx)
 
-Relay signals to child process (tsx cli.ts:-):
+**Relay signals to child process (tsx cli.ts:24-120):**
+
 ```typescript
 let waitForSignal: Promise<void> | undefined;
 
@@ -413,8 +431,8 @@ const relaySignalToChild = async (signal: NodeJS.Signals) => {
   waitForSignal = new Promise((resolve) => {
     setTimeout(() => {
       const exitCode = osConstants.signals[signal];
-      process.exit(+ exitCode); // POSIX-compliant
-    }, ); // s grace period
+      process.exit(128 + exitCode); // POSIX-compliant
+    }, 5000); // 5s grace period
 
     childProcess.on('exit', () => {
       resolve();
@@ -424,37 +442,40 @@ const relaySignalToChild = async (signal: NodeJS.Signals) => {
   // Force kill after grace period
   setTimeout(() => {
     childProcess.kill('SIGKILL');
-  }, );
+  }, 5000);
 };
 
 process.on('SIGINT', relaySignalToChild);
 process.on('SIGTERM', relaySignalToChild);
 ```
 
-Exit code mapping (tsx cli.ts:):
+**Exit code mapping (tsx cli.ts:254):**
+
 ```typescript
 childProcess.on('close', (code, signal) => {
   if (code !== null) {
     process.exit(code);
   } else if (signal) {
     const exitCode = osConstants.signals[signal];
-    process.exit(+ exitCode); // for SIGINT, for SIGTERM
+    process.exit(128 + exitCode); // 130 for SIGINT, 143 for SIGTERM
   }
 });
 ```
 
-Benefits:- Graceful shutdown
+**Benefits:**
+- Graceful shutdown
 - Proper signal propagation
 - POSIX-compliant exit codes
 - Timeout for hung processes
 
 ---
 
-⃣ TYPE-SAFE CONFIGURATION
+## 4⃣ TYPE-SAFE CONFIGURATION
 
-Pattern : Zod Validation with Transform
+### Pattern 1: Zod Validation with Transform
 
-Parse → Transform → Enrich pattern:
+**Parse → Transform → Enrich pattern:**
+
 ```typescript
 import { z } from 'zod';
 import path from 'node:path';
@@ -465,9 +486,9 @@ const RawConfigSchema = z.object({
   targets: z.array(z.string()).nonempty(),
   deploy: z.discriminatedUnion('provider', [
     z.object({
-      provider: z.literal('s'),
+      provider: z.literal('s3'),
       bucket: z.string(),
-      region: z.string().default('us-east-'),
+      region: z.string().default('us-east-1'),
     }),
     z.object({
       provider: z.literal('gcs'),
@@ -500,7 +521,7 @@ const config = res.data;
 
 ---
 
-Pattern : Environment Variable Validation
+### Pattern 2: Environment Variable Validation
 
 ```typescript
 import { z } from 'zod';
@@ -509,52 +530,55 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const EnvSchema = z.object({
-  PORT: z.coerce.number().int().min().max().default(),
+  PORT: z.coerce.number().int().min(1).max(65535).default(3000),
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   DATABASE_URL: z.string().url(),
   DEBUG: z.preprocess(
     (v) => (typeof v === 'string' ? v === 'true' : v),
     z.boolean().default(false)
   ),
-  API_KEY: z.string().min(),
+  API_KEY: z.string().min(10),
 });
 
 export const env = EnvSchema.parse(process.env);
 export type Env = typeof env;
 
-// Usage: env.PORT is guaranteed to be number -```
+// Usage: env.PORT is guaranteed to be number 1-65535
+```
 
 ---
 
-⃣ ASYNC/AWAIT BEST PRACTICES
+## 5⃣ ASYNC/AWAIT BEST PRACTICES
 
-Pattern : Top-Level Await (Prisma Style)
+### Pattern 1: Top-Level Await (Prisma Style)
 
 ```typescript
 async function main() {
-  const args = process.argv.slice();
+  const args = process.argv.slice(2);
   const result = await runCommand(args);
   return result;
 }
 
 void main().catch((err) => {
-  console.error('', err instanceof Error ? err.message : err);
-  process.exitCode = ;
+  console.error('✗', err instanceof Error ? err.message : err);
+  process.exitCode = 1;
 });
 ```
 
-Pure ESM (tsx/bun-friendly):
+**Pure ESM (tsx/bun-friendly):**
+
 ```typescript
-const args = process.argv.slice();
+const args = process.argv.slice(2);
 const code = await runCommand(args);
-process.exit(code ?? );
+process.exit(code ?? 0);
 ```
 
 ---
 
-Pattern : Parallel Operations
+### Pattern 2: Parallel Operations
 
-Fail-fast (Promise.all):
+**Fail-fast (Promise.all):**
+
 ```typescript
 const [config, user, data] = await Promise.all([
   loadConfig(),
@@ -563,24 +587,26 @@ const [config, user, data] = await Promise.all([
 ]);
 ```
 
-Best effort (Promise.allSettled):
+**Best effort (Promise.allSettled):**
+
 ```typescript
 const results = await Promise.allSettled(
   tasks.map(task => processTask(task))
 );
 
 const failures = results.filter(r => r.status === 'rejected');
-if (failures.length > ) {
+if (failures.length > 0) {
   failures.forEach(f => console.error(f.reason));
-  process.exitCode = ;
+  process.exitCode = 1;
 }
 ```
 
-Concurrency limiting (p-limit):
+**Concurrency limiting (p-limit):**
+
 ```typescript
 import pLimit from 'p-limit';
 
-const limit = pLimit(); // max concurrent
+const limit = pLimit(4); // max 4 concurrent
 await Promise.all(
   items.map(item => limit(() => processItem(item)))
 );
@@ -588,7 +614,7 @@ await Promise.all(
 
 ---
 
-Pattern : Cleanup (Prisma Pattern)
+### Pattern 3: Cleanup (Prisma Pattern)
 
 ```typescript
 async function main() {
@@ -602,7 +628,8 @@ async function main() {
 }
 ```
 
-Signal-aware teardown (Vercel pattern):
+**Signal-aware teardown (Vercel pattern):**
+
 ```typescript
 import { onExit } from 'signal-exit';
 
@@ -616,18 +643,18 @@ onExit(() => { void cleanup(); });
 await main().catch(async (err) => {
   await cleanup();
   console.error(err);
-  process.exit();
+  process.exit(1);
 });
 ```
 
 ---
 
-⃣ RECOMMENDED PATTERNS FOR KAI CLIS
+## 6⃣ RECOMMENDED PATTERNS FOR KAI CLIS
 
-For Tier (llcli-style):
+### For Tier 1 (llcli-style):
 
 ```typescript
-!/usr/bin/env bun
+#!/usr/bin/env bun
 
 interface Config {
   apiKey: string;
@@ -636,14 +663,15 @@ interface Config {
 
 const DEFAULTS = {
   baseUrl: 'https://api.example.com',
-  limit: ,
+  limit: 20,
 } as const;
 
 class CLIError extends Error {
   constructor(
     message: string,
     public code: string,
-    public exitCode: number =   ) {
+    public exitCode: number = 1
+  ) {
     super(message);
     this.name = 'CLIError';
   }
@@ -655,18 +683,18 @@ function loadConfig(): Config {
 }
 
 async function main() {
-  const args = process.argv.slice();
+  const args = process.argv.slice(2);
 
-  if (!args.length || args[] === '--help') {
+  if (!args.length || args[0] === '--help') {
     showHelp();
     return;
   }
 
-  const command = args[];
+  const command = args[0];
 
   switch (command) {
     case 'fetch':
-      await fetchData(args[]);
+      await fetchData(args[1]);
       break;
     default:
       throw new CLIError(`Unknown command: ${command}`, 'ERR_UNKNOWN_CMD');
@@ -679,16 +707,16 @@ main().catch(error => {
     process.exit(error.exitCode);
   }
   console.error('Fatal error:', error);
-  process.exit();
+  process.exit(1);
 });
 ```
 
 ---
 
-For Tier (Commander.js):
+### For Tier 2 (Commander.js):
 
 ```typescript
-!/usr/bin/env bun
+#!/usr/bin/env bun
 
 import { Command } from 'commander';
 
@@ -697,7 +725,7 @@ const program = new Command();
 program
   .name('mycli')
   .description('My CLI tool')
-  .version('..');
+  .version('1.0.0');
 
 program
   .command('process <file>')
@@ -708,7 +736,7 @@ program
       await processFile(file, options);
     } catch (error) {
       console.error('Processing failed:', error);
-      process.exit();
+      process.exit(1);
     }
   });
 
@@ -717,34 +745,39 @@ program.parse();
 
 ---
 
-QUICK REFERENCE CHECKLIST
+## ✓ QUICK REFERENCE CHECKLIST
 
-Type Safety:- [ ] Use strict mode in tsconfig.json
+**Type Safety:**
+- [ ] Use strict mode in tsconfig.json
 - [ ] Define interfaces for all data structures
 - [ ] Avoid `any` types (use `unknown` if needed)
 - [ ] Use template literal types for string patterns
 - [ ] Use discriminated unions for commands
 - [ ] Prefer `as const satisfies` for configs
 
-Error Handling:- [ ] Custom error class with `code` field
+**Error Handling:**
+- [ ] Custom error class with `code` field
 - [ ] Actionable error messages with hints
-- [ ] Exit code = success, = error, = bug
+- [ ] Exit code 0 = success, 1 = error, 2 = bug
 - [ ] Catch at top level (main().catch())
 - [ ] Handle signals (SIGINT, SIGTERM)
 
-Modern TypeScript:- [ ] Use `satisfies` for exhaustiveness checks
+**Modern TypeScript:**
+- [ ] Use `satisfies` for exhaustiveness checks
 - [ ] Use template literals for validation
 - [ ] Use const type parameters for literals
 - [ ] Prefer `as const` for config objects
 
-Async/Await:- [ ] Top-level await in ESM or void main().catch()
+**Async/Await:**
+- [ ] Top-level await in ESM or void main().catch()
 - [ ] Use Promise.allSettled for best-effort parallel
 - [ ] Cleanup in finally blocks
 - [ ] Set process.exitCode instead of process.exit
 
 ---
 
-Sources:- tsx (privatenumber/tsx) - Type safety, signal handling
+**Sources:**
+- tsx (privatenumber/tsx) - Type safety, signal handling
 - Vite (vitejs/vite) - Modern TS features, validation
 - Turbo (vercel/turbo) - Config patterns
 - Bun (oven-sh/bun) - Async patterns

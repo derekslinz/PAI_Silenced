@@ -153,7 +153,7 @@ Layer 4: DYNAMIC CONTEXT (session-specific, ephemeral, does NOT survive compacti
 2. **CLAUDE.md = operating manual.** How to do the work. Procedures, templates, references.
 3. **@Imports = rich context.** Who you are, what you know, system architecture map.
 4. **Dynamic context = session state.** What happened recently. Rebuilt each session.
-5. **PostCompact = belt and suspenders.** RestoreContext.hook.ts re-injects critical files after compaction.
+5. **PostCompact = belt and suspenders.** PreCompact.hook.ts captures active work context before compaction so it survives the summary.
 6. **System prompt is primary-agent only.** Subagents get their agent definition body, not core PAI rules.
 
 ### Key File Paths
@@ -165,7 +165,7 @@ Layer 4: DYNAMIC CONTEXT (session-specific, ephemeral, does NOT survive compacti
 | `~/.claude/settings.json` | Runtime settings (directly edited) |
 | `PAI/TOOLS/pai.ts` | Launcher -- wires `--append-system-prompt-file` |
 | `hooks/LoadContext.hook.ts` | Injects startup files + dynamic context |
-| `hooks/RestoreContext.hook.ts` | Re-injects critical files after compaction |
+| `hooks/PreCompact.hook.ts` | Captures active work context before compaction |
 
 ---
 

@@ -1,23 +1,23 @@
-WriteReport Workflow
+# WriteReport Workflow
 
-Purpose:Generate a McKinsey-style professional consulting report from TELOS analysis content, rendered as a dark-themed web-based document with custom Practical Typography fonts and automatic light-mode print support.
-
----
-
-Workflow Overview
-
-```
-
-  . ANALYZE        . NARRATIVE       . STRUCTURE      . RENDER  
-  Run TELOS         Generate story     Map to McKinsey   Output as  
-  analysis          via CreateNarra-   report sections   web report 
-                    tivePoints                                       
-
-```
+**Purpose:** Generate a McKinsey-style professional consulting report from TELOS analysis content, rendered as a dark-themed web-based document with custom Practical Typography fonts and automatic light-mode print support.
 
 ---
 
-Input Parameters
+## Workflow Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  1. ANALYZE        2. NARRATIVE       3. STRUCTURE      4. RENDER  │
+│  Run TELOS         Generate story     Map to McKinsey   Output as  │
+│  analysis          via CreateNarra-   report sections   web report │
+│                    tivePoints                                       │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Input Parameters
 
 | Parameter | Required | Default | Description |
 |-----------|----------|---------|-------------|
@@ -27,32 +27,34 @@ Input Parameters
 
 ---
 
-Artifact-Based Pipeline
+## Artifact-Based Pipeline
 
-CRITICAL: This workflow consumes artifacts produced by the assessment workflow.
-Source → Assessment → Report Flow
+**CRITICAL: This workflow consumes artifacts produced by the assessment workflow.**
 
-```
-
-  SOURCE FILES (you edit)         ARTIFACTS (generated)    REPORT (output)  
-                                                                             
-  {source}/                       {source}/artifacts/      {source}/report/ 
-   FINDINGS.md            →     findings.json   →   lib/report-data.ts
-   CRITICAL_ISSUES.md           narrative.json                        
-   BLOCKERS.md                  recommendations.json                  
-   VISION.md                    roadmap.json                          
-   SOLUTION_NARRATIVE.md        methodology.json                      
-   telos/.md                                                            
+### Source → Assessment → Report Flow
 
 ```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  SOURCE FILES (you edit)         ARTIFACTS (generated)    REPORT (output)  │
+│                                                                             │
+│  {source}/                       {source}/artifacts/      {source}/report/ │
+│  ├── FINDINGS.md            →    ├── findings.json   →   lib/report-data.ts│
+│  ├── CRITICAL_ISSUES.md          ├── narrative.json                        │
+│  ├── BLOCKERS.md                 ├── recommendations.json                  │
+│  ├── VISION.md                   ├── roadmap.json                          │
+│  ├── SOLUTION_NARRATIVE.md       └── methodology.json                      │
+│  └── telos/*.md                                                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
-Artifact Schema
+### Artifact Schema
 
-findings.json:```json
+**findings.json:**
+```json
 {
   "findings": [
     {
-      "id": "F",
+      "id": "F1",
       "title": "Finding Title",
       "description": "Description of the finding",
       "evidence": "Evidence supporting this finding",
@@ -63,11 +65,12 @@ findings.json:```json
 }
 ```
 
-recommendations.json:```json
+**recommendations.json:**
+```json
 {
   "recommendations": [
     {
-      "id": "R",
+      "id": "R1",
       "title": "Recommendation Title",
       "description": "Description",
       "priority": "immediate|short-term|long-term"
@@ -76,81 +79,85 @@ recommendations.json:```json
 }
 ```
 
-roadmap.json:```json
+**roadmap.json:**
+```json
 {
   "phases": [
     {
-      "phase": "Phase ",
+      "phase": "Phase 1",
       "title": "Phase Title",
       "description": "Phase description",
-      "duration": "Weeks -"
+      "duration": "Weeks 1-8"
     }
   ]
 }
 ```
 
-methodology.json:```json
+**methodology.json:**
+```json
 {
-  "interviewCount": ,
-  "roles": ["CEO", "CTO", "VP Product", "Product Managers ()"]
+  "interviewCount": 12,
+  "roles": ["CEO", "CTO", "VP Product", "Product Managers (3)"]
 }
 ```
 
-narrative.json:```json
+**narrative.json:**
+```json
 {
   "context": "Executive summary context",
   "clientAsk": "What the client asked for",
   "currentState": "Current state description",
   "whyNow": "Why this matters now",
-  "existentialRisks": ["Risk ", "Risk "],
-  "competitiveThreats": ["Threat ", "Threat "],
+  "existentialRisks": ["Risk 1", "Risk 2"],
+  "competitiveThreats": ["Threat 1", "Threat 2"],
   "timelinePressures": "Timeline pressure description",
   "goodNews": "The pivot - the solution exists",
-  "requirements": ["Requirement ", "Requirement "],
+  "requirements": ["Requirement 1", "Requirement 2"],
   "targetStateDescription": "Vision description",
-  "keyCapabilities": ["Capability ", "Capability "],
-  "successMetrics": ["Metric ", "Metric "],
-  "immediateSteps": ["Step ", "Step "],
-  "decisionPoints": ["Decision ", "Decision "],
+  "keyCapabilities": ["Capability 1", "Capability 2"],
+  "successMetrics": ["Metric 1", "Metric 2"],
+  "immediateSteps": ["Step 1", "Step 2"],
+  "decisionPoints": ["Decision 1", "Decision 2"],
   "commitmentRequired": "What courage looks like"
 }
 ```
 
-Regeneration Flow
+### Regeneration Flow
 
 When you edit source files and say "regenerate the report":
 
-. Assessment Workflowreads source files → produces `artifacts/.json`
-. Report Workflowreads `artifacts/.json` → generates `report/lib/report-data.ts`
-. Dev serverhot-reloads → updated report visible
+1. **Assessment Workflow** reads source files → produces `artifacts/*.json`
+2. **Report Workflow** reads `artifacts/*.json` → generates `report/lib/report-data.ts`
+3. **Dev server** hot-reloads → updated report visible
 
-The artifacts/ directory is the contract between assessment and report workflows.
+**The artifacts/ directory is the contract between assessment and report workflows.**
+
 ---
 
-Execution Steps
+## Execution Steps
 
-Step : Verify Artifacts Exist
+### Step 1: Verify Artifacts Exist
 
 Check that the assessment workflow has produced artifacts:
 
 ```bash
 ls {source}/artifacts/
-Should contain: findings.json, recommendations.json, roadmap.json, methodology.json, narrative.json
+# Should contain: findings.json, recommendations.json, roadmap.json, methodology.json, narrative.json
 ```
 
-If artifacts don't exist, run the assessment workflow first (CreateNarrativePoints or AnalyzeProjectWithGemini).
+If artifacts don't exist, run the assessment workflow first (CreateNarrativePoints or AnalyzeProjectWithGemini3).
 
-Step : Copy Report Template
+### Step 2: Copy Report Template
 
 ```bash
-Copy template to output directory (if not already done)
-cp -r ~/.claude/skills/_TELOS/report-template/{output_dir}/
+# Copy template to output directory (if not already done)
+cp -r ~/.claude/skills/_TELOS/report-template/* {output_dir}/
 
-Install dependencies
+# Install dependencies
 cd {output_dir} && bun install
 ```
 
-Step : Generate report-data.ts from Artifacts
+### Step 3: Generate report-data.ts from Artifacts
 
 Read each artifact file and assemble into the ReportData structure:
 
@@ -166,13 +173,13 @@ const narrative = JSON.parse(fs.readFileSync('{source}/artifacts/narrative.json'
 const reportData = {
   clientName: "{client_name}",
   reportTitle: "Strategic Assessment & Transformation Roadmap",
-  reportDate: "December ",
+  reportDate: "December 2025",
   classification: "CONFIDENTIAL",
   executiveSummary: {
     context: narrative.context,
     methodology: methodology,
-    keyFindings: narrative.keyFindings || findings.findings.slice(,).map(f => f.title),
-    primaryRecommendation: recommendations.recommendations[]?.description || "",
+    keyFindings: narrative.keyFindings || findings.findings.slice(0,5).map(f => f.title),
+    primaryRecommendation: recommendations.recommendations[0]?.description || "",
     expectedOutcomes: narrative.expectedOutcomes || []
   },
   situationAssessment: {
@@ -207,7 +214,7 @@ const reportData = {
 
 Write the assembled data to `{output_dir}/lib/report-data.ts`.
 
-Step : Start Dev Server
+### Step 4: Start Dev Server
 
 ```bash
 cd {output_dir} && bun dev
@@ -215,69 +222,71 @@ cd {output_dir} && bun dev
 
 The report will hot-reload as you regenerate.
 
-Regeneration Shortcut
+### Regeneration Shortcut
 
 When {PRINCIPAL.NAME} edits source files and says "regenerate the report":
 
-. Run assessment workflow to update artifacts
-. Re-run Step to regenerate report-data.ts
-. Dev server hot-reloads automatically
+1. Run assessment workflow to update artifacts
+2. Re-run Step 3 to regenerate report-data.ts
+3. Dev server hot-reloads automatically
 
 ---
 
-Report Structure
+## Report Structure
 
-. Cover Page
+### 1. Cover Page
 - Confidential classification at top (Heliotrope Caps, red)
-- Centered content block:  - UL logo(x, left-justified with -ml-) - `/ul-icon.png`
-  - "TELOS Assessment"label (Heliotrope Caps, primary blue, tracking-[.em])
+- **Centered content block:**
+  - **UL logo** (125x125, left-justified with -ml-4) - `/ul-icon.png`
+  - **"TELOS Assessment"** label (Heliotrope Caps, primary blue, tracking-[0.25em])
   - Report title (Advocate Wide font)
-  - "Prepared for {Client Name}" - CUSTOMIZE per engagement- Footer: Date + "<ORG_NAME> Consulting"
+  - "Prepared for {Client Name}" - **CUSTOMIZE per engagement**
+- Footer: Date + "<ORG_NAME> Consulting"
 
-. Executive Summary (page)
-- Methodology exhibit- Interview count and roles interviewed (by role, not by name)
+### 2. Executive Summary (1 page)
+- **Methodology exhibit** - Interview count and roles interviewed (by role, not by name)
 - Situation overview
-- Key findings (-bullets)
+- Key findings (3-5 bullets)
 - Primary recommendation
 - Expected outcomes
 
-. Situation Assessment
+### 3. Situation Assessment
 - Current state analysis
 - Context and background
 - What the client asked for
 - Why this matters now
 
-. Key Findings
+### 4. Key Findings
 - Each finding as a distinct section
 - Evidence supporting each finding
 - Severity/impact indicator
 - Source attribution (see Board-Ready Reports section below)
 
-. Risk Analysis
+### 5. Risk Analysis
 - Existential risks identified
 - Probability and impact matrix
 - Competitive threats
 - Timeline pressures
 
-. Strategic Recommendations
+### 6. Strategic Recommendations
 - Primary recommendation
 - Supporting recommendations
 - Required organizational changes
 - Resource requirements
 
-. Target State Vision
+### 7. Target State Vision
 - Future state description
 - Architecture/approach overview
 - Key capabilities enabled
 - Success metrics
 
-. Implementation Roadmap
+### 8. Implementation Roadmap
 - Phased approach
 - Quick wins vs long-term initiatives
 - Dependencies
 - Milestones
 
-. Call to Action
+### 9. Call to Action
 - Immediate next steps
 - Decision points required
 - Success criteria
@@ -285,15 +294,16 @@ Report Structure
 
 ---
 
-Design Specifications
+## Design Specifications
 
-Typography (Practical Typography Fonts)
+### Typography (Practical Typography Fonts)
 
-CRITICAL: Use Matthew Butterick's Practical Typography fonts (see font source below)
+**CRITICAL: Use Matthew Butterick's Practical Typography fonts (see font source below)**
+
 The report-template includes these fonts in `public/fonts/`. The font stack is:
 
 ```css
-/Font Families /
+/* Font Families */
 --font-display: 'Advocate Wide', 'Advocate', sans-serif;
 --font-heading: 'Concourse Medium', 'Concourse', sans-serif;
 --font-body: 'Valkyrie', Georgia, serif;
@@ -301,186 +311,195 @@ The report-template includes these fonts in `public/fonts/`. The font stack is:
 --font-sans: 'Concourse', system-ui, sans-serif;
 ```
 
-Font Usage:
+**Font Usage:**
+
 | Element | Font | Weight | Example |
 |---------|------|--------|---------|
-| Cover title | Advocate Wide | | Report title on cover page |
-| Section headings | Concourse Medium | | "Executive Summary", "Key Findings" |
-| Body text | Valkyrie | | Paragraphs, descriptions, evidence |
-| Labels/badges | Heliotrope Caps | | "EXHIBIT ", "KEY TAKEAWAY", "CRITICAL" |
-| UI elements | Concourse | /| Dates, metadata, badges |
+| Cover title | Advocate Wide | 400 | Report title on cover page |
+| Section headings | Concourse Medium | 600 | "Executive Summary", "Key Findings" |
+| Body text | Valkyrie | 400 | Paragraphs, descriptions, evidence |
+| Labels/badges | Heliotrope Caps | 400 | "EXHIBIT 1", "KEY TAKEAWAY", "CRITICAL" |
+| UI elements | Concourse | 400/700 | Dates, metadata, badges |
 
-Branding Assets Required:
+**Branding Assets Required:**
+
 ```
 public/
- ul-icon.png                    UL connected nodes logo (blue)
+├── ul-icon.png                    # UL connected nodes logo (blue)
 ```
 
-Font Files Required:
+**Font Files Required:**
+
 ```
 public/fonts/
- advocate__narr_reg.woff     Advocate (narrow)
- advocate__wide_reg.woff     Advocate Wide (display)
- concourse__regular.woff      Concourse (sans)
- concourse__bold.woff         Concourse Bold
- concourse__regular.woff      Concourse Medium
- concourse__bold.woff         Concourse Medium Bold
- valkyrie_a_regular.woff       Valkyrie (serif body)
- valkyrie_a_bold.woff          Valkyrie Bold
- valkyrie_a_italic.woff        Valkyrie Italic
- heliotrope__regular.woff     Heliotrope
- heliotrope__caps_regular.woffHeliotrope Caps (labels)
+├── advocate_34_narr_reg.woff2      # Advocate (narrow)
+├── advocate_54_wide_reg.woff2      # Advocate Wide (display)
+├── concourse_3_regular.woff2       # Concourse (sans)
+├── concourse_3_bold.woff2          # Concourse Bold
+├── concourse_4_regular.woff2       # Concourse Medium
+├── concourse_4_bold.woff2          # Concourse Medium Bold
+├── valkyrie_a_regular.woff2        # Valkyrie (serif body)
+├── valkyrie_a_bold.woff2           # Valkyrie Bold
+├── valkyrie_a_italic.woff2         # Valkyrie Italic
+├── heliotrope_3_regular.woff2      # Heliotrope
+└── heliotrope_3_caps_regular.woff2 # Heliotrope Caps (labels)
 ```
 
-Color Palette (Dark Theme)
+### Color Palette (Dark Theme)
 
 The report uses a professional super-dark blue background with brightened accent colors for optimal contrast:
 
 ```css
-/Dark Theme - Super Dark Blue Background /
---background: BD;           /Primary background - deep navy /
---background-secondary: D;  /Section backgrounds /
---background-tertiary: C;   /Elevated elements /
---background-elevated: E;   /Cards, modals /
+/* Dark Theme - Super Dark Blue Background */
+--background: #0B0D14;           /* Primary background - deep navy */
+--background-secondary: #12141D;  /* Section backgrounds */
+--background-tertiary: #191C26;   /* Elevated elements */
+--background-elevated: #20232E;   /* Cards, modals */
 
-/Text - Light on Dark /
---foreground: FFF;           /Primary text /
---muted: AAA;                /Secondary text /
---muted-dark: BB;           /Tertiary text /
+/* Text - Light on Dark */
+--foreground: #F5F5F7;           /* Primary text */
+--muted: #A1A1A6;                /* Secondary text */
+--muted-dark: #6B6B70;           /* Tertiary text */
 
-/Borders /
---border: rgba(, , , .);
---border-subtle: rgba(, , , .);
---border-emphasis: rgba(, , , .);
+/* Borders */
+--border: rgba(255, 255, 255, 0.12);
+--border-subtle: rgba(255, 255, 255, 0.08);
+--border-emphasis: rgba(255, 255, 255, 0.2);
 
-/Accents - Brightened for dark mode /
---primary: AEF;              /Headers, key metrics, links /
---primary-glow: rgba(, , , .);
---accent: BAFF;               /Highlights, callouts /
---accent-glow: rgba(, , , .);
---success: ADE;              /Positive indicators /
---warning: FBBF;              /Caution indicators /
---destructive: F;          /Risk/critical indicators /
+/* Accents - Brightened for dark mode */
+--primary: #4A9EF7;              /* Headers, key metrics, links */
+--primary-glow: rgba(74, 158, 247, 0.3);
+--accent: #B47AFF;               /* Highlights, callouts */
+--accent-glow: rgba(180, 122, 255, 0.3);
+--success: #4ADE80;              /* Positive indicators */
+--warning: #FBBF24;              /* Caution indicators */
+--destructive: #F87171;          /* Risk/critical indicators */
 
-/Section backgrounds /
---section-bg: D;           /Section backgrounds /
---callout-bg: rgba(, , , .);  /Blue tinted callouts /
+/* Section backgrounds */
+--section-bg: #12141D;           /* Section backgrounds */
+--callout-bg: rgba(74, 158, 247, 0.1);  /* Blue tinted callouts */
 ```
 
-Print Mode:When printed (Cmd+P), the report automatically switches to a light theme for better paper output:
-- White background (ffffff)
-- Dark text (ab)
+**Print Mode:** When printed (Cmd+P), the report automatically switches to a light theme for better paper output:
+- White background (#ffffff)
+- Dark text (#1a1b26)
 - Standard accent colors for ink efficiency
 
-McKinsey Visual Elements
+### McKinsey Visual Elements
 
-. Exhibit Boxes- Numbered figures with Heliotrope Caps labels and sources
-. Key Takeaway Callouts- Blue-accented boxes with Heliotrope Caps headers
-. Severity Indicators- Color-coded tags (Critical/High/Medium/Low) in Concourse
-. Progress Bars- For metrics and completion percentages
-. Timeline Graphics- For roadmaps and phases with Heliotrope Caps phase labels
-. Quote Blocks- For interview evidence with Valkyrie italic
+1. **Exhibit Boxes** - Numbered figures with Heliotrope Caps labels and sources
+2. **Key Takeaway Callouts** - Blue-accented boxes with Heliotrope Caps headers
+3. **Severity Indicators** - Color-coded tags (Critical/High/Medium/Low) in Concourse
+4. **Progress Bars** - For metrics and completion percentages
+5. **Timeline Graphics** - For roadmaps and phases with Heliotrope Caps phase labels
+6. **Quote Blocks** - For interview evidence with Valkyrie italic
 
-Layout Principles
+### Layout Principles
 
-- White space: Generous margins, breathing room between sections
-- Hierarchy: Clear visual hierarchy through typography and spacing
-- Consistency: Same patterns repeated throughout
-- Professional: Clean, corporate, trustworthy aesthetic
-- Printable: Optimized for both screen and print (PDF-ready)
+- **White space**: Generous margins, breathing room between sections
+- **Hierarchy**: Clear visual hierarchy through typography and spacing
+- **Consistency**: Same patterns repeated throughout
+- **Professional**: Clean, corporate, trustworthy aesthetic
+- **Printable**: Optimized for both screen and print (PDF-ready)
 
 ---
 
-Output Files
+## Output Files
 
 The workflow generates a complete Next.js app:
 
 ```
 {output_dir}/
- public/
-    fonts/              Practical Typography fonts (wofffiles)
- app/
-    layout.tsx          Report shell with print styles
-    page.tsx            Full report content
-    globals.css         Font-face declarations + McKinsey styling
- components/
-    cover-page.tsx      Report cover (Advocate Wide title)
-    section.tsx         Reusable section component
-    finding-card.tsx    Individual finding display
-    exhibit.tsx         Numbered figure/exhibit
-    callout.tsx         Key takeaway box
-    severity-badge.tsx  Risk/severity indicator
-    timeline.tsx        Roadmap visualization
-    quote-block.tsx     Interview quote display
-    recommendation-card.tsx  Priority-coded recommendations
- lib/
-    report-data.ts      Generated report content (CUSTOMIZE THIS)
-    utils.ts            Utility functions
- package.json
- tailwind.config.ts      Font family definitions
- tsconfig.json
- postcss.config.js
+├── public/
+│   └── fonts/              # Practical Typography fonts (11 woff2 files)
+├── app/
+│   ├── layout.tsx          # Report shell with print styles
+│   ├── page.tsx            # Full report content
+│   └── globals.css         # Font-face declarations + McKinsey styling
+├── components/
+│   ├── cover-page.tsx      # Report cover (Advocate Wide title)
+│   ├── section.tsx         # Reusable section component
+│   ├── finding-card.tsx    # Individual finding display
+│   ├── exhibit.tsx         # Numbered figure/exhibit
+│   ├── callout.tsx         # Key takeaway box
+│   ├── severity-badge.tsx  # Risk/severity indicator
+│   ├── timeline.tsx        # Roadmap visualization
+│   ├── quote-block.tsx     # Interview quote display
+│   └── recommendation-card.tsx  # Priority-coded recommendations
+├── lib/
+│   ├── report-data.ts      # Generated report content (CUSTOMIZE THIS)
+│   └── utils.ts            # Utility functions
+├── package.json
+├── tailwind.config.ts      # Font family definitions
+├── tsconfig.json
+└── postcss.config.js
 ```
 
 ---
 
-Example Command Flow
+## Example Command Flow
 
 ```bash
-User: "Create a TELOS report for Acme Corp"
+# User: "Create a TELOS report for Acme Corp"
 
-Step : {DA_IDENTITY.NAME} runs TELOS analysis on source directory
-Step : {DA_IDENTITY.NAME} executes CreateNarrativePoints workflow
-Step : {DA_IDENTITY.NAME} copies report-template to output directory
-Step : {DA_IDENTITY.NAME} generates report-data.ts with content
-Step : {DA_IDENTITY.NAME} runs bun install && bun dev
+# Step 1: {DA_IDENTITY.NAME} runs TELOS analysis on source directory
+# Step 2: {DA_IDENTITY.NAME} executes CreateNarrativePoints workflow
+# Step 3: {DA_IDENTITY.NAME} copies report-template to output directory
+# Step 4: {DA_IDENTITY.NAME} generates report-data.ts with content
+# Step 5: {DA_IDENTITY.NAME} runs bun install && bun dev
 
-To view:
+# To view:
 cd {output_dir} && bun dev
-Opens at http://localhost:
-To print:
-Use browser print (Cmd+P) - print styles are included
+# Opens at http://localhost:3000
+
+# To print:
+# Use browser print (Cmd+P) - print styles are included
 ```
 
 ---
 
-Template Location
+## Template Location
 
-CRITICAL: The report template lives at:
+**CRITICAL: The report template lives at:**
+
 ```
 ~/.claude/skills/_TELOS/report-template/
 ```
 
 This template includes:
-- All Practical Typography font files
+- All 11 Practical Typography font files
 - Pre-configured globals.css with @font-face declarations
 - Tailwind config with font family definitions
 - All McKinsey-style components
 - Placeholder report-data.ts
 
 When generating a report:
-. Copy the entire template to the output directory
-. Generate `lib/report-data.ts` with client-specific content:
+1. Copy the entire template to the output directory
+2. Generate `lib/report-data.ts` with client-specific content:
    - `clientName`: The customer name (e.g., "Quorum Cyber", "Acme Corp")
    - `reportTitle`: The engagement title
    - `reportDate`: Current month/year
    - All findings, recommendations, roadmap from TELOS analysis
-. Update `app/layout.tsx` metadata with client name
+3. Update `app/layout.tsx` metadata with client name
 
 ---
 
-Integration Notes
+## Integration Notes
 
-Prerequisite Workflow:- CreateNarrativePoints MUST run first to generate narrative content
+**Prerequisite Workflow:**
+- CreateNarrativePoints MUST run first to generate narrative content
 
-Font Source:- Fonts should be sourced from Practical Typography or your project's font directory
+**Font Source:**
+- Fonts should be sourced from Practical Typography or your project's font directory
 - Already included in report-template for convenience
 
-Works with:- InterviewExtraction output (provides evidence quotes)
-- AnalyzeProjectWithGeminioutput (provides deep analysis)
+**Works with:**
+- InterviewExtraction output (provides evidence quotes)
+- AnalyzeProjectWithGemini3 output (provides deep analysis)
 - Direct TELOS directory analysis
 
-Output designed for:- Board presentations
+**Output designed for:**
+- Board presentations
 - Executive briefings
 - Client deliverables
 - Strategic planning sessions
@@ -488,11 +507,11 @@ Output designed for:- Board presentations
 
 ---
 
-Quality Checklist
+## Quality Checklist
 
 Before finalizing the report:
 
-- [ ] UL logo displays correctly (x, left-justified)
+- [ ] UL logo displays correctly (125x125, left-justified)
 - [ ] "TELOS Assessment" label visible above title
 - [ ] Cover page has correct client name and date
 - [ ] Cover title uses Advocate Wide font
@@ -514,9 +533,10 @@ Before finalizing the report:
 
 ---
 
-Voice & Tone
+## Voice & Tone
 
-This is McKinsey-style professional consulting:
+**This is McKinsey-style professional consulting:**
+
 - Direct, confident assertions
 - Evidence-backed claims
 - Strategic framing
@@ -525,7 +545,8 @@ This is McKinsey-style professional consulting:
 - Clear recommendations
 - Actionable insights
 
-Avoid:- Casual language
+**Avoid:**
+- Casual language
 - Technical jargon (unless client-appropriate)
 - Vague statements
 - Unsubstantiated claims
@@ -533,42 +554,45 @@ Avoid:- Casual language
 
 ---
 
-Board-Ready Reports
+## Board-Ready Reports
 
-When the report will be presented to a board or executive audience:
-Source Anonymization
+**When the report will be presented to a board or executive audience:**
 
-CRITICAL: Remove all individual names from source attributions.
+### Source Anonymization
+
+**CRITICAL: Remove all individual names from source attributions.**
+
 Sources should reference roles, not people:
-- "John Smith interview"
-- "Feedback from Sarah Jones"
-- "Executive interviews"
-- "Product team interviews ()"
-- "Engineering leadership feedback"
-- "Customer success team assessment"
+- ✗ "John Smith interview"
+- ✗ "Feedback from Sarah Jones"
+- ✓ "Executive interviews"
+- ✓ "Product team interviews (2)"
+- ✓ "Engineering leadership feedback"
+- ✓ "Customer success team assessment"
 
-Why:Boards should evaluate findings on merit, not attribute blame or credit to individuals. Role-based sourcing maintains credibility while protecting interviewees.
+**Why:** Boards should evaluate findings on merit, not attribute blame or credit to individuals. Role-based sourcing maintains credibility while protecting interviewees.
 
-Methodology Section
+### Methodology Section
 
 The Executive Summary MUST include:
-- Interview count- Total number of interviews conducted
-- Roles interviewed- List by role category, not by name
+- **Interview count** - Total number of interviews conducted
+- **Roles interviewed** - List by role category, not by name
 
 Example:
 ```
-Interviews Conducted: Roles Interviewed:
+Interviews Conducted: 12
+Roles Interviewed:
 - Chief Executive Officer
 - Chief Technology Officer
 - VP of Product
-- Product Managers ()
-- Engineering Leadership ()
+- Product Managers (3)
+- Engineering Leadership (2)
 - Customer Success Leadership
 - SOC Leadership
 - Sales Leadership
 ```
 
-Content Review Checklist
+### Content Review Checklist
 
 Before board presentation:
 - [ ] All individual names removed from sources
@@ -580,13 +604,15 @@ Before board presentation:
 
 ---
 
-Maintenance
+## Maintenance
 
-To update fonts:```bash
-Copy latest fonts from ULSite
-cp ~/Projects/[your-site]/public/fonts/.woff~/.claude/skills/Telos/ReportTemplate/public/fonts/
+**To update fonts:**
+```bash
+# Copy latest fonts from ULSite
+cp ~/Projects/[your-site]/public/fonts/*.woff2 ~/.claude/skills/Telos/ReportTemplate/public/fonts/
 ```
 
-To update template components:Edit files in `~/.claude/skills/_TELOS/report-template/components/`
+**To update template components:**
+Edit files in `~/.claude/skills/_TELOS/report-template/components/`
 
-To change color scheme:
+**To change color scheme:**

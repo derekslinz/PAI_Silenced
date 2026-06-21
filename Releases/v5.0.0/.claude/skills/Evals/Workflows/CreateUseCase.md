@@ -1,32 +1,43 @@
-CreateUseCase Workflow
+# CreateUseCase Workflow
 
 Create a new evaluation use case with test cases and scoring criteria.
 
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the CreateUseCase workflow in the Evals skill to create eval use case"}' \
+  > /dev/null 2>&1 &
+```
+
+Running the **CreateUseCase** workflow in the **Evals** skill to create eval use case...
+
 ---
 
-Prerequisites
+## Prerequisites
 
 - Clear understanding of what you're evaluating
 - Example inputs and expected outputs
 - Quality criteria defined
 
-Execution
+## Execution
 
-Step : Gather Requirements
+### Step 1: Gather Requirements
 
 Ask the user:
-. What is this use case evaluating? (prompt, model, task)
-. What does "good" output look like?
-. What specific criteria matter? (accuracy, format, style, etc.)
-. Do you have example inputs and outputs?
+1. What is this use case evaluating? (prompt, model, task)
+2. What does "good" output look like?
+3. What specific criteria matter? (accuracy, format, style, etc.)
+4. Do you have example inputs and outputs?
 
-Step : Create Use Case Directory
+### Step 2: Create Use Case Directory
 
 ```bash
 mkdir -p ~/.claude/skills/Evals/UseCases/<name>/{test-cases,golden-outputs,prompts}
 ```
 
-Step : Create Config File
+### Step 3: Create Config File
 
 Create `~/.claude/skills/Evals/UseCases/<name>/config.yaml`:
 
@@ -35,77 +46,88 @@ name: <use_case_name>
 description: |
   <What this use case evaluates and why>
 
-version: ".."
+version: "1.0.0"
 
-What we're testing
+# What we're testing
 target:
-  type: prompt  or "model", "agent"
-  path: prompts/v...md  relative path
+  type: prompt  # or "model", "agent"
+  path: prompts/v1.0.0.md  # relative path
 
-Scoring criteria
+# Scoring criteria
 criteria:
   deterministic:
     - scorer: "sentence-counter"
-      weight: .      params:
-        min:         max:     - scorer: "format-validator"
-      weight: .      params:
+      weight: 0.10
+      params:
+        min: 2
+        max: 5
+    - scorer: "format-validator"
+      weight: 0.10
+      params:
         required_sections: ["summary", "analysis"]
     - scorer: "voice-validator"
-      weight: .      params:
+      weight: 0.10
+      params:
         forbidden_words: ["unveils", "plummeted", "groundbreaking"]
         check_contractions: true
 
   ai_based:
     - scorer: "llm-judge-accuracy"
-      weight: .      params:
-        judge_model: "claude---sonnet-"
+      weight: 0.35
+      params:
+        judge_model: "claude-3-5-sonnet-20241022"
         reasoning_first: true
-        scale: "-"
+        scale: "1-5"
     - scorer: "llm-judge-style"
-      weight: .      params:
-        judge_model: "claude---sonnet-"
+      weight: 0.35
+      params:
+        judge_model: "claude-3-5-sonnet-20241022"
         reasoning_first: true
-        scale: "-"
+        scale: "1-5"
 
-Pass/fail threshold
-pass_threshold: .
-Models to evaluate against
+# Pass/fail threshold
+pass_threshold: 0.75
+
+# Models to evaluate against
 models:
-  - claude---sonnet-  - claude---haiku-  - gpt-o
+  - claude-3-5-sonnet-20241022
+  - claude-3-5-haiku-20241022
+  - gpt-4o
 ```
 
-Step : Create Initial Prompt Version
+### Step 4: Create Initial Prompt Version
 
-Create `~/.claude/skills/Evals/UseCases/<name>/prompts/v...md`:
+Create `~/.claude/skills/Evals/UseCases/<name>/prompts/v1.0.0.md`:
 
 ```markdown
-<Task Name> Prompt v..
-System Context
+# <Task Name> Prompt v1.0.0
+
+## System Context
 
 <System prompt or context>
 
-Task Instructions
+## Task Instructions
 
 <Specific instructions for the task>
 
-Output Format
+## Output Format
 
 <Expected output format specification>
 
-Examples (Optional)
+## Examples (Optional)
 
 <Few-shot examples if applicable>
 ```
 
-Step : Create Test Cases
+### Step 5: Create Test Cases
 
 Create test cases in `~/.claude/skills/Evals/UseCases/<name>/test-cases/`:
 
 Each test case is a YAML file:
 
 ```yaml
-test-cases/-basic.yaml
-id: "-basic"
+# test-cases/001-basic.yaml
+id: "001-basic"
 name: "Basic functionality test"
 description: "Tests standard use case"
 priority: high
@@ -117,28 +139,31 @@ input:
     key: value
 
 expected:
-  format: "structured"  or "freeform"
+  format: "structured"  # or "freeform"
   contains:
-    - "expected phrase "
-    - "expected phrase "
+    - "expected phrase 1"
+    - "expected phrase 2"
   excludes:
     - "unwanted phrase"
   length:
-    min_words:     max_words: 
-golden_output: "../golden-outputs/-basic.md"  Optional reference
+    min_words: 50
+    max_words: 200
+
+golden_output: "../golden-outputs/001-basic.md"  # Optional reference
 ```
 
-Recommended Test Case Distribution:- -Easycases (standard inputs, clear expectations)
-- -Mediumcases (typical edge cases)
-- -Hardcases (ambiguous inputs, tricky scenarios)
+**Recommended Test Case Distribution:**
+- 2-3 **Easy** cases (standard inputs, clear expectations)
+- 3-4 **Medium** cases (typical edge cases)
+- 2-3 **Hard** cases (ambiguous inputs, tricky scenarios)
 
-Step : Create Golden Outputs (Optional)
+### Step 6: Create Golden Outputs (Optional)
 
 If you have reference "perfect" outputs, add them:
 
 ```bash
-golden-outputs/-basic.md
-<The ideal output for test case >
+# golden-outputs/001-basic.md
+<The ideal output for test case 001>
 ```
 
 Golden outputs serve as:
@@ -146,68 +171,68 @@ Golden outputs serve as:
 - Baseline for comparison
 - Documentation of expected behavior
 
-Step : Create README
+### Step 7: Create README
 
 Create `~/.claude/skills/Evals/UseCases/<name>/README.md`:
 
 ```markdown
-<Use Case Name>
+# <Use Case Name>
 
-Purpose
+## Purpose
 
 <What this use case evaluates and why it matters>
 
-Target
+## Target
 
 <What's being tested - prompt, model, agent>
 
-Quality Criteria
+## Quality Criteria
 
-Deterministic (%)
-- Sentence Count(%): -sentences per summary
-- Format(%): Required sections present
-- Voice(%): Matches target style
+### Deterministic (60%)
+- **Sentence Count** (10%): 2-5 sentences per summary
+- **Format** (10%): Required sections present
+- **Voice** (10%): Matches target style
 
-AI-Based (%)
-- Accuracy(%): Factual correctness
-- Style(%): Voice authenticity
+### AI-Based (40%)
+- **Accuracy** (35%): Factual correctness
+- **Style** (35%): Voice authenticity
 
-Test Cases
+## Test Cases
 
 | ID | Name | Priority | Description |
 |----|------|----------|-------------|
-| | Basic | High | Standard input |
-| | Edge | Medium | Edge case handling |
+| 001 | Basic | High | Standard input |
+| 002 | Edge | Medium | Edge case handling |
 | ... | ... | ... | ... |
 
-Running Evaluations
+## Running Evaluations
 
 \`\`\`bash
 bun run ~/.claude/skills/Evals/EvalServer/cli-run.ts --use-case <name>
 \`\`\`
 
-Version History
+## Version History
 
-- v..: Initial version
+- v1.0.0: Initial version
 ```
 
-Step : Validate Use Case
+### Step 8: Validate Use Case
 
 ```bash
-Check structure
+# Check structure
 ls -la ~/.claude/skills/Evals/UseCases/<name>/
 
-Validate config
+# Validate config
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts use-case show <name>
 ```
 
-Step : Run Initial Eval
+### Step 9: Run Initial Eval
 
 ```bash
-Run first evaluation to verify setup
+# Run first evaluation to verify setup
 bun run ~/.claude/skills/Evals/EvalServer/cli-run.ts \
   --use-case <name> \
-  --test-id -basic \
+  --test-id 001-basic \
   --verbose
 ```
 
@@ -216,48 +241,48 @@ Review:
 - Are test cases properly formatted?
 - Do AI judges produce valid output?
 
-Best Practices
+## Best Practices
 
-Test Case Design
+### Test Case Design
 
-. Cover the distribution: Easy, medium, and hard cases
-. Include edge cases: Empty inputs, very long inputs, malformed data
-. Version inputs: Track which test cases apply to which prompt versions
-. Document failures: When tests fail, understand why before fixing
+1. **Cover the distribution**: Easy, medium, and hard cases
+2. **Include edge cases**: Empty inputs, very long inputs, malformed data
+3. **Version inputs**: Track which test cases apply to which prompt versions
+4. **Document failures**: When tests fail, understand why before fixing
 
-Criteria Weights
+### Criteria Weights
 
 | Pattern | Deterministic | AI-Based |
 |---------|---------------|----------|
-| Format-critical | -% | -% |
-| Quality-critical | -% | -% |
-| Balanced | % | % |
+| Format-critical | 60-70% | 30-40% |
+| Quality-critical | 30-40% | 60-70% |
+| Balanced | 50% | 50% |
 
-Prompt Versioning
+### Prompt Versioning
 
 Use semantic versioning:
-- v..→ v..: Bug fix, minor wording change
-- v..→ v..: New feature, added section
-- v..→ v..: Major rewrite, breaking changes
+- **v1.0.0 → v1.0.1**: Bug fix, minor wording change
+- **v1.0.0 → v1.1.0**: New feature, added section
+- **v1.0.0 → v2.0.0**: Major rewrite, breaking changes
 
-Directory Structure
+## Directory Structure
 
 ```
 UseCases/<name>/
- config.yaml          Scoring configuration
- README.md            Documentation
- test-cases/          Test case definitions
-    -basic.yaml
-    -edge.yaml
-    ...
- golden-outputs/      Reference outputs (optional)
-    -basic.md
-    ...
- prompts/             Versioned prompts
-     v...md
-     v...md
+├── config.yaml          # Scoring configuration
+├── README.md            # Documentation
+├── test-cases/          # Test case definitions
+│   ├── 001-basic.yaml
+│   ├── 002-edge.yaml
+│   └── ...
+├── golden-outputs/      # Reference outputs (optional)
+│   ├── 001-basic.md
+│   └── ...
+└── prompts/             # Versioned prompts
+    ├── v1.0.0.md
+    └── v1.1.0.md
 ```
 
-Done
+## Done
 
 Use case created and validated. Ready to run evaluations.

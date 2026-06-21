@@ -1,109 +1,118 @@
-Create Sales Package
+# Create Sales Package
 
-Full pipeline: Transform product documentation into sales narrative + visual asset.
+**Full pipeline: Transform product documentation into sales narrative + visual asset.**
+
 ---
 
-MANDATORY STEPS — EXECUTE IN ORDER
+## MANDATORY STEPS — EXECUTE IN ORDER
 
 ```
 PRODUCT DOCUMENTATION
         ↓
-[] STORY EXPLANATION — Extract narrative arc with StoryExplanation Skill
+[1] STORY EXPLANATION — Extract narrative arc with StoryExplanation Skill
         ↓
-[] EMOTIONAL REGISTER — Match to emotion from aesthetic vocabulary
+[2] EMOTIONAL REGISTER — Match to emotion from aesthetic vocabulary
         ↓
-[] VISUAL CONCEPT — Derive scene from narrative + emotion
+[3] VISUAL CONCEPT — Derive scene from narrative + emotion
         ↓
-[] GENERATE VISUAL — Create charcoal sketch with Art Skill
+[4] GENERATE VISUAL — Create charcoal sketch with Art Skill
         ↓
-[] COMPILE OUTPUT — Narrative + visual + talking points
+[5] COMPILE OUTPUT — Narrative + visual + talking points
 ```
 
 ---
 
-Step : Extract Narrative with Story Explanation
+## Step 1: Extract Narrative with Story Explanation
 
-Use the StoryExplanation Skill to extract the narrative arc.
+**Use the StoryExplanation Skill to extract the narrative arc.**
+
 ```
-Invoke StoryExplanation Skill with -item length for [product documentation]
+Invoke StoryExplanation Skill with 24-item length for [product documentation]
 ```
 
-Focus on:- What's the REAL value proposition?
+**Focus on:**
+- What's the REAL value proposition?
 - Why does this MATTER to the customer?
 - What problem does this SOLVE?
 - What's the transformation (before → after)?
 
-Output:-point story explanation capturing the value proposition.
+**Output:** 8-24 point story explanation capturing the value proposition.
 
 ---
 
-Step : Identify Emotional Register
+## Step 2: Identify Emotional Register
 
-Match the product/value proposition to an emotional register.
+**Match the product/value proposition to an emotional register.**
+
 
 | Value Proposition Type | Emotional Register | Warm:Cool |
 |------------------------|-------------------|-----------|
-| Solves painful problem| HOPE / POSSIBILITY | :|
-| Prevents disaster/risk| URGENCY / WARNING | :|
-| Enables new capabilities| WONDER / DISCOVERY | :|
-| Saves time/effort| DETERMINATION / EFFORT | :|
-| Deep expertise/insight| CONTEMPLATION | :|
-| Team/collaboration| CONNECTION | :|
-| Replaces legacy/old way| MELANCHOLY (for old) + HOPE (for new) | :|
+| **Solves painful problem** | HOPE / POSSIBILITY | 80:20 |
+| **Prevents disaster/risk** | URGENCY / WARNING | 60:40 |
+| **Enables new capabilities** | WONDER / DISCOVERY | 40:60 |
+| **Saves time/effort** | DETERMINATION / EFFORT | 70:30 |
+| **Deep expertise/insight** | CONTEMPLATION | 50:50 |
+| **Team/collaboration** | CONNECTION | 90:10 |
+| **Replaces legacy/old way** | MELANCHOLY (for old) + HOPE (for new) | 60:40 |
 
-Output:Selected emotional register with specific vocabulary.
+**Output:** Selected emotional register with specific vocabulary.
 
 ---
 
-Step : Derive Visual Concept
+## Step 3: Derive Visual Concept
 
-Translate narrative + emotion into a specific visual scene.
-Key Questions
+**Translate narrative + emotion into a specific visual scene.**
 
-. What are the CONCRETE SUBJECTS?   - Extract specific nouns from the value proposition
+### Key Questions
+
+1. **What are the CONCRETE SUBJECTS?**
+   - Extract specific nouns from the value proposition
    - Human figure? AI/robot figure? Both?
    - What objects represent the product/outcome?
 
-. What's the VISUAL METAPHOR?   - What scene captures the transformation?
+2. **What's the VISUAL METAPHOR?**
+   - What scene captures the transformation?
    - What shows the value in action?
    - What would make someone "get it" instantly?
 
-. What's the COMPOSITION?   - Minimalist with breathing space
+3. **What's the COMPOSITION?**
+   - Minimalist with breathing space
    - Centered subjects floating in empty space
    - Few elements, each intentional
 
-Scene Construction Template
+### Scene Construction Template
 
 ```
 VALUE PROPOSITION: [One sentence summary of what matters]
 CONCRETE SUBJECTS: [Specific nouns that MUST appear visually]
 VISUAL METAPHOR: [What scene captures this value?]
-EMOTIONAL REGISTER: [From Step ]
+EMOTIONAL REGISTER: [From Step 2]
 WARM:COOL RATIO: [From emotion table]
 ```
 
-Output:Specific visual scene that captures the value proposition.
+**Output:** Specific visual scene that captures the value proposition.
 
 ---
 
-Step : Generate Visual Asset
+## Step 4: Generate Visual Asset
 
-Use the Art Skill (essay-art workflow) to create the image.
-Invoke Art Skill
+**Use the Art Skill (essay-art workflow) to create the image.**
+
+### Invoke Art Skill
 
 ```
 Invoke Art Skill → essay-art workflow
 ```
 
-Prompt Template
+### Prompt Template
 
 ```
 Sophisticated charcoal architectural sketch. [ARTIST REFERENCE] influence.
 
-EMOTIONAL REGISTER: [From Step ]
+EMOTIONAL REGISTER: [From Step 2]
 
 SCENE:
-[Visual scene from Step ]
+[Visual scene from Step 3]
 
 MINIMALIST COMPOSITION:
 - Subject(s) CENTERED in the frame
@@ -117,12 +126,12 @@ CONCRETE SUBJECTS:
 HUMAN FIGURE — GESTURAL ABSTRACTED SKETCH:
 - MULTIPLE OVERLAPPING LINES suggesting the form
 - Quick, confident, ENERGETIC gestural marks
-- Burnt Sienna (B) WASH accent touches
+- Burnt Sienna (#8B4513) WASH accent touches
 
 [If AI/tech figure:]
 ROBOT/TECH FIGURE — GESTURAL ANGULAR SKETCH:
 - Angular rigid gestural marks
-- Deep Purple (AC) WASH accent touches
+- Deep Purple (#4A148C) WASH accent touches
 
 LINEWORK:
 - Loose charcoal/graphite pencil strokes
@@ -130,7 +139,7 @@ LINEWORK:
 - NOT clean vectors, NOT smooth
 
 COLOR — CHARCOAL DOMINANT:
-- CHARCOAL AND GRAY DOMINANT — %
+- CHARCOAL AND GRAY DOMINANT — 85%
 - Sienna accents on human elements
 - Purple accents on tech elements
 - Background is EMPTY — white/cream negative space
@@ -145,92 +154,95 @@ Sign {DA_IDENTITY.NAME} small in charcoal bottom right.
 NO other text.
 ```
 
-Generate with CLI
+### Generate with CLI
 
 ```bash
 bun run ~/.claude/skills/art/Tools/Generate.ts \
   --model nano-banana-pro \
   --prompt "[YOUR PROMPT]" \
-  --size K \
-  --aspect-ratio :\
+  --size 2K \
+  --aspect-ratio 1:1 \
   --remove-bg \
   --output /path/to/output.png
 ```
 
-Output:Charcoal sketch visual asset with transparent background.
+**Output:** Charcoal sketch visual asset with transparent background.
 
 ---
 
-Step : Compile Sales Package
+## Step 5: Compile Sales Package
 
-Assemble the complete output.
-Output Format
+**Assemble the complete output.**
+
+### Output Format
 
 ```markdown
-Sales Package: [Product/Feature Name]
+# Sales Package: [Product/Feature Name]
 
-Sales Narrative
+## Sales Narrative
 
-[-point story explanation from Step ]
+[8-24 point story explanation from Step 1]
 
-Visual Asset
+## Visual Asset
 
 [Image path or embedded image]
 
-Key Talking Points
+## Key Talking Points
 
-. [First major value point]
-. [Second major value point]
-. [Third major value point]
+1. [First major value point]
+2. [Second major value point]
+3. [Third major value point]
 
-Emotional Hook
+## Emotional Hook
 
-Register:[Emotional register used]
-Core Message:[One sentence that captures the feeling]
+**Register:** [Emotional register used]
+**Core Message:** [One sentence that captures the feeling]
 
-Script Snippet
+## Script Snippet
 
-"[-sentence elevator pitch version of the narrative]"
+"[2-3 sentence elevator pitch version of the narrative]"
 ```
 
 ---
 
-Validation Checklist
+## Validation Checklist
 
 Before delivering:
 
-- [ ] Narrative captures VALUE— not just features, but why it matters
-- [ ] Visual matches narrative— someone could connect them
-- [ ] Emotional register consistent— narrative and visual aligned
-- [ ] Talking points actionable— sales team can use immediately
-- [ ] Script is natural— sounds like something you'd actually say
+- [ ] **Narrative captures VALUE** — not just features, but why it matters
+- [ ] **Visual matches narrative** — someone could connect them
+- [ ] **Emotional register consistent** — narrative and visual aligned
+- [ ] **Talking points actionable** — sales team can use immediately
+- [ ] **Script is natural** — sounds like something you'd actually say
 
 ---
 
-Example Execution
+## Example Execution
 
-Input:Documentation for AI code review tool
+**Input:** Documentation for AI code review tool
 
-Step Output (Narrative):. Code review is broken — PRs get rubber-stamped
-. Junior devs miss subtle bugs, seniors don't have time
-. This tool understands your codebase like a -year veteran
-. It catches the issues that slip through human review
-. Not pattern matching — actual understanding of your patterns
-. Learns your specific conventions and flags deviations
-. Integrates into existing workflow — no context switching
-. Result: fewer production bugs, faster reviews, happier teams
+**Step 1 Output (Narrative):**
+1. Code review is broken — PRs get rubber-stamped
+2. Junior devs miss subtle bugs, seniors don't have time
+3. This tool understands your codebase like a 10-year veteran
+4. It catches the issues that slip through human review
+5. Not pattern matching — actual understanding of your patterns
+6. Learns your specific conventions and flags deviations
+7. Integrates into existing workflow — no context switching
+8. Result: fewer production bugs, faster reviews, happier teams
 
-Step Output:WONDER / DISCOVERY (:warm:cool) — "it actually understands"
+**Step 2 Output:** WONDER / DISCOVERY (40:60 warm:cool) — "it actually understands"
 
-Step Output:- VALUE: AI that understands code like a senior engineer
+**Step 3 Output:**
+- VALUE: AI that understands code like a senior engineer
 - SUBJECTS: Human developer + AI figure, both examining code
 - METAPHOR: Two figures producing the same insight — you can't tell who caught the bug
 - COMPOSITION: Minimalist, centered, code/output flowing between them
 
-Step Output:Charcoal sketch of human and AI both examining same code output
+**Step 4 Output:** Charcoal sketch of human and AI both examining same code output
 
-Step Output:Complete sales package with narrative, visual, talking points, and script
+**Step 5 Output:** Complete sales package with narrative, visual, talking points, and script
 
 ---
 
-The workflow: Story Explanation → Emotion → Visual Concept → Generate → Compile
+**The workflow: Story Explanation → Emotion → Visual Concept → Generate → Compile**

@@ -1,8 +1,8 @@
-IDENTITY AND GOALS
+# IDENTITY AND GOALS
 
 You are an advanced UI builder that shows a visual representation of functionality that's provided to you via the input.
 
-STEPS
+# STEPS
 
 - Think about the goal of the Fabric project, which is discussed below:
 
@@ -43,7 +43,7 @@ Primary contributors
 Note
 
 We are adding functionality to the project so often that you should update often as well. That means: git pull; pipx install . --force; fabric --update; source ~/.zshrc (or ~/.bashrc) in the main directory!
-March , — We just added pipx install support, which makes it way easier to install Fabric, support for Claude, local models via Ollama, and a number of new Patterns. Be sure to update and check fabric -h for the latest!
+March 13, 2024 — We just added pipx install support, which makes it way easier to install Fabric, support for Claude, local models via Ollama, and a number of new Patterns. Be sure to update and check fabric -h for the latest!
 
 Introduction videos
 
@@ -55,7 +55,7 @@ These videos use the ./setup.sh install method, which is now replaced with the e
  Watch the video
 What and why
 
-Since the start of and GenAI we've seen a massive number of AI applications for accomplishing tasks. It's powerful, but it's not easy to integrate this functionality into our lives.
+Since the start of 2023 and GenAI we've seen a massive number of AI applications for accomplishing tasks. It's powerful, but it's not easy to integrate this functionality into our lives.
 
 In other words, AI doesn't have a capabilities problem—it has an integration problem.
 
@@ -73,7 +73,7 @@ Our approach is to break problems into individual pieces (see below) and then ap
 augmented_challenges
 Too many prompts
 
-Prompts are good for this, but the biggest challenge I faced in ——which still exists today—is the sheer number of AI prompts out there. We all have prompts that are useful, but it's hard to discover new ones, know if they are good or not, and manage different versions of the ones we like.
+Prompts are good for this, but the biggest challenge I faced in 2023——which still exists today—is the sheer number of AI prompts out there. We all have prompts that are useful, but it's hard to discover new ones, know if they are good or not, and manage different versions of the ones we like.
 
 One of fabric's primary features is helping people collect and integrate prompts, which we call Patterns, into various parts of their lives.
 
@@ -111,13 +111,13 @@ Setting up the fabric commands
 Follow these steps to get all fabric related apps installed and configured.
 
 Navigate to where you want the Fabric project to live on your system in a semi-permanent place on your computer.
-Find a home for Fabric
+# Find a home for Fabric
 cd /where/you/keep/code
 Clone the project to your computer.
-Clone Fabric to your computer
+# Clone Fabric to your computer
 git clone https://github.com/danielmiessler/fabric.git
 Enter Fabric's main directory
-Enter the project folder (where you cloned it)
+# Enter the project folder (where you cloned it)
 cd fabric
 Install pipx:
 macOS:
@@ -138,7 +138,7 @@ Restart your shell to reload everything.
 
 Now you are up and running! You can test by running the help.
 
-Making sure the paths are set up correctly
+# Making sure the paths are set up correctly
 fabric --help
 Note
 
@@ -155,7 +155,7 @@ us the results in
   --clear               Clears your persistent model choice so that you can
                         once again use the --model flag
   --update, -u          Update patterns. NOTE: This will revert the default
-                        model to gpt-turbo. please run --changeDefaultModel
+                        model to gpt4-turbo. please run --changeDefaultModel
                         to once again set default model
   --pattern PATTERN, -p PATTERN
                         The pattern (prompt) to use
@@ -168,7 +168,7 @@ us the results in
                         have set a default model. please use --clear to clear
                         persistence before using this flag
   --vendor VENDOR, -V VENDOR
-                        Specify vendor for the selected model (e.g., -V "LM Studio" -m openai/gpt-oss-b)
+                        Specify vendor for the selected model (e.g., -V "LM Studio" -m openai/gpt-oss-20b)
   --listmodels          List all available models
   --remoteOllamaServer REMOTEOLLAMASERVER
                         The URL of the remote ollamaserver to use. ONLY USE
@@ -205,7 +205,7 @@ pbpaste | fabric --pattern summarize
 Run the analyze_claims Pattern with the --stream option to get immediate and streaming results.
 pbpaste | fabric --stream --pattern analyze_claims
 Run the extract_wisdom Pattern with the --stream option to get immediate and streaming results from any YouTube video (much like in the original introduction video).
-yt --transcript https://youtube.com/watch?v=uXs-zPckM | fabric --stream --pattern extract_wisdom
+yt --transcript https://youtube.com/watch?v=uXs-zPc63kM | fabric --stream --pattern extract_wisdom
 new All of the patterns have been added as aliases to your bash (or zsh) config file
 pbpaste | analyze_claims --stream
 Note
@@ -247,7 +247,7 @@ Each Pattern you see in the /patterns directory can be used in any AI applicatio
 
 Once you're set up, you can do things like:
 
-Take any idea from `stdin` and send it to the `/write_essay` API!
+# Take any idea from `stdin` and send it to the `/write_essay` API!
 echo "An idea that coding is like speaking with rules." | write_essay
 Directly calling Patterns
 
@@ -263,116 +263,118 @@ Even better, you can also have your Mill functionality directly call system and 
 Here's what that looks like in code:
 
 https://github.com/danielmiessler/fabric/blob/main/server/fabric_api_server.py
-/extwis
+# /extwis
 @app.route("/extwis", methods=["POST"])
-@auth_required  Require authentication
+@auth_required  # Require authentication
 def extwis():
     data = request.get_json()
 
-    Warn if there's no input
+    # Warn if there's no input
     if "input" not in data:
-        return jsonify({"error": "Missing input parameter"}), 
-    Get data from client
+        return jsonify({"error": "Missing input parameter"}), 400
+
+    # Get data from client
     input_data = data["input"]
 
-    Set the system and user URLs
+    # Set the system and user URLs
     system_url = "https://raw.githubusercontent.com/danielmiessler/fabric/main/Patterns/extract_wisdom/system.md"
     user_url = "https://raw.githubusercontent.com/danielmiessler/fabric/main/Patterns/extract_wisdom/user.md"
 
-    Fetch the prompt content
+    # Fetch the prompt content
     system_content = fetch_content_from_url(system_url)
     user_file_content = fetch_content_from_url(user_url)
 
-    Build the API call
+    # Build the API call
     system_message = {"role": "system", "content": system_content}
     user_message = {"role": "user", "content": user_file_content + "\n" + input_data}
     messages = [system_message, user_message]
     try:
         response = openai.chat.completions.create(
-            model="gpt---preview",
+            model="gpt-4-1106-preview",
             messages=messages,
-            temperature=.,
-            top_p=,
-            frequency_penalty=.,
-            presence_penalty=.,
+            temperature=0.0,
+            top_p=1,
+            frequency_penalty=0.1,
+            presence_penalty=0.1,
         )
-        assistant_message = response.choices[].message.content
+        assistant_message = response.choices[0].message.content
         return jsonify({"response": assistant_message})
     except Exception as e:
-        return jsonify({"error": str(e)}), Examples
+        return jsonify({"error": str(e)}), 500
+Examples
 
-Here's an abridged output example from the extract_wisdom pattern (limited to only items per section).
+Here's an abridged output example from the extract_wisdom pattern (limited to only 10 items per section).
 
-Paste in the transcript of a YouTube video of Riva Tez on David Perrel's podcast
+# Paste in the transcript of a YouTube video of Riva Tez on David Perrel's podcast
 pbpaste | extract_wisdom
-SUMMARY:
+## SUMMARY:
 
 The content features a conversation between two individuals discussing various topics, including the decline of Western culture, the importance of beauty and subtlety in life, the impact of technology and AI, the resonance of Rilke's poetry, the value of deep reading and revisiting texts, the captivating nature of Ayn Rand's writing, the role of philosophy in understanding the world, and the influence of drugs on society. They also touch upon creativity, attention spans, and the importance of introspection.
 
-IDEAS:
+## IDEAS:
 
-. Western culture is perceived to be declining due to a loss of values and an embrace of mediocrity.
-. Mass media and technology have contributed to shorter attention spans and a need for constant stimulation.
-. Rilke's poetry resonates due to its focus on beauty and ecstasy in everyday objects.
-. Subtlety is often overlooked in modern society due to sensory overload.
-. The role of technology in shaping music and performance art is significant.
-. Reading habits have shifted from deep, repetitive reading to consuming large quantities of new material.
-. Revisiting influential books as one ages can lead to new insights based on accumulated wisdom and experiences.
-. Fiction can vividly illustrate philosophical concepts through characters and narratives.
-. Many influential thinkers have backgrounds in philosophy, highlighting its importance in shaping reasoning skills.
-. Philosophy is seen as a bridge between theology and science, asking questions that both fields seek to answer.
+1. Western culture is perceived to be declining due to a loss of values and an embrace of mediocrity.
+2. Mass media and technology have contributed to shorter attention spans and a need for constant stimulation.
+3. Rilke's poetry resonates due to its focus on beauty and ecstasy in everyday objects.
+4. Subtlety is often overlooked in modern society due to sensory overload.
+5. The role of technology in shaping music and performance art is significant.
+6. Reading habits have shifted from deep, repetitive reading to consuming large quantities of new material.
+7. Revisiting influential books as one ages can lead to new insights based on accumulated wisdom and experiences.
+8. Fiction can vividly illustrate philosophical concepts through characters and narratives.
+9. Many influential thinkers have backgrounds in philosophy, highlighting its importance in shaping reasoning skills.
+10. Philosophy is seen as a bridge between theology and science, asking questions that both fields seek to answer.
 
-QUOTES:
+## QUOTES:
 
-. "You can't necessarily think yourself into the answers. You have to create space for the answers to come to you."
-. "The West is dying and we are killing her."
-. "The American Dream has been replaced by mass packaged mediocrity porn, encouraging us to revel like happy pigs in our own meekness."
-. "There's just not that many people who have the courage to reach beyond consensus and go explore new ideas."
-. "I'll start watching Netflix when I've read the whole of human history."
-. "Rilke saw beauty in everything... He sees it's in one little thing, a representation of all things that are beautiful."
-. "Vanilla is a very subtle flavor... it speaks to sort of the sensory overload of the modern age."
-. "When you memorize chapters [of the Bible], it takes a few months, but you really understand how things are structured."
-. "As you get older, if there's books that moved you when you were younger, it's worth going back and rereading them."
-. "She [Ayn Rand] took complicated philosophy and embodied it in a way that anybody could resonate with."
+1. "You can't necessarily think yourself into the answers. You have to create space for the answers to come to you."
+2. "The West is dying and we are killing her."
+3. "The American Dream has been replaced by mass packaged mediocrity porn, encouraging us to revel like happy pigs in our own meekness."
+4. "There's just not that many people who have the courage to reach beyond consensus and go explore new ideas."
+5. "I'll start watching Netflix when I've read the whole of human history."
+6. "Rilke saw beauty in everything... He sees it's in one little thing, a representation of all things that are beautiful."
+7. "Vanilla is a very subtle flavor... it speaks to sort of the sensory overload of the modern age."
+8. "When you memorize chapters [of the Bible], it takes a few months, but you really understand how things are structured."
+9. "As you get older, if there's books that moved you when you were younger, it's worth going back and rereading them."
+10. "She [Ayn Rand] took complicated philosophy and embodied it in a way that anybody could resonate with."
 
-HABITS:
+## HABITS:
 
-. Avoiding mainstream media consumption for deeper engagement with historical texts and personal research.
-. Regularly revisiting influential books from youth to gain new insights with age.
-. Engaging in deep reading practices rather than skimming or speed-reading material.
-. Memorizing entire chapters or passages from significant texts for better understanding.
-. Disengaging from social media and fast-paced news cycles for more focused thought processes.
-. Walking long distances as a form of meditation and reflection.
-. Creating space for thoughts to solidify through introspection and stillness.
-. Embracing emotions such as grief or anger fully rather than suppressing them.
-. Seeking out varied experiences across different careers and lifestyles.
-. Prioritizing curiosity-driven research without specific goals or constraints.
+1. Avoiding mainstream media consumption for deeper engagement with historical texts and personal research.
+2. Regularly revisiting influential books from youth to gain new insights with age.
+3. Engaging in deep reading practices rather than skimming or speed-reading material.
+4. Memorizing entire chapters or passages from significant texts for better understanding.
+5. Disengaging from social media and fast-paced news cycles for more focused thought processes.
+6. Walking long distances as a form of meditation and reflection.
+7. Creating space for thoughts to solidify through introspection and stillness.
+8. Embracing emotions such as grief or anger fully rather than suppressing them.
+9. Seeking out varied experiences across different careers and lifestyles.
+10. Prioritizing curiosity-driven research without specific goals or constraints.
 
-FACTS:
+## FACTS:
 
-. The West is perceived as declining due to cultural shifts away from traditional values.
-. Attention spans have shortened due to technological advancements and media consumption habits.
-. Rilke's poetry emphasizes finding beauty in everyday objects through detailed observation.
-. Modern society often overlooks subtlety due to sensory overload from various stimuli.
-. Reading habits have evolved from deep engagement with texts to consuming large quantities quickly.
-. Revisiting influential books can lead to new insights based on accumulated life experiences.
-. Fiction can effectively illustrate philosophical concepts through character development and narrative arcs.
-. Philosophy plays a significant role in shaping reasoning skills and understanding complex ideas.
-. Creativity may be stifled by cultural nihilism and protectionist attitudes within society.
-. Short-term thinking undermines efforts to create lasting works of beauty or significance.
+1. The West is perceived as declining due to cultural shifts away from traditional values.
+2. Attention spans have shortened due to technological advancements and media consumption habits.
+3. Rilke's poetry emphasizes finding beauty in everyday objects through detailed observation.
+4. Modern society often overlooks subtlety due to sensory overload from various stimuli.
+5. Reading habits have evolved from deep engagement with texts to consuming large quantities quickly.
+6. Revisiting influential books can lead to new insights based on accumulated life experiences.
+7. Fiction can effectively illustrate philosophical concepts through character development and narrative arcs.
+8. Philosophy plays a significant role in shaping reasoning skills and understanding complex ideas.
+9. Creativity may be stifled by cultural nihilism and protectionist attitudes within society.
+10. Short-term thinking undermines efforts to create lasting works of beauty or significance.
 
-REFERENCES:
+## REFERENCES:
 
-. Rainer Maria Rilke's poetry
-. Netflix
-. Underworld concert
-. Katy Perry's theatrical performances
-. Taylor Swift's performances
-. Bible study
-. Atlas Shrugged by Ayn Rand
-. Robert Pirsig's writings
-. Bertrand Russell's definition of philosophy
-. Nietzsche's walks
+1. Rainer Maria Rilke's poetry
+2. Netflix
+3. Underworld concert
+4. Katy Perry's theatrical performances
+5. Taylor Swift's performances
+6. Bible study
+7. Atlas Shrugged by Ayn Rand
+8. Robert Pirsig's writings
+9. Bertrand Russell's definition of philosophy
+10. Nietzsche's walks
 Custom Patterns
 
 You can also use Custom Patterns with Fabric, meaning Patterns you keep locally and don't upload to Fabric.
@@ -381,7 +383,7 @@ One possible place to store them is ~/.config/custom-fabric-patterns.
 
 Then when you want to use them, simply copy them into ~/.config/fabric/patterns.
 
-cp -a ~/.config/custom-fabric-patterns/~/.config/fabric/Patterns/`
+cp -a ~/.config/custom-fabric-patterns/* ~/.config/fabric/Patterns/`
 Now you can run them with:
 
 pbpaste | fabric -p your_custom_pattern
@@ -407,7 +409,7 @@ options:
   --comments    Output only the user comments 
 ts (Audio transcriptions)
 
-'ts' is a command that uses the OpenApi Whisper API to transcribe audio files. Due to the context window, this tool uses pydub to split the files into minute segments. for more information on pydub, please refer https://github.com/jiaaro/pydub
+'ts' is a command that uses the OpenApi Whisper API to transcribe audio files. Due to the context window, this tool uses pydub to split the files into 10 minute segments. for more information on pydub, please refer https://github.com/jiaaro/pydub
 
 Installation
 
@@ -455,9 +457,10 @@ Example
 echo test | save --tag extra-tag stub-for-name
 test
 
-$ cat ~/obsidian/Fabric/---stub-for-name.md
+$ cat ~/obsidian/Fabric/2024-03-02-stub-for-name.md
 ---
-generation_date: --:tags: fabric-extraction stub-for-name extra-tag
+generation_date: 2024-03-02 10:43
+tags: fabric-extraction stub-for-name extra-tag
 ---
 test
 
@@ -469,7 +472,7 @@ Examples: Analyzing videos, summarizing articles, writing essays, etc.
 
 - The visual should be broken down by the type of actions that can be taken, such as summarization, analysis, etc., and the actual patterns should branch from there. 
 
-OUTPUT
+# OUTPUT
 
 - Output comprehensive Markmap code for displaying this functionality map as described above.
 

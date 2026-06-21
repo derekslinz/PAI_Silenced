@@ -1,12 +1,23 @@
-ValidateSkill Workflow
+# ValidateSkill Workflow
 
-Purpose:Check if an existing skill follows the canonical structure with proper TitleCase naming.
+**Purpose:** Check if an existing skill follows the canonical structure with proper TitleCase naming.
+
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the ValidateSkill workflow in the CreateSkill skill to validate skill structure"}' \
+  > /dev/null 2>&1 &
+```
+
+Running the **ValidateSkill** workflow in the **CreateSkill** skill to validate skill structure...
 
 ---
 
-Step : Read the Authoritative Source
+## Step 1: Read the Authoritative Source
 
-REQUIRED FIRST:Read the canonical structure:
+**REQUIRED FIRST:** Read the canonical structure:
 
 ```
 ~/.claude/PAI/DOCUMENTATION/Skills/SkillSystem.md
@@ -14,7 +25,7 @@ REQUIRED FIRST:Read the canonical structure:
 
 ---
 
-Step : Read the Target Skill
+## Step 2: Read the Target Skill
 
 ```bash
 ~/.claude/skills/[SkillName]/SKILL.md
@@ -22,42 +33,42 @@ Step : Read the Target Skill
 
 ---
 
-Step : Check TitleCase Naming
+## Step 3: Check TitleCase Naming
 
-Skill Directory
+### Skill Directory
 ```bash
 ls ~/.claude/skills/ | grep -i [skillname]
 ```
 
 Verify TitleCase:
--  `Blogging`, `Daemon`, `CreateSkill`
--  `createskill`, `create-skill`, `CREATE_SKILL`
+- ✓ `Blogging`, `Daemon`, `CreateSkill`
+- ✗ `createskill`, `create-skill`, `CREATE_SKILL`
 
-Workflow Files
+### Workflow Files
 ```bash
 ls ~/.claude/skills/[SkillName]/Workflows/
 ```
 
 Verify TitleCase:
--  `Create.md`, `UpdateDaemonInfo.md`, `SyncRepo.md`
--  `create.md`, `update-daemon-info.md`, `SYNC_REPO.md`
+- ✓ `Create.md`, `UpdateDaemonInfo.md`, `SyncRepo.md`
+- ✗ `create.md`, `update-daemon-info.md`, `SYNC_REPO.md`
 
-Tool Files
+### Tool Files
 ```bash
 ls ~/.claude/skills/[SkillName]/Tools/
 ```
 
 Verify TitleCase:
--  `ManageServer.ts`, `ManageServer.help.md`
--  `manage-server.ts`, `MANAGE_SERVER.ts`
+- ✓ `ManageServer.ts`, `ManageServer.help.md`
+- ✗ `manage-server.ts`, `MANAGE_SERVER.ts`
 
 ---
 
-Step : Check YAML Frontmatter
+## Step 4: Check YAML Frontmatter
 
 Verify the YAML has:
 
-Single-Line Description with USE WHEN
+### Single-Line Description with USE WHEN
 ```yaml
 ---
 name: SkillName
@@ -65,7 +76,8 @@ description: [What it does]. USE WHEN [intent triggers using OR]. [Additional ca
 ---
 ```
 
-Check for violations:- Multi-line description using `|` (WRONG)
+**Check for violations:**
+- Multi-line description using `|` (WRONG)
 - Missing `USE WHEN` keyword (WRONG)
 - Separate `triggers:` array in YAML (OLD FORMAT - WRONG)
 - Separate `workflows:` array in YAML (OLD FORMAT - WRONG)
@@ -73,53 +85,56 @@ Check for violations:- Multi-line description using `|` (WRONG)
 
 ---
 
-Step : Check Markdown Body
+## Step 5: Check Markdown Body
 
 Verify the body has:
 
-Workflow Routing Section
+### Workflow Routing Section
 ```markdown
-Workflow Routing
+## Workflow Routing
 
-When executing a workflow, output this notification:
+**When executing a workflow, output this notification:**
+
 ```
-Running WorkflowNamein SkillName...
+Running **WorkflowName** in **SkillName**...
 ```
 
 | Workflow | Trigger | File |
 |----------|---------|------|
-| WorkflowOne| "trigger phrase" | `Workflows/WorkflowOne.md` |
+| **WorkflowOne** | "trigger phrase" | `Workflows/WorkflowOne.md` |
 ```
 
-Check for violations:- Missing `Workflow Routing` section
+**Check for violations:**
+- Missing `## Workflow Routing` section
 - Workflow names not in TitleCase
 - File paths not matching actual file names
 
-Examples Section
+### Examples Section
 ```markdown
-Examples
+## Examples
 
-Example : [Use case]```
+**Example 1: [Use case]**
+```
 User: "[Request]"
 → [Action]
 → [Result]
 ```
 ```
 
-Check:Examples section required (WRONG if missing)
+**Check:** Examples section required (WRONG if missing)
 
-Gotchas Section
+### Gotchas Section
 ```markdown
-Gotchas
+## Gotchas
 
 [Known failure modes, API quirks, common mistakes]
 ```
 
-Check:Gotchas section required (WRONG if missing). This is the highest information density in any skill — Anthropic's internal best practice.
+**Check:** Gotchas section required (WRONG if missing). This is the highest information density in any skill — Anthropic's internal best practice.
 
-Negative Triggers (for skills with confusable neighbors)
+### Negative Triggers (for skills with confusable neighbors)
 
-Check:If the skill shares vocabulary with other skills, description should include `NOT FOR` clause:
+**Check:** If the skill shares vocabulary with other skills, description should include `NOT FOR` clause:
 ```yaml
 description: ... USE WHEN [triggers]. NOT FOR [what this ISN'T for (use SkillName instead)].
 ```
@@ -128,36 +143,37 @@ Common confusable pairs to check: research-style skills (Research vs investigati
 
 ---
 
-Step a-prelude: Public Release Readiness Check
+## Step 5a-prelude: Public Release Readiness Check
 
 Every skill ships with the PAI public release. Verify the skill is clean of personal/sensitive content:
 
 ```bash
-rg -i "danielmiessler|unsupervised|ULAdmin|thesurface|human|ul\.live|/Users/[a-z]+/" ~/.claude/skills/[SkillName]/
+rg -i "danielmiessler|unsupervised|ULAdmin|thesurface|human3|ul\.live|/Users/[a-z]+/" ~/.claude/skills/[SkillName]/
 ```
 
-Check for violations:- Hardcoded secrets, API keys, tokens, bearer credentials (zero tolerance)
-- Author name or first-person war stories ("the user reports", "the April incident...")
+**Check for violations:**
+- Hardcoded secrets, API keys, tokens, bearer credentials (zero tolerance)
+- Author name or first-person war stories ("the user reports", "the April 2026 incident...")
 - Specific project names baked into prose (<product>, <subproduct>, <brand>, etc.) — these belong in `SKILLCUSTOMIZATIONS/`
 - User-specific absolute paths (`/Users/<name>/...`) — use `~/` instead
 - Personal domain names (<author>.example, <product>.example, <brand>.example) — unless the skill is specifically about operating that domain
 
-Zero matches = PASS.Any match = FAIL, recommend moving to `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/<SkillName>/` or rewriting in generic language.
+**Zero matches = PASS.** Any match = FAIL, recommend moving to `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/<SkillName>/` or rewriting in generic language.
 
 ---
 
-Step a: BPE Compliance Check
+## Step 5a: BPE Compliance Check
 
 Apply the bitter lesson test to the skill's instructions:
 
 - [ ] Each instruction provides knowledge Claude can't derive on its own
 - [ ] No instructions compensating for model limitations (format enforcement, CoT scaffolding)
 - [ ] Deterministic scripts used where possible instead of prompt-based workarounds
-- [ ] SKILL.md is under lines (large skills should use References/ or root context files)
+- [ ] SKILL.md is under 500 lines (large skills should use References/ or root context files)
 
 ---
 
-Step : Check Workflow Files
+## Step 6: Check Workflow Files
 
 ```bash
 ls ~/.claude/skills/[SkillName]/Workflows/
@@ -165,13 +181,13 @@ ls ~/.claude/skills/[SkillName]/Workflows/
 
 Verify:
 - Every file uses TitleCase naming
-- Every file has a corresponding entry in `Workflow Routing` section
+- Every file has a corresponding entry in `## Workflow Routing` section
 - Every routing entry points to an existing file
 - Routing table names match file names exactly
 
 ---
 
-Step : Check Structure
+## Step 7: Check Structure
 
 ```bash
 ls -la ~/.claude/skills/[SkillName]/
@@ -184,10 +200,11 @@ Verify:
 
 ---
 
-Step a: Check CLI-First Integration (for skills with CLI tools)
+## Step 7a: Check CLI-First Integration (for skills with CLI tools)
 
-If the skill has CLI tools in `tools/`:
-CLI Tool Configuration Flags
+**If the skill has CLI tools in `tools/`:**
+
+### CLI Tool Configuration Flags
 
 Check each tool for flag-based configuration:
 ```bash
@@ -200,16 +217,17 @@ Verify the tool exposes behavioral configuration via flags:
 - Resource flags (--model, etc.) if applicable
 - Post-processing flags if applicable
 
-Workflow Intent-to-Flag Mapping
+### Workflow Intent-to-Flag Mapping
 
 For workflows that call CLI tools, check for intent-to-flag mapping tables:
 
 ```bash
-grep -l "Intent-to-Flag" ~/.claude/skills/[SkillName]/Workflows/.md
+grep -l "Intent-to-Flag" ~/.claude/skills/[SkillName]/Workflows/*.md
 ```
 
-Required pattern in workflows with CLI tools:```markdown
-Intent-to-Flag Mapping
+**Required pattern in workflows with CLI tools:**
+```markdown
+## Intent-to-Flag Mapping
 
 | User Says | Flag | When to Use |
 |-----------|------|-------------|
@@ -217,54 +235,54 @@ Intent-to-Flag Mapping
 | (default) | `--model sonnet` | Balanced |
 ```
 
-Reference:`~/.claude/PAI/DOCUMENTATION/Tools/CliFirstArchitecture.md`
+**Reference:** `~/.claude/PAI/DOCUMENTATION/Tools/CliFirstArchitecture.md`
 
 ---
 
-Step : Report Results
+## Step 8: Report Results
 
-COMPLIANTif all checks pass:
+**COMPLIANT** if all checks pass:
 
-Naming (TitleCase)
+### Naming (TitleCase)
 - [ ] Skill directory uses TitleCase
 - [ ] All workflow files use TitleCase
 - [ ] All reference docs use TitleCase
 - [ ] All tool files use TitleCase
 - [ ] Routing table names match file names
 
-YAML Frontmatter
+### YAML Frontmatter
 - [ ] `name:` uses TitleCase
 - [ ] `description:` is single-line with `USE WHEN`
 - [ ] No separate `triggers:` or `workflows:` arrays
-- [ ] Description under characters
+- [ ] Description under 1024 characters
 
-Markdown Body
-- [ ] `Workflow Routing` section present
-- [ ] `Gotchas` section present with known failure modes
-- [ ] `Examples` section with -patterns
+### Markdown Body
+- [ ] `## Workflow Routing` section present
+- [ ] `## Gotchas` section present with known failure modes
+- [ ] `## Examples` section with 2-3 patterns
 - [ ] All workflows have routing entries
-- [ ] SKILL.md under lines
+- [ ] SKILL.md under 500 lines
 
-Content Quality (Anthropic Best Practices)
+### Content Quality (Anthropic Best Practices)
 - [ ] Description includes `NOT FOR` clause if confusable with other skills
 - [ ] Instructions focus on what breaks Claude's defaults (not stating the obvious)
 - [ ] No instructions compensating for model limitations (BPE check)
 - [ ] Appropriate degrees of freedom (specific for fragile tasks, flexible for safe ones)
 
-Public Release Readiness
+### Public Release Readiness
 - [ ] No sensitive content (API keys, tokens, credentials, private URLs)
 - [ ] No personal references (author name, project names, personal domains, user-specific absolute paths)
 - [ ] Pre-flight grep for personal refs returns zero matches
 - [ ] Personal/user-specific content (if any) lives in `SKILLCUSTOMIZATIONS/`, not the skill body
 
-Structure
+### Structure
 - [ ] `Tools/` directory exists
 - [ ] No `backups/` inside skill
 - [ ] `References/` used appropriately for large skills
 
-CLI-First Integration (for skills with CLI tools)
+### CLI-First Integration (for skills with CLI tools)
 - [ ] CLI tools expose configuration via flags (not hardcoded)
 - [ ] Workflows that call CLI tools have intent-to-flag mapping tables
 - [ ] Flag mappings cover mode, output, and resource selection where applicable
 
-NON-COMPLIANTif any check fails. Recommend using CanonicalizeSkill workflow.
+**NON-COMPLIANT** if any check fails. Recommend using CanonicalizeSkill workflow.

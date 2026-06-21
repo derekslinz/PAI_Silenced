@@ -80,6 +80,25 @@ function loadSettings(): Settings {
  * Load relationship context for session startup.
  * Returns a lightweight summary of key opinions and recent notes.
  */
+// Conditionally load identity/TELOS — only when populated by /interview.
+// Unpopulated bootstrap templates carry placeholder sentinels and are skipped,
+// so empty scaffolds cost zero session tokens (no @import).
+function loadIdentityContext(paiDir: string): string | null {
+  const targets = [
+    join(paiDir, 'USER/PRINCIPAL_IDENTITY.md'),
+    join(paiDir, 'USER/TELOS/PRINCIPAL_TELOS.md'),
+  ];
+  const placeholder = /\(interview|\(sample\)|SAMPLE TEMPLATE|Bootstrap default/;
+  const parts: string[] = [];
+  for (const path of targets) {
+    if (!existsSync(path)) continue;
+    const content = readFileSync(path, 'utf-8');
+    if (placeholder.test(content)) continue; // skip unpopulated scaffold
+    parts.push(content.trim());
+  }
+  return parts.length ? parts.join('\n\n---\n\n') : null;
+}
+
 function loadRelationshipContext(paiDir: string): string | null {
   const parts: string[] = [];
 
@@ -472,11 +491,17 @@ async function main() {
       console.error(' Skipped learning readback (disabled)');
     }
 
+    // Load identity/TELOS only when populated (replaces static @imports of bootstrap scaffolds)
+    const identityContext = loadIdentityContext(paiDir);
+    if (identityContext) {
+      console.error(` Loaded identity/TELOS context (${identityContext.length} chars)`);
+    }
+
     // Inject dynamic context if we have any
-    if (relationshipContext || learningContext) {
+    if (relationshipContext || learningContext || identityContext) {
       const message = `<system-reminder>
 PAI Dynamic Context (Auto-loaded at Session Start)
-${relationshipContext ?? ''}${learningContext ? '\n---\n' + learningContext : ''}
+${identityContext ? identityContext + '\n---\n' : ''}${relationshipContext ?? ''}${learningContext ? '\n---\n' + learningContext : ''}
 ---
 Dynamic context loaded. Constitutional rules are in the system prompt (PAI/PAI_SYSTEM_PROMPT.md). Operational procedures are in CLAUDE.md.
 </system-reminder>`;

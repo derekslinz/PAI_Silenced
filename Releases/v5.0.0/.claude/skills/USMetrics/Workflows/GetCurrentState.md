@@ -1,41 +1,41 @@
-GetCurrentState Workflow
+# GetCurrentState Workflow
 
-Skill:USMetrics
-Purpose:Generate comprehensive U.S. economic overview with multi-timeframe trend analysis
+**Skill:** USMetrics
+**Purpose:** Generate comprehensive U.S. economic overview with multi-timeframe trend analysis
 
-Overview
+## Overview
 
-This workflow produces a detailed analysis document examining all metrics in the US-Common-Metrics dataset across multiple time horizons (year, year, year, year), identifying patterns, correlations, and research opportunities.
+This workflow produces a detailed analysis document examining all 68 metrics in the US-Common-Metrics dataset across multiple time horizons (10 year, 5 year, 2 year, 1 year), identifying patterns, correlations, and research opportunities.
 
-IMPORTANT:This workflow reads from the Substrate US-Common-Metrics dataset. Run `UpdateData` workflow first to ensure data is current.
+**IMPORTANT:** This workflow reads from the Substrate US-Common-Metrics dataset. Run `UpdateData` workflow first to ensure data is current.
 
-Data Flow
+## Data Flow
 
 ```
-. UpdateData workflow (run first)
-    Fetches from FRED, EIA, Treasury APIs
-    Writes to Substrate files:
+1. UpdateData workflow (run first)
+   └── Fetches from FRED, EIA, Treasury APIs
+   └── Writes to Substrate files:
        - US-Common-Metrics.md
        - us-metrics-current.csv
        - us-metrics-historical.csv
 
-. GetCurrentState workflow (this)
-    Reads from Substrate files
-    Calculates trends from historical data
-    Generates analysis report
+2. GetCurrentState workflow (this)
+   └── Reads from Substrate files
+   └── Calculates trends from historical data
+   └── Generates analysis report
 ```
 
-Execution Steps
+## Execution Steps
 
-Step : Initialize
+### Step 1: Initialize
 
 Output the workflow status message:
 
 ```
-Running GetCurrentStatein USMetrics...
+Running **GetCurrentState** in **USMetrics**...
 ```
 
-Step : Load Metric Definitions
+### Step 2: Load Metric Definitions
 
 Read the master metrics document:
 ```
@@ -48,132 +48,152 @@ Extract the list of all metrics with their:
 - Update frequencies
 - Current values (if populated)
 
-Step : Fetch Historical Data
+### Step 3: Fetch Historical Data
 
-For each metric with a FRED series ID, fetch historical data spanning + years.
+For each metric with a FRED series ID, fetch historical data spanning 10+ years.
 
-Key FRED Series (Priority Fetch):
+**Key FRED Series (Priority Fetch):**
+
 | Category | Metric | FRED ID |
 |----------|--------|---------|
-| GDP | Real GDP | GDPC|
-| GDP | GDP Growth Rate (QoQ) | ARLQSBEA |
+| GDP | Real GDP | GDPC1 |
+| GDP | GDP Growth Rate (QoQ) | A191RL1Q225SBEA |
 | Inflation | CPI-U All Items | CPIAUCSL |
 | Inflation | Core CPI | CPILFESL |
 | Inflation | PCE Price Index | PCEPI |
-| Employment | Unemployment Rate (U-) | UNRATE |
+| Employment | Unemployment Rate (U-3) | UNRATE |
 | Employment | Nonfarm Payrolls | PAYEMS |
 | Employment | Initial Jobless Claims | ICSA |
 | Housing | Median Home Price | MSPUS |
-| Housing | -Year Mortgage Rate | MORTGAGEUS |
+| Housing | 30-Year Mortgage Rate | MORTGAGE30US |
 | Consumer | Consumer Sentiment | UMCSENT |
 | Consumer | Personal Saving Rate | PSAVERT |
 | Markets | Fed Funds Rate | FEDFUNDS |
-| Markets | -Year Treasury | DGS|
-| Markets | -Year Treasury | DGS|
+| Markets | 10-Year Treasury | DGS10 |
+| Markets | 2-Year Treasury | DGS2 |
 | Trade | Trade Balance | BOPGSTB |
 | Fiscal | Federal Debt | GFDEBTN |
 
-Non-FRED Data (separate APIs):- Gas prices: EIA API (`PET.EMM_EPMR_PTE_NUS_DPG.W`)
+**Non-FRED Data (separate APIs):**
+- Gas prices: EIA API (`PET.EMM_EPMR_PTE_NUS_DPG.W`)
 - Oil prices: EIA API (`PET.RWTC.W`)
 - Federal debt (daily): Treasury FiscalData API
 
-Step : Calculate Trend Statistics
+### Step 4: Calculate Trend Statistics
 
 For each metric, calculate:
 
-Timeframe Analysis:- -Year:Compound annual growth rate (CAGR), total change, volatility
-- -Year:CAGR, total change, volatility, comparison to -year trend
-- -Year:CAGR, total change, recent acceleration/deceleration
-- -Year:YoY change, recent momentum, latest value vs. average
+**Timeframe Analysis:**
+- **10-Year:** Compound annual growth rate (CAGR), total change, volatility
+- **5-Year:** CAGR, total change, volatility, comparison to 10-year trend
+- **2-Year:** CAGR, total change, recent acceleration/deceleration
+- **1-Year:** YoY change, recent momentum, latest value vs. average
 
-Trend Direction:- Rising (↑), Falling (↓), Stable (→)
+**Trend Direction:**
+- Rising (↑), Falling (↓), Stable (→)
 - Acceleration indicator (speeding up vs. slowing down)
 
-Example Output:```
+**Example Output:**
+```
 Unemployment Rate (UNRATE)
- Current: .% (Nov )
- -Year: .% → .% (-.pp, ↓ trend)
- -Year: .% → .% (+.pp, ↑ from pre-COVID low)
- -Year: .% → .% (+.pp, gradual rise)
- -Year: .% → .% (+.pp, slight increase)
- Assessment: Gradually rising from -year lows, still historically low
+├── Current: 4.1% (Nov 2024)
+├── 10-Year: 5.8% → 4.1% (-1.7pp, ↓ trend)
+├── 5-Year: 3.5% → 4.1% (+0.6pp, ↑ from pre-COVID low)
+├── 2-Year: 3.7% → 4.1% (+0.4pp, gradual rise)
+├── 1-Year: 3.9% → 4.1% (+0.2pp, slight increase)
+└── Assessment: Gradually rising from 50-year lows, still historically low
 ```
 
-Step : Cross-Category Analysis
+### Step 5: Cross-Category Analysis
 
-Analyze interrelationships between categories:
-. Inflation Employment(Phillips Curve dynamics)
+**Analyze interrelationships between categories:**
+
+1. **Inflation Employment** (Phillips Curve dynamics)
    - CPI vs. Unemployment correlation
    - Wage growth vs. inflation relationship
 
-. Monetary Policy Economy   - Fed Funds Rate impact on mortgage rates, housing
-   - Yield curve (Y-Y spread) as recession indicator
+2. **Monetary Policy Economy**
+   - Fed Funds Rate impact on mortgage rates, housing
+   - Yield curve (10Y-2Y spread) as recession indicator
 
-. Consumer Health Economic Output   - Sentiment vs. retail sales correlation
+3. **Consumer Health Economic Output**
+   - Sentiment vs. retail sales correlation
    - Saving rate vs. consumer spending
 
-. Housing Broader Economy   - Home prices vs. inflation
+4. **Housing Broader Economy**
+   - Home prices vs. inflation
    - Housing starts as leading indicator
 
-. Energy Inflation   - Oil/gas prices impact on CPI
+5. **Energy Inflation**
+   - Oil/gas prices impact on CPI
    - Energy component of consumer budgets
 
-. Fiscal Financial Markets   - Debt growth vs. Treasury yields
+6. **Fiscal Financial Markets**
+   - Debt growth vs. Treasury yields
    - Deficit spending impact on GDP
 
-Step : Pattern Detection
+### Step 6: Pattern Detection
 
-Identify notable patterns:
-. Regime Changes   - Pre/post COVID comparison
+**Identify notable patterns:**
+
+1. **Regime Changes**
+   - Pre/post COVID comparison
    - Pre/post rate hike cycle
    - Historical vs. current levels
 
-. Divergences   - Metrics moving opposite to historical correlation
+2. **Divergences**
+   - Metrics moving opposite to historical correlation
    - Unusual spreads (e.g., yield curve inversion)
 
-. Extremes   - Metrics at historical highs/lows
+3. **Extremes**
+   - Metrics at historical highs/lows
    - Metrics multiple standard deviations from mean
 
-. Leading Indicator Signals   - Jobless claims trend
+4. **Leading Indicator Signals**
+   - Jobless claims trend
    - Yield curve shape
    - Consumer sentiment direction
 
-Step : Generate Research Recommendations
+### Step 7: Generate Research Recommendations
 
 Based on patterns detected, suggest:
 
-. Areas requiring deeper investigation   - Anomalies that warrant explanation
+1. **Areas requiring deeper investigation**
+   - Anomalies that warrant explanation
    - Divergences from historical patterns
 
-. Potential risks to monitor   - Leading indicators suggesting concern
+2. **Potential risks to monitor**
+   - Leading indicators suggesting concern
    - Metrics approaching critical thresholds
 
-. Opportunities for analysis   - Correlations that may predict future moves
+3. **Opportunities for analysis**
+   - Correlations that may predict future moves
    - Underexplored relationships
 
-. Data gaps to fill   - Metrics not yet tracked that would improve analysis
+4. **Data gaps to fill**
+   - Metrics not yet tracked that would improve analysis
    - Higher-frequency data needs
 
-Step : Compile Output Document
+### Step 8: Compile Output Document
 
 Generate structured markdown report:
 
 ```markdown
-US Economic State Analysis
+# US Economic State Analysis
 
-Generated:[YYYY-MM-DD HH:MM]
-Data Period:[years through current]
-Sources:FRED, EIA, Treasury FiscalData, BLS, Census
-
----
-
-Executive Summary
-
-[-bullet points with the most important findings]
+**Generated:** [YYYY-MM-DD HH:MM]
+**Data Period:** [10 years through current]
+**Sources:** FRED, EIA, Treasury FiscalData, BLS, Census
 
 ---
 
-Current Snapshot
+## Executive Summary
+
+[3-5 bullet points with the most important findings]
+
+---
+
+## Current Snapshot
 
 | Category | Key Metric | Value | YoY Δ | Trend |
 |----------|------------|-------|-------|-------|
@@ -184,69 +204,69 @@ Current Snapshot
 
 ---
 
-Detailed Trend Analysis
+## Detailed Trend Analysis
 
-. Economic Output & Growth
-[y/y/y/y analysis for GDP, industrial production, retail sales]
+### 1. Economic Output & Growth
+[10y/5y/2y/1y analysis for GDP, industrial production, retail sales]
 
-. Inflation & Prices
+### 2. Inflation & Prices
 [Analysis for CPI, PCE, gas prices, oil prices]
 
-. Employment & Labor
+### 3. Employment & Labor
 [Analysis for unemployment, payrolls, claims, participation]
 
-[... continue for all categories]
+[... continue for all 10 categories]
 
 ---
 
-Cross-Metric Analysis
+## Cross-Metric Analysis
 
-Inflation-Employment Dynamics
+### Inflation-Employment Dynamics
 [Phillips curve analysis, current relationship]
 
-Monetary Policy Transmission
+### Monetary Policy Transmission
 [Fed funds → mortgages → housing → economy]
 
-Consumer-Economy Linkage
+### Consumer-Economy Linkage
 [Sentiment → spending → GDP relationship]
 
 [... additional cross-category analyses]
 
 ---
 
-Pattern Detection
+## Pattern Detection
 
-Regime Changes
-- [Pattern ]
-- [Pattern ]
+### Regime Changes
+- [Pattern 1]
+- [Pattern 2]
 
-Divergences
-- [Divergence ]
-- [Divergence ]
+### Divergences
+- [Divergence 1]
+- [Divergence 2]
 
-Historical Extremes
-- [Extreme ]
-- [Extreme ]
-
----
-
-Research Recommendations
-
-High Priority
-. [Investigation area ]
-. [Investigation area ]
-
-Risks to Monitor
-. [Risk ]
-. [Risk ]
-
-Data Gaps
-. [Gap ]
-. [Gap ]
+### Historical Extremes
+- [Extreme 1]
+- [Extreme 2]
 
 ---
 
-Methodology Notes
+## Research Recommendations
+
+### High Priority
+1. [Investigation area 1]
+2. [Investigation area 2]
+
+### Risks to Monitor
+1. [Risk 1]
+2. [Risk 2]
+
+### Data Gaps
+1. [Gap 1]
+2. [Gap 2]
+
+---
+
+## Methodology Notes
 
 - Trend calculations use [method]
 - Seasonally adjusted data used where available
@@ -254,7 +274,7 @@ Methodology Notes
 
 ---
 
-Sources
+## Sources
 
 - Federal Reserve Economic Data (FRED)
 - Energy Information Administration (EIA)
@@ -263,20 +283,20 @@ Sources
 - U.S. Census Bureau
 ```
 
-Output Location
+## Output Location
 
 Save generated report to:
 ```
 ~/.claude/History/research/[YYYY-MM]/[YYYY-MM-DD]_US-Economic-State-Analysis.md
 ```
 
-Error Handling
+## Error Handling
 
 - If FRED API fails: Note which metrics couldn't be fetched, proceed with available data
 - If API key missing: Prompt user to set `FRED_API_KEY` environment variable
 - If metric not found: Log missing series, continue with others
 
-Future Enhancements
+## Future Enhancements
 
 - [ ] Add visualization generation (charts, graphs)
 - [ ] Implement automated scheduling (weekly/monthly reports)

@@ -1,28 +1,42 @@
-ComparePrompts Workflow
+# ComparePrompts Workflow
 
 A/B test two prompt versions to determine which performs better.
 
-This workflow implements the Science Protocol for prompt experimentation.
+**This workflow implements the Science Protocol for prompt experimentation.**
+
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the ComparePrompts workflow in the Evals skill to A/B test prompts"}' \
+  > /dev/null 2>&1 &
+```
+
+Running the **ComparePrompts** workflow in the **Evals** skill to A/B test prompts...
+
 ---
 
-Science Protocol Alignment
+## Science Protocol Alignment
 
 Before running any comparison, ensure you're following scientific rigor:
 
-Pre-Commitment (BEFORE running):
+### Pre-Commitment (BEFORE running):
 - [ ] Success criteria defined (what score/metric means "better"?)
 - [ ] Pass threshold locked (what difference is meaningful?)
 - [ ] Hypothesis is falsifiable (what result would DISPROVE it?)
 
-Falsifiability Check:
+### Falsifiability Check:
 For every hypothesis, answer:
-> "What result would prove that Variant B is NOT better than Variant A?"
-Example:- Hypothesis: "v..improves accuracy due to source verification instructions"
-- Falsifiable if: "v..accuracy ≤ v..accuracy, or difference < %"
+> *"What result would prove that Variant B is NOT better than Variant A?"*
 
-If you cannot articulate what would disprove your hypothesis, STOP- you don't have a scientific hypothesis.
+**Example:**
+- Hypothesis: "v1.1.0 improves accuracy due to source verification instructions"
+- Falsifiable if: "v1.1.0 accuracy ≤ v1.0.0 accuracy, or difference < 5%"
 
-Consider Three Variants:
+If you cannot articulate what would disprove your hypothesis, **STOP** - you don't have a scientific hypothesis.
+
+### Consider Three Variants:
 A/B tests are good. A/B/C tests are often better.
 - Reduces confirmation bias toward "the first alternative"
 - Explores more of the solution space
@@ -30,104 +44,108 @@ A/B tests are good. A/B/C tests are often better.
 
 ---
 
-Prerequisites
+## Prerequisites
 
 - Existing use case with test cases
 - Two (or more) prompt versions to compare
 - Understanding of what "better" means for this use case
-- Falsifiable hypothesis with pre-committed success threshold
-Execution
+- **Falsifiable hypothesis with pre-committed success threshold**
 
-Step : Identify Comparison (Science: Goal + Hypothesize)
+## Execution
+
+### Step 1: Identify Comparison (Science: Goal + Hypothesize)
 
 Ask the user:
-. Which use case?
-. Which prompt versions? (consider + variants)
-. What's the hypothesis? (Why might one be better?)
-. What would DISPROVE this hypothesis?← Critical
-. Which metrics matter most?
-. What threshold defines "significantly better"?
+1. Which use case?
+2. Which prompt versions? (consider 3+ variants)
+3. What's the hypothesis? (Why might one be better?)
+4. **What would DISPROVE this hypothesis?** ← Critical
+5. Which metrics matter most?
+6. What threshold defines "significantly better"?
 
-Step : Validate Both Prompts Exist
+### Step 2: Validate Both Prompts Exist
 
 ```bash
-Check prompts exist
+# Check prompts exist
 ls ~/.claude/skills/Evals/UseCases/<name>/prompts/
 
-Should see both versions:
-v...md
-v...md
+# Should see both versions:
+# v1.0.0.md
+# v1.1.0.md
 ```
 
-Step : Create Comparison Config
+### Step 3: Create Comparison Config
 
 Create `~/.claude/skills/Evals/UseCases/<name>/comparisons/<comparison-name>.yaml`:
 
 ```yaml
 comparison:
-  name: "v..vs v.."
+  name: "v1.0.0 vs v1.1.0"
   hypothesis: |
-    v..should produce more accurate summaries due to
+    v1.1.0 should produce more accurate summaries due to
     added context about source verification.
 
   variants:
     a:
-      name: "v..(Baseline)"
+      name: "v1.0.0 (Baseline)"
       description: "Original prompt without source instructions"
-      prompt: "prompts/v...md"
+      prompt: "prompts/v1.0.0.md"
     b:
-      name: "v..(Candidate)"
+      name: "v1.1.0 (Candidate)"
       description: "Added source verification instructions"
-      prompt: "prompts/v...md"
+      prompt: "prompts/v1.1.0.md"
 
-  Use all test cases, or specify subset
-  test_cases: all  or ["-basic", "-edge", "-hard"]
+  # Use all test cases, or specify subset
+  test_cases: all  # or ["001-basic", "002-edge", "003-hard"]
 
-  Judge configuration
+  # Judge configuration
   judges:
     - name: "Accuracy Judge"
-      model: "claude---sonnet-"
+      model: "claude-3-5-sonnet-20241022"
       focus: "accuracy"
     - name: "Style Judge"
-      model: "gpt-o"
+      model: "gpt-4o"
       focus: "style"
 
   settings:
-    position_swap: true      Mitigate position bias
-    num_runs:              Runs per test case
-    confidence_level: .  For statistical significance
-    model: "claude---sonnet-"  Model to generate outputs
+    position_swap: true      # Mitigate position bias
+    num_runs: 1              # Runs per test case
+    confidence_level: 0.95   # For statistical significance
+    model: "claude-3-5-sonnet-20241022"  # Model to generate outputs
 ```
 
-Step : Run Comparison
+### Step 4: Run Comparison
 
-Option A: Via CLI
+**Option A: Via CLI**
+
 ```bash
 bun run ~/.claude/skills/Evals/EvalServer/cli-run.ts \
   --use-case <name> \
-  --compare prompts/v...md prompts/v...md \
+  --compare prompts/v1.0.0.md prompts/v1.1.0.md \
   --position-swap
 ```
 
-Option B: Via Web UI
-. Open http://localhost:. Select use case
-. Click "Compare" tab
-. Select both prompt versions
-. Enable position swapping
-. Run comparison
+**Option B: Via Web UI**
 
-Step : Position Swapping Protocol
+1. Open http://localhost:5173
+2. Select use case
+3. Click "Compare" tab
+4. Select both prompt versions
+5. Enable position swapping
+6. Run comparison
+
+### Step 5: Position Swapping Protocol
 
 If `position_swap: true`:
 
 For each test case:
-. Run : Variant A = "Option ", Variant B = "Option "
-. Run : Variant B = "Option ", Variant A = "Option "
-. Average scores to eliminate position bias
+1. **Run 1**: Variant A = "Option 1", Variant B = "Option 2"
+2. **Run 2**: Variant B = "Option 1", Variant A = "Option 2"
+3. Average scores to eliminate position bias
 
 This addresses the known bias where LLMs favor the first option presented.
 
-Step : Collect Results
+### Step 6: Collect Results
 
 Results stored in:
 - `Results/<use-case>/comparisons/<comparison-name>/<run-id>.json`
@@ -135,55 +153,58 @@ Results stored in:
 Results structure:
 ```json
 {
-  "comparison_name": "v..vs v..",
-  "run_id": "---",
+  "comparison_name": "v1.0.0 vs v1.1.0",
+  "run_id": "2024-01-15-143022",
   "variants": {
-    "a": { "name": "v..", "wins": , "avg_score": .},
-    "b": { "name": "v..", "wins": , "avg_score": .}
+    "a": { "name": "v1.0.0", "wins": 5, "avg_score": 4.2 },
+    "b": { "name": "v1.1.0", "wins": 7, "avg_score": 4.5 }
   },
   "per_test_case": [...],
   "statistical_significance": {
-    "p_value": .,
+    "p_value": 0.03,
     "significant": true,
-    "confidence_interval": [., .]
+    "confidence_interval": [0.15, 0.45]
   }
 }
 ```
 
-Step : Interpret Results
+### Step 7: Interpret Results
 
-Report Format:
+**Report Format:**
+
 ```markdown
-A/B Test Results: v..vs v..
-Summary
+## A/B Test Results: v1.0.0 vs v1.1.0
 
-| Metric | v..(A) | v..(B) |
+### Summary
+
+| Metric | v1.0.0 (A) | v1.1.0 (B) |
 |--------|------------|------------|
-| Win Rate | % | % |
-| Avg Score | .| .|
-| Std Dev | .| .|
+| Win Rate | 42% | 58% |
+| Avg Score | 4.2 | 4.5 |
+| Std Dev | 0.8 | 0.6 |
 
-Statistical Significance
+### Statistical Significance
 
-- p-value: .- Significant at %: Yes
-- Confidence Interval: [., .]
+- **p-value**: 0.03
+- **Significant at 95%**: Yes
+- **Confidence Interval**: [0.15, 0.45]
 
-Per-Dimension Breakdown
+### Per-Dimension Breakdown
 
 | Dimension | A Wins | B Wins | Tie |
 |-----------|--------|--------|-----|
-| Accuracy | | | |
-| Style | | | |
-| Format | | | |
+| Accuracy | 3 | 7 | 2 |
+| Style | 5 | 4 | 3 |
+| Format | 6 | 6 | 0 |
 
-Conclusion
+### Conclusion
 
-Winner: v..(Candidate)
-Confidence: High (p < .)
-Recommendation: Deploy v..to production
+**Winner**: v1.1.0 (Candidate)
+**Confidence**: High (p < 0.05)
+**Recommendation**: Deploy v1.1.0 to production
 ```
 
-Step : Make Decision
+### Step 8: Make Decision
 
 Based on results:
 
@@ -194,89 +215,89 @@ Based on results:
 | No significant difference | Keep simpler prompt, or gather more data |
 | Mixed results (A wins some, B wins others) | Consider hybrid approach |
 
-Step : Document Decision
+### Step 9: Document Decision
 
 Update use case README with comparison results:
 
 ```markdown
-Comparison History
+## Comparison History
 
-v..vs v..(--)
+### v1.0.0 vs v1.1.0 (2024-01-15)
 
-Hypothesis: v..improves accuracy with source verification.
+**Hypothesis**: v1.1.0 improves accuracy with source verification.
 
-Result: v..significantly better (p=.)
-- Accuracy: +%
+**Result**: v1.1.0 significantly better (p=0.03)
+- Accuracy: +15%
 - Style: No change
 - Format: No change
 
-Decision: Deployed v..as new baseline.
+**Decision**: Deployed v1.1.0 as new baseline.
 ```
 
-Best Practices
+## Best Practices
 
-Sample Size
+### Sample Size
 
-- Minimum: test cases (statistically weak)
-- Recommended: -test cases (good power)
-- Ideal: + test cases (high confidence)
+- **Minimum**: 10 test cases (statistically weak)
+- **Recommended**: 20-30 test cases (good power)
+- **Ideal**: 50+ test cases (high confidence)
 
-Position Swapping
+### Position Swapping
 
-Always enablefor pairwise comparisons. Research shows LLMs have strong position bias (prefer first option).
+**Always enable** for pairwise comparisons. Research shows LLMs have strong position bias (prefer first option).
 
-Judge Selection
+### Judge Selection
 
-Use different modelthan the one generating outputs:
-- If testing Claude prompts → Use GPT-o as judge
+Use **different model** than the one generating outputs:
+- If testing Claude prompts → Use GPT-4o as judge
 - If testing GPT prompts → Use Claude as judge
 
 This prevents self-serving bias.
 
-Statistical Significance
+### Statistical Significance
 
 | p-value | Interpretation |
 |---------|----------------|
-| < .| Strong evidence |
-| .-.| Moderate evidence |
-| .-.| Weak evidence |
-| > .| Not significant |
+| < 0.01 | Strong evidence |
+| 0.01-0.05 | Moderate evidence |
+| 0.05-0.10 | Weak evidence |
+| > 0.10 | Not significant |
 
 Don't deploy based on weak evidence unless the improvement is large.
 
-Common Patterns
+## Common Patterns
 
-Testing Instruction Changes
+### Testing Instruction Changes
 
 ```yaml
 hypothesis: "More explicit formatting instructions improve structure"
 variants:
-  a: { prompt: "v...md" }  Implicit formatting
-  b: { prompt: "v...md" }  Explicit section headers
+  a: { prompt: "v1.0.0.md" }  # Implicit formatting
+  b: { prompt: "v1.1.0.md" }  # Explicit section headers
 focus: "format"
 ```
 
-Testing Few-Shot Examples
+### Testing Few-Shot Examples
 
 ```yaml
-hypothesis: "Adding examples improves accuracy"
+hypothesis: "Adding 2 examples improves accuracy"
 variants:
-  a: { prompt: "v...md" }  Zero-shot
-  b: { prompt: "v...md" }  Two-shot
+  a: { prompt: "v1.0.0.md" }  # Zero-shot
+  b: { prompt: "v1.1.0.md" }  # Two-shot
 focus: "accuracy"
 ```
 
-Testing Persona/Role Changes
+### Testing Persona/Role Changes
 
 ```yaml
 hypothesis: "Expert persona produces more detailed analysis"
 variants:
-  a: { prompt: "v...md" }  Generic assistant
-  b: { prompt: "v...md" }  Domain expert persona
+  a: { prompt: "v1.0.0.md" }  # Generic assistant
+  b: { prompt: "v1.1.0.md" }  # Domain expert persona
 focus: "depth"
 ```
 
-Render Comparison Template
+## Render Comparison Template
 
 For detailed comparison setup, use the Comparison template:
 
@@ -288,11 +309,12 @@ bun run ~/.claude/Templates/Tools/RenderTemplate.ts \
   --preview
 ```
 
-Paradigm Check (When Iterations Stall)
+## Paradigm Check (When Iterations Stall)
 
-If you've run + comparisons without meaningful improvement, STOP and ask:
+If you've run 3+ comparisons without meaningful improvement, STOP and ask:
 
-Are we testing the right thing?
+**Are we testing the right thing?**
+
 | Signal | Question to Ask |
 |--------|-----------------|
 | All variants score similarly | Is the metric actually measuring what matters? |
@@ -300,7 +322,8 @@ Are we testing the right thing?
 | Improvements don't compound | Is the base prompt fundamentally limited? |
 | Test cases all behave the same | Do we need more diverse/challenging cases? |
 
-Paradigm Shift Indicators:- The eval criteria might be wrong (measuring the wrong thing)
+**Paradigm Shift Indicators:**
+- The eval criteria might be wrong (measuring the wrong thing)
 - The test cases might be too easy or too homogeneous
 - The entire approach might need rethinking (different architecture)
 
@@ -310,6 +333,6 @@ This forces stepping back from the eval loop to question the frame itself.
 
 ---
 
-Done
+## Done
 
 Comparison completed. Results documented. Decision made.

@@ -913,138 +913,52 @@ async function main() {
       await kvPush; process.exit(0);
     }
 
-    //  DETERMINISTIC TAB TITLE (immediate, purple/thinking) 
+    //  DETERMINISTIC TAB TITLE (immediate, purple/thinking)
     const sessionLabel = getSessionOneWord(sessionId);
     const prefix = sessionLabel ? `${sessionLabel} | ` : '';
     const deterministicTitle = quickTitle(prompt);
     const thinkingTitle = deterministicTitle || getWorkingFallback();
     setTabState({ title: ` ${prefix}${thinkingTitle}`, state: 'thinking', sessionId });
 
-    //  INFERENCE: Tab title + session name 
-    console.error('[PromptProcessing] Running inference (tab title' + (isFirstPrompt ? ' + session name)...' : ')...'));
+    //  Deterministic mode guess — emitted immediately so the harness has a floor
+    // The background worker will NOT re-emit mode; it only persists session name + tab title.
+    const deterministicMode: Mode = isMinimalInteraction ? 'MINIMAL' : (!isNativeMode(prompt) ? 'ALGORITHM' : 'NATIVE');
+    const deterministicTier: number | null = deterministicMode === 'ALGORITHM' ? 3 : null;
+    emitAdditionalContext(deterministicMode, deterministicTier, 'deterministic-pre-inference');
+    appendPromptProcessingTelemetry({
+      timestamp: new Date().toISOString(), session_id: sessionId,
+      prompt_excerpt: prompt.slice(0, 120), mode: deterministicMode, tier: deterministicTier,
+      mode_reason: 'deterministic-pre-inference', source: 'fast-path', latency_ms: 0,
+    });
 
+    //  FIRE-AND-FORGET: spawn background inference worker
+    // The worker runs inference (tab title + session name + accurate mode/tier), persists results,
+    // and updates the tab title once complete. The main hook has already returned by then.
     const cleanPrompt = prompt.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 1000);
-    // Naming is permanent and first-prompt-only; exclude Assistant turns so Algorithm scaffolding
-    // (phase headers, agent names, SUMMARY lines) cannot contaminate the session name. Tab-title
-    // inference on later prompts keeps Assistant context for "continue with X" style follow-ups.
-    const context = getRecentContext(data.transcript_path, 6, !isFirstPrompt);
-    const userPrompt = context ? `CONTEXT:\n${context}\n\nCURRENT MESSAGE:\n${cleanPrompt}` : cleanPrompt;
-
-    const inferenceStart = Date.now();
+    const workerPayload = JSON.stringify({
+      sessionId,
+      isFirstPrompt,
+      cleanPrompt,
+      transcriptPath: data.transcript_path,
+      prefix,
+      deterministicTitle: deterministicTitle ?? null,
+      pendingFallbackName: pendingFallbackName ?? null,
+    });
+    const workerPath = join(dirname(new URL(import.meta.url).pathname), 'PromptProcessingWorker.ts');
     try {
-      const result = await inference({
-        systemPrompt: buildContextPrompt(isFirstPrompt),
-        userPrompt,
-        expectJson: true,
-        timeout: 25000,
-        level: 'standard',
+      Bun.spawn(['bun', 'run', workerPath], {
+        stdin: new TextEncoder().encode(workerPayload),
+        stdout: 'ignore',
+        stderr: 'ignore',
+        // Detach so the worker outlives this process
+        detached: true,
       });
-
-      if (result.success && result.parsed) {
-        const r = result.parsed as InferenceResult;
-
-        //  Process tab title 
-        let finalTitle = deterministicTitle && isValidWorkingTitle(deterministicTitle) ? deterministicTitle : getWorkingFallback();
-        if (r.tab_title) {
-          const inferredWords = r.tab_title.split(/\s+/);
-          const validated = trimToValidTitle(inferredWords, isValidWorkingTitle);
-          if (validated) {
-            finalTitle = validated;
-          }
-        }
-        // If inference session name is available, try deriving tab title from it
-        // This ensures tab title and session name reflect the same understanding
-        if (isFirstPrompt && r.session_name && !/[*`<>{}[\]]/.test(r.session_name)) {
-          const derived = sessionNameToTabTitle(r.session_name);
-          if (derived) finalTitle = derived;
-        }
-        setTabState({ title: ` ${prefix}${finalTitle}`, state: 'working', sessionId });
-
-        //  Process session name from inference (first prompt only) 
-        // Inference understands intent — it's the PRIMARY source for session names
-        let inferenceNameStored = false;
-        if (isFirstPrompt && r.session_name) {
-          if (/[*`<>{}[\]]/.test(r.session_name)) {
-            console.error('[PromptProcessing] Rejected session name with artifacts');
-          } else {
-            const nameWords = r.session_name.trim().split(/\s+/).slice(0, 5);
-            const label = nameWords.map(w => titleCase(w)).join(' ');
-            const hasProfanity = nameWords.some(w => PROFANITY_WORDS.has(w.toLowerCase()));
-            if (label && nameWords.length >= 5 && nameWords.every(w => w.length >= 2) && !hasProfanity && isValidSessionName(label)) {
-              storeName(sessionId, label, 'inference-haiku');
-              inferenceNameStored = true;
-            } else if (label) {
-              console.error(`[PromptProcessing] Rejected invalid session name: "${label}"`);
-            }
-          }
-        }
-        // If inference didn't produce a name, fall back to deterministic
-        if (isFirstPrompt && !inferenceNameStored && pendingFallbackName) {
-          storeName(sessionId, pendingFallbackName, 'deterministic-fallback');
-        }
-
-        //  Emit MODE/TIER additionalContext for harness floor 
-        const validModes: Mode[] = ['MINIMAL', 'NATIVE', 'ALGORITHM'];
-        const finalMode: Mode = (r.mode && validModes.includes(r.mode as Mode)) ? (r.mode as Mode) : 'ALGORITHM';
-        const finalTier: number | null = (finalMode === 'ALGORITHM')
-          ? (typeof r.tier === 'number' && r.tier >= 1 && r.tier <= 5 ? r.tier : 3)
-          : null;
-        const finalReason: string = (typeof r.mode_reason === 'string' && r.mode_reason.length > 0)
-          ? r.mode_reason.slice(0, 200)
-          : 'classifier';
-        emitAdditionalContext(finalMode, finalTier, finalReason);
-        appendPromptProcessingTelemetry({
-          timestamp: new Date().toISOString(),
-          session_id: sessionId,
-          prompt_excerpt: cleanPrompt.slice(0, 120),
-          tab_title: r.tab_title ?? null,
-          session_name: isFirstPrompt ? (r.session_name ?? null) : null,
-          mode: finalMode,
-          tier: finalTier,
-          mode_reason: finalReason,
-          source: 'classifier',
-          latency_ms: Date.now() - inferenceStart,
-        });
-
-      } else {
-        console.error(`[PromptProcessing] Inference failed: ${result.error}`);
-        // Inference failed — store deterministic fallback name
-        if (isFirstPrompt && pendingFallbackName) {
-          storeName(sessionId, pendingFallbackName, 'deterministic-fallback');
-        }
-        const fallbackTitle = deterministicTitle && isValidWorkingTitle(deterministicTitle) ? deterministicTitle : getWorkingFallback();
-        setTabState({ title: ` ${prefix}${fallbackTitle}`, state: 'working', sessionId });
-        emitAdditionalContext('ALGORITHM', 3, `inference failed: ${result.error ?? 'unknown'}`);
-        appendPromptProcessingTelemetry({
-          timestamp: new Date().toISOString(),
-          session_id: sessionId,
-          prompt_excerpt: cleanPrompt.slice(0, 120),
-          mode: 'ALGORITHM',
-          tier: 3,
-          mode_reason: `inference failed: ${result.error ?? 'unknown'}`,
-          source: 'fail-safe',
-          latency_ms: Date.now() - inferenceStart,
-        });
-      }
-    } catch (err) {
-      console.error(`[PromptProcessing] Inference error: ${err}`);
-      // Inference errored — store deterministic fallback name
+      console.error('[PromptProcessing] Background inference worker spawned');
+    } catch (spawnErr) {
+      console.error(`[PromptProcessing] Failed to spawn worker: ${spawnErr} — falling back to deterministic name`);
       if (isFirstPrompt && pendingFallbackName) {
         storeName(sessionId, pendingFallbackName, 'deterministic-fallback');
       }
-      const fallbackTitle = deterministicTitle && isValidWorkingTitle(deterministicTitle) ? deterministicTitle : getWorkingFallback();
-      setTabState({ title: ` ${prefix}${fallbackTitle}`, state: 'working', sessionId });
-      emitAdditionalContext('ALGORITHM', 3, `inference error: ${String(err).slice(0, 80)}`);
-      appendPromptProcessingTelemetry({
-        timestamp: new Date().toISOString(),
-        session_id: sessionId,
-        prompt_excerpt: cleanPrompt.slice(0, 120),
-        mode: 'ALGORITHM',
-        tier: 3,
-        mode_reason: `inference error: ${String(err).slice(0, 80)}`,
-        source: 'fail-safe',
-        latency_ms: Date.now() - inferenceStart,
-      });
     }
 
     await kvPush; process.exit(0);

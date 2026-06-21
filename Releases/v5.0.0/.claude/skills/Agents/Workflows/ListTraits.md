@@ -1,30 +1,41 @@
-ListTraits Workflow
+# ListTraits Workflow
 
-Shows all available traits that can be composed into custom agents.
+**Shows all available traits that can be composed into custom agents.**
+
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the ListTraits workflow in the Agents skill to show traits"}' \
+  > /dev/null 2>&1 &
+```
+
+Running **ListTraits** in **Agents**...
+
 ---
 
-When to Use
+## When to Use
 
 User says:
-
 - "What agent personalities can you create?"
 - "Show me available traits"
 - "List agent types"
 - "What expertise areas do you have?"
 
-The Workflow
+## The Workflow
 
-Step : Run ComposeAgent with --list Flag
+### Step 1: Run ComposeAgent with --list Flag
 
 ```bash
 bun run ~/.claude/skills/Agents/Tools/ComposeAgent.ts --list
 ```
 
-Step : Present Results to User
+### Step 2: Present Results to User
 
 The tool outputs:
 
-```text
+```
 AVAILABLE TRAITS
 
 EXPERTISE (domain knowledge):
@@ -80,11 +91,11 @@ EXAMPLE COMPOSITIONS:
                          traits: analytical, pragmatic, rapid
 ```
 
-Step : Explain Composition System
+### Step 3: Explain Composition System
 
 Add context for user:
 
-```text
+```
 You can combine these traits to create custom agents:
 
 EXPERTISE + PERSONALITY + APPROACH = Custom Agent
@@ -102,13 +113,49 @@ Examples:
 Just describe what you need naturally, and I'll compose the right agent.
 ```
 
-Example Interaction
+## Enhanced Presentation (Optional)
 
-User:"What kinds of agents can you create?"
+If user wants more detail, also explain voice assignment:
 
-System:
-```text
-I can compose agents from traits across three categories:
+```
+Each trait combination maps to a unique voice:
+
+ENERGETIC VOICES (enthusiastic, creative, bold):
+- Jeremy (excited Irish-American male)
+- Fin (energetic Irish storyteller)
+- Freya (vibrant dynamic female)
+- Dave (youthful British energy)
+
+INTELLECTUAL VOICES (analytical, skeptical, research):
+- Default (BBC anchor authority)
+- George (academic warm raspy)
+- Charlotte (sophisticated Swedish-British)
+- Antoni (professorial articulate)
+
+AUTHORITATIVE VOICES (bold, business, cautious):
+- Domi (assertive CEO female)
+- Bill (documentary trustworthy male)
+- Alice (confident news anchor female)
+- Joseph (formal British authority)
+
+WARM VOICES (empathetic, consultative):
+- Matilda (friendly American storyteller)
+- Thomas (calm gentle guide)
+- Rachel (calm supportive)
+
+EDGY VOICES (adversarial, contrarian, security):
+- Clyde (gravelly war veteran intensity)
+- Callum (hoarse hacker character)
+- Sam (raspy gritty authentic)
+```
+
+## Example Interaction
+
+**User:** "What kinds of agents can you create?"
+
+**System:**
+```
+I can compose agents from 28 traits across three categories:
 
 EXPERTISE (what they know):
 security, legal, finance, medical, technical, research, creative,
@@ -127,14 +174,14 @@ Just tell me what you need:
 - "Create a skeptical security analyst"
 - "Get me someone creative and fast"
 
-I'll compose the right agent for the task.
+I'll compose the right agent with a matching voice.
 ```
 
-Quick Reference Card (Optional)
+## Quick Reference Card (Optional)
 
 For frequent use, provide a condensed version:
 
-```text
+```
 QUICK TRAIT REFERENCE
 
 Expertise:     security | legal | finance | medical | technical |
@@ -154,12 +201,13 @@ Popular Combos:
 - Red team:           contrarian + skeptical + bold
 ```
 
-Related Workflows
+## Related Workflows
 
-- CreateCustomAgent- Actually create agents with these traits
-- SpawnParallelAgents- Launch generic agents (no trait customization)
+- **CreateCustomAgent** - Actually create agents with these traits
+- **SpawnParallelAgents** - Launch generic agents (no trait customization)
 
-References
+## References
 
 - Full trait definitions: `~/.claude/skills/Agents/Data/Traits.yaml`
+- Voice mappings: Lines 349-794 in Traits.yaml
 - ComposeAgent tool: `~/.claude/skills/Agents/Tools/ComposeAgent.ts`

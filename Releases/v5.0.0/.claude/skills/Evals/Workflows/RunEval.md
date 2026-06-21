@@ -1,31 +1,42 @@
-RunEval Workflow
+# RunEval Workflow
 
 Run evaluations for a specific use case.
 
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the RunEval workflow in the Evals skill to execute evaluation"}' \
+  > /dev/null 2>&1 &
+```
+
+Running the **RunEval** workflow in the **Evals** skill to execute evaluation...
+
 ---
 
-Prerequisites
+## Prerequisites
 
 - Use case must exist in `UseCases/<name>/`
 - Test cases defined in use case
 - Config.yaml with scoring criteria
 
-Execution
+## Execution
 
-Step : Validate Use Case
+### Step 1: Validate Use Case
 
 ```bash
-Check use case exists
+# Check use case exists
 ls ~/.claude/skills/Evals/UseCases/<use-case>/config.yaml
 ```
 
 If missing, redirect to `CreateUseCase.md` workflow.
 
-Step : Check EvalServer Status
+### Step 2: Check EvalServer Status
 
 ```bash
-Check if server is running
-curl -s http://localhost:> /dev/null >&&& echo "Running" || echo "Not running"
+# Check if server is running
+curl -s http://localhost:5173 > /dev/null 2>&1 && echo "Running" || echo "Not running"
 ```
 
 If not running, start it:
@@ -33,25 +44,29 @@ If not running, start it:
 cd ~/.claude/skills/Evals/EvalServer && bun run dev &
 ```
 
-Step : Run Evaluation
+### Step 3: Run Evaluation
 
-Option A: Web UI (Recommended). Open http://localhost:. Select use case from dropdown
-. Choose model(s) to evaluate
-. Click "Run Evaluation"
-. Watch real-time streaming results
+**Option A: Web UI (Recommended)**
+1. Open http://localhost:5173
+2. Select use case from dropdown
+3. Choose model(s) to evaluate
+4. Click "Run Evaluation"
+5. Watch real-time streaming results
 
-Option B: CLI```bash
+**Option B: CLI**
+```bash
 bun run ~/.claude/skills/Evals/EvalServer/cli-run.ts \
   --use-case <name> \
-  --model claude---sonnet-```
+  --model claude-3-5-sonnet-20241022
+```
 
-Step : Collect Results
+### Step 4: Collect Results
 
 Results are stored in:
 - `Results/<use-case>/<run-id>/results.json`
 - `EvalServer/storage/evals.db` (queryable)
 
-Step : Report Summary
+### Step 5: Report Summary
 
 Use structured response format:
 
@@ -66,25 +81,26 @@ STATUS:
 | Failed Tests | X |
 
 STORY EXPLANATION:
-. Ran evaluation against <N> test cases
-. Deterministic scorers completed first
-. AI judges evaluated accuracy and style
-. Calculated weighted scores
-. Compared against pass threshold
-. <Key finding >
-. <Key finding >
-. <Recommendation>
+1. Ran evaluation against <N> test cases
+2. Deterministic scorers completed first
+3. AI judges evaluated accuracy and style
+4. Calculated weighted scores
+5. Compared against pass threshold
+6. <Key finding 1>
+7. <Key finding 2>
+8. <Recommendation>
 
 COMPLETED: Evaluation finished with X% pass rate.
 ```
 
-Error Handling
+## Error Handling
 
-If eval fails:. Check model API key is configured
-. Verify test cases have valid inputs
-. Check scorer configurations in config.yaml
-. Review error logs in terminal
+**If eval fails:**
+1. Check model API key is configured
+2. Verify test cases have valid inputs
+3. Check scorer configurations in config.yaml
+4. Review error logs in terminal
 
-Done
+## Done
 
 Evaluation complete. Results available in UI and files.

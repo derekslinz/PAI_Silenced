@@ -1,31 +1,33 @@
-The Science Protocol
+# The Science Protocol
 
-Skills don't call Science. They implement it.
+**Skills don't call Science. They implement it.**
+
 This document defines the Science Protocol - the interface that skills embody when they apply systematic, evidence-based iteration to their domain.
 
 ---
 
-The Core Insight
+## The Core Insight
 
-Science is not a service that other skills invoke. It's a protocol they implement.
+Science is not a service that other skills invoke. It's a **protocol they implement**.
 
 Like how TCP/IP defines communication patterns without caring what's being communicated, Science defines the iteration pattern without caring what domain it's applied to.
 
-The Distinction:
+**The Distinction:**
+
 | Model | Description | Coupling |
 |-------|-------------|----------|
-| Service (Wrong)| Development calls Science.analyze() | High - Science must know all skills |
-| Protocol (Right)| Development implements ScienceProtocol | Low - Skills are independently compliant |
+| **Service (Wrong)** | Development calls Science.analyze() | High - Science must know all skills |
+| **Protocol (Right)** | Development implements ScienceProtocol | Low - Skills are independently compliant |
 
 ---
 
-The Protocol Interface
+## The Protocol Interface
 
 Any Science-compliant workflow exhibits these behaviors:
 
 ```typescript
 interface ScienceProtocol {
-  // Phase : What are we trying to achieve?
+  // Phase 0: What are we trying to achieve?
   goal: {
     successCriteria: string[];      // How will we know we succeeded?
     measurableIndicators: Metric[]; // What numbers define success?
@@ -33,30 +35,31 @@ interface ScienceProtocol {
     antiGoals?: string[];           // What are we NOT trying to do?
   };
 
-  // Phase : What is the current state?
+  // Phase 1: What is the current state?
   observe(): Observation;
 
-  // Phase : What might work? (MUST be plural)
-  hypothesize(): Hypothesis[];  // Minimum 
-  // Phase -: Design and run tests
+  // Phase 2: What might work? (MUST be plural)
+  hypothesize(): Hypothesis[];  // Minimum 3
+
+  // Phase 3-4: Design and run tests
   experiment(hypothesis: Hypothesis): ExperimentResult;
 
-  // Phase -: What happened? How does it compare?
+  // Phase 5-6: What happened? How does it compare?
   measure(result: ExperimentResult): Measurement;
   analyze(measurement: Measurement, goal: Goal): Analysis;
 
-  // Phase : What's next?
+  // Phase 7: What's next?
   iterate(analysis: Analysis): NextAction;
 }
 ```
 
 ---
 
-How Skills Implement Science
+## How Skills Implement Science
 
 Skills don't import Science. They declare compliance through structure and behavior.
 
-Development (TDD)
+### Development (TDD)
 
 ```yaml
 skill: Development
@@ -71,16 +74,18 @@ mapping:
   iterate: Refactor, or move to next feature
 ```
 
-The Cycle:```
+**The Cycle:**
+```
 Write Test (GOAL) → Run Test (OBSERVE - it fails) →
 Think of Fix (HYPOTHESIZE) → Write Code (EXPERIMENT) →
 Run Test (MEASURE) → Pass/Fail? (ANALYZE) →
 Refactor or Continue (ITERATE)
 ```
 
-Evals (Prompt Optimization)
+### Evals (Prompt Optimization)
 
-Evals is the canonical Science implementation for prompts.
+**Evals is the canonical Science implementation for prompts.**
+
 When doing prompt experiments, DO NOT build ad-hoc evaluation. Invoke Evals directly.
 
 ```yaml
@@ -96,19 +101,21 @@ mapping:
   iterate: Refine prompt, try next hypothesis, or declare success
 ```
 
-The Cycle:```
+**The Cycle:**
+```
 Define Use Case (GOAL) → Run Baseline (OBSERVE) →
 Generate Variants (HYPOTHESIZE) → Compare Prompts (EXPERIMENT) →
 Collect Scores (MEASURE) → Statistical Analysis (ANALYZE) →
 Pick Winner or Refine (ITERATE)
 ```
 
-Evals adds domain-specific rigor:- Position swapping- mitigates LLM positional bias
-- Multi-judge panels- reduces model quirks (x cheaper than single large judge)
-- Reasoning-first scoring- %+ accuracy improvement
-- Paradigm check- when to question the entire eval framework
+**Evals adds domain-specific rigor:**
+- **Position swapping** - mitigates LLM positional bias
+- **Multi-judge panels** - reduces model quirks (7x cheaper than single large judge)
+- **Reasoning-first scoring** - 13%+ accuracy improvement
+- **Paradigm check** - when to question the entire eval framework
 
-Research (Investigation)
+### Research (Investigation)
 
 ```yaml
 skill: Research
@@ -123,7 +130,7 @@ mapping:
   iterate: Deeper questions emerge
 ```
 
-Council (Debate)
+### Council (Debate)
 
 ```yaml
 skill: Council
@@ -138,7 +145,7 @@ mapping:
   iterate: Refined positions until consensus
 ```
 
-Worktree (Parallel Experiments)
+### Worktree (Parallel Experiments)
 
 ```yaml
 skill: Development/Worktree
@@ -153,7 +160,7 @@ mapping:
   iterate: Pick winner, merge, cleanup
 ```
 
-RedTeam (Adversarial Analysis)
+### RedTeam (Adversarial Analysis)
 
 ```yaml
 skill: RedTeam
@@ -161,7 +168,7 @@ implements: Science
 mapping:
   goal: Strongest possible argument/product
   observe: Original argument or design
-  hypothesize: Attack vectors (agents generate them)
+  hypothesize: Attack vectors (32 agents generate them)
   experiment: Multi-agent assault on every angle
   measure: Vulnerability scores
   analyze: Steelman response to each attack
@@ -170,7 +177,7 @@ mapping:
 
 ---
 
-Protocol Compliance Markers
+## Protocol Compliance Markers
 
 Skills can declare compliance in their SKILL.md frontmatter:
 
@@ -179,51 +186,52 @@ Skills can declare compliance in their SKILL.md frontmatter:
 name: Development
 description: ...
 implements: Science
-science_cycle_time: micro  micro, meso, macro
+science_cycle_time: micro  # micro, meso, macro
 ---
 ```
 
-This is documentation of the mapping, not runtime coupling.
+This is **documentation of the mapping**, not runtime coupling.
 
 ---
 
-Integration Points (When Science Orchestrates)
+## Integration Points (When Science Orchestrates)
 
 Science explicitly orchestrates only when:
 
-. Cross-domain problems- The problem spans multiple skills
-. Explicit experimentation requests- "Try approaches and compare"
-. Novel problems- No existing skill pattern fits
+1. **Cross-domain problems** - The problem spans multiple skills
+2. **Explicit experimentation requests** - "Try 3 approaches and compare"
+3. **Novel problems** - No existing skill pattern fits
 
-Orchestration Flow:
+**Orchestration Flow:**
+
 ```
 User: "Figure out best auth approach"
-           
-           
-
-           SCIENCE ORCHESTRATES           
-
-           
-            Goal: Research Skill helps define success criteria
-           
-            Observe: Research Skill gathers context
-           
-            Hypothesize: Council Skill generates approaches
-           
-            Experiment: Worktree runs parallel implementations
-           
-            Measure: Evals Skill compares approaches
-           
-            Analyze: Science synthesizes results
-           
-            Iterate: Pick winner or refine
+           │
+           ▼
+┌─────────────────────────────────────────┐
+│           SCIENCE ORCHESTRATES           │
+└─────────────────────────────────────────┘
+           │
+           ├──► Goal: Research Skill helps define success criteria
+           │
+           ├──► Observe: Research Skill gathers context
+           │
+           ├──► Hypothesize: Council Skill generates approaches
+           │
+           ├──► Experiment: Worktree runs parallel implementations
+           │
+           ├──► Measure: Evals Skill compares approaches
+           │
+           ├──► Analyze: Science synthesizes results
+           │
+           └──► Iterate: Pick winner or refine
 ```
 
 ---
 
-Handoff Boundaries
+## Handoff Boundaries
 
-What Science Provides to Skills
+### What Science Provides to Skills
 
 | To Skill | Science Provides |
 |----------|------------------|
@@ -233,7 +241,7 @@ What Science Provides to Skills
 | Council | Options to debate, judgment criteria |
 | Worktree | Variant names, comparison criteria |
 
-What Skills Provide to Science
+### What Skills Provide to Science
 
 | From Skill | Skill Provides |
 |------------|----------------|
@@ -245,99 +253,101 @@ What Skills Provide to Science
 
 ---
 
-Scale-Appropriate Protocol Adherence
+## Scale-Appropriate Protocol Adherence
 
 | Scale | Cycle Time | Protocol Adherence | State Management |
 |-------|------------|-------------------|------------------|
-| Micro| Seconds-Minutes | Implicit (internalized) | None needed |
-| Meso| Hours-Days | Explicit when stuck | `.science/` directory |
-| Macro| Weeks-Months | Formal documentation | Global registry |
-| Meta| Months-Years | Constitutional | Skill versioning |
+| **Micro** | Seconds-Minutes | Implicit (internalized) | None needed |
+| **Meso** | Hours-Days | Explicit when stuck | `.science/` directory |
+| **Macro** | Weeks-Months | Formal documentation | Global registry |
+| **Meta** | Months-Years | Constitutional | Skill versioning |
 
-Key Principle:Don't over-formalize micro-scale work. Let the protocol be implicit until you need its structure.
+**Key Principle:** Don't over-formalize micro-scale work. Let the protocol be implicit until you need its structure.
 
 ---
 
-The Self-Reference Property
+## The Self-Reference Property
 
 Science applies to itself.
 
 The Science skill MUST be able to improve its own methodology using the scientific method:
 
-. Goal:Improve problem-solving effectiveness
-. Observe:Track experiment outcomes across domains
-. Hypothesize:Try methodology variations
-. Experiment:Apply variations to real problems
-. Measure:Learning rate, success rate, iteration speed
-. Analyze:Compare methodology versions
-. Iterate:Update Science documentation
+1. **Goal:** Improve problem-solving effectiveness
+2. **Observe:** Track experiment outcomes across domains
+3. **Hypothesize:** Try methodology variations
+4. **Experiment:** Apply variations to real problems
+5. **Measure:** Learning rate, success rate, iteration speed
+6. **Analyze:** Compare methodology versions
+7. **Iterate:** Update Science documentation
 
 This is tracked in `Meta/` directory.
 
 ---
 
-Bidirectional Skill Integration
+## Bidirectional Skill Integration
 
-Science → Evals
+### Science → Evals
 
 When Science encounters prompt optimization:
 
-. Recognize the domain- "This is a prompt experiment"
-. Delegate to specialist- Invoke Evals skill directly
-. Use Evals infrastructure- Don't reinvent position swapping, multi-judge, etc.
-. Accept Evals output- Scores, statistics, recommendations
+1. **Recognize the domain** - "This is a prompt experiment"
+2. **Delegate to specialist** - Invoke Evals skill directly
+3. **Use Evals infrastructure** - Don't reinvent position swapping, multi-judge, etc.
+4. **Accept Evals output** - Scores, statistics, recommendations
 
-The directive:If experimenting with prompts, use Evals. Period.
+**The directive:** If experimenting with prompts, use Evals. Period.
 
-Evals → Science
+### Evals → Science
 
 When Evals gets stuck or needs broader framing:
 
-. Paradigm check trigger- + iterations without improvement
-. Invoke Science explicitly- `Science/Workflows/StructuredInvestigation.md`
-. Question the frame- Is the use case defined correctly? Are we measuring the right thing?
-. Return with clarity- New hypothesis, new direction, or confirmation to continue
+1. **Paradigm check trigger** - 3+ iterations without improvement
+2. **Invoke Science explicitly** - `Science/Workflows/StructuredInvestigation.md`
+3. **Question the frame** - Is the use case defined correctly? Are we measuring the right thing?
+4. **Return with clarity** - New hypothesis, new direction, or confirmation to continue
 
-The escalation path:Evals runs implicitly as Science. When implicit fails, go explicit.
+**The escalation path:** Evals runs implicitly as Science. When implicit fails, go explicit.
 
-When Science Orchestrates Across Skills
+### When Science Orchestrates Across Skills
 
 For problems spanning prompt AND code AND research:
 
 ```
 User: "Improve the summarization pipeline"
-           
-           
-
-           SCIENCE ORCHESTRATES           
-
-           
-            Goal: What does "better" mean? (Science/DefineGoal)
-           
-            Observe: Current performance across dimensions
-           
-            Hypothesize: Multiple improvement paths
-                Better prompt (→ Evals)
-                Better code (→ Development/Worktree)
-                Better architecture (→ Research)
-           
-            Experiment: Parallel experiments via appropriate skills
-           
-            Measure: Aggregate results from each skill
-           
-            Iterate: Pick winner, next cycle
+           │
+           ▼
+┌─────────────────────────────────────────┐
+│           SCIENCE ORCHESTRATES           │
+└─────────────────────────────────────────┘
+           │
+           ├──► Goal: What does "better" mean? (Science/DefineGoal)
+           │
+           ├──► Observe: Current performance across dimensions
+           │
+           ├──► Hypothesize: Multiple improvement paths
+           │    ├─ Better prompt (→ Evals)
+           │    ├─ Better code (→ Development/Worktree)
+           │    └─ Better architecture (→ Research)
+           │
+           ├──► Experiment: Parallel experiments via appropriate skills
+           │
+           ├──► Measure: Aggregate results from each skill
+           │
+           └──► Iterate: Pick winner, next cycle
 ```
 
 Science orchestrates; specialist skills execute.
 
 ---
 
-Summary
+## Summary
 
-Science is not a skill you call. It's a pattern you embody.
+**Science is not a skill you call. It's a pattern you embody.**
+
 - Skills implement the protocol independently
 - No runtime coupling required
 - Science orchestrates only for cross-domain coordination
 - Scale determines formality level
 - The protocol improves itself through its own application
-- Evals is the canonical implementation for prompts- When Evals stalls, escalate to explicit Science workflows
+- **Evals is the canonical implementation for prompts**
+- **When Evals stalls, escalate to explicit Science workflows**

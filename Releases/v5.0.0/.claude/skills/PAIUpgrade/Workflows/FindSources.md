@@ -1,12 +1,23 @@
-Find Sources
+# Find Sources
+
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the FindSources workflow in the PAIUpgrade skill to discover sources"}' \
+  > /dev/null 2>&1 &
+```
+
+Running the **FindSources** workflow in the **PAIUpgrade** skill to discover sources...
 
 Discover and evaluate new sources to add to upgrade monitoring.
 
-Trigger:"find upgrade sources", "find new sources", "discover channels", "expand monitoring"
+**Trigger:** "find upgrade sources", "find new sources", "discover channels", "expand monitoring"
 
 ---
 
-Overview
+## Overview
 
 This workflow helps identify new sources worth monitoring for PAI-relevant updates:
 - YouTube channels creating relevant content
@@ -16,23 +27,23 @@ This workflow helps identify new sources worth monitoring for PAI-relevant updat
 
 ---
 
-Process
+## Process
 
-Step : Define Search Criteria
+### Step 1: Define Search Criteria
 
 Clarify what type of sources to find:
 
 | Category | Examples |
 |----------|----------|
-| AI Development| Claude tutorials, AI coding workflows |
-| Agent Patterns| Multi-agent systems, orchestration |
-| Tool Building| CLI tools, MCP servers, integrations |
-| Security| AI security, prompt injection, safety |
-| Productivity| Developer workflows, automation |
+| **AI Development** | Claude tutorials, AI coding workflows |
+| **Agent Patterns** | Multi-agent systems, orchestration |
+| **Tool Building** | CLI tools, MCP servers, integrations |
+| **Security** | AI security, prompt injection, safety |
+| **Productivity** | Developer workflows, automation |
 
 ---
 
-Step : Search for YouTube Channels
+### Step 2: Search for YouTube Channels
 
 Use web search to find relevant channels:
 
@@ -50,7 +61,7 @@ For each discovered channel, evaluate:
 
 ---
 
-Step : Search for Blogs/Newsletters
+### Step 3: Search for Blogs/Newsletters
 
 Look for written content sources:
 
@@ -68,7 +79,7 @@ Evaluate each source for:
 
 ---
 
-Step : Search for GitHub Repositories
+### Step 4: Search for GitHub Repositories
 
 Find repositories with useful patterns:
 
@@ -86,40 +97,42 @@ Look for:
 
 ---
 
-Step : Evaluate and Rank Sources
+### Step 5: Evaluate and Rank Sources
 
 For each potential source, score:
 
-| Criterion | Weight | Score (-) |
+| Criterion | Weight | Score (1-5) |
 |-----------|--------|-------------|
-| Relevance to PAI | % | |
-| Content Quality | % | |
-| Update Frequency | % | |
-| Unique Value | % | |
-| Stack Alignment | % | |
+| Relevance to PAI | 30% | |
+| Content Quality | 25% | |
+| Update Frequency | 20% | |
+| Unique Value | 15% | |
+| Stack Alignment | 10% | |
 
-Priority Assignment:- Score ≥ .→ HIGH - Add immediately
-- Score .-.→ MEDIUM - Consider adding
-- Score < .→ LOW - Monitor occasionally
+**Priority Assignment:**
+- Score ≥ 4.0 → HIGH - Add immediately
+- Score 3.0-3.9 → MEDIUM - Consider adding
+- Score < 3.0 → LOW - Monitor occasionally
 
 ---
 
-Step : Output Recommendations
+### Step 6: Output Recommendations
 
 ```markdown
-New Source Recommendations
-Discovery Date:[date]
+# New Source Recommendations
+**Discovery Date:** [date]
 
-HIGH PRIORITY (Add Now)
+## HIGH PRIORITY (Add Now)
 
-[Source Name]
-Type:YouTube / Blog / GitHub / Other
-URL:[url]
-Relevance:[Why this matters for PAI]
-Content Focus:[What they cover]
-Update Frequency:[How often they post]
+### [Source Name]
+**Type:** YouTube / Blog / GitHub / Other
+**URL:** [url]
+**Relevance:** [Why this matters for PAI]
+**Content Focus:** [What they cover]
+**Update Frequency:** [How often they post]
 
-To Add:```json
+**To Add:**
+```json
 {
   "name": "[Source Name]",
   "url": "[url]",
@@ -130,66 +143,67 @@ To Add:```json
 
 ---
 
-MEDIUM PRIORITY (Consider)
+## MEDIUM PRIORITY (Consider)
 
 [Similar format]
 
 ---
 
-LOW PRIORITY (Optional)
+## LOW PRIORITY (Optional)
 
 [Similar format]
 
 ---
 
-How to Add Sources
+## How to Add Sources
 
-For YouTube Channels:
+### For YouTube Channels:
 Edit `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/PAIUpgrade/youtube-channels.json`
 
-For Other Sources:
+### For Other Sources:
 Currently, non-YouTube sources are monitored via the base `sources.json`.
 To request additions to base Anthropic monitoring, note them for next PAI release.
 ```
 
 ---
 
-Step : Offer to Add
+### Step 7: Offer to Add
 
 If user approves recommendations:
 
 ```bash
-Read current user config
+# Read current user config
 cat ~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/PAIUpgrade/youtube-channels.json
 
-Add new channels (merge with existing)
-Update the channels array with new entries
+# Add new channels (merge with existing)
+# Update the channels array with new entries
 ```
 
 ---
 
-Discovery Strategies
+## Discovery Strategies
 
-Follow the Experts
+### Follow the Experts
 - Find who Anthropic engineers follow/reference
 - Check who creates content cited in official docs
 - Look at conference speaker lists
 
-Community Mining
+### Community Mining
 - Search Discord/Slack for recommended resources
 - Check Reddit threads for learning resources
 - Look at "awesome" lists on GitHub
 
-Algorithm Surfing
+### Algorithm Surfing
 - Start from known good channels, explore recommendations
 - Check related channels on YouTube
 - Follow citation chains in blog posts
 
 ---
 
-Examples
+## Examples
 
-General discovery:```
+**General discovery:**
+```
 User: "find new upgrade sources"
 → Search for relevant YouTube channels
 → Search for AI development blogs
@@ -197,14 +211,16 @@ User: "find new upgrade sources"
 → Output recommendations with add instructions
 ```
 
-Specific category:```
+**Specific category:**
+```
 User: "find YouTube channels about MCP servers"
 → Focused search on MCP content
 → Evaluate MCP-specific channels
 → Recommend best MCP resources
 ```
 
-Add recommended source:```
+**Add recommended source:**
+```
 User: "add that channel"
 → Read current user config
 → Add new channel entry
@@ -213,10 +229,12 @@ User: "add that channel"
 
 ---
 
-Integration
+## Integration
 
-With Other Workflows:- Upgrade- New sources feed into monitoring
-- ResearchUpgrade- Discovered sources can be researched
+**With Other Workflows:**
+- **Upgrade** - New sources feed into monitoring
+- **ResearchUpgrade** - Discovered sources can be researched
 
-With USER Customization:- Sources are added to USER directory, not base skill
+**With USER Customization:**
+- Sources are added to USER directory, not base skill
 - Personal monitoring preferences stay private

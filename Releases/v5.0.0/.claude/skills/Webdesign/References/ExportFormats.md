@@ -1,60 +1,60 @@
-Export Formats
+# Export Formats
 
 Decision matrix for choosing the right export from Claude Design.
 
-Format Quick Reference
+## Format Quick Reference
 
 | Format | When to use | Output type | Further processing |
 |--------|-------------|-------------|-------------------|
-| Internal URL| Async review, team feedback | Shareable claude.ai URL | None — view-only |
-| Canva| Collaborative editing, marketing | Editable Canva project | Canva UI |
-| Bundle| Production code pipeline | Directory with PROMPT.md + assets + scaffolding | `frontend-design` plugin |
-| Standalone HTML| One-off landing page, static hosting | Single `index.html` + assets | Minimal |
-| PDF| Client deliverable, print | Rendered PDF | None |
-| PPTX| Slide deck presentation | PowerPoint file | Further edit in PPT/Keynote |
-| Folder| Local file archive | Directory of assets | Manual processing |
+| **Internal URL** | Async review, team feedback | Shareable claude.ai URL | None — view-only |
+| **Canva** | Collaborative editing, marketing | Editable Canva project | Canva UI |
+| **Bundle** | Production code pipeline | Directory with PROMPT.md + assets + scaffolding | `frontend-design` plugin |
+| **Standalone HTML** | One-off landing page, static hosting | Single `index.html` + assets | Minimal |
+| **PDF** | Client deliverable, print | Rendered PDF | None |
+| **PPTX** | Slide deck presentation | PowerPoint file | Further edit in PPT/Keynote |
+| **Folder** | Local file archive | Directory of assets | Manual processing |
 
-Decision Tree
+## Decision Tree
 
 ```
 Q: What's the next step after export?
-
- Review / feedback → Internal URL
-
- Non-developer will edit → Canva
-
- Production code in an existing app → Bundle → IntegrateIntoApp
-
- Production code, new standalone app → Bundle → ExportToCode → DeployDesign
-
- Static one-off page → Standalone HTML → DeployDesign
-
- Client presentation → PDF or PPTX
-
- Archive / keep locally → Folder
+│
+├─ Review / feedback → Internal URL
+│
+├─ Non-developer will edit → Canva
+│
+├─ Production code in an existing app → Bundle → IntegrateIntoApp
+│
+├─ Production code, new standalone app → Bundle → ExportToCode → DeployDesign
+│
+├─ Static one-off page → Standalone HTML → DeployDesign
+│
+├─ Client presentation → PDF or PPTX
+│
+└─ Archive / keep locally → Folder
 ```
 
-Bundle Format (Most Important)
+## Bundle Format (Most Important)
 
 The handoff bundle is the load-bearing output when code is the destination. Structure:
 
 ```
 bundle/
- PROMPT.md                    Structured brief for Claude Code
- tokens.json                  Design tokens (colors, typography, spacing)
- preview.html                 Static preview render
- components/                  Component scaffolds
-    button.tsx
-    card.tsx
-    ...
- assets/                      Images, fonts, icons
-    logo.svg
-    fonts/
-    images/
- README.md                    Bundle metadata
+├── PROMPT.md                    # Structured brief for Claude Code
+├── tokens.json                  # Design tokens (colors, typography, spacing)
+├── preview.html                 # Static preview render
+├── components/                  # Component scaffolds
+│   ├── button.tsx
+│   ├── card.tsx
+│   └── ...
+├── assets/                      # Images, fonts, icons
+│   ├── logo.svg
+│   ├── fonts/
+│   └── images/
+└── README.md                    # Bundle metadata
 ```
 
-PROMPT.md — the heart of the bundle
+### PROMPT.md — the heart of the bundle
 
 Contains:
 - Project purpose + audience
@@ -66,13 +66,13 @@ Contains:
 
 When you feed the bundle to Claude Code, the plugin reads PROMPT.md first. Everything else is context.
 
-tokens.json — machine-readable design tokens
+### tokens.json — machine-readable design tokens
 
 ```json
 {
   "color": {
-    "primary": { "": "...", "": "...", "": "..." },
-    "neutral": { "": "...", ...},
+    "primary": { "50": "#...", "500": "#...", "900": "#..." },
+    "neutral": { "50": "#...", ...},
     "accent": { ...}
   },
   "typography": {
@@ -80,7 +80,7 @@ tokens.json — machine-readable design tokens
     "body": { "family": "...", "scale": [...] },
     "mono": { "family": "...", "scale": [...] }
   },
-  "spacing": { "unit": , "scale": [,,,,,,,,,] },
+  "spacing": { "unit": 4, "scale": [0,4,8,12,16,24,32,48,64,96] },
   "radius": { ... },
   "shadow": { ... }
 }
@@ -88,10 +88,10 @@ tokens.json — machine-readable design tokens
 
 Framework translators read this directly. Tailwind configs, Styled Components themes, CSS custom properties all derive from this.
 
-HTML Export Caveats
+## HTML Export Caveats
 
 Standalone HTML export is a single file with inlined CSS and (usually) inlined JS. It's great for:
-- Static hosts (Cloudflare Pages, Netlify, S)
+- Static hosts (Cloudflare Pages, Netlify, S3)
 - Email-embedded prototypes
 - One-off landing pages
 
@@ -100,9 +100,9 @@ It's NOT suitable for:
 - Dynamic content / data-fetching
 - Multi-page sites (no routing)
 
-For anything beyond a single static page, use Bundleinstead.
+For anything beyond a single static page, use **Bundle** instead.
 
-Canva Export Caveats
+## Canva Export Caveats
 
 Canva exports produce an editable Canva design that preserves:
 - Layout structure (as Canva layers)
@@ -117,7 +117,7 @@ Canva is the right export when:
 
 Canva is NOT the right export when code is the destination — the round-trip from Canva back to code is lossy.
 
-PDF vs PPTX
+## PDF vs PPTX
 
 | If you need... | Use |
 |----------------|-----|
@@ -128,7 +128,7 @@ PDF vs PPTX
 | Fidelity to the Claude Design artifact | PDF (locks appearance) |
 | Editable-after-export | PPTX (modifiable slides) |
 
-Token-Only Export
+## Token-Only Export
 
 For tight hand-offs where the user will write the code themselves, export just `tokens.json`:
 
@@ -141,7 +141,7 @@ This is useful when:
 - You only need to establish the design system, not the implementation
 - Integration is token-only (see `IntegrateIntoApp.md` → mode: token-only)
 
-Format Combinations
+## Format Combinations
 
 Sometimes one artifact needs multiple exports:
 

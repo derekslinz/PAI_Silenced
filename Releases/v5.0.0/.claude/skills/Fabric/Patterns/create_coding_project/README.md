@@ -1,20 +1,20 @@
-Create Coding Project
+# Create Coding Project
 
 Generate wireframes and starter code for any coding ideas that you have.
 
-Usage
+## Usage
 
 ```bash
 echo "INSERT_YOUR_IDEA_HERE" | fabric -p create_coding_project
 ```
 
-Example
+## Example
 
-<u>Input</u>:
+### <u>Input</u>:
 ```bash
 echo "I want to create a project that can generate shell scripts from yaml files then upload them to a Jamf Pro server via the Jamf Pro API." | fabric -p create_coding_project
 ```
-<u>Output</u>:
+### <u>Output</u>:
 PROJECT:
 
 Automate shell script generation from YAML files and upload to Jamf Pro server using Jamf Pro API.
@@ -25,33 +25,33 @@ This project converts YAML configurations into shell scripts and uploads them to
 
 STEPS:
 
-. Parse YAML file.
-. Convert YAML to shell script.
-. Authenticate with Jamf Pro API.
-. Upload shell script to Jamf Pro server.
-. Verify upload success.
-. Log upload details.
+1. Parse YAML file.
+2. Convert YAML to shell script.
+3. Authenticate with Jamf Pro API.
+4. Upload shell script to Jamf Pro server.
+5. Verify upload success.
+6. Log upload details.
 
 STRUCTURE:
 ```css
 jamf-script-generator/
- src/
-    __init__.py
-    yaml_parser.py
-    script_generator.py
-    jamf_api.py
-    main.py
- config/
-    example.yaml
- logs/
-    upload.log
- tests/
-    test_yaml_parser.py
-    test_script_generator.py
-    test_jamf_api.py
-    test_main.py
- requirements.txt
- README.md
+├── src/
+│   ├── __init__.py
+│   ├── yaml_parser.py
+│   ├── script_generator.py
+│   ├── jamf_api.py
+│   └── main.py
+├── config/
+│   └── example.yaml
+├── logs/
+│   └── upload.log
+├── tests/
+│   ├── test_yaml_parser.py
+│   ├── test_script_generator.py
+│   ├── test_jamf_api.py
+│   └── test_main.py
+├── requirements.txt
+└── README.md
 ```
 
 DETAILED EXPLANATION:

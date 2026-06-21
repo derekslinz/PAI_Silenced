@@ -1,12 +1,23 @@
-CanonicalizeSkill Workflow
+# CanonicalizeSkill Workflow
 
-Purpose:Restructure an existing skill to match the canonical format with proper naming conventions.
+**Purpose:** Restructure an existing skill to match the canonical format with proper naming conventions.
+
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the CanonicalizeSkill workflow in the CreateSkill skill to restructure skill"}' \
+  > /dev/null 2>&1 &
+```
+
+Running the **CanonicalizeSkill** workflow in the **CreateSkill** skill to restructure skill...
 
 ---
 
-Step : Read the Authoritative Source
+## Step 1: Read the Authoritative Source
 
-REQUIRED FIRST:Read the canonical structure:
+**REQUIRED FIRST:** Read the canonical structure:
 
 ```
 ~/.claude/PAI/SkillSystem.md
@@ -16,7 +27,7 @@ This defines exactly what "canonicalize" means.
 
 ---
 
-Step : Read the Current Skill
+## Step 2: Read the Current Skill
 
 ```bash
 ~/.claude/skills/[skill-name]/SKILL.md
@@ -28,48 +39,52 @@ Identify what's wrong:
 - Separate `workflows:` array in YAML? (OLD FORMAT)
 - Missing `USE WHEN` in description?
 - Workflow routing missing from markdown body?
-- Workflow files not using TitleCase?- Skill directory not using TitleCase?
+- **Workflow files not using TitleCase?**
+- **Skill directory not using TitleCase?**
+
 ---
 
-Step : Backup
+## Step 3: Backup
 
 ```bash
 cp -r ~/.claude/skills/[skill-name]/ ~/.claude/History/Backups/[skill-name]-backup-$(date +%Y%m%d)/
 ```
 
-Note:Backups go to `~/.claude/History/Backups/`, NEVER inside skill directories.
+**Note:** Backups go to `~/.claude/History/Backups/`, NEVER inside skill directories.
 
 ---
 
-Step : Enforce TitleCase Naming
+## Step 4: Enforce TitleCase Naming
 
-CRITICAL: All naming must use TitleCase (PascalCase).
-Skill Directory Name
-```
- WRONG: createskill, create-skill, create_skill, CREATESKILL
- CORRECT: Createskill (or CreateSkill for multi-word)
-```
+**CRITICAL: All naming must use TitleCase (PascalCase).**
 
-Workflow File Names
+### Skill Directory Name
 ```
- WRONG: create.md, CREATE.md, create-skill.md, create_skill.md
- CORRECT: Create.md, UpdateDaemonInfo.md, SyncRepo.md
+✗ WRONG: createskill, create-skill, create_skill, CREATESKILL
+✓ CORRECT: Createskill (or CreateSkill for multi-word)
 ```
 
-Reference Doc Names
+### Workflow File Names
 ```
- WRONG: prosody-guide.md, PROSODY_GUIDE.md
- CORRECT: ProsodyGuide.md, SchemaSpec.md, ApiReference.md
-```
-
-Tool Names
-```
- WRONG: manage-server.ts, MANAGE_SERVER.ts
- CORRECT: ManageServer.ts (with ManageServer.help.md)
+✗ WRONG: create.md, CREATE.md, create-skill.md, create_skill.md
+✓ CORRECT: Create.md, UpdateDaemonInfo.md, SyncRepo.md
 ```
 
-Rename files if needed:```bash
-Example: rename workflow files
+### Reference Doc Names
+```
+✗ WRONG: prosody-guide.md, PROSODY_GUIDE.md
+✓ CORRECT: ProsodyGuide.md, SchemaSpec.md, ApiReference.md
+```
+
+### Tool Names
+```
+✗ WRONG: manage-server.ts, MANAGE_SERVER.ts
+✓ CORRECT: ManageServer.ts (with ManageServer.help.md)
+```
+
+**Rename files if needed:**
+```bash
+# Example: rename workflow files
 cd ~/.claude/skills/[SkillName]/Workflows/
 mv create.md Create.md
 mv update-info.md UpdateInfo.md
@@ -78,56 +93,63 @@ mv sync_repo.md SyncRepo.md
 
 ---
 
-Step : Enforce Flat Folder Structure
+## Step 5: Enforce Flat Folder Structure
 
-CRITICAL: Maximum levels deep - `skills/SkillName/Category/`
-Check for Nested Folders
+**CRITICAL: Maximum 2 levels deep - `skills/SkillName/Category/`**
 
-Scan for folders deeper than levels:
+### Check for Nested Folders
+
+Scan for folders deeper than 2 levels:
 
 ```bash
-Find any folders + levels deep (FORBIDDEN)
-find ~/.claude/skills/[SkillName]/ -type d -mindepth -maxdepth ```
-
-Common Violations to Fix
-
-Nested Workflows:```
- WRONG: Workflows/Company/DueDiligence.md
- FIX: Workflows/CompanyDueDiligence.md
+# Find any folders 3+ levels deep (FORBIDDEN)
+find ~/.claude/skills/[SkillName]/ -type d -mindepth 2 -maxdepth 3
 ```
 
-Nested Templates:```
- WRONG: Templates/Primitives/Extract.md
- FIX: Move to skills/Prompting/Extract.md (templates belong in Prompting)
+### ✗ Common Violations to Fix
+
+**Nested Workflows:**
+```
+✗ WRONG: Workflows/Company/DueDiligence.md
+✓ FIX: Workflows/CompanyDueDiligence.md
 ```
 
-Nested Tools:```
- WRONG: Tools/Utils/Helper.ts
- FIX: Tools/Helper.ts (or delete if not needed)
+**Nested Templates:**
+```
+✗ WRONG: Templates/Primitives/Extract.md
+✓ FIX: Move to skills/Prompting/Extract.md (templates belong in Prompting)
 ```
 
-Flatten Procedure
+**Nested Tools:**
+```
+✗ WRONG: Tools/Utils/Helper.ts
+✓ FIX: Tools/Helper.ts (or delete if not needed)
+```
 
-. Identify nested files: Find any file + levels deep
-. Rename for clarity: `Category/File.md` → `CategoryFile.md`
-. Move to parent: Move up one level to proper location
-. Update references: Search for old paths and update
+### Flatten Procedure
 
-Example:```bash
-Before (levels - WRONG)
+1. **Identify nested files**: Find any file 3+ levels deep
+2. **Rename for clarity**: `Category/File.md` → `CategoryFile.md`
+3. **Move to parent**: Move up one level to proper location
+4. **Update references**: Search for old paths and update
+
+**Example:**
+```bash
+# Before (3 levels - WRONG)
 skills/OSINT/Workflows/Company/DueDiligence.md
 
-After (levels - CORRECT)
+# After (2 levels - CORRECT)
 skills/OSINT/Workflows/CompanyDueDiligence.md
 ```
 
-Rule:If you need to organize many files, use clear filenames NOT subdirectories.
+**Rule:** If you need to organize many files, use clear filenames NOT subdirectories.
 
 ---
 
-Step : Convert YAML Frontmatter
+## Step 6: Convert YAML Frontmatter
 
-From old format (WRONG):```yaml
+**From old format (WRONG):**
+```yaml
 ---
 name: skill-name
 description: |
@@ -143,59 +165,62 @@ workflows:
 ---
 ```
 
-To new format (CORRECT):```yaml
+**To new format (CORRECT):**
+```yaml
 ---
 name: SkillName
 description: What the skill does. USE WHEN user mentions X OR user wants to Y. Additional capabilities.
 ---
 ```
 
-Key changes:- Skill name in TitleCase
+**Key changes:**
+- Skill name in TitleCase
 - Combine description + triggers into single-line `description` with `USE WHEN`
 - Remove `triggers:` array entirely
 - Remove `workflows:` array from YAML (moves to body)
 
 ---
 
-Step : Add Workflow Routing to Body
+## Step 6: Add Workflow Routing to Body
 
-Add `Workflow Routing` section in markdown body:
+Add `## Workflow Routing` section in markdown body:
 
 ```markdown
-SkillName
+# SkillName
 
 [Description]
 
-Workflow Routing
+## Workflow Routing
 
-When executing a workflow, output this notification:
+**When executing a workflow, output this notification:**
+
 ```
-Running WorkflowNamein SkillName...
+Running **WorkflowName** in **SkillName**...
 ```
 
 | Workflow | Trigger | File |
 |----------|---------|------|
-| WorkflowOne| "trigger phrase one" | `Workflows/WorkflowOne.md` |
-| WorkflowTwo| "trigger phrase two" | `Workflows/WorkflowTwo.md` |
+| **WorkflowOne** | "trigger phrase one" | `Workflows/WorkflowOne.md` |
+| **WorkflowTwo** | "trigger phrase two" | `Workflows/WorkflowTwo.md` |
 
-Examples
+## Examples
 
 [Required examples section]
 
-[Rest of documentation]
+## [Rest of documentation]
 ```
 
-Note:Workflow names in routing table must match file names exactly (TitleCase).
+**Note:** Workflow names in routing table must match file names exactly (TitleCase).
 
 ---
 
-Step : Remove Redundant Routing
+## Step 7: Remove Redundant Routing
 
-If the markdown body already had routing information in a different format, consolidate it into the standard `Workflow Routing` section. Delete any duplicate routing tables or sections.
+If the markdown body already had routing information in a different format, consolidate it into the standard `## Workflow Routing` section. Delete any duplicate routing tables or sections.
 
 ---
 
-Step : Ensure All Workflows Are Routed
+## Step 8: Ensure All Workflows Are Routed
 
 List workflow files:
 ```bash
@@ -203,18 +228,18 @@ ls ~/.claude/skills/[SkillName]/Workflows/
 ```
 
 For EACH file:
-. Verify TitleCase naming (rename if needed)
-. Ensure there's a routing entry in `Workflow Routing`
-. Verify routing entry matches exact file name
+1. Verify TitleCase naming (rename if needed)
+2. Ensure there's a routing entry in `## Workflow Routing`
+3. Verify routing entry matches exact file name
 
 ---
 
-Step : Add Gotchas Section
+## Step 9: Add Gotchas Section
 
-REQUIRED:Every skill needs a `Gotchas` section after the workflow routing table.
+**REQUIRED:** Every skill needs a `## Gotchas` section after the workflow routing table.
 
 ```markdown
-Gotchas
+## Gotchas
 
 - [Known failure mode or API quirk]
 - [Common mistake Claude makes with this skill]
@@ -223,7 +248,7 @@ Gotchas
 
 If the skill is new or you don't know specific gotchas yet, add the section with a placeholder:
 ```markdown
-Gotchas
+## Gotchas
 
 _No gotchas documented yet. Add failures here as they're discovered._
 ```
@@ -232,7 +257,7 @@ Per Anthropic: "The highest information density in any Skill comes from gotchas 
 
 ---
 
-Step a: Add Negative Triggers (if applicable)
+## Step 9a: Add Negative Triggers (if applicable)
 
 If the skill shares vocabulary with other skills, add `NOT FOR` to the description:
 ```yaml
@@ -241,15 +266,15 @@ description: ... USE WHEN [triggers]. NOT FOR [confusable alternative (use Skill
 
 ---
 
-Step b: Check BPE Compliance
+## Step 9b: Check BPE Compliance
 
 Review each instruction: does it provide knowledge Claude can't derive on its own? Remove instructions that just tell Claude what it already knows. Focus on information that breaks Claude's default patterns.
 
 ---
 
-Step c: Check SKILL.md Size
+## Step 9c: Check SKILL.md Size
 
-If SKILL.md exceeds lines, extract detailed reference content into:
+If SKILL.md exceeds 500 lines, extract detailed reference content into:
 - Root-level context files (existing PAI pattern)
 - `References/` subdirectory for extensive reference material
 
@@ -257,21 +282,23 @@ Keep SKILL.md as a concise routing guide.
 
 ---
 
-Step : Add Examples Section
+## Step 10: Add Examples Section
 
-REQUIRED:Every skill needs an `Examples` section with -concrete usage patterns.
+**REQUIRED:** Every skill needs an `## Examples` section with 2-3 concrete usage patterns.
 
 ```markdown
-Examples
+## Examples
 
-Example : [Common use case]```
+**Example 1: [Common use case]**
+```
 User: "[Typical user request]"
 → Invokes WorkflowName workflow
 → [What skill does]
 → [What user gets back]
 ```
 
-Example : [Another use case]```
+**Example 2: [Another use case]**
+```
 User: "[Different request]"
 → [Process]
 → [Output]
@@ -282,31 +309,31 @@ Place the Examples section after Workflow Routing.
 
 ---
 
-Step : Verify
+## Step 10: Verify
 
 Run checklist:
 
-Naming (TitleCase)
+### Naming (TitleCase)
 - [ ] Skill directory uses TitleCase (e.g., `Blogging`, `Createskill`)
 - [ ] All workflow files use TitleCase (e.g., `Create.md`, `UpdateInfo.md`)
 - [ ] All reference docs use TitleCase (e.g., `ProsodyGuide.md`)
 - [ ] All tool files use TitleCase (e.g., `ManageServer.ts`)
 - [ ] Routing table workflow names match file names exactly
 
-YAML Frontmatter
+### YAML Frontmatter
 - [ ] `name:` uses TitleCase
 - [ ] `description:` is single-line with embedded `USE WHEN` clause
 - [ ] No separate `triggers:` or `workflows:` arrays in YAML
 - [ ] Description uses intent-based language
-- [ ] Description is under characters
+- [ ] Description is under 1024 characters
 
-Markdown Body
-- [ ] `Workflow Routing` section present
+### Markdown Body
+- [ ] `## Workflow Routing` section present
 - [ ] Routing uses table format with Workflow, Trigger, File columns
 - [ ] All workflow files have routing entries
-- [ ] `Examples` section with -concrete usage patterns
+- [ ] `## Examples` section with 2-3 concrete usage patterns
 
-Structure
+### Structure
 - [ ] `tools/` directory exists (even if empty)
 - [ ] Workflows contain ONLY work execution procedures
 - [ ] Reference docs live at skill root (not in Workflows/)
@@ -314,7 +341,7 @@ Structure
 
 ---
 
-TitleCase Reference
+## TitleCase Reference
 
 | Type | Wrong | Correct |
 |------|-------|---------|
@@ -327,6 +354,6 @@ TitleCase Reference
 
 ---
 
-Done
+## Done
 
 Skill now matches the canonical structure from SkillSystem.md with proper TitleCase naming throughout.

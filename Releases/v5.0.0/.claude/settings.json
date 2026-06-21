@@ -1244,7 +1244,7 @@
   },
   "pai": {
     "version": "5.0.0",
-    "algorithmVersion": "3.28.0",
+    "algorithmVersion": "6.3.0",
     "repoUrl": "github.com/danielmiessler/PAI"
   },
   "preferences": {
@@ -1321,11 +1321,11 @@
     }
   },
   "counts": {
-    "skills": 102,
-    "skillsPublic": 46,
-    "skillsPrivate": 56,
-    "workflows": 435,
-    "hooks": 38,
+    "skills": 45,
+    "skillsPublic": 45,
+    "skillsPrivate": 0,
+    "workflows": 170,
+    "hooks": 22,
     "signals": 8609,
     "files": 0,
     "work": 3857,

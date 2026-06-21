@@ -96,7 +96,7 @@ Example — adding a staging environment:
 |--------|-----------|-----------------|------|
 | Tool activity | `MEMORY/OBSERVABILITY/tool-activity.jsonl` | 100 | `ToolActivityTracker.hook.ts` (PostToolUse, catch-all) |
 | Tool failures | `MEMORY/OBSERVABILITY/tool-failures.jsonl` | 50 | `ToolFailureTracker.hook.ts` (PostToolUseFailure) |
-| Subagent events | `MEMORY/OBSERVABILITY/subagent-events.jsonl` | 50 | `AgentInvocation.hook.ts` (PreToolUse:Agent / PostToolUse:Agent) |
+| Subagent events | `MEMORY/OBSERVABILITY/subagent-events.jsonl` | 50 | `ToolActivityTracker.hook.ts` (PostToolUse, global — captures Agent tool start/stop) |
 | Agent watchdog | stdout (Monitor notifications) | — | `Tools/AgentWatchdog.ts` via Monitor tool. Reads tool-activity.jsonl + subagent-starts.json; alerts on 90s silence with active agents. Auto-triggered by Pulse agent-guard hook on background agent spawn. |
 
 Per-source counts match between `Pulse/Observability/observability.ts` (local) and `observability-transport.ts` (KV push) to ensure identical data on all destinations.

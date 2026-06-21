@@ -1,35 +1,37 @@
-Standard Research Workflow
+# Standard Research Workflow
 
-Mode:different researcher types, query each | Timeout:minutes
+**Mode:** 4 different researcher types, 1 query each | **Timeout:** 2 minutes
 
-CRITICAL: URL Verification Required
+## CRITICAL: URL Verification Required
 
-BEFORE delivering any research results with URLs:. Verify EVERY URL using WebFetch or curl
-. Confirm the content matches what you're citing
-. NEVER include unverified URLs - research agents HALLUCINATE URLs
-. A single broken link is a CATASTROPHIC FAILURE
+**BEFORE delivering any research results with URLs:**
+1. Verify EVERY URL using WebFetch or curl
+2. Confirm the content matches what you're citing
+3. NEVER include unverified URLs - research agents HALLUCINATE URLs
+4. A single broken link is a CATASTROPHIC FAILURE
 
 See `SKILL.md` for full URL Verification Protocol.
 
-When to Use
+## When to Use
 
 - Default mode for most research requests
 - User says "do research" or "research this"
 - Need multiple perspectives quickly
 
-Workflow
+## Workflow
 
-Step : Craft One Query Per Researcher
+### Step 1: Craft One Query Per Researcher
 
 Create ONE focused query optimized for each researcher's strengths:
-- Claude: Academic depth, detailed analysis, scholarly sources
-- Gemini: Multi-perspective synthesis, cross-domain connections
-- Grok: Contrarian, fact-based perspective; long-term truth over short-term trend; social/political nuance
-- Perplexity: Live-web retrieval with citations; fastest current-state snapshot
+- **Claude**: Academic depth, detailed analysis, scholarly sources
+- **Gemini**: Multi-perspective synthesis, cross-domain connections
+- **Grok**: Contrarian, fact-based perspective; long-term truth over short-term trend; social/political nuance
+- **Perplexity**: Live-web retrieval with citations; fastest current-state snapshot
 
-Step : Launch Agents in Parallel (of each type)
+### Step 2: Launch 4 Agents in Parallel (1 of each type)
 
-SINGLE message with Task calls:
+**SINGLE message with 4 Task calls:**
+
 ```typescript
 Task({
   subagent_type: "ClaudeResearcher",
@@ -56,45 +58,47 @@ Task({
 })
 ```
 
-Each agent:- Gets ONE query
+**Each agent:**
+- Gets ONE query
 - Does ONE search
 - Returns immediately
 
-Step : Cross-Check Synthesis
+### Step 3: Cross-Check Synthesis
 
-Combine the two perspectives with confidence scoring and conflict detection:
-. Cross-reference findings:Where both agents report the same fact → tag `[HIGH]`
-. Flag unique findings:Findings from only one agent → tag `[MED]`
-. Detect contradictions:Where agents disagree → tag `[CONFLICT]` with both sides
-. Quantitative check:Any number cited by one agent — did the other agent's sources confirm it?
+Combine the two perspectives **with confidence scoring and conflict detection:**
 
-This adds ~-seconds to synthesis (reading both results with conflict lens) — well within the <s budget.
+1. **Cross-reference findings:** Where both agents report the same fact → tag `[HIGH]`
+2. **Flag unique findings:** Findings from only one agent → tag `[MED]`
+3. **Detect contradictions:** Where agents disagree → tag `[CONFLICT]` with both sides
+4. **Quantitative check:** Any number cited by one agent — did the other agent's sources confirm it?
 
-Step : Parallel URL Verification
+This adds ~2-3 seconds to synthesis (reading both results with conflict lens) — well within the <5s budget.
+
+### Step 4: Parallel URL Verification
 
 Agents now self-verify URLs before returning. For any remaining unverified URLs, batch-verify in parallel:
 
 ```bash
-Parallel URL check (not sequential)
+# Parallel URL check (not sequential)
 for url in "${urls[@]}"; do curl -s -o /dev/null -w "%{http_code} $url\n" -L "$url" & done; wait
 ```
 
-If URL fails:Remove it. If the finding was `[HIGH]` based on cross-reference, downgrade to `[MED]`.
+**If URL fails:** Remove it. If the finding was `[HIGH]` based on cross-reference, downgrade to `[MED]`.
 
-Step : Return Results
+### Step 5: Return Results
 
 ```markdown
 SUMMARY: Research on [topic]
 ANALYSIS: [Key findings with confidence tags: [HIGH] [MED] [LOW] [CONFLICT]]
-ACTIONS: researchers × query each + cross-check synthesis
-RESULTS: [Synthesized answer]
-STATUS: Standard mode - agents, cross-checked
+ACTIONS: 2 researchers × 1 query each + cross-check synthesis
+✓ RESULTS: [Synthesized answer]
+STATUS: Standard mode - 2 agents, cross-checked
 CAPTURE: [Key verified facts]
- NEXT: [Suggest extensive if CONFLICT items need resolution]
-STORY EXPLANATION: [-numbered points]
+→NEXT: [Suggest extensive if CONFLICT items need resolution]
+STORY EXPLANATION: [5-8 numbered points]
 COMPLETED: Research on [topic] complete
 ```
 
-Speed Target
+## Speed Target
 
-~-seconds for results
+~15-30 seconds for results

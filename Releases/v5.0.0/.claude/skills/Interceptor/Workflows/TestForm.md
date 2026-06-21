@@ -1,25 +1,36 @@
-TestForm Workflow
+# TestForm Workflow
+
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the TestForm workflow in the Interceptor skill to test a form"}' \
+  > /dev/null 2>&1 &
+```
+
+Running **TestForm** in **Interceptor**...
 
 ---
 
 Discover, fill, submit, and verify a form on any page. Uses Interceptor's semantic element finding to locate form fields by role and name, fills them with test data, submits, and verifies the result.
 
-When to Use
+## When to Use
 
 - Testing signup, login, or contact forms after changes
 - Verifying form validation behavior (required fields, email format, etc.)
 - Checking that form submissions reach the correct API endpoint
 - Testing forms on authenticated pages where agent-browser can't reach
 
-Steps
+## Steps
 
-. Open the Page with the Form
+### 1. Open the Page with the Form
 
 ```bash
 interceptor open "<PAGE_URL>"
 ```
 
-. Discover Form Fields
+### 2. Discover Form Fields
 
 Use the find command to locate input fields:
 
@@ -37,19 +48,19 @@ interceptor tree
 
 Look for elements with roles: `textbox`, `combobox`, `checkbox`, `radio`, `spinbutton`, `slider`, `switch`.
 
-. Fill Form Fields
+### 3. Fill Form Fields
 
 Fill each field using its semantic selector or ref:
 
 ```bash
-By semantic selector (preferred — survives DOM changes)
+# By semantic selector (preferred — survives DOM changes)
 interceptor type "textbox:Email" "test@example.com"
 interceptor type "textbox:Name" "Test User"
 interceptor select "combobox:Country" "United States"
 
-By element ref (from tree output)
-interceptor act e"test@example.com"
-interceptor act e"Test User"
+# By element ref (from tree output)
+interceptor act e5 "test@example.com"
+interceptor act e8 "Test User"
 ```
 
 For checkboxes and radio buttons:
@@ -59,7 +70,7 @@ interceptor click "checkbox:Terms and Conditions"
 interceptor click "radio:Monthly Plan"
 ```
 
-. Verify Pre-Submit State
+### 4. Verify Pre-Submit State
 
 Before submitting, verify the form looks correct:
 
@@ -69,7 +80,7 @@ Before submitting, verify the form looks correct:
 
 Read the screenshot to confirm fields are populated correctly and no validation errors are showing.
 
-. Submit the Form
+### 5. Submit the Form
 
 ```bash
 interceptor click "button:Submit"
@@ -83,47 +94,47 @@ interceptor keys "Enter"
 interceptor wait-stable
 ```
 
-. Verify Submission Result
+### 6. Verify Submission Result
 
 Check what happened after submission:
 
 ```bash
-Check the page content for success/error messages
+# Check the page content for success/error messages
 interceptor read --text-only
 
-Check network for the API call
+# Check network for the API call
 interceptor net log --json
 
-Capture the result page
+# Capture the result page
 ( cd /tmp/pai-screenshots && interceptor screenshot --save )
 ```
 
 Look for:
 - Success confirmation message or redirect
 - API call to the expected endpoint with correct method (POST/PUT)
-- Response status code (/for success)
+- Response status code (200/201 for success)
 - Any error messages or validation failures
 
-. Test Edge Cases (Optional)
+### 7. Test Edge Cases (Optional)
 
 For thorough form testing, repeat with edge case inputs:
 
 ```bash
-Empty required fields — submit without filling
+# Empty required fields — submit without filling
 interceptor click "button:Submit"
-interceptor read --text-only  Check for validation messages
+interceptor read --text-only  # Check for validation messages
 
-Invalid email format
+# Invalid email format
 interceptor type "textbox:Email" "not-an-email"
 interceptor click "button:Submit"
 interceptor read --text-only
 
-Very long input
+# Very long input
 interceptor type "textbox:Name" "A very long name that might break layout assumptions in the form"
 ( cd /tmp/pai-screenshots && interceptor screenshot --save )
 ```
 
-Notes
+## Notes
 
 - Semantic selectors (`"textbox:Email"`) use accessible role + name. If a form field has no accessible name, it will only be findable by ref ID — consider fixing the accessibility.
 - `interceptor type` clears the field before typing. Use `interceptor type <ref> "text" --append` to add to existing content.

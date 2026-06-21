@@ -1,12 +1,23 @@
-UpdateSkill Workflow
+# UpdateSkill Workflow
 
-Purpose:Add workflows or modify an existing skill while maintaining canonical structure and TitleCase naming.
+**Purpose:** Add workflows or modify an existing skill while maintaining canonical structure and TitleCase naming.
+
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the UpdateSkill workflow in the CreateSkill skill to modify existing skill"}' \
+  > /dev/null 2>&1 &
+```
+
+Running the **UpdateSkill** workflow in the **CreateSkill** skill to modify existing skill...
 
 ---
 
-Step : Read the Authoritative Source
+## Step 1: Read the Authoritative Source
 
-REQUIRED FIRST:Read the canonical structure:
+**REQUIRED FIRST:** Read the canonical structure:
 
 ```
 ~/.claude/PAI/SkillSystem.md
@@ -14,7 +25,7 @@ REQUIRED FIRST:Read the canonical structure:
 
 ---
 
-Step : Read the Current Skill
+## Step 2: Read the Current Skill
 
 ```bash
 ~/.claude/skills/[SkillName]/SKILL.md
@@ -27,7 +38,7 @@ Understand the current:
 
 ---
 
-Step : Understand the Update
+## Step 3: Understand the Update
 
 What needs to change?
 - Adding a new workflow?
@@ -36,14 +47,16 @@ What needs to change?
 
 ---
 
-Step : Make Changes
+## Step 4: Make Changes
 
-To Add a New Workflow:
+### To Add a New Workflow:
 
-. Determine TitleCase name:   -  `Create.md`, `UpdateDaemonInfo.md`, `SyncRepo.md`
-   -  `create.md`, `update-daemon-info.md`, `SYNC_REPO.md`
+1. **Determine TitleCase name:**
+   - ✓ `Create.md`, `UpdateDaemonInfo.md`, `SyncRepo.md`
+   - ✗ `create.md`, `update-daemon-info.md`, `SYNC_REPO.md`
 
-. Create the workflow file:```bash
+2. **Create the workflow file:**
+```bash
 touch ~/.claude/skills/[SkillName]/Workflows/[WorkflowName].md
 ```
 
@@ -52,37 +65,41 @@ Example:
 touch ~/.claude/skills/_DAEMON/Workflows/UpdatePublicRepo.md
 ```
 
-. Add entry to `Workflow Routing` section in SKILL.md:```markdown
-Workflow Routing
+3. **Add entry to `## Workflow Routing` section in SKILL.md:**
+```markdown
+## Workflow Routing
 
 | Workflow | Trigger | File |
 |----------|---------|------|
-| ExistingWorkflow| "existing trigger" | `Workflows/ExistingWorkflow.md` |
-| NewWorkflow| "new trigger" | `Workflows/NewWorkflow.md` |
+| **ExistingWorkflow** | "existing trigger" | `Workflows/ExistingWorkflow.md` |
+| **NewWorkflow** | "new trigger" | `Workflows/NewWorkflow.md` |
 ```
 
-. Write the workflow content
-To Update Triggers:
+4. **Write the workflow content**
+
+### To Update Triggers:
 
 Modify the single-line `description` in YAML frontmatter:
 ```yaml
 description: [What it does]. USE WHEN [updated intent triggers using OR]. [Capabilities].
 ```
 
-To Add a Tool:
+### To Add a Tool:
 
-. Create TitleCase tool file:```bash
+1. **Create TitleCase tool file:**
+```bash
 touch ~/.claude/skills/[SkillName]/Tools/ToolName.ts
 touch ~/.claude/skills/[SkillName]/Tools/ToolName.help.md
 ```
 
-. Ensure Tools/ directory exists:```bash
+2. **Ensure Tools/ directory exists:**
+```bash
 mkdir -p ~/.claude/skills/[SkillName]/Tools
 ```
 
 ---
 
-Step : Verify TitleCase
+## Step 5: Verify TitleCase
 
 After making changes, verify naming:
 
@@ -92,28 +109,28 @@ ls ~/.claude/skills/[SkillName]/Tools/
 ```
 
 All files must use TitleCase:
--  `WorkflowName.md`
--  `ToolName.ts`, `ToolName.help.md`
--  `workflow-name.md`, `tool_name.ts`
+- ✓ `WorkflowName.md`
+- ✓ `ToolName.ts`, `ToolName.help.md`
+- ✗ `workflow-name.md`, `tool_name.ts`
 
 ---
 
-Step : Final Checklist
+## Step 6: Final Checklist
 
-Naming
+### Naming
 - [ ] New workflow files use TitleCase
 - [ ] New tool files use TitleCase
 - [ ] Routing table names match file names exactly
 
-Structure
+### Structure
 - [ ] YAML still has single-line description with USE WHEN
 - [ ] No separate `triggers:` or `workflows:` arrays in YAML
-- [ ] Markdown body has `Workflow Routing` section
+- [ ] Markdown body has `## Workflow Routing` section
 - [ ] All routes point to existing files
 - [ ] New workflow files have routing entries
 
 ---
 
-Done
+## Done
 
 Skill updated while maintaining canonical structure and TitleCase naming.

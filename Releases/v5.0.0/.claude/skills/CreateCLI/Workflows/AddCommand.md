@@ -3,18 +3,30 @@ workflow: add-command
 purpose: Add new command to existing CLI
 ---
 
-Add Command Workflow
+# Add Command Workflow
 
-Extend existing CLI with new commands while maintaining code quality and consistency.
+**Extend existing CLI with new commands while maintaining code quality and consistency.**
+
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the AddCommand workflow in the CreateCLI skill to add CLI command"}' \
+  > /dev/null 2>&1 &
+```
+
+Running the **AddCommand** workflow in the **CreateCLI** skill to add CLI command...
+
 ---
 
-PURPOSE
+## PURPOSE
 
 Add one or more commands to an existing CLI without breaking existing functionality.
 
 ---
 
-WHEN TO USE
+## WHEN TO USE
 
 - User requests: "Add [command] to [CLI]"
 - "Extend [CLI] with [feature]"
@@ -22,18 +34,18 @@ WHEN TO USE
 
 ---
 
-STEPS
+## STEPS
 
-. Locate Existing CLI
+### 1. Locate Existing CLI
 
 ```bash
-Find CLI location
+# Find CLI location
 ls -la ~/.claude/Bin/[cli-name]/
-or
+# or
 ls -la ~/Projects/[project]/
 ```
 
-. Read Current Structure
+### 2. Read Current Structure
 
 ```typescript
 // Identify:
@@ -42,7 +54,7 @@ ls -la ~/Projects/[project]/
 // - Help text structure
 ```
 
-. Add Interface (if needed)
+### 3. Add Interface (if needed)
 
 ```typescript
 // Add response interface
@@ -51,11 +63,12 @@ interface NewCommandResponse {
 }
 ```
 
-. Implement Command Function
+### 4. Implement Command Function
 
 ```typescript
-/ [Command description]
- /
+/**
+ * [Command description]
+ */
 async function newCommand(
   arg: string,
   options: { flag?: boolean } = {}
@@ -65,34 +78,34 @@ async function newCommand(
   // Validation
   if (!arg) {
     console.error('Error: argument required');
-    process.exit();
+    process.exit(1);
   }
 
   // Implementation
   const result = await fetchData(config, arg);
 
   // Output
-  console.log(JSON.stringify(result, null, ));
+  console.log(JSON.stringify(result, null, 2));
 }
 ```
 
-. Add to Switch Statement
+### 5. Add to Switch Statement
 
 ```typescript
 switch (command) {
   // ... existing cases
 
   case 'newcommand':
-    await newCommand(args[], options);
+    await newCommand(args[1], options);
     break;
 
   default:
     console.error(`Unknown command: ${command}`);
-    process.exit();
+    process.exit(1);
 }
 ```
 
-. Update Help Text
+### 6. Update Help Text
 
 ```typescript
 COMMANDS:
@@ -101,25 +114,25 @@ COMMANDS:
   help, --help, -h              Show help
 
 EXAMPLES:
-  New command examples                                   // ← Add
+  # New command examples                                   // ← Add
   $ mycli newcommand value
   $ mycli newcommand value --flag
 ```
 
-. Update README
+### 7. Update README
 
 Add to command list and examples section.
 
-. Test
+### 8. Test
 
 ```bash
 ./cli.ts newcommand test-value
-./cli.ts --help  Verify new command listed
+./cli.ts --help  # Verify new command listed
 ```
 
 ---
 
-QUALITY CHECKLIST
+## ✓ QUALITY CHECKLIST
 
 - [ ] Command function implemented
 - [ ] Added to switch statement
@@ -131,17 +144,18 @@ QUALITY CHECKLIST
 
 ---
 
-Example: Adding "search" to existing "list/create" CLI
+**Example: Adding "search" to existing "list/create" CLI**
+
 ```typescript
 // Before: list, create
 // After: list, create, search ← new
 
-async function search(keyword: string, limit: number = ): Promise<void> {
+async function search(keyword: string, limit: number = 20): Promise<void> {
   // Implementation
 }
 
 // Add to switch
 case 'search':
-  await search(args[], parseLimit(args));
+  await search(args[1], parseLimit(args));
   break;
 ```

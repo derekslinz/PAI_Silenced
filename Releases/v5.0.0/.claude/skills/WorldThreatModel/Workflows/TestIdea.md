@@ -3,90 +3,98 @@ workflow: TestIdea
 mode: single-run
 ---
 
-Test Idea Against World Threat Models
+# Test Idea Against World Threat Models
 
-Test any idea, strategy, investment, brand, or concept against all persistent world models
+Test any idea, strategy, investment, brand, or concept against all 11 persistent world models
 to assess viability across time horizons.
 
-When to Use
+## When to Use
 
 - User says "test this idea," "how will this hold up," "test my strategy," "stress test this"
 - User provides an idea/strategy/investment and wants temporal viability analysis
 - User wants to understand when an idea breaks or thrives
 
-Prerequisites
+## Prerequisites
 
 - World models must exist at `~/.claude/PAI/MEMORY/RESEARCH/WorldModels/`
 - If models don't exist, prompt user to run UpdateModels workflow first
 
-Tier Detection
+## Tier Detection
 
 Detect from user prompt:
-- "fast"or "quick"→ Fast tier
-- "deep"or "thorough"or "comprehensive"→ Deep tier
-- No modifier→ Standard tier (default)
+- **"fast"** or **"quick"** → Fast tier
+- **"deep"** or **"thorough"** or **"comprehensive"** → Deep tier
+- **No modifier** → Standard tier (default)
 
-Workflow Steps
+## Workflow Steps
 
-Step : Validate Models Exist
+### Step 0: Validate Models Exist
 
 ```
-Check ~/.claude/PAI/MEMORY/RESEARCH/WorldModels/ for all model files.
+Check ~/.claude/PAI/MEMORY/RESEARCH/WorldModels/ for all 11 model files.
 If any missing: "World models incomplete. Run 'update world models' first."
-If models older than days: warn user but proceed.
+If models older than 30 days: warn user but proceed.
 ```
 
-Step : Extract and Decompose the Idea
+### Step 1: Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Testing your idea against all eleven world threat models at TIER tier", "voice_id": "fTtv3eikoepIosk8dTZ5"}'
+```
+
+### Step 2: Extract and Decompose the Idea
 
 Before hitting it with world models, decompose the idea:
 
-. State the ideain -sentences
-. Identify core assumptionsthe idea relies on (market conditions, technology state, cultural norms, regulatory environment, competitive landscape)
-. Identify success dependencies— what must remain true for this to work?
+1. **State the idea** in 1-2 sentences
+2. **Identify core assumptions** the idea relies on (market conditions, technology state, cultural norms, regulatory environment, competitive landscape)
+3. **Identify success dependencies** — what must remain true for this to work?
 
-For Standard and Deep tiers:Invoke FirstPrinciples skill to classify assumptions:
+For **Standard and Deep tiers:** Invoke FirstPrinciples skill to classify assumptions:
 - Hard constraints (physics, demographics, math)
 - Soft constraints (policy, regulation, cultural norms)
 - Assumptions (unvalidated beliefs the idea depends on)
 
-Step : Run Against World Models
+### Step 3: Run Against World Models
 
-Read all model files from `~/.claude/PAI/MEMORY/RESEARCH/WorldModels/`.
+Read all 11 model files from `~/.claude/PAI/MEMORY/RESEARCH/WorldModels/`.
 
-Fast Tier (~min)
+#### Fast Tier (~2 min)
 Single-agent analysis:
-. Read all models sequentially
-. For each horizon, generate: Verdict (//) + -bullet points
-. Write Executive Verdict
-. Output using abbreviated format from OutputFormat.md
+1. Read all 11 models sequentially
+2. For each horizon, generate: Verdict (●/●/●) + 2-3 bullet points
+3. Write Executive Verdict
+4. Output using abbreviated format from OutputFormat.md
 
-Standard Tier (~min)
+#### Standard Tier (~10 min)
 Parallel agent analysis:
-. Spawn up to parallel agents (Task tool, `run_in_background: true`)
-. Each agent:
+1. Spawn up to 11 parallel agents (Task tool, `run_in_background: true`)
+2. Each agent:
    - Reads ONE world model document
    - Analyzes the idea against that specific horizon
    - Tests each assumption against the horizon's conditions
    - Returns: Verdict, Key Factors, Analysis, Assumptions Tested
-. After all agents return, invoke RedTeam skillwith:
+3. After all agents return, invoke **RedTeam skill** with:
    - Prompt: "Attack this idea across all time horizons. Here are the per-horizon analyses: {results}"
    - Extract adversarial findings per horizon
-. Synthesize Cross-Horizon Synthesis section
-. Output using full format from OutputFormat.md
+4. Synthesize Cross-Horizon Synthesis section
+5. Output using full format from OutputFormat.md
 
-Deep Tier (up to hr)
+#### Deep Tier (up to 1 hr)
 Full capability invocation:
-. FirstPrinciples(if not already run): Full deconstruct → challenge → reconstruct cycle on the idea
-. Research update check: For each horizon, run quick Research check for any new developments that affect this specific idea
-. Parallel horizon analysis: Same as Standard but with deeper prompts and longer analysis per horizon
-. RedTeam(agents): Full adversarial analysis of the idea across all horizons
-. Council: Multi-agent debate on the idea's long-term viability
-   - Prompt: "Debate the viability of {idea} across time horizons from months to years. Consider: {per-horizon results}"
+1. **FirstPrinciples** (if not already run): Full deconstruct → challenge → reconstruct cycle on the idea
+2. **Research update check**: For each horizon, run quick Research check for any new developments that affect this specific idea
+3. **Parallel horizon analysis**: Same as Standard but with deeper prompts and longer analysis per horizon
+4. **RedTeam** (32 agents): Full adversarial analysis of the idea across all horizons
+5. **Council**: Multi-agent debate on the idea's long-term viability
+   - Prompt: "Debate the viability of {idea} across time horizons from 6 months to 50 years. Consider: {per-horizon results}"
    - Extract Council Deliberation section
-. Synthesize all findings
-. Output using complete format from OutputFormat.md (all sections)
+6. Synthesize all findings
+7. Output using complete format from OutputFormat.md (all sections)
 
-Step : Format Output
+### Step 4: Format Output
 
 Use the template in `OutputFormat.md` (loaded from skill root). Ensure:
 - Each horizon is clearly separated with its own section header
@@ -94,21 +102,29 @@ Use the template in `OutputFormat.md` (loaded from skill root). Ensure:
 - Confidence levels reflect model confidence × analysis certainty
 - Adversarial findings attribute to specific horizon contexts
 
-Output Format
+### Step 5: Voice Summary
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Analysis complete. SUMMARY_OF_EXECUTIVE_VERDICT", "voice_id": "fTtv3eikoepIosk8dTZ5"}'
+```
+
+## Output Format
 
 See `OutputFormat.md` in the skill root directory.
 
-Integration Points
+## Integration Points
 
 | Skill | Tier | Purpose |
 |-------|------|---------|
-| FirstPrinciples| Standard, Deep | Decompose idea assumptions before testing |
-| RedTeam| Standard, Deep | Adversarial attack on idea across horizons |
-| Council| Deep only | Multi-perspective debate on viability |
-| Research| Deep only | Quick refresh of horizon-relevant current events |
+| **FirstPrinciples** | Standard, Deep | Decompose idea assumptions before testing |
+| **RedTeam** | Standard, Deep | Adversarial attack on idea across horizons |
+| **Council** | Deep only | Multi-perspective debate on viability |
+| **Research** | Deep only | Quick refresh of horizon-relevant current events |
 
-Error Handling
+## Error Handling
 
 - If a parallel agent fails: continue with remaining agents, note missing horizon in output
 - If a skill invocation fails: degrade gracefully (e.g., skip Council section, note in footer)
-- If models are stale (>days): prominently warn in header, recommend update
+- If models are stale (>90 days): prominently warn in header, recommend update

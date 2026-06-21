@@ -1,11 +1,12 @@
-Full Cycle Workflow
+# Full Cycle Workflow
 
-Level Science - Research-grade methodology for macro-scale problems
+**Level 3 Science - Research-grade methodology for macro-scale problems**
+
 For problems spanning weeks to months, requiring statistical rigor, stakeholder review, or external publication. This is the complete scientific method with all safeguards.
 
 ---
 
-When to Use
+## When to Use
 
 - Product strategy or architectural decisions
 - Research for publication or sharing
@@ -14,7 +15,7 @@ When to Use
 - When you need to convince skeptics with rigorous evidence
 - Anything where getting it wrong is very expensive
 
-Anti-Triggers (Don't Use When)
+## Anti-Triggers (Don't Use When)
 
 - Problem can be solved in a day
 - Quick iteration is more valuable than rigor
@@ -23,323 +24,350 @@ Anti-Triggers (Don't Use When)
 
 ---
 
-The Complete Scientific Cycle
+## The Complete Scientific Cycle
 
-Phase : Research Protocol Design
+### Phase 0: Research Protocol Design
 
 Before starting, document the methodology itself.
 
 ```markdown
-Research Protocol: [Project Name]
+# Research Protocol: [Project Name]
 
-Principal Investigator:[Who owns this]
-Date:[Start date]
-Expected Duration:[Timeline]
+**Principal Investigator:** [Who owns this]
+**Date:** [Start date]
+**Expected Duration:** [Timeline]
 
-Research Question
+## Research Question
 [The fundamental question we're trying to answer]
 
-Significance
+## Significance
 [Why this matters - what decisions hinge on the answer?]
 
-Methodology Overview
+## Methodology Overview
 [High-level approach]
 
-Ethical Considerations
+## Ethical Considerations
 [Any concerns about how we're testing]
 
-Peer Review
+## Peer Review
 [Who will review methodology before execution?]
 
-Version History
+## Version History
 | Version | Date | Changes |
 |---------|------|---------|
-| .    | Date | Initial protocol |
+| 1.0     | Date | Initial protocol |
 ```
 
-Phase : Goal Definition with Pre-Registration
+### Phase 1: Goal Definition with Pre-Registration
 
-Pre-commit to success criteria before gathering evidence.
+**Pre-commit to success criteria before gathering evidence.**
+
 This prevents moving goalposts and confirmation bias.
 
 ```markdown
-Pre-Registered Goal Specification
+## Pre-Registered Goal Specification
 
-Primary Outcome:[The main thing we're measuring]
+**Primary Outcome:**
+[The main thing we're measuring]
 
-Success Criteria (PRE-REGISTERED - cannot change post-hoc):- [ ] [Quantitative criterion with exact threshold]
-- [ ] [Quantitative criterion with exact threshold]
+**Success Criteria (PRE-REGISTERED - cannot change post-hoc):**
+- [ ] [Quantitative criterion 1 with exact threshold]
+- [ ] [Quantitative criterion 2 with exact threshold]
 - [ ] [Qualitative criterion with clear rubric]
 
-Secondary Outcomes:- [Exploratory measurement ]
-- [Exploratory measurement ]
+**Secondary Outcomes:**
+- [Exploratory measurement 1]
+- [Exploratory measurement 2]
 
-Statistical Significance Threshold:[e.g., p < ., or Bayesian equivalent]
+**Statistical Significance Threshold:**
+[e.g., p < 0.05, or Bayesian equivalent]
 
-Minimum Effect Size:[What delta matters practically, not just statistically?]
+**Minimum Effect Size:**
+[What delta matters practically, not just statistically?]
 
-Stopping Rules:- Stop early if: [condition]
+**Stopping Rules:**
+- Stop early if: [condition]
 - Continue until: [condition]
 
-Pre-Registration Timestamp:[When this was locked]
-Pre-Registration Witness:[Who reviewed before data collection]
+**Pre-Registration Timestamp:** [When this was locked]
+**Pre-Registration Witness:** [Who reviewed before data collection]
 ```
 
-Phase : Comprehensive Context Gathering
+### Phase 2: Comprehensive Context Gathering
 
-Literature review and baseline establishment.
+**Literature review and baseline establishment.**
+
 ```markdown
-Context Report
+## Context Report
 
-Literature Review
+### Literature Review
 | Source | Key Finding | Relevance | Quality |
 |--------|-------------|-----------|---------|
 | [Ref]  | [Finding]   | [How it applies] | [High/Med/Low] |
 
-Prior Art
+### Prior Art
 - [What exists in this space]
 - [What has been tried before]
 - [Why previous attempts succeeded/failed]
 
-Baseline Measurements
+### Baseline Measurements
 | Metric | Current Value | Collection Method | Confidence |
 |--------|---------------|-------------------|------------|
 | [Name] | [Value ± error] | [How measured] | [High/Med/Low] |
 
-Stakeholder Map
+### Stakeholder Map
 | Stakeholder | Interest | Influence | Concerns |
 |-------------|----------|-----------|----------|
 | [Name]      | [What they care about] | [High/Med/Low] | [Worries] |
 
-Constraints Analysis
-- Time:[Hard deadline or flexible?]
-- Budget:[Resource limits]
-- Technical:[System constraints]
-- Political:[Organizational dynamics]
-- Ethical:[Boundaries we won't cross]
+### Constraints Analysis
+- **Time:** [Hard deadline or flexible?]
+- **Budget:** [Resource limits]
+- **Technical:** [System constraints]
+- **Political:** [Organizational dynamics]
+- **Ethical:** [Boundaries we won't cross]
 ```
 
-Phase : Hypothesis Generation with Devil's Advocate
+### Phase 3: Hypothesis Generation with Devil's Advocate
 
-Multiple hypotheses with active attempts to disprove each.
+**Multiple hypotheses with active attempts to disprove each.**
+
 ```markdown
-Hypothesis Set
+## Hypothesis Set
 
-Hypothesis : [Name]
+### Hypothesis 1: [Name]
 
-Claim:[Precise, testable statement]
+**Claim:** [Precise, testable statement]
 
-Theoretical Basis:[Why might this be true?]
+**Theoretical Basis:** [Why might this be true?]
 
-Supporting Evidence:. [Evidence point ]
-. [Evidence point ]
+**Supporting Evidence:**
+1. [Evidence point 1]
+2. [Evidence point 2]
 
-Challenging Evidence (Devil's Advocate):. [Counter-evidence ]
-. [Counter-evidence ]
+**Challenging Evidence (Devil's Advocate):**
+1. [Counter-evidence 1]
+2. [Counter-evidence 2]
 
-Falsification Criteria:- This hypothesis is FALSE if: [specific observable outcome]
+**Falsification Criteria:**
+- This hypothesis is FALSE if: [specific observable outcome]
 
-Bayesian Prior:[Initial probability estimate before testing]
+**Bayesian Prior:** [Initial probability estimate before testing]
 
-Competing Hypotheses:[Which other hypotheses conflict with this one?]
+**Competing Hypotheses:** [Which other hypotheses conflict with this one?]
 
 ---
-[Repeat for minimum hypotheses]
+[Repeat for minimum 5 hypotheses]
 ```
 
-Hypothesis Quality Checklist:- [ ] Is it specific enough to be testable?
+**Hypothesis Quality Checklist:**
+- [ ] Is it specific enough to be testable?
 - [ ] Is it falsifiable (could evidence prove it wrong)?
 - [ ] Have we seriously considered counter-evidence?
 - [ ] Is it distinct from other hypotheses?
 - [ ] Would confirming it actually tell us what to do?
 
-Phase : Experiment Design with Controls
+### Phase 4: Experiment Design with Controls
 
-Rigorous experimental design.
+**Rigorous experimental design.**
+
 ```markdown
-Experiment Design: [Name]
+## Experiment Design: [Name]
 
-Variables
-Independent Variable (what we're changing):[Precise definition]
+### Variables
+**Independent Variable (what we're changing):**
+[Precise definition]
 
-Dependent Variable (what we're measuring):[Precise definition]
+**Dependent Variable (what we're measuring):**
+[Precise definition]
 
-Control Variables (what we're holding constant):- [Variable ]: held at [value]
-- [Variable ]: held at [value]
+**Control Variables (what we're holding constant):**
+- [Variable 1]: held at [value]
+- [Variable 2]: held at [value]
 
-Confounding Variables (what might skew results):- [Confounder ]: mitigated by [strategy]
-- [Confounder ]: mitigated by [strategy]
+**Confounding Variables (what might skew results):**
+- [Confounder 1]: mitigated by [strategy]
+- [Confounder 2]: mitigated by [strategy]
 
-Control Group
-Design:[How we're establishing baseline]
-Size:[N required for statistical power]
+### Control Group
+**Design:** [How we're establishing baseline]
+**Size:** [N required for statistical power]
 
-Treatment Group(s)
-Design:[What intervention/change]
-Size:[N required]
+### Treatment Group(s)
+**Design:** [What intervention/change]
+**Size:** [N required]
 
-Randomization
+### Randomization
 [How subjects/cases are assigned to groups]
 
-Blinding
+### Blinding
 - Single-blind: [who is blinded]
 - Double-blind: [if applicable]
 
-Power Analysis
-Effect size expected:[Minimum delta to detect]
-Sample size required:[N]
-Power:[e.g., %]
+### Power Analysis
+**Effect size expected:** [Minimum delta to detect]
+**Sample size required:** [N]
+**Power:** [e.g., 80%]
 
-Data Collection Protocol
-. [Step - exactly how to collect]
-. [Step ]
-. [Step ]
+### Data Collection Protocol
+1. [Step 1 - exactly how to collect]
+2. [Step 2]
+3. [Step 3]
 
-Analysis Plan (PRE-REGISTERED)
+### Analysis Plan (PRE-REGISTERED)
 [Exactly what statistical tests will be run]
 [How will we handle missing data?]
 [What corrections for multiple comparisons?]
 ```
 
-Phase : Execution with Audit Trail
+### Phase 5: Execution with Audit Trail
 
-Run experiments with complete documentation.
+**Run experiments with complete documentation.**
+
 ```markdown
-Execution Log
+## Execution Log
 
-Experiment: [Name]
-Started:[Timestamp]
-Ended:[Timestamp]
-Executed By:[Who]
+### Experiment: [Name]
+**Started:** [Timestamp]
+**Ended:** [Timestamp]
+**Executed By:** [Who]
 
-Protocol Deviations
+### Protocol Deviations
 | Date | Deviation | Reason | Impact Assessment |
 |------|-----------|--------|-------------------|
 | [Date] | [What changed] | [Why] | [How it affects validity] |
 
-Data Collection Log
+### Data Collection Log
 | Timestamp | Data Point | Value | Collector | Notes |
 |-----------|-----------|-------|-----------|-------|
 | [Time]    | [Metric]  | [Value] | [Who] | [Context] |
 
-Anomalies Observed
-- [Unexpected event ]: [Description and impact]
-- [Unexpected event ]: [Description and impact]
+### Anomalies Observed
+- [Unexpected event 1]: [Description and impact]
+- [Unexpected event 2]: [Description and impact]
 
-Raw Data Location
+### Raw Data Location
 [Path to preserved raw data - never modify raw data]
 ```
 
-Phase : Statistical Analysis
+### Phase 6: Statistical Analysis
 
-Rigorous analysis with appropriate methods.
+**Rigorous analysis with appropriate methods.**
+
 ```markdown
-Statistical Analysis
+## Statistical Analysis
 
-Descriptive Statistics
+### Descriptive Statistics
 | Group | N | Mean | SD | Median | Range |
 |-------|---|------|----|---------| ------|
 | Control | [N] | [M] | [SD] | [Med] | [Min-Max] |
 | Treatment | [N] | [M] | [SD] | [Med] | [Min-Max] |
 
-Inferential Statistics
-Test Used:[Name of test and justification]
-Results:- Test statistic: [Value]
+### Inferential Statistics
+**Test Used:** [Name of test and justification]
+**Results:**
+- Test statistic: [Value]
 - p-value: [Value]
 - Confidence interval: [Range]
 - Effect size: [Value and interpretation]
 
-Assumption Checks
+### Assumption Checks
 - Normality: [Met/Violated] - [How addressed]
 - Homogeneity of variance: [Met/Violated] - [How addressed]
 - Independence: [Met/Violated] - [How addressed]
 
-Bayesian Analysis (if applicable)
-Prior:[Distribution]
-Posterior:[Updated distribution]
-Bayes Factor:[Value and interpretation]
+### Bayesian Analysis (if applicable)
+**Prior:** [Distribution]
+**Posterior:** [Updated distribution]
+**Bayes Factor:** [Value and interpretation]
 
-Sensitivity Analysis
+### Sensitivity Analysis
 [How robust are results to different assumptions?]
 ```
 
-Phase : Analysis Against Pre-Registered Goals
+### Phase 7: Analysis Against Pre-Registered Goals
 
-Honest comparison - no moving goalposts.
+**Honest comparison - no moving goalposts.**
+
 ```markdown
-Results vs. Pre-Registered Criteria
+## Results vs. Pre-Registered Criteria
 
-Primary Outcome
+### Primary Outcome
 | Pre-Registered Criterion | Required | Achieved | Status |
 |-------------------------|----------|----------|--------|
-| [Criterion ]           | [Value]  | [Value]  | / |
-| [Criterion ]           | [Value]  | [Value]  | / |
+| [Criterion 1]           | [Value]  | [Value]  | ✓/✗  |
+| [Criterion 2]           | [Value]  | [Value]  | ✓/✗  |
 
-Hypothesis Verdicts
+### Hypothesis Verdicts
 | Hypothesis | Prior | Posterior | Verdict | Confidence |
 |------------|-------|-----------|---------|------------|
-| H        | [%]   | [%]       | CONFIRMED/REFUTED | [High/Med/Low] |
-| H        | [%]   | [%]       | CONFIRMED/REFUTED | [High/Med/Low] |
+| H1         | [%]   | [%]       | CONFIRMED/REFUTED | [High/Med/Low] |
+| H2         | [%]   | [%]       | CONFIRMED/REFUTED | [High/Med/Low] |
 
-Unexpected Findings
+### Unexpected Findings
 [Results that emerged but weren't pre-registered]
-Note: These are exploratory and require replication
-Limitations
-. [Methodological limitation ]
-. [Methodological limitation ]
-. [Generalizability concerns]
+*Note: These are exploratory and require replication*
 
-Alternative Interpretations
+### Limitations
+1. [Methodological limitation 1]
+2. [Methodological limitation 2]
+3. [Generalizability concerns]
+
+### Alternative Interpretations
 [What other explanations for results are possible?]
 ```
 
-Phase : Iteration Planning
+### Phase 8: Iteration Planning
 
-Based on findings, plan next steps.
+**Based on findings, plan next steps.**
+
 ```markdown
-Iteration Plan
+## Iteration Plan
 
-If Primary Goal Met
+### If Primary Goal Met
 - [ ] Document methodology for future reference
 - [ ] Communicate findings to stakeholders
 - [ ] Implement winning approach
 - [ ] Set up ongoing monitoring
 
-If Primary Goal Not Met
+### If Primary Goal Not Met
 - [ ] Analyze why hypotheses failed
 - [ ] Generate new hypotheses based on learnings
 - [ ] Design next cycle experiments
 - [ ] Consider paradigm shift (is the whole frame wrong?)
 
-Knowledge Transfer
-Key Learnings:. [Generalizable insight ]
-. [Generalizable insight ]
+### Knowledge Transfer
+**Key Learnings:**
+1. [Generalizable insight 1]
+2. [Generalizable insight 2]
 
-Methodology Improvements for Next Time:. [Process improvement ]
-. [Process improvement ]
+**Methodology Improvements for Next Time:**
+1. [Process improvement 1]
+2. [Process improvement 2]
 
-Follow-Up Research Questions:. [New question emerged ]
-. [New question emerged ]
+**Follow-Up Research Questions:**
+1. [New question emerged 1]
+2. [New question emerged 2]
 ```
 
 ---
 
-Artifacts Produced
+## Artifacts Produced
 
 A Full Cycle produces these documentation artifacts:
 
-. Research Protocol- Pre-registered methodology
-. Context Report- Literature review and baseline
-. Hypothesis Document- All hypotheses with priors
-. Experiment Design- Detailed methodology
-. Execution Log- Complete audit trail
-. Statistical Report- Analysis results
-. Findings Report- Conclusions and recommendations
-. Iteration Plan- Next steps
+1. **Research Protocol** - Pre-registered methodology
+2. **Context Report** - Literature review and baseline
+3. **Hypothesis Document** - All hypotheses with priors
+4. **Experiment Design** - Detailed methodology
+5. **Execution Log** - Complete audit trail
+6. **Statistical Report** - Analysis results
+7. **Findings Report** - Conclusions and recommendations
+8. **Iteration Plan** - Next steps
 
 ---
 
-Peer Review Checkpoints
+## Peer Review Checkpoints
 
 | Phase | Review Required | Reviewer(s) |
 |-------|-----------------|-------------|
@@ -351,16 +379,18 @@ Peer Review Checkpoints
 
 ---
 
-When to Pivot or Stop
+## When to Pivot or Stop
 
-Pivot the entire approach when:- Fundamental assumption proves false
+**Pivot the entire approach when:**
+- Fundamental assumption proves false
 - Environment changed significantly
 - Better opportunity emerged
 - Stakeholder priorities shifted
 
-Stop early when:- Clear failure with no recovery path
+**Stop early when:**
+- Clear failure with no recovery path
 - Resources better spent elsewhere
 - Ethical concerns emerged
 - Goal achieved early
 
-Document the decision:Even pivots and stops generate learnings.
+**Document the decision:** Even pivots and stops generate learnings.

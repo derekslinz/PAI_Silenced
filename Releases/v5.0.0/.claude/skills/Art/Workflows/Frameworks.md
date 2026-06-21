@@ -1,17 +1,30 @@
-Visual Mental Models & Frameworks Workflow
+# Visual Mental Models & Frameworks Workflow
 
-Hand-drawn frameworks, mental models, and conceptual diagrams using UL aesthetic.
+**Hand-drawn frameworks, mental models, and conceptual diagrams using UL aesthetic.**
+
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the Frameworks workflow in the Art skill to create diagrams"}' \
+  > /dev/null 2>&1 &
+```
+
+Running **Frameworks** in **Art**...
+
 ---
 
-Creates VISUAL FRAMEWORKS— signature mental models illustrated as memorable diagrams with editorial hand-drawn style.
+Creates **VISUAL FRAMEWORKS** — signature mental models illustrated as memorable diagrams with editorial hand-drawn style.
 
 ---
 
-Purpose
+## Purpose
 
-Visual frameworks illustrate mental models, thinking frameworks, and conceptual relationships. These are signature frameworksmade visual — xmatrices, Venn diagrams, conceptual maps with personality and editorial style.
+Visual frameworks illustrate mental models, thinking frameworks, and conceptual relationships. These are **signature frameworks** made visual — 2x2 matrices, Venn diagrams, conceptual maps with personality and editorial style.
 
-Use this workflow for:- xmatrices and quadrant models
+**Use this workflow for:**
+- 2x2 matrices and quadrant models
 - Venn diagrams with editorial flair
 - Conceptual relationship maps
 - "The [Your Name] Framework for X"
@@ -20,40 +33,41 @@ Use this workflow for:- xmatrices and quadrant models
 
 ---
 
-Visual Aesthetic: Structured Concepts with Editorial Style
+## Visual Aesthetic: Structured Concepts with Editorial Style
 
-Think:Smart conceptual diagram, but hand-drawn and visually interesting
+**Think:** Smart conceptual diagram, but hand-drawn and visually interesting
 
-Core Characteristics
-. Clear structure— Framework shape is recognizable (x, Venn, pyramid, etc.)
-. Hand-drawn organic— Imperfect lines, wobbly circles, human touch
-. Editorial aesthetic— Flat colors, black linework, UL palette
-. Labels integrated— Typography part of visual design
-. Conceptual clarity— Framework immediately understandable
-. Memorable visual— Becomes THE reference image for this framework
-. Thoughtful color— Strategic use of purple/teal to show relationships
+### Core Characteristics
+1. **Clear structure** — Framework shape is recognizable (2x2, Venn, pyramid, etc.)
+2. **Hand-drawn organic** — Imperfect lines, wobbly circles, human touch
+3. **Editorial aesthetic** — Flat colors, black linework, UL palette
+4. **Labels integrated** — Typography part of visual design
+5. **Conceptual clarity** — Framework immediately understandable
+6. **Memorable visual** — Becomes THE reference image for this framework
+7. **Thoughtful color** — Strategic use of purple/teal to show relationships
 
 ---
 
-Color System for Frameworks
+## Color System for Frameworks
 
-Structure
+### Structure
 ```
-Black — All framework structure (axes, circles, boxes)
-```
-
-Concept Differentiation
-```
-Deep Purple AC — Concept area or optimal quadrant
-Deep Teal B — Concept area or contrast quadrant
-Charcoal DDD — All text and labels
+Black #000000 — All framework structure (axes, circles, boxes)
 ```
 
-Background
+### Concept Differentiation
 ```
-White FFFFFF or Light Cream FED```
+Deep Purple #4A148C — Concept area 1 or optimal quadrant
+Deep Teal #00796B — Concept area 2 or contrast quadrant
+Charcoal #2D2D2D — All text and labels
+```
 
-Color Strategy
+### Background
+```
+White #FFFFFF or Light Cream #F5E6D3
+```
+
+### Color Strategy
 - Framework lines/structure in black
 - Purple for "ideal" or primary concept
 - Teal for "secondary" or contrast concept
@@ -61,27 +75,32 @@ Color Strategy
 
 ---
 
-MANDATORY WORKFLOW STEPS
+## MANDATORY WORKFLOW STEPS
 
-Step : Define Framework Structure
+### Step 1: Define Framework Structure
 
-Identify the mental model:
-. What framework type?   - xmatrix (four quadrants)
+**Identify the mental model:**
+
+1. **What framework type?**
+   - 2x2 matrix (four quadrants)
    - Venn diagram (overlapping circles)
    - Pyramid/hierarchy
    - Spectrum/continuum
    - Triangle (three-way balance)
    - Other conceptual shape
 
-. What are the dimensions/concepts?   - For x: X-axis concept, Y-axis concept
-   - For Venn: Circle concept, Circle concept, overlap meaning
+2. **What are the dimensions/concepts?**
+   - For 2x2: X-axis concept, Y-axis concept
+   - For Venn: Circle 1 concept, Circle 2 concept, overlap meaning
    - For pyramid: Levels from bottom to top
 
-. What are the quadrants/areas/zones?   - Name and describe each region
+3. **What are the quadrants/areas/zones?**
+   - Name and describe each region
    - Which is "optimal" or most important?
 
-Output:```
-FRAMEWORK TYPE: [xMatrix / Venn Diagram / Pyramid / etc.]
+**Output:**
+```
+FRAMEWORK TYPE: [2x2 Matrix / Venn Diagram / Pyramid / etc.]
 
 FRAMEWORK NAME: "The [Your Name] Framework for [Topic]"
 
@@ -90,32 +109,37 @@ DIMENSIONS:
 - Y-axis: [Concept] (Low → High)
 
 QUADRANTS/AREAS:
-. [Name]: [Description] — [Color if highlighted]
-. [Name]: [Description] — [Color if highlighted]
-. [Name]: [Description]
-. [Name]: [Description]
+1. [Name]: [Description] — [Color if highlighted]
+2. [Name]: [Description] — [Color if highlighted]
+3. [Name]: [Description]
+4. [Name]: [Description]
 
 OPTIMAL ZONE: [Which quadrant/area is ideal]
 ```
 
 ---
 
-Step : Design Framework Visual
+### Step 2: Design Framework Visual
 
-Plan the visual representation:
-. Framework geometry:   - How large is each element
+**Plan the visual representation:**
+
+1. **Framework geometry:**
+   - How large is each element
    - Proportions and spacing
    - Symmetry or intentional asymmetry
 
-. Labeling strategy:   - Where axis labels go
+2. **Labeling strategy:**
+   - Where axis labels go
    - Where quadrant names go
    - Additional annotations
 
-. Color assignment:   - Which quadrant gets purple (optimal)
+3. **Color assignment:**
+   - Which quadrant gets purple (optimal)
    - Which gets teal (contrast or secondary)
    - Rest remain black/white
 
-Output:```
+**Output:**
+```
 VISUAL STRUCTURE:
 [Describe the framework shape, e.g.:]
 - Two intersecting axes forming four quadrants
@@ -124,29 +148,29 @@ VISUAL STRUCTURE:
 - Each quadrant labeled with concept name
 
 COLOR CODING:
-- Top-right quadrant (optimal): Purple AC accent
-- Bottom-left quadrant (contrast): Teal B accent
+- Top-right quadrant (optimal): Purple #4A148C accent
+- Bottom-left quadrant (contrast): Teal #00796B accent
 - Other quadrants: Black structure only
 
 TYPOGRAPHY PLACEMENT:
-- Title (Tier ): Top center
-- Axis labels (Tier ): Along axes
-- Quadrant labels (Tier ): Inside each quadrant
-- Annotations (Tier ): Strategic notes on key quadrants
+- Title (Tier 1): Top center
+- Axis labels (Tier 2): Along axes
+- Quadrant labels (Tier 2): Inside each quadrant
+- Annotations (Tier 3): Strategic notes on key quadrants
 ```
 
 ---
 
-Step : Construct Prompt
+### Step 3: Construct Prompt
 
-Prompt Template
+### Prompt Template
 
 ```
 Hand-drawn conceptual framework diagram in editorial style.
 
 STYLE REFERENCE: Mental model illustration, conceptual diagram with personality, smart person's framework sketch
 
-BACKGROUND: [White FFFFFF OR Light Cream FED] — clean, flat
+BACKGROUND: [White #FFFFFF OR Light Cream #F5E6D3] — clean, flat
 
 AESTHETIC:
 - Hand-drawn framework structure (wobbly lines, organic shapes)
@@ -155,7 +179,7 @@ AESTHETIC:
 - Editorial flat color with strategic purple/teal accents
 - Clear conceptual structure with human touch
 
-FRAMEWORK TYPE: [xMatrix / Venn Diagram / Pyramid / Spectrum / etc.]
+FRAMEWORK TYPE: [2x2 Matrix / Venn Diagram / Pyramid / Spectrum / etc.]
 
 FRAMEWORK STRUCTURE:
 [Describe the specific framework geometry, e.g.:]
@@ -164,27 +188,29 @@ FRAMEWORK STRUCTURE:
 - Y-axis: [Low concept] on bottom → [High concept] on top
 - Four quadrants created by intersection
 
-TYPOGRAPHY SYSTEM (-TIER):
+TYPOGRAPHY SYSTEM (3-TIER):
 
-TIER - FRAMEWORK TITLE (Advocate Block Display):
+TIER 1 - FRAMEWORK TITLE (Advocate Block Display):
 - "[FRAMEWORK NAME IN ALL-CAPS]"
 - Font: Advocate style, extra bold, hand-lettered, all-caps
-- Size: x larger than body text
-- Color: Black - Position: Top center
+- Size: 3x larger than body text
+- Color: Black #000000
+- Position: Top center
 - Example: "THE SECURITY VS CONVENIENCE FRAMEWORK"
 
-TIER - LABELS & CONCEPTS (Concourse Sans):
+TIER 2 - LABELS & CONCEPTS (Concourse Sans):
 - Axis labels: "[X-axis concept]", "[Y-axis concept]"
-- Quadrant names: "[Quadrant ]", "[Quadrant ]", etc.
+- Quadrant names: "[Quadrant 1]", "[Quadrant 2]", etc.
 - Font: Concourse geometric sans-serif
 - Size: Medium readable
-- Color: Charcoal DDD
+- Color: Charcoal #2D2D2D
 - Position: Along axes and inside quadrants
 
-TIER - ANNOTATIONS (Advocate Condensed Italic):
-- Insight notes: "optimal zone", "avoid this quadrant"
+TIER 3 - ANNOTATIONS (Advocate Condensed Italic):
+- Insight notes: "*optimal zone*", "*avoid this quadrant*"
 - Font: Advocate condensed italic
-- Size: % of Tier - Color: Purple AC or Teal B for emphasis
+- Size: 60% of Tier 2
+- Color: Purple #4A148C or Teal #00796B for emphasis
 - Position: Near relevant quadrants/areas
 
 QUADRANTS/AREAS TO SHOW:
@@ -193,8 +219,8 @@ QUADRANTS/AREAS TO SHOW:
 TOP-RIGHT QUADRANT:
 - Label: "[Name]"
 - Description: [What this represents]
-- Color: Purple (AC) subtle accent/highlight — OPTIMAL ZONE
-- Annotation: "ideal state" in purple italic
+- Color: Purple (#4A148C) subtle accent/highlight — OPTIMAL ZONE
+- Annotation: "*ideal state*" in purple italic
 
 TOP-LEFT QUADRANT:
 - Label: "[Name]"
@@ -204,7 +230,7 @@ TOP-LEFT QUADRANT:
 BOTTOM-RIGHT QUADRANT:
 - Label: "[Name]"
 - Description: [What this represents]
-- Color: Teal (B) subtle accent — CONTRAST ZONE
+- Color: Teal (#00796B) subtle accent — CONTRAST ZONE
 
 BOTTOM-LEFT QUADRANT:
 - Label: "[Name]"
@@ -214,69 +240,70 @@ BOTTOM-LEFT QUADRANT:
 [Adjust based on framework type - Venn would describe circles, pyramid would describe levels, etc.]
 
 COLOR USAGE:
-- Black () for all framework structure (axes, circles, lines)
-- Deep Purple (AC) for [optimal zone] — subtle fill or accent
-- Deep Teal (B) for [contrast zone] — subtle accent
-- Charcoal (DDD) for all text except emphasized annotations
+- Black (#000000) for all framework structure (axes, circles, lines)
+- Deep Purple (#4A148C) for [optimal zone] — subtle fill or accent
+- Deep Teal (#00796B) for [contrast zone] — subtle accent
+- Charcoal (#2D2D2D) for all text except emphasized annotations
 
 CRITICAL REQUIREMENTS:
 - Hand-drawn imperfect geometry (NOT digital precision)
 - Framework structure immediately recognizable
-- Clear labels in -tier typography hierarchy
-- Strategic color on -key zones only (subtle, not solid fills)
+- Clear labels in 3-tier typography hierarchy
+- Strategic color on 1-2 key zones only (subtle, not solid fills)
 - No gradients, flat colors only
 - Editorial illustration aesthetic maintained
 - Conceptually clear and memorable
 
-Optional: Sign small in bottom right corner in charcoal (DDD).
+Optional: Sign small in bottom right corner in charcoal (#2D2D2D).
 ```
 
 ---
 
-Step : Determine Aspect Ratio
+### Step 4: Determine Aspect Ratio
 
 | Framework Type | Aspect Ratio | Reasoning |
 |----------------|--------------|-----------|
-| xMatrix | :| Square for balanced quadrants |
-| Venn Diagram | :| Square for circular symmetry |
-| Pyramid | :or :| Vertical emphasis |
-| Horizontal spectrum | :| Wide for left-right continuum |
-| Triangle | :| Balanced for three concepts |
+| 2x2 Matrix | 1:1 | Square for balanced quadrants |
+| Venn Diagram | 1:1 | Square for circular symmetry |
+| Pyramid | 1:1 or 4:3 | Vertical emphasis |
+| Horizontal spectrum | 16:9 | Wide for left-right continuum |
+| Triangle | 1:1 | Balanced for three concepts |
 
-Default: :(square)— Works for most framework types
+**Default: 1:1 (square)** — Works for most framework types
 
 ---
 
-Step : Execute Generation
+### Step 5: Execute Generation
 
 ```bash
 bun run ~/.claude/skills/art/Tools/Generate.ts \
   --model nano-banana-pro \
   --prompt "[YOUR PROMPT]" \
-  --size K \
-  --aspect-ratio :\
+  --size 2K \
+  --aspect-ratio 1:1 \
   --output /path/to/framework.png
 ```
 
-Model Recommendation:nano-banana-pro (best text rendering for labels)
+**Model Recommendation:** nano-banana-pro (best text rendering for labels)
 
-Immediately Open:```bash
+**Immediately Open:**
+```bash
 open /path/to/framework.png
 ```
 
 ---
 
-Step : Validation (MANDATORY)
+### Step 6: Validation (MANDATORY)
 
-Must Have
-- [ ] Framework structure clear— x/ Venn / Pyramid immediately recognizable
-- [ ] Readable labels— All text legible in -tier hierarchy
-- [ ] Hand-drawn aesthetic— Imperfect lines, organic shapes, human quality
-- [ ] Strategic color— Purple on optimal zone, teal on contrast, not everywhere
-- [ ] Conceptually memorable— This becomes THE reference image for framework
-- [ ] Editorial style— Maintains UL flat color, black linework aesthetic
+#### Must Have
+- [ ] **Framework structure clear** — 2x2 / Venn / Pyramid immediately recognizable
+- [ ] **Readable labels** — All text legible in 3-tier hierarchy
+- [ ] **Hand-drawn aesthetic** — Imperfect lines, organic shapes, human quality
+- [ ] **Strategic color** — Purple on optimal zone, teal on contrast, not everywhere
+- [ ] **Conceptually memorable** — This becomes THE reference image for framework
+- [ ] **Editorial style** — Maintains UL flat color, black linework aesthetic
 
-Must NOT Have
+#### Must NOT Have
 - [ ] Perfect digital geometry (too clean)
 - [ ] Illegible or cluttered text
 - [ ] Color overload (solid fills everywhere)
@@ -284,7 +311,7 @@ Must NOT Have
 - [ ] Corporate/boring diagram look
 - [ ] Gradients or shadows
 
-If Validation Fails
+#### If Validation Fails
 
 | Problem | Fix |
 |---------|-----|
@@ -293,50 +320,56 @@ If Validation Fails
 | Over-colored | "Subtle purple accent on optimal zone only, rest black structure" |
 | Confusing structure | Simplify framework, stronger geometry cues |
 | Looks corporate | Reference "editorial conceptual illustration, Saul Steinberg style" |
-| Not memorable | Add strategic annotation showing the insight: "this is the sweet spot" |
+| Not memorable | Add strategic annotation showing the insight: "*this is the sweet spot*" |
 
 ---
 
-Example Use Cases
+## Example Use Cases
 
-Example : "Security vs Convenience Framework"
-- Type:xmatrix
-- Axes:Security (low → high), Convenience (low → high)
-- Quadrants:Vulnerable, Fortress, Balanced (purple), Abandoned
-- Color:Purple on "Balanced" optimal quadrant
-- Aspect::
-Example : "Human .Capability Venn"
-- Type:Venn diagram (circles)
-- Circles:Human abilities, AI capabilities, Tools
-- Overlap:Where magic happens (purple)
-- Color:Purple on center overlap
-- Aspect::
-Example : "Threat Modeling Pyramid"
-- Type:Pyramid (levels)
-- Levels:Assets (bottom) → Threats → Vulnerabilities → Mitigations (top)
-- Color:Purple on top level (actions), teal on bottom (foundation)
-- Aspect::
+### Example 1: "Security vs Convenience Framework"
+- **Type:** 2x2 matrix
+- **Axes:** Security (low → high), Convenience (low → high)
+- **Quadrants:** Vulnerable, Fortress, Balanced (purple), Abandoned
+- **Color:** Purple on "Balanced" optimal quadrant
+- **Aspect:** 1:1
+
+### Example 2: "Human 3.0 Capability Venn"
+- **Type:** Venn diagram (3 circles)
+- **Circles:** Human abilities, AI capabilities, Tools
+- **Overlap:** Where magic happens (purple)
+- **Color:** Purple on center overlap
+- **Aspect:** 1:1
+
+### Example 3: "Threat Modeling Pyramid"
+- **Type:** Pyramid (4 levels)
+- **Levels:** Assets (bottom) → Threats → Vulnerabilities → Mitigations (top)
+- **Color:** Purple on top level (actions), teal on bottom (foundation)
+- **Aspect:** 4:3
+
 ---
 
-Quick Reference
+## Quick Reference
 
-Framework Formula:```
-. Define framework structure (type, dimensions, quadrants)
-. Design visual (geometry, labeling, color assignment)
-. Construct prompt with clear structure
-. Choose square aspect ratio (usually :)
-. Generate with nano-banana-pro
-. Validate for clarity and memorability
+**Framework Formula:**
+```
+1. Define framework structure (type, dimensions, quadrants)
+2. Design visual (geometry, labeling, color assignment)
+3. Construct prompt with clear structure
+4. Choose square aspect ratio (usually 1:1)
+5. Generate with nano-banana-pro
+6. Validate for clarity and memorability
 ```
 
-Color Strategy:- Framework structure: Black
+**Color Strategy:**
+- Framework structure: Black
 - Optimal zone: Purple (subtle accent)
 - Contrast zone: Teal (subtle accent)
 - Text: Charcoal (except emphasized annotations)
 
-Key Principle:- This becomes THE reference image people remember for this framework
+**Key Principle:**
+- This becomes THE reference image people remember for this framework
 - Must be conceptually clear AND visually distinctive
 
 ---
 
-The workflow: Define → Design → Construct → Generate → Validate → Complete
+**The workflow: Define → Design → Construct → Generate → Validate → Complete**

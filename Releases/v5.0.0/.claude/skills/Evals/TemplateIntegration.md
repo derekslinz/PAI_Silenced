@@ -1,19 +1,19 @@
-Template Integration
+# Template Integration
 
-Available Templates
+## Available Templates
 
 ```
 ~/.claude/Templates/Evals/
- Judge.hbs       Configurable LLM-as-Judge prompts
- Rubric.hbs      Evaluation criteria definitions
- TestCase.hbs    Test case specifications
- Comparison.hbs  A/B testing templates
- Report.hbs      Statistical result reports
+├── Judge.hbs       # Configurable LLM-as-Judge prompts
+├── Rubric.hbs      # Evaluation criteria definitions
+├── TestCase.hbs    # Test case specifications
+├── Comparison.hbs  # A/B testing templates
+└── Report.hbs      # Statistical result reports
 ```
 
 ---
 
-Creating Custom Judges
+## Creating Custom Judges
 
 Use the JUDGE template for custom evaluation:
 
@@ -24,21 +24,25 @@ bun run ~/.claude/Templates/Tools/RenderTemplate.ts \
   -o ~/.claude/skills/Evals/UseCases/<name>/judge-prompt.md
 ```
 
-Judge Config Example
+### Judge Config Example
 
 ```yaml
 judge:
   name: Content Quality Judge
   focus: accuracy
   scale:
-    type: -  criteria:
+    type: 1-5
+  criteria:
     - name: Factual Accuracy
       description: Information matches source material
-      weight: .    - name: Completeness
+      weight: 0.4
+    - name: Completeness
       description: Covers all key points
-      weight: .    - name: Clarity
+      weight: 0.3
+    - name: Clarity
       description: Easy to understand
-      weight: .  reasoning_required: true
+      weight: 0.3
+  reasoning_required: true
   position_swap: true
 output:
   format: json
@@ -46,7 +50,7 @@ output:
 
 ---
 
-Creating Rubrics
+## Creating Rubrics
 
 Use the RUBRIC template for scoring criteria:
 
@@ -59,9 +63,10 @@ bun run ~/.claude/Templates/Tools/RenderTemplate.ts \
 
 ---
 
-LLM-as-Judge Best Practices
+## LLM-as-Judge Best Practices
 
-. Reasoning before scoring: Always require explanation first
-. Use -scale: Most reliable, avoid -. Different judge model: Don't self-judge
-. Position swapping: Average A-first and B-first results
-. Multi-judge panels: -models, x cheaper than large single judge
+1. **Reasoning before scoring**: Always require explanation first
+2. **Use 1-5 scale**: Most reliable, avoid 0-100
+3. **Different judge model**: Don't self-judge
+4. **Position swapping**: Average A-first and B-first results
+5. **Multi-judge panels**: 5-10 models, 7x cheaper than large single judge

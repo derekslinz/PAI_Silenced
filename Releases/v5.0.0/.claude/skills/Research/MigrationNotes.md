@@ -1,121 +1,123 @@
-Research Skill Migration - Skills-as-Containers Architecture
+# Research Skill Migration - Skills-as-Containers Architecture
 
-Date:--(original migration)
-Updated:--(Nomad verification upgrade)
-Intern Agent:Nova (original), {{DA_NAME}} (update)
-Architecture:Skills-as-Containers
+**Date:** 2025-10-31 (original migration)
+**Updated:** 2026-04-01 (Nomad verification upgrade)
+**Intern Agent:** Nova (original), {{DA_NAME}} (update)
+**Architecture:** Skills-as-Containers
 
-> --Update:Research skill upgraded with Nomad-inspired explorer-verifier pattern. Quick now uses Claude (not Perplexity). Standard uses agents (Claude + Gemini) with cross-check synthesis. Extensive uses explorers + verifiers (total). All agents have self-verification. New Verify.md workflow added. See SKILL.md for current state. Counts below reflect original migration state.
+> **2026-04-01 Update:** Research skill upgraded with Nomad-inspired explorer-verifier pattern. Quick now uses Claude (not Perplexity). Standard uses 2 agents (Claude + Gemini) with cross-check synthesis. Extensive uses 7 explorers + 2 verifiers (9 total). All agents have self-verification. New Verify.md workflow added. See SKILL.md for current state. Counts below reflect original migration state.
 
-Migration Summary
+## Migration Summary
 
-Successfully migrated research commands to the research skill's workflows directory, following the Skills-as-Containers architecture pattern.
+Successfully migrated 4 research commands to the research skill's workflows directory, following the Skills-as-Containers architecture pattern.
 
-Files Migrated
+## Files Migrated
 
-. Claude WebSearch Research
-- Source:`~/.claude/commands/perform-claude-research.md`
-- Destination:`~/.claude/skills/Research/Workflows/ClaudeResearch.md`
-- Size:.K
-- Description:Intelligent query decomposition with Claude's WebSearch tool (free, no API keys)
-- Triggers:"claude research", "use websearch", "claude only"
+### 1. Claude WebSearch Research
+- **Source:** `~/.claude/commands/perform-claude-research.md`
+- **Destination:** `~/.claude/skills/Research/Workflows/ClaudeResearch.md`
+- **Size:** 3.6K
+- **Description:** Intelligent query decomposition with Claude's WebSearch tool (free, no API keys)
+- **Triggers:** "claude research", "use websearch", "claude only"
 
-. Perplexity API Research
-- Source:`~/.claude/commands/perform-perplexity-research.md`
-- Destination:`~/.claude/skills/Research/Workflows/PerplexityResearch.md`
-- Size:.K
-- Description:Fast web search with query decomposition via Perplexity API
-- Triggers:"perplexity research", "use perplexity", "sonar"
+### 2. Perplexity API Research
+- **Source:** `~/.claude/commands/perform-perplexity-research.md`
+- **Destination:** `~/.claude/skills/Research/Workflows/PerplexityResearch.md`
+- **Size:** 8.1K
+- **Description:** Fast web search with query decomposition via Perplexity API
+- **Triggers:** "perplexity research", "use perplexity", "sonar"
 
-. Interview Preparation
-- Source:`~/.claude/commands/perform-interview-research.md`
-- Destination:`~/.claude/skills/Research/Workflows/InterviewResearch.md`
-- Size:.K
-- Description:Tyler Cowen-style interview prep with Shannon surprise principle
-- Triggers:"interview research", "prepare interview questions", "sponsored interview"
+### 3. Interview Preparation
+- **Source:** `~/.claude/commands/perform-interview-research.md`
+- **Destination:** `~/.claude/skills/Research/Workflows/InterviewResearch.md`
+- **Size:** 4.4K
+- **Description:** Tyler Cowen-style interview prep with Shannon surprise principle
+- **Triggers:** "interview research", "prepare interview questions", "sponsored interview"
 
-. AI Trends Analysis
-- Source:`~/.claude/commands/analyze-ai-trends.md`
-- Destination:`~/.claude/skills/Research/Workflows/AnalyzeAiTrends.md`
-- Size:.K
-- Description:Deep trend analysis across historical AI news logs
-- Triggers:"analyze ai trends", "trend analysis", "ai industry trends"
+### 4. AI Trends Analysis
+- **Source:** `~/.claude/commands/analyze-ai-trends.md`
+- **Destination:** `~/.claude/skills/Research/Workflows/AnalyzeAiTrends.md`
+- **Size:** 3.0K
+- **Description:** Deep trend analysis across historical AI news logs
+- **Triggers:** "analyze ai trends", "trend analysis", "ai industry trends"
 
-Workflows Directory Status
+## Workflows Directory Status
 
-Location:`~/.claude/skills/Research/Workflows/`
+**Location:** `~/.claude/skills/Research/Workflows/`
 
-Note (-):Conduct.md and PerplexityResearch.md were later removed. Perplexity functionality consolidated into QuickResearch.md (single-agent) and StandardResearch.md (multi-agent).
+**Note (2026-01):** Conduct.md and PerplexityResearch.md were later removed. Perplexity functionality consolidated into QuickResearch.md (single-agent) and StandardResearch.md (multi-agent).
 
-Current Workflows:- `AnalyzeAiTrends.md` - AI industry trend analysis
+**Current Workflows:** 13
+- `AnalyzeAiTrends.md` - AI industry trend analysis
 - `ClaudeResearch.md` - Claude WebSearch only
 - `Enhance.md` - Content enhancement
-- `ExtensiveResearch.md` - -agent parallel research
+- `ExtensiveResearch.md` - 12-agent parallel research
 - `ExtractAlpha.md` - Deep insight extraction
 - `ExtractKnowledge.md` - Knowledge extraction
-- `Fabric.md` - + Fabric patterns
+- `Fabric.md` - 242+ Fabric patterns
 - `InterviewResearch.md` - Tyler Cowen-style prep
-- `QuickResearch.md` - Perplexity agent (fast)
+- `QuickResearch.md` - 1 Perplexity agent (fast)
 - `Retrieve.md` - Content retrieval with anti-bot handling
-- `StandardResearch.md` - -agent default research
+- `StandardResearch.md` - 3-agent default research
 - `WebScraping.md` - Web scraping workflows
 - `YoutubeExtraction.md` - YouTube content extraction
 
-SKILL.md Updates
+## SKILL.md Updates
 
 Added comprehensive routing section:
 
-Research Workflow Routing
+### Research Workflow Routing
 
 Based on the type of research request, route to the appropriate workflow:
 
-. Quick Research (Single Perplexity)- `Workflows/QuickResearch.md`
-. Standard Research (Default)- `Workflows/StandardResearch.md`
-. Extensive Research (agents)- `Workflows/ExtensiveResearch.md`
-. Claude WebSearch Research- `Workflows/ClaudeResearch.md`
-. Interview Preparation- `Workflows/InterviewResearch.md`
-. AI Trends Analysis- `Workflows/AnalyzeAiTrends.md`
+1. **Quick Research (Single Perplexity)** - `Workflows/QuickResearch.md`
+2. **Standard Research (Default)** - `Workflows/StandardResearch.md`
+3. **Extensive Research (12 agents)** - `Workflows/ExtensiveResearch.md`
+4. **Claude WebSearch Research** - `Workflows/ClaudeResearch.md`
+5. **Interview Preparation** - `Workflows/InterviewResearch.md`
+6. **AI Trends Analysis** - `Workflows/AnalyzeAiTrends.md`
 
 Each workflow has:
 - Clear location path
 - Trigger phrases for routing
 - Brief description of purpose
 
-Original Files Status
+## Original Files Status
 
-ALL ORIGINALS PRESERVED
+✓ **ALL ORIGINALS PRESERVED**
+
 The original command files remain in `~/.claude/commands/`:
-- `perform-claude-research.md` 
-- `perform-perplexity-research.md` 
-- `perform-interview-research.md` 
-- `analyze-ai-trends.md` 
+- `perform-claude-research.md` ✓
+- `perform-perplexity-research.md` ✓
+- `perform-interview-research.md` ✓
+- `analyze-ai-trends.md` ✓
 
-Success Criteria Met
+## Success Criteria Met
 
-new commands in Workflows/ (total with conduct.md)
-SKILL.md routing updated with clear triggers
-Originals preserved in commands/ directory
-Skills-as-Containers architecture followed
+✓ 4 new commands in Workflows/ (5 total with conduct.md)
+✓ SKILL.md routing updated with clear triggers
+✓ Originals preserved in commands/ directory
+✓ Skills-as-Containers architecture followed
 
-Benefits of Migration
+## Benefits of Migration
 
-. Centralized Research Logic:All research workflows now live within the research skill
-. Clear Routing:SKILL.md provides explicit routing based on user triggers
-. Skills-as-Containers:Follows the established architecture pattern
-. Backwards Compatible:Original commands preserved for reference/rollback
-. Scalable:Easy to add more research workflows in the future
+1. **Centralized Research Logic:** All research workflows now live within the research skill
+2. **Clear Routing:** SKILL.md provides explicit routing based on user triggers
+3. **Skills-as-Containers:** Follows the established architecture pattern
+4. **Backwards Compatible:** Original commands preserved for reference/rollback
+5. **Scalable:** Easy to add more research workflows in the future
 
-Next Steps
+## Next Steps
 
 Consider:
-. Adding workflow-specific documentation for each research type
-. Creating example outputs for each workflow
-. Potentially deprecating original command files once migration is validated
-. Adding cross-workflow coordination patterns (e.g., "do both perplexity and claude research")
+1. Adding workflow-specific documentation for each research type
+2. Creating example outputs for each workflow
+3. Potentially deprecating original command files once migration is validated
+4. Adding cross-workflow coordination patterns (e.g., "do both perplexity and claude research")
 
-Architecture Pattern
+## Architecture Pattern
 
-This migration follows the Skills-as-Containerspattern where:
+This migration follows the **Skills-as-Containers** pattern where:
 - Skills are self-contained directories
 - Workflows live in `Workflows/` subdirectory
 - SKILL.md provides routing and documentation

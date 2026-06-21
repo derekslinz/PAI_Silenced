@@ -1,10 +1,10 @@
-Audit Workflow
+# Audit Workflow
 
 Full audit of all force-loaded AI instructions for over-prompting.
 
-Steps
+## Steps
 
-. Discover what's loaded
+### 1. Discover what's loaded
 
 Read `settings.json` to find:
 - `loadAtStartup.files` — force-loaded every session
@@ -14,39 +14,40 @@ Read `settings.json` to find:
 
 Also check for project-level CLAUDE.md files if working in a specific project.
 
-. Read every instruction file
+### 2. Read every instruction file
 
 Read each discovered file completely. Count total lines and rules.
 
-. Evaluate each rule against the Five Questions
+### 3. Evaluate each rule against the Five Questions
 
 For every rule found, apply the five questions from SKILL.md. Cross-reference with Claude Code's built-in system prompt behavior:
 
-Claude already does by default (common false adds):- Read files before editing them
+**Claude already does by default (common false adds):**
+- Read files before editing them
 - Ask before destructive operations (rm, reset --hard, force push)
 - Make minimal changes, don't add unrequested features
 - Don't modify quoted/user text
 - Check safer alternatives before destructive git ops
 - Use structured choices when asking questions
 
-. Check for cross-file conflicts
+### 4. Check for cross-file conflicts
 
 Compare rules across all files for:
 - Same concept stated differently in two places
 - Rules that contradict each other
 - Outdated references (skill names, file paths, tool names)
 
-. Evaluate context-to-value ratio
+### 5. Evaluate context-to-value ratio
 
 For each force-loaded file, estimate:
 - How many tokens it consumes
 - How often its content actually affects output quality
 - Whether it could be on-demand (via CONTEXT_ROUTING) instead of always-loaded
 
-. Produce the report
+### 6. Produce the report
 
 Use the output format from SKILL.md. Include estimated token savings.
 
-. Offer trimmed versions
+### 7. Offer trimmed versions
 
 If the user approves, produce cleaned versions of the files with dead weight removed.

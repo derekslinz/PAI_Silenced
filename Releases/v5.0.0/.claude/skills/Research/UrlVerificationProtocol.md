@@ -1,7 +1,8 @@
-URL Verification Protocol
+# URL Verification Protocol
 
-MANDATORY for all research workflows in this skill.
-Critical Warning
+**MANDATORY for all research workflows in this skill.**
+
+## Critical Warning
 
 ```
 ---------------------------------------------------------------
@@ -11,7 +12,7 @@ Critical Warning
 ---------------------------------------------------------------
 ```
 
-Why This Matters
+## Why This Matters
 
 Research agents (Perplexity, Gemini, Claude, Grok) frequently HALLUCINATE URLs that look plausible but don't exist. This includes:
 - URLs with correct domain but wrong path
@@ -19,50 +20,51 @@ Research agents (Perplexity, Gemini, Claude, Grok) frequently HALLUCINATE URLs t
 - URLs combining real domains with fabricated paths
 - URLs to articles that were deleted or moved
 
-Verification Workflow
+## Verification Workflow
 
 Before including ANY URL in research results:
 
-. Verify with WebFetch- Actually fetch the URL and confirm it returns content (not , , or error)
-. Confirm content matches claim- The fetched content must actually support what you're citing it for
-. Use curl as backup- `curl -s -o /dev/null -w "%{http_code}" -L URL` to check HTTP status
-. NEVER include unverified URLs- If you can't verify it, DON'T include it
+1. **Verify with WebFetch** - Actually fetch the URL and confirm it returns content (not 404, 403, or error)
+2. **Confirm content matches claim** - The fetched content must actually support what you're citing it for
+3. **Use curl as backup** - `curl -s -o /dev/null -w "%{http_code}" -L URL` to check HTTP status
+4. **NEVER include unverified URLs** - If you can't verify it, DON'T include it
 
 ```bash
-Step : Check HTTP status
+# Step 1: Check HTTP status
 curl -s -o /dev/null -w "%{http_code}" -L "https://example.com/article"
 
-Step : If , verify content with WebFetch
+# Step 2: If 200, verify content with WebFetch
 WebFetch(url, "Confirm this article exists and summarize its main point")
 
-Step : Only include if BOTH checks pass
+# Step 3: Only include if BOTH checks pass
 ```
 
-Acceptable vs Unacceptable
+## Acceptable vs Unacceptable
 
 | Acceptable | Unacceptable |
 |------------|--------------|
 | URL verified via WebFetch returns actual content | URL from research agent without verification |
-| URL returns AND content matches citation | URL returns //|
+| URL returns 200 AND content matches citation | URL returns 403/404/500 |
 | URL content actually supports the claim | URL exists but content doesn't match |
 
-Broken links destroy credibility. Verify EVERY URL.
-Parallel Verification (for multi-agent modes)
+**Broken links destroy credibility. Verify EVERY URL.**
 
-When verifying many URLs (Extensive mode can produce -+), use parallel batch curl instead of sequential:
+## Parallel Verification (for multi-agent modes)
+
+When verifying many URLs (Extensive mode can produce 10-20+), use parallel batch curl instead of sequential:
 
 ```bash
-Parallel batch verification — all URLs checked simultaneously
-urls=("url" "url" "url" ...)
+# Parallel batch verification — all URLs checked simultaneously
+urls=("url1" "url2" "url3" ...)
 for url in "${urls[@]}"; do
   curl -s -o /dev/null -w "%{http_code} $url\n" -L "$url" &
 done
 wait
-Parse results: any non-→ remove from output
+# Parse results: any non-200 → remove from output
 ```
 
-Fallback:If parallel verification fails (e.g., too many concurrent connections), fall back to sequential.
+**Fallback:** If parallel verification fails (e.g., too many concurrent connections), fall back to sequential.
 
-Agent Self-Verification
+## Agent Self-Verification
 
-As of v., all researcher agents include a Self-Verification section that requires URL verification before returning results. This means most URLs should already be verified when the orchestrator receives them. The orchestrator's batch check is a safety net, not the primary verification layer.
+As of v5.1, all researcher agents include a Self-Verification section that requires URL verification before returning results. This means most URLs should already be verified when the orchestrator receives them. The orchestrator's batch check is a safety net, not the primary verification layer.

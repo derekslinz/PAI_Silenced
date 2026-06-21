@@ -3,11 +3,13 @@
 > **PAI is the Life OS. {DA_IDENTITY.NAME} is {PRINCIPAL.NAME}'s DA. Pulse is the Life Dashboard.**
 > Canonical thesis: `PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md`. Everyone running PAI names their own DA; {DA_IDENTITY.NAME} is {PRINCIPAL.NAME}'s specific instantiation. PAI targets AS3 on the [PAI Maturity Model](https://your-domain.example.com/blog/personal-ai-maturity-model), with lineage from [The Real Internet of Things](https://your-domain.example.com/blog/the-real-internet-of-things) (2016).
 
-@PAI/USER/PRINCIPAL_IDENTITY.md
 @PAI/USER/DA_IDENTITY.md
 @PAI/USER/PROJECTS/PROJECTS.md
-@PAI/USER/TELOS/PRINCIPAL_TELOS.md
 @PAI/DOCUMENTATION/ARCHITECTURE_SUMMARY.md
+
+<!-- PRINCIPAL_IDENTITY.md and TELOS/PRINCIPAL_TELOS.md are no longer static @imports.
+     LoadContext.hook.ts injects them at SessionStart only once populated by /interview,
+     so unpopulated bootstrap scaffolds cost zero session tokens. -->
 
 # MODES
 

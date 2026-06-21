@@ -3,12 +3,24 @@ workflow: create-cli
 purpose: Generate complete, production-ready TypeScript CLI from requirements
 ---
 
-Create CLI Workflow
+# Create CLI Workflow
 
-Generate production-quality TypeScript command-line interfaces following llcli pattern and CLI-First Architecture.
+**Generate production-quality TypeScript command-line interfaces following llcli pattern and CLI-First Architecture.**
+
+## Voice Notification
+
+```bash
+curl -s -X POST http://localhost:31337/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Running the CreateCli workflow in the CreateCLI skill to generate new CLI"}' \
+  > /dev/null 2>&1 &
+```
+
+Running the **CreateCli** workflow in the **CreateCLI** skill to generate new CLI...
+
 ---
 
-PURPOSE
+## PURPOSE
 
 This workflow generates a complete, immediately usable TypeScript CLI tool with:
 - Full type safety and error handling
@@ -19,7 +31,7 @@ This workflow generates a complete, immediately usable TypeScript CLI tool with:
 
 ---
 
-WHEN TO USE
+## WHEN TO USE
 
 Activate this workflow when user requests:
 - "Create a CLI for [API/service/tool]"
@@ -30,66 +42,72 @@ Activate this workflow when user requests:
 
 ---
 
-TIER DECISION TREE
+## TIER DECISION TREE
 
-Use this deterministic decision tree to select complexity tier:
+**Use this deterministic decision tree to select complexity tier:**
+
 ```
 START: User describes CLI requirements
-
- Does it need + commands with grouping?  YES → Tier (Commander.js)
-                                             NO  ↓
-
- Does it need plugin architecture?  YES → Tier (Commander.js)
-                                             NO  ↓
-
- Does it need subcommands (git-style)?  YES → Tier (Commander.js)
-                                             NO  ↓
-
- Does it need complex nested options?  YES → Tier (Commander.js)
-                                             NO  ↓
-
- Use Tier (llcli-style) ← DEFAULT
+│
+├─ Does it need 10+ commands with grouping? ─ YES → Tier 2 (Commander.js)
+│                                             NO  ↓
+│
+├─ Does it need plugin architecture? ──────── YES → Tier 2 (Commander.js)
+│                                             NO  ↓
+│
+├─ Does it need subcommands (git-style)? ──── YES → Tier 2 (Commander.js)
+│                                             NO  ↓
+│
+├─ Does it need complex nested options? ────── YES → Tier 2 (Commander.js)
+│                                             NO  ↓
+│
+└─ Use Tier 1 (llcli-style) ← DEFAULT
    ↑
-    % of CLIs end up here
+   └─ 80% of CLIs end up here
 ```
 
-Tier Indicators (DEFAULT):- -simple commands
-- API client wrapper
-- Data transformer
-- File processor
-- Simple automation
-- JSON output
-- Fast development needed
+**Tier 1 Indicators (DEFAULT):**
+- ✓ 2-10 simple commands
+- ✓ API client wrapper
+- ✓ Data transformer
+- ✓ File processor
+- ✓ Simple automation
+- ✓ JSON output
+- ✓ Fast development needed
 
-Tier Indicators (ESCALATION):- + commands needing organization
-- Plugin/extension system
-- Subcommands (convert json csv, convert csv json)
-- Multiple output format engines
-- Complex option combinations
+**Tier 2 Indicators (ESCALATION):**
+- ✗ 10+ commands needing organization
+- ✗ Plugin/extension system
+- ✗ Subcommands (convert json csv, convert csv json)
+- ✗ Multiple output format engines
+- ✗ Complex option combinations
 
-Rule of Thumb:If user doesn't explicitly need Tier features, use Tier .
+**Rule of Thumb:** If user doesn't explicitly need Tier 2 features, use Tier 1.
 
 ---
 
-WORKFLOW STEPS
+## WORKFLOW STEPS
 
-Step : Gather Requirements
+### Step 1: Gather Requirements
 
-Extract from user request:- CLI name (kebab-case, e.g., `ghcli`, `mdhtml`)
+**Extract from user request:**
+- CLI name (kebab-case, e.g., `ghcli`, `md2html`)
 - Purpose (one-sentence description)
 - Commands needed (list each command with arguments)
 - API/service being wrapped (if applicable)
 - Authentication method (API key, Bearer token, OAuth)
 - Environment variables needed
 - Output format (usually JSON)
-- Configuration flags needed(behavioral variants - see Step a)
+- **Configuration flags needed** (behavioral variants - see Step 5a)
 
-Questions to ask user if unclear:- "What API or service does this wrap?"
+**Questions to ask user if unclear:**
+- "What API or service does this wrap?"
 - "What are the main commands you need?"
 - "How should it authenticate?"
 - "Where should the CLI be installed?" (personal bin, project-specific, etc.)
 
-Example extraction:```
+**Example extraction:**
+```
 User: "Create a CLI for the GitHub API"
 
 Extracted:
@@ -104,24 +122,28 @@ Extracted:
 
 ---
 
-Step : Determine Complexity Tier
+### Step 2: Determine Complexity Tier
 
-Apply decision tree from above.
-For most requests → Tier 
+**Apply decision tree from above.**
+
+**For most requests → Tier 1**
+
 Example decision:
 ```
 User: "CLI for GitHub API with repos, issues, search commands"
-→ commands (< ) 
-→ No subcommands 
-→ Simple arguments 
-→ API wrapper 
-= TIER ```
+→ 3 commands (< 10) ✓
+→ No subcommands ✓
+→ Simple arguments ✓
+→ API wrapper ✓
+= TIER 1
+```
 
 ---
 
-Step : Generate TypeScript Interface Definitions
+### Step 3: Generate TypeScript Interface Definitions
 
-Based on API responses/data structures:
+**Based on API responses/data structures:**
+
 ```typescript
 // For API client CLIs
 interface ApiResponse {
@@ -144,7 +166,8 @@ interface Config {
 }
 ```
 
-For file processing CLIs:```typescript
+**For file processing CLIs:**
+```typescript
 interface ProcessResult {
   input: string;
   output: string;
@@ -160,9 +183,10 @@ interface Config {
 
 ---
 
-Step : Generate Configuration Section
+### Step 4: Generate Configuration Section
 
-Pattern from llcli:
+**Pattern from llcli:**
+
 ```typescript
 // ============================================================================
 // Configuration
@@ -170,26 +194,27 @@ Pattern from llcli:
 
 const DEFAULTS = {
   baseUrl: '{{API_BASE_URL}}',
-  limit: ,
+  limit: 20,
   {{ADDITIONAL_DEFAULTS}}
 } as const;
 
-/ Load configuration from environment
- /
+/**
+ * Load configuration from environment
+ */
 function loadConfig(): Config {
   const envPath = process.env.PAI_CONFIG_DIR ? join(process.env.PAI_CONFIG_DIR, '.env') : join(homedir(), '.claude', 'PAI', '.env');
 
   try {
-    const envContent = readFileSync(envPath, 'utf-');
+    const envContent = readFileSync(envPath, 'utf-8');
     const apiKey = envContent
       .split('\n')
       .find(line => line.startsWith('{{ENV_VAR_NAME}}='))
-      ?.split('=')[]
+      ?.split('=')[1]
       ?.trim();
 
     if (!apiKey) {
       console.error('Error: {{ENV_VAR_NAME}} not found in ${PAI_CONFIG_DIR}/.env');
-      process.exit();
+      process.exit(1);
     }
 
     return {
@@ -200,32 +225,36 @@ function loadConfig(): Config {
   } catch (error) {
     console.error(`Error: Cannot read ${PAI_CONFIG_DIR}/.env file`);
     console.error('Make sure {{ENV_VAR_NAME}} is set in ${PAI_CONFIG_DIR}/.env');
-    process.exit();
+    process.exit(1);
   }
 }
 ```
 
 ---
 
-Step a: Design Configuration Flags (REQUIRED)
+### Step 5a: Design Configuration Flags (REQUIRED)
 
-Every CLI should expose behavioral configuration via flags, not hardcoded values.
+**Every CLI should expose behavioral configuration via flags, not hardcoded values.**
+
 This enables workflows and users to adapt CLI behavior without code changes.
 
-Standard Flag Categories:
+**Standard Flag Categories:**
+
 | Category | Examples | Purpose |
 |----------|----------|---------|
-| Mode flags| `--fast`, `--thorough`, `--dry-run` | Execution behavior |
-| Output flags| `--format json`, `--quiet`, `--verbose` | Output control |
-| Resource flags| `--model haiku`, `--model opus` | Model/resource selection |
-| Post-process flags| `--thumbnail`, `--remove-bg` | Additional processing |
+| **Mode flags** | `--fast`, `--thorough`, `--dry-run` | Execution behavior |
+| **Output flags** | `--format json`, `--quiet`, `--verbose` | Output control |
+| **Resource flags** | `--model haiku`, `--model opus` | Model/resource selection |
+| **Post-process flags** | `--thumbnail`, `--remove-bg` | Additional processing |
 
-Design Checklist:. What execution modes does this CLI need? (fast vs thorough, dry-run)
-. What output formats are useful? (json, table, quiet, verbose)
-. Are there resource/model selections? (cheap vs expensive, fast vs accurate)
-. Are there optional post-processing steps?
+**Design Checklist:**
+1. What execution modes does this CLI need? (fast vs thorough, dry-run)
+2. What output formats are useful? (json, table, quiet, verbose)
+3. Are there resource/model selections? (cheap vs expensive, fast vs accurate)
+4. Are there optional post-processing steps?
 
-Example flag design for an API CLI:```typescript
+**Example flag design for an API CLI:**
+```typescript
 // Mode flags
 const dryRun = args.includes('--dry-run');
 const verbose = args.includes('--verbose');
@@ -233,33 +262,36 @@ const quiet = args.includes('--quiet');
 
 // Resource flags
 const modelIdx = args.indexOf('--model');
-const model = modelIdx !== -? args[modelIdx + ] : 'default';
+const model = modelIdx !== -1 ? args[modelIdx + 1] : 'default';
 
 // Output flags
 const formatIdx = args.indexOf('--format');
-const format = formatIdx !== -? args[formatIdx + ] : 'json';
+const format = formatIdx !== -1 ? args[formatIdx + 1] : 'json';
 ```
 
-Flag Design Principles:. Sensible defaults: CLI works without flags for common case
-. Explicit overrides: Flags modify default behavior
-. Boolean flags: `--flag` enables (no `--no-flag` needed)
-. Value flags: `--flag <value>` for choices
-. Composable: Flags should combine logically
+**Flag Design Principles:**
+1. **Sensible defaults**: CLI works without flags for common case
+2. **Explicit overrides**: Flags modify default behavior
+3. **Boolean flags**: `--flag` enables (no `--no-flag` needed)
+4. **Value flags**: `--flag <value>` for choices
+5. **Composable**: Flags should combine logically
 
-Reference:`~/.claude/PAI/DOCUMENTATION/Tools/CliFirstArchitecture.md` (Configuration Flags section)
+**Reference:** `~/.claude/PAI/DOCUMENTATION/Tools/CliFirstArchitecture.md` (Configuration Flags section)
 
 ---
 
-Step : Generate Command Functions
+### Step 5: Generate Command Functions
 
-One function per command (incorporating configuration flags from Step a):
+**One function per command (incorporating configuration flags from Step 5a):**
+
 ```typescript
 // ============================================================================
 // CLI Commands
 // ============================================================================
 
-/ {{COMMAND_DESCRIPTION}}
- /
+/**
+ * {{COMMAND_DESCRIPTION}}
+ */
 async function {{commandName}}(
   {{ARGUMENTS}}: string,
   options: { limit?: number } = {}
@@ -269,7 +301,7 @@ async function {{commandName}}(
   // Validate inputs
   if (!{{ARGUMENTS}} || {{ARGUMENTS}}.trim() === '') {
     console.error('Error: {{ARGUMENT_NAME}} is required');
-    process.exit();
+    process.exit(1);
   }
 
   // Build request
@@ -282,16 +314,18 @@ async function {{commandName}}(
   const data = await {{fetchFunction}}(config, params);
 
   // Output JSON
-  console.log(JSON.stringify(data, null, ));
+  console.log(JSON.stringify(data, null, 2));
 }
 ```
 
-Repeat for each command.
+**Repeat for each command.**
+
 ---
 
-Step : Generate Help Documentation
+### Step 6: Generate Help Documentation
 
-Comprehensive help text following llcli pattern:
+**Comprehensive help text following llcli pattern:**
+
 ```typescript
 // ============================================================================
 // Help Documentation
@@ -300,7 +334,7 @@ Comprehensive help text following llcli pattern:
 function showHelp(): void {
   console.log(`
 {{CLI_NAME}} - {{CLI_DESCRIPTION}}
-${'='.repeat(CLI_NAME.length + CLI_DESCRIPTION.length + )}
+${'='.repeat(CLI_NAME.length + CLI_DESCRIPTION.length + 3)}
 
 A clean, deterministic CLI for {{PURPOSE}}.
 
@@ -321,7 +355,7 @@ EXAMPLES:
 OUTPUT:
   All commands return JSON to stdout
   Errors and messages go to stderr
-  Exit code on success, on error
+  Exit code 0 on success, 1 on error
 
 CONFIGURATION:
   {{CONFIGURATION_DETAILS}}
@@ -339,49 +373,51 @@ PHILOSOPHY:
 
 For more information, see ~/.claude/Bin/{{CLI_NAME}}/README.md
 
-Version: ..`);
+Version: 1.0.0
+`);
 }
 
 function showVersion(): void {
-  console.log('{{CLI_NAME}} version ..');
+  console.log('{{CLI_NAME}} version 1.0.0');
 }
 ```
 
 ---
 
-Step : Generate Main Entry Point
+### Step 7: Generate Main Entry Point
 
-Argument parsing and command routing:
+**Argument parsing and command routing:**
+
 ```typescript
 // ============================================================================
 // Main CLI Entry Point
 // ============================================================================
 
 async function main() {
-  const args = process.argv.slice();
+  const args = process.argv.slice(2);
 
   // Handle help/version
-  if (args.length === || args[] === 'help' || args[] === '--help' || args[] === '-h') {
+  if (args.length === 0 || args[0] === 'help' || args[0] === '--help' || args[0] === '-h') {
     showHelp();
     return;
   }
 
-  if (args[] === 'version' || args[] === '--version' || args[] === '-v') {
+  if (args[0] === 'version' || args[0] === '--version' || args[0] === '-v') {
     showVersion();
     return;
   }
 
-  const command = args[];
+  const command = args[0];
 
   // Parse common options (e.g., --limit)
   const limitIndex = args.indexOf('--limit');
-  const limit = limitIndex !== -&& args[limitIndex + ]
-    ? parseInt(args[limitIndex + ], )
+  const limit = limitIndex !== -1 && args[limitIndex + 1]
+    ? parseInt(args[limitIndex + 1], 10)
     : undefined;
 
-  if (limitIndex !== -&& (isNaN(limit!) || limit! <= )) {
+  if (limitIndex !== -1 && (isNaN(limit!) || limit! <= 0)) {
     console.error('Error: --limit must be a positive number');
-    process.exit();
+    process.exit(1);
   }
 
   // Route to commands
@@ -391,82 +427,84 @@ async function main() {
     default:
       console.error(`Error: Unknown command '${command}'`);
       console.error('Run "{{CLI_NAME}} --help" for usage information');
-      process.exit();
+      process.exit(1);
   }
 }
 
 // Run CLI
 main().catch((error) => {
   console.error('Fatal error:', error);
-  process.exit();
+  process.exit(1);
 });
 ```
 
 ---
 
-Step : Generate Documentation Files
+### Step 8: Generate Documentation Files
 
-README.md structure (following llcli):
+**README.md structure (following llcli):**
+
 ```markdown
-{{CLI_NAME}} - {{CLI_DESCRIPTION}}
+# {{CLI_NAME}} - {{CLI_DESCRIPTION}}
 
-Version:..Last Updated:{{TODAY_DATE}}
+**Version:** 1.0.0
+**Last Updated:** {{TODAY_DATE}}
 
 ---
 
-Overview
+## Overview
 
 {{CLI_NAME}} is a clean, deterministic command-line interface for {{PURPOSE}}. It provides simple access to {{SERVICE}} with a focus on reliability, composability, and documentation.
 
-Philosophy
+### Philosophy
 
-{{CLI_NAME}} follows CLI-First Architecture:
+{{CLI_NAME}} follows **CLI-First Architecture**:
 
-. Deterministic- Same input always produces same output
-. Clean- Single responsibility
-. Composable- JSON output pipes to jq, grep, other tools
-. Documented- Comprehensive help and examples
-. Testable- Predictable, verifiable behavior
+1. **Deterministic** - Same input always produces same output
+2. **Clean** - Single responsibility
+3. **Composable** - JSON output pipes to jq, grep, other tools
+4. **Documented** - Comprehensive help and examples
+5. **Testable** - Predictable, verifiable behavior
 
 ---
 
-Installation
+## Installation
 
 [Setup instructions]
 
 ---
 
-Usage
+## Usage
 
 [Command documentation]
 
 ---
 
-Examples
+## Examples
 
 [Real-world examples with jq, grep, etc.]
 
 ---
 
-Configuration
+## Configuration
 
 [Environment variables, defaults]
 
 ---
 
-API Reference
+## API Reference
 
 [API endpoint documentation]
 
 ---
 
-Philosophy
+## Philosophy
 
-Why This CLI Exists
+### Why This CLI Exists
 
 [Explain the problem it solves]
 
-Design Principles
+### Design Principles
 
 [Key decisions and why]
 
@@ -475,39 +513,42 @@ Design Principles
 [Additional sections: Troubleshooting, Integration, Best Practices]
 ```
 
-QUICKSTART.md:```markdown
-{{CLI_NAME}} Quick Start
+**QUICKSTART.md:**
+```markdown
+# {{CLI_NAME}} Quick Start
 
-The -second guide to using {{CLI_NAME}}
-Installation
+**The 30-second guide to using {{CLI_NAME}}**
+
+## Installation
 
 [Quick setup]
 
-Usage
+## Usage
 
-[-most common commands]
+[3-5 most common commands]
 
-Piping to jq
+## Piping to jq
 
 [Common jq patterns]
 
-Configuration
+## Configuration
 
 [Minimal config info]
 
-Full Documentation
+## Full Documentation
 
 See: ~/.claude/Bin/{{CLI_NAME}}/README.md
 ```
 
 ---
 
-Step : Generate Supporting Files
+### Step 9: Generate Supporting Files
 
-package.json:```json
+**package.json:**
+```json
 {
   "name": "{{CLI_NAME}}",
-  "version": "..",
+  "version": "1.0.0",
   "description": "{{CLI_DESCRIPTION}}",
   "type": "module",
   "bin": {
@@ -523,12 +564,13 @@ package.json:```json
 }
 ```
 
-tsconfig.json:```json
+**tsconfig.json:**
+```json
 {
   "compilerOptions": {
-    "target": "ES",
+    "target": "ES2022",
     "module": "ESNext",
-    "lib": ["ES"],
+    "lib": ["ES2022"],
     "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
@@ -537,35 +579,39 @@ tsconfig.json:```json
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": [".ts"],
+  "include": ["*.ts"],
   "exclude": ["node_modules"]
 }
 ```
 
-.env.example:```bash
-{{CLI_NAME}} Configuration
+**.env.example:**
+```bash
+# {{CLI_NAME}} Configuration
 {{ENV_VAR_NAME}}=your_{{TOKEN_TYPE}}_here
 ```
 
 ---
 
-Step : Validate and Report
+### Step 10: Validate and Report
 
-Quality Gates:. TypeScript compiles without errors
-. All commands work with test inputs
-. Help text displays correctly
-. README is comprehensive
-. File permissions set (chmod +x)
+**Quality Gates:**
+1. ✓ TypeScript compiles without errors
+2. ✓ All commands work with test inputs
+3. ✓ Help text displays correctly
+4. ✓ README is comprehensive
+5. ✓ File permissions set (chmod +x)
 
-Validation Commands:```bash
+**Validation Commands:**
+```bash
 cd ~/.claude/Bin/{{CLI_NAME}}/
 chmod +x {{CLI_NAME}}.ts
 ./{{CLI_NAME}}.ts --help
 ./{{CLI_NAME}}.ts --version
 ```
 
-Report to user:```
-CLI Created: ~/.claude/Bin/{{CLI_NAME}}/
+**Report to user:**
+```
+✓ CLI Created: ~/.claude/Bin/{{CLI_NAME}}/
 
 Files generated:
 - {{CLI_NAME}}.ts ({{LINE_COUNT}} lines)
@@ -576,24 +622,26 @@ Files generated:
 - QUICKSTART.md
 
 Next steps:
-. Configure: Add {{ENV_VAR_NAME}} to ${PAI_CONFIG_DIR}/.env
-. Test: ./{{CLI_NAME}}.ts --help
-. Use: ./{{CLI_NAME}}.ts {{EXAMPLE_COMMAND}}
+1. Configure: Add {{ENV_VAR_NAME}} to ${PAI_CONFIG_DIR}/.env
+2. Test: ./{{CLI_NAME}}.ts --help
+3. Use: ./{{CLI_NAME}}.ts {{EXAMPLE_COMMAND}}
 
 Documentation: ~/.claude/Bin/{{CLI_NAME}}/README.md
 ```
 
 ---
 
-OUTPUT EXAMPLE
+## OUTPUT EXAMPLE
 
-User Request:"Create a CLI for the Notion API to list databases and create pages"
+**User Request:**
+"Create a CLI for the Notion API to list databases and create pages"
 
-Generated Output:```
-CLI Created: ~/.claude/Bin/notioncli/
+**Generated Output:**
+```
+✓ CLI Created: ~/.claude/Bin/notioncli/
 
 Files generated:
-- notioncli.ts (lines)
+- notioncli.ts (342 lines)
 - package.json
 - tsconfig.json
 - .env.example (NOTION_API_KEY)
@@ -601,15 +649,15 @@ Files generated:
 - QUICKSTART.md
 
 Commands available:
-- notioncli databases                    List all databases
-- notioncli pages create <db-id>         Create page in database
-- notioncli search <query>               Search workspace
-- notioncli --help                       Show full help
+- notioncli databases                    # List all databases
+- notioncli pages create <db-id>         # Create page in database
+- notioncli search <query>               # Search workspace
+- notioncli --help                       # Show full help
 
 Next steps:
-. Add NOTION_API_KEY=your_key to ${PAI_CONFIG_DIR}/.env
-. Test: notioncli databases
-. Read: ~/.claude/Bin/notioncli/README.md
+1. Add NOTION_API_KEY=your_key to ${PAI_CONFIG_DIR}/.env
+2. Test: notioncli databases
+3. Read: ~/.claude/Bin/notioncli/README.md
 
 The CLI follows llcli pattern with type safety, error handling,
 and comprehensive documentation.
@@ -617,39 +665,44 @@ and comprehensive documentation.
 
 ---
 
-RELATED WORKFLOWS
+## RELATED WORKFLOWS
 
-After creating CLI:- `add-command.md` - Add more commands to existing CLI
+**After creating CLI:**
+- `add-command.md` - Add more commands to existing CLI
 - `add-testing.md` - Generate test suite
 - `setup-distribution.md` - Setup npm publishing or binary distribution
 
-Escalation:- `upgrade-tier.md` - Migrate from Tier → Tier if CLI grows complex
+**Escalation:**
+- `upgrade-tier.md` - Migrate from Tier 1 → Tier 2 if CLI grows complex
 
 ---
 
-REAL-WORLD EXAMPLES
+## REAL-WORLD EXAMPLES
 
-Example : API Client
+### Example 1: API Client
 
-Request:"CLI for Stripe API"
+**Request:** "CLI for Stripe API"
 
-Decision:Tier (API wrapper, simple commands)
+**Decision:** Tier 1 (API wrapper, simple commands)
 
-Generated Commands:```bash
+**Generated Commands:**
+```bash
 stripecli customers list
 stripecli customers create --email user@example.com
-stripecli payments list --customer cus_stripecli balance
+stripecli payments list --customer cus_123
+stripecli balance
 ```
 
 ---
 
-Example : File Processor
+### Example 2: File Processor
 
-Request:"CLI to convert markdown to various formats"
+**Request:** "CLI to convert markdown to various formats"
 
-Decision:Tier (file I/O, simple transformations)
+**Decision:** Tier 1 (file I/O, simple transformations)
 
-Generated Commands:```bash
+**Generated Commands:**
+```bash
 md-convert html input.md output.html
 md-convert pdf input.md output.pdf
 md-convert extract-links input.md
@@ -658,67 +711,81 @@ md-convert stats input.md
 
 ---
 
-Example : Database Tool
+### Example 3: Database Tool
 
-Request:"CLI for database migrations with rollback, status, and generate commands"
+**Request:** "CLI for database migrations with rollback, status, and generate commands"
 
-Decision:Tier (complex workflow, subcommands)
+**Decision:** Tier 2 (complex workflow, subcommands)
 
-Generated Commands:```bash
-db-migrate up                    Run pending migrations
-db-migrate down --steps        Rollback
-db-migrate status                Show migration status
-db-migrate create --name users   Generate new migration
+**Generated Commands:**
+```bash
+db-migrate up                    # Run pending migrations
+db-migrate down --steps 1        # Rollback
+db-migrate status                # Show migration status
+db-migrate create --name users   # Generate new migration
 ```
 
 ---
 
-BEST PRACTICES
+## ✓ BEST PRACTICES
 
-. Default to Tier Start simple. % of CLIs don't need a framework.
+### 1. **Default to Tier 1**
+Start simple. 80% of CLIs don't need a framework.
 
-. Complete DocumentationREADME explains "why" not just "how". Include philosophy section.
+### 2. **Complete Documentation**
+README explains "why" not just "how". Include philosophy section.
 
-. Type Safety FirstAll interfaces, strict mode, no `any` types.
+### 3. **Type Safety First**
+All interfaces, strict mode, no `any` types.
 
-. Deterministic OutputJSON to stdout, errors to stderr. Consistent every time.
+### 4. **Deterministic Output**
+JSON to stdout, errors to stderr. Consistent every time.
 
-. Error ContextDon't just say "Error". Explain what failed and how to fix it.
+### 5. **Error Context**
+Don't just say "Error". Explain what failed and how to fix it.
 
-. Examples in HelpShow real usage examples, not just flag descriptions.
+### 6. **Examples in Help**
+Show real usage examples, not just flag descriptions.
 
-. Test ImmediatelyRun `--help` and version command before reporting success.
+### 7. **Test Immediately**
+Run `--help` and version command before reporting success.
 
-. Follow llcli PatternUse proven structure from ~/.claude/Bin/llcli/ as reference.
-
----
-
-TROUBLESHOOTING
-
-"Should I use Tier or Tier ?"→ Follow decision tree. If uncertain, use Tier . You can upgrade later.
-
-"User wants commands"→ Tier can handle this if commands are simple. Use Tier only if they need grouping/subcommands.
-
-"CLI needs both JSON and table output"→ Tier (multiple output engines). Tier is JSON-only.
-
-"User didn't specify commands"→ Ask: "What are the main commands you need?"
-
-"Don't know API structure"→ Ask: "Do you have API documentation? What does a typical response look like?"
+### 8. **Follow llcli Pattern**
+Use proven structure from ~/.claude/Bin/llcli/ as reference.
 
 ---
 
-QUALITY CHECKLIST
+## TROUBLESHOOTING
+
+**"Should I use Tier 1 or Tier 2?"**
+→ Follow decision tree. If uncertain, use Tier 1. You can upgrade later.
+
+**"User wants 15 commands"**
+→ Tier 1 can handle this if commands are simple. Use Tier 2 only if they need grouping/subcommands.
+
+**"CLI needs both JSON and table output"**
+→ Tier 2 (multiple output engines). Tier 1 is JSON-only.
+
+**"User didn't specify commands"**
+→ Ask: "What are the main commands you need?"
+
+**"Don't know API structure"**
+→ Ask: "Do you have API documentation? What does a typical response look like?"
+
+---
+
+## QUALITY CHECKLIST
 
 Before reporting CLI as complete, verify:
 
-Core Functionality
+### Core Functionality
 - [ ] TypeScript compiles (run bun check)
 - [ ] File permissions set (chmod +x)
 - [ ] --help displays correctly
 - [ ] --version shows version
 - [ ] All commands in help are implemented
 
-Configuration Flags Standard
+### Configuration Flags Standard
 - [ ] Configuration exposed via flags, not hardcoded
 - [ ] Mode flags present where applicable (--fast, --thorough, --dry-run)
 - [ ] Output flags present (--format, --quiet, --verbose)
@@ -726,21 +793,21 @@ Configuration Flags Standard
 - [ ] Sensible defaults work without flags
 - [ ] Flags documented in --help output
 
-Documentation & Output
+### Documentation & Output
 - [ ] README has philosophy section
 - [ ] QUICKSTART has common examples
 - [ ] .env.example lists all required vars
 - [ ] Error messages are actionable
-- [ ] Exit codes correct (= success, = error)
+- [ ] Exit codes correct (0 = success, 1 = error)
 - [ ] JSON output valid (test with `| jq empty`)
 - [ ] Configuration loaded from expected location
 - [ ] CLI name is kebab-case
 - [ ] Follows llcli structure pattern
 
-Workflow Integration
+### Workflow Integration
 - [ ] If this CLI will be called by workflows, document the intent-to-flag mapping pattern
 - [ ] Flag names match standard conventions (see CliFirstArchitecture.md)
 
 ---
 
-This workflow generates production-ready CLIs that work immediately, following the proven llcli pattern and CLI-First Architecture principles.
+**This workflow generates production-ready CLIs that work immediately, following the proven llcli pattern and CLI-First Architecture principles.**

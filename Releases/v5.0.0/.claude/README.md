@@ -73,7 +73,7 @@ In your first Claude session, run `/interview` to personalize your DA with your 
  CLAUDE.md                    # operational procedures + context routing
  settings.json                # Claude Code config + DA identity
  PAI/                         # the engine
-    ALGORITHM/v3.29.0.md     # the universal problem-solving framework
+    ALGORITHM/v6.3.0.md      # the universal problem-solving framework
     DOCUMENTATION/           # every subsystem fully documented
     PULSE/                   # daemon, menu bar, scheduled tasks
     TOOLS/                   # CLI utilities (Inference, GenerateTelosSummary, etc.)
@@ -101,7 +101,7 @@ The DA reads `CLAUDE.md` at every session start, which `@`-imports your identity
 
 - **System architecture:** [PAI/DOCUMENTATION/PAISystemArchitecture.md](./PAI/DOCUMENTATION/PAISystemArchitecture.md)
 - **Life OS thesis:** [PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md](./PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md)
-- **Algorithm spec:** [PAI/ALGORITHM/v3.29.0.md](./PAI/ALGORITHM/v3.29.0.md)
+- **Algorithm spec:** [PAI/ALGORITHM/v6.3.0.md](./PAI/ALGORITHM/v6.3.0.md)
 - **Skill system:** [PAI/DOCUMENTATION/Skills/SkillSystem.md](./PAI/DOCUMENTATION/Skills/SkillSystem.md)
 - **Hook system:** [PAI/DOCUMENTATION/Hooks/HookSystem.md](./PAI/DOCUMENTATION/Hooks/HookSystem.md)
 - **Pulse system:** [PAI/DOCUMENTATION/Pulse/PulseSystem.md](./PAI/DOCUMENTATION/Pulse/PulseSystem.md) (path is case-insensitive on macOS APFS; on Linux use `PAI/PULSE/`)

@@ -1,4 +1,4 @@
-Extract Alpha
+# Extract Alpha
 
 Extract the highest-alpha ideas from content using deep deep thinking analysis.
 
@@ -8,11 +8,12 @@ Focuses on what's genuinely new, counterintuitive, and profound.
 USE WHEN analyzing podcasts, videos, articles, essays, or any content where you want to capture
 the most important and surprising insights without missing subtle but profound ideas.
 
-Extract Alpha - Deep Content Analysis
+# Extract Alpha - Deep Content Analysis
 
-Core Philosophy
+## Core Philosophy
 
-Based on Claude Shannon's information theory: real information is what's different, not what's the same.
+Based on Claude Shannon's information theory: **real information is what's different, not what's the same.**
+
 This skill finds:
 - Net new ideas and novel presentations
 - New frameworks for combining ideas
@@ -20,7 +21,7 @@ This skill finds:
 - Subtle but profound observations
 - Non-obvious connections and implications
 
-The Problem This Solves:Standard extraction often misses:
+**The Problem This Solves:** Standard extraction often misses:
 - Subtle philosophical implications
 - Non-obvious connections between ideas
 - Counterintuitive observations buried in conversation
@@ -28,7 +29,7 @@ The Problem This Solves:Standard extraction often misses:
 - Surprising reframings of common concepts
 - Low-probability but brilliant insights
 
-When to Activate This Skill
+## When to Activate This Skill
 
 - Analyzing YouTube videos, podcasts, interviews
 - Processing essays, articles, blog posts
@@ -38,41 +39,44 @@ When to Activate This Skill
 - Standard patterns failed to capture key insights
 - User explicitly requests "extract alpha" or "deep analysis"
 
-The Five-Step Process
+## The Five-Step Process
 
-Step : Content Extraction
+### Step 1: Content Extraction
 
-For YouTube videos:```bash
+**For YouTube videos:**
+```bash
 fabric -y "YOUTUBE_URL"
 ```
 
-For other content:- Paste text directly
+**For other content:**
+- Paste text directly
 - Use WebFetch for articles
 - Read from files
 
-Step : Deep deep thinking Analysis
+### Step 2: Deep deep thinking Analysis
 
 Before extracting anything, engage in extended deep thinking using the deep thinking protocol:
 
-deep thinking Protocol:```
+**deep thinking Protocol:**
+```
 DEEP THINKING DEEP ANALYSIS MODE:
 
 Think deeply and extensively about this content:
 
-. SURFACE SCAN - What are the obvious main points?
-. DEPTH PROBE - What implications aren't explicitly stated?
-. CONNECTION MAP - What unusual connections exist between ideas?
+1. SURFACE SCAN - What are the obvious main points?
+2. DEPTH PROBE - What implications aren't explicitly stated?
+3. CONNECTION MAP - What unusual connections exist between ideas?
    - WONDER TRIGGER: What makes you stop and think "wait, how does THAT work?"
    - CROSS-DOMAIN PATTERNS: What seemingly different things (human/AI, biology/ML, physics/economics) share the same underlying principle?
    - PERSONAL RELEVANCE: What applies to YOUR life in a surprising way?
    - AHA MOMENTS: What connections make you see familiar things differently?
-. ASSUMPTION CHALLENGE - What conventional wisdom is being questioned?
-. NOVELTY DETECTION - What's genuinely new or surprising here?
-. FRAMEWORK EXTRACTION - What mental models or frameworks emerge?
-. SUBTLE INSIGHTS - What quiet observations carry profound weight?
-. CONTRARIAN ANGLES - What goes against common thinking?
-. FUTURE IMPLICATIONS - What does this suggest about what's coming?
-. SYNTHESIS - What are the highest-alpha ideas across all dimensions?
+4. ASSUMPTION CHALLENGE - What conventional wisdom is being questioned?
+5. NOVELTY DETECTION - What's genuinely new or surprising here?
+6. FRAMEWORK EXTRACTION - What mental models or frameworks emerge?
+7. SUBTLE INSIGHTS - What quiet observations carry profound weight?
+8. CONTRARIAN ANGLES - What goes against common thinking?
+9. FUTURE IMPLICATIONS - What does this suggest about what's coming?
+10. SYNTHESIS - What are the highest-alpha ideas across all dimensions?
 
 Allow thinking to wander and make unexpected connections.
 Question every assumption about what's "important."
@@ -80,190 +84,204 @@ Look for ideas that make you pause and reconsider.
 Prioritize novelty and surprise over comprehensiveness.
 ```
 
-Step : Extract Insights
+### Step 3: Extract Insights
 
 After deep thinking, extract the highest-alpha insights:
 
-Extraction Protocol:```
-Generate -highest-alpha ideas from your deep analysis.
+**Extraction Protocol:**
+```
+Generate 24-30 highest-alpha ideas from your deep analysis.
 
 For each insight:
-- Write in -word bullets (allow flexibility for clarity)
+- Write in 8-12 word bullets (allow flexibility for clarity)
 - Use approachable Paul Graham style
 - Prioritize ideas that are:
-  Make you pause and think "wait, WHAT?"
-  Spark curiosity or wonder
-  Reveal cross-domain patterns (same principle across human/AI, biology/ML, etc.)
-  Expose underlying associations that weren't obvious
-  Feel personally relevant or change how you see yourself
-  Challenge how you understand familiar things
-  Make you want to tell someone else
-  Create "holy shit" or "aha!" moments
-  Include specific details WHEN they enhance the surprise/insight
-  Make you reconsider your assumptions about the world
+  * Make you pause and think "wait, WHAT?"
+  * Spark curiosity or wonder
+  * Reveal cross-domain patterns (same principle across human/AI, biology/ML, etc.)
+  * Expose underlying associations that weren't obvious
+  * Feel personally relevant or change how you see yourself
+  * Challenge how you understand familiar things
+  * Make you want to tell someone else
+  * Create "holy shit" or "aha!" moments
+  * Include specific details WHEN they enhance the surprise/insight
+  * Make you reconsider your assumptions about the world
 
 Focus on low-probability insights that are coherent and valuable.
 Avoid obvious takeaways and surface-level observations.
 Capture the subtle genius buried in the content.
 ```
 
-Step : File Organization - Scratch → History Pattern
+### Step 4: File Organization - Scratch → History Pattern
 
-CRITICAL:Follow the proper file organization pattern for all extractalpha work:
+**CRITICAL:** Follow the proper file organization pattern for all extractalpha work:
 
-Working Files (Temporary Analysis)
+#### Working Files (Temporary Analysis)
 
-Use the current work item directory for all working files during analysis:
+**Use the current work item directory for all working files during analysis:**
+
 ```bash
 ~/.claude/PAI/MEMORY/WORK/{current_work}/
 ```
 
-To get the current work directory:. Read `~/.claude/`
-. Extract the `work_dir` value
-. Use `~/.claude/PAI/MEMORY/WORK/{work_dir}/` for temporary artifacts
+**To get the current work directory:**
+1. Read `~/.claude/`
+2. Extract the `work_dir` value
+3. Use `~/.claude/PAI/MEMORY/WORK/{work_dir}/` for temporary artifacts
 
-What goes in the work item directory:- Raw transcripts from fabric -y
+**What goes in the work item directory:**
+- Raw transcripts from fabric -y
 - Intermediate analysis notes
 - deep thinking working thoughts
 - Draft versions of insights
 - Any temporary files during the extraction process
 
-Why this pattern:- Ties iterative work artifacts to the work item for learning
+**Why this pattern:**
+- Ties iterative work artifacts to the work item for learning
 - System can analyze how research progresses over time
 - Working artifacts provide context for the final outputs
 
-Example work item structure:```
-~/.claude/PAI/MEMORY/WORK/-_extract-alpha-analysis/
- raw-transcript.txt
- deep thinking-notes.md
- draft-insights.md
- working-analysis.md
+**Example work item structure:**
+```
+~/.claude/PAI/MEMORY/WORK/20260111-172408_extract-alpha-analysis/
+├── raw-transcript.txt
+├── deep thinking-notes.md
+├── draft-insights.md
+└── working-analysis.md
 ```
 
-Permanent Output (Final Research)
+#### Permanent Output (Final Research)
 
-Save final outputs to permanent history:
+**Save final outputs to permanent history:**
+
 ```bash
 ~/.claude/History/research/YYYY-MM-DD_description/
 ```
 
-What goes in history/research/:- extract_alpha.md- The final -insights (formatted output)
-- deep thinking-analysis.md- Full deep thinking deep analysis (all dimensions)
-- README.md- Documentation of the research session
+**What goes in history/research/:**
+- **extract_alpha.md** - The final 24-30 insights (formatted output)
+- **deep thinking-analysis.md** - Full deep thinking deep analysis (all 10 dimensions)
+- **README.md** - Documentation of the research session
 - Source metadata (URL, title, date analyzed, content type)
 
-Example history structure:```
-~/.claude/History/research/--_podcast-analysis/
- README.md                  Research session documentation
- extract_alpha.md           Final -insights
- deep thinking-analysis.md     Full deep analysis
- metadata.json              Source info, timestamps, etc.
+**Example history structure:**
+```
+~/.claude/History/research/2025-10-26_podcast-analysis/
+├── README.md                  # Research session documentation
+├── extract_alpha.md           # Final 24-30 insights
+├── deep thinking-analysis.md     # Full deep analysis
+└── metadata.json              # Source info, timestamps, etc.
 ```
 
-README.md Template
+#### README.md Template
 
 Create a README.md in the history directory documenting the research:
 
 ```markdown
-Extract Alpha - [Content Title]
+# Extract Alpha - [Content Title]
 
-Source Information
-- URL/Title:[Source URL or title]
-- Content Type:[YouTube video / Article / Podcast / Essay]
-- Date Analyzed:YYYY-MM-DD
-- Analysis Duration:[Time spent]
+## Source Information
+- **URL/Title:** [Source URL or title]
+- **Content Type:** [YouTube video / Article / Podcast / Essay]
+- **Date Analyzed:** YYYY-MM-DD
+- **Analysis Duration:** [Time spent]
 
-Analysis Method
-- deep thinking Deep Analysis (-dimension framework)
+## Analysis Method
+- deep thinking Deep Analysis (10-dimension framework)
 - Focus on low-probability but brilliant insights
 
-Key Findings Summary
-[-sentence summary of the most important insights discovered]
+## Key Findings Summary
+[2-3 sentence summary of the most important insights discovered]
 
-Output Files
-- `extract_alpha.md` - Final -highest-alpha insights
+## Output Files
+- `extract_alpha.md` - Final 24-30 highest-alpha insights
 - `deep thinking-analysis.md` - Complete deep thinking analysis
 - `metadata.json` - Structured source and analysis metadata
 
-Notes
+## Notes
 [Any important observations about the analysis process or content]
 ```
 
-Verification Step (MANDATORY)
+#### Verification Step (MANDATORY)
 
-ALWAYS verify output is properly captured:
-. Check if hooks captured the output:   ```bash
-   Check most recent history entries
-   ls -lt ~/.claude/History/research/ | head -
-   Verify your research directory exists
+**ALWAYS verify output is properly captured:**
+
+1. **Check if hooks captured the output:**
+   ```bash
+   # Check most recent history entries
+   ls -lt ~/.claude/History/research/ | head -5
+
+   # Verify your research directory exists
    ls ~/.claude/History/research/YYYY-MM-DD_description/
    ```
 
-. If hooks did NOT capture automatically:   ```bash
-   Create directory structure manually
+2. **If hooks did NOT capture automatically:**
+   ```bash
+   # Create directory structure manually
    mkdir -p ~/.claude/History/research/YYYY-MM-DD_description/
 
-   Save extract_alpha.md (final insights)
-   Save deep thinking-analysis.md (full analysis)
-   Create README.md (documentation)
-   Add metadata.json (source info)
+   # Save extract_alpha.md (final insights)
+   # Save deep thinking-analysis.md (full analysis)
+   # Create README.md (documentation)
+   # Add metadata.json (source info)
    ```
 
-. Confirm all files saved:   ```bash
+3. **Confirm all files saved:**
+   ```bash
    ls -lah ~/.claude/History/research/YYYY-MM-DD_description/
-   Should show: README.md, extract_alpha.md, deep thinking-analysis.md, metadata.json
+   # Should show: README.md, extract_alpha.md, deep thinking-analysis.md, metadata.json
    ```
 
-Complete Workflow Example
+#### Complete Workflow Example
 
 ```bash
-. Get current work directory
+# 1. Get current work directory
 WORK_DIR=$(jq -r '.work_dir' ~/.claude/PAI/MEMORY/STATE/current-work.json)
 
-. Work in current work item directory
+# 2. Work in current work item directory
 cd ~/.claude/PAI/MEMORY/WORK/${WORK_DIR}/
 
-. Extract content to work item directory
+# 3. Extract content to work item directory
 fabric -y "YOUTUBE_URL" > raw-transcript.txt
 
-. Perform deep thinking analysis (working notes in work item directory)
-[Deep thinking happens here, notes saved to work item directory]
+# 4. Perform deep thinking analysis (working notes in work item directory)
+# [Deep thinking happens here, notes saved to work item directory]
 
-. Extract insights
-[Extract -insights from deep thinking analysis, draft in work item directory]
+# 5. Extract insights
+# [Extract 24-30 insights from deep thinking analysis, draft in work item directory]
 
-. Create permanent history directory
+# 6. Create permanent history directory
 mkdir -p ~/.claude/History/research/$(date +%Y-%m-%d)_podcast-analysis/
 
-. Save final outputs to history
-- extract_alpha.md (final insights)
-- deep thinking-analysis.md (full deep thinking)
-- README.md (documentation)
-- metadata.json (source info)
+# 7. Save final outputs to history
+# - extract_alpha.md (final insights)
+# - deep thinking-analysis.md (full deep thinking)
+# - README.md (documentation)
+# - metadata.json (source info)
 
-. Verify hooks captured it
+# 8. Verify hooks captured it
 ls -lah ~/.claude/History/research/$(date +%Y-%m-%d)_podcast-analysis/
 
-. Note: working artifacts remain tied to work item for learning
-(Don't delete working files - they provide context for the work item)
+# 9. Note: working artifacts remain tied to work item for learning
+# (Don't delete working files - they provide context for the work item)
 ```
 
-Why This Pattern Matters
+#### Why This Pattern Matters
 
-. Work item integration:Working artifacts are tied to the work item for learning
-. System intelligence:PAI can analyze how research progresses over time
-. Context preservation:Working files provide context for final outputs
-. Proper documentation:README ensures context is preserved in history
-. Hook verification:Ensures nothing is lost if hooks fail
-. deep thinking preservation:Full deep analysis is saved, not just final insights
-. Research continuity:Can revisit analysis methodology later
+1. **Work item integration:** Working artifacts are tied to the work item for learning
+2. **System intelligence:** PAI can analyze how research progresses over time
+3. **Context preservation:** Working files provide context for final outputs
+4. **Proper documentation:** README ensures context is preserved in history
+5. **Hook verification:** Ensures nothing is lost if hooks fail
+6. **deep thinking preservation:** Full deep analysis is saved, not just final insights
+7. **Research continuity:** Can revisit analysis methodology later
 
-Output Format
+## Output Format
 
 Simple markdown list with blank lines between items for readability:
 
 ```markdown
-EXTRACT ALPHA
+# EXTRACT ALPHA
 
 - First high-alpha insight in approachable style
 
@@ -277,14 +295,14 @@ EXTRACT ALPHA
 
 - Subtle but profound philosophical point
 
-[... continue for -items total ...]
+[... continue for 24-30 items total ...]
 ```
 
-Quality over quantity:If content only has truly novel insights, extract . Don't pad with obvious ideas.
+**Quality over quantity:** If content only has 15 truly novel insights, extract 15. Don't pad with obvious ideas.
 
-What to Look For
+## What to Look For
 
-HIGH-ALPHA SIGNALS:
+### HIGH-ALPHA SIGNALS:
 - Makes you stop and reconsider something you thought you knew
 - Connects ideas from different domains unexpectedly
 - Challenges industry consensus or common wisdom
@@ -294,7 +312,7 @@ HIGH-ALPHA SIGNALS:
 - Represents a novel mental model or framework
 - Captures a subtle observation with profound weight
 
-LOW-ALPHA SIGNALS (avoid):
+### LOW-ALPHA SIGNALS (avoid):
 - Restates common knowledge
 - Obvious implications or direct quotes of main points
 - Generic advice that could apply to anything
@@ -302,68 +320,72 @@ LOW-ALPHA SIGNALS (avoid):
 - Ideas you've heard many times before
 - Purely factual information without insight
 
-Comparison to Standard Patterns
+## Comparison to Standard Patterns
 
-extract_wisdom:- Comprehensive: IDEAS, INSIGHTS, QUOTES, HABITS, FACTS, REFERENCES
-- Structured -word bullets
+**extract_wisdom:**
+- Comprehensive: IDEAS, INSIGHTS, QUOTES, HABITS, FACTS, REFERENCES
+- Structured 16-word bullets
 - Captures breadth
 - Can miss subtle depth
 
-extract_alpha (original):- items, -word bullets
+**extract_alpha (original):**
+- 24 items, 8-word bullets
 - Focuses on novelty
 - Paul Graham style
 - Can miss ideas due to mode collapse
 
-extractalpha (this skill):- -items, -word bullets (flexible)
+**extractalpha (this skill):**
+- 24-30 items, 8-12 word bullets (flexible)
 - Deep deep thinking analysis first
 - Focuses on low-probability but brilliant insights
 - Specifically designed to NOT miss subtle profound ideas
 - Prioritizes surprise and novelty over comprehensiveness
 
-Usage Examples
+## Usage Examples
 
-Example : YouTube Video Analysis
+### Example 1: YouTube Video Analysis
 
 ```bash
-Step : Extract transcript
+# Step 1: Extract transcript
 fabric -y "https://youtu.be/VIDEO_ID"
 
-Step & : Apply this skill (PAI does this automatically)
-- Deep deep thinking analysis
-- Extract insights
-- Output -highest-alpha insights
+# Step 2 & 3: Apply this skill (PAI does this automatically)
+# - Deep deep thinking analysis
+# - Extract insights
+# - Output 24-30 highest-alpha insights
 ```
 
-Example : Article Analysis
+### Example 2: Article Analysis
 
 ```typescript
 // User provides article URL or text
 // PAI:
-// . Fetches content (WebFetch or direct paste)
-// . Applies deep thinking protocol
-// . Extracts insights
-// . Returns high-alpha list
+// 1. Fetches content (WebFetch or direct paste)
+// 2. Applies deep thinking protocol
+// 3. Extracts insights
+// 4. Returns high-alpha list
 ```
 
-Integration with PAI
+## Integration with PAI
 
 When this skill activates, PAI should:
 
-. Load contentvia appropriate method (fabric -y, WebFetch, Read, or paste)
-. Get current work directory- Read `~/.claude/` for `work_dir`
-. Use work item directory- Work in `~/.claude/PAI/MEMORY/WORK/{work_dir}/`
-. Engage deep thinking mode- Deep extended thinking through all dimensions
-. Extract insights- Extract -highest-alpha ideas focusing on low-probability brilliant insights
-. Save to history- Final outputs to `~/.claude/History/research/YYYY-MM-DD_description/`
-. Verify capture- Ensure hooks captured or manually save all files
-. Output simple list- Unformatted markdown, Paul Graham style, -words each
-. Prioritize surprise- Novel ideas over obvious takeaways
-. Optional verification- For insights with quantitative claims, spot-check via `Workflows/Verify.md` Tier 
-Internal Prompt Pattern
+1. **Load content** via appropriate method (fabric -y, WebFetch, Read, or paste)
+2. **Get current work directory** - Read `~/.claude/` for `work_dir`
+3. **Use work item directory** - Work in `~/.claude/PAI/MEMORY/WORK/{work_dir}/`
+4. **Engage deep thinking mode** - Deep extended thinking through all 10 dimensions
+5. **Extract insights** - Extract 24-30 highest-alpha ideas focusing on low-probability brilliant insights
+6. **Save to history** - Final outputs to `~/.claude/History/research/YYYY-MM-DD_description/`
+7. **Verify capture** - Ensure hooks captured or manually save all files
+8. **Output simple list** - Unformatted markdown, Paul Graham style, 8-12 words each
+9. **Prioritize surprise** - Novel ideas over obvious takeaways
+10. **Optional verification** - For insights with quantitative claims, spot-check via `Workflows/Verify.md` Tier 2
+
+### Internal Prompt Pattern
 
 ```
 <instructions>
-STEP - DEEP THINKING DEEP ANALYSIS:
+STEP 1 - DEEP THINKING DEEP ANALYSIS:
 Think deeply and extensively about this content:
 - What makes you stop and think "wait, WHAT?"
 - What feels personally relevant in a surprising way?
@@ -387,8 +409,8 @@ Question assumptions about what's "important."
 Prioritize insights that create WONDER, CURIOSITY, PERSONAL RELEVANCE, and CROSS-DOMAIN PATTERNS.
 Focus on what's INTERESTING/SURPRISING/INSIGHTFUL, not just technical or comprehensive.
 
-STEP - EXTRACT INSIGHTS:
-Generate -highest-alpha insights from your deep analysis.
+STEP 2 - EXTRACT INSIGHTS:
+Generate 24-30 highest-alpha insights from your deep analysis.
 
 Focus on:
 - Low-probability but brilliant insights
@@ -403,7 +425,7 @@ Focus on:
 - Subtle observations with profound emotional weight
 
 For each insight:
-- Write in approachable -word bullets (Paul Graham style)
+- Write in approachable 8-12 word bullets (Paul Graham style)
 - Avoid surface-level observations
 - Capture what's INTERESTING, SURPRISING, and INSIGHTFUL
 - Reveal cross-domain patterns and underlying associations
@@ -412,51 +434,53 @@ For each insight:
 - Include ideas standard patterns would miss
 
 Output Format:
-EXTRACT ALPHA
+# EXTRACT ALPHA
 
-- [Insight ]
+- [Insight 1]
 
-- [Insight ]
+- [Insight 2]
 
-[... -total items with blank lines between each ...]
+[... 24-30 total items with blank lines between each ...]
 </instructions>
 
 [CONTENT TO ANALYZE]
 ```
 
-Example Output Quality
+## Example Output Quality
 
-What standard extract_alpha might miss:- "We're not building animals, we're building ghosts" (profound reframing)
+**What standard extract_alpha might miss:**
+- "We're not building animals, we're building ghosts" (profound reframing)
 - "Pre-training is like crappy evolution" (novel framework)
 - "Context window is working memory, weights are hazy recollection" (powerful analogy)
 - "In-context learning might implement gradient descent internally" (deep technical insight)
 - "Agents are trying to get the full thing too early" (historical pattern observation)
 
-What extractalpha (this skill) captures:ALL of the above plus more subtle implications and connections.
+**What extractalpha (this skill) captures:**
+ALL of the above plus more subtle implications and connections.
 
-Key Principles
+## Key Principles
 
-. Think first, extract second- deep thinking before output
-. Focus on low-probability insights- Don't just grab obvious ideas
-. Prioritize surprise- Novel > comprehensive
-. Capture subtlety- Profound quiet observations matter
-. Challenge assumptions- What's the conventional wisdom being questioned?
-. Find connections- Non-obvious links between ideas
-. Flexible length- -words, whatever achieves clarity
-. Quality threshold- Better brilliant insights than padded ones
-. Cross-domain patterns- Same principles across different fields
-. Personal relevance- What changes how you see things?
+1. **Think first, extract second** - deep thinking before output
+2. **Focus on low-probability insights** - Don't just grab obvious ideas
+3. **Prioritize surprise** - Novel > comprehensive
+4. **Capture subtlety** - Profound quiet observations matter
+5. **Challenge assumptions** - What's the conventional wisdom being questioned?
+6. **Find connections** - Non-obvious links between ideas
+7. **Flexible length** - 8-12 words, whatever achieves clarity
+8. **Quality threshold** - Better 15 brilliant insights than 30 padded ones
+9. **Cross-domain patterns** - Same principles across different fields
+10. **Personal relevance** - What changes how you see things?
 
-Common Failure Modes to Avoid
+## Common Failure Modes to Avoid
 
-. Mode collapse- Only extracting high-probability obvious ideas
-. Surface skimming- Missing depth for breadth
-. Quote collection- Restating without extracting insight
-. Comprehensiveness trap- Trying to capture everything instead of highest alpha
-. Rigid formatting- Forcing words when would be clearer
-. Obvious takeaways- Extracting main points instead of surprising implications
+1. **Mode collapse** - Only extracting high-probability obvious ideas
+2. **Surface skimming** - Missing depth for breadth
+3. **Quote collection** - Restating without extracting insight
+4. **Comprehensiveness trap** - Trying to capture everything instead of highest alpha
+5. **Rigid formatting** - Forcing 8 words when 10 would be clearer
+6. **Obvious takeaways** - Extracting main points instead of surprising implications
 
-Success Criteria
+## Success Criteria
 
 You've succeeded with this skill when:
 - User says "YES! That's exactly the insight I was thinking about!"
@@ -466,19 +490,22 @@ You've succeeded with this skill when:
 - Reading the extraction makes you reconsider your understanding
 - No important surprising ideas are missing from the output
 
-Quick Reference
+## Quick Reference
 
-Four-step process:. Extract content (fabric -y, WebFetch, Read, paste)
-. Deep deep thinking (-dimension analysis) - work in work item directory
-. Extract insights (-highest-alpha ideas, -words)
-. Save to history (verify hooks captured output) - working artifacts stay with work item
+**Four-step process:**
+1. Extract content (fabric -y, WebFetch, Read, paste)
+2. Deep deep thinking (10-dimension analysis) - work in work item directory
+3. Extract insights (24-30 highest-alpha ideas, 8-12 words)
+4. Save to history (verify hooks captured output) - working artifacts stay with work item
 
-Output format:- Simple markdown list with blank lines between items
+**Output format:**
+- Simple markdown list with blank lines between items
 - Paul Graham approachable style
-- -word bullets (flexible)
+- 8-12 word bullets (flexible)
 - Prioritize novelty and surprise
 
-Remember:- Real information is what's different
+**Remember:**
+- Real information is what's different
 - Think deeply before extracting
 - Focus on low-probability but brilliant insights
 - Capture subtle profound observations

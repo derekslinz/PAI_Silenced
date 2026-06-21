@@ -1,8 +1,8 @@
-Browser Stories — YAML User Story Format
+# Browser Stories — YAML User Story Format
 
 Stories are declarative YAML files that define user journeys for automated validation. Each story has a URL, a sequence of steps, and assertions to verify.
 
-Format
+## Format
 
 ```yaml
 name: Story Suite Name
@@ -11,25 +11,25 @@ stories:
   - name: Individual story name
     steps:
       - action: wait|click|fill|type|press|select|hover|goto
-        target: "LLM-readable element description"  NOT CSS selectors
-        value: "input value"                         for fill/type/select
-        description: "what should happen"            for wait actions
+        target: "LLM-readable element description"  # NOT CSS selectors
+        value: "input value"                         # for fill/type/select
+        description: "what should happen"            # for wait actions
     assertions:
       - type: snapshot_contains|url_matches|element_visible|element_absent
-        text: "expected text"          for snapshot_contains
-        pattern: "regex pattern"       for url_matches
-        description: "element desc"    for element_visible/absent
+        text: "expected text"          # for snapshot_contains
+        pattern: "regex pattern"       # for url_matches
+        description: "element desc"    # for element_visible/absent
 ```
 
-Key Principles
+## Key Principles
 
-. LLM-readable targets— describe elements in natural language ("First story title link"), not CSS selectors (`.story-link:first-child`). UIReviewer agents use accessibility snapshots to find elements by description.
+1. **LLM-readable targets** — describe elements in natural language ("First story title link"), not CSS selectors (`.story-link:first-child`). UIReviewer agents use accessibility snapshots to find elements by description.
 
-. One file per page/flow— group related stories in a single YAML file. Each file targets one URL or closely related flow.
+2. **One file per page/flow** — group related stories in a single YAML file. Each file targets one URL or closely related flow.
 
-. Assertions are binary— each assertion produces PASS or FAIL. No fuzzy matching.
+3. **Assertions are binary** — each assertion produces PASS or FAIL. No fuzzy matching.
 
-Actions
+## Actions
 
 | Action | Required Fields | Description |
 |--------|----------------|-------------|
@@ -42,7 +42,7 @@ Actions
 | `hover` | `target` | Hover over an element |
 | `goto` | `value` | Navigate to a URL |
 
-Assertion Types
+## Assertion Types
 
 | Type | Required Fields | Description |
 |------|----------------|-------------|
@@ -51,20 +51,20 @@ Assertion Types
 | `element_visible` | `description` | Element matching description is visible |
 | `element_absent` | `description` | No element matching description is visible |
 
-Running Stories
+## Running Stories
 
-Stories are executed by the ReviewStoriesworkflow, which fans each story out to a parallel UIReviewer agent:
+Stories are executed by the **ReviewStories** workflow, which fans each story out to a parallel UIReviewer agent:
 
 ```
-Run all stories in a file
+# Run all stories in a file
 "Review stories in HackerNews.yaml"
 
-Run all stories across all files
+# Run all stories across all files
 "Review all browser stories"
 ```
 
-File Naming
+## File Naming
 
 - Use PascalCase: `HackerNews.yaml`, `ExampleApp.yaml`, `LoginFlow.yaml`
 - One file per target app or page group
-- Keep story count per file under (UIReviewer parallelism limit)
+- Keep story count per file under 8 (UIReviewer parallelism limit)

@@ -1,51 +1,52 @@
-TELOS Dashboard Template
+# TELOS Dashboard Template
 
-A reusable Next.js dashboard template with Tokyo Night Day theme, shadcn/ui components, and built-in AI chat functionality powered by Claude Haiku ..
+A reusable Next.js dashboard template with Tokyo Night Day theme, shadcn/ui components, and built-in AI chat functionality powered by Claude Haiku 4.5.
 
-Features
+## Features
 
-- Modern Stack: Next.js , React , TypeScript, Tailwind CSS - Beautiful Design: Tokyo Night Day theme with professional gradients
-- Pre-built Components: shadcn/ui Card, Badge, Button, Progress, Table components
-- AI Chat: Built-in Ask page with Claude Haiku .integration
-- Dynamic File System: Automatic file discovery, navigation, and editing
-- File Upload: Drag-and-drop interface for uploading .md and .csv files
-- File Editing: In-browser editing with save functionality
-- Responsive Layout: Fixed sidebar navigation with responsive main content
-- Template Structure: Easy-to-customize pages with TODO comments
+- **Modern Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS 4
+- **Beautiful Design**: Tokyo Night Day theme with professional gradients
+- **Pre-built Components**: shadcn/ui Card, Badge, Button, Progress, Table components
+- **AI Chat**: Built-in Ask page with Claude Haiku 4.5 integration
+- **Dynamic File System**: Automatic file discovery, navigation, and editing
+- **File Upload**: Drag-and-drop interface for uploading .md and .csv files
+- **File Editing**: In-browser editing with save functionality
+- **Responsive Layout**: Fixed sidebar navigation with responsive main content
+- **Template Structure**: Easy-to-customize pages with TODO comments
 
-Pages Included
+## Pages Included
 
-. Overview(`/`) - Dashboard overview with hero section, metrics grid, and summary
-. Ask(`/ask`) - AI chatbot powered by Claude Haiku .with full TELOS context
-. Add File(`/add-file`) - Drag-and-drop file upload interface for .md and .csv files
-. File Viewer(`/file/[slug]`) - Dynamic file viewer with edit capabilities for all TELOS files
-. Projects(`/projects`) - Project tracking with budget, progress, and status (template example)
-. Teams(`/teams`) - Team management and coverage tracking (template example)
-. Vulnerabilities(`/vulnerabilities`) - Security vulnerability tracking (template example)
-. Progress(`/progress`) - Progress tracking toward goals (template example)
+1. **Overview** (`/`) - Dashboard overview with hero section, metrics grid, and summary
+2. **Ask** (`/ask`) - AI chatbot powered by Claude Haiku 4.5 with full TELOS context
+3. **Add File** (`/add-file`) - Drag-and-drop file upload interface for .md and .csv files
+4. **File Viewer** (`/file/[slug]`) - Dynamic file viewer with edit capabilities for all TELOS files
+5. **Projects** (`/projects`) - Project tracking with budget, progress, and status (template example)
+6. **Teams** (`/teams`) - Team management and coverage tracking (template example)
+7. **Vulnerabilities** (`/vulnerabilities`) - Security vulnerability tracking (template example)
+8. **Progress** (`/progress`) - Progress tracking toward goals (template example)
 
-Getting Started
+## Getting Started
 
-. Copy the Template
+### 1. Copy the Template
 
 ```bash
 cp -r ~/.claude/skills/telos/dashboard-template /path/to/your/project
 cd /path/to/your/project
 ```
 
-. Install Dependencies
+### 2. Install Dependencies
 
 ```bash
 bun install
 ```
 
-Note: The template requires `@radix-ui/react-slot` for the Button component. It should install automatically with `bun install`. If you encounter issues, install it manually:
+**Note**: The template requires `@radix-ui/react-slot` for the Button component. It should install automatically with `bun install`. If you encounter issues, install it manually:
 
 ```bash
 bun add @radix-ui/react-slot
 ```
 
-. Configure Environment
+### 3. Configure Environment
 
 Copy `.env.example` to `.env` and add your Anthropic API key:
 
@@ -58,50 +59,50 @@ Edit `.env`:
 ANTHROPIC_API_KEY=your_api_key_here
 ```
 
-Note: The template includes a pre-configured `.env` file with a working API key for testing. Replace it with your own key for production use.
+**Note**: The template includes a pre-configured `.env` file with a working API key for testing. Replace it with your own key for production use.
 
-. Customize Your Dashboard
+### 4. Customize Your Dashboard
 
-Update Branding
+#### Update Branding
 
-File: `components/sidebar.tsx`
-- Line -: Replace `{/TODO: Add your app name /}` with your app name
-- Line : Update footer text
+**File**: `components/sidebar.tsx`
+- Line 24-26: Replace `{/* TODO: Add your app name */}` with your app name
+- Line 54: Update footer text
 
-File: `app/layout.tsx`
-- Line -: Update metadata title and description
+**File**: `app/layout.tsx`
+- Line 6-7: Update metadata title and description
 
-Add Your Data
+#### Add Your Data
 
 Each page includes TODO comments marking where to add your data:
 
-Overview Page(`app/page.tsx`):
-- Line -: Add metrics data structure
-- Lines with `{/TODO: ... /}`: Replace with your content
+**Overview Page** (`app/page.tsx`):
+- Line 7-13: Add metrics data structure
+- Lines with `{/* TODO: ... */}`: Replace with your content
 
-Projects Page(`app/projects/page.tsx`):
-- Line -: Add projects data structure
+**Projects Page** (`app/projects/page.tsx`):
+- Line 6-17: Add projects data structure
 - Map over your projects array to render cards
 
-Teams Page(`app/teams/page.tsx`):
-- Line -: Add teams data structure
+**Teams Page** (`app/teams/page.tsx`):
+- Line 6-13: Add teams data structure
 - Map over teams to populate grid
 
-Vulnerabilities Page(`app/vulnerabilities/page.tsx`):
-- Line -: Add vulnerabilities data structure
+**Vulnerabilities Page** (`app/vulnerabilities/page.tsx`):
+- Line 6-14: Add vulnerabilities data structure
 - Map over data to populate table
 
-Progress Page(`app/progress/page.tsx`):
-- Line -: Add progress metrics structure
+**Progress Page** (`app/progress/page.tsx`):
+- Line 6-12: Add progress metrics structure
 - Map over categories to show progress
 
-Customize Data Structure
+#### Customize Data Structure
 
-File: `lib/data.ts`
+**File**: `lib/data.ts`
 - Replace example data with your actual data
 - Add TypeScript interfaces for type safety
 
-Example:
+**Example**:
 ```typescript
 // lib/data.ts
 export interface Project {
@@ -122,92 +123,92 @@ export const projects: Project[] = [
 ]
 ```
 
-. Run Development Server
+### 5. Run Development Server
 
 ```bash
 bun dev
 ```
 
-Open [http://localhost:](http://localhost:) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Tokyo Night Day Theme
+## Tokyo Night Day Theme
 
 The template uses a professionally-designed color palette:
 
-- Primary: `ede` (Blue)
-- Accent: `f` (Purple)
-- Success: `b` (Green)
-- Warning: `fa` (Orange)
-- Destructive: `fa` (Red)
-- Background: `ffffff` (White)
-- Foreground: `ab` (Dark)
+- **Primary**: `#2e7de9` (Blue)
+- **Accent**: `#9854f1` (Purple)
+- **Success**: `#33b579` (Green)
+- **Warning**: `#f0a020` (Orange)
+- **Destructive**: `#f52a65` (Red)
+- **Background**: `#ffffff` (White)
+- **Foreground**: `#1a1b26` (Dark)
 
 Colors are defined in:
 - `tailwind.config.ts` - Tailwind theme extension
 - `app/globals.css` - CSS variables
 
-AI Chat Integration
+## AI Chat Integration
 
-The Ask page uses Claude Haiku .via Anthropic API:
+The Ask page uses Claude Haiku 4.5 via Anthropic API:
 
-Frontend: `app/ask/page.tsx`
+**Frontend**: `app/ask/page.tsx`
 - React state management for messages
 - Beautiful chat UI with user/assistant bubbles
 - Loading states and error handling
 
-Backend: `app/api/chat/route.ts`
+**Backend**: `app/api/chat/route.ts`
 - Next.js API route
 - Calls Anthropic Messages API
 - Handles errors gracefully
 
-Environment Variable Required:
+**Environment Variable Required**:
 ```
-ANTHROPIC_API_KEY=sk-ant-api-...
+ANTHROPIC_API_KEY=sk-ant-api03-...
 ```
 
-Dynamic File System
+## Dynamic File System
 
 The template includes a complete file management system for TELOS files (markdown and CSV):
 
-File Discovery
-- Automatic scanning: The dashboard automatically discovers all `.md` and `.csv` files in the TELOS directory
-- Dynamic navigation: Every file becomes a clickable navigation item in the sidebar
-- Real-time updates: File count and list update automatically when new files are uploaded
+### File Discovery
+- **Automatic scanning**: The dashboard automatically discovers all `.md` and `.csv` files in the TELOS directory
+- **Dynamic navigation**: Every file becomes a clickable navigation item in the sidebar
+- **Real-time updates**: File count and list update automatically when new files are uploaded
 
-Implementation: `lib/telos-data.ts`
+**Implementation**: `lib/telos-data.ts`
 - `getAllTelosData()` - Scans TELOS directory and returns all files
 - `getTelosFileCount()` - Returns total file count
 - `getTelosFileList()` - Returns array of filenames
 - Searches `~/.claude/skills/Telos/` for `.md` files
 - Searches `~/.claude/skills/Telos/data/` for `.csv` files
 
-File Upload
-Page: `app/add-file/page.tsx`
+### File Upload
+**Page**: `app/add-file/page.tsx`
 - Drag-and-drop interface
 - Button-based file selection
 - Support for `.md` and `.csv` files
 - Real-time upload status tracking
 - Automatic sidebar refresh after upload
 
-API: `app/api/upload/route.ts`
+**API**: `app/api/upload/route.ts`
 - Handles file upload via FormData
 - Validates file types
 - Saves to appropriate TELOS directory
 - Logs uploads to `updates.md`
 
-File Viewing and Editing
-Page: `app/file/[slug]/page.tsx`
+### File Viewing and Editing
+**Page**: `app/file/[slug]/page.tsx`
 - Dynamic route for any TELOS file
 - Displays markdown files with ReactMarkdown rendering
 - Displays CSV files as formatted tables
 - Edit mode with textarea editor
 - Save functionality with success/error feedback
 
-API Endpoints:
+**API Endpoints**:
 - `app/api/file/get/route.ts` - Fetches individual file content
 - `app/api/file/save/route.ts` - Saves edited content back to disk
 
-Features:
+**Features**:
 - Toggle between view and edit modes
 - Syntax-highlighted editing (monospace font)
 - Save/Cancel buttons with visual feedback
@@ -215,8 +216,8 @@ Features:
 - Automatic content refresh after save
 - Logs all edits to `updates.md`
 
-Sidebar Integration
-File: `components/sidebar.tsx`
+### Sidebar Integration
+**File**: `components/sidebar.tsx`
 - Static navigation (Overview, Ask, Add File)
 - Dynamic file navigation section
 - File count badge
@@ -224,7 +225,7 @@ File: `components/sidebar.tsx`
 - Active state highlighting
 - Scrollable file list
 
-Event System:
+**Event System**:
 ```typescript
 // Dispatched after file upload
 window.dispatchEvent(new CustomEvent('telosFileUploaded', {
@@ -235,17 +236,17 @@ window.dispatchEvent(new CustomEvent('telosFileUploaded', {
 window.addEventListener('telosFileUploaded', handleFileUploaded)
 ```
 
-Component Library
+## Component Library
 
 All UI components are in `components/ui/`:
 
-- Card: Container component with header and content
-- Badge: Status/label indicator with variants
-- Button: Interactive button with multiple variants and sizes
-- Progress: Progress bar component
-- Table: Responsive table with header and rows
+- **Card**: Container component with header and content
+- **Badge**: Status/label indicator with variants
+- **Button**: Interactive button with multiple variants and sizes
+- **Progress**: Progress bar component
+- **Table**: Responsive table with header and rows
 
-Usage Example:
+**Usage Example**:
 ```tsx
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -264,93 +265,93 @@ import { Button } from "@/components/ui/button"
 </Card>
 ```
 
-Project Structure
+## Project Structure
 
 ```
 dashboard-template/
- app/
-    api/
-       chat/
-          route.ts          AI chat API endpoint
-       file/
-          get/
-             route.ts      Fetch individual file content
-          save/
-              route.ts      Save edited file content
-       files/
-          count/
-              route.ts      Get file count and list
-       upload/
-           route.ts          File upload handler
-    add-file/
-       page.tsx              File upload page
-    ask/
-       page.tsx              AI chatbot page
-    file/
-       [slug]/
-           page.tsx          Dynamic file viewer/editor
-    projects/
-       page.tsx              Projects page (template)
-    teams/
-       page.tsx              Teams page (template)
-    vulnerabilities/
-       page.tsx              Vulnerabilities page (template)
-    progress/
-       page.tsx              Progress page (template)
-    globals.css               Global styles
-    layout.tsx                Root layout
-    page.tsx                  Overview page
- components/
-    ui/
-       card.tsx              Card component
-       badge.tsx             Badge component
-       button.tsx            Button component
-       progress.tsx          Progress bar
-       table.tsx             Table component
-    sidebar.tsx               Navigation sidebar
- lib/
-    data.ts                   Data definitions
-    telos-data.ts             TELOS file system utilities
-    utils.ts                  Utility functions
- .env                          Environment variables (gitignored)
- .env.example                  Environment template
- .gitignore                    Git ignore rules
- next.config.mjs               Next.js configuration
- package.json                  Dependencies
- postcss.config.mjs            PostCSS configuration
- tailwind.config.ts            Tailwind configuration
- tsconfig.json                 TypeScript configuration
- README.md                     This file
+├── app/
+│   ├── api/
+│   │   ├── chat/
+│   │   │   └── route.ts          # AI chat API endpoint
+│   │   ├── file/
+│   │   │   ├── get/
+│   │   │   │   └── route.ts      # Fetch individual file content
+│   │   │   └── save/
+│   │   │       └── route.ts      # Save edited file content
+│   │   ├── files/
+│   │   │   └── count/
+│   │   │       └── route.ts      # Get file count and list
+│   │   └── upload/
+│   │       └── route.ts          # File upload handler
+│   ├── add-file/
+│   │   └── page.tsx              # File upload page
+│   ├── ask/
+│   │   └── page.tsx              # AI chatbot page
+│   ├── file/
+│   │   └── [slug]/
+│   │       └── page.tsx          # Dynamic file viewer/editor
+│   ├── projects/
+│   │   └── page.tsx              # Projects page (template)
+│   ├── teams/
+│   │   └── page.tsx              # Teams page (template)
+│   ├── vulnerabilities/
+│   │   └── page.tsx              # Vulnerabilities page (template)
+│   ├── progress/
+│   │   └── page.tsx              # Progress page (template)
+│   ├── globals.css               # Global styles
+│   ├── layout.tsx                # Root layout
+│   └── page.tsx                  # Overview page
+├── components/
+│   ├── ui/
+│   │   ├── card.tsx              # Card component
+│   │   ├── badge.tsx             # Badge component
+│   │   ├── button.tsx            # Button component
+│   │   ├── progress.tsx          # Progress bar
+│   │   └── table.tsx             # Table component
+│   └── sidebar.tsx               # Navigation sidebar
+├── lib/
+│   ├── data.ts                   # Data definitions
+│   ├── telos-data.ts             # TELOS file system utilities
+│   └── utils.ts                  # Utility functions
+├── .env                          # Environment variables (gitignored)
+├── .env.example                  # Environment template
+├── .gitignore                    # Git ignore rules
+├── next.config.mjs               # Next.js configuration
+├── package.json                  # Dependencies
+├── postcss.config.mjs            # PostCSS configuration
+├── tailwind.config.ts            # Tailwind configuration
+├── tsconfig.json                 # TypeScript configuration
+└── README.md                     # This file
 ```
 
-Customization Tips
+## Customization Tips
 
-Add New Pages
+### Add New Pages
 
-. Create page directory: `app/your-page/`
-. Create page file: `app/your-page/page.tsx`
-. Add to sidebar navigation in `components/sidebar.tsx`
-. Import appropriate icon from `lucide-react`
+1. Create page directory: `app/your-page/`
+2. Create page file: `app/your-page/page.tsx`
+3. Add to sidebar navigation in `components/sidebar.tsx`
+4. Import appropriate icon from `lucide-react`
 
-Modify Theme Colors
+### Modify Theme Colors
 
 Edit `tailwind.config.ts`:
 ```typescript
 colors: {
-  primary: "your-color",
-  accent: "your-color",
+  primary: "#your-color",
+  accent: "#your-color",
   // ...
 }
 ```
 
-Change Sidebar Branding
+### Change Sidebar Branding
 
 Edit `components/sidebar.tsx`:
-- Line -: App name
-- Line : Footer text
-- Line : Background gradient colors
+- Line 24-26: App name
+- Line 54: Footer text
+- Line 20: Background gradient colors
 
-Add Data Loading
+### Add Data Loading
 
 Replace static data with API calls:
 
@@ -367,55 +368,58 @@ export default async function Page() {
 }
 ```
 
-Development
+## Development
 
-Run dev server:
+**Run dev server**:
 ```bash
 bun dev
 ```
 
-Build for production:
+**Build for production**:
 ```bash
 bun run build
 ```
 
-Start production server:
+**Start production server**:
 ```bash
 bun start
 ```
 
-Type checking:
+**Type checking**:
 ```bash
 bunx tsc --noEmit
 ```
 
-Deployment
+## Deployment
 
 This template works with any Next.js hosting platform:
 
-- Vercel: `vercel deploy`
-- Cloudflare Pages: Connect to Git repo
-- Netlify: Connect to Git repo
-- Docker: Use standard Next.js Dockerfile
+- **Vercel**: `vercel deploy`
+- **Cloudflare Pages**: Connect to Git repo
+- **Netlify**: Connect to Git repo
+- **Docker**: Use standard Next.js Dockerfile
 
-Remember to set environment variablesin your hosting platform:
+**Remember to set environment variables** in your hosting platform:
 ```
 ANTHROPIC_API_KEY=your_key_here
 ```
 
-Tech Stack
+## Tech Stack
 
-- Framework: Next.js .- React: .- TypeScript: .x
-- Styling: Tailwind CSS .- UI Components: shadcn/ui (custom implementation)
-- Icons: Lucide React
-- AI: Claude Haiku .(Anthropic API)
-- Package Manager: Bun (also works with npm/yarn/pnpm)
+- **Framework**: Next.js 15.5
+- **React**: 19.2
+- **TypeScript**: 5.x
+- **Styling**: Tailwind CSS 4.1
+- **UI Components**: shadcn/ui (custom implementation)
+- **Icons**: Lucide React
+- **AI**: Claude Haiku 4.5 (Anthropic API)
+- **Package Manager**: Bun (also works with npm/yarn/pnpm)
 
-License
+## License
 
 This template is part of the TELOS skill system and is free to use for any purpose.
 
-Support
+## Support
 
 This is a template - customize it to fit your needs! All pages include TODO comments marking where to add your data and content.
 

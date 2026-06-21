@@ -5,9 +5,9 @@ metadata:
   tags: images, img, staticFile, png, jpg, svg, webp
 ---
 
-Using images in Remotion
+# Using images in Remotion
 
-The `<Img>` component
+## The `<Img>` component
 
 Always use the `<Img>` component from `remotion` to display images:
 
@@ -19,9 +19,9 @@ export const MyComposition = () => {
 };
 ```
 
-Important restrictions
+## Important restrictions
 
-You MUST use the `<Img>` component from `remotion`.Do not use:
+**You MUST use the `<Img>` component from `remotion`.** Do not use:
 
 - Native HTML `<img>` elements
 - Next.js `<Image>` component
@@ -29,18 +29,18 @@ You MUST use the `<Img>` component from `remotion`.Do not use:
 
 The `<Img>` component ensures images are fully loaded before rendering, preventing flickering and blank frames during video export.
 
-Local images with staticFile()
+## Local images with staticFile()
 
 Place images in the `public/` folder and use `staticFile()` to reference them:
 
 ```
 my-video/
- public/
-   logo.png
-   avatar.jpg
-   icon.svg
- src/
- package.json
+├─ public/
+│  ├─ logo.png
+│  ├─ avatar.jpg
+│  └─ icon.svg
+├─ src/
+├─ package.json
 ```
 
 ```tsx
@@ -49,7 +49,7 @@ import { Img, staticFile } from "remotion";
 <Img src={staticFile("logo.png")} />
 ```
 
-Remote images
+## Remote images
 
 Remote URLs can be used directly without `staticFile()`:
 
@@ -61,7 +61,7 @@ Ensure remote images have CORS enabled.
 
 For animated GIFs, use the `<Gif>` component from `@remotion/gif` instead.
 
-Sizing and positioning
+## Sizing and positioning
 
 Use the `style` prop to control size and position:
 
@@ -69,17 +69,17 @@ Use the `style` prop to control size and position:
 <Img
   src={staticFile("photo.png")}
   style={{
-    width: ,
-    height: ,
+    width: 500,
+    height: 300,
     position: "absolute",
-    top: ,
-    left: ,
+    top: 100,
+    left: 50,
     objectFit: "cover",
   }}
 />
 ```
 
-Dynamic image paths
+## Dynamic image paths
 
 Use template literals for dynamic file references:
 
@@ -105,7 +105,7 @@ This pattern is useful for:
 - Theme-based icons
 - State-dependent graphics
 
-Getting image dimensions
+## Getting image dimensions
 
 Use `getImageDimensions()` to get the dimensions of an image:
 

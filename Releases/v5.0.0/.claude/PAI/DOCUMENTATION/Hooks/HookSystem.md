@@ -47,10 +47,6 @@ Claude Code supports the following hook events:
       "hooks": [
         {
           "type": "command",
-          "command": "$HOME/.claude/hooks/KittyEnvPersist.hook.ts"
-        },
-        {
-          "type": "command",
           "command": "$HOME/.claude/hooks/LoadContext.hook.ts"
         },
         {
@@ -66,7 +62,6 @@ Claude Code supports the following hook events:
 ```
 
 **What They Do:**
-- `KittyEnvPersist.hook.ts` - Persists Kitty terminal env vars both to the shared `MEMORY/STATE/kitty-env.json` and to a per-session `MEMORY/STATE/kitty-sessions/{sessionId}.json` (required by out-of-process consumers like the Pulse daemon), then resets tab title to clean state
 - `LoadContext.hook.ts` - Injects dynamic context (relationship, learning, work summary) as `<system-reminder>` at session start
 - `KVSync.hook.ts` - Pushes work.json to Cloudflare KV (`sync:work_state`) so admin.example.com activity dashboard has fresh data
 
@@ -90,10 +85,6 @@ Claude Code supports the following hook events:
         {
           "type": "command",
           "command": "$HOME/.claude/hooks/WorkCompletionLearning.hook.ts"
-        },
-        {
-          "type": "command",
-          "command": "$HOME/.claude/hooks/ULWorkSync.hook.ts"
         },
         {
           "type": "command",
@@ -123,7 +114,6 @@ Claude Code supports the following hook events:
 
 **What They Do:**
 - `WorkCompletionLearning.hook.ts` - Reads ISA.md frontmatter for work metadata and ISC section for criteria status, captures learning to `MEMORY/LEARNING/` for significant work sessions
-- `ULWorkSync.hook.ts` - Syncs UL work state at session end
 - `SessionCleanup.hook.ts` - Marks ISA.md frontmatter status→COMPLETED and sets completed_at timestamp, clears session state, resets tab, cleans session names
 - `RelationshipMemory.hook.ts` - Captures relationship context (observations, behaviors) to `MEMORY/RELATIONSHIP/`
 - `UpdateCounts.hook.ts` - Updates system counts (skills, hooks, signals, workflows, files) displayed in the startup banner
@@ -226,7 +216,6 @@ Claude Code supports the following hook events:
     {
       "hooks": [
         { "type": "command", "command": "$HOME/.claude/hooks/LastResponseCache.hook.ts" },
-        { "type": "command", "command": "$HOME/.claude/hooks/ResponseTabReset.hook.ts" },
         { "type": "command", "command": "$HOME/.claude/hooks/DocIntegrity.hook.ts" }
       ]
     }
@@ -242,10 +231,6 @@ Each Stop hook is a self-contained `.hook.ts` file that reads stdin via shared `
 - Writes `last_assistant_message` (or transcript fallback) to `MEMORY/STATE/last-response.txt`
 - PromptProcessing reads this on the next UserPromptSubmit to access the previous response
 
-**`ResponseTabReset.hook.ts`** — Reset Kitty tab title/color after response
-- Calls `handlers/TabState.ts` to set completed state
-- Converts working gerund title to past tense
-
 **`DocIntegrity.hook.ts`** — Cross-reference + semantic drift checks + architecture summary regen
 - Calls `handlers/DocCrossRefIntegrity.ts` — deterministic + inference-powered doc updates
 - Calls `handlers/RebuildArchSummary.ts` — regenerates `PAI_ARCHITECTURE_SUMMARY.md` when system files change
@@ -259,7 +244,6 @@ Each Stop hook is a self-contained `.hook.ts` file that reads stdin via shared `
 **When:** Before Claude executes any tool
 **Use Cases:**
 - Security validation across file operations (Bash, Edit, Write, Read, MultiEdit) — SecurityPipeline (Pattern → Egress → Rules inspectors) blocks dangerous commands, protects credentials, enforces path tiers
-- Tab state updates on questions
 - Agent execution guardrails — Pulse HTTP route at localhost:31337/hooks/agent-guard
 - Skill invocation validation — Pulse HTTP route at localhost:31337/hooks/skill-guard
 
@@ -291,12 +275,6 @@ Each Stop hook is a self-contained `.hook.ts` file that reads stdin via shared `
       "hooks": [
         { "type": "http", "url": "http://localhost:31337/hooks/agent-guard" }
       ]
-    },
-    {
-      "matcher": "AskUserQuestion",
-      "hooks": [
-        { "type": "command", "command": "$HOME/.claude/hooks/SetQuestionTab.hook.ts" }
-      ]
     }
   ]
 }
@@ -306,7 +284,6 @@ Each Stop hook is a self-contained `.hook.ts` file that reads stdin via shared `
 
 **What They Do:**
 - `ContextReduction.hook.sh` - Context reduction via [RTK](https://github.com/rtk-ai/rtk). Transparently rewrites Bash commands to `rtk` equivalents for 60-90% token reduction across git, build, test, lint, and package manager output. Runs on the Bash matcher. Meta commands (use directly, not through hook): `rtk gain` (savings analytics), `rtk gain --history` (command history), `rtk discover` (missed opportunities), `rtk proxy <cmd>` (bypass filtering). Note: if `rtk gain` fails, check for name collision with reachingforthejack/rtk (Rust Type Kit).
-- `SetQuestionTab.hook.ts` - Updates tab state to "awaiting input" when AskUserQuestion is invoked
 
 ---
 
@@ -321,12 +298,6 @@ Each Stop hook is a self-contained `.hook.ts` file that reads stdin via shared `
     {
       "hooks": [
         { "type": "command", "command": "$HOME/.claude/hooks/ContentScanner.hook.ts" }
-      ]
-    },
-    {
-      "matcher": "AskUserQuestion",
-      "hooks": [
-        { "type": "command", "command": "$HOME/.claude/hooks/QuestionAnswered.hook.ts" }
       ]
     },
     {
@@ -359,11 +330,6 @@ Each Stop hook is a self-contained `.hook.ts` file that reads stdin via shared `
 - Runs InjectionInspector from the Inspector Pipeline to detect prompt injection attempts in tool output
 - Part of the v4.0 security architecture; replaces the former PromptInjectionScanner
 - Inspector source: `hooks/security/inspectors/`
-
-**QuestionAnswered.hook.ts** - Post-Question Processing
-- Fires after AskUserQuestion completes (user has answered)
-- Captures the question and answer for session context
-- Used for analytics and learning from user preferences
 
 **ISASync.hook.ts** - ISA Frontmatter → work.json Sync
 - Fires after Write/Edit to ISA files in `MEMORY/WORK/`
@@ -417,45 +383,13 @@ Each Stop hook is a self-contained `.hook.ts` file that reads stdin via shared `
 
 ### 8. **SubagentStart**
 **When:** A subagent is spawned (command-only event)
-**Status:** Empty registration. Claude Code's built-in `SubagentStart` payload omits `subagent_type` / `description` / `prompt`, so PAI tracks subagent lifecycle at the `PreToolUse:Agent` boundary via `AgentInvocation.hook.ts` (see Section 1) where that data is reliably present.
-
-**Current Hooks:**
-```json
-{
-  "SubagentStart": []
-}
-```
+**Status:** No active hooks wired.
 
 ---
 
 ### 9. **ConfigChange**
 **When:** Configuration settings are modified (command-only event)
-**Use Cases:**
-- Security audit trail for permission changes
-- Track hook modifications
-- Detect unauthorized config changes
-
-**Current Hooks:**
-```json
-{
-  "ConfigChange": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "$HOME/.claude/hooks/ConfigAudit.hook.ts"
-        }
-      ]
-    }
-  ]
-}
-```
-
-**What It Does:**
-- `ConfigAudit.hook.ts` - Appends config change events to `MEMORY/OBSERVABILITY/config-changes.jsonl`
-- Captures: config key, change summary (old → new), session ID, timestamp
-- Flags sensitive keys (permissions, hooks, env, mcpServers) with extra logging
-- Lightweight (<20ms) — file append only, no inference calls
+**Status:** No active hooks wired.
 
 ---
 
@@ -495,191 +429,49 @@ Claude Code's built-in auto-memory system writes learnings to `~/.claude/project
 
 ### 11. **PostCompact**
 **When:** After Claude compacts context
-**Status:** Active — `RestoreContext.hook.ts`
-
-**Current Hooks:**
-```json
-{
-  "PostCompact": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "$HOME/.claude/hooks/RestoreContext.hook.ts"
-        }
-      ]
-    }
-  ]
-}
-```
-
-**What It Does:**
-- `RestoreContext.hook.ts` - Restores critical context after compaction to prevent context loss
+**Status:** No active hooks wired.
 
 ---
 
 ### 12. **SubagentStop**
 **When:** A subagent completes (command-only event)
-**Status:** Empty registration. Subagent stop + duration is tracked at `PostToolUse:Agent` via `AgentInvocation.hook.ts` (see Section 1).
-
-**Current Hooks:**
-```json
-{
-  "SubagentStop": []
-}
-```
+**Status:** No active hooks wired.
 
 ---
 
 ### 12a. **TeammateIdle**
 **When:** An agent team teammate is about to go idle
-**Status:** Active — `TeammateIdle.hook.ts`
-
-**Current Hooks:**
-```json
-{
-  "TeammateIdle": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "$HOME/.claude/hooks/TeammateIdle.hook.ts"
-        }
-      ]
-    }
-  ]
-}
-```
-
-**What It Does:**
-- `TeammateIdle.hook.ts` - Logs idle events to `MEMORY/OBSERVABILITY/teammate-events.jsonl`
-- Pure logging — does not block or redirect teammates
-- Captures: teammate name, team name, session ID, timestamp
+**Status:** No active hooks wired.
 
 ---
 
 ### 13. **TaskCreated**
 **When:** A task is created via TaskCreate tool
-**Status:** Active — `TaskGovernance.hook.ts`
-
-**Current Hooks:**
-```json
-{
-  "TaskCreated": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "$HOME/.claude/hooks/TaskGovernance.hook.ts"
-        }
-      ]
-    }
-  ]
-}
-```
-
-**What It Does:**
-- `TaskGovernance.hook.ts` - Validates and governs task creation for ISC quality standards
+**Status:** No active hooks wired.
 
 ---
 
 ### 14. **StopFailure**
 **When:** The main agent fails to complete a response
-**Status:** Active — `StopFailureHandler.hook.ts`
-
-**Current Hooks:**
-```json
-{
-  "StopFailure": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "$HOME/.claude/hooks/StopFailureHandler.hook.ts"
-        }
-      ]
-    }
-  ]
-}
-```
-
-**What It Does:**
-- `StopFailureHandler.hook.ts` - Handles stop failures, captures error context for debugging
+**Status:** No active hooks wired.
 
 ---
 
 ### 15. **Elicitation**
 **When:** An elicitation event occurs
-**Status:** Active — `ElicitationHandler.hook.ts`
-
-**Current Hooks:**
-```json
-{
-  "Elicitation": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "$HOME/.claude/hooks/ElicitationHandler.hook.ts"
-        }
-      ]
-    }
-  ]
-}
-```
-
-**What It Does:**
-- `ElicitationHandler.hook.ts` - Handles elicitation events for interactive user engagement
+**Status:** No active hooks wired.
 
 ---
 
 ### 16. **FileChanged**
 **When:** A file is changed on disk (external to Claude)
-**Status:** Active — `FileChanged.hook.ts`
-
-**Current Hooks:**
-```json
-{
-  "FileChanged": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "$HOME/.claude/hooks/FileChanged.hook.ts"
-        }
-      ]
-    }
-  ]
-}
-```
-
-**What It Does:**
-- `FileChanged.hook.ts` - Reacts to external file changes, enabling watch-mode behaviors
+**Status:** No active hooks wired.
 
 ---
 
 ### 17. **InstructionsLoaded**
 **When:** Instructions (CLAUDE.md or project instructions) are loaded
-**Status:** Active — `InstructionsLoadedHandler.hook.ts`
-
-**Current Hooks:**
-```json
-{
-  "InstructionsLoaded": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "$HOME/.claude/hooks/InstructionsLoadedHandler.hook.ts"
-        }
-      ]
-    }
-  ]
-}
-```
-
-**What It Does:**
-- `InstructionsLoadedHandler.hook.ts` - Processes loaded instructions for context enrichment or validation
+**Status:** No active hooks wired.
 
 ---
 
@@ -1246,7 +1038,7 @@ Hooks in same event execute **sequentially** in order defined in settings.json:
   "Stop": [
     {
       "hooks": [
-        { "command": "$HOME/.claude/hooks/ResponseTabReset.hook.ts" }  // Example: one of several Stop hooks
+        { "command": "$HOME/.claude/hooks/LastResponseCache.hook.ts" }  // Example: one of the Stop hooks
       ]
     }
   ]
@@ -1367,83 +1159,48 @@ HOOK LIFECYCLE:
 6. Hook exits 0 (always succeeds)
 7. Claude Code continues
 
-HOOKS BY EVENT (19 event types wired in settings.json; verified 2026-04-30):
+HOOKS BY EVENT (authoritative wiring from settings.json):
 
-SESSION START (3 hooks):
-  KittyEnvPersist.hook.ts        Persist Kitty env vars + tab reset
+SESSION START (2 hooks):
   LoadContext.hook.ts             Dynamic context injection (relationship, learning, work)
-  KVSync.hook.ts                 Push work.json to Cloudflare KV
+  KVSync.hook.ts                 Push work.json to Cloudflare KV [async]
 
 USER PROMPT SUBMIT (4 hooks):
   PromptGuard.hook.ts            Security: PromptInspector (injection/exfil/evasion)
   RepeatDetection.hook.ts        Detect repeated asks / repeat-request complaints
-  PromptProcessing.hook.ts        Unified: rating + tab title + session name (1 Haiku call)
-  SatisfactionCapture.hook.ts    User satisfaction signal capture
-  # Browser-verify rule lives in PAI_SYSTEM_PROMPT.md ("Browser-verify all web
-  # output" / "Reproduce before fixing"), not as a UserPromptSubmit hook.
+  PromptProcessing.hook.ts       Unified: rating + tab title + session name + mode + tier [async]
+  SatisfactionCapture.hook.ts    User satisfaction signal capture [async]
 
-PRE TOOL USE (4 distinct hooks across tool matchers + 2 Pulse HTTP routes):
+PRE TOOL USE (2 hooks + 2 Pulse HTTP routes):
   SecurityPipeline.hook.ts       Security validation [Bash, Edit, Write, Read, MultiEdit]
   ContextReduction.hook.sh       Context reduction via RTK [Bash]
-  ContainmentGuard.hook.ts       Zone-write enforcement [Edit, Write, MultiEdit]
-  SetQuestionTab.hook.ts         Tab state on question [AskUserQuestion]
-  Pulse HTTP: agent-guard        Agent spawn guardrails (localhost:31337/hooks/agent-guard)
   Pulse HTTP: skill-guard        Skill invocation validation (localhost:31337/hooks/skill-guard)
+  Pulse HTTP: agent-guard        Agent spawn guardrails (localhost:31337/hooks/agent-guard)
 
-POST TOOL USE (5 distinct hooks):
-  ContentScanner.hook.ts         Security: InjectionInspector for prompt injection
-  QuestionAnswered.hook.ts       Post-question tab reset [AskUserQuestion]
-  ISASync.hook.ts                ISA → work.json sync [Write, Edit]
+POST TOOL USE (4 hooks):
+  ContentScanner.hook.ts         Security: InjectionInspector for prompt injection [global]
   TelosSummarySync.hook.ts       TELOS edits → regenerate PRINCIPAL_TELOS.md [Write, Edit]
-  ToolActivityTracker.hook.ts    Per-tool event log to OBSERVABILITY/
+  ISASync.hook.ts                ISA → work.json sync [Write, Edit]
+  ToolActivityTracker.hook.ts    Per-tool event log to OBSERVABILITY/ [global]
 
 POST TOOL USE FAILURE (1 hook):
-  ToolFailureTracker.hook.ts     Error logging to OBSERVABILITY/
-
-STOP (3 hooks):
-  LastResponseCache.hook.ts      Cache response for PromptProcessing bridge
-  ResponseTabReset.hook.ts       Tab title/color reset after response
-  DocIntegrity.hook.ts           Cross-ref + arch summary regen
-
-STOP FAILURE (1 hook):
-  StopFailureHandler.hook.ts     Capture abnormal-stop diagnostics
-
-SUBAGENT START (0 hooks):
-  (empty — see PreToolUse:Agent → AgentInvocation.hook.ts)
-
-SUBAGENT STOP (0 hooks):
-  (empty — see PostToolUse:Agent → AgentInvocation.hook.ts)
+  ToolFailureTracker.hook.ts     Error logging to OBSERVABILITY/ [async]
 
 PERMISSION REQUEST (1 hook):
   SmartApprover.hook.ts          Auto-approve reversible local actions per policy
 
-TASK CREATED (1 hook):
-  TaskGovernance.hook.ts         Task-list ceiling + hygiene checks
-
-TEAMMATE IDLE (1 hook):
-  TeammateIdle.hook.ts           Idle-agent watchdog signal
-
-FILE CHANGED (1 hook):
-  FileChanged.hook.ts            Route external file-edit notifications
-
-INSTRUCTIONS LOADED (1 hook):
-  InstructionsLoadedHandler.hook.ts  Instructions-context bootstrap
-
-ELICITATION (1 hook):
-  ElicitationHandler.hook.ts     Claude-side elicitation response
-
-CONFIG CHANGE (1 hook):
-  ConfigAudit.hook.ts            Security audit trail to OBSERVABILITY/
-
 PRE COMPACT (1 hook):
   PreCompact.hook.ts             Capture work context before compaction
 
-POST COMPACT (1 hook):
-  RestoreContext.hook.ts         Rehydrate active ISA/state after compaction
+STOP (2 hooks):
+  LastResponseCache.hook.ts      Cache response for PromptProcessing bridge
+  DocIntegrity.hook.ts           Cross-ref + arch summary regen
 
-SESSION END (7 hooks):
+SUBAGENT STOP (0 hooks):
+  (none)
+
+SESSION END (6 hooks):
   WorkCompletionLearning.hook.ts Work/learning capture to MEMORY/
-  ULWorkSync.hook.ts             UL GitHub-Issues task sync
   SessionCleanup.hook.ts         Mark WORK dir complete, clear state, reset tab
   RelationshipMemory.hook.ts     Relationship context to MEMORY/RELATIONSHIP/
   UpdateCounts.hook.ts           Refresh system counts (skills, hooks, signals)

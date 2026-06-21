@@ -1,8 +1,8 @@
-Interview Extraction Workflow
+# Interview Extraction Workflow
 
 Extract standardized insights from interviews and notes into categorized output files.
 
-Trigger Phrases
+## Trigger Phrases
 
 - "extract content"
 - "extract telos content"
@@ -10,13 +10,13 @@ Trigger Phrases
 - "analyze interviews"
 - Running TELOS skill on a directory containing interviews
 
-Input Requirements
+## Input Requirements
 
-- Target Directory: A directory containing interview notes, transcripts, or meeting notes
-- Supported Formats: Markdown (.md), text (.txt), or similar text-based files
-- Structure: Files may be organized in subdirectories (e.g., per interview, per date, per person)
+- **Target Directory**: A directory containing interview notes, transcripts, or meeting notes
+- **Supported Formats**: Markdown (.md), text (.txt), or similar text-based files
+- **Structure**: Files may be organized in subdirectories (e.g., per interview, per date, per person)
 
-Extraction Categories (Total)
+## Extraction Categories (13 Total)
 
 | Category | Description | Output File |
 |----------|-------------|-------------|
@@ -34,154 +34,170 @@ Extraction Categories (Total)
 | Metrics | Quantitative measures, KPIs, numbers, statistics | `METRICS.md` |
 | Goals | Objectives, targets, desired outcomes | `GOALS.md` |
 
-Execution Workflow
+## Execution Workflow
 
-Phase : Discovery
+### Phase 1: Discovery
 
-. Scan Target Directory   - Recursively find all text-based files (`.md`, `.txt`, etc.)
+1. **Scan Target Directory**
+   - Recursively find all text-based files (`.md`, `.txt`, etc.)
    - Build inventory of files to process
    - Identify any naming patterns that indicate speaker/source
 
-. Report File Inventory   ```
+2. **Report File Inventory**
+   ```
    Found X interview files across Y directories:
    - [list files with paths]
    ```
 
-Phase : Deep Analysis (Ultrathink)
+### Phase 2: Deep Analysis (Ultrathink)
 
-MANDATORY: Activate Ultrathink (be-creative skill) for extraction quality
+**MANDATORY: Activate Ultrathink (be-creative skill) for extraction quality**
+
 For each file:
 
-. Read Complete Content   - Load full file contents
+1. **Read Complete Content**
+   - Load full file contents
    - Note filename and path for attribution
 
-. Identify Speakers/Sources   - Look for speaker indicators (names, roles, titles)
+2. **Identify Speakers/Sources**
+   - Look for speaker indicators (names, roles, titles)
    - Extract attribution metadata where possible
 
-. Extract to Categories   Apply deep reasoning to classify content into the categories:
+3. **Extract to Categories**
+   Apply deep reasoning to classify content into the 13 categories:
 
-   Differentiators— Look for:
+   **Differentiators** — Look for:
    - "What makes us different..."
    - "Unlike competitors..."
    - "Our unique approach..."
    - Competitive advantages mentioned
 
-   Findings— Look for:
+   **Findings** — Look for:
    - Discoveries and observations
    - "I noticed that..."
    - "We found that..."
    - General insights
 
-   Complaints— Look for:
+   **Complaints** — Look for:
    - Frustrations expressed
    - "The problem is..."
    - "I'm frustrated by..."
    - Pain points and annoyances
 
-   Gaps— Look for:
+   **Gaps** — Look for:
    - "We're missing..."
    - "We don't have..."
    - "There's no..."
    - Unmet needs
 
-   Critical Issues— Look for:
+   **Critical Issues** — Look for:
    - Urgent language ("must", "critical", "urgent")
    - Time-sensitive problems
    - High-impact blockers
    - Risk indicators
 
-   Blockers— Look for:
+   **Blockers** — Look for:
    - "We can't because..."
    - "What's stopping us..."
    - Constraints and limitations
    - Theory of Constraints friction
 
-   Ideas— Look for:
+   **Ideas** — Look for:
    - "What if we..."
    - "We could..."
    - Suggestions and proposals
    - Creative solutions
 
-   Recommendations— Look for:
+   **Recommendations** — Look for:
    - "You should..."
    - "I recommend..."
    - Explicit advice given
    - Action items suggested
 
-   Architecture— Look for:
+   **Architecture** — Look for:
    - System descriptions
    - How components connect
    - Organizational structure
    - Process flows
 
-   Vision— Look for:
+   **Vision** — Look for:
    - Future state descriptions
    - "We want to become..."
    - Aspirational statements
    - Long-term direction
 
-   Tech Stack— Look for:
+   **Tech Stack** — Look for:
    - Tool names
    - Platform mentions
    - Technology references
    - Software/hardware mentioned
 
-   Metrics— Look for:
+   **Metrics** — Look for:
    - Numbers and statistics
    - KPIs mentioned
    - Measurements and benchmarks
    - Quantitative data
 
-   Goals— Look for:
+   **Goals** — Look for:
    - Explicit objectives
    - Targets and milestones
    - "Our goal is..."
    - Desired outcomes
 
-Phase : Consolidation
+### Phase 3: Consolidation
 
-. Aggregate All Extractions   - Combine items from all files per category
+1. **Aggregate All Extractions**
+   - Combine items from all files per category
    - Preserve all attribution
 
-. Deduplicate and Merge   - Identify semantically similar items
+2. **Deduplicate and Merge**
+   - Identify semantically similar items
    - Consolidate duplicates while preserving all source attributions
    - Keep the most complete/clear version of duplicate items
 
-. Order by Significance   - Items mentioned multiple times ranked higher
+3. **Order by Significance**
+   - Items mentioned multiple times ranked higher
    - Items with stronger language ranked higher
    - Critical/urgent items prioritized
 
-Phase : Output Generation
+### Phase 4: Output Generation
 
-Generate output files at the top levelof the target directory.
+Generate 13 output files at the **top level** of the target directory.
 
-Output File Template:
+**Output File Template:**
+
 ```markdown
-[CATEGORY NAME]
+# [CATEGORY NAME]
 
-Extracted from interviews and notes. Each item includes source attribution.
+*Extracted from interviews and notes. Each item includes source attribution.*
+
 ---
 
-Items
+## Items
 
-- [Extracted item - preserve original phrasing where possible] — Source: [filename.md], [Speaker Name if known]
-- [Another extracted item] — Source: [filename.md]
-- [Item mentioned by multiple sources] — Sources: [file.md] (Speaker A), [file.md] (Speaker B)
+- [Extracted item - preserve original phrasing where possible] — *Source: [filename.md], [Speaker Name if known]*
+
+- [Another extracted item] — *Source: [filename.md]*
+
+- [Item mentioned by multiple sources] — *Sources: [file1.md] (Speaker A), [file2.md] (Speaker B)*
+
 ---
 
-Generated: [timestamp]Files processed: [count]```
+*Generated: [timestamp]*
+*Files processed: [count]*
+```
 
-Phase : Summary Report
+### Phase 5: Summary Report
 
 After generating all files, output a summary:
 
 ```markdown
-Extraction Complete
+## Extraction Complete
 
-Files Processed:X
-Output Location:[target directory]
+**Files Processed:** X
+**Output Location:** [target directory]
 
-Category Counts
+### Category Counts
 | Category | Items Extracted |
 |----------|-----------------|
 | Differentiators | X |
@@ -198,52 +214,56 @@ Category Counts
 | Metrics | X |
 | Goals | X |
 
-Notable Patterns
+### Notable Patterns
 - [Any cross-cutting themes observed]
 - [Frequently mentioned items]
 - [High-priority items requiring attention]
 ```
 
-Quality Requirements
+## Quality Requirements
 
-. Attribution is Mandatory   - Every extracted item MUST have source file attribution
+1. **Attribution is Mandatory**
+   - Every extracted item MUST have source file attribution
    - Include speaker name when identifiable
    - For duplicates, list ALL sources
 
-. Preserve Original Voice   - Keep original phrasing where meaningful
+2. **Preserve Original Voice**
+   - Keep original phrasing where meaningful
    - Don't over-summarize or lose nuance
    - Maintain context where critical
 
-. No Sensitive Data in Workflow   - This workflow file contains NO customer data
+3. **No Sensitive Data in Workflow**
+   - This workflow file contains NO customer data
    - All extraction happens at runtime
    - Output files contain extracted content only
 
-. Completeness   - Process ALL files in directory tree
+4. **Completeness**
+   - Process ALL files in directory tree
    - Don't skip files or truncate content
    - Capture edge cases and subtle mentions
 
-Example Usage
+## Example Usage
 
 ```
 User: "Extract content from /path/to/interviews"
 
 {DA_IDENTITY.NAME}:
-. Scans directory, finds interview files
-. Activates Ultrathink for deep analysis
-. Processes each file, extracting to categories
-. Consolidates and deduplicates
-. Generates output files at /path/to/interviews/
-. Reports summary with counts and patterns
+1. Scans directory, finds 15 interview files
+2. Activates Ultrathink for deep analysis
+3. Processes each file, extracting to 13 categories
+4. Consolidates and deduplicates
+5. Generates 13 output files at /path/to/interviews/
+6. Reports summary with counts and patterns
 ```
 
-Error Handling
+## Error Handling
 
-- Empty Directory: Report "No interview files found" and exit
-- Unreadable Files: Skip with warning, continue processing others
-- No Extractions for Category: Create file with "No items extracted for this category"
-- Large Files: Process in chunks if needed, maintain context
+- **Empty Directory**: Report "No interview files found" and exit
+- **Unreadable Files**: Skip with warning, continue processing others
+- **No Extractions for Category**: Create file with "No items extracted for this category"
+- **Large Files**: Process in chunks if needed, maintain context
 
-Integration with TELOS
+## Integration with TELOS
 
 This workflow is a component of the TELOS skill and can be:
 - Invoked directly via trigger phrases
@@ -251,7 +271,7 @@ This workflow is a component of the TELOS skill and can be:
 - Combined with other TELOS workflows for comprehensive assessment
 
 The extracted categories align with TELOS methodology for organizational analysis, particularly:
-- Blockers→ Theory of Constraints analysis
-- Vision + Goals→ Strategic direction
-- Architecture→ System understanding
-- Metrics→ Measurement framework
+- **Blockers** → Theory of Constraints analysis
+- **Vision + Goals** → Strategic direction
+- **Architecture** → System understanding
+- **Metrics** → Measurement framework

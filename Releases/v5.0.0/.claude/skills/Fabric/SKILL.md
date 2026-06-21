@@ -1,35 +1,56 @@
 ---
 name: Fabric
-description: "Execute any of + specialized prompt patterns natively (no CLI required for most) across categories: Extraction (+), Summarization (+), Analysis (+), Creation (+), Improvement (+), Security (), Rating (). Common patterns: extract_wisdom, summarize, create__sentence_summary, create_threat_model, create_stride_threat_model, analyze_claims, improve_writing, review_code, extract_main_idea, analyze_malware, create_sigma_rules, create_mermaid_visualization, youtube_summary, judge_output, rate_ai_response. Native execution reads Patterns/{name}/system.md and applies directly. Fabric CLI used only for YouTube transcript extraction (-y URL) and fallback URL fetching (-u URL). Patterns auto-synced from upstream Fabric repo via UpdatePatterns workflow. Workflows: ExecutePattern, UpdatePatterns. USE WHEN fabric, fabric pattern, run fabric, sync fabric, update patterns, use extract_wisdom, threat model, summarize, analyze claims, improve writing, review code, create prd, rate content, create diagram, mermaid diagram, STRIDE, sigma rules, analyze malware. NOT FOR comprehensive multi-agent investigation (use Research), content-adaptive dynamic extraction (use ExtractWisdom), or security threat intelligence aggregation (use AnnualReports)."
+description: "Execute any of 240+ specialized prompt patterns natively (no CLI required for most) across categories: Extraction (30+), Summarization (20+), Analysis (35+), Creation (50+), Improvement (10+), Security (15), Rating (8). Common patterns: extract_wisdom, summarize, create_5_sentence_summary, create_threat_model, create_stride_threat_model, analyze_claims, improve_writing, review_code, extract_main_idea, analyze_malware, create_sigma_rules, create_mermaid_visualization, youtube_summary, judge_output, rate_ai_response. Native execution reads Patterns/{name}/system.md and applies directly. Fabric CLI used only for YouTube transcript extraction (-y URL) and fallback URL fetching (-u URL). Patterns auto-synced from upstream Fabric repo via UpdatePatterns workflow. Workflows: ExecutePattern, UpdatePatterns. USE WHEN fabric, fabric pattern, run fabric, sync fabric, update patterns, use extract_wisdom, threat model, summarize, analyze claims, improve writing, review code, create prd, rate content, create diagram, mermaid diagram, STRIDE, sigma rules, analyze malware. NOT FOR comprehensive multi-agent investigation (use Research), content-adaptive dynamic extraction (use ExtractWisdom), or security threat intelligence aggregation (use AnnualReports)."
 effort: medium
 ---
 
-Customization
+## Customization
 
-Before executing, check for user customizations at:`~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/Fabric/`
+**Before executing, check for user customizations at:**
+`~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/Fabric/`
 
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
-Fabric
+## Voice Notification
 
-Intelligent prompt pattern system providing + specialized patterns for content analysis, extraction, summarization, threat modeling, and transformation.
+**When executing a workflow, do BOTH:**
 
-Patterns Location:`Patterns/`
+1. **Send voice notification**:
+   ```bash
+   curl -s -X POST http://localhost:31337/notify \
+     -H "Content-Type: application/json" \
+     -d '{"message": "Running the WORKFLOWNAME workflow in the Fabric skill to ACTION"}' \
+     > /dev/null 2>&1 &
+   ```
+
+2. **Output text notification**:
+   ```
+   Running the **WorkflowName** workflow in the **Fabric** skill to ACTION...
+   ```
+
+**Full documentation:** `~/.claude/PAI/DOCUMENTATION/Notifications/NotificationSystem.md`
+
+# Fabric
+
+Intelligent prompt pattern system providing 240+ specialized patterns for content analysis, extraction, summarization, threat modeling, and transformation.
+
+**Patterns Location:** `Patterns/`
 
 ---
 
-Workflow Routing
+## Workflow Routing
 
 | Workflow | Trigger | File |
 |----------|---------|------|
-| ExecutePattern| "use fabric", "run pattern", "apply pattern", "extract wisdom", "summarize", "analyze with fabric" | `Workflows/ExecutePattern.md` |
-| UpdatePatterns| "update fabric", "update patterns", "sync fabric", "pull patterns" | `Workflows/UpdatePatterns.md` |
+| **ExecutePattern** | "use fabric", "run pattern", "apply pattern", "extract wisdom", "summarize", "analyze with fabric" | `Workflows/ExecutePattern.md` |
+| **UpdatePatterns** | "update fabric", "update patterns", "sync fabric", "pull patterns" | `Workflows/UpdatePatterns.md` |
 
 ---
 
-Examples
+## Examples
 
-Example : Extract wisdom from content```
+**Example 1: Extract wisdom from content**
+```
 User: "Use fabric to extract wisdom from this article"
 -> Invokes ExecutePattern workflow
 -> Selects extract_wisdom pattern
@@ -38,7 +59,8 @@ User: "Use fabric to extract wisdom from this article"
 -> Returns structured IDEAS, INSIGHTS, QUOTES, etc.
 ```
 
-Example : Update patterns```
+**Example 2: Update patterns**
+```
 User: "Update fabric patterns"
 -> Invokes UpdatePatterns workflow
 -> Runs git pull from upstream fabric repository
@@ -46,7 +68,8 @@ User: "Update fabric patterns"
 -> Reports pattern count
 ```
 
-Example : Create threat model```
+**Example 3: Create threat model**
+```
 User: "Use fabric to create a threat model for this API"
 -> Invokes ExecutePattern workflow
 -> Selects create_threat_model pattern
@@ -56,56 +79,58 @@ User: "Use fabric to create a threat model for this API"
 
 ---
 
-Quick Reference
+## Quick Reference
 
-Pattern Execution (Native - No CLI Required)
+### Pattern Execution (Native - No CLI Required)
 
 Instead of calling `fabric -p pattern_name`, PAI executes patterns natively:
-. Reads `Patterns/{pattern_name}/system.md`
-. Applies pattern instructions directly as prompt
-. Returns results without external CLI calls
+1. Reads `Patterns/{pattern_name}/system.md`
+2. Applies pattern instructions directly as prompt
+3. Returns results without external CLI calls
 
-When to Use Fabric CLI Directly
+### When to Use Fabric CLI Directly
 
 Only use `fabric` command for:
-- `-y URL`- YouTube transcript extraction
-- `-u URL`- URL content fetching (when native fetch fails)
+- **`-y URL`** - YouTube transcript extraction
+- **`-u URL`** - URL content fetching (when native fetch fails)
 
-Most Common Patterns
+### Most Common Patterns
 
 | Intent | Pattern | Description |
 |--------|---------|-------------|
 | Extract insights | `extract_wisdom` | IDEAS, INSIGHTS, QUOTES, HABITS |
 | Summarize | `summarize` | General summary |
-| -sentence summary | `create__sentence_summary` | Ultra-concise |
+| 5-sentence summary | `create_5_sentence_summary` | Ultra-concise |
 | Threat model | `create_threat_model` | Security threat analysis |
 | Analyze claims | `analyze_claims` | Fact-check claims |
 | Improve writing | `improve_writing` | Writing enhancement |
 | Code review | `review_code` | Code analysis |
 | Main idea | `extract_main_idea` | Core message extraction |
 
-Full Pattern Catalog
+### Full Pattern Catalog
 
-Browse the `Patterns/` directory for the complete list of + patterns organized by category.
+Browse the `Patterns/` directory for the complete list of 240+ patterns organized by category.
 
 ---
 
-Native Pattern Execution
+## Native Pattern Execution
 
-How it works:
+**How it works:**
+
 ```
 User Request → Pattern Selection → Read system.md → Apply → Return Results
 ```
 
-Pattern Structure:```
+**Pattern Structure:**
+```
 Patterns/
- extract_wisdom/
-    system.md       The prompt instructions
- summarize/
-    system.md
- create_threat_model/
-    system.md
- ...+ patterns
+├── extract_wisdom/
+│   └── system.md       # The prompt instructions
+├── summarize/
+│   └── system.md
+├── create_threat_model/
+│   └── system.md
+└── ...240+ patterns
 ```
 
 Each pattern's `system.md` contains the full prompt that defines:
@@ -116,62 +141,63 @@ Each pattern's `system.md` contains the full prompt that defines:
 
 ---
 
-Pattern Categories
+## Pattern Categories
 
 | Category | Count | Examples |
 |----------|-------|----------|
-| Extraction| + | extract_wisdom, extract_insights, extract_main_idea |
-| Summarization| + | summarize, create__sentence_summary, youtube_summary |
-| Analysis| + | analyze_claims, analyze_code, analyze_threat_report |
-| Creation| + | create_threat_model, create_prd, create_mermaid_visualization |
-| Improvement| + | improve_writing, improve_prompt, review_code |
-| Security| | create_stride_threat_model, create_sigma_rules, analyze_malware |
-| Rating| | rate_content, judge_output, rate_ai_response |
+| **Extraction** | 30+ | extract_wisdom, extract_insights, extract_main_idea |
+| **Summarization** | 20+ | summarize, create_5_sentence_summary, youtube_summary |
+| **Analysis** | 35+ | analyze_claims, analyze_code, analyze_threat_report |
+| **Creation** | 50+ | create_threat_model, create_prd, create_mermaid_visualization |
+| **Improvement** | 10+ | improve_writing, improve_prompt, review_code |
+| **Security** | 15 | create_stride_threat_model, create_sigma_rules, analyze_malware |
+| **Rating** | 8 | rate_content, judge_output, rate_ai_response |
 
 ---
 
-Integration
+## Integration
 
-Feeds Into
-- Research- Fabric patterns enhance research analysis
-- Blogging- Content summarization and improvement
-- Security- Threat modeling and analysis
+### Feeds Into
+- **Research** - Fabric patterns enhance research analysis
+- **Blogging** - Content summarization and improvement
+- **Security** - Threat modeling and analysis
 
-Uses
-- fabric CLI- For YouTube transcripts (`-y`) and URL fetching (`-u`)
-- Native execution- Direct pattern application (preferred)
+### Uses
+- **fabric CLI** - For YouTube transcripts (`-y`) and URL fetching (`-u`)
+- **Native execution** - Direct pattern application (preferred)
 
 ---
 
-File Organization
+## File Organization
 
 | Path | Purpose |
 |------|---------|
-| `Patterns/` | Local pattern storage (+) |
+| `Patterns/` | Local pattern storage (240+) |
 | `Workflows/` | Execution workflows |
 
 ---
 
-Changelog
+## Changelog
 
---- Initial skill creation (extracted from PAI/TOOLS/fabric)
+### 2026-01-18
+- Initial skill creation (extracted from PAI/TOOLS/fabric)
 - Native pattern execution (no CLI dependency for most patterns)
 - Two workflows: ExecutePattern, UpdatePatterns
-- + patterns organized by category
+- 240+ patterns organized by category
 - PAI Pack ready structure
 
-Gotchas
+## Gotchas
 
-- `fabric -y URL` for YouTube extraction — don't scrape YouTube pages.fabric handles transcript extraction natively.
-- Pattern names are exact.`extract_wisdom` not `extractwisdom`. Check `fabric --list` if unsure.
-- Long content may exceed pattern context limits.For very long inputs, chunk the content or use a summarize pattern first.
+- **`fabric -y URL` for YouTube extraction — don't scrape YouTube pages.** fabric handles transcript extraction natively.
+- **Pattern names are exact.** `extract_wisdom` not `extractwisdom`. Check `fabric --list` if unsure.
+- **Long content may exceed pattern context limits.** For very long inputs, chunk the content or use a summarize pattern first.
 
-Execution Log
+## Execution Log
 
 After completing any workflow, append a single JSONL entry:
 
 ```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Fabric","workflow":"WORKFLOW_USED","input":"_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.claude/PAI/MEMORY/SKILLS/execution.jsonl
+echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Fabric","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.claude/PAI/MEMORY/SKILLS/execution.jsonl
 ```
 
-Replace `WORKFLOW_USED` with the workflow executed, `_WORD_SUMMARY` with a brief input description, and `SECONDS` with approximate wall-clock time. Log `status: "error"` if the workflow failed.
+Replace `WORKFLOW_USED` with the workflow executed, `8_WORD_SUMMARY` with a brief input description, and `SECONDS` with approximate wall-clock time. Log `status: "error"` if the workflow failed.

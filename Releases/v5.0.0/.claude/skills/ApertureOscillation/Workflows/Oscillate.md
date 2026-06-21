@@ -1,45 +1,45 @@
-Oscillate Workflow — Aperture Oscillation
+# Oscillate Workflow — Aperture Oscillation
 
-Purpose
+## Purpose
 
-Run structured passes over the same question at different scope levels — narrow tactical, wide strategic, and divergence synthesis — to surface design tensions invisible at any single scope.
+Run 3 structured passes over the same question at different scope levels — narrow tactical, wide strategic, and divergence synthesis — to surface design tensions invisible at any single scope.
 
-Invocation
+## Invocation
 
 This workflow is invoked:
-. Directlyby the user: "use aperture oscillation on this", "oscillate scope on this"
-. By the Algorithmduring OBSERVE or THINK when ApertureOscillation capability is selected
-. By other skillsthat need scope-coherence analysis before committing to an approach
+1. **Directly** by the user: "use aperture oscillation on this", "oscillate scope on this"
+2. **By the Algorithm** during OBSERVE or THINK when ApertureOscillation capability is selected
+3. **By other skills** that need scope-coherence analysis before committing to an approach
 
-Inputs
+## Inputs
 
-- Tactical Target:The specific thing being built, designed, or decided. The narrow, concrete question.
-- Strategic Context:The bigger-picture goal, system vision, or purpose the tactical target serves.
-- Current State (optional):Any existing ISC criteria, approach decisions, or constraints already established.
+- **Tactical Target:** The specific thing being built, designed, or decided. The narrow, concrete question.
+- **Strategic Context:** The bigger-picture goal, system vision, or purpose the tactical target serves.
+- **Current State (optional):** Any existing ISC criteria, approach decisions, or constraints already established.
 
 If invoked without explicit inputs, extract them from the conversation:
 - Tactical = the specific ask or task being worked on
 - Strategic = the broader goal, system, or vision mentioned in context (CLAUDE.md, TELOS, project context)
 
-Execution
+## Execution
 
-Step : Frame the Inputs
+### Step 1: Frame the Inputs
 
 Clearly state both inputs before beginning passes:
 
 ```
 APERTURE OSCILLATION
- Tactical Target: [the specific thing — -sentences]
- Strategic Context: [the bigger picture — -sentences]
+ Tactical Target: [the specific thing — 1-2 sentences]
+ Strategic Context: [the bigger picture — 1-2 sentences]
 ```
 
 If the tactical target and strategic context are essentially the same thing (no meaningful scope difference), abort and recommend IterativeDepth instead.
 
-Step : Pass — Narrow Aperture (Tactical-First)
+### Step 2: Pass 1 — Narrow Aperture (Tactical-First)
 
 Frame the tactical target as the primary question. The strategic context is mentioned briefly as background but does not drive the analysis.
 
-Prompt framing:"We need to build [tactical target]. For context, this lives inside [strategic context]. What should [tactical target] look like?"
+**Prompt framing:** "We need to build [tactical target]. For context, this lives inside [strategic context]. What should [tactical target] look like?"
 
 Focus on:
 - What the component's own logic demands
@@ -48,29 +48,29 @@ Focus on:
 - What a good implementation looks like in isolation
 
 ```
-
- PASS /— NARROW APERTURE (Tactical)   
-                                              
- Framing: "[tactical target] is primary.      
- [strategic context] is background."          
-                                              
- Component Logic:                             
- - [What this thing naturally wants to be]    
- - [Local patterns and conventions]           
- - [Natural interfaces and boundaries]        
-                                              
- Tactical Findings:                           
- - [Finding ]                                
- - [Finding ]                                
- - [Finding ]                                
-
+┌─────────────────────────────────────────────┐
+│ PASS 1/3 — NARROW APERTURE (Tactical)   │
+│                                              │
+│ Framing: "[tactical target] is primary.      │
+│ [strategic context] is background."          │
+│                                              │
+│ Component Logic:                             │
+│ - [What this thing naturally wants to be]    │
+│ - [Local patterns and conventions]           │
+│ - [Natural interfaces and boundaries]        │
+│                                              │
+│ Tactical Findings:                           │
+│ - [Finding 1]                                │
+│ - [Finding 2]                                │
+│ - [Finding 3]                                │
+└─────────────────────────────────────────────┘
 ```
 
-Step : Pass — Wide Aperture (Strategic-First)
+### Step 3: Pass 2 — Wide Aperture (Strategic-First)
 
 Invert the framing. The strategic context is now primary. The tactical target is derived from it.
 
-Prompt framing:"We're trying to accomplish [strategic context]. Given that, how should [tactical target] be implemented?"
+**Prompt framing:** "We're trying to accomplish [strategic context]. Given that, how should [tactical target] be implemented?"
 
 Focus on:
 - What the system needs from this component
@@ -79,29 +79,29 @@ Focus on:
 - What gets prioritized differently when the system vision leads
 
 ```
-
- PASS /— WIDE APERTURE (Strategic)    
-                                              
- Framing: "[strategic context] is primary.    
- [tactical target] is derived."              
-                                              
- System Requirements:                         
- - [What the system needs from this piece]    
- - [Coherence constraints]                    
- - [Alignment demands]                        
-                                              
- Strategic Findings:                          
- - [Finding ]                                
- - [Finding ]                                
- - [Finding ]                                
-
+┌─────────────────────────────────────────────┐
+│ PASS 2/3 — WIDE APERTURE (Strategic)    │
+│                                              │
+│ Framing: "[strategic context] is primary.    │
+│ [tactical target] is derived."              │
+│                                              │
+│ System Requirements:                         │
+│ - [What the system needs from this piece]    │
+│ - [Coherence constraints]                    │
+│ - [Alignment demands]                        │
+│                                              │
+│ Strategic Findings:                          │
+│ - [Finding 1]                                │
+│ - [Finding 2]                                │
+│ - [Finding 3]                                │
+└─────────────────────────────────────────────┘
 ```
 
-Step : Pass — Oscillation (Synthesis)
+### Step 4: Pass 3 — Oscillation (Synthesis)
 
 Feed the outputs of both passes. Explicitly compare them. Ask: where do the tactical and strategic views diverge? What did each frame reveal that the other missed? What tensions exist?
 
-Prompt framing:"Pass said [tactical findings]. Pass said [strategic findings]. Where do these views diverge? What does each miss? What tensions exist between local logic and system coherence?"
+**Prompt framing:** "Pass 1 said [tactical findings]. Pass 2 said [strategic findings]. Where do these views diverge? What does each miss? What tensions exist between local logic and system coherence?"
 
 Focus on:
 - Points of divergence between the two framings
@@ -110,27 +110,27 @@ Focus on:
 - Recommended resolution for each tension
 
 ```
-
- PASS /— OSCILLATION (Synthesis)       
-                                              
- Divergences Found:                           
- - [Where tactical and strategic disagree]    
- - [What narrow aperture missed]              
- - [What wide aperture missed]                
-                                              
- Design Tensions:                             
- [Tension : description + resolution]     
- [Tension : description + resolution]     
-                                              
- Alignment Status:                            
- [ALIGNED | DIVERGENT — summary]              
-
+┌─────────────────────────────────────────────┐
+│ PASS 3/3 — OSCILLATION (Synthesis)       │
+│                                              │
+│ Divergences Found:                           │
+│ - [Where tactical and strategic disagree]    │
+│ - [What narrow aperture missed]              │
+│ - [What wide aperture missed]                │
+│                                              │
+│ Design Tensions:                             │
+│ [Tension 1: description + resolution]     │
+│ [Tension 2: description + resolution]     │
+│                                              │
+│ Alignment Status:                            │
+│ [ALIGNED | DIVERGENT — summary]              │
+└─────────────────────────────────────────────┘
 ```
 
-Step : Output
+### Step 5: Output
 
 ```
-APERTURE OSCILLATION COMPLETE (passes)
+APERTURE OSCILLATION COMPLETE (3 passes)
 
 Results:
 - Tactical findings: {count}
@@ -148,41 +148,43 @@ ISC IMPLICATIONS:
 Key Insight: [The most important thing that single-scope analysis would have missed]
 ```
 
-Integration with Algorithm Phases
+## Integration with Algorithm Phases
 
 When the Algorithm selects ApertureOscillation, it runs at one of two integration points:
 
-During OBSERVE (before ISC):```
+**During OBSERVE (before ISC):**
+```
 OBSERVE Phase:
-. Reverse Engineering (standard)
-. Capability Audit
-. >>> APERTURE OSCILLATION (if selected) <<<
+1. Reverse Engineering (standard)
+2. Capability Audit
+3. >>> APERTURE OSCILLATION (if selected) <<<
    - Takes tactical target from the user's request
    - Takes strategic context from project/TELOS/conversation context
    - Surfaces design tensions before ISC criteria are written
-. ISC CREATION (now informed by scope oscillation)
+4. ISC CREATION (now informed by scope oscillation)
 ```
 
-During THINK (before approach commitment):```
+**During THINK (before approach commitment):**
+```
 THINK Phase:
-. Riskiest Assumptions
-. >>> APERTURE OSCILLATION (if selected) <<<
+1. Riskiest Assumptions
+2. >>> APERTURE OSCILLATION (if selected) <<<
    - Takes proposed approach as tactical target
    - Takes broader system/project goals as strategic context
    - Validates that the approach serves both local and system needs
-. Approach commitment
+3. Approach commitment
 ```
 
-Combining with IterativeDepth
+## Combining with IterativeDepth
 
 ApertureOscillation and IterativeDepth are complementary, not competing:
 
-- IterativeDepth first— understand the problem from multiple analytical angles
-- ApertureOscillation second— validate that the proposed solution serves both local and system needs
+- **IterativeDepth first** — understand the problem from multiple analytical angles
+- **ApertureOscillation second** — validate that the proposed solution serves both local and system needs
 
-At Deep (E) or Comprehensive (E) effort, using both in sequence produces the richest requirement set: IterativeDepth discovers the full problem space, ApertureOscillation ensures the solution fits the system.
+At Deep (E4) or Comprehensive (E5) effort, using both in sequence produces the richest requirement set: IterativeDepth discovers the full problem space, ApertureOscillation ensures the solution fits the system.
 
-Agent Mode (for Algorithm delegation)
+## Agent Mode (for Algorithm delegation)
 
 When spawning an agent to run ApertureOscillation:
 
@@ -194,11 +196,11 @@ and system-level coherence.
 TACTICAL TARGET: {specific thing being built}
 STRATEGIC CONTEXT: {bigger-picture goal or system vision}
 
-TASK: Run passes:
-. NARROW — frame the tactical target as primary, strategic as background
-. WIDE — frame the strategic context as primary, tactical as derived  
-. SYNTHESIS — compare the two framings, identify divergences and tensions
+TASK: Run 3 passes:
+1. NARROW — frame the tactical target as primary, strategic as background
+2. WIDE — frame the strategic context as primary, tactical as derived  
+3. SYNTHESIS — compare the two framings, identify divergences and tensions
 
 OUTPUT: Design tensions found, alignment status, ISC implications.
-SLA: Complete within seconds.
+SLA: Complete within 45 seconds.
 ```

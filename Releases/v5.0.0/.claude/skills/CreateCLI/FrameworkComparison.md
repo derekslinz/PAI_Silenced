@@ -1,118 +1,119 @@
-CLI Framework Comparison
+# CLI Framework Comparison
 
-Comprehensive analysis of TypeScript CLI frameworks for informed tier selection
+**Comprehensive analysis of TypeScript CLI frameworks for informed tier selection**
+
 ---
 
-Quick Recommendation Matrix
+## Quick Recommendation Matrix
 
 | Use Case | Framework | Why |
 |----------|-----------|-----|
-| API Client(-commands) | Manual Parsing (Tier ) | Zero deps, lines, production-ready |
-| File Processor(simple args) | Manual Parsing (Tier ) | Fast development, type-safe, composable |
-| Multi-Tool(+ commands) | Commander.js (Tier ) | Subcommands, auto-help, proven |
-| Plugin System(extensible) | oclif (Tier ) | Enterprise-grade, reference only |
+| **API Client** (2-10 commands) | Manual Parsing (Tier 1) | Zero deps, 300 lines, production-ready |
+| **File Processor** (simple args) | Manual Parsing (Tier 1) | Fast development, type-safe, composable |
+| **Multi-Tool** (10+ commands) | Commander.js (Tier 2) | Subcommands, auto-help, proven |
+| **Plugin System** (extensible) | oclif (Tier 3) | Enterprise-grade, reference only |
 
-Rule:Default to Manual → escalate to Commander → reference oclif only
+**Rule:** Default to Manual → escalate to Commander → reference oclif only
 
 ---
 
-Framework Comparison Table
+## Framework Comparison Table
 
 | Framework | Stars | Bundle Size | TypeScript | Best For | Tier |
 |-----------|-------|-------------|------------|----------|----------|
-| Manual Parsing| N/A | KB | Native | Simple CLIs (llcli) | Tier DEFAULT |
-| Commander.js| K+ | ~KB | Built-in | General CLIs | Tier |
-| oclif| K+ | + MB | First-class | Enterprise plugins | Tier (ref only) |
-| cleye| N/A | Small | Schema inference | Modern TS CLIs | Alternative |
-| citty| N/A | Moderate | Discriminated unions | Complex type safety | Alternative |
-| Yargs| K+ | Larger | @types | Config-heavy | Not recommended |
+| **Manual Parsing** | N/A | 0 KB | Native | Simple CLIs (llcli) | Tier 1 ★ DEFAULT |
+| **Commander.js** | 25K+ | ~100 KB | Built-in | General CLIs | Tier 2 |
+| **oclif** | 12K+ | 22+ MB | First-class | Enterprise plugins | Tier 3 (ref only) |
+| **cleye** | N/A | Small | Schema inference | Modern TS CLIs | Alternative |
+| **citty** | N/A | Moderate | Discriminated unions | Complex type safety | Alternative |
+| **Yargs** | 30K+ | Larger | @types | Config-heavy | Not recommended |
 
 ---
 
-⃣ TIER : Manual Parsing (llcli Pattern)
+## 1⃣ TIER 1: Manual Parsing (llcli Pattern)
 
-Pattern
+### Pattern
 
 ```typescript
-!/usr/bin/env bun
+#!/usr/bin/env bun
 
 async function main() {
-  const args = process.argv.slice();
+  const args = process.argv.slice(2);
 
-  if (args.length === || args[] === '--help') {
+  if (args.length === 0 || args[0] === '--help') {
     showHelp();
     return;
   }
 
-  const command = args[];
+  const command = args[0];
 
   switch (command) {
     case 'today':
       await fetchToday();
       break;
     case 'date':
-      if (!args[]) {
+      if (!args[1]) {
         console.error('Error: date requires YYYY-MM-DD argument');
-        process.exit();
+        process.exit(1);
       }
-      await fetchDate(args[]);
+      await fetchDate(args[1]);
       break;
     case 'search':
-      const keyword = args[];
+      const keyword = args[1];
       const limitIdx = args.indexOf('--limit');
-      const limit = limitIdx !== -? parseInt(args[limitIdx + ]) : ;
+      const limit = limitIdx !== -1 ? parseInt(args[limitIdx + 1]) : 20;
       await fetchSearch(keyword, limit);
       break;
     default:
       console.error(`Unknown command: ${command}`);
-      process.exit();
+      process.exit(1);
   }
 }
 
 main().catch(error => {
   console.error('Fatal:', error);
-  process.exit();
+  process.exit(1);
 });
 ```
 
-Pros
-- Zero dependencies (no node_modules bloat)
-- Complete control over parsing logic
-- Type-safe with TypeScript interfaces
-- -lines total (easy to understand)
-- Fast development (no framework learning curve)
-- Proven pattern (llcli is production-ready)
-- Perfect for Bun runtime
-- Deterministic behavior
+### Pros
+- ✓ Zero dependencies (no node_modules bloat)
+- ✓ Complete control over parsing logic
+- ✓ Type-safe with TypeScript interfaces
+- ✓ 300-400 lines total (easy to understand)
+- ✓ Fast development (no framework learning curve)
+- ✓ Proven pattern (llcli is production-ready)
+- ✓ Perfect for Bun runtime
+- ✓ Deterministic behavior
 
-Cons
-- Manual help text (but this ensures quality)
-- Manual argument parsing (but simple)
-- No built-in subcommand routing (use Tier if needed)
-- Repetitive for + commands (escalate at that point)
+### Cons
+- ✗ Manual help text (but this ensures quality)
+- ✗ Manual argument parsing (but simple)
+- ✗ No built-in subcommand routing (use Tier 2 if needed)
+- ✗ Repetitive for 20+ commands (escalate at that point)
 
-When to Use (DEFAULT)
-- -commands
-- API client wrappers
-- Data transformers
-- File processors
-- Simple automation tools
-- JSON output only
-- Fast development priority
+### When to Use (DEFAULT)
+- ✓ 2-10 commands
+- ✓ API client wrappers
+- ✓ Data transformers
+- ✓ File processors
+- ✓ Simple automation tools
+- ✓ JSON output only
+- ✓ Fast development priority
 
-Reference Implementation
-Location:`~/.claude/Bin/llcli/llcli.ts` (lines)
-Commands:today, date, search
-Pattern:Exactly what this tier generates
+### Reference Implementation
+**Location:** `~/.claude/Bin/llcli/llcli.ts` (327 lines)
+**Commands:** today, date, search
+**Pattern:** Exactly what this tier generates
 
 ---
 
-⃣ TIER : Commander.js
+## 2⃣ TIER 2: Commander.js
 
-Pattern
+### Pattern
 
 ```typescript
-!/usr/bin/env bun
+#!/usr/bin/env bun
 
 import { Command } from 'commander';
 
@@ -121,7 +122,7 @@ const program = new Command();
 program
   .name('mycli')
   .description('Production CLI tool')
-  .version('..');
+  .version('1.0.0');
 
 program
   .command('convert <format> <input>')
@@ -145,48 +146,48 @@ program
 program.parse();
 ```
 
-Pros
-- Auto-generated help (from command definitions)
-- Subcommand routing built-in
-- Fluent API (readable, chainable)
-- TypeScript definitions included
-- Large community (K+ stars)
-- Well-documented
-- Option parsing automatic
-- Lightweight (~KB, zero sub-dependencies)
+### Pros
+- ✓ Auto-generated help (from command definitions)
+- ✓ Subcommand routing built-in
+- ✓ Fluent API (readable, chainable)
+- ✓ TypeScript definitions included
+- ✓ Large community (25K+ stars)
+- ✓ Well-documented
+- ✓ Option parsing automatic
+- ✓ Lightweight (~100 KB, zero sub-dependencies)
 
-Cons
-- Framework dependency (not zero-dep like Tier )
-- Learning curve (need to understand API)
-- Opinionated structure
-- Overkill for simple CLIs (use Tier instead)
-- Bun may prefer zero-dep approach
+### Cons
+- ✗ Framework dependency (not zero-dep like Tier 1)
+- ✗ Learning curve (need to understand API)
+- ✗ Opinionated structure
+- ✗ Overkill for simple CLIs (use Tier 1 instead)
+- ✗ Bun may prefer zero-dep approach
 
-When to Use (ESCALATION)
-- + commands needing organization
-- Subcommands (e.g., `cli convert json csv` vs `cli convert csv json`)
-- Plugin architecture needed
-- Complex option combinations
-- Multiple output format engines
-- Git-style command groups
+### When to Use (ESCALATION)
+- ✗ 10+ commands needing organization
+- ✗ Subcommands (e.g., `cli convert json csv` vs `cli convert csv json`)
+- ✗ Plugin architecture needed
+- ✗ Complex option combinations
+- ✗ Multiple output format engines
+- ✗ Git-style command groups
 
-Example Use Case
+### Example Use Case
 ```bash
-Data transformation CLI with subcommands
+# Data transformation CLI with subcommands
 data-cli convert json csv input.json --output data.csv
 data-cli convert csv json input.csv
 data-cli validate schema data.json --strict
 data-cli analyze stats data.csv
-data-cli analyze trends data.csv --window d
+data-cli analyze trends data.csv --window 7d
 ```
 
-Pattern:Commands naturally group into categories (convert, validate, analyze)
+**Pattern:** Commands naturally group into categories (convert, validate, analyze)
 
 ---
 
-⃣ TIER : oclif (Reference Only)
+## 3⃣ TIER 3: oclif (Reference Only)
 
-Pattern
+### Pattern
 
 ```typescript
 import { Command, Flags, Args } from '@oclif/core';
@@ -218,37 +219,38 @@ export default class Hello extends Command {
 }
 ```
 
-Pros
-- Enterprise-grade plugin system
-- Code generation (`oclif generate command`)
-- Topics for hierarchical commands
-- Auto-updates mechanism
-- Multi-command CLIs (Heroku, Salesforce scale)
-- Class-based commands (OOP style)
-- ES modules + CommonJS compatible
+### Pros
+- ✓ Enterprise-grade plugin system
+- ✓ Code generation (`oclif generate command`)
+- ✓ Topics for hierarchical commands
+- ✓ Auto-updates mechanism
+- ✓ Multi-command CLIs (Heroku, Salesforce scale)
+- ✓ Class-based commands (OOP style)
+- ✓ ES modules + CommonJS compatible
 
-Cons
-- Heavy bundle size (+ MB)
-- Steep learning curve
-- Complex setup
-- Overkill for % of CLIs
-- Not aligned with PAI's minimal approach
+### Cons
+- ✗ Heavy bundle size (22+ MB)
+- ✗ Steep learning curve
+- ✗ Complex setup
+- ✗ Overkill for 99% of CLIs
+- ✗ Not aligned with PAI's minimal approach
 
-When to Reference (RARE)
+### When to Reference (RARE)
 - Enterprise plugin systems (Heroku CLI scale)
-- + commands with complex organization
+- 50+ commands with complex organization
 - Auto-update mechanisms critical
 - Multi-tenant CLI platforms
 
-Note:This skill does NOT generate oclif CLIs. Documentation only for reference.
+**Note:** This skill does NOT generate oclif CLIs. Documentation only for reference.
 
 ---
 
-RESEARCH FINDINGS: Type-Safe Frameworks
+## RESEARCH FINDINGS: Type-Safe Frameworks
 
-cleye (Schema-Driven Inference)
+### cleye (Schema-Driven Inference)
 
-Pattern:```typescript
+**Pattern:**
+```typescript
 import { cli } from 'cleye';
 
 const argv = cli({
@@ -271,21 +273,24 @@ const argv = cli({
 // argv._.scriptPath → string | undefined
 ```
 
-Key Insight:TypeScript infers full shape from flag definitions (zero manual typing)
+**Key Insight:** TypeScript infers full shape from flag definitions (zero manual typing)
 
-Use When:- Zero boilerplate preference
+**Use When:**
+- Zero boilerplate preference
 - Modern TypeScript CLI
 - Full type inference needed
 
-Trade-off vs Tier :- + Type inference automatic
+**Trade-off vs Tier 1:**
+- + Type inference automatic
 - - Framework dependency
 - - Less control over parsing
 
 ---
 
-citty (Discriminated Unions)
+### citty (Discriminated Unions)
 
-Pattern:```typescript
+**Pattern:**
+```typescript
 import { defineCommand, runMain } from 'citty';
 
 const convert = defineCommand({
@@ -314,22 +319,24 @@ const convert = defineCommand({
 runMain(convert);
 ```
 
-Key Insight:Discriminated unions provide exhaustive type checking
+**Key Insight:** Discriminated unions provide exhaustive type checking
 
-Use When:- Complex command trees
+**Use When:**
+- Complex command trees
 - Type safety critical
 - Argument validation needed
 
-Trade-off vs Tier :- + Advanced type safety
+**Trade-off vs Tier 1:**
+- + Advanced type safety
 - - Framework abstraction
 - - Additional dependency
 
 ---
 
-DECISION CRITERIA
+## DECISION CRITERIA
 
-Choose Manual Parsing (Tier ) If:
-- [ ] CLI has -simple commands
+### Choose Manual Parsing (Tier 1) If:
+- [ ] CLI has 2-10 simple commands
 - [ ] Commands take basic arguments (strings, numbers, flags)
 - [ ] Output is JSON only
 - [ ] No subcommand grouping needed
@@ -337,115 +344,134 @@ Choose Manual Parsing (Tier ) If:
 - [ ] Fast development critical
 - [ ] Following llcli pattern
 
-→ % of CLIs should use Tier 
+**→ 80% of CLIs should use Tier 1**
+
 ---
 
-Choose Commander.js (Tier ) If:
-- [ ] CLI has + commands needing organization
+### Choose Commander.js (Tier 2) If:
+- [ ] CLI has 10+ commands needing organization
 - [ ] Subcommands required (git-style: `cli category command`)
 - [ ] Complex nested options
 - [ ] Plugin architecture planned
 - [ ] Multiple output formats (JSON, table, CSV)
 - [ ] Auto-generated help essential
 
-→ % of CLIs need Tier 
+**→ 15% of CLIs need Tier 2**
+
 ---
 
-Reference oclif (Tier ) If:
+### Reference oclif (Tier 3) If:
 - [ ] Enterprise plugin system (Heroku/Salesforce scale)
-- [ ] + commands with topics
+- [ ] 50+ commands with topics
 - [ ] Auto-update mechanism
 - [ ] Multi-tenant platform
 
-→ % of CLIs (NOT generated by this skill)
+**→ 5% of CLIs (NOT generated by this skill)**
+
 ---
 
-llcli Pattern Analysis
+## llcli Pattern Analysis
 
-Why Manual Parsing Works
+### Why Manual Parsing Works
 
-llcli demonstrates:. lines total- Complete CLI with docs
-. Zero dependencies- No node_modules needed
-. Type-safe- Full TypeScript interfaces
-. Production-ready- Error handling, help, validation
-. Composable- JSON output pipes everywhere
-. Documented- README explains philosophy
+**llcli demonstrates:**
+1. **327 lines total** - Complete CLI with docs
+2. **Zero dependencies** - No node_modules needed
+3. **Type-safe** - Full TypeScript interfaces
+4. **Production-ready** - Error handling, help, validation
+5. **Composable** - JSON output pipes everywhere
+6. **Documented** - README explains philosophy
 
-Key Insight:For API wrappers and simple tools, manual parsing is SUPERIOR to frameworks because:
+**Key Insight:** For API wrappers and simple tools, manual parsing is SUPERIOR to frameworks because:
 - Complete control over behavior
 - No framework magic to debug
 - Easier to understand and modify
 - Faster to develop (no API to learn)
 - Deterministic (no framework updates breaking things)
 
-When llcli Pattern Breaks Down
+### When llcli Pattern Breaks Down
 
-Indicators to escalate:- + commands making switch statement unwieldy
+**Indicators to escalate:**
+- 15+ commands making switch statement unwieldy
 - Need for subcommand grouping (convert json csv vs convert csv json)
 - Plugin/extension system required
 - Complex option validation across commands
 
-At that point → Tier (Commander.js)
----
-
-Best Practices
-
-. Start Tier , Escalate When ProvenDon't guess complexity. Build simple first.
-
-. Frameworks Are Not FreeEvery dependency is debt. Justify it.
-
-. Type Safety > FrameworksManual parsing with TypeScript beats framework without types.
-
-. Help Text Quality MattersAuto-generated help is convenient but often poor quality. Manual help (like llcli) is better.
-
-. Composability > FeaturesJSON output + pipes > built-in table rendering.
-
-. Test ImmediatelyRun `--help` before declaring framework choice successful.
-
-. Read Real CodeStudy llcli, not just framework docs.
-
-. Benchmark SizeCheck dist/ folder size. Tier CLIs are <KB.
+**At that point → Tier 2 (Commander.js)**
 
 ---
 
-Additional Research
+## Best Practices
 
-Yargs (NOT Recommended for PAI)
+### 1. **Start Tier 1, Escalate When Proven**
+Don't guess complexity. Build simple first.
 
-Why not recommended:- Larger bundle size than Commander
+### 2. **Frameworks Are Not Free**
+Every dependency is debt. Justify it.
+
+### 3. **Type Safety > Frameworks**
+Manual parsing with TypeScript beats framework without types.
+
+### 4. **Help Text Quality Matters**
+Auto-generated help is convenient but often poor quality. Manual help (like llcli) is better.
+
+### 5. **Composability > Features**
+JSON output + pipes > built-in table rendering.
+
+### 6. **Test Immediately**
+Run `--help` before declaring framework choice successful.
+
+### 7. **Read Real Code**
+Study llcli, not just framework docs.
+
+### 8. **Benchmark Size**
+Check dist/ folder size. Tier 1 CLIs are <100 KB.
+
+---
+
+## Additional Research
+
+### Yargs (NOT Recommended for PAI)
+
+**Why not recommended:**
+- Larger bundle size than Commander
 - Less TypeScript-friendly
 - Verbose syntax
 - Async typing issues
 
-Use Commander.js instead if escalating from Tier .
+**Use Commander.js instead if escalating from Tier 1.**
+
 ---
 
-Ink (NOT Recommended for General CLIs)
+### Ink (NOT Recommended for General CLIs)
 
-Why not recommended:- React-based (massive overhead)
+**Why not recommended:**
+- React-based (massive overhead)
 - Interactive UIs (not deterministic)
 - Large bundle size
 - Overkill for data processing
 
-Use for:Dashboard UIs, dev servers with live updates
+**Use for:** Dashboard UIs, dev servers with live updates
 
-Not for:API clients, file processors, automation
-
----
-
-Final Recommendation
-
-For PAI createcli skill:
-. Default:Tier (Manual Parsing / llcli pattern)
-. Escalation:Tier (Commander.js) when decision tree indicates
-. Reference:Tier (oclif) for documentation only
-
-Philosophy:The best framework is no framework until proven otherwise.
+**Not for:** API clients, file processors, automation
 
 ---
 
-Sources:- llcli production implementation (~/.claude/Bin/llcli/)
-- Commander.js .x documentation
+## ✓ Final Recommendation
+
+**For PAI createcli skill:**
+
+1. **Default:** Tier 1 (Manual Parsing / llcli pattern)
+2. **Escalation:** Tier 2 (Commander.js) when decision tree indicates
+3. **Reference:** Tier 3 (oclif) for documentation only
+
+**Philosophy:** The best framework is no framework until proven otherwise.
+
+---
+
+**Sources:**
+- llcli production implementation (~/.claude/Bin/llcli/)
+- Commander.js 12.x documentation
 - oclif core documentation
-- Perplexity research (sub-queries on CLI frameworks)
+- Perplexity research (32 sub-queries on CLI frameworks)
 - Codex research (tsx, vite, next, bun CLI analysis)
