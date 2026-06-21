@@ -52,7 +52,7 @@ When multiple agents' results are available, scan for contradictions:
 . Optional escalation— for `[CONFLICT]` items, launch one targeted follow-up query
 
 Conflict output format:```
-️ CONFLICT on [topic]:
+ CONFLICT on [topic]:
   Agent A (ClaudeResearcher): [claim] — [source]
   Agent B (GrokResearcher): [claim] — [source]
   Resolution: [Unresolved | Resolved by Agent C | Resolved by source priority]

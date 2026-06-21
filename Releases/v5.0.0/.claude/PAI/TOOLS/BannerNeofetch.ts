@@ -17,9 +17,9 @@ import { spawnSync } from "child_process";
 const HOME = process.env.HOME!;
 const CLAUDE_DIR = join(HOME, ".claude");
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Terminal Width Detection
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 function getTerminalWidth(): number {
   let width: number | null = null;
@@ -71,9 +71,9 @@ function getTerminalWidth(): number {
   return width;
 }
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // ANSI Color System - Modern Gradient Palette
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 const RESET = "\x1b[0m";
 const BOLD = "\x1b[1m";
@@ -113,46 +113,46 @@ const UI = {
   info: rgb(59, 130, 246),        // #3B82F6 - blue
 };
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Unicode Characters Library
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 // Braille patterns (2x4 dots per char = high resolution)
 // Reference: https://en.wikipedia.org/wiki/Braille_Patterns
 const BRAILLE = {
-  empty: "⠀", full: "⣿",
-  dots: "⠁⠂⠃⠄⠅⠆⠇⡀⡁⡂⡃⡄⡅⡆⡇⢀⢁⢂⢃⢄⢅⢆⢇⣀⣁⣂⣃⣄⣅⣆⣇",
-  gradients: ["⠀", "⢀", "⣀", "⣄", "⣤", "⣦", "⣶", "⣷", "⣿"],
+  empty: "", full: "",
+  dots: "",
+  gradients: ["", "", "", "", "", "", "", "", ""],
 };
 
 // Block elements for shading
 const BLOCKS = {
-  full: "█", light: "░", medium: "▒", dark: "▓",
-  upper: "▀", lower: "▄", left: "▌", right: "▐",
-  eighths: ["", "▏", "▎", "▍", "▌", "▋", "▊", "▉", "█"],
-  vEighths: ["", "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+  full: "", light: "", medium: "", dark: "",
+  upper: "", lower: "", left: "", right: "",
+  eighths: ["", "", "", "", "", "", "", "", ""],
+  vEighths: ["", "", "", "", "", "", "", "", ""],
 };
 
 // Geometric shapes
 const SHAPES = {
-  triangles: { tl: "◤", tr: "◥", bl: "◣", br: "◢" },
-  diamonds: { filled: "◆", empty: "◇", small: "⬥" },
-  circles: { filled: "●", empty: "○", half: ["◐", "◑", "◒", "◓"] },
+  triangles: { tl: "", tr: "", bl: "", br: "" },
+  diamonds: { filled: "", empty: "", small: "" },
+  circles: { filled: "", empty: "", half: ["", "", "", ""] },
 };
 
 // Box drawing - rounded corners for modern feel
 const BOX = {
-  tl: "╭", tr: "╮", bl: "╰", br: "╯",
-  h: "─", v: "│",
-  lt: "├", rt: "┤", tt: "┬", bt: "┴",
+  tl: "", tr: "", bl: "", br: "",
+  h: "", v: "",
+  lt: "", rt: "", tt: "", bt: "",
 };
 
 // Sparkline characters (8 levels)
-const SPARK = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"];
+const SPARK = ["", "", "", "", "", "", "", ""];
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // 3D Isometric Cube Logo - High Resolution Braille Art
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 /**
  * Premium 3D isometric cube using Braille characters
@@ -160,73 +160,73 @@ const SPARK = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"];
  * Top face: lightest, Left face: medium, Right face: darkest
  */
 const ISOMETRIC_CUBE_BRAILLE = [
-  "              ⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀              ",
-  "          ⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀          ",
-  "        ⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀        ",
-  "      ⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀      ",
-  "    ⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀    ",
-  "   ⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦   ",
-  "  ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿  ",
-  "  ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿  ",
-  "  ⣿⣿⣿⣿⣿⣿⣿⣿⣿ PAI ⣿⣿⣿⣿⣿⣿⣿⣿⣿  ",
-  "  ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿  ",
-  "  ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿  ",
-  "   ⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟   ",
-  "    ⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋    ",
-  "      ⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋      ",
-  "        ⠉⠛⠻⠿⠿⠿⠿⠿⠿⠿⠿⠟⠛⠉        ",
-  "              ⠉⠉⠉⠉⠉⠉              ",
+  "                            ",
+  "                    ",
+  "                ",
+  "            ",
+  "        ",
+  "      ",
+  "    ",
+  "    ",
+  "   PAI   ",
+  "    ",
+  "    ",
+  "      ",
+  "        ",
+  "            ",
+  "                ",
+  "                            ",
 ];
 const CUBE_WIDTH = 46;
 
 // Alternative: Block-based geometric cube with gradient shading
 const ISOMETRIC_CUBE_BLOCKS = [
-  "          ╱────────────────╲          ",
-  "        ╱░░░░░░░░░░░░░░░░░░░░╲        ",
-  "      ╱░░░░░░░░░░░░░░░░░░░░░░░░╲      ",
-  "    ╱░░░░░░░░░░░░░░░░░░░░░░░░░░░░╲    ",
-  "  ╱░░░░░░░░░░░░ PAI ░░░░░░░░░░░░░░╲  ",
-  "  │▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓│  ",
-  "  │▒▒▒▒░░░░░░░░░░░░░░░░░░░░░▓▓▓▓│  ",
-  "  │▒▒▒▒▒░░░░░░░░░░░░░░░░░░▓▓▓▓▓│  ",
-  "  │▒▒▒▒▒▒░░░░░░░░░░░░░░░▓▓▓▓▓▓│  ",
-  "    ╲▒▒▒▒▒▒░░░░░░░░░░▓▓▓▓▓▓╱    ",
-  "      ╲▒▒▒▒▒▒░░░░▓▓▓▓▓▓╱      ",
-  "        ╲▒▒▒▒▓▓▓▓▓▓╱        ",
-  "          ╲────────╱          ",
+  "                    ",
+  "                ",
+  "            ",
+  "        ",
+  "   PAI   ",
+  "    ",
+  "    ",
+  "    ",
+  "    ",
+  "        ",
+  "            ",
+  "                ",
+  "                    ",
 ];
 
 // Compact high-detail version for narrower terminals
 const COMPACT_CUBE = [
-  "      ⣀⣤⣶⣶⣶⣶⣤⣀      ",
-  "    ⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦    ",
-  "  ⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷  ",
-  " ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ",
-  " ⣿⣿⣿⣿ PAI ⣿⣿⣿⣿ ",
-  " ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ",
-  "  ⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟  ",
-  "    ⠙⠿⣿⣿⣿⣿⠿⠋    ",
-  "      ⠉⠉⠉⠉      ",
+  "            ",
+  "        ",
+  "    ",
+  "  ",
+  "  PAI  ",
+  "  ",
+  "    ",
+  "        ",
+  "            ",
 ];
 const COMPACT_CUBE_WIDTH = 24;
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Block Letter Art for "PAI"
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 const PAI_BLOCK_ART = [
-  "██████╗  █████╗ ██╗",
-  "██╔══██╗██╔══██╗██║",
-  "██████╔╝███████║██║",
-  "██╔═══╝ ██╔══██║██║",
-  "██║     ██║  ██║██║",
-  "╚═╝     ╚═╝  ╚═╝╚═╝",
+  "   ",
+  "",
+  "",
+  " ",
+  "       ",
+  "       ",
 ];
 const PAI_WIDTH = 19;
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Dynamic Stats Collection
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 interface SystemStats {
   name: string;
@@ -328,9 +328,9 @@ function getStats(): SystemStats {
   };
 }
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Utility Functions
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 function visibleLength(str: string): number {
   return str.replace(/\x1b\[[0-9;]*m/g, "").length;
@@ -418,9 +418,9 @@ function colorPaiArt(): string[] {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Main Banner Generation
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 function createNeofetchBanner(): string {
   const width = Math.max(getTerminalWidth(), 90);
@@ -435,9 +435,9 @@ function createNeofetchBanner(): string {
   const lines: string[] = [];
   const gap = 4;
 
-  // ─────────────────────────────────────────────────────────────────
+  // 
   // TOP SECTION: Logo (left) + Stats (right)
-  // ─────────────────────────────────────────────────────────────────
+  // 
 
   // Build stats lines with modern formatting
   const statsLines: string[] = [];
@@ -448,16 +448,16 @@ function createNeofetchBanner(): string {
     return `${BOLD}${colors[i % colors.length]}${c}${RESET}`;
   }).join("");
   statsLines.push(`${gradientName} ${UI.muted}@${RESET} ${UI.subtext}Personal AI Infrastructure${RESET}`);
-  statsLines.push(`${UI.dim}${"─".repeat(40)}${RESET}`);
+  statsLines.push(`${UI.dim}${"".repeat(40)}${RESET}`);
   statsLines.push("");
 
   // Stats with emoji icons and progress bars
   const maxSkills = 100;
   const maxHooks = 50;
 
-  statsLines.push(`${GRADIENT.cyan1}⚡${RESET} ${UI.muted}DA Name${RESET}      ${UI.text}${stats.name}${RESET}`);
+  statsLines.push(`${GRADIENT.cyan1}${RESET} ${UI.muted}DA Name${RESET}      ${UI.text}${stats.name}${RESET}`);
   statsLines.push(`${GRADIENT.blue1}${RESET} ${UI.muted}Skills${RESET}       ${GRADIENT.blue1}${stats.skills}${RESET} ${progressBar(stats.skills, maxSkills, 10)}`);
-  statsLines.push(`${GRADIENT.purple1}⚙${RESET}  ${UI.muted}Hooks${RESET}        ${GRADIENT.purple1}${stats.hooks}${RESET} ${progressBar(stats.hooks, maxHooks, 10)}`);
+  statsLines.push(`${GRADIENT.purple1}${RESET}  ${UI.muted}Hooks${RESET}        ${GRADIENT.purple1}${stats.hooks}${RESET} ${progressBar(stats.hooks, maxHooks, 10)}`);
   statsLines.push(`${UI.warning}${RESET} ${UI.muted}Work Items${RESET}   ${UI.warning}${stats.workItems}+${RESET}`);
   statsLines.push(`${UI.success}${RESET} ${UI.muted}Learnings${RESET}    ${UI.success}${stats.learnings}${RESET}`);
   statsLines.push(`${GRADIENT.blue2}${RESET} ${UI.muted}User Files${RESET}   ${GRADIENT.blue2}${stats.userFiles}${RESET}`);
@@ -477,9 +477,9 @@ function createNeofetchBanner(): string {
     lines.push(`  ${logoLine}${" ".repeat(gap)}${statLine}`);
   }
 
-  // ─────────────────────────────────────────────────────────────────
+  // 
   // BOTTOM SECTION: Full-width footer area
-  // ─────────────────────────────────────────────────────────────────
+  // 
 
   lines.push("");
 
@@ -487,19 +487,19 @@ function createNeofetchBanner(): string {
   const bottomWidth = Math.min(width - 4, 80);
 
   // Top border with rounded corners
-  lines.push(`  ${UI.dim}${BOX.tl}${"─".repeat(bottomWidth - 2)}${BOX.tr}${RESET}`);
+  lines.push(`  ${UI.dim}${BOX.tl}${"".repeat(bottomWidth - 2)}${BOX.tr}${RESET}`);
 
   // Gradient header: PAI | Personal AI Infrastructure
   const paiGradient = `${BOLD}${GRADIENT.blue1}P${RESET}${BOLD}${GRADIENT.purple1}A${RESET}${BOLD}${GRADIENT.cyan1}I${RESET}`;
-  const headerContent = `${paiGradient} ${UI.dim}│${RESET} ${UI.text}Personal AI Infrastructure${RESET}`;
-  lines.push(`  ${UI.dim}│${RESET}${center(headerContent, bottomWidth - 2)}${UI.dim}│${RESET}`);
+  const headerContent = `${paiGradient} ${UI.dim}${RESET} ${UI.text}Personal AI Infrastructure${RESET}`;
+  lines.push(`  ${UI.dim}${RESET}${center(headerContent, bottomWidth - 2)}${UI.dim}${RESET}`);
 
   // Quote
   const quote = `${ITALIC}${UI.subtext}"Magnifying human capabilities through structured intelligence..."${RESET}`;
-  lines.push(`  ${UI.dim}│${RESET}${center(quote, bottomWidth - 2)}${UI.dim}│${RESET}`);
+  lines.push(`  ${UI.dim}${RESET}${center(quote, bottomWidth - 2)}${UI.dim}${RESET}`);
 
   // Empty line for spacing
-  lines.push(`  ${UI.dim}│${RESET}${" ".repeat(bottomWidth - 2)}${UI.dim}│${RESET}`);
+  lines.push(`  ${UI.dim}${RESET}${" ".repeat(bottomWidth - 2)}${UI.dim}${RESET}`);
 
   // Animated sparkline histogram (full gradient wave)
   const waveUp = SPARK.map((s, i) => {
@@ -511,36 +511,36 @@ function createNeofetchBanner(): string {
     return `${colors[i]}${s}${RESET}`;
   }).join("");
   const fullWave = waveUp + waveDown + waveUp + waveDown;
-  lines.push(`  ${UI.dim}│${RESET}${center(fullWave, bottomWidth - 2)}${UI.dim}│${RESET}`);
+  lines.push(`  ${UI.dim}${RESET}${center(fullWave, bottomWidth - 2)}${UI.dim}${RESET}`);
 
   // Empty line for spacing
-  lines.push(`  ${UI.dim}│${RESET}${" ".repeat(bottomWidth - 2)}${UI.dim}│${RESET}`);
+  lines.push(`  ${UI.dim}${RESET}${" ".repeat(bottomWidth - 2)}${UI.dim}${RESET}`);
 
   // PAI block art (centered)
   const paiArt = colorPaiArt();
   for (const paiLine of paiArt) {
-    lines.push(`  ${UI.dim}│${RESET}${center(paiLine, bottomWidth - 2)}${UI.dim}│${RESET}`);
+    lines.push(`  ${UI.dim}${RESET}${center(paiLine, bottomWidth - 2)}${UI.dim}${RESET}`);
   }
 
   // Empty line for spacing
-  lines.push(`  ${UI.dim}│${RESET}${" ".repeat(bottomWidth - 2)}${UI.dim}│${RESET}`);
+  lines.push(`  ${UI.dim}${RESET}${" ".repeat(bottomWidth - 2)}${UI.dim}${RESET}`);
 
   // GitHub URL with modern link styling
-  const linkIcon = `${GRADIENT.cyan2}◆${RESET}`;
+  const linkIcon = `${GRADIENT.cyan2}${RESET}`;
   const githubUrl = `${linkIcon} ${UI.subtext}github.com/${RESET}${GRADIENT.blue1}danielmiessler${RESET}${UI.subtext}/${RESET}${GRADIENT.purple1}PAI${RESET}`;
-  lines.push(`  ${UI.dim}│${RESET}${center(githubUrl, bottomWidth - 2)}${UI.dim}│${RESET}`);
+  lines.push(`  ${UI.dim}${RESET}${center(githubUrl, bottomWidth - 2)}${UI.dim}${RESET}`);
 
   // Bottom border
-  lines.push(`  ${UI.dim}${BOX.bl}${"─".repeat(bottomWidth - 2)}${BOX.br}${RESET}`);
+  lines.push(`  ${UI.dim}${BOX.bl}${"".repeat(bottomWidth - 2)}${BOX.br}${RESET}`);
 
   lines.push(""); // Bottom padding
 
   return lines.join("\n");
 }
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Compact Mode Banner (for narrow terminals)
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 function createCompactBanner(): string {
   const stats = getStats();
@@ -554,20 +554,20 @@ function createCompactBanner(): string {
   }).join("");
 
   lines.push("");
-  lines.push(`  ${UI.dim}╭──${RESET} ${paiGradient} ${UI.dim}│${RESET} ${UI.subtext}Personal AI Infrastructure${RESET} ${UI.dim}──────╮${RESET}`);
-  lines.push(`  ${UI.dim}│${RESET}                                                 ${UI.dim}│${RESET}`);
-  lines.push(`  ${UI.dim}│${RESET}   ${kaiGradient}  ${GRADIENT.cyan1}⚡${RESET}${UI.text}${stats.skills}${RESET} ${GRADIENT.purple1}⚙${RESET}${UI.text}${stats.hooks}${RESET} ${UI.success}${RESET}${UI.text}${stats.learnings}${RESET} ${GRADIENT.magenta}${RESET}${UI.text}${stats.model}${RESET}   ${UI.dim}│${RESET}`);
-  lines.push(`  ${UI.dim}│${RESET}                                                 ${UI.dim}│${RESET}`);
-  lines.push(`  ${UI.dim}│${RESET}   ${sparklineHistogram(28)} ${UI.success}●${RESET} ${UI.subtext}ready${RESET}   ${UI.dim}│${RESET}`);
-  lines.push(`  ${UI.dim}╰──────────────────────────────────────────────────╯${RESET}`);
+  lines.push(`  ${UI.dim}${RESET} ${paiGradient} ${UI.dim}${RESET} ${UI.subtext}Personal AI Infrastructure${RESET} ${UI.dim}${RESET}`);
+  lines.push(`  ${UI.dim}${RESET}                                                 ${UI.dim}${RESET}`);
+  lines.push(`  ${UI.dim}${RESET}   ${kaiGradient}  ${GRADIENT.cyan1}${RESET}${UI.text}${stats.skills}${RESET} ${GRADIENT.purple1}${RESET}${UI.text}${stats.hooks}${RESET} ${UI.success}${RESET}${UI.text}${stats.learnings}${RESET} ${GRADIENT.magenta}${RESET}${UI.text}${stats.model}${RESET}   ${UI.dim}${RESET}`);
+  lines.push(`  ${UI.dim}${RESET}                                                 ${UI.dim}${RESET}`);
+  lines.push(`  ${UI.dim}${RESET}   ${sparklineHistogram(28)} ${UI.success}${RESET} ${UI.subtext}ready${RESET}   ${UI.dim}${RESET}`);
+  lines.push(`  ${UI.dim}${RESET}`);
   lines.push("");
 
   return lines.join("\n");
 }
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Main Entry Point
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 function main(): void {
   const args = process.argv.slice(2);
@@ -576,14 +576,14 @@ function main(): void {
 
   try {
     if (test) {
-      console.log("\n" + "═".repeat(80));
+      console.log("\n" + "".repeat(80));
       console.log("  NEOFETCH BANNER - FULL MODE");
-      console.log("═".repeat(80));
+      console.log("".repeat(80));
       console.log(createNeofetchBanner());
 
-      console.log("\n" + "═".repeat(80));
+      console.log("\n" + "".repeat(80));
       console.log("  NEOFETCH BANNER - COMPACT MODE");
-      console.log("═".repeat(80));
+      console.log("".repeat(80));
       console.log(createCompactBanner());
     } else if (compact) {
       console.log(createCompactBanner());

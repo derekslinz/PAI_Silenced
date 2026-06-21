@@ -76,7 +76,7 @@ type Proposal = {
   status: "pending" | "approved" | "rejected" | "modified";
 };
 
-// ─── Classification rules (keyword → target, with weight) ───
+//  Classification rules (keyword → target, with weight) 
 
 const RULES: Array<{ target: Target; patterns: RegExp[]; weight: number }> = [
   // Foundational TELOS
@@ -124,7 +124,7 @@ const RULES: Array<{ target: Target; patterns: RegExp[]; weight: number }> = [
   { target: "memory/feedback", patterns: [/\b(always|never|do not) (do|use|include)\b/i, /\bwhen (you|{{DA_NAME}})\b/i, /\bKai should\b/i, /\bfrom now on\b/i, /\brule:\b/i], weight: 3 },
 ];
 
-// ─── Chunking ───
+//  Chunking 
 
 function readSource(sourcePath: string, stdin: boolean): Array<{ file: string; content: string }> {
   if (stdin) {
@@ -181,7 +181,7 @@ function chunkContent(file: string, content: string): Array<{ section: string; b
   return chunks;
 }
 
-// ─── Classification ───
+//  Classification 
 
 function classify(body: string): { target: Target; confidence: number; reasons: string[]; alternatives: Target[] } {
   const scores: Record<string, { score: number; reasons: string[] }> = {};
@@ -223,7 +223,7 @@ function classify(body: string): { target: Target; confidence: number; reasons: 
   };
 }
 
-// ─── Main ───
+//  Main 
 
 function main(): void {
   const args = process.argv.slice(2);
@@ -280,7 +280,7 @@ function main(): void {
     return;
   }
 
-  console.log(`═══ Migration Scan Results ═══\n`);
+  console.log(` Migration Scan Results \n`);
   console.log(`Sources scanned:    ${sources.length}`);
   console.log(`Chunks extracted:   ${proposals.length}`);
   console.log(`Avg confidence:     ${Math.round(avgConfidence * 100)}%`);
@@ -288,17 +288,17 @@ function main(): void {
   console.log(``);
   console.log(`Proposed routing:`);
   for (const [target, n] of Object.entries(byTarget).sort((a, b) => b[1] - a[1])) {
-    const icon = target === "UNCLEAR" ? "❓" : target.startsWith("memory/feedback") ? "" : "";
+    const icon = target === "UNCLEAR" ? "" : target.startsWith("memory/feedback") ? "" : "";
     console.log(`  ${icon}  ${target.padEnd(38)}  ${n} chunks`);
   }
   console.log(``);
   const unclear = proposals.filter((p) => p.proposed_target === "UNCLEAR");
   if (unclear.length) {
-    console.log(`⚠️  ${unclear.length} chunks unclear — will need {{PRINCIPAL_NAME}}'s routing decision.`);
+    console.log(`  ${unclear.length} chunks unclear — will need {{PRINCIPAL_NAME}}'s routing decision.`);
   }
   const lowConf = proposals.filter((p) => p.classification_confidence < 0.4 && p.proposed_target !== "UNCLEAR");
   if (lowConf.length) {
-    console.log(`⚠️  ${lowConf.length} chunks classified at <40% confidence — review recommended.`);
+    console.log(`  ${lowConf.length} chunks classified at <40% confidence — review recommended.`);
   }
   console.log(``);
   console.log(`Next: bun ~/.claude/PAI/TOOLS/MigrateApprove.ts --review`);

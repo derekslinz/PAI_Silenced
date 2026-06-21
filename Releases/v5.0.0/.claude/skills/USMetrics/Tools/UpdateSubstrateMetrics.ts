@@ -258,10 +258,10 @@ async function fetchAllMetrics(): Promise<Map<string, FetchResult>> {
         updated: new Date().toISOString().split("T")[],
         source: config.source,
       });
-      console.log(`    ✓ ${formatValue(data.value, config)} (${data.date})`);
+      console.log(`     ${formatValue(data.value, config)} (${data.date})`);
     } else {
       errors.push(id);
-      console.log(`    ✗ Failed`);
+      console.log(`     Failed`);
     }
 
     // Small delay to be nice to APIs
@@ -480,17 +480,17 @@ Output:
   console.log("\nWriting files...");
 
   writeFileSync(mdPath, updatedMd);
-  console.log(`  ✓ ${mdPath}`);
+  console.log(`   ${mdPath}`);
 
   writeFileSync(currentCsvPath, currentCsv);
-  console.log(`  ✓ ${currentCsvPath}`);
+  console.log(`   ${currentCsvPath}`);
 
   // Append to historical (create header if new file)
   if (!existsSync(historicalCsvPath)) {
     writeFileSync(historicalCsvPath, "fetch_timestamp,metric_id,value,period\n");
   }
   appendFileSync(historicalCsvPath, historicalCsv);
-  console.log(`  ✓ ${historicalCsvPath} (appended)`);
+  console.log(`   ${historicalCsvPath} (appended)`);
 
   console.log("\n" + "=".repeat());
   console.log(`Update complete. ${results.size} metrics updated.`);

@@ -75,7 +75,7 @@ async function splitAudioFile(
         index: index + 1,
       }));
 
-      console.log(`✓ Split into ${chunks.length} chunks`);
+      console.log(` Split into ${chunks.length} chunks`);
       resolve({ chunks, tempDir });
     });
 
@@ -137,10 +137,10 @@ export async function splitAndTranscribe(
       const transcript = await transcribeChunk(chunk, openai, format);
       transcripts.push(transcript);
 
-      console.log(`✓ Chunk ${chunk.index} complete`);
+      console.log(` Chunk ${chunk.index} complete`);
     }
 
-    console.log("\n✓ All chunks transcribed");
+    console.log("\n All chunks transcribed");
 
     // Merge transcripts
     let merged: string;
@@ -158,7 +158,7 @@ export async function splitAndTranscribe(
   } finally {
     // Cleanup temp directory
     rmSync(tempDir, { recursive: true, force: true });
-    console.log("✓ Cleaned up temporary files");
+    console.log(" Cleaned up temporary files");
   }
 }
 

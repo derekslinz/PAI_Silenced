@@ -120,7 +120,7 @@ Linkedin
 More
 Blog
 GitHub
-Copyright Excalidraw community. Built with Docusaurus ️
+Copyright Excalidraw community. Built with Docusaurus 
 
 OUTPUT
 

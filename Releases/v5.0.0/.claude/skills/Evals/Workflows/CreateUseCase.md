@@ -244,18 +244,18 @@ Directory Structure
 
 ```
 UseCases/<name>/
-├── config.yaml          Scoring configuration
-├── README.md            Documentation
-├── test-cases/          Test case definitions
-│   ├── -basic.yaml
-│   ├── -edge.yaml
-│   └── ...
-├── golden-outputs/      Reference outputs (optional)
-│   ├── -basic.md
-│   └── ...
-└── prompts/             Versioned prompts
-    ├── v...md
-    └── v...md
+ config.yaml          Scoring configuration
+ README.md            Documentation
+ test-cases/          Test case definitions
+    -basic.yaml
+    -edge.yaml
+    ...
+ golden-outputs/      Reference outputs (optional)
+    -basic.md
+    ...
+ prompts/             Versioned prompts
+     v...md
+     v...md
 ```
 
 Done

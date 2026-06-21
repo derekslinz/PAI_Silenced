@@ -1,22 +1,21 @@
 #!/bin/bash
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # PAI Status Line — Responsive display with 4 modes by terminal width:
 #   nano (<35), micro (35-54), mini (55-79), normal (80+)
-# Normal output: PAI Header → Context → Usage → Git → Memory → Learning → Quote
-# ═══════════════════════════════════════════════════════════════════════════════
+# Normal output: PAI Header → Context → Usage → Git → Memory → Learning
+# 
 
 set -o pipefail
 
-# ─────────────────────────────────────────────────────────────────────────────
+# 
 # CONFIGURATION
-# ─────────────────────────────────────────────────────────────────────────────
+# 
 
 PAI_DIR="${PAI_DIR:-$HOME/.claude/PAI}"
 CLAUDE_HOME="$HOME/.claude"
 SETTINGS_FILE="$CLAUDE_HOME/settings.json"
 RATINGS_FILE="$PAI_DIR/MEMORY/LEARNING/SIGNALS/ratings.jsonl"
 MODEL_CACHE="$PAI_DIR/MEMORY/STATE/model-cache.txt"
-QUOTE_CACHE="$PAI_DIR/.quote-cache"
 LOCATION_CACHE="$PAI_DIR/MEMORY/STATE/location-cache.json"
 WEATHER_CACHE="$PAI_DIR/MEMORY/STATE/weather-cache.json"
 USAGE_CACHE="/tmp/pai-usage-${USER:-anon}.json"
@@ -84,19 +83,19 @@ ALGO_VERSION="${ALGO_VERSION:-—}"
 settings_has_counts="${settings_has_counts:-false}"
 
 # Cache TTL in seconds — rationale documented for each
-# ┌─────────────────┬────────┬──────────────────────────────────────────────────┐
-# │ Cache           │ TTL    │ Rationale                                        │
-# ├─────────────────┼────────┼──────────────────────────────────────────────────┤
-# │ Location        │ 3600s  │ IP/geo rarely changes; external API              │
-# │ Weather         │  900s  │ 15 min: weather changes slowly                   │
-# │ Counts          │ n/a    │ Read directly from settings.json (stop hook)     │
-# │ Usage           │  900s  │ 15 min: /api/oauth/usage has aggressive 429 limits│
-# │ Learning        │   30s  │ Ratings change infrequently mid-session          │
-# │ Session name    │ mtime  │ Invalidated when source files change             │
-# │ Quote           │   60s  │ 1 min: keyed ZenQuotes is effectively unlimited  │
-# │ Model           │ n/a    │ Written once per session, no TTL                 │
-# │ Terminal width  │ n/a    │ Written once, read as fallback                   │
-# └─────────────────┴────────┴──────────────────────────────────────────────────┘
+# 
+#  Cache            TTL     Rationale                                        
+# 
+#  Location         3600s   IP/geo rarely changes; external API              
+#  Weather           900s   15 min: weather changes slowly                   
+#  Counts           n/a     Read directly from settings.json (stop hook)     
+#  Usage             900s   15 min: /api/oauth/usage has aggressive 429 limits
+#  Learning           30s   Ratings change infrequently mid-session          
+#  Session name     mtime   Invalidated when source files change             
+#  Quote              60s   1 min: keyed ZenQuotes is effectively unlimited  
+#  Model            n/a     Written once per session, no TTL                 
+#  Terminal width   n/a     Written once, read as fallback                   
+# 
 LOCATION_CACHE_TTL=3600
 WEATHER_CACHE_TTL=900
 USAGE_CACHE_TTL=900      # 15 min: /api/oauth/usage has aggressive per-token rate limits (~5 req before 429)
@@ -184,9 +183,9 @@ reset_time_str() {
     fi
 }
 
-# ─────────────────────────────────────────────────────────────────────────────
+# 
 # PARSE INPUT (must happen before parallel block consumes stdin)
-# ─────────────────────────────────────────────────────────────────────────────
+# 
 
 input=$(cat)
 
@@ -234,11 +233,11 @@ has_native_rate_limits="${has_native_rate_limits:-false}"
 # Without this: 83% raw looks fine but means ~1% usable remaining.
 COMPACTION_USABLE=835  # 83.5% × 10 for integer math precision
 
-# ── Startup context estimate (fresh calculation, no cross-session caching) ─
+#  Startup context estimate (fresh calculation, no cross-session caching) 
 # Before the first API call, Claude Code provides no token data. We estimate
 # from measured file sizes + per-item token costs.
 # Token ratio: ~3.5 chars/token for text content (bytes * 10 / 35).
-# ───────────────────────────────────────────────────────────────────────────
+# 
 startup_estimate=false
 if [ "$context_pct" = "0" ] && [ "$total_input" -eq 0 ] 2>/dev/null; then
     startup_estimate=true
@@ -381,9 +380,9 @@ if [ -n "$session_id" ]; then
     fi
 fi
 
-# ─────────────────────────────────────────────────────────────────────────────
+# 
 # TERMINAL WIDTH DETECTION
-# ─────────────────────────────────────────────────────────────────────────────
+# 
 # Hooks don't inherit terminal context. Try multiple methods. Width is detected
 # before prefetch so narrow modes can skip work they never render.
 
@@ -465,18 +464,18 @@ _repeat_chars() {
     printf '%s' "${s// /$ch}"
 }
 
-SEP_SOLID=$(_repeat_chars "$content_width" "─")
-SEP_DASHED=$(_repeat_chars "$content_width" "┄")
+SEP_SOLID=$(_repeat_chars "$content_width" "")
+SEP_DASHED=$(_repeat_chars "$content_width" "")
 SEP_DOT=$(_repeat_chars "$content_width" "·")
 
-# Separator line helper — generates ─ repeated to content_width
+# Separator line helper — generates  repeated to content_width
 sep() {
     printf "${SLATE_600}%s${RESET}\n" "$SEP_SOLID"
 }
 
-# ─────────────────────────────────────────────────────────────────────────────
+# 
 # PARALLEL PREFETCH - Launch expensive operations needed by current width mode
-# ─────────────────────────────────────────────────────────────────────────────
+# 
 # Blocks write to $_parallel_tmp/{name}.sh and are skipped when the active
 # width mode never renders that data.
 #   git.sh      — Branch, stash, sync, last commit (all modes)
@@ -588,19 +587,19 @@ if [ "$MODE" = "mini" ] || [ "$MODE" = "normal" ]; then
         if [ -n "$weather_json" ] && echo "$weather_json" | jq -e '.current' >/dev/null 2>&1; then
             eval "$(echo "$weather_json" | jq -r '.current | "temp=\(.temperature_2m)\ncode=\(.weather_code)\nis_day=\(.is_day)"' 2>/dev/null)"
             # Map open-meteo weather_code → single emoji glyph (clear/cloudy/fog/rain/snow/storm)
-            # Day vs. night uses the is_day flag to pick sun ☀ vs. moon  for clear conditions.
+            # Day vs. night uses the is_day flag to pick sun  vs. moon  for clear conditions.
             case "$code" in
-                0)              [ "${is_day:-1}" = "0" ] && icon="" || icon="☀️" ;;
-                1)              [ "${is_day:-1}" = "0" ] && icon="" || icon="️" ;;
-                2)              icon="⛅" ;;
-                3)              icon="☁️" ;;
-                45|48)          icon="️" ;;
-                51|53|55|56|57) icon="️" ;;
-                61|63|65|66|67) icon="️" ;;
-                80|81|82)       icon="️" ;;
-                71|73|75|77|85|86) icon="️" ;;
-                95|96|99)       icon="⛈️" ;;
-                *)              icon="️" ;;
+                0)              [ "${is_day:-1}" = "0" ] && icon="" || icon="" ;;
+                1)              [ "${is_day:-1}" = "0" ] && icon="" || icon="" ;;
+                2)              icon="" ;;
+                3)              icon="" ;;
+                45|48)          icon="" ;;
+                51|53|55|56|57) icon="" ;;
+                61|63|65|66|67) icon="" ;;
+                80|81|82)       icon="" ;;
+                71|73|75|77|85|86) icon="" ;;
+                95|96|99)       icon="" ;;
+                *)              icon="" ;;
             esac
             temp_int=$(printf '%.0f' "$temp")
             if [ "$TEMP_UNIT" = "celsius" ]; then
@@ -782,9 +781,9 @@ fi
 # NOTE: DA_NAME, PAI_VERSION, input JSON, cc_version, model_name, dir_name
 # are all already parsed above (lines 59-113). No duplicate parsing needed.
 
-# ─────────────────────────────────────────────────────────────────────────────
+# 
 # COLOR PALETTE
-# ─────────────────────────────────────────────────────────────────────────────
+# 
 # Tailwind-inspired colors organized by usage
 
 RESET='\033[0m'
@@ -862,9 +861,9 @@ PAI_TIME='\033[38;2;96;165;250m'      # Medium-light blue for time
 PAI_WEATHER='\033[38;2;135;206;235m'  # Sky blue for weather
 PAI_SESSION='\033[38;2;120;135;160m'  # Muted blue-gray for session label
 
-# ─────────────────────────────────────────────────────────────────────────────
+# 
 # HELPER FUNCTIONS
-# ─────────────────────────────────────────────────────────────────────────────
+# 
 
 # Get color for rating value (handles "—" for no data)
 get_rating_color() {
@@ -946,9 +945,9 @@ render_context_bar() {
     for ((i=1; i<=width; i++)); do
         # Marker positions render their threshold glyph regardless of fill.
         if [ "$i" -eq "$pos_20" ]; then
-            output="${output}\033[38;2;251;146;60m⛁${RESET}"    # orange marker
+            output="${output}\033[38;2;251;146;60m${RESET}"    # orange marker
         elif [ "$i" -eq "$pos_60" ]; then
-            output="${output}\033[38;2;180;40;40m⛁${RESET}"     # dark-red marker
+            output="${output}\033[38;2;180;40;40m${RESET}"     # dark-red marker
         elif [ "$i" -le "$filled" ]; then
             if [ "$i" -lt "$pos_20" ]; then
                 color='\033[38;2;74;222;128m'    # green band
@@ -958,9 +957,9 @@ render_context_bar() {
                 color='\033[38;2;180;40;40m'     # dark-red band
             fi
             last_color="$color"
-            output="${output}${color}⛁${RESET}"
+            output="${output}${color}${RESET}"
         else
-            output="${output}${CTX_BUCKET_EMPTY}⛁${RESET}"
+            output="${output}${CTX_BUCKET_EMPTY}${RESET}"
         fi
         [ "$use_spacing" = true ] && output="${output} "
     done
@@ -978,22 +977,22 @@ calc_bar_width() {
 
     case "$mode" in
         nano)
-            prefix_len=2    # "◉ "
+            prefix_len=2    # " "
             suffix_len=5    # " XX%"
             bucket_size=2   # char + space
             ;;
         micro)
-            prefix_len=2    # "◉ "
+            prefix_len=2    # " "
             suffix_len=5    # " XX%"
             bucket_size=2
             ;;
         mini)
-            prefix_len=12   # "◉ CONTEXT: "
+            prefix_len=12   # " CONTEXT: "
             suffix_len=5    # " XXX%"
             bucket_size=2
             ;;
         normal)
-            prefix_len=11   # "◉ CONTEXT: " (◉=1 + space + CONTEXT: + space)
+            prefix_len=11   # " CONTEXT: " (=1 + space + CONTEXT: + space)
             suffix_len=5    # " XXX%" (space + up to 3 digits + %)
             bucket_size=1   # no spacing for dense display
             ;;
@@ -1011,9 +1010,9 @@ calc_bar_width() {
     echo "$buckets"
 }
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # LINE 0: PAI BRANDING (location, time, weather)
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # NOTE: location_city, location_state, weather_str are populated by PARALLEL PREFETCH
 
 current_time=$(date +"%H:%M")
@@ -1024,14 +1023,14 @@ if [ -n "$SESSION_LABEL" ]; then
     session_display=$(echo "$SESSION_LABEL" | tr '[:lower:]' '[:upper:]')
 fi
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # COMPACT CARD OUTPUT (nano/micro/mini modes)
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # For narrow panes: all essential metrics in a dense, bordered card.
 # No click-to-expand — everything visible in default view.
 
 if [ "$MODE" != "normal" ]; then
-    # ── Compute values needed for card ──
+    #  Compute values needed for card 
 
     # Context percentage — raw, matches /context command
     _raw_pct="${context_pct%%.*}"
@@ -1068,58 +1067,58 @@ if [ "$MODE" != "normal" ]; then
     fi
     _learn_color=$(get_rating_color "$_learn_score")
 
-    # ── Compact modes: same sections as normal, horizontally compressed ──
+    #  Compact modes: same sections as normal, horizontally compressed 
     case "$MODE" in
         nano)
             # Line 1: branding + context
-            printf "${PAI_A}${PAI_LOGO}${RESET}  ${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${CTX_PRIMARY}◉${RESET}${_pct_color}${_raw_pct}%%${RESET}
+            printf "${PAI_A}${PAI_LOGO}${RESET}  ${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${CTX_PRIMARY}${RESET}${_pct_color}${_raw_pct}%%${RESET}
 "
             # Line 2: git + learning
-            [ "$is_git_repo" = "true" ] && printf "${GIT_PRIMARY}◈${RESET}${GIT_VALUE}${branch}${RESET} "
-            printf "${LEARN_LABEL}✿${RESET}${_learn_color}${_learn_score}${_learn_trend}${RESET}
+            [ "$is_git_repo" = "true" ] && printf "${GIT_PRIMARY}${RESET}${GIT_VALUE}${branch}${RESET} "
+            printf "${LEARN_LABEL}${RESET}${_learn_color}${_learn_score}${_learn_trend}${RESET}
 "
             ;;
         micro)
             # Line 1: branding + context
-            printf "${PAI_A}${PAI_LOGO}${RESET}  ${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${CTX_PRIMARY}◉${RESET}${_pct_color}${_raw_pct}%%${RESET}
+            printf "${PAI_A}${PAI_LOGO}${RESET}  ${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${CTX_PRIMARY}${RESET}${_pct_color}${_raw_pct}%%${RESET}
 "
             # Line 2: git + learning
-            printf "${GIT_PRIMARY}◈${RESET}${GIT_VALUE}${branch:-—}${RESET}"
+            printf "${GIT_PRIMARY}${RESET}${GIT_VALUE}${branch:-—}${RESET}"
             [ -n "$_age" ] && printf " ${GIT_AGE_RECENT}${_age}${RESET}"
-            printf " ${SLATE_600}│${RESET} ${LEARN_LABEL}✿${RESET}${_learn_color}${_learn_score}${_learn_trend}${RESET}
+            printf " ${SLATE_600}${RESET} ${LEARN_LABEL}${RESET}${_learn_color}${_learn_score}${_learn_trend}${RESET}
 "
             # Line 3: memory counts
-            printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} ${LEARN_SESSIONS}⊕${RESET}${SLATE_300}${sessions_count}${RESET}
+            printf "${LEARN_PRIMARY}${RESET} ${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}${RESET}${SLATE_300}${ratings_count}${RESET} ${LEARN_SESSIONS}⊕${RESET}${SLATE_300}${sessions_count}${RESET}
 "
             ;;
         mini)
             # Line 1: branding + location/time
-            printf "${SLATE_600}──${RESET} ${PAI_A}${PAI_LOGO}${RESET}  ${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${SLATE_600}──${RESET} ${PAI_CITY}${location_city}${RESET} ${SLATE_600}│${RESET} ${PAI_TIME}${current_time}${RESET} ${SLATE_600}│${RESET} ${PAI_WEATHER}${weather_str}${RESET}
+            printf "${SLATE_600}${RESET} ${PAI_A}${PAI_LOGO}${RESET}  ${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${SLATE_600}${RESET} ${PAI_CITY}${location_city}${RESET} ${SLATE_600}${RESET} ${PAI_TIME}${current_time}${RESET} ${SLATE_600}${RESET} ${PAI_WEATHER}${weather_str}${RESET}
 "
             # Line 2: context bar (compact)
             _bar_w=20
             _bar=$(render_context_bar $_bar_w $_raw_pct)
-            printf "${CTX_PRIMARY}◉${RESET} ${_bar} ${_pct_color}${_raw_pct}%%${RESET}
+            printf "${CTX_PRIMARY}${RESET} ${_bar} ${_pct_color}${_raw_pct}%%${RESET}
 "
             # Line 4: git
-            printf "${GIT_PRIMARY}◈${RESET} ${GIT_VALUE}${branch:-—}${RESET}"
+            printf "${GIT_PRIMARY}${RESET} ${GIT_VALUE}${branch:-—}${RESET}"
             [ -n "$_age" ] && printf " ${age_color:-$GIT_AGE_RECENT}${_age}${RESET}"
             [ "${stash_count:-0}" -gt 0 ] && printf " ${GIT_STASH}⊡${stash_count}${RESET}"
             printf "
 "
             # Line 5: memory + learning
-            printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} ${SLATE_600}│${RESET} ${LEARN_LABEL}✿${RESET}${_learn_color}${_learn_score}${_learn_trend}${RESET}
+            printf "${LEARN_PRIMARY}${RESET} ${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}${RESET}${SLATE_300}${ratings_count}${RESET} ${SLATE_600}${RESET} ${LEARN_LABEL}${RESET}${_learn_color}${_learn_score}${_learn_trend}${RESET}
 "
             ;;
     esac
     exit 0
 fi
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # NORMAL MODE: Full multi-line output (80+ columns)
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
-# Output PAI branding line: PAI │ CITY, STATE   HH:MM  ☁️ temp [│ session]
+# Output PAI branding line: PAI  CITY, STATE   HH:MM   temp [ session]
 # City + state arrive uppercased from the location prefetch; flag is rendered there too.
 _hdr_loc=""
 if [ -n "$location_city" ]; then
@@ -1134,22 +1133,22 @@ _hdr_loc_plain="${_hdr_loc_plain}${location_city}"
 [ -n "$location_state" ] && _hdr_loc_plain="${_hdr_loc_plain}, ${location_state}"
 [ -z "$_hdr_loc_plain" ] && _hdr_loc_plain="—"
 if [ -n "$session_display" ]; then
-    printf "${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${SLATE_600}│${RESET} ${_hdr_loc}  ${PAI_TIME}${current_time}${RESET}  ${PAI_WEATHER}${weather_str}${RESET} ${SLATE_600}│${RESET} ${PAI_SESSION}${session_display}${RESET}\n"
+    printf "${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${SLATE_600}${RESET} ${_hdr_loc}  ${PAI_TIME}${current_time}${RESET}  ${PAI_WEATHER}${weather_str}${RESET} ${SLATE_600}${RESET} ${PAI_SESSION}${session_display}${RESET}\n"
 else
-    _hdr_left="PAI │ ${_hdr_loc_plain}  ${current_time}  ${weather_str} "
+    _hdr_left="PAI  ${_hdr_loc_plain}  ${current_time}  ${weather_str} "
     _hdr_fill=$((content_width - ${#_hdr_left}))
     [ "$_hdr_fill" -lt 2 ] && _hdr_fill=2
-    _hdr_dashes=$(_repeat_chars "$_hdr_fill" "─")
-    printf "${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${SLATE_600}│${RESET} ${_hdr_loc}  ${PAI_TIME}${current_time}${RESET}  ${PAI_WEATHER}${weather_str}${RESET} ${SLATE_600}${_hdr_dashes}${RESET}\n"
+    _hdr_dashes=$(_repeat_chars "$_hdr_fill" "")
+    printf "${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${SLATE_600}${RESET} ${_hdr_loc}  ${PAI_TIME}${current_time}${RESET}  ${PAI_WEATHER}${weather_str}${RESET} ${SLATE_600}${_hdr_dashes}${RESET}\n"
 fi
 printf "${SLATE_600}%s${RESET}\n" "$SEP_DASHED"
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # LINE: STATE METER — dimension meters toward Ideal State
 # Reads PAI/USER/TELOS/PAI_STATE.json (written by ComputeGap.ts on a schedule).
 # Falls back to placeholder values if the state file is missing.
-# Format: STATE: HEALTH 68%│CREATIVE 31%│FREEDOM 78%│RELATIONSHIPS 84%│FINANCIAL 42%
-# ═══════════════════════════════════════════════════════════════════════════════
+# Format: STATE: HEALTH 68%CREATIVE 31%FREEDOM 78%RELATIONSHIPS 84%FINANCIAL 42%
+# 
 
 _dim_color() {
     # Blue-family gradient — navy → light blue across dimensions
@@ -1206,16 +1205,16 @@ for _i in "${!_dims[@]}"; do
         *)           _suffix="%" ;;
     esac
     printf "%b%s${RESET} %b%s%s${RESET}" "$_dc" "${_labels[$_i]}" "$_tc" "$_val" "$_suffix"
-    [ "$_i" -lt $((${#_dims[@]} - 1)) ] && printf " ${SLATE_600}│${RESET} "
+    [ "$_i" -lt $((${#_dims[@]} - 1)) ] && printf " ${SLATE_600}${RESET} "
 done
 printf "\n"
 sep
-printf "${SLATE_400}CC:${RESET} ${PAI_A}${cc_version}${RESET} ${SLATE_600}│${RESET} ${SLATE_500}PAI:${PAI_A}${PAI_VERSION}${RESET} ${SLATE_400}ALG:${PAI_A}${ALGO_VERSION}${RESET} ${SLATE_600}│${RESET} ${WIELD_ACCENT}SK:${RESET} ${SLATE_300}${public_skills}${RESET}${SLATE_600}${RESET} ${SLATE_500}${private_skills}${RESET}${SLATE_600}${RESET} ${SLATE_600}│${RESET} ${WIELD_WORKFLOWS}WF:${RESET} ${SLATE_300}${workflows_count}${RESET} ${SLATE_600}│${RESET} ${WIELD_HOOKS}HK:${RESET} ${SLATE_300}${hooks_count}${RESET}\n"
+printf "${SLATE_400}CC:${RESET} ${PAI_A}${cc_version}${RESET} ${SLATE_600}${RESET} ${SLATE_500}PAI:${PAI_A}${PAI_VERSION}${RESET} ${SLATE_400}ALG:${PAI_A}${ALGO_VERSION}${RESET} ${SLATE_600}${RESET} ${WIELD_ACCENT}SK:${RESET} ${SLATE_300}${public_skills}${RESET}${SLATE_600}${RESET} ${SLATE_500}${private_skills}${RESET}${SLATE_600}${RESET} ${SLATE_600}${RESET} ${WIELD_WORKFLOWS}WF:${RESET} ${SLATE_300}${workflows_count}${RESET} ${SLATE_600}${RESET} ${WIELD_HOOKS}HK:${RESET} ${SLATE_300}${hooks_count}${RESET}\n"
 sep
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # LINE 1: CONTEXT
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 # Context display — show percentage and bar (no token counts)
 context_max="${context_max:-200000}"
@@ -1229,7 +1228,7 @@ display_pct="$raw_pct"
 pct_color=$(get_usage_color "$display_pct")
 
 # Calculate bar width dynamically from actual prefix/suffix lengths
-# Prefix: "◉ CONTEXT: " = 11 visible chars
+# Prefix: " CONTEXT: " = 11 visible chars
 # Suffix: " " + display_pct + "%" = 1 + len(display_pct) + 1
 _ctx_suffix_len=$(( 1 + ${#display_pct} + 1 ))
 bar_width=$(( content_width - 11 - _ctx_suffix_len ))
@@ -1286,9 +1285,9 @@ if [ "$_ctx_count" -gt 0 ]; then
 fi
 sep
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # LINE: ACCOUNT USAGE (Claude API rate limits — 5H and 7D windows)
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # NOTE: usage_5h, usage_7d, usage_5h_reset, usage_7d_reset populated by PARALLEL PREFETCH
 
 usage_5h_int=${usage_5h%%.*}
@@ -1376,16 +1375,16 @@ if [ "${usage_no_data:-false}" != "true" ] && { [ "$usage_5h_int" -gt 0 ] || [ "
     else
         _sub_color="$USAGE_PRIMARY"; _api_color="$SLATE_600"
     fi
-    printf "${_label_color}USE:${RESET} ${_reset_color}5HR:${RESET} ${usage_5h_color}${usage_5h_int}%%${RESET} ${_reset_color}↻${RESET}${_reset_5h_fmt} ${SLATE_600}│${RESET} ${_reset_color}WEEK:${RESET} ${usage_7d_color}${usage_7d_int}%%${RESET} ${_reset_color}↻${RESET}${_reset_7d_fmt} ${SLATE_600}(${RESET}${_sub_color}SUB${RESET}${SLATE_600}/${RESET}${_api_color}API${RESET}${SLATE_600})${RESET}"
-    [ -n "$extra_display" ] && printf " ${SLATE_600}│${RESET} ${USAGE_EXTRA}${extra_display}${RESET}"
+    printf "${_label_color}USE:${RESET} ${_reset_color}5HR:${RESET} ${usage_5h_color}${usage_5h_int}%%${RESET} ${_reset_color}↻${RESET}${_reset_5h_fmt} ${SLATE_600}${RESET} ${_reset_color}WEEK:${RESET} ${usage_7d_color}${usage_7d_int}%%${RESET} ${_reset_color}↻${RESET}${_reset_7d_fmt} ${SLATE_600}(${RESET}${_sub_color}SUB${RESET}${SLATE_600}/${RESET}${_api_color}API${RESET}${SLATE_600})${RESET}"
+    [ -n "$extra_display" ] && printf " ${SLATE_600}${RESET} ${USAGE_EXTRA}${extra_display}${RESET}"
     [ -n "$stale_suffix" ] && printf "${stale_suffix}"
     printf "\n"
     sep
 fi
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # LINE: LEARNING (with sparklines in normal mode)
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 LEARNING_CACHE_TTL=30  # seconds
 
@@ -1409,7 +1408,7 @@ if [ -f "$RATINGS_FILE" ] && [ -s "$RATINGS_FILE" ]; then
         source "$LEARNING_CACHE"
     else
         # Compute fresh and cache
-        _sparkline_w=$((content_width - 10))  # prefix "   ├─ 15m:  " ~12 cols, -10 to fill edge
+        _sparkline_w=$((content_width - 10))  # prefix "    15m:  " ~12 cols, -10 to fill edge
         [ "$_sparkline_w" -lt 20 ] && _sparkline_w=20
         eval "$(grep '^{' "$RATINGS_FILE" | jq -Rc 'try fromjson catch empty' | jq -rs --argjson now "$now" --argjson spark_w "$_sparkline_w" '
       # Parse ISO timestamp to epoch (handles timezone offsets)
@@ -1444,16 +1443,16 @@ if [ -f "$RATINGS_FILE" ] && [ -s "$RATINGS_FILE" ]; then
       # Sparkline: diverging from 5, symmetric heights, color = direction
       def to_bar:
         floor |
-        if . >= 10 then "\u001b[38;2;34;197;94m▅\u001b[0m"      # brightest green
-        elif . >= 9 then "\u001b[38;2;74;222;128m▅\u001b[0m"    # green
-        elif . >= 8 then "\u001b[38;2;134;239;172m▄\u001b[0m"   # light green
-        elif . >= 7 then "\u001b[38;2;59;130;246m▃\u001b[0m"    # dark blue
-        elif . >= 6 then "\u001b[38;2;96;165;250m▂\u001b[0m"    # blue
-        elif . >= 5 then "\u001b[38;2;253;224;71m▁\u001b[0m"    # yellow baseline
-        elif . >= 4 then "\u001b[38;2;253;186;116m▂\u001b[0m"   # light orange
-        elif . >= 3 then "\u001b[38;2;251;146;60m▃\u001b[0m"    # orange
-        elif . >= 2 then "\u001b[38;2;248;113;113m▄\u001b[0m"   # light red
-        else "\u001b[38;2;239;68;68m▅\u001b[0m" end;            # red
+        if . >= 10 then "\u001b[38;2;34;197;94m\u001b[0m"      # brightest green
+        elif . >= 9 then "\u001b[38;2;74;222;128m\u001b[0m"    # green
+        elif . >= 8 then "\u001b[38;2;134;239;172m\u001b[0m"   # light green
+        elif . >= 7 then "\u001b[38;2;59;130;246m\u001b[0m"    # dark blue
+        elif . >= 6 then "\u001b[38;2;96;165;250m\u001b[0m"    # blue
+        elif . >= 5 then "\u001b[38;2;253;224;71m\u001b[0m"    # yellow baseline
+        elif . >= 4 then "\u001b[38;2;253;186;116m\u001b[0m"   # light orange
+        elif . >= 3 then "\u001b[38;2;251;146;60m\u001b[0m"    # orange
+        elif . >= 2 then "\u001b[38;2;248;113;113m\u001b[0m"   # light red
+        else "\u001b[38;2;239;68;68m\u001b[0m" end;            # red
 
       # Sparkline from PRE-FILTERED data (not all ratings)
       def make_sparkline($data; $period_start):
@@ -1558,28 +1557,28 @@ CACHE_EOF
 
         [ "$latest_source" = "explicit" ] && src_label="EXP" || src_label="IMP"
 
-        printf "${LEARN_LABEL}LEARNING:${RESET} ${SLATE_600}│${RESET} "
-        printf "${LATEST_COLOR}${latest}${RESET}${SLATE_500}${src_label}${RESET} ${SLATE_600}│${RESET} "
+        printf "${LEARN_LABEL}LEARNING:${RESET} ${SLATE_600}${RESET} "
+        printf "${LATEST_COLOR}${latest}${RESET}${SLATE_500}${src_label}${RESET} ${SLATE_600}${RESET} "
         printf "${SIGNAL_PERIOD}60m:${RESET} ${HOUR_COLOR}${hour_avg}${RESET} "
         printf "${SIGNAL_PERIOD}1d:${RESET} ${TODAY_COLOR}${today_avg}${RESET} "
         printf "${SIGNAL_PERIOD}1mo:${RESET} ${MONTH_COLOR}${month_avg}${RESET}\n"
 
         # Sparklines (condensed, no blank lines — 60m + 1d + 1mo)
-        printf "   ${SLATE_600}├─${RESET} ${SIGNAL_PERIOD}%-5s${RESET} %s\n" "60m:" "$hour_sparkline"
-        printf "   ${SLATE_600}├─${RESET} ${SIGNAL_PERIOD}%-5s${RESET} %s\n" "1d:" "$day_sparkline"
-        printf "   ${SLATE_600}└─${RESET} ${SIGNAL_PERIOD}%-5s${RESET} %s\n" "1mo:" "$month_sparkline"
+        printf "   ${SLATE_600}${RESET} ${SIGNAL_PERIOD}%-5s${RESET} %s\n" "60m:" "$hour_sparkline"
+        printf "   ${SLATE_600}${RESET} ${SIGNAL_PERIOD}%-5s${RESET} %s\n" "1d:" "$day_sparkline"
+        printf "   ${SLATE_600}${RESET} ${SIGNAL_PERIOD}%-5s${RESET} %s\n" "1mo:" "$month_sparkline"
     else
         printf "${LEARN_LABEL}LEARNING:${RESET}\n"
         printf "  ${SLATE_500}No ratings yet${RESET}\n"
     fi
 else
-    printf "${LEARN_LABEL}✿${RESET} ${LEARN_LABEL}LEARNING:${RESET}\n"
+    printf "${LEARN_LABEL}${RESET} ${LEARN_LABEL}LEARNING:${RESET}\n"
     printf "  ${SLATE_500}No ratings yet${RESET}\n"
 fi
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # LINE 7: QUOTE (normal mode only)
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 if [ "$MODE" = "normal" ]; then
     sep
@@ -1587,7 +1586,7 @@ if [ "$MODE" = "normal" ]; then
     # Quote was prefetched in parallel block — just read the cache
     if [ -f "$QUOTE_CACHE" ]; then
         IFS='|' read -r quote_text quote_author < "$QUOTE_CACHE"
-        full_len=$((${#quote_text} + ${#quote_author} + 6))  # ✦ "text" —author
+        full_len=$((${#quote_text} + ${#quote_author} + 6))  #  "text" —author
 
         if [ "$full_len" -le "$content_width" ]; then
             printf "${SLATE_400}\"${quote_text}\"${RESET} ${QUOTE_AUTHOR}—${quote_author}${RESET}\n"

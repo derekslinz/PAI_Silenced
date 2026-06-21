@@ -4,7 +4,7 @@ Intelligent multi-layer content retrieval system for DIFFICULT content retrieval
 
 When to Use This Skill
 
-️ IMPORTANT:This skill is for CHALLENGING content retrieval only, not routine fetching.
+ IMPORTANT:This skill is for CHALLENGING content retrieval only, not routine fetching.
 
 DO USE this skill when user indicates difficulty:- "I can't get this content"
 - "Having trouble retrieving this"
@@ -324,7 +324,7 @@ Layer Comparison Matrix
 | Speed| Fast (< s) | Medium (-s) | Slower (-s) |
 | Bot Detection Bypass| No | Yes | Yes |
 | CAPTCHA Handling| No | Yes | Yes |
-| JavaScript Rendering| ️ Limited | Full | Full |
+| JavaScript Rendering|  Limited | Full | Full |
 | Batch Operations| Manual | Up to | Unlimited |
 | Search Integration| Basic | Multi-engine | Google only |
 | Markdown Output| Yes | Yes | Optimized |
@@ -379,23 +379,23 @@ Process:
 File Structure Example:
 Working files (in current work item directory):```
 ~/.claude/PAI/MEMORY/WORK/-_retrieve-react-docs/
-├── raw-content/
-│   ├── page.md (Layer output)
-│   ├── page.md (Layer output)
-│   └── page.md (Layer output)
-├── processed/
-│   ├── combined-content.md
-│   └── extracted-features.json
-├── metadata.json (URLs, layers used, timestamps)
-└── errors.log (failed attempts, escalations)
+ raw-content/
+    page.md (Layer output)
+    page.md (Layer output)
+    page.md (Layer output)
+ processed/
+    combined-content.md
+    extracted-features.json
+ metadata.json (URLs, layers used, timestamps)
+ errors.log (failed attempts, escalations)
 ```
 
 History (permanent archive):```
 ~/.claude/History/research/--_react-documentation/
-├── README.md (retrieval documentation)
-├── content.md (final extracted content)
-├── metadata.json (sources, layers used, timestamps)
-└── summary.md (key extracted information)
+ README.md (retrieval documentation)
+ content.md (final extracted content)
+ metadata.json (sources, layers used, timestamps)
+ summary.md (key extracted information)
 ```
 
 README.md Template:```markdown

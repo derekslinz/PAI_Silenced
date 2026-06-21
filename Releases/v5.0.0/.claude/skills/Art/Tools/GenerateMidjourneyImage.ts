@@ -297,7 +297,7 @@ async function main() {
     });
 
     console.log('Midjourney Image Generation');
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('');
     console.log(`Prompt: ${args.prompt}`);
     console.log(`Aspect Ratio: ${args.aspectRatio}`);
     console.log(`Version: ${args.version}`);
@@ -308,7 +308,7 @@ async function main() {
     if (args.tile) console.log(`Tile: enabled`);
     console.log(`Output: ${args.output}`);
     console.log(`Timeout: ${args.timeout}s`);
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+    console.log('\n');
 
     // Initialize Discord bot
     const discordBot = new DiscordBotClient({
@@ -339,12 +339,12 @@ async function main() {
       // Download image
       await discordBot.downloadImage(result.imageUrl, args.output);
 
-      console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      console.log('\n');
       console.log('Success!');
       console.log(`   Image URL: ${result.imageUrl}`);
       console.log(`   Saved to: ${args.output}`);
       console.log(`   Message ID: ${result.messageId}`);
-      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+      console.log('\n');
 
       // Disconnect
       await discordBot.disconnect();

@@ -43,23 +43,23 @@ Step : Execute Passes
 
 For each lens (through N):
 ```
-┌─────────────────────────────────────────────┐
-│ ITERATIVE DEPTH — Pass {i}/{N}: {LENS_NAME}                      │
-│                                                                       │
-│ Lens Question: "{The lens's core question}"                          │
-│                                                                       │
-│ Exploring from this angle...                                         │
-│                                                                       │
-│ Findings:                                                            │
-│ - [Finding — potential ISC criterion]                              │
-│ - [Finding — potential ISC criterion]                              │
-│ - [Finding — refinement of existing criterion]                     │
-│                                                                       │
-│ New/Refined ISC:                                                     │
-│ + C{N}: [new criterion, -words, state not action]               │
-│ ~ C{M}: [refined criterion, was X, now Y]                           │
-│ + A{N}: [new anti-criterion]                                         │
-└─────────────────────────────────────────────┘
+
+ ITERATIVE DEPTH — Pass {i}/{N}: {LENS_NAME}                      
+                                                                       
+ Lens Question: "{The lens's core question}"                          
+                                                                       
+ Exploring from this angle...                                         
+                                                                       
+ Findings:                                                            
+ - [Finding — potential ISC criterion]                              
+ - [Finding — potential ISC criterion]                              
+ - [Finding — refinement of existing criterion]                     
+                                                                       
+ New/Refined ISC:                                                     
+ + C{N}: [new criterion, -words, state not action]               
+ ~ C{M}: [refined criterion, was X, now Y]                           
+ + A{N}: [new anti-criterion]                                         
+
 ```
 
 Execution modes by SLA:

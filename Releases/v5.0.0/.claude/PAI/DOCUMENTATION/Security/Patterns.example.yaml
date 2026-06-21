@@ -22,19 +22,19 @@ bash:
 
   # BLOCKED — Hard deny via exit(2). No prompt, no workaround.
   blocked:
-    # ── Filesystem destruction ────────────────────────────────────
+    #  Filesystem destruction 
     - pattern: "rm\\s.*-\\w*r.*\\s+/(\\s|$)"
       reason: "Recursive deletion of system root"
     - pattern: "rm\\s.*-\\w*r.*\\s+~/?(\\s|$)"
       reason: "Recursive deletion of home directory"
 
-    # ── Credential access via shell ──────────────────────────────
+    #  Credential access via shell 
     - pattern: "cat.*\\.env"
       reason: "Reading .env file via cat (use Read tool or secrets utility)"
     - pattern: "source.*\\.env"
       reason: "Sourcing .env file into shell environment"
 
-    # ── Credential exfiltration in outbound commands ─────────────
+    #  Credential exfiltration in outbound commands 
     - pattern: "sk_live_"
       reason: "Stripe live key detected in command string"
     - pattern: "sk-ant-"
@@ -42,7 +42,7 @@ bash:
     - pattern: "PRIVATE KEY"
       reason: "Private key material detected in command string"
 
-    # ── Pipe to shell (universal) ────────────────────────────────
+    #  Pipe to shell (universal) 
     - pattern: "\\|\\s*(sh|bash|zsh)\\b"
       reason: "Piping output to shell interpreter"
 
@@ -57,11 +57,11 @@ bash:
     - pattern: "DROP DATABASE"
       reason: "Database drop (logged for audit)"
 
-    # ── Outbound data exfiltration (alert, not block) ────────────
+    #  Outbound data exfiltration (alert, not block) 
     - pattern: "curl.*(-X POST|--data|\\s-d\\s)"
       reason: "Outbound HTTP POST via curl (logged for audit)"
 
-    # ── Environment variable dump (credential exposure) ──────────
+    #  Environment variable dump (credential exposure) 
     - pattern: "^(printenv|env)\\s*$"
       reason: "Full environment variable dump (credential exposure risk)"
 

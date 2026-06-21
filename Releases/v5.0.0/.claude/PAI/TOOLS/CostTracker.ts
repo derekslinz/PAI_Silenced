@@ -70,9 +70,9 @@ interface CallSite {
   reason: string;
 }
 
-// ──────────────────────────────────────────────────────────────────────────
+// 
 // Subscription usage (OAuth, cached by UpdateCounts.hook.ts)
-// ──────────────────────────────────────────────────────────────────────────
+// 
 
 function readSubscriptionUsage(): { five_hour_pct: number | null; seven_day_pct: number | null } {
   try {
@@ -87,9 +87,9 @@ function readSubscriptionUsage(): { five_hour_pct: number | null; seven_day_pct:
   }
 }
 
-// ──────────────────────────────────────────────────────────────────────────
+// 
 // API spend (requires ANTHROPIC_ADMIN_API_KEY)
-// ──────────────────────────────────────────────────────────────────────────
+// 
 
 async function fetchApiSpend(): Promise<{ month_used_usd: number | null; source: "admin_key" | "unavailable" }> {
   const adminKey = process.env.ANTHROPIC_ADMIN_API_KEY;
@@ -123,9 +123,9 @@ async function fetchApiSpend(): Promise<{ month_used_usd: number | null; source:
   }
 }
 
-// ──────────────────────────────────────────────────────────────────────────
+// 
 // Static call-site scan — the real leak detector
-// ──────────────────────────────────────────────────────────────────────────
+// 
 
 // Paths we scan (source-of-truth for PAI-local billing risk)
 const SCAN_ROOTS = [
@@ -248,9 +248,9 @@ function scanCallSites(): CallSite[] {
   });
 }
 
-// ──────────────────────────────────────────────────────────────────────────
+// 
 // Baseline diff — detect new call sites since last scan
-// ──────────────────────────────────────────────────────────────────────────
+// 
 
 function readBaseline(): Set<string> {
   try {
@@ -267,9 +267,9 @@ function writeBaseline(sites: CallSite[]): void {
   writeFileSync(CALL_SITES_PATH, JSON.stringify({ updated: new Date().toISOString(), sites }, null, 2));
 }
 
-// ──────────────────────────────────────────────────────────────────────────
+// 
 // Snapshot assembly
-// ──────────────────────────────────────────────────────────────────────────
+// 
 
 async function takeSnapshot(): Promise<{ snapshot: CostSnapshot; sites: CallSite[] }> {
   const subscription = readSubscriptionUsage();
@@ -309,9 +309,9 @@ async function takeSnapshot(): Promise<{ snapshot: CostSnapshot; sites: CallSite
   };
 }
 
-// ──────────────────────────────────────────────────────────────────────────
+// 
 // Alert (text)
-// ──────────────────────────────────────────────────────────────────────────
+// 
 
 async function emitAlert(message: string): Promise<void> {
   // Text alert to stderr; callers also print the message to stdout for
@@ -319,13 +319,13 @@ async function emitAlert(message: string): Promise<void> {
   console.error(`[CostTracker] alert: ${message}`);
 }
 
-// ──────────────────────────────────────────────────────────────────────────
+// 
 // CLI
-// ──────────────────────────────────────────────────────────────────────────
+// 
 
 function formatStatus(snap: CostSnapshot): string {
   const lines: string[] = [];
-  lines.push(`═══ PAI Anthropic Cost — ${snap.ts} ═══`);
+  lines.push(` PAI Anthropic Cost — ${snap.ts} `);
   lines.push(``);
   lines.push(`Subscription (OAuth):`);
   lines.push(`  5h window:   ${snap.subscription.five_hour_pct ?? "unknown"}%`);
@@ -349,7 +349,7 @@ function formatStatus(snap: CostSnapshot): string {
   }
   lines.push(``);
   if (snap.alerts.length === 0) {
-    lines.push(`✅ No alerts`);
+    lines.push(` No alerts`);
   } else {
     lines.push(` Alerts:`);
     for (const a of snap.alerts) lines.push(`  ! ${a}`);
@@ -372,7 +372,7 @@ async function main(): Promise<void> {
       console.log(`Found ${sites.length} potential API-billing call site(s):`);
       console.log(``);
       for (const s of sites) {
-        const icon = s.classification === "bypass" ? "" : s.classification === "legit" ? "✅" : "❓";
+        const icon = s.classification === "bypass" ? "" : s.classification === "legit" ? "" : "";
         console.log(`${icon} ${s.file}:${s.line}`);
         console.log(`   ${s.reason}`);
       }

@@ -6,24 +6,24 @@ Bundle Layout
 
 ```
 <bundle-root>/
-├── PROMPT.md                    REQUIRED. Structured brief for the frontend-design plugin.
-├── tokens.json                  REQUIRED. Design tokens in JSON.
-├── preview.html                 REQUIRED. Static preview render.
-├── README.md                    RECOMMENDED. Bundle metadata.
-├── manifest.json                RECOMMENDED. Framework + version metadata.
-├── components/                  OPTIONAL. Component scaffolds.
-│   └── <component>.{tsx,jsx,vue,astro,html}
-├── pages/                       OPTIONAL. Page scaffolds (multi-page bundles).
-│   └── <route>.{tsx,jsx,vue,astro,html}
-├── assets/                      OPTIONAL. Binary assets.
-│   ├── images/
-│   ├── fonts/
-│   ├── icons/
-│   └── logos/
-└── integration/                 OPTIONAL. Framework-specific config.
-    ├── tailwind.config.ts
-    ├── astro.config.mjs
-    └── ...
+ PROMPT.md                    REQUIRED. Structured brief for the frontend-design plugin.
+ tokens.json                  REQUIRED. Design tokens in JSON.
+ preview.html                 REQUIRED. Static preview render.
+ README.md                    RECOMMENDED. Bundle metadata.
+ manifest.json                RECOMMENDED. Framework + version metadata.
+ components/                  OPTIONAL. Component scaffolds.
+    <component>.{tsx,jsx,vue,astro,html}
+ pages/                       OPTIONAL. Page scaffolds (multi-page bundles).
+    <route>.{tsx,jsx,vue,astro,html}
+ assets/                      OPTIONAL. Binary assets.
+    images/
+    fonts/
+    icons/
+    logos/
+ integration/                 OPTIONAL. Framework-specific config.
+     tailwind.config.ts
+     astro.config.mjs
+     ...
 ```
 
 File Semantics

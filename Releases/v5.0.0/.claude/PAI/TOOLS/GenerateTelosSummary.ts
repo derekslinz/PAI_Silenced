@@ -292,5 +292,5 @@ function generate(): string {
 const summary = generate();
 writeFileSync(OUTPUT_PATH, summary);
 const lineCount = summary.split('\n').length;
-console.log(`✅ Generated PRINCIPAL_TELOS.md (${lineCount} lines) at ${OUTPUT_PATH}`);
+console.log(` Generated PRINCIPAL_TELOS.md (${lineCount} lines) at ${OUTPUT_PATH}`);
 console.error(` TELOS summary regenerated: ${lineCount} lines from source files`);

@@ -1,6 +1,6 @@
 # Expenses
 
-> 💼 SAMPLE TEMPLATE — Replace with your own expense tracking via /interview or by editing this file.
+>  SAMPLE TEMPLATE — Replace with your own expense tracking via /interview or by editing this file.
 
 Running list of business expenses, or a pointer to wherever you track them (QuickBooks, a spreadsheet, a separate ledger).
 

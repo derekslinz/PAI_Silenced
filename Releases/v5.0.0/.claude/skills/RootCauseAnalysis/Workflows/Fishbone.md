@@ -18,16 +18,16 @@ The Structure
 
 ```
                   People              Process             Material
-                     │                   │                   │
-               ┌─────┴─────┐       ┌─────┴─────┐       ┌─────┴─────┐
-               │           │       │           │       │           │
-               │           │       │           │       │           │
-        ─ ─ ─ ─┴─ ─ ─ ─ ─ ─┴─ ─ ─ ─┴─ ─ ─ ─ ─ ─┴─ ─ ─ ─┴─ ─ ─ ─ ─ ─┼─ ─ ─ ─ PROBLEM
-                                                                    │
-               │           │       │           │       │           │
-               │           │       │           │       │           │
-               └─────┬─────┘       └─────┬─────┘       └─────┬─────┘
-                     │                   │                   │
+                                                           
+                             
+                                                              
+                                                              
+                                    PROBLEM
+                                                                    
+                                                              
+                                                              
+                             
+                                                           
                   Machine           Measurement         Environment
 ```
 
@@ -99,12 +99,12 @@ For each cause, ask "Why does this happen?" -times. This is where Whys nests ins
 
 ```
 Category: Process
-  ├─ Cause: Deploy runbook missing
-  │    └─ Why: Template predates current architecture
-  │         └─ Why: No owner for runbook maintenance
-  ├─ Cause: Rollback procedure untested
-  │    └─ Why: Never run in prod
-  │         └─ Why: Fear of causing secondary incident
+   Cause: Deploy runbook missing
+       Why: Template predates current architecture
+            Why: No owner for runbook maintenance
+   Cause: Rollback procedure untested
+       Why: Never run in prod
+            Why: Fear of causing secondary incident
 ```
 
 Step : Prioritize Using Pareto
@@ -142,7 +142,7 @@ CAUSE MAP:
 
 People:
 - [Cause A]
-  └─ Why: [depth]
+   Why: [depth]
 - [Cause A]
 
 Machine:
@@ -151,8 +151,8 @@ Machine:
 
 Method:
 - [Cause C]
-  └─ Why: [depth]
-    └─ Why: [depth]
+   Why: [depth]
+     Why: [depth]
 
 Material:
 - [Cause D]

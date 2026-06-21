@@ -19,11 +19,11 @@ Not for:dynamic behavior (use CausalLoop), incident causation (use RootCauseAnal
 The Structure
 
 ```
-[CONCEPT A]  ──"contains"── [CONCEPT B]
-    │
-    │"interacts with"
-    ▼
-[CONCEPT C]  ──"depends on"── [CONCEPT D]
+[CONCEPT A]  "contains" [CONCEPT B]
+    
+    "interacts with"
+    
+[CONCEPT C]  "depends on" [CONCEPT D]
 ```
 
 Components:- Concepts— nodes, usually nouns or noun phrases, enclosed in boxes
@@ -123,10 +123,10 @@ CONCEPTS (general → specific):
 
 HIERARCHY:
   [C]
-    ├─ [C]
-    │   └─ [C]
-    └─ [C]
-        └─ [C]
+     [C]
+        [C]
+     [C]
+         [C]
 
 PROPOSITIONS (concept → [link] → concept):
 - [C] → [contains] → [C]

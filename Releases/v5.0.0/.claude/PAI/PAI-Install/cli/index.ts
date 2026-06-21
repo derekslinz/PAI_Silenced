@@ -144,7 +144,7 @@ export async function runCLI(): Promise<void> {
   }
 
   try {
-    // ── Step 1: System Detection ──
+    //  Step 1: System Detection 
     if (!state.completedSteps.includes("system-detect")) {
       const step = STEPS[0];
       printStep(step.number, 9, step.name);
@@ -154,7 +154,7 @@ export async function runCLI(): Promise<void> {
       state.currentStep = "prerequisites";
     }
 
-    // ── Step 2: Prerequisites ──
+    //  Step 2: Prerequisites 
     if (!state.completedSteps.includes("prerequisites")) {
       const step = STEPS[1];
       printStep(step.number, 9, step.name);
@@ -163,7 +163,7 @@ export async function runCLI(): Promise<void> {
       state.currentStep = "api-keys";
     }
 
-    // ── Step 3: API Keys ──
+    //  Step 3: API Keys 
     if (!state.completedSteps.includes("api-keys")) {
       const step = STEPS[2];
       printStep(step.number, 9, step.name);
@@ -172,7 +172,7 @@ export async function runCLI(): Promise<void> {
       state.currentStep = "identity";
     }
 
-    // ── Step 4: Identity ──
+    //  Step 4: Identity 
     if (!state.completedSteps.includes("identity")) {
       const step = STEPS[3];
       printStep(step.number, 9, step.name);
@@ -181,7 +181,7 @@ export async function runCLI(): Promise<void> {
       state.currentStep = "repository";
     }
 
-    // ── Step 5: Repository ──
+    //  Step 5: Repository 
     if (!state.completedSteps.includes("repository")) {
       const step = STEPS[4];
       printStep(step.number, 9, step.name);
@@ -190,7 +190,7 @@ export async function runCLI(): Promise<void> {
       state.currentStep = "configuration";
     }
 
-    // ── Step 6: Configuration ──
+    //  Step 6: Configuration 
     if (!state.completedSteps.includes("configuration")) {
       const step = STEPS[5];
       printStep(step.number, 9, step.name);
@@ -199,7 +199,7 @@ export async function runCLI(): Promise<void> {
       state.currentStep = "pulse";
     }
 
-    // ── Step 7: Pulse ──
+    //  Step 7: Pulse 
     if (!state.completedSteps.includes("pulse") && !state.skippedSteps.includes("pulse")) {
       const step = STEPS[6];
       printStep(step.number, 9, step.name);
@@ -208,7 +208,7 @@ export async function runCLI(): Promise<void> {
       state.currentStep = "telegram";
     }
 
-    // ── Step 8: Telegram (optional) ──
+    //  Step 8: Telegram (optional) 
     if (!state.completedSteps.includes("telegram") && !state.skippedSteps.includes("telegram")) {
       const step = STEPS[7];
       printStep(step.number, 9, step.name);
@@ -221,7 +221,7 @@ export async function runCLI(): Promise<void> {
       state.currentStep = "validation";
     }
 
-    // ── Step 9: Validation ──
+    //  Step 9: Validation 
     if (!state.completedSteps.includes("validation")) {
       const step = STEPS[8];
       printStep(step.number, 9, step.name);
@@ -237,7 +237,7 @@ export async function runCLI(): Promise<void> {
       }
     }
 
-    // ── Summary ──
+    //  Summary 
     const summary = generateSummary(state);
     printSummary(summary);
 

@@ -22,7 +22,7 @@ import { parseArgs } from 'util';
 const BASE_DIR = process.env.PAI_DIR || join(process.env.HOME!, '.claude');
 const FRAMES_DIR = join(BASE_DIR, 'MEMORY', 'WISDOM', 'FRAMES');
 
-// ── Types ──
+//  Types 
 
 type ObservationType = 'principle' | 'contextual-rule' | 'prediction' | 'anti-pattern' | 'evolution';
 
@@ -34,7 +34,7 @@ interface UpdateResult {
   framePath: string;
 }
 
-// ── Frame Operations ──
+//  Frame Operations 
 
 function getFramePath(domain: string): string {
   return join(FRAMES_DIR, `${domain}.md`);
@@ -175,7 +175,7 @@ function addPrediction(content: string, observation: string): string {
   return content.slice(0, lineEnd) + `\n| ${observation} | To be refined | 60% |` + content.slice(lineEnd);
 }
 
-// ── Core Update Function ──
+//  Core Update Function 
 
 export function updateFrame(
   domain: string,
@@ -289,7 +289,7 @@ ${type === 'anti-pattern' ? `### ${observation}\n- **Severity:** Medium\n- **Fre
   };
 }
 
-// ── CLI ──
+//  CLI 
 
 if (import.meta.main) {
   const { values } = parseArgs({

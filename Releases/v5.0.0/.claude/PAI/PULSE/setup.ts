@@ -17,7 +17,7 @@ const HOME = process.env.HOME ?? "~"
 const PAI_DIR = join(HOME, ".claude", "PAI")
 const PULSE_DIR = join(PAI_DIR, "PULSE")
 
-// ── Helpers ──
+//  Helpers 
 
 function prompt(question: string): Promise<string> {
   process.stdout.write(`\n  ${question} `)
@@ -32,9 +32,9 @@ function prompt(question: string): Promise<string> {
 }
 
 function heading(text: string): void {
-  console.log(`\n${"─".repeat(50)}`)
+  console.log(`\n${"".repeat(50)}`)
   console.log(`  ${text}`)
-  console.log(`${"─".repeat(50)}`)
+  console.log(`${"".repeat(50)}`)
 }
 
 function ok(text: string): void {
@@ -45,7 +45,7 @@ function warn(text: string): void {
   console.log(`  [!!] ${text}`)
 }
 
-// ── Step 1: Read Identity ──
+//  Step 1: Read Identity 
 
 async function readIdentity(): Promise<{ name: string; description: string }> {
   heading("Step 1: Worker Identity")
@@ -70,7 +70,7 @@ async function readIdentity(): Promise<{ name: string; description: string }> {
   return { name: name.toLowerCase(), description }
 }
 
-// ── Step 2: GitHub App Setup ──
+//  Step 2: GitHub App Setup 
 
 async function setupGitHubApp(workerName: string): Promise<{
   appId: string
@@ -126,7 +126,7 @@ async function setupGitHubApp(workerName: string): Promise<{
   return { appId, installationId, privateKeyPath: resolvedKey, repos }
 }
 
-// ── Step 3: Telegram Setup ──
+//  Step 3: Telegram Setup 
 
 async function setupTelegram(workerName: string): Promise<{ botToken: string; chatId: string }> {
   heading("Step 3: Telegram Bot")
@@ -151,7 +151,7 @@ async function setupTelegram(workerName: string): Promise<{ botToken: string; ch
   return { botToken, chatId }
 }
 
-// ── Step 4: Generate Config Files ──
+//  Step 4: Generate Config Files 
 
 async function generateConfigs(opts: {
   name: string
@@ -245,7 +245,7 @@ enabled = true
   ok(".env written")
 }
 
-// ── Step 5: Local HTTPS Setup (hosts file + mkcert) ──
+//  Step 5: Local HTTPS Setup (hosts file + mkcert) 
 
 async function setupLocalHTTPS(): Promise<void> {
   heading("Step 5: Local HTTPS (mkcert)")
@@ -336,7 +336,7 @@ async function setupLocalHTTPS(): Promise<void> {
   }
 }
 
-// ── Step 6: Install launchd Service ──
+//  Step 6: Install launchd Service 
 
 async function installService(): Promise<void> {
   heading("Step 6: Installing launchd Service")
@@ -364,7 +364,7 @@ async function installService(): Promise<void> {
   ok("launchd service installed")
 }
 
-// ── Step 7: Health Check ──
+//  Step 7: Health Check 
 
 async function healthCheck(): Promise<void> {
   heading("Step 7: Health Check")
@@ -398,14 +398,14 @@ async function healthCheck(): Promise<void> {
   }
 }
 
-// ── Main ──
+//  Main 
 
 async function main() {
   console.log(`
-${"═".repeat(50)}
+${"".repeat(50)}
   PAI Pulse Worker Setup
   Goal: Working AI employee in under 30 minutes
-${"═".repeat(50)}`)
+${"".repeat(50)}`)
 
   const startTime = Date.now()
 
@@ -431,7 +431,7 @@ ${"═".repeat(50)}`)
   const elapsed = Math.round((Date.now() - startTime) / 1000)
 
   console.log(`
-${"═".repeat(50)}
+${"".repeat(50)}
   Setup Complete!
 
   Worker: ${identity.name}
@@ -442,7 +442,7 @@ ${"═".repeat(50)}
   - Create a test issue with label "status:ready" in one of your repos
   - Watch: tail -f ${join(PULSE_DIR, "logs", "pulse-stdout.log")}
   - Status: ${join(PULSE_DIR, "manage.sh")} status
-${"═".repeat(50)}
+${"".repeat(50)}
 `)
 }
 

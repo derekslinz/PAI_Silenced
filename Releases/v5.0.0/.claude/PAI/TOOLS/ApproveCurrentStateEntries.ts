@@ -55,10 +55,10 @@ function reviewQueue(): void {
   const queue = loadQueue();
   const pending = queue.filter((p) => p.status === "pending");
   if (pending.length === 0) {
-    console.log("✅ No pending proposals.");
+    console.log(" No pending proposals.");
     return;
   }
-  console.log(`═══ Pending proposals (${pending.length}) ═══\n`);
+  console.log(` Pending proposals (${pending.length}) \n`);
   for (const p of pending) {
     console.log(`ID: ${p.id}`);
     console.log(`  Source: ${p.source}    Target: ${p.target}    At: ${p.timestamp}`);
@@ -100,7 +100,7 @@ function approve(id: string): void {
   appendToTarget(p.target, p.payload, p.source);
   queue.splice(idx, 1);
   saveQueue(queue);
-  console.log(`✅ Approved and committed: ${id} → ${p.target}`);
+  console.log(` Approved and committed: ${id} → ${p.target}`);
 }
 
 function reject(id: string): void {
@@ -112,7 +112,7 @@ function reject(id: string): void {
     return;
   }
   saveQueue(filtered);
-  console.log(`️  Rejected: ${id}`);
+  console.log(`  Rejected: ${id}`);
 }
 
 function approveAll(): void {
@@ -128,10 +128,10 @@ function approveAll(): void {
   }
   const remaining = queue.filter((p) => p.status !== "pending");
   saveQueue(remaining);
-  console.log(`✅ ${pending.length} proposals approved and committed.`);
+  console.log(` ${pending.length} proposals approved and committed.`);
 }
 
-// ─── Main ───
+//  Main 
 
 const args = process.argv.slice(2);
 

@@ -106,7 +106,7 @@ ${p.content_full}
 `;
     writeFileSync(filePath, content);
     logCommit({ ...p, committed_at: new Date().toISOString(), target_path: filePath });
-    console.log(`✅ Committed to ${filePath}`);
+    console.log(` Committed to ${filePath}`);
     return true;
   }
 
@@ -131,7 +131,7 @@ ${p.content_full}
 `;
     writeFileSync(filePath, content);
     logCommit({ ...p, committed_at: new Date().toISOString(), target_path: filePath });
-    console.log(`✅ Committed to ${filePath}`);
+    console.log(` Committed to ${filePath}`);
     return true;
   }
 
@@ -143,23 +143,23 @@ ${p.content_full}
   const existing = readFileSync(targetPath, "utf-8");
   writeFileSync(targetPath, existing + entry);
   logCommit({ ...p, committed_at: new Date().toISOString(), target_path: targetPath });
-  console.log(`✅ Committed to ${targetPath}`);
+  console.log(` Committed to ${targetPath}`);
   return true;
 }
 
-// ─── Commands ───
+//  Commands 
 
 function cmdReview(): void {
   const queue = loadQueue();
   const pending = queue.filter((p) => p.status === "pending");
   if (pending.length === 0) {
-    console.log("✅ No pending proposals.");
+    console.log(" No pending proposals.");
     return;
   }
-  console.log(`═══ ${pending.length} pending proposals ═══\n`);
+  console.log(` ${pending.length} pending proposals \n`);
   for (const p of pending) {
     const conf = Math.round(p.classification_confidence * 100);
-    const icon = p.proposed_target === "UNCLEAR" ? "❓" : conf >= 60 ? "✅" : "⚠️";
+    const icon = p.proposed_target === "UNCLEAR" ? "" : conf >= 60 ? "" : "";
     console.log(`${icon}  ${p.id.slice(0, 8)}  →  ${p.proposed_target}  (${conf}%)`);
     console.log(`    Source: ${p.source_file} :: ${p.source_section}`);
     console.log(`    Preview: ${p.content_preview}${p.content_full.length > 160 ? "..." : ""}`);
@@ -181,7 +181,7 @@ function cmdSummary(): void {
     by[p.proposed_target].count += 1;
     by[p.proposed_target].avg_conf += p.classification_confidence;
   }
-  console.log(`═══ Migration Queue Summary ═══\n`);
+  console.log(` Migration Queue Summary \n`);
   console.log(`Total pending: ${pending.length}\n`);
   for (const [target, { count, avg_conf }] of Object.entries(by).sort((a, b) => b[1].count - a[1].count)) {
     const conf = Math.round((avg_conf / count) * 100);
@@ -226,7 +226,7 @@ function cmdReject(id: string): void {
   }
   queue.splice(idx, 1);
   saveQueue(queue);
-  console.log(`️  Rejected ${id}`);
+  console.log(`  Rejected ${id}`);
 }
 
 function cmdApproveTarget(target: string): void {
@@ -243,7 +243,7 @@ function cmdApproveTarget(target: string): void {
   }
   const remaining = queue.filter((p) => !(p.proposed_target === target && p.status === "pending"));
   saveQueue(remaining);
-  console.log(`✅ Committed ${committed}/${matching.length} proposals for ${target}`);
+  console.log(` Committed ${committed}/${matching.length} proposals for ${target}`);
 }
 
 function cmdApproveAll(): void {
@@ -258,7 +258,7 @@ function cmdApproveAll(): void {
   for (const p of pending) if (commitProposal(p)) committed += 1;
   const remaining = queue.filter((p) => p.status === "pending" && p.proposed_target === "UNCLEAR");
   saveQueue(remaining);
-  console.log(`✅ Committed ${committed}/${pending.length}  —  ${remaining.length} UNCLEAR left for manual routing`);
+  console.log(` Committed ${committed}/${pending.length}  —  ${remaining.length} UNCLEAR left for manual routing`);
 }
 
 function cmdReset(): void {
@@ -266,7 +266,7 @@ function cmdReset(): void {
   console.log("Queue cleared.");
 }
 
-// ─── Main ───
+//  Main 
 
 const args = process.argv.slice(2);
 

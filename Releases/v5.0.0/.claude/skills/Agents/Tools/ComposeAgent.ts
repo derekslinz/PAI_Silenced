@@ -442,7 +442,7 @@ ACTIONS: [Steps taken or tools used]
 RESULTS: [Outcomes, what was accomplished]
 STATUS: [Current state of the task/system]
 CAPTURE: [Required - context worth preserving for this session]
-️ NEXT: [Recommended next steps or options]
+ NEXT: [Recommended next steps or options]
 STORY EXPLANATION:
 . [First key point in the narrative]
 . [Second key point]
@@ -769,7 +769,7 @@ OUTPUT (json format includes):
 
     case "summary":
       console.log(`COMPOSED AGENT: ${agent.name}`);
-      console.log(`─────────────────────────────────────`);
+      console.log(``);
       console.log(`Traits:      ${agent.traits.join(", ")}`);
       console.log(`Expertise:   ${agent.expertise.map((e) => e.name).join(", ") || "General"}`);
       console.log(`Personality: ${agent.personality.map((p) => p.name).join(", ")}`);

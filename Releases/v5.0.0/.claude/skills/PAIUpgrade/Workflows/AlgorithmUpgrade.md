@@ -12,19 +12,19 @@ This workflow closes the ultimate feedback loop: the Algorithm reflects on its o
 
 ```
 Algorithm Reflections (JSONL)     Current Algorithm Spec
-┌──────────────────────────┐     ┌──────────────────────────┐
-│ Q: Execution mistakes   │     │ Version + Changelog      │
-│ Q: Algorithm fixes      │     │ Phase definitions        │
-│ Q: Fundamental gaps     │     │ ISC requirements         │
-│ Sentiment + budget data  │     │ Capability matrix        │
-└──────────────────────────┘     │ Quality gates            │
-           │                     │ ISA integration          │
-           └──────────┬──────────┘
-                      ▼
-        ┌─────────────────────────────┐
-        │  SECTION-TARGETED UPGRADES  │
-        │  (specific diffs proposed)   │
-        └─────────────────────────────┘
+     
+ Q: Execution mistakes         Version + Changelog      
+ Q: Algorithm fixes            Phase definitions        
+ Q: Fundamental gaps           ISC requirements         
+ Sentiment + budget data        Capability matrix        
+      Quality gates            
+                                 ISA integration          
+           
+                      
+        
+          SECTION-TARGETED UPGRADES  
+          (specific diffs proposed)   
+        
 ```
 
 ---
@@ -39,9 +39,9 @@ Reflections map to Algorithm sections. This is the routing table for where fixes
 | Phase timing, budget, over-budget | Effort Level, Phase Budgets | `RESPONSE DEPTH SELECTION`, phase budget tables |
 | Capability selection, wrong tools | Capabilities Selection | `CAPABILITIES SELECTION` |
 | Agent overhead, wrong parallelization | Agent Instructions | `Agent Instructions` |
-| Context recovery, prior work missed | OBSERVE phase | `━━━ OBSERVE ━━━`, `CONTEXT RECOVERY` |
-| Verification gaps, claims without proof | VERIFY phase | `━━━ VERIFY ━━━` |
-| Plan mode, exploration depth | PLAN phase, Plan Mode | `━━━ PLAN ━━━`, `Plan Mode Integration` |
+| Context recovery, prior work missed | OBSERVE phase | ` OBSERVE `, `CONTEXT RECOVERY` |
+| Verification gaps, claims without proof | VERIFY phase | ` VERIFY ` |
+| Plan mode, exploration depth | PLAN phase, Plan Mode | ` PLAN `, `Plan Mode Integration` |
 | ISA issues, sync problems | ISA Integration | `ISA Integration` |
 | Phase merging, discrete violations | Phase Discipline | `Discrete Phase Enforcement`, `Phase Discipline Checklist` |
 | Notifications | System Notifications | `System Notifications` |
@@ -62,7 +62,7 @@ The algorithm changes frequently. Every upgrade analysis MUST start by reading a
 . Produce a structured digest:
 
    ALGORITHM DIGEST: v{VERSION}
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   
    Phases: [list each phase with its key mandate]
    Quality Gates: [list each gate with its pass/fail criteria]
    ISC Rules: [summarize ISC construction and verification rules]
@@ -241,7 +241,7 @@ For each theme with + occurrences across ALL sources (or if HIGH signal):
 
 ```
 ALGORITHM UPGRADE PROPOSAL {N}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 Section: [Algorithm section name]
 Priority: [CRITICAL / HIGH / MEDIUM / LOW]
 Signal: [N reflections, {HIGH/MED/LOW} average signal]

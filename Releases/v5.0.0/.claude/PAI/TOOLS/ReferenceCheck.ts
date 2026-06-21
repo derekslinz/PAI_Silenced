@@ -32,7 +32,7 @@ const HOME = process.env.HOME || '';
 const CLAUDE_DIR = join(HOME, '.claude');
 const PAI_DIR = join(CLAUDE_DIR, 'PAI');
 
-// ── Arg parsing (manual, zero deps) ──
+//  Arg parsing (manual, zero deps) 
 
 const args = process.argv.slice(2);
 if (args.includes('--help') || args.includes('-h')) {
@@ -58,7 +58,7 @@ const changedOnly = args.includes('--changed');
 const includeStale = args.includes('--stale');
 const includeOrphans = args.includes('--orphans');
 
-// ── Exclusion rules ──
+//  Exclusion rules 
 
 const EXCLUDE_DIR_NAMES = new Set([
   'node_modules', '.git', '.next', '.turbo', '.cache', 'dist', 'build',
@@ -202,7 +202,7 @@ function isScannableFile(absPath: string): boolean {
   return ext === '.md' || ext === '.ts' || ext === '.tsx' || ext === '.json';
 }
 
-// ── File walker (iterative, visited-set by realpath to avoid symlink cycles) ──
+//  File walker (iterative, visited-set by realpath to avoid symlink cycles) 
 
 function walk(root: string): string[] {
   const out: string[] = [];
@@ -251,7 +251,7 @@ function walk(root: string): string[] {
   return out;
 }
 
-// ── Reference extraction ──
+//  Reference extraction 
 
 // Match path-like tokens. We capture the raw ref (group 1) and later resolve.
 // These patterns are tuned to minimize false positives on code literals.
@@ -459,7 +459,7 @@ function extractRefs(content: string, referringFile: string): RefHit[] {
   return refs;
 }
 
-// ── Git changed files ──
+//  Git changed files 
 
 function getChangedFiles(): Set<string> {
   try {
@@ -473,7 +473,7 @@ function getChangedFiles(): Set<string> {
   }
 }
 
-// ── Main ──
+//  Main 
 
 interface Finding {
   type: 'missing' | 'stale' | 'orphan';
@@ -621,13 +621,13 @@ if (jsonOutput) {
   console.log(JSON.stringify(summary, null, 2));
 } else {
   if (missing.length > 0) {
-    console.error(`\n❌ MISSING REFERENCES (${missing.length}):`);
+    console.error(`\n MISSING REFERENCES (${missing.length}):`);
     for (const f of missing) {
       console.error(`  ${f.file}:${f.line} → ${f.ref}`);
     }
   }
   if (stale.length > 0) {
-    console.error(`\n⚠️  STALE (${stale.length}):`);
+    console.error(`\n  STALE (${stale.length}):`);
     for (const f of stale) {
       console.error(`  ${f.file}:${f.line} → ${f.ref}  (${f.detail})`);
     }
@@ -644,7 +644,7 @@ if (jsonOutput) {
     );
   }
   if (uniqueFindings.length === 0 && !quiet) {
-    console.error('✅ All references valid.');
+    console.error(' All references valid.');
   }
 }
 

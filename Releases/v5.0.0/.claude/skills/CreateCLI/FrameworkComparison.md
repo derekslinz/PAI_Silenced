@@ -29,7 +29,7 @@ Framework Comparison Table
 
 ---
 
-️⃣ TIER : Manual Parsing (llcli Pattern)
+⃣ TIER : Manual Parsing (llcli Pattern)
 
 Pattern
 
@@ -107,7 +107,7 @@ Pattern:Exactly what this tier generates
 
 ---
 
-️⃣ TIER : Commander.js
+⃣ TIER : Commander.js
 
 Pattern
 
@@ -184,7 +184,7 @@ Pattern:Commands naturally group into categories (convert, validate, analyze)
 
 ---
 
-️⃣ TIER : oclif (Reference Only)
+⃣ TIER : oclif (Reference Only)
 
 Pattern
 

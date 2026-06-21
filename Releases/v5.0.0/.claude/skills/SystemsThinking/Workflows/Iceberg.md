@@ -16,24 +16,24 @@ This workflow is invoked:
 The Four Layers
 
 ```
-╱═══════════════════════════════════╲
-│        LAYER : EVENTS            │  ← What happened? (visible, reactive)
-╲═══════════════════════════════════╱
-        │ "Why did this happen?"
-        ▼
-╱═══════════════════════════════════╲
-│        LAYER : PATTERNS          │  ← What has happened over time?
-╲═══════════════════════════════════╱
-        │ "What's generating this pattern?"
-        ▼
-╱═══════════════════════════════════╲
-│       LAYER : STRUCTURES         │  ← What rules, incentives, feedback loops?
-╲═══════════════════════════════════╱
-        │ "What beliefs make this structure feel correct?"
-        ▼
-╱═══════════════════════════════════╲
-│     LAYER : MENTAL MODELS        │  ← What assumptions generate the structure?
-╲═══════════════════════════════════╱
+
+        LAYER : EVENTS              ← What happened? (visible, reactive)
+
+         "Why did this happen?"
+        
+
+        LAYER : PATTERNS            ← What has happened over time?
+
+         "What's generating this pattern?"
+        
+
+       LAYER : STRUCTURES           ← What rules, incentives, feedback loops?
+
+         "What beliefs make this structure feel correct?"
+        
+
+     LAYER : MENTAL MODELS          ← What assumptions generate the structure?
+
 ```
 
 Intervention leverage increases as you descend.Event-layer fixes are reactive and don't prevent recurrence. Structure-layer fixes change the generator. Mental-model-layer fixes change what the organization believes, which transforms the whole cascade.

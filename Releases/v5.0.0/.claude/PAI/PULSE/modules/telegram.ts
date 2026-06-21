@@ -22,7 +22,7 @@ import { appendFile, mkdir } from "fs/promises"
 // invoice — every Telegram message was a 25-turn SDK session billed to the API.
 delete process.env.ANTHROPIC_API_KEY
 
-// ── Config Interface ──
+//  Config Interface 
 
 export interface TelegramConfig {
   enabled: boolean
@@ -33,16 +33,16 @@ export interface TelegramConfig {
   edit_interval_ms?: number
 }
 
-// ── Constants ──
+//  Constants 
 
 const HOME = process.env.HOME ?? ""
 const CWD = join(HOME, ".claude")
 const STATE_DIR = join(HOME, ".claude", "PAI", "PULSE", "state", "telegram")
 const LOGS_DIR = join(HOME, ".claude", "PAI", "PULSE", "logs", "telegram")
 const MAX_TELEGRAM_LENGTH = 4096
-const CURSOR = " ▌"
+const CURSOR = " "
 
-// ── Module State ──
+//  Module State 
 
 let bot: Bot | null = null
 let conversationStore: ConversationStore | null = null
@@ -53,7 +53,7 @@ let messagesResponded = 0
 let lastSessionId: string | undefined
 let activeConfig: TelegramConfig | null = null
 
-// ── Logging ──
+//  Logging 
 
 function log(level: "info" | "warn" | "error", msg: string, data?: unknown) {
   const entry = JSON.stringify({
@@ -66,7 +66,7 @@ function log(level: "info" | "warn" | "error", msg: string, data?: unknown) {
   console.log(entry)
 }
 
-// ── Chat Log ──
+//  Chat Log 
 
 async function appendChatLog(userMsg: string, botMsg: string) {
   const chatLogPath = join(LOGS_DIR, "chat-log.md")
@@ -78,7 +78,7 @@ async function appendChatLog(userMsg: string, botMsg: string) {
   await appendFile(chatLogPath, entry).catch(() => {})
 }
 
-// ── Exports ──
+//  Exports 
 
 /**
  * Start the Telegram bot polling loop.
@@ -204,7 +204,7 @@ You are {{DA_NAME}}, responding via Telegram. {{PRINCIPAL_NAME}} is messaging yo
 
 CRITICAL RULES FOR TELEGRAM MODE:
 - IGNORE all ALGORITHM/NATIVE/MINIMAL format templates from CLAUDE.md. Those are for terminal sessions only.
-- NO format headers (no ════, no ️, no ━━━, no ISC criteria, no phase markers)
+- NO format headers (no , no , no , no ISC criteria, no phase markers)
 - NO emoji prefixes, NO bullet formatting
 - Speak as {{DA_NAME}} — first person, natural, conversational, like talking to a friend
 - Keep responses under 200 words

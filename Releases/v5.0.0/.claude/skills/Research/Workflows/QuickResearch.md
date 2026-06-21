@@ -39,7 +39,7 @@ ACTIONS: Perplexity query
 RESULTS: [Answer]
 STATUS: Quick mode - agent, query
 CAPTURE: [Key facts]
-️ NEXT: [Suggest standard research if more depth needed]
+ NEXT: [Suggest standard research if more depth needed]
 STORY EXPLANATION: [-numbered points - keep brief]
 COMPLETED: Quick answer on [topic]
 ```

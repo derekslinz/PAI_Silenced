@@ -28,13 +28,13 @@ Execution Steps
 . Extract Content
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ STEP : CONTENT EXTRACTION                                                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ . Detect input type (URL, file path, or raw text)                         │
-│ . Route to appropriate Parser workflow OR read directly                    │
-│ . Extract: title, sections, key points, quotes, data                      │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+ STEP : CONTENT EXTRACTION                                                  
+
+ . Detect input type (URL, file path, or raw text)                         
+ . Route to appropriate Parser workflow OR read directly                    
+ . Extract: title, sections, key points, quotes, data                      
+
 ```
 
 For YouTube:```bash
@@ -50,19 +50,19 @@ Or use Parser: ExtractArticle for URLs
 . Analyze Structure
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ STEP : STRUCTURE ANALYSIS                                                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ Extract these elements for animation:                                       │
-│                                                                             │
-│ • Title & subtitle                                                          │
-│ • Section headers (H, H)                                                  │
-│ • Key points (-main takeaways)                                          │
-│ • Quotes or callouts                                                        │
-│ • Data/statistics (numbers, percentages)                                    │
-│ • Lists or steps                                                            │
-│ • Conclusion/summary                                                        │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+ STEP : STRUCTURE ANALYSIS                                                  
+
+ Extract these elements for animation:                                       
+                                                                             
+ • Title & subtitle                                                          
+ • Section headers (H, H)                                                  
+ • Key points (-main takeaways)                                          
+ • Quotes or callouts                                                        
+ • Data/statistics (numbers, percentages)                                    
+ • Lists or steps                                                            
+ • Conclusion/summary                                                        
+
 ```
 
 Output structure:```typescript
@@ -83,43 +83,43 @@ interface ContentStructure {
 . Generate Animation Plan
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ STEP : ANIMATION PLANNING                                                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ Map content to animation scenes:                                            │
-│                                                                             │
-│ Scene : Title Card (seconds)                                            │
-│   → Title fade in with spring scale                                        │
-│   → Subtitle fade in with delay                                            │
-│                                                                             │
-│ Scene -N: Content Sections (-seconds each)                             │
-│   → Section header slide in                                                │
-│   → Key points stagger in                                                  │
-│   → Data visualizations animate                                            │
-│                                                                             │
-│ Scene N+: Conclusion (seconds)                                          │
-│   → Summary points                                                          │
-│   → Call to action                                                          │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+ STEP : ANIMATION PLANNING                                                  
+
+ Map content to animation scenes:                                            
+                                                                             
+ Scene : Title Card (seconds)                                            
+   → Title fade in with spring scale                                        
+   → Subtitle fade in with delay                                            
+                                                                             
+ Scene -N: Content Sections (-seconds each)                             
+   → Section header slide in                                                
+   → Key points stagger in                                                  
+   → Data visualizations animate                                            
+                                                                             
+ Scene N+: Conclusion (seconds)                                          
+   → Summary points                                                          
+   → Call to action                                                          
+
 ```
 
 Timing formula:- Title: frames (seconds at fps)
 - Per section: -frames (-seconds)
 - Conclusion: frames (seconds)
 - Total = + (sections × ) + 
-.Verify Logical Coherence ️ CRITICAL GATE
+.Verify Logical Coherence  CRITICAL GATE
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ STEP .: LOGICAL COHERENCE VERIFICATION                                    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ BEFORE generating React components, verify the animation plan makes sense.  │
-│                                                                             │
-│ This checks LOGICAL coherence, not just functional capability.              │
-│                                                                             │
-│ If these checks FAIL, the video would render but be confusing/wrong.        │
-│ Block early to save compute and prevent bad outputs.                        │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+ STEP .: LOGICAL COHERENCE VERIFICATION                                    
+
+ BEFORE generating React components, verify the animation plan makes sense.  
+                                                                             
+ This checks LOGICAL coherence, not just functional capability.              
+                                                                             
+ If these checks FAIL, the video would render but be confusing/wrong.        
+ Block early to save compute and prevent bad outputs.                        
+
 ```
 
 . NARRATIVE COHERENCE CHECKS
@@ -271,7 +271,7 @@ if (!verification.passed) {
 }
 
 if (verification.warnings.length > ) {
-  console.warn('️  COHERENCE WARNINGS (review recommended):')
+  console.warn('  COHERENCE WARNINGS (review recommended):')
   verification.warnings.forEach(warn => console.warn(`  - ${warn}`))
 }
 
@@ -283,9 +283,9 @@ PASS:```
 Logical coherence verified - proceeding to component generation
 
 Checks passed:
-  ✓ Narrative flow: All sections connect logically
-  ✓ Timing: Adapted to content density (avg .words/sec)
-  ✓ Scene selection: All templates match content types
+   Narrative flow: All sections connect logically
+   Timing: Adapted to content density (avg .words/sec)
+   Scene selection: All templates match content types
 ```
 
 FAIL:```
@@ -300,7 +300,7 @@ Cannot proceed - fix logical issues before rendering
 ```
 
 WARN:```
-️  COHERENCE WARNINGS (review recommended):
+  COHERENCE WARNINGS (review recommended):
 
   - Narrative: Section → transition lacks bridge concept
   - Timing: Scene duration near minimum bound (.s per point)
@@ -322,20 +322,20 @@ Bottom line:Verification prevents technically-correct but logically-broken video
 . Generate Remotion Components
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ STEP : COMPONENT GENERATION                                                │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ Create project at: /tmp/remotion-{timestamp}/                              │
-│                                                                             │
-│ Files to generate:                                                          │
-│ • package.json                                                              │
-│ • src/Root.tsx (composition registration)                                   │
-│ • src/Video.tsx (main composition)                                          │
-│ • src/scenes/TitleScene.tsx                                                │
-│ • src/scenes/SectionScene.tsx                                              │
-│ • src/scenes/ConclusionScene.tsx                                           │
-│ • src/theme.ts (copy from skill)                                           │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+ STEP : COMPONENT GENERATION                                                
+
+ Create project at: /tmp/remotion-{timestamp}/                              
+                                                                             
+ Files to generate:                                                          
+ • package.json                                                              
+ • src/Root.tsx (composition registration)                                   
+ • src/Video.tsx (main composition)                                          
+ • src/scenes/TitleScene.tsx                                                
+ • src/scenes/SectionScene.tsx                                              
+ • src/scenes/ConclusionScene.tsx                                           
+ • src/theme.ts (copy from skill)                                           
+
 ```
 
 MANDATORY: Apply PAI Theme```typescript
@@ -351,13 +351,13 @@ import { PAI_THEME } from '~/.claude/skills/Remotion/theme'
 . Render Output
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ STEP : RENDER                                                              │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ . Install dependencies: npm install                                        │
-│ . Render: npx remotion render {composition-id} ~/Downloads/{name}.mp    │
-│ . Open for preview: open ~/Downloads/{name}.mp                          │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+ STEP : RENDER                                                              
+
+ . Install dependencies: npm install                                        
+ . Render: npx remotion render {composition-id} ~/Downloads/{name}.mp    
+ . Open for preview: open ~/Downloads/{name}.mp                          
+
 ```
 
 Scene Templates
@@ -439,7 +439,7 @@ const KeyPointsScene: React.FC<{ heading: string; points: string[] }> = ({ headi
             display: 'flex',
             alignItems: 'flex-start',
           }}>
-            <span style={{ color: PAI_THEME.colors.accent, marginRight: }}>✓</span>
+            <span style={{ color: PAI_THEME.colors.accent, marginRight: }}></span>
             {point}
           </div>
         )

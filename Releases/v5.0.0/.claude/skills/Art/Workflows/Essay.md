@@ -9,11 +9,11 @@ Uses architectural sketching STYLE (gestural lines, hatching, charcoal) to depic
 
 ALL STEPS ARE MANDATORY — NO EXCEPTIONS 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-️  EVERY SINGLE STEP BELOW IS MANDATORY. EXECUTE ALL OF THEM.  ️
-️  DO NOT SKIP ANY STEP. DO NOT ABBREVIATE. DO NOT SHORTCUT.   ️
-️  IF YOU SKIP A STEP, YOU HAVE FAILED THE WORKFLOW.           ️
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  EVERY SINGLE STEP BELOW IS MANDATORY. EXECUTE ALL OF THEM.  
+  DO NOT SKIP ANY STEP. DO NOT ABBREVIATE. DO NOT SHORTCUT.   
+  IF YOU SKIP A STEP, YOU HAVE FAILED THE WORKFLOW.           
+
 ```
 
 ALL STEPS ARE MANDATORY. Execute them IN ORDER. Do NOT skip steps.
@@ -61,7 +61,7 @@ LOGICAL/PHILOSOPHICAL CONSISTENCY:- The visual MUST make logical sense with the 
 - If using a balance scale: the winning/heavy side pushes DOWN
 - THINK about what the metaphor actually means before drawing it
 
-️ KNOWN ISSUE: Background removal may remove the signature.If the signature is missing after generation, you must add it manually or regenerate with the signature more integrated into the composition (not isolated in corner with empty space).
+ KNOWN ISSUE: Background removal may remove the signature.If the signature is missing after generation, you must add it manually or regenerate with the signature more integrated into the composition (not isolated in corner with empty space).
 
 ---
 
@@ -265,8 +265,8 @@ SUBJECT (WHAT TO DRAW — showing the problem):
 EMOTIONAL REGISTER: [From Step ]
 
 TECHNIQUE — GESTURAL ARCHITECTURAL SKETCH STYLE:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Architecture is the TECHNIQUE, not the required subject ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Architecture is the TECHNIQUE, not the required subject 
 - GESTURAL — quick, confident, energetic marks
 - OVERLAPPING LINES — multiple strokes suggesting form
 - HATCHING — cross-hatching creates depth and tone
@@ -756,10 +756,10 @@ Step : Validation (MANDATORY)
 CRITICAL: This step is MANDATORY. Regenerate if validation fails.
 ACTUALLY LOOK AT THE IMAGE AND THINK 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-️  DO NOT JUST CHECK BOXES. ACTUALLY ANALYZE THE IMAGE.           ️
-️  LOOK AT IT. THINK ABOUT IT. ASK: DOES THIS MAKE SENSE?         ️
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  DO NOT JUST CHECK BOXES. ACTUALLY ANALYZE THE IMAGE.           
+  LOOK AT IT. THINK ABOUT IT. ASK: DOES THIS MAKE SENSE?         
+
 ```
 
 Open and Inspect

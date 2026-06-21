@@ -1,6 +1,6 @@
 # MY_ORG
 
-> 💼 SAMPLE TEMPLATE — Rename this directory to your primary operating organization (e.g. `AcmeInc/`, `MyCompany/`) and populate it via /interview or by editing these files.
+>  SAMPLE TEMPLATE — Rename this directory to your primary operating organization (e.g. `AcmeInc/`, `MyCompany/`) and populate it via /interview or by editing these files.
 
 This directory holds the work artifacts produced **inside** your primary operating organization — the day-to-day operational documents, design assets, brand materials, and internal references that aren't customer-specific or consulting-specific.
 

@@ -53,17 +53,17 @@ When:State machines, status transitions, lifecycle flows
 . Class Diagrams
 When:Object relationships, inheritance, composition
 ```
-User ──has many──> Posts
-User ──belongs to──> Organization
-Post ──has many──> Comments
+User has many> Posts
+User belongs to> Organization
+Post has many> Comments
 ```
 
 . Entity Relationship Diagrams
 When:Database schemas, data models, table relationships
 ```
-Customer ||──o{ Order : places
-Order ||──o{ LineItem : contains
-Product ||──o{ LineItem : ordered_in
+Customer ||o{ Order : places
+Order ||o{ LineItem : contains
+Product ||o{ LineItem : ordered_in
 ```
 
 . Gantt Charts
@@ -75,8 +75,8 @@ Task : Jan - Feb ```
 . Git Graphs
 When:Branching strategies, merge flows, version control
 ```
-main ──> feature branch ──> merged back ──> main
-     └──> hotfix ──────────> merged ──────> main
+main > feature branch > merged back > main
+     > hotfix > merged > main
 ```
 
 ---
@@ -322,19 +322,19 @@ B. Hand-Drawn Styling
 Each node type gets Excalidraw treatment:
 
 Rectangles (Process boxes):```
-Instead of: ┌──────────┐
-This:       ╱──────────╲  (wobbly, not perfect)
-           │  Process  │  (slightly tilted)
-           ╲──────────╱  (organic edges)
+Instead of: 
+This:         (wobbly, not perfect)
+             Process    (slightly tilted)
+             (organic edges)
 ```
 
 Diamonds (Decisions):```
-Instead of: ◇
-This:       ◊  (wobbly, asymmetric, hand-drawn diamond)
+Instead of: 
+This:         (wobbly, asymmetric, hand-drawn diamond)
 ```
 
 Arrows:```
-Instead of: ────────→
+Instead of: →
 This:       ∼∼∼∼∼∼∼→  (slightly wavy, organic curve)
 ```
 
@@ -801,7 +801,7 @@ Example : ER Diagram for Database Schema
 Content:Data modeling article about blog platform
 CSE Result:-item story revealing entities: Users, Posts, Comments, Categories with relationships
 Diagram Type:Entity Relationship Diagram
-Structure:User ──Post, Post ──Comment, Post ──Category (many-to-many)
+Structure:User Post, Post Comment, Post Category (many-to-many)
 Color:Purple on User and Post (core), Teal on Comment and Category
 Aspect::horizontal
 

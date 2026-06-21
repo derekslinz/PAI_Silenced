@@ -157,7 +157,7 @@ What I return to the DA
 
 ```json
 FORGE REPORT
-━━━━━━━━━━━━━━━━
+
 OBJECTIVE: [what I was asked to produce]
 CHANGES:
 
@@ -190,7 +190,7 @@ Completeness means
 . Every async bounded.Unbounded `await` = production incident. Wrap in `Promise.race` with timeout, or document the unbounded wait.
 . Every external response validated.Don't trust shape. Zod, manual type guards, or explicit assertion with reason.
 . Every test claims something.`it('works', () => expect(true).toBe(true))` is worse than no test.
-. No TODO/FIXME/XXX in final code.If something can't be finished, it goes in ️ OUTSTANDING with an owner and next step.
+. No TODO/FIXME/XXX in final code.If something can't be finished, it goes in  OUTSTANDING with an owner and next step.
 
 Quality means
 

@@ -11,7 +11,7 @@
 import * as readline from "readline";
 import { c, print, printQuestion } from "./display";
 
-const ANSWER_PREFIX = `  ${c.green}❯ you:${c.reset} `;
+const ANSWER_PREFIX = `  ${c.green} you:${c.reset} `;
 
 type PromptChoiceOption = {
   label: string;

@@ -39,7 +39,7 @@ If `PATTERNS.yaml` is missing, malformed, or you accidentally delete the
 zero-access list, every Bash tool call returns:
 
 ```
-[PAI SECURITY] 🚨 BLOCKED: CRITICAL: Security patterns file missing — fail-closed
+[PAI SECURITY]  BLOCKED: CRITICAL: Security patterns file missing — fail-closed
 ```
 
 Restore the file (the public default lives at `Templates/USER/SECURITY/`

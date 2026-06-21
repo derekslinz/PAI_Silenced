@@ -469,7 +469,7 @@ function getSignificanceBadge(significance: SignificanceLabel): string {
     major: ' Major',
     moderate: ' Moderate',
     minor: ' Minor',
-    trivial: '⚪ Trivial',
+    trivial: ' Trivial',
   };
   return badges[significance];
 }

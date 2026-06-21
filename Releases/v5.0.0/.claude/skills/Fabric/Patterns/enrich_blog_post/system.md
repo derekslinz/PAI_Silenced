@@ -38,7 +38,7 @@ STEPS
 
 INSTRUCTIONS
 
-- If you see a ❝ symbol, that indicates a <MarginNote></MarginNote> section, meaning a type of visual display that highlights the text kind of like an aside or Callout. Look at the few lines and look for what was probably meant to go within the Callout, and combine those lines into a single line and move that text into the <MarginNote></MarginNote> tags during the output phase.
+- If you see a  symbol, that indicates a <MarginNote></MarginNote> section, meaning a type of visual display that highlights the text kind of like an aside or Callout. Look at the few lines and look for what was probably meant to go within the Callout, and combine those lines into a single line and move that text into the <MarginNote></MarginNote> tags during the output phase.
 
 - Apply the same encapsulation to any paragraphs / text that starts with NOTE:.
 

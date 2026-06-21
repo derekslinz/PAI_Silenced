@@ -115,7 +115,7 @@ What Every Generated CLI Includes
 
 ---
 
-️ INTEGRATION WITH PAI
+ INTEGRATION WITH PAI
 
 Technology Stack Alignment
 
@@ -170,12 +170,12 @@ User Request:"Create a CLI for the GitHub API that can list repos, create issues
 
 Generated Structure:```
 ~/.claude/Bin/ghcli/
-├── ghcli.ts              lines, complete implementation
-├── package.json          Bun + TypeScript
-├── tsconfig.json         Strict mode
-├── .env.example          GITHUB_TOKEN=your_token
-├── README.md             Full documentation
-└── QUICKSTART.md         Common use cases
+ ghcli.ts              lines, complete implementation
+ package.json          Bun + TypeScript
+ tsconfig.json         Strict mode
+ .env.example          GITHUB_TOKEN=your_token
+ README.md             Full documentation
+ QUICKSTART.md         Common use cases
 ```
 
 Usage:```bash
@@ -193,10 +193,10 @@ User Request:"Build a CLI to convert markdown files to HTML with frontmatter ext
 
 Generated Structure:```
 ~/.claude/Bin/mdhtml/
-├── mdhtml.ts
-├── package.json
-├── README.md
-└── QUICKSTART.md
+ mdhtml.ts
+ package.json
+ README.md
+ QUICKSTART.md
 ```
 
 Usage:```bash
@@ -213,10 +213,10 @@ User Request:"Create a CLI for data transformation with multiple formats, valida
 
 Generated Structure:```
 ~/.claude/Bin/data-cli/
-├── data-cli.ts           Commander.js with subcommands
-├── package.json
-├── README.md
-└── QUICKSTART.md
+ data-cli.ts           Commander.js with subcommands
+ package.json
+ README.md
+ QUICKSTART.md
 ```
 
 Usage:```bash

@@ -198,25 +198,25 @@ Science explicitly orchestrates only when:
 Orchestration Flow:
 ```
 User: "Figure out best auth approach"
-           │
-           ▼
-┌─────────────────────────────────────────┐
-│           SCIENCE ORCHESTRATES           │
-└─────────────────────────────────────────┘
-           │
-           ├──► Goal: Research Skill helps define success criteria
-           │
-           ├──► Observe: Research Skill gathers context
-           │
-           ├──► Hypothesize: Council Skill generates approaches
-           │
-           ├──► Experiment: Worktree runs parallel implementations
-           │
-           ├──► Measure: Evals Skill compares approaches
-           │
-           ├──► Analyze: Science synthesizes results
-           │
-           └──► Iterate: Pick winner or refine
+           
+           
+
+           SCIENCE ORCHESTRATES           
+
+           
+            Goal: Research Skill helps define success criteria
+           
+            Observe: Research Skill gathers context
+           
+            Hypothesize: Council Skill generates approaches
+           
+            Experiment: Worktree runs parallel implementations
+           
+            Measure: Evals Skill compares approaches
+           
+            Analyze: Science synthesizes results
+           
+            Iterate: Pick winner or refine
 ```
 
 ---
@@ -306,26 +306,26 @@ For problems spanning prompt AND code AND research:
 
 ```
 User: "Improve the summarization pipeline"
-           │
-           ▼
-┌─────────────────────────────────────────┐
-│           SCIENCE ORCHESTRATES           │
-└─────────────────────────────────────────┘
-           │
-           ├──► Goal: What does "better" mean? (Science/DefineGoal)
-           │
-           ├──► Observe: Current performance across dimensions
-           │
-           ├──► Hypothesize: Multiple improvement paths
-           │    ├─ Better prompt (→ Evals)
-           │    ├─ Better code (→ Development/Worktree)
-           │    └─ Better architecture (→ Research)
-           │
-           ├──► Experiment: Parallel experiments via appropriate skills
-           │
-           ├──► Measure: Aggregate results from each skill
-           │
-           └──► Iterate: Pick winner, next cycle
+           
+           
+
+           SCIENCE ORCHESTRATES           
+
+           
+            Goal: What does "better" mean? (Science/DefineGoal)
+           
+            Observe: Current performance across dimensions
+           
+            Hypothesize: Multiple improvement paths
+                Better prompt (→ Evals)
+                Better code (→ Development/Worktree)
+                Better architecture (→ Research)
+           
+            Experiment: Parallel experiments via appropriate skills
+           
+            Measure: Aggregate results from each skill
+           
+            Iterate: Pick winner, next cycle
 ```
 
 Science orchestrates; specialist skills execute.

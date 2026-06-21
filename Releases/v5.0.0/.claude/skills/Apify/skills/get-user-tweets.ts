@@ -75,7 +75,7 @@ async function main() {
 
     // Step : Show the tweets
     console.log('. Latest tweets:')
-    console.log('   ════════════════════════════════════════')
+    console.log('   ')
     console.log()
 
     items.forEach((tweet, i) => {
@@ -86,7 +86,7 @@ async function main() {
       if (tweet.url) {
         console.log(`   URL: ${tweet.url}`)
       }
-      console.log('   ────────────────────────────────────────')
+      console.log('   ')
       console.log()
     })
 

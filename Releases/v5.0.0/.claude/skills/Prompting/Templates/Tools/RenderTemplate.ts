@@ -210,7 +210,7 @@ export function renderTemplate(options: RenderOptions): string {
   if (options.outputPath) {
     const outputFullPath = resolveTemplatePath(options.outputPath);
     writeFileSync(outputFullPath, rendered);
-    console.log(`✓ Rendered to: ${outputFullPath}`);
+    console.log(` Rendered to: ${outputFullPath}`);
   }
 
   return rendered;

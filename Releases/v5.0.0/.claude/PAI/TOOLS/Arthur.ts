@@ -12,7 +12,7 @@ const PAI_DIR = process.env.PAI_DIR ?? join(homedir(), ".claude", "PAI");
 const POLICIES_PATH = join(PAI_DIR, "USER", "ARTHUR", "policies.yaml");
 const GCP_PROJECT = process.env.PAI_GCP_PROJECT ?? "";
 
-// ───────────────────────── Types ─────────────────────────
+//  Types 
 
 interface Policy {
   allowed_callers?: string[];
@@ -43,7 +43,7 @@ interface PolicyDecision {
   rule: string;
 }
 
-// ───────────────────────── Audit log ─────────────────────────
+//  Audit log 
 
 function securityLogPath(kind: string): string {
   const now = new Date();
@@ -65,7 +65,7 @@ export function audit(event: Record<string, unknown>): void {
   appendFileSync(securityLogPath(kind), JSON.stringify(entry) + "\n", "utf8");
 }
 
-// ───────────────────────── Policy loader ─────────────────────────
+//  Policy loader 
 
 let policiesCache: Policies | null = null;
 let policiesLoadedAt = 0;
@@ -87,7 +87,7 @@ function getPolicy(key: string): Policy | null {
   return null;
 }
 
-// ───────────────────────── Rate limiting (SQLite, in-memory for v1) ─────────────────────────
+//  Rate limiting (SQLite, in-memory for v1) 
 
 const rateWindows = new Map<string, number[]>();
 
@@ -108,7 +108,7 @@ function checkRate(key: string, caller: string, limit: string): { ok: boolean; r
   return { ok: true };
 }
 
-// ───────────────────────── Time window check ─────────────────────────
+//  Time window check 
 
 function checkTimeWindow(window: string): { ok: boolean; reason?: string } {
   const match = window.match(/^(\d{2}):(\d{2})-(\d{2}):(\d{2})$/);
@@ -125,7 +125,7 @@ function checkTimeWindow(window: string): { ok: boolean; reason?: string } {
   return { ok: true };
 }
 
-// ───────────────────────── Policy evaluation ─────────────────────────
+//  Policy evaluation 
 
 export function evaluate(req: AccessRequest): PolicyDecision {
   const policy = getPolicy(req.key);
@@ -197,7 +197,7 @@ export function evaluate(req: AccessRequest): PolicyDecision {
   return { verdict: "ALLOW", reason: "policy checks passed", rule: "policy_match" };
 }
 
-// ───────────────────────── GCP Secret Manager fetch ─────────────────────────
+//  GCP Secret Manager fetch 
 
 const secretCache = new Map<string, { value: string; fetchedAt: number }>();
 const SECRET_CACHE_MS = 60_000;
@@ -221,7 +221,7 @@ async function fetchFromGCP(key: string): Promise<string> {
   return value;
 }
 
-// ───────────────────────── Confirmation channel (v1 stub) ─────────────────────────
+//  Confirmation channel (v1 stub) 
 
 async function requestConfirmation(req: AccessRequest, reason: string): Promise<boolean> {
   // v1 stub — sends push via Pulse/Telegram and waits up to 60s for approval
@@ -245,7 +245,7 @@ async function requestConfirmation(req: AccessRequest, reason: string): Promise<
   return false;
 }
 
-// ───────────────────────── Public API ─────────────────────────
+//  Public API 
 
 export async function get(
   key: string,
@@ -300,7 +300,7 @@ export class ArthurDeniedError extends Error {
   }
 }
 
-// ───────────────────────── CLI entrypoint ─────────────────────────
+//  CLI entrypoint 
 
 if (import.meta.main) {
   const args = process.argv.slice(2);

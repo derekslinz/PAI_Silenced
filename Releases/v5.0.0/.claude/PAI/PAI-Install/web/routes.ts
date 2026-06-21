@@ -26,14 +26,14 @@ import {
 } from "../engine/state";
 import { STEPS, getProgress, getStepStatuses } from "../engine/steps";
 
-// ─── State ───────────────────────────────────────────────────────
+//  State 
 
 let installState: InstallState | null = null;
 let wsClients = new Set<any>();
 let messageHistory: ServerMessage[] = [];
 let pendingRequests = new Map<string, { resolve: (value: string) => void }>();
 
-// ─── Broadcasting ────────────────────────────────────────────────
+//  Broadcasting 
 
 function broadcast(msg: ServerMessage): void {
   const raw = JSON.stringify(msg);
@@ -47,7 +47,7 @@ function broadcast(msg: ServerMessage): void {
   }
 }
 
-// ─── Engine Event → WebSocket ────────────────────────────────────
+//  Engine Event → WebSocket 
 
 function createWsEmitter(): (event: EngineEvent) => Promise<void> {
   return async (event: EngineEvent) => {
@@ -86,7 +86,7 @@ function createWsEmitter(): (event: EngineEvent) => Promise<void> {
   };
 }
 
-// ─── Input Request Bridge ────────────────────────────────────────
+//  Input Request Bridge 
 
 async function requestInput(
   id: string,
@@ -111,7 +111,7 @@ async function requestChoice(
   });
 }
 
-// ─── WebSocket Message Handler ───────────────────────────────────
+//  WebSocket Message Handler 
 
 export function handleWsMessage(ws: any, raw: string): void {
   let msg: ClientMessage;
@@ -170,7 +170,7 @@ export function handleWsMessage(ws: any, raw: string): void {
   }
 }
 
-// ─── Installation Flow ───────────────────────────────────────────
+//  Installation Flow 
 
 async function startInstallation(): Promise<void> {
   // Always start fresh — GUI should not silently resume stale state
@@ -268,7 +268,7 @@ async function startInstallation(): Promise<void> {
   }
 }
 
-// ─── Connection Management ───────────────────────────────────────
+//  Connection Management 
 
 export function addClient(ws: any): void {
   wsClients.add(ws);

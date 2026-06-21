@@ -5,7 +5,7 @@
  * Validates skill and agent tool calls via HTTP hooks.
  */
 
-// ── Types ──
+//  Types 
 
 export interface HooksConfig {
   enabled: boolean
@@ -18,7 +18,7 @@ interface HookStats {
   agentGuard: { total: number; warned: number; passed: number }
 }
 
-// ── State ──
+//  State 
 
 const stats: HookStats = {
   requests: 0,
@@ -30,7 +30,7 @@ let blockedSkills = ["keybindings-help"]
 const FAST_AGENT_TYPES = ["Explore"]
 const FAST_MODELS = ["haiku"]
 
-// ── Init ──
+//  Init 
 
 export function startHooks(config: HooksConfig): void {
   if (config.blocked_skills) {
@@ -38,7 +38,7 @@ export function startHooks(config: HooksConfig): void {
   }
 }
 
-// ── Route Handler ──
+//  Route Handler 
 
 export function handleHooksRequest(req: Request, pathname: string): Response | null {
   if (req.method !== "POST") return null
@@ -72,7 +72,7 @@ export async function handleHooksRequestAsync(req: Request, pathname: string): P
   }
 }
 
-// ── Skill Guard ──
+//  Skill Guard 
 
 function handleSkillGuard(body: { tool_input?: { skill?: string } }): Response {
   stats.requests++
@@ -94,7 +94,7 @@ function handleSkillGuard(body: { tool_input?: { skill?: string } }): Response {
   return new Response("", { status: 200 })
 }
 
-// ── Agent Guard ──
+//  Agent Guard 
 
 function handleAgentGuard(body: {
   tool_input?: { run_in_background?: boolean; subagent_type?: string; model?: string; prompt?: string; description?: string; name?: string }
@@ -136,7 +136,7 @@ function handleAgentGuard(body: {
   })
 }
 
-// ── Health ──
+//  Health 
 
 export function hooksHealth(): { status: string; stats: HookStats } {
   return { status: "ok", ...stats }

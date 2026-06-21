@@ -34,17 +34,17 @@ PAI SOURCES (private, read-only)
   PROJECTS.md (public projects only)
   MEMORY/WORK/ (abstracted to topic themes)
   PRINCIPAL_IDENTITY.md (public bio data)
-    │
-    ├──[DaemonAggregator.ts]──→ Reads sources, merges with existing data
-    │
-    ├──[SecurityFilter.ts]──→ Deterministic code-level allowlist filter
-    │                          Strips names, paths, credentials, internal refs
-    │                          NOT an LLM filter — enforced by pattern matching
-    │
-    └──→ daemon-data.json → ~/Projects/daemon-dm/ (PRIVATE repo)
-              │
-              └──[deploy.sh]──→ Copies JSON into framework → VitePress build → Cloudflare Pages
-                                    │
+    
+    [DaemonAggregator.ts]→ Reads sources, merges with existing data
+    
+    [SecurityFilter.ts]→ Deterministic code-level allowlist filter
+                              Strips names, paths, credentials, internal refs
+                              NOT an LLM filter — enforced by pattern matching
+    
+    → daemon-data.json → ~/Projects/daemon-dm/ (PRIVATE repo)
+              
+              [deploy.sh]→ Copies JSON into framework → VitePress build → Cloudflare Pages
+                                    
                               ~/Projects/daemon/ (PUBLIC repo — forkable framework)
 
     STRUCTURALLY EXCLUDED (never read):
@@ -57,17 +57,17 @@ Skill Structure
 
 ```
 skills/Daemon/
-├── SKILL.md              (this file)
-├── Tools/
-│   ├── DaemonAggregator.ts   (reads PAI sources → daemon-data.json)
-│   └── SecurityFilter.ts     (deterministic content sanitizer)
-├── Workflows/
-│   ├── UpdateDaemon.md       (aggregate → preview → approve → deploy)
-│   ├── ReadDaemon.md         (read current daemon-data.json)
-│   ├── PreviewDaemon.md      (show diff without deploying)
-│   └── DeployDaemon.md       (bash deploy.sh from daemon-dm)
-└── Docs/
-    └── SecurityClassification.md  (public/private data categories)
+ SKILL.md              (this file)
+ Tools/
+    DaemonAggregator.ts   (reads PAI sources → daemon-data.json)
+    SecurityFilter.ts     (deterministic content sanitizer)
+ Workflows/
+    UpdateDaemon.md       (aggregate → preview → approve → deploy)
+    ReadDaemon.md         (read current daemon-data.json)
+    PreviewDaemon.md      (show diff without deploying)
+    DeployDaemon.md       (bash deploy.sh from daemon-dm)
+ Docs/
+     SecurityClassification.md  (public/private data categories)
 ```
 
 Important Paths

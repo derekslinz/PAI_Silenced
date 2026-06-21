@@ -74,7 +74,7 @@ function generateSearchQueries(question: string): string[] {
     searchQueries.forEach((q, i) => console.log(`  ${i + }. ${q}`));
 
     console.log('\nRESULTS: Executing searches via Claude WebSearch...\n');
-    console.log('═'.repeat());
+    console.log(''.repeat());
 
     // Output instructions for the claude-researcher agent
     console.log('\nSEARCH QUERIES TO EXECUTE:\n');
@@ -86,10 +86,10 @@ function generateSearchQueries(question: string): string[] {
       console.log('');
     });
 
-    console.log('═'.repeat());
+    console.log(''.repeat());
 
     console.log('\nSTATUS: Query decomposition complete');
-    console.log('️ NEXT: Claude-Researcher agent will execute these searches using WebSearch tool\n');
+    console.log(' NEXT: Claude-Researcher agent will execute these searches using WebSearch tool\n');
     console.log('COMPLETED: Completed query decomposition for web research');
 
   } catch (error) {

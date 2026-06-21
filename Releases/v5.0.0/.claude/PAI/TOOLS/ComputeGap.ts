@@ -161,11 +161,11 @@ function logEntry(gap: DimensionGap): void {
 }
 
 function formatHuman(gaps: DimensionGap[]): string {
-  const lines: string[] = ["═══ Current → Ideal Gap ═══", ""];
+  const lines: string[] = [" Current → Ideal Gap ", ""];
   for (const g of gaps) {
     lines.push(`## ${g.dimension.toUpperCase()}`);
     if (g.entries.length === 0) {
-      lines.push("  ✅ No gaps.");
+      lines.push("   No gaps.");
     } else {
       for (const e of g.entries) {
         const icon = e.severity === "critical" ? "" : e.severity === "warning" ? "" : "";
@@ -178,7 +178,7 @@ function formatHuman(gaps: DimensionGap[]): string {
   return lines.join("\n");
 }
 
-// ─── Main ───
+//  Main 
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);

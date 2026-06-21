@@ -15,9 +15,9 @@ import { spawnSync } from "child_process";
 const HOME = process.env.HOME!;
 const CLAUDE_DIR = join(HOME, ".claude");
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Terminal Width Detection
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 function getTerminalWidth(): number {
   let width: number | null = null;
@@ -69,9 +69,9 @@ function getTerminalWidth(): number {
   return width;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // ANSI Helpers
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 const RESET = "\x1b[0m";
 const BOLD = "\x1b[1m";
@@ -89,9 +89,9 @@ const BOX = {
   h: "\u2500", v: "\u2502", dh: "\u2550",
 };
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Stats Collection
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 interface SystemStats {
   name: string;
@@ -199,9 +199,9 @@ function getStats(): SystemStats {
   };
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Utility Functions
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 function visibleLength(str: string): number {
   return str.replace(/\x1b\[[0-9;]*m/g, "").length;
@@ -235,9 +235,9 @@ function sparkline(length: number, colors?: string[]): string {
   }).join("");
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // LARGE TERMINAL DESIGNS (85+ cols)
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 // Design 13: Navy/Steel Blue Theme - Neofetch style
 function createNavyBanner(stats: SystemStats, width: number): string {
@@ -289,12 +289,12 @@ function createNavyBanner(stats: SystemStats, width: number): string {
   const infoLines = [
     `${C.slate}"${RESET}${C.lightBlue}${stats.catchphrase}${RESET}${C.slate}..."${RESET}`,
     `${C.steel}${BOX.h.repeat(24)}${RESET}`,
-    `${C.navy}\u2B22${RESET}  ${C.slate}PAI${RESET}       ${C.silver}${stats.paiVersion}${RESET}`,                            // ⬢ hexagon (tech/AI)
-    `${C.navy}\u2699${RESET}  ${C.slate}Algo${RESET}      ${C.silver}${stats.algorithmVersion}${RESET}`,                      // ⚙ gear (algorithm)
-    `${C.lightBlue}\u2726${RESET}  ${C.slate}SK${RESET}        ${C.silver}${stats.skills}${RESET}`,             // ✦ four-pointed star (skills)
+    `${C.navy}\u2B22${RESET}  ${C.slate}PAI${RESET}       ${C.silver}${stats.paiVersion}${RESET}`,                            //  hexagon (tech/AI)
+    `${C.navy}\u2699${RESET}  ${C.slate}Algo${RESET}      ${C.silver}${stats.algorithmVersion}${RESET}`,                      //  gear (algorithm)
+    `${C.lightBlue}\u2726${RESET}  ${C.slate}SK${RESET}        ${C.silver}${stats.skills}${RESET}`,             //  four-pointed star (skills)
     `${C.skyBlue}\u21BB${RESET}  ${C.slate}WF${RESET}        ${C.iceBlue}${stats.workflows}${RESET}`,           // ↻ cycle (workflows)
     `${C.royalBlue}\u21AA${RESET}  ${C.slate}Hooks${RESET}     ${C.periwinkle}${stats.hooks}${RESET}`,         // ↪ hook arrow
-    `${C.medBlue}\u2726${RESET}  ${C.slate}Signals${RESET}   ${C.skyBlue}${stats.learnings}${RESET}`,          // ✦ star (user sentiment signals)
+    `${C.medBlue}\u2726${RESET}  ${C.slate}Signals${RESET}   ${C.skyBlue}${stats.learnings}${RESET}`,          //  star (user sentiment signals)
     `${C.navy}\u2261${RESET}  ${C.slate}Files${RESET}     ${C.lightBlue}${stats.userFiles}${RESET}`,           // ≡ identical to (files/menu)
     `${C.steel}${BOX.h.repeat(24)}${RESET}`,
   ];
@@ -312,11 +312,11 @@ function createNavyBanner(stats: SystemStats, width: number): string {
 
   // Reticle corner characters (heavy/thick)
   const RETICLE = {
-    tl: "\u250F", // ┏
-    tr: "\u2513", // ┓
-    bl: "\u2517", // ┗
-    br: "\u251B", // ┛
-    h: "\u2501",  // ━
+    tl: "\u250F", // 
+    tr: "\u2513", // 
+    bl: "\u2517", // 
+    br: "\u251B", // 
+    h: "\u2501",  // 
   };
 
   // Frame dimensions
@@ -604,9 +604,9 @@ function createIceBanner(stats: SystemStats, width: number): string {
   return lines.join("\n");
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // RESPONSIVE NAVY BANNER VARIANTS (progressive compaction)
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 // Shared Navy color palette for all compact variants
 function getNavyColors() {
@@ -801,9 +801,9 @@ function createNavyUltraCompactBanner(stats: SystemStats, width: number): string
   return lines.join("\n");
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Main Banner Selection - Width-based routing
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 // Breakpoints for responsive Navy banner
 const BREAKPOINTS = {
@@ -849,9 +849,9 @@ function createBanner(forceDesign?: string): string {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // CLI
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 const args = process.argv.slice(2);
 const testMode = args.includes("--test");
@@ -860,9 +860,9 @@ const designArg = args.find(a => a.startsWith("--design="))?.split("=")[1];
 try {
   if (testMode) {
     for (const design of ALL_DESIGNS) {
-      console.log(`\n${"═".repeat(60)}`);
+      console.log(`\n${"".repeat(60)}`);
       console.log(`  DESIGN: ${design.toUpperCase()}`);
-      console.log(`${"═".repeat(60)}`);
+      console.log(`${"".repeat(60)}`);
       console.log(createBanner(design));
     }
   } else {

@@ -1,9 +1,9 @@
 !/usr/bin/env bun
 
 / UL Abstract Illustration Prompt Generator
-  ️ DEPRECATED - THIS TOOL USES OLD CHARACTER-BASED SYSTEM
- ️ NEEDS COMPLETE REWRITE FOR ABSTRACT SHAPES/IMPRESSIONS ONLY
- ️ DO NOT USE UNTIL UPDATED
+   DEPRECATED - THIS TOOL USES OLD CHARACTER-BASED SYSTEM
+  NEEDS COMPLETE REWRITE FOR ABSTRACT SHAPES/IMPRESSIONS ONLY
+  DO NOT USE UNTIL UPDATED
   This tool needs to be rewritten to generate prompts using:
  - Abstract shapes and forms (NO characters)
  - Visual motifs (networks, flows, structures, horizons)

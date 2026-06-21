@@ -29,7 +29,7 @@ const changedOnly = args.includes('--changed');
 const jsonOutput = args.includes('--json');
 const quiet = args.includes('--quiet');
 
-// ── Path Reference Extraction ──
+//  Path Reference Extraction 
 
 const PATH_PATTERNS = [
   // Backtick-quoted paths: `PAI/DOCUMENTATION/Hooks/HookSystem.md`, `hooks/SecurityPipeline.hook.ts`
@@ -140,7 +140,7 @@ function extractPathRefs(content: string, docPath: string): PathRef[] {
   return refs;
 }
 
-// ── File Discovery ──
+//  File Discovery 
 
 function findDocs(): string[] {
   const docs: string[] = [];
@@ -190,7 +190,7 @@ function getChangedFiles(): Set<string> {
   }
 }
 
-// ── Main ──
+//  Main 
 
 interface Finding {
   doc: string;
@@ -264,7 +264,7 @@ for (const docPath of docsToCheck) {
   }
 }
 
-// ── Output ──
+//  Output 
 
 if (jsonOutput) {
   console.log(JSON.stringify({ docsChecked, refsChecked, findings }, null, 2));
@@ -273,14 +273,14 @@ if (jsonOutput) {
   const stale = findings.filter(f => f.type === 'stale');
 
   if (missing.length > 0) {
-    console.error(`\n❌ MISSING REFERENCES (${missing.length}):`);
+    console.error(`\n MISSING REFERENCES (${missing.length}):`);
     for (const f of missing) {
       console.error(`  ${f.doc}:${f.line} → ${f.ref}`);
     }
   }
 
   if (stale.length > 0) {
-    console.error(`\n⚠️  STALE DOCS (${stale.length}):`);
+    console.error(`\n  STALE DOCS (${stale.length}):`);
     for (const f of stale) {
       console.error(`  ${f.doc}:${f.line} → ${f.ref} (${f.detail})`);
     }
@@ -291,7 +291,7 @@ if (jsonOutput) {
   }
 
   if (findings.length === 0 && !quiet) {
-    console.error('✅ All references valid and fresh.');
+    console.error(' All references valid and fresh.');
   }
 }
 

@@ -7,12 +7,12 @@ Purpose:Generate a McKinsey-style professional consulting report from TELOS anal
 Workflow Overview
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│  . ANALYZE        . NARRATIVE       . STRUCTURE      . RENDER  │
-│  Run TELOS         Generate story     Map to McKinsey   Output as  │
-│  analysis          via CreateNarra-   report sections   web report │
-│                    tivePoints                                       │
-└─────────────────────────────────────────────────────────────────────┘
+
+  . ANALYZE        . NARRATIVE       . STRUCTURE      . RENDER  
+  Run TELOS         Generate story     Map to McKinsey   Output as  
+  analysis          via CreateNarra-   report sections   web report 
+                    tivePoints                                       
+
 ```
 
 ---
@@ -33,17 +33,17 @@ CRITICAL: This workflow consumes artifacts produced by the assessment workflow.
 Source → Assessment → Report Flow
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  SOURCE FILES (you edit)         ARTIFACTS (generated)    REPORT (output)  │
-│                                                                             │
-│  {source}/                       {source}/artifacts/      {source}/report/ │
-│  ├── FINDINGS.md            →    ├── findings.json   →   lib/report-data.ts│
-│  ├── CRITICAL_ISSUES.md          ├── narrative.json                        │
-│  ├── BLOCKERS.md                 ├── recommendations.json                  │
-│  ├── VISION.md                   ├── roadmap.json                          │
-│  ├── SOLUTION_NARRATIVE.md       └── methodology.json                      │
-│  └── telos/.md                                                            │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+  SOURCE FILES (you edit)         ARTIFACTS (generated)    REPORT (output)  
+                                                                             
+  {source}/                       {source}/artifacts/      {source}/report/ 
+   FINDINGS.md            →     findings.json   →   lib/report-data.ts
+   CRITICAL_ISSUES.md           narrative.json                        
+   BLOCKERS.md                  recommendations.json                  
+   VISION.md                    roadmap.json                          
+   SOLUTION_NARRATIVE.md        methodology.json                      
+   telos/.md                                                            
+
 ```
 
 Artifact Schema
@@ -313,23 +313,23 @@ Font Usage:
 Branding Assets Required:
 ```
 public/
-├── ul-icon.png                    UL connected nodes logo (blue)
+ ul-icon.png                    UL connected nodes logo (blue)
 ```
 
 Font Files Required:
 ```
 public/fonts/
-├── advocate__narr_reg.woff     Advocate (narrow)
-├── advocate__wide_reg.woff     Advocate Wide (display)
-├── concourse__regular.woff      Concourse (sans)
-├── concourse__bold.woff         Concourse Bold
-├── concourse__regular.woff      Concourse Medium
-├── concourse__bold.woff         Concourse Medium Bold
-├── valkyrie_a_regular.woff       Valkyrie (serif body)
-├── valkyrie_a_bold.woff          Valkyrie Bold
-├── valkyrie_a_italic.woff        Valkyrie Italic
-├── heliotrope__regular.woff     Heliotrope
-└── heliotrope__caps_regular.woffHeliotrope Caps (labels)
+ advocate__narr_reg.woff     Advocate (narrow)
+ advocate__wide_reg.woff     Advocate Wide (display)
+ concourse__regular.woff      Concourse (sans)
+ concourse__bold.woff         Concourse Bold
+ concourse__regular.woff      Concourse Medium
+ concourse__bold.woff         Concourse Medium Bold
+ valkyrie_a_regular.woff       Valkyrie (serif body)
+ valkyrie_a_bold.woff          Valkyrie Bold
+ valkyrie_a_italic.woff        Valkyrie Italic
+ heliotrope__regular.woff     Heliotrope
+ heliotrope__caps_regular.woffHeliotrope Caps (labels)
 ```
 
 Color Palette (Dark Theme)
@@ -397,29 +397,29 @@ The workflow generates a complete Next.js app:
 
 ```
 {output_dir}/
-├── public/
-│   └── fonts/              Practical Typography fonts (wofffiles)
-├── app/
-│   ├── layout.tsx          Report shell with print styles
-│   ├── page.tsx            Full report content
-│   └── globals.css         Font-face declarations + McKinsey styling
-├── components/
-│   ├── cover-page.tsx      Report cover (Advocate Wide title)
-│   ├── section.tsx         Reusable section component
-│   ├── finding-card.tsx    Individual finding display
-│   ├── exhibit.tsx         Numbered figure/exhibit
-│   ├── callout.tsx         Key takeaway box
-│   ├── severity-badge.tsx  Risk/severity indicator
-│   ├── timeline.tsx        Roadmap visualization
-│   ├── quote-block.tsx     Interview quote display
-│   └── recommendation-card.tsx  Priority-coded recommendations
-├── lib/
-│   ├── report-data.ts      Generated report content (CUSTOMIZE THIS)
-│   └── utils.ts            Utility functions
-├── package.json
-├── tailwind.config.ts      Font family definitions
-├── tsconfig.json
-└── postcss.config.js
+ public/
+    fonts/              Practical Typography fonts (wofffiles)
+ app/
+    layout.tsx          Report shell with print styles
+    page.tsx            Full report content
+    globals.css         Font-face declarations + McKinsey styling
+ components/
+    cover-page.tsx      Report cover (Advocate Wide title)
+    section.tsx         Reusable section component
+    finding-card.tsx    Individual finding display
+    exhibit.tsx         Numbered figure/exhibit
+    callout.tsx         Key takeaway box
+    severity-badge.tsx  Risk/severity indicator
+    timeline.tsx        Roadmap visualization
+    quote-block.tsx     Interview quote display
+    recommendation-card.tsx  Priority-coded recommendations
+ lib/
+    report-data.ts      Generated report content (CUSTOMIZE THIS)
+    utils.ts            Utility functions
+ package.json
+ tailwind.config.ts      Font family definitions
+ tsconfig.json
+ postcss.config.js
 ```
 
 ---

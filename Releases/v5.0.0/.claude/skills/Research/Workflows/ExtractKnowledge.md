@@ -79,7 +79,7 @@ Generate structured knowledge extraction with:
 
 ```
 KNOWLEDGE EXTRACTION RESULTS
-══════════════════════════════════════════════════
+
 Source: <source>
 Type: <detected_type>
 Domain: <detected_domain>
@@ -109,11 +109,11 @@ RELATED CONCEPTS:
 EXTRACTED WISDOM: (for wisdom content)
 "<key quotes and insights>"
 
-️ TECHNICAL DETAILS: (for security/research content)
+ TECHNICAL DETAILS: (for security/research content)
 • <technical detail >
 • <technical detail >
 
-══════════════════════════════════════════════════
+
 ```
 
 Domain-Specific Signal Points

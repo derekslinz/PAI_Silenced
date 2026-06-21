@@ -18,7 +18,7 @@ const PAI_DIR = join(HOME, ".claude", "PAI")
 const TASKS_DIR = join(PAI_DIR, "Pulse", "state", "da")
 const TASKS_PATH = join(TASKS_DIR, "scheduled-tasks.jsonl")
 
-// ── Types ──
+//  Types 
 
 interface ScheduledTask {
   id: string
@@ -44,7 +44,7 @@ interface ScheduledTask {
   fire_count: number
 }
 
-// ── Task Store I/O ──
+//  Task Store I/O 
 
 function ensureDir(): void {
   if (!existsSync(TASKS_DIR)) {
@@ -76,7 +76,7 @@ function appendTask(task: ScheduledTask): void {
   appendFileSync(TASKS_PATH, JSON.stringify(task) + "\n")
 }
 
-// ── CLI Argument Parsing ──
+//  CLI Argument Parsing 
 
 function parseArgs(args: string[]): Record<string, string> {
   const result: Record<string, string> = {}
@@ -91,7 +91,7 @@ function parseArgs(args: string[]): Record<string, string> {
   return result
 }
 
-// ── Commands ──
+//  Commands 
 
 function listTasks(filter: "active" | "all" | "history" = "active"): void {
   const tasks = readTasks()
@@ -107,7 +107,7 @@ function listTasks(filter: "active" | "all" | "history" = "active"): void {
   }
 
   console.log(`\n${"ID".padEnd(24)} ${"Status".padEnd(12)} ${"Schedule".padEnd(24)} ${"Description".padEnd(40)} Fired`)
-  console.log("─".repeat(110))
+  console.log("".repeat(110))
 
   for (const task of filtered) {
     const schedule = task.schedule.type === "once"
@@ -192,7 +192,7 @@ function cancelTask(id: string): void {
   console.log(`Cancelled: ${task.id} — "${task.description}"`)
 }
 
-// ── Main ──
+//  Main 
 
 const [command, ...rest] = process.argv.slice(2)
 

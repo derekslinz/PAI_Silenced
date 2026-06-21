@@ -188,25 +188,25 @@ START
   ↓
 Attempt Tier (WebFetch)
   ↓
-Success? → Yes → Return content ✓
+Success? → Yes → Return content 
   ↓
   No
   ↓
 Attempt Tier (Curl + Chrome Headers)
   ↓
-Success? → Yes → Return content ✓
+Success? → Yes → Return content 
   ↓
   No
   ↓
 Attempt Tier (Browser Automation)
   ↓
-Success? → Yes → Return content ✓
+Success? → Yes → Return content 
   ↓
   No
   ↓
 Attempt Tier (Bright Data MCP)
   ↓
-Success? → Yes → Return content ✓
+Success? → Yes → Return content 
   ↓
   No
   ↓

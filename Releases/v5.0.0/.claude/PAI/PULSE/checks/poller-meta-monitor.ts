@@ -124,7 +124,7 @@ function main(): void {
     return;
   }
 
-  console.log(`⚠️ Pulse meta-monitor: ${stale.length} monitoring job(s) silent or failing:\n`);
+  console.log(` Pulse meta-monitor: ${stale.length} monitoring job(s) silent or failing:\n`);
   for (const s of stale) console.log(`  • ${s}`);
   console.log(`\nTrust in proactive monitoring is compromised while these are silent. Investigate.`);
 }

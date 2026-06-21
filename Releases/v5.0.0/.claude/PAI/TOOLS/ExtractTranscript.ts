@@ -179,7 +179,7 @@ async function transcribeFile(
       language: "en",
     });
 
-    console.log(`✓ Transcription complete`);
+    console.log(` Transcription complete`);
 
     // Return as string (API returns string for all formats)
     return typeof transcription === 'string' ? transcription : JSON.stringify(transcription, null, 2);
@@ -303,11 +303,11 @@ async function main() {
       const transcript = await transcribeFile(file, options, openai);
       const outputPath = await saveTranscript(file, transcript, options);
       results.push({ file, output: outputPath });
-      console.log(`✓ Saved to: ${outputPath}`);
+      console.log(` Saved to: ${outputPath}`);
     } catch (error) {
       const errorMsg = error instanceof Error ? error.message : String(error);
       errors.push({ file: basename(file), error: errorMsg });
-      console.error(`✗ Failed to transcribe ${basename(file)}: ${errorMsg}`);
+      console.error(` Failed to transcribe ${basename(file)}: ${errorMsg}`);
     }
   }
 

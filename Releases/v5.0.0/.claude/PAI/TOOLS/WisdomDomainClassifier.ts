@@ -20,7 +20,7 @@ import { parseArgs } from 'util';
 const BASE_DIR = process.env.PAI_DIR || join(process.env.HOME!, '.claude');
 const FRAMES_DIR = join(BASE_DIR, 'MEMORY', 'WISDOM', 'FRAMES');
 
-// ── Domain Keyword Map ──
+//  Domain Keyword Map 
 
 interface DomainKeywords {
   domain: string;
@@ -97,7 +97,7 @@ const DOMAIN_MAP: DomainKeywords[] = [
   },
 ];
 
-// ── Classification ──
+//  Classification 
 
 interface ClassificationResult {
   domain: string;
@@ -187,7 +187,7 @@ export function listFrames(): { domain: string; path: string; confidence: string
     });
 }
 
-// ── CLI ──
+//  CLI 
 
 if (import.meta.main) {
   const { values } = parseArgs({

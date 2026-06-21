@@ -265,8 +265,8 @@ function listOpinions(): void {
     console.log(`\n## ${category.charAt(0).toUpperCase() + category.slice(1)}\n`);
 
     for (const op of opinionList.sort((a, b) => b.confidence - a.confidence)) {
-      const bar = '█'.repeat(Math.round(op.confidence * 10)) +
-                  '░'.repeat(10 - Math.round(op.confidence * 10));
+      const bar = ''.repeat(Math.round(op.confidence * 10)) +
+                  ''.repeat(10 - Math.round(op.confidence * 10));
       console.log(`  [${bar}] ${(op.confidence * 100).toFixed(0)}% - ${op.statement}`);
     }
   }
@@ -333,7 +333,7 @@ async function main() {
       }
 
       const opinion = addOpinion(statement, category);
-      console.log(`✅ Added opinion: "${statement}" (${category}, confidence: 50%)`);
+      console.log(` Added opinion: "${statement}" (${category}, confidence: 50%)`);
       break;
     }
 
@@ -371,14 +371,14 @@ async function main() {
 
       try {
         const result = addEvidence(statement, evidenceType, description);
-        console.log(`✅ Added ${evidenceType} evidence to "${statement}"`);
+        console.log(` Added ${evidenceType} evidence to "${statement}"`);
         console.log(`   Confidence: ${(result.opinion.confidence * 100).toFixed(0)}% (${result.confidenceChange > 0 ? '+' : ''}${(result.confidenceChange * 100).toFixed(1)}%)`);
 
         if (result.needsNotification) {
-          console.log('\n⚠️  SIGNIFICANT CHANGE - {{PRINCIPAL_NAME}} should be notified');
+          console.log('\n  SIGNIFICANT CHANGE - {{PRINCIPAL_NAME}} should be notified');
         }
       } catch (err) {
-        console.error(`❌ ${err}`);
+        console.error(` ${err}`);
         process.exit(1);
       }
       break;

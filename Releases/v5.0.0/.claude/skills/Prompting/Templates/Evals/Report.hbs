@@ -66,15 +66,15 @@
 ## Executive Summary
 
 {{#gt summary.pass_rate 0.9}}
-✅ **EXCELLENT** - {{percent summary.pass_rate 1}}% pass rate
+ **EXCELLENT** - {{percent summary.pass_rate 1}}% pass rate
 {{else}}
 {{#gt summary.pass_rate 0.75}}
-✓ **GOOD** - {{percent summary.pass_rate 1}}% pass rate
+ **GOOD** - {{percent summary.pass_rate 1}}% pass rate
 {{else}}
 {{#gt summary.pass_rate 0.5}}
-⚠️ **NEEDS IMPROVEMENT** - {{percent summary.pass_rate 1}}% pass rate
+️ **NEEDS IMPROVEMENT** - {{percent summary.pass_rate 1}}% pass rate
 {{else}}
-❌ **CRITICAL** - {{percent summary.pass_rate 1}}% pass rate
+ **CRITICAL** - {{percent summary.pass_rate 1}}% pass rate
 {{/gt}}
 {{/gt}}
 {{/gt}}
@@ -105,9 +105,9 @@
 | Mean Score | {{comparison.previous_score}} | {{summary.mean_score}} | {{comparison.delta}} |
 
 {{#if comparison.significant}}
-⚠️ **Statistically significant change detected**
+️ **Statistically significant change detected**
 {{else}}
-✓ No statistically significant change
+ No statistically significant change
 {{/if}}
 {{/if}}
 

@@ -1067,19 +1067,19 @@ All templates live in `~/.claude/skills/Prompting/Templates/`:
 
 ```
 skills/Prompting/
-├── Templates/
-│   ├── Primitives/       Core template files (.hbs)
-│   │   ├── Roster.hbs
-│   │   ├── Structure.hbs
-│   │   ├── Briefing.hbs
-│   │   └── Gate.hbs
-│   ├── Data/             YAML data sources
-│   │   ├── Agents.yaml
-│   │   ├── Skills.yaml
-│   │   └── ValidationGates.yaml
-│   └── Compiled/         Generated output
-└── Tools/                Rendering utilities
-    └── RenderTemplate.ts
+ Templates/
+    Primitives/       Core template files (.hbs)
+       Roster.hbs
+       Structure.hbs
+       Briefing.hbs
+       Gate.hbs
+    Data/             YAML data sources
+       Agents.yaml
+       Skills.yaml
+       ValidationGates.yaml
+    Compiled/         Generated output
+ Tools/                Rendering utilities
+     RenderTemplate.ts
 ```
 
 ---

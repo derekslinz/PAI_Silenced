@@ -17,13 +17,13 @@ Invoked for:
 Notation
 
 ```
-  A  ──(+)── B        A increases → B increases (same direction)
+  A  (+) B        A increases → B increases (same direction)
                          A decreases → B decreases
 
-  A  ──(−)── B        A increases → B decreases (opposite direction)
+  A  (−) B        A increases → B decreases (opposite direction)
                          A decreases → B increases
 
-  A  ═══(+/−)═══ B    Same as above but with a DELAY (drawn thicker or with ||)
+  A  (+/−) B    Same as above but with a DELAY (drawn thicker or with ||)
 
 
   Loop labels:
@@ -65,7 +65,7 @@ Step : Draw the Arrows
 For each pair of variables, ask: does a change in A directly cause a change in B?
 - Direct causation only— no "A correlates with B"; no "A causes C causes B" as a single arrow (draw it through C)
 - Polarity— assign (+) or (−)
-- Delay— mark with ═══ or || if the effect takes significantly longer than the rhythm of the system
+- Delay— mark with  or || if the effect takes significantly longer than the rhythm of the system
 
 Sanity check each arrow— can you describe the mechanism in one sentence? If not, the arrow is probably wrong.
 
@@ -187,7 +187,7 @@ CLD Conventions
 - Horizontal layoutwhen possible; feedback loops naturally form ovals
 - Reinforcing loopsoften drawn with circular arrow symbol ↻ in center with "R"
 - Balancing loopsoften drawn with "=" or scales symbol with "B"
-- Delaysdrawn with double lines on the arrow ═══ or `||`
+- Delaysdrawn with double lines on the arrow  or `||`
 - Exogenous variables(outside the model) drawn without incoming arrows, in a distinct color/shape
 - Stocks(accumulations) vs Flows(rates) — advanced stock-and-flow notation; use when the CLD underdetermines behavior
 

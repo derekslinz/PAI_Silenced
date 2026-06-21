@@ -128,11 +128,11 @@ Step : Headshot Generation
 
 MANDATORY: Generate a FRESH, VARIED, FACE-ONLY headshot EVERY time.
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-️  FACE ONLY: Forehead to chin, ear to ear                        ️
-️  NO shoulders, NO neck, NO body visible                         ️
-️  If shoulders/body visible → REGENERATE IMMEDIATELY             ️
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  FACE ONLY: Forehead to chin, ear to ear                        
+  NO shoulders, NO neck, NO body visible                         
+  If shoulders/body visible → REGENERATE IMMEDIATELY             
+
 ```
 
 Headshot Variation Requirements
@@ -241,11 +241,11 @@ Step : Quality Validation
 
 MANDATORY: ALL checks must pass before presenting to the user.
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-️  THE xTEST IS MANDATORY                                  ️
-️  If text isn't readable at thumbnail size → FAIL                ️
-️  If it looks like ass at any size → FAIL                        ️
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  THE xTEST IS MANDATORY                                  
+  If text isn't readable at thumbnail size → FAIL                
+  If it looks like ass at any size → FAIL                        
+
 ```
 
 Quality Gates (ALL MUST PASS)

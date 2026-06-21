@@ -9,25 +9,25 @@ Directory Structure
 
 ```markdown
 Templates/
-├── Primitives/       Core template files (.hbs)
-│   ├── Roster.hbs    Agent/skill definitions
-│   ├── Structure.hbs Workflow patterns
-│   ├── Briefing.hbs  Agent context handoff
-│   └── Gate.hbs      Validation checklists
-├── Data/             YAML data sources
-│   ├── Agents.yaml   All agent definitions
-│   ├── Skills.yaml   All skill definitions
-│   └── ValidationGates.yaml Standard validation gates
-├── Evals/            Eval-specific templates
-│   ├── Judge.hbs     LLM-as-Judge prompt template
-│   ├── Rubric.hbs    Evaluation rubric generator
-│   ├── TestCase.hbs  Test case definition
-│   ├── Comparison.hbs A/B comparison template
-│   └── Report.hbs    Eval results report
-├── Compiled/         Generated output (gitignored)
-└── Tools/            Rendering utilities
-    ├── RenderTemplate.ts   Core rendering engine
-    └── ValidateTemplate.ts Template syntax checker
+ Primitives/       Core template files (.hbs)
+    Roster.hbs    Agent/skill definitions
+    Structure.hbs Workflow patterns
+    Briefing.hbs  Agent context handoff
+    Gate.hbs      Validation checklists
+ Data/             YAML data sources
+    Agents.yaml   All agent definitions
+    Skills.yaml   All skill definitions
+    ValidationGates.yaml Standard validation gates
+ Evals/            Eval-specific templates
+    Judge.hbs     LLM-as-Judge prompt template
+    Rubric.hbs    Evaluation rubric generator
+    TestCase.hbs  Test case definition
+    Comparison.hbs A/B comparison template
+    Report.hbs    Eval results report
+ Compiled/         Generated output (gitignored)
+ Tools/            Rendering utilities
+     RenderTemplate.ts   Core rendering engine
+     ValidateTemplate.ts Template syntax checker
 ```
 
 Core Syntax

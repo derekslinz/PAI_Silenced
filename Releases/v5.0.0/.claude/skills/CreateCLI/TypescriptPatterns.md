@@ -17,7 +17,7 @@ Research Sources:- tsx (privatenumber/tsx)
 
 ---
 
-️⃣ TYPE-SAFE ARGUMENT PARSING
+⃣ TYPE-SAFE ARGUMENT PARSING
 
 Pattern : Schema-Driven Inference (cleye library - used by tsx)
 
@@ -120,7 +120,7 @@ Key Insight:Discriminated unions enable exhaustive compile-time checking.
 
 ---
 
-️⃣ MODERN TYPESCRIPT FEATURES (.x)
+⃣ MODERN TYPESCRIPT FEATURES (.x)
 
 Pattern : `satisfies` Operator (Vite/Turbo)
 
@@ -231,7 +231,7 @@ const flags = defineFlags({
 
 ---
 
-️⃣ ERROR HANDLING PATTERNS
+⃣ ERROR HANDLING PATTERNS
 
 Pattern : Custom Error Classes (pnpm)
 
@@ -450,7 +450,7 @@ Benefits:- Graceful shutdown
 
 ---
 
-️⃣ TYPE-SAFE CONFIGURATION
+⃣ TYPE-SAFE CONFIGURATION
 
 Pattern : Zod Validation with Transform
 
@@ -526,7 +526,7 @@ export type Env = typeof env;
 
 ---
 
-️⃣ ASYNC/AWAIT BEST PRACTICES
+⃣ ASYNC/AWAIT BEST PRACTICES
 
 Pattern : Top-Level Await (Prisma Style)
 
@@ -622,7 +622,7 @@ await main().catch(async (err) => {
 
 ---
 
-️⃣ RECOMMENDED PATTERNS FOR KAI CLIS
+⃣ RECOMMENDED PATTERNS FOR KAI CLIS
 
 For Tier (llcli-style):
 

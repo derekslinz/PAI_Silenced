@@ -230,7 +230,7 @@ INGEST RIPPLE PLAN:
   RIPPLE (reverse-direction updates to existing notes):
     → Ideas/existing-note-— add body [[new-note-slug]] wikilink + add to its related: array (type: extends)
     → Ideas/existing-note-— update Evidence section with new data point + add to related:
-    → Ideas/existing-note-— ️ CONTRADICTION: new source says X, note says Y — type: contradicts
+    → Ideas/existing-note-—  CONTRADICTION: new source says X, note says Y — type: contradicts
   NO CHANGE: Ideas/tangentially-related — mentioned same tag but no substantive connection
 ```
 
@@ -241,7 +241,7 @@ After the user approves (or you determine updates are low-risk cross-references)
 - Related notes: add reverse-direction `related:` entries to their frontmatter with appropriate types
 - Body wikilinks: add `[[wikilinks]]` in existing prose where natural (not forced)
 - Update `updated:` date on modified notes
-- For contradictions: add a `> ️ Contradiction:[note] claims X — see [[new-note]] for counter-evidence` callout, AND add `type: contradicts` in related: arrays
+- For contradictions: add a `>  Contradiction:[note] claims X — see [[new-note]] for counter-evidence` callout, AND add `type: contradicts` in related: arrays
 
 Step — Log and index
 
@@ -294,7 +294,7 @@ CONTRADICTION SCAN:
   Contradictions found: N
   Superseded claims: N
 
-  ️ CONTRADICTION:
+   CONTRADICTION:
     [[note-a]] claims: "X"
     [[note-b]] claims: "Y"
     Resolution: [suggest which is correct, or flag for the user]

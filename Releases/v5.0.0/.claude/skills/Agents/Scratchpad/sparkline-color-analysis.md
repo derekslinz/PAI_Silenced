@@ -16,7 +16,7 @@ Constraint Analysis
 Hard Constraints:- Must be distinguishable for deuteranopia (% of males - red-green confusion)
 - Must be distinguishable for protanopia (% of males - red confusion)
 - Must work in -color terminal mode (fallback from true color)
-- Must use block characters (█▇▆▅▄▬▃▂▁) - upward for -, downward for -- Each rating level must be visually distinct
+- Must use block characters () - upward for -, downward for -- Each rating level must be visually distinct
 
 Soft Constraints:- Prefer perceptually uniform progression (equal visual steps)
 - Maintain aesthetic appeal
@@ -46,20 +46,20 @@ Specific RGB Values (-bit True Color)
 
 ```bash
 Positive gradient (upward blocks, increasing luminance)
-Rating : RGB(, , )  → \ub[;;;;m█  Bright cyan-green (L≈)
-Rating  : RGB(, , )  → \ub[;;;;m▇  Vibrant cyan-green (L≈)
-Rating  : RGB(, , )   → \ub[;;;;m▆   Medium green-cyan (L≈)
-Rating  : RGB(, , )   → \ub[;;;;m▅   Moderate green (L≈)
-Rating  : RGB(, , )   → \ub[;;;;m▄   Subtle green (L≈)
+Rating : RGB(, , )  → \ub[;;;;m  Bright cyan-green (L≈)
+Rating  : RGB(, , )  → \ub[;;;;m  Vibrant cyan-green (L≈)
+Rating  : RGB(, , )   → \ub[;;;;m   Medium green-cyan (L≈)
+Rating  : RGB(, , )   → \ub[;;;;m   Moderate green (L≈)
+Rating  : RGB(, , )   → \ub[;;;;m   Subtle green (L≈)
 
 Neutral center
-Rating  : RGB(, , ) → \ub[;;;;m▬  Warm gray (L≈)
+Rating  : RGB(, , ) → \ub[;;;;m  Warm gray (L≈)
 
 Negative gradient (downward blocks, decreasing luminance)
-Rating  : RGB(, , )  → \ub[;;;;m▃  Amber/orange (L≈)
-Rating  : RGB(, , )  → \ub[;;;;m▂  Orange-red (L≈)
-Rating  : RGB(, , )   → \ub[;;;;m▁   Strong red (L≈)
-Rating  : RGB(, , )   → \ub[;;;;m▁   Deep dark red (L≈)
+Rating  : RGB(, , )  → \ub[;;;;m  Amber/orange (L≈)
+Rating  : RGB(, , )  → \ub[;;;;m  Orange-red (L≈)
+Rating  : RGB(, , )   → \ub[;;;;m   Strong red (L≈)
+Rating  : RGB(, , )   → \ub[;;;;m   Deep dark red (L≈)
 ```
 
 Luminance Calculation (Approximate):Using simplified L= (.×R + .×G + .×B) / .
@@ -74,34 +74,34 @@ For terminals that don't support -bit color, map to xterm-palette:
 
 ```bash
 Positive (-color approximations)
-Rating : \ub[;;m█   xterm color (cyan-green, closest to ,,)
-Rating  : \ub[;;m▇   xterm color (light green)
-Rating  : \ub[;;m▆   xterm color (medium green-cyan)
-Rating  : \ub[;;m▅   xterm color (moderate green)
-Rating  : \ub[;;m▄   xterm color (dark green)
+Rating : \ub[;;m   xterm color (cyan-green, closest to ,,)
+Rating  : \ub[;;m   xterm color (light green)
+Rating  : \ub[;;m   xterm color (medium green-cyan)
+Rating  : \ub[;;m   xterm color (moderate green)
+Rating  : \ub[;;m   xterm color (dark green)
 
 Neutral
-Rating  : \ub[;;m▬  xterm color (gray)
+Rating  : \ub[;;m  xterm color (gray)
 
 Negative
-Rating  : \ub[;;m▃  xterm color (orange)
-Rating  : \ub[;;m▂  xterm color (dark orange)
-Rating  : \ub[;;m▁  xterm color (orange-red)
-Rating  : \ub[;;m▁  xterm color (dark red)
+Rating  : \ub[;;m  xterm color (orange)
+Rating  : \ub[;;m  xterm color (dark orange)
+Rating  : \ub[;;m  xterm color (orange-red)
+Rating  : \ub[;;m  xterm color (dark red)
 ```
 
 Implementation Code:```bash
 jq implementation for rating-to-color mapping
-if   . >= .then "\ub[;;;;m█"
-elif . >= .then "\ub[;;;;m▇"
-elif . >= .then "\ub[;;;;m▆"
-elif . >= .then "\ub[;;;;m▅"
-elif . >= .then "\ub[;;;;m▄"
-elif . >= .then "\ub[;;;;m▬"
-elif . >= .then "\ub[;;;;m▃"
-elif . >= .then "\ub[;;;;m▂"
-elif . >= .then "\ub[;;;;m▁"
-else "\ub[;;;;m▁"
+if   . >= .then "\ub[;;;;m"
+elif . >= .then "\ub[;;;;m"
+elif . >= .then "\ub[;;;;m"
+elif . >= .then "\ub[;;;;m"
+elif . >= .then "\ub[;;;;m"
+elif . >= .then "\ub[;;;;m"
+elif . >= .then "\ub[;;;;m"
+elif . >= .then "\ub[;;;;m"
+elif . >= .then "\ub[;;;;m"
+else "\ub[;;;;m"
 end
 ```
 
@@ -173,7 +173,7 @@ Rating  : RGB(, , )    Very low brightness dark red
 Trade-offs:- Maximum perceptual range (uses two visual dimensions)
 - Intuitive brightness mapping (bright=good, dark=bad)
 - High contrast between extremes
-- ️ May be too intense in bright terminal themes
+-  May be too intense in bright terminal themes
 
 ---
 
@@ -207,8 +207,8 @@ Rating  : RGB(, , )    Deep warm red
 
 Trade-offs:- Uses temperature perception (cool=calm, warm=alert)
 - Aesthetic appeal
-- ️ May be subtle for some users
-- ️ Temperature perception varies by individual
+-  May be subtle for some users
+-  Temperature perception varies by individual
 
 ---
 
@@ -229,12 +229,12 @@ Solution (Blue-Orange):- Rating → Appears as bright blue
 Solution (Saturation + Brightness):- Rating → Appears as very bright gray
 - Rating → Appears as very dark gray
 - Works in grayscale
-- ️ Hue information lost but brightness preserved
+-  Hue information lost but brightness preserved
 
 Solution (Temperature):- Rating → Appears as bright cyan-gray
 - Rating → Appears as dark yellow-brown
 - Good distinction
-- ️ Some mid-range confusion possible
+-  Some mid-range confusion possible
 
 ---
 
@@ -269,20 +269,20 @@ fi
 Visual Preview (Simulated)
 
 ```
-Rating : █ (Bright cyan-green)
-Rating  : ▇ (Vibrant green-cyan)
-Rating  : ▆ (Medium green-cyan)
-Rating  : ▅ (Moderate green)
-Rating  : ▄ (Subtle green)
-Rating  : ▬ (Neutral gray)
-Rating  : ▃ (Amber/orange)
-Rating  : ▂ (Orange-red)
-Rating  : ▁ (Strong red)
-Rating  : ▁ (Deep dark red)
+Rating :  (Bright cyan-green)
+Rating  :  (Vibrant green-cyan)
+Rating  :  (Medium green-cyan)
+Rating  :  (Moderate green)
+Rating  :  (Subtle green)
+Rating  :  (Neutral gray)
+Rating  :  (Amber/orange)
+Rating  :  (Orange-red)
+Rating  :  (Strong red)
+Rating  :  (Deep dark red)
 ```
 
 Full sparkline example (ratings: , , , , , , , , , ):```
-▆▇█▆▄▬▃▂▁▁
+
 ```
 
 ---

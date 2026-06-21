@@ -35,12 +35,12 @@ Place images in the `public/` folder and use `staticFile()` to reference them:
 
 ```
 my-video/
-├─ public/
-│  ├─ logo.png
-│  ├─ avatar.jpg
-│  └─ icon.svg
-├─ src/
-├─ package.json
+ public/
+   logo.png
+   avatar.jpg
+   icon.svg
+ src/
+ package.json
 ```
 
 ```tsx

@@ -195,12 +195,12 @@ Output Formats
 Table (Default)
 
 ```
-┌──────────┬────────────────────────────┬───────────┬────────────┐
-│ Run ID   │ Model                      │ Pass Rate │ Mean Score │
-├──────────┼────────────────────────────┼───────────┼────────────┤
-│ abc  │ claude---sonnet-│ %       │ .       │
-│ def  │ gpt-o                     │ %       │ .       │
-└──────────┴────────────────────────────┴───────────┴────────────┘
+
+ Run ID    Model                       Pass Rate  Mean Score 
+
+ abc   claude---sonnet- %        .       
+ def   gpt-o                      %        .       
+
 ```
 
 JSON

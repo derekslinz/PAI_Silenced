@@ -124,7 +124,7 @@ function loadExtendManifest(skillName: string): ExtendManifest | null {
 
     // Validate required fields
     if (!manifest.skill || !manifest.extends) {
-      console.warn(`⚠️ Invalid EXTEND.yaml for ${skillName}: missing required fields`);
+      console.warn(` Invalid EXTEND.yaml for ${skillName}: missing required fields`);
       return null;
     }
 
@@ -135,7 +135,7 @@ function loadExtendManifest(skillName: string): ExtendManifest | null {
 
     return manifest;
   } catch (error) {
-    console.warn(`⚠️ Failed to parse EXTEND.yaml for ${skillName}:`, error);
+    console.warn(` Failed to parse EXTEND.yaml for ${skillName}:`, error);
     return null;
   }
 }
@@ -162,7 +162,7 @@ export function loadSkillConfig<T>(skillDir: string, filename: string): T {
     if (!existsSync(baseConfigPath)) {
       baseConfig = {} as T;
     } else {
-      console.error(`❌ Failed to load base config ${baseConfigPath}:`, error);
+      console.error(` Failed to load base config ${baseConfigPath}:`, error);
       throw error;
     }
   }
@@ -201,7 +201,7 @@ export function loadSkillConfig<T>(skillDir: string, filename: string): T {
     // 5. Merge and return
     return mergeConfigs(baseConfig, customConfig, manifest.merge_strategy);
   } catch (error) {
-    console.warn(`⚠️ Failed to load customization ${customConfigPath}, using base config:`, error);
+    console.warn(` Failed to load customization ${customConfigPath}, using base config:`, error);
     return baseConfig;
   }
 }

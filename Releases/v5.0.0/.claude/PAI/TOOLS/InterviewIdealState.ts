@@ -188,7 +188,7 @@ function showNext(state: InterviewState): void {
   const pendingPrefs = PREFERENCE_FILES.filter((f) => state.preference_files[f].status !== "done");
 
   if (pendingDims.length === 0 && pendingPrefs.length === 0) {
-    console.log("✅ All interviews complete.");
+    console.log(" All interviews complete.");
     return;
   }
 
@@ -215,17 +215,17 @@ function showNext(state: InterviewState): void {
 }
 
 function showStatus(state: InterviewState): void {
-  console.log("═══ Interview Progress ═══\n");
+  console.log(" Interview Progress \n");
   console.log("IDEAL_STATE dimensions:");
   for (const d of DIMENSIONS) {
     const tbd = countTbd(join(IDEAL_DIR, `${d}.md`));
-    const mark = state.dimensions[d].status === "done" ? "✅" : tbd === 0 ? "" : "⬜";
+    const mark = state.dimensions[d].status === "done" ? "" : tbd === 0 ? "" : "";
     console.log(`  ${mark} ${d.padEnd(16)}  ${tbd} TBD remaining`);
   }
   console.log("\nPreference files:");
   for (const f of PREFERENCE_FILES) {
     const tbd = countTbd(join(TELOS_DIR, `${f}.md`));
-    const mark = state.preference_files[f].status === "done" ? "✅" : tbd === 0 ? "" : "⬜";
+    const mark = state.preference_files[f].status === "done" ? "" : tbd === 0 ? "" : "";
     console.log(`  ${mark} ${f.padEnd(20)}  ${tbd} TBD remaining`);
   }
   const dimDone = Object.values(state.dimensions).filter((d) => d.status === "done").length;
@@ -261,10 +261,10 @@ function markDone(state: InterviewState, name: string): void {
     process.exit(1);
   }
   saveState(state);
-  console.log(`✅ Marked ${upper} complete.`);
+  console.log(` Marked ${upper} complete.`);
 }
 
-// ─── Main ───
+//  Main 
 
 const args = process.argv.slice(2);
 const state = loadState();

@@ -3,7 +3,7 @@
  * ANSI colors, progress bars, banners, and formatted output.
  */
 
-// ─── ANSI Colors ─────────────────────────────────────────────────
+//  ANSI Colors 
 
 export const c = {
   reset: "\x1b[0m",
@@ -30,15 +30,15 @@ export function print(text: string): void {
 }
 
 export function printSuccess(text: string): void {
-  print(`  ${c.green}✓${c.reset} ${text}`);
+  print(`  ${c.green}${c.reset} ${text}`);
 }
 
 export function printError(text: string): void {
-  print(`  ${c.red}✗${c.reset} ${text}`);
+  print(`  ${c.red}${c.reset} ${text}`);
 }
 
 export function printWarning(text: string): void {
-  print(`  ${c.yellow}⚠${c.reset} ${text}`);
+  print(`  ${c.yellow}${c.reset} ${text}`);
 }
 
 export function printInfo(text: string): void {
@@ -51,12 +51,12 @@ export function printStep(num: number, total: number, name: string): void {
   // reader's eye lands on it first when the wizard moves to a new section.
   const label = ` STEP ${num} / ${total}  —  ${name.toUpperCase()} `;
   const inner = label.length;
-  const border = "═".repeat(inner);
+  const border = "".repeat(inner);
   print("");
   print("");
-  print(`  ${c.blue}╔${border}╗${c.reset}`);
-  print(`  ${c.blue}║${c.bold}${c.lightBlue}${label}${c.reset}${c.blue}║${c.reset}`);
-  print(`  ${c.blue}╚${border}╝${c.reset}`);
+  print(`  ${c.blue}${border}${c.reset}`);
+  print(`  ${c.blue}${c.bold}${c.lightBlue}${label}${c.reset}${c.blue}${c.reset}`);
+  print(`  ${c.blue}${border}${c.reset}`);
   print("");
 }
 
@@ -66,21 +66,21 @@ function padVisible(text: string, width: number): string {
 
 export function printSectionHeader(title: string, subtitle?: string, stepNumber?: number): void {
   const stepLabel = stepNumber ? `Step ${stepNumber}/9` : "";
-  const leftLabel = `${c.bold}${c.white}▸ ${title}${c.reset}`;
+  const leftLabel = `${c.bold}${c.white} ${title}${c.reset}`;
   const innerWidth = Math.max(
     53,
-    visibleLength(`▸ ${title}`) + (stepLabel ? stepLabel.length + 4 : 0),
+    visibleLength(` ${title}`) + (stepLabel ? stepLabel.length + 4 : 0),
     subtitle ? subtitle.length + 4 : 0
   );
-  const rightPadding = stepLabel ? Math.max(2, innerWidth - visibleLength(`▸ ${title}`) - stepLabel.length) : 0;
+  const rightPadding = stepLabel ? Math.max(2, innerWidth - visibleLength(` ${title}`) - stepLabel.length) : 0;
 
   print("");
-  print(`  ${c.lightBlue}╭${"─".repeat(innerWidth + 2)}╮${c.reset}`);
-  print(`  ${c.lightBlue}│${c.reset} ${leftLabel}${stepLabel ? `${" ".repeat(rightPadding)}${c.gray}${stepLabel}${c.reset}` : padVisible("", innerWidth)} ${c.lightBlue}│${c.reset}`);
+  print(`  ${c.lightBlue}${"".repeat(innerWidth + 2)}${c.reset}`);
+  print(`  ${c.lightBlue}${c.reset} ${leftLabel}${stepLabel ? `${" ".repeat(rightPadding)}${c.gray}${stepLabel}${c.reset}` : padVisible("", innerWidth)} ${c.lightBlue}${c.reset}`);
   if (subtitle) {
-    print(`  ${c.lightBlue}│${c.reset} ${c.gray}${padVisible(subtitle, innerWidth)}${c.reset} ${c.lightBlue}│${c.reset}`);
+    print(`  ${c.lightBlue}${c.reset} ${c.gray}${padVisible(subtitle, innerWidth)}${c.reset} ${c.lightBlue}${c.reset}`);
   }
-  print(`  ${c.lightBlue}╰${"─".repeat(innerWidth + 2)}╯${c.reset}`);
+  print(`  ${c.lightBlue}${"".repeat(innerWidth + 2)}${c.reset}`);
 }
 
 /**
@@ -100,54 +100,54 @@ export function printQuestion(text: string, daName: string = "{{DA_NAME}}"): voi
   const innerWidth = Math.max(header.length, ...lines.map(visibleLength));
 
   print("");
-  print(`  ${borderColor}╭─ ${header} ${"─".repeat(Math.max(0, innerWidth - header.length))}╮${c.reset}`);
+  print(`  ${borderColor} ${header} ${"".repeat(Math.max(0, innerWidth - header.length))}${c.reset}`);
   for (const line of lines) {
-    print(`  ${borderColor}│${c.reset} ${c.white}${line}${c.reset}${" ".repeat(Math.max(0, innerWidth - visibleLength(line)))} ${borderColor}│${c.reset}`);
+    print(`  ${borderColor}${c.reset} ${c.white}${line}${c.reset}${" ".repeat(Math.max(0, innerWidth - visibleLength(line)))} ${borderColor}${c.reset}`);
   }
-  print(`  ${borderColor}╰${"─".repeat(innerWidth + 2)}╯${c.reset}`);
+  print(`  ${borderColor}${"".repeat(innerWidth + 2)}${c.reset}`);
 }
 
-// ─── Progress Bar ────────────────────────────────────────────────
+//  Progress Bar 
 
 export function progressBar(percent: number, width: number = 30): string {
   const filled = Math.round((percent / 100) * width);
   const empty = width - filled;
-  return `${c.blue}${"▓".repeat(filled)}${c.gray}${"░".repeat(empty)}${c.reset} ${percent}%`;
+  return `${c.blue}${"".repeat(filled)}${c.gray}${"".repeat(empty)}${c.reset} ${percent}%`;
 }
 
-// ─── Banner ──────────────────────────────────────────────────────
+//  Banner 
 
 export function printBanner(): void {
-  const sep = `${c.steel}│${c.reset}`;
-  const bar = `${c.steel}────────────────────────${c.reset}`;
+  const sep = `${c.steel}${c.reset}`;
+  const bar = `${c.steel}${c.reset}`;
 
   print("");
-  print(`${c.steel}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${c.reset}`);
+  print(`${c.steel}${c.reset}`);
   print("");
   print(`                      ${c.navy}P${c.reset}${c.blue}A${c.reset}${c.lightBlue}I${c.reset} ${c.steel}|${c.reset} ${c.gray}Personal AI Infrastructure${c.reset}`);
   print("");
   print(`                     ${c.italic}${c.lightBlue}"Magnifying human capabilities..."${c.reset}`);
   print("");
   print("");
-  print(`           ${c.navy}████████████████${c.reset}${c.lightBlue}████${c.reset}   ${sep}  ${c.gray}"${c.reset}${c.lightBlue}{{DA_NAME}} here, ready to go${c.reset}${c.gray}..."${c.reset}`);
-  print(`           ${c.navy}████████████████${c.reset}${c.lightBlue}████${c.reset}   ${sep}  ${bar}`);
-  print(`           ${c.navy}████${c.reset}        ${c.navy}████${c.reset}${c.lightBlue}████${c.reset}   ${sep}  ${c.navy}⬢${c.reset}  ${c.gray}PAI${c.reset}       ${c.silver}v5.0.0${c.reset}`);
-  print(`           ${c.navy}████${c.reset}        ${c.navy}████${c.reset}${c.lightBlue}████${c.reset}   ${sep}  ${c.navy}⚙${c.reset}  ${c.gray}Algo${c.reset}      ${c.silver}v6.3.0${c.reset}`);
-  print(`           ${c.navy}████████████████${c.reset}${c.lightBlue}████${c.reset}   ${sep}  ${c.lightBlue}✦${c.reset}  ${c.gray}Installer${c.reset} ${c.silver}v5.0${c.reset}`);
-  print(`           ${c.navy}████████████████${c.reset}${c.lightBlue}████${c.reset}   ${sep}  ${bar}`);
-  print(`           ${c.navy}████${c.reset}        ${c.blue}████${c.reset}${c.lightBlue}████${c.reset}   ${sep}`);
-  print(`           ${c.navy}████${c.reset}        ${c.blue}████${c.reset}${c.lightBlue}████${c.reset}   ${sep}  ${c.yellow}⚠  Alpha — rough edges expected${c.reset}`);
-  print(`           ${c.navy}████${c.reset}        ${c.blue}████${c.reset}${c.lightBlue}████${c.reset}   ${sep}`);
-  print(`           ${c.navy}████${c.reset}        ${c.blue}████${c.reset}${c.lightBlue}████${c.reset}   ${sep}`);
+  print(`           ${c.navy}${c.reset}${c.lightBlue}${c.reset}   ${sep}  ${c.gray}"${c.reset}${c.lightBlue}{{DA_NAME}} here, ready to go${c.reset}${c.gray}..."${c.reset}`);
+  print(`           ${c.navy}${c.reset}${c.lightBlue}${c.reset}   ${sep}  ${bar}`);
+  print(`           ${c.navy}${c.reset}        ${c.navy}${c.reset}${c.lightBlue}${c.reset}   ${sep}  ${c.navy}${c.reset}  ${c.gray}PAI${c.reset}       ${c.silver}v5.0.0${c.reset}`);
+  print(`           ${c.navy}${c.reset}        ${c.navy}${c.reset}${c.lightBlue}${c.reset}   ${sep}  ${c.navy}${c.reset}  ${c.gray}Algo${c.reset}      ${c.silver}v6.3.0${c.reset}`);
+  print(`           ${c.navy}${c.reset}${c.lightBlue}${c.reset}   ${sep}  ${c.lightBlue}${c.reset}  ${c.gray}Installer${c.reset} ${c.silver}v5.0${c.reset}`);
+  print(`           ${c.navy}${c.reset}${c.lightBlue}${c.reset}   ${sep}  ${bar}`);
+  print(`           ${c.navy}${c.reset}        ${c.blue}${c.reset}${c.lightBlue}${c.reset}   ${sep}`);
+  print(`           ${c.navy}${c.reset}        ${c.blue}${c.reset}${c.lightBlue}${c.reset}   ${sep}  ${c.yellow}  Alpha — rough edges expected${c.reset}`);
+  print(`           ${c.navy}${c.reset}        ${c.blue}${c.reset}${c.lightBlue}${c.reset}   ${sep}`);
+  print(`           ${c.navy}${c.reset}        ${c.blue}${c.reset}${c.lightBlue}${c.reset}   ${sep}`);
   print("");
   print("");
   print(`                       ${c.steel}→${c.reset} ${c.blue}github.com/danielmiessler/PAI${c.reset}`);
   print("");
-  print(`${c.steel}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${c.reset}`);
+  print(`${c.steel}${c.reset}`);
   print("");
 }
 
-// ─── Detection Display ───────────────────────────────────────────
+//  Detection Display 
 
 import type { DetectionResult } from "../engine/types";
 
@@ -203,14 +203,14 @@ export function printDetection(det: DetectionResult): void {
   printInfo(`Timezone: ${det.timezone}`);
 }
 
-// ─── Validation Display ──────────────────────────────────────────
+//  Validation Display 
 
 import type { ValidationCheck, InstallSummary } from "../engine/types";
 
 export function printValidation(checks: ValidationCheck[]): void {
   print("");
   print(`${c.bold}  Validation Results${c.reset}`);
-  print(`${c.gray}  ${"─".repeat(40)}${c.reset}`);
+  print(`${c.gray}  ${"".repeat(40)}${c.reset}`);
 
   for (const check of checks) {
     if (check.passed) {
@@ -227,18 +227,18 @@ export function printSummary(summary: InstallSummary): void {
   const installTypeLabel = summary.installType === "upgrade" ? "fresh + backup migration" : "fresh";
 
   print("");
-  print(`${c.navy}╔══════════════════════════════════════════════════╗${c.reset}`);
-  print(`${c.navy}║${c.reset}  ${c.green}${c.bold}SYSTEM ONLINE${c.reset}                                    ${c.navy}║${c.reset}`);
-  print(`${c.navy}╠══════════════════════════════════════════════════╣${c.reset}`);
-  print(`${c.navy}║${c.reset}  PAI Version:  ${c.white}v${summary.paiVersion}${c.reset}                             ${c.navy}║${c.reset}`);
-  print(`${c.navy}║${c.reset}  Principal:    ${c.white}${summary.principalName}${c.reset}${" ".repeat(Math.max(0, 33 - summary.principalName.length))}${c.navy}║${c.reset}`);
-  print(`${c.navy}║${c.reset}  AI Name:      ${c.white}${summary.aiName}${c.reset}${" ".repeat(Math.max(0, 33 - summary.aiName.length))}${c.navy}║${c.reset}`);
-  print(`${c.navy}║${c.reset}  Timezone:     ${c.white}${summary.timezone}${c.reset}${" ".repeat(Math.max(0, 33 - summary.timezone.length))}${c.navy}║${c.reset}`);
-  print(`${c.navy}║${c.reset}  Install Type: ${c.white}${installTypeLabel}${c.reset}${" ".repeat(Math.max(0, 33 - installTypeLabel.length))}${c.navy}║${c.reset}`);
-  print(`${c.navy}╠══════════════════════════════════════════════════╣${c.reset}`);
-  print(`${c.navy}║${c.reset}                                                  ${c.navy}║${c.reset}`);
-  print(`${c.navy}║${c.reset}  ${c.lightBlue}Run: ${c.bold}source ~/.zshrc && pai${c.reset}                      ${c.navy}║${c.reset}`);
-  print(`${c.navy}║${c.reset}                                                  ${c.navy}║${c.reset}`);
-  print(`${c.navy}╚══════════════════════════════════════════════════╝${c.reset}`);
+  print(`${c.navy}${c.reset}`);
+  print(`${c.navy}${c.reset}  ${c.green}${c.bold}SYSTEM ONLINE${c.reset}                                    ${c.navy}${c.reset}`);
+  print(`${c.navy}${c.reset}`);
+  print(`${c.navy}${c.reset}  PAI Version:  ${c.white}v${summary.paiVersion}${c.reset}                             ${c.navy}${c.reset}`);
+  print(`${c.navy}${c.reset}  Principal:    ${c.white}${summary.principalName}${c.reset}${" ".repeat(Math.max(0, 33 - summary.principalName.length))}${c.navy}${c.reset}`);
+  print(`${c.navy}${c.reset}  AI Name:      ${c.white}${summary.aiName}${c.reset}${" ".repeat(Math.max(0, 33 - summary.aiName.length))}${c.navy}${c.reset}`);
+  print(`${c.navy}${c.reset}  Timezone:     ${c.white}${summary.timezone}${c.reset}${" ".repeat(Math.max(0, 33 - summary.timezone.length))}${c.navy}${c.reset}`);
+  print(`${c.navy}${c.reset}  Install Type: ${c.white}${installTypeLabel}${c.reset}${" ".repeat(Math.max(0, 33 - installTypeLabel.length))}${c.navy}${c.reset}`);
+  print(`${c.navy}${c.reset}`);
+  print(`${c.navy}${c.reset}                                                  ${c.navy}${c.reset}`);
+  print(`${c.navy}${c.reset}  ${c.lightBlue}Run: ${c.bold}source ~/.zshrc && pai${c.reset}                      ${c.navy}${c.reset}`);
+  print(`${c.navy}${c.reset}                                                  ${c.navy}${c.reset}`);
+  print(`${c.navy}${c.reset}`);
   print("");
 }

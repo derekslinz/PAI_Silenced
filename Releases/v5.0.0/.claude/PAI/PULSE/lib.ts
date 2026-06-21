@@ -9,7 +9,7 @@ import { parse } from "smol-toml"
 import { join } from "path"
 import { rename } from "fs/promises"
 
-// ── Types ──
+//  Types 
 
 export type OutputTarget = "telegram" | "ntfy" | "email" | "log"
 
@@ -40,13 +40,13 @@ export interface DaemonState {
   startedAt: number
 }
 
-// ── Env Var Resolution ──
+//  Env Var Resolution 
 
 function resolveEnvVars(value: string): string {
   return value.replace(/\$\{?([A-Z_][A-Z0-9_]*)\}?/g, (_, name) => process.env[name] ?? "")
 }
 
-// ── Config Loading ──
+//  Config Loading 
 
 export async function loadConfig(daemonDir: string): Promise<DaemonConfig> {
   const raw = await Bun.file(join(daemonDir, "PULSE.toml")).text()
@@ -66,7 +66,7 @@ export async function loadConfig(daemonDir: string): Promise<DaemonConfig> {
   return { jobs }
 }
 
-// ── Cron Matching (from Monitor/cron/scheduler.ts) ──
+//  Cron Matching (from Monitor/cron/scheduler.ts) 
 
 interface CronField {
   type: "any" | "values"
@@ -125,7 +125,7 @@ export function isDue(schedule: string, now: Date, lastRun?: number): boolean {
   return Math.floor(now.getTime() / 60_000) > Math.floor(lastRun / 60_000)
 }
 
-// ── State I/O (atomic write-to-tmp + rename) ──
+//  State I/O (atomic write-to-tmp + rename) 
 
 export async function readState(path: string): Promise<DaemonState> {
   try {
@@ -141,7 +141,7 @@ export async function writeState(path: string, state: DaemonState): Promise<void
   await rename(tmp, path)
 }
 
-// ── Logging ──
+//  Logging 
 
 export function log(level: string, msg: string, data?: Record<string, unknown>): void {
   const entry = { ts: new Date().toISOString(), level, msg, ...data }
@@ -152,7 +152,7 @@ export function log(level: string, msg: string, data?: Record<string, unknown>):
   }
 }
 
-// ── Output Dispatch ──
+//  Output Dispatch 
 
 export async function dispatch(output: string, target: OutputTarget | OutputTarget[], jobName: string): Promise<void> {
   const targets = Array.isArray(target) ? target : [target]
@@ -222,7 +222,7 @@ async function dispatchSingle(output: string, target: OutputTarget, jobName: str
   }
 }
 
-// ── Sentinel Check ──
+//  Sentinel Check 
 
 const SENTINELS = ["NO_ACTION", "NO_URGENT", "NO_EVENTS", "HEARTBEAT_OK"]
 
@@ -231,7 +231,7 @@ export function isSentinel(output: string): boolean {
   return !trimmed || SENTINELS.includes(trimmed)
 }
 
-// ── Process Spawning ──
+//  Process Spawning 
 
 export async function spawnScript(command: string, timeoutMs = 60_000): Promise<string> {
   const proc = Bun.spawn(["bash", "-c", command], {

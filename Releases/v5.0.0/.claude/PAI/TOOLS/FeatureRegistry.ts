@@ -196,12 +196,12 @@ function listFeatures(project: string): void {
 
   console.log(`\nFeature Registry: ${project}`);
   console.log(`Updated: ${registry.updated}`);
-  console.log(`─────────────────────────────────────`);
+  console.log(``);
 
   const summary = registry.completion_summary;
   console.log(`Progress: ${summary.passing}/${summary.total} passing`);
   console.log(`  Pending: ${summary.pending} | Failing: ${summary.failing} | Blocked: ${summary.blocked}`);
-  console.log(`─────────────────────────────────────\n`);
+  console.log(`\n`);
 
   // Group by priority
   const byPriority = {
@@ -215,10 +215,10 @@ function listFeatures(project: string): void {
     console.log(`${priority} Features:`);
     for (const f of features) {
       const statusIcon = {
-        pending: '○',
-        in_progress: '◐',
-        passing: '✓',
-        failing: '✗',
+        pending: '',
+        in_progress: '',
+        passing: '',
+        failing: '',
         blocked: '⊘'
       }[f.status];
       console.log(`  ${statusIcon} [${f.id}] ${f.name} (${f.status})`);
@@ -235,12 +235,12 @@ function verifyFeatures(project: string): void {
   }
 
   console.log(`\nVerification Report: ${project}`);
-  console.log(`═══════════════════════════════════════\n`);
+  console.log(`\n`);
 
   let allPassing = true;
 
   for (const feature of registry.features) {
-    const icon = feature.status === 'passing' ? '✅' : '❌';
+    const icon = feature.status === 'passing' ? '' : '';
     console.log(`${icon} ${feature.id}: ${feature.name}`);
 
     if (feature.status !== 'passing') {
@@ -253,17 +253,17 @@ function verifyFeatures(project: string): void {
 
     // Show test steps
     for (const step of feature.test_steps) {
-      const stepIcon = step.status === 'passing' ? '✓' : step.status === 'failing' ? '✗' : '○';
+      const stepIcon = step.status === 'passing' ? '' : step.status === 'failing' ? '' : '';
       console.log(`   ${stepIcon} ${step.step}`);
     }
     console.log('');
   }
 
-  console.log(`═══════════════════════════════════════`);
+  console.log(``);
   if (allPassing) {
-    console.log(`✅ ALL FEATURES PASSING - Ready for completion`);
+    console.log(` ALL FEATURES PASSING - Ready for completion`);
   } else {
-    console.log(`❌ INCOMPLETE - Some features not passing`);
+    console.log(` INCOMPLETE - Some features not passing`);
   }
 }
 

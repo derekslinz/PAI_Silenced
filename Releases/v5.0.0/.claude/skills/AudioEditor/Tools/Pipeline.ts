@@ -40,9 +40,9 @@ const ext = extname(audioFile);
 const base = basename(audioFile, ext);
 const dir = dirname(audioFile);
 
-console.log("╔══════════════════════════════════════════╗");
-console.log("║       AudioEditor Pipeline               ║");
-console.log("╚══════════════════════════════════════════╝");
+console.log("");
+console.log("       AudioEditor Pipeline               ");
+console.log("");
 console.log(`Input: ${audioFile}`);
 console.log(`Mode: ${aggressive ? "aggressive" : "standard"}${doPolish ? " + polish" : ""}`);
 console.log("");
@@ -50,7 +50,7 @@ console.log("");
 const startTime = Date.now();
 
 // ===== Step : Transcribe =====
-console.log("━━━ Step /: Transcribe ━━━━━━━━━━━━━━━━━━");
+console.log(" Step /: Transcribe ");
 const transcriptFile = join(dir, `${base}.transcript.json`);
 
 if (existsSync(transcriptFile)) {
@@ -71,7 +71,7 @@ if (!existsSync(transcriptFile)) {
 console.log("");
 
 // ===== Step : Analyze =====
-console.log("━━━ Step /: Analyze ━━━━━━━━━━━━━━━━━━━━━");
+console.log(" Step /: Analyze ");
 const editsFile = join(dir, `${base}.edits.json`);
 
 const analyzeArgs = [join(TOOLS_DIR, "Analyze.ts"), transcriptFile, "--output", editsFile];
@@ -93,7 +93,7 @@ const edits = JSON.parse(await Bun.file(editsFile).text());
 console.log("");
 
 if (preview) {
-  console.log("━━━ Preview Mode ━━━━━━━━━━━━━━━━━━━━━━━━━");
+  console.log(" Preview Mode ");
   console.log(`Found ${edits.length} proposed edits:\n`);
   for (const edit of edits) {
     const duration = (edit.end - edit.start).toFixed();
@@ -110,7 +110,7 @@ if (preview) {
 }
 
 // ===== Step : Edit =====
-console.log("━━━ Step /: Edit ━━━━━━━━━━━━━━━━━━━━━━━━");
+console.log(" Step /: Edit ");
 const editedFile = doPolish
   ? join(dir, `${base}_edited_pre-polish${ext}`)
   : outputPath || join(dir, `${base}_edited${ext}`);
@@ -130,7 +130,7 @@ console.log("");
 
 // ===== Step : Polish (optional) =====
 if (doPolish) {
-  console.log("━━━ Step /: Polish ━━━━━━━━━━━━━━━━━━━━━━");
+  console.log(" Step /: Polish ");
   const polishedFile = outputPath || join(dir, `${base}_edited${ext}`);
 
   const polishResult = await $`bun ${join(TOOLS_DIR, "Polish.ts")} ${editedFile} --output ${polishedFile}`.nothrow();
@@ -144,7 +144,7 @@ if (doPolish) {
 
   console.log("");
 } else {
-  console.log("━━━ Step /: Polish (skipped) ━━━━━━━━━━━━");
+  console.log(" Step /: Polish (skipped) ");
   console.log("Add --polish flag to enable Cleanvoice cloud polish.");
   console.log("");
 }
@@ -155,9 +155,9 @@ const finalFile = doPolish
   ? outputPath || join(dir, `${base}_edited${ext}`)
   : editedFile;
 
-console.log("╔══════════════════════════════════════════╗");
-console.log("║       Pipeline Complete                  ║");
-console.log("╚══════════════════════════════════════════╝");
+console.log("");
+console.log("       Pipeline Complete                  ");
+console.log("");
 console.log(`Output: ${finalFile}`);
 console.log(`Elapsed: ${elapsed}s`);
 console.log(`Artifacts:`);

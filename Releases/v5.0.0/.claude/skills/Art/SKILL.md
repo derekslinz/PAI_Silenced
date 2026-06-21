@@ -21,15 +21,15 @@ These override default behavior. If the directory does not exist, proceed with s
 
 CONSTITUTIONAL: ALWAYS RUN A NAMED WORKFLOW. NEVER FREEFORM. 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-️  EVERY image generation MUST run through a named workflow       ️
-️  in this skill's Workflows/ directory.                          ️
-️  NEVER call Tools/Generate.ts with a hand-written prompt        ️
-️  outside the workflow template — the workflows encode the       ️
-️  quality standards (TECHNIQUE, palette, composition rules,      ️
-️  problem-type metaphor, CSE-narrative arc) that the models   ️
-️  consistently fail to honor without them.                       ️
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  EVERY image generation MUST run through a named workflow       
+  in this skill's Workflows/ directory.                          
+  NEVER call Tools/Generate.ts with a hand-written prompt        
+  outside the workflow template — the workflows encode the       
+  quality standards (TECHNIQUE, palette, composition rules,      
+  problem-type metaphor, CSE-narrative arc) that the models   
+  consistently fail to honor without them.                       
+
 ```
 
 Freeform-prompting Generate.ts directly is FORBIDDEN.It is the documented root cause of every "looks like shit" rejection in the rating history. The Essay / Frameworks / Maps / Comics / etc. workflows exist because the bare model defaults to illustrative-school cartoons; the workflow templates discipline it back to the editorial Lebbeus Woods / Paul Rudolph / charcoal-architectural register the principal actually wants.
@@ -66,21 +66,21 @@ If no workflow matches the request, stop and surface to the userbefore generatin
 
 MANDATORY: Output to Downloads First 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-️  ALL GENERATED IMAGES GO TO ~/Downloads/ FIRST                   ️
-️  NEVER output directly to project directories                    ️
-️  User MUST preview in Finder/Preview before use                  ️
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ALL GENERATED IMAGES GO TO ~/Downloads/ FIRST                   
+  NEVER output directly to project directories                    
+  User MUST preview in Finder/Preview before use                  
+
 ```
 
 This applies to ALL workflows in this skill.
 MANDATORY: Transparency Rules for Blog Headers 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-️  INLINE (body) image → TRANSPARENT (PNG with alpha)           ️
-️  SOCIAL THUMBNAIL (frontmatter) → SEPIA EAEDF (opaque)       ️
-️  EVERY blog header MUST use --thumbnail (produces both)        ️
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  INLINE (body) image → TRANSPARENT (PNG with alpha)           
+  SOCIAL THUMBNAIL (frontmatter) → SEPIA EAEDF (opaque)       
+  EVERY blog header MUST use --thumbnail (produces both)        
+
 ```
 
 The blog page background is sepia EAEDF. Inline images MUST be transparent PNG so they composite cleanly over the page. Social platforms (X, LinkedIn, RSS readers) do NOT honor transparency — they show white/black bleed-through — so the `thumbnail:` frontmatter MUST point to the sepia-backed version.

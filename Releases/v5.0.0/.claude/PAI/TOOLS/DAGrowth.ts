@@ -18,7 +18,7 @@ const HOME = process.env.HOME ?? "~"
 const PAI = join(HOME, ".claude", "PAI")
 const REGISTRY_PATH = join(PAI, "USER", "DA", "_registry.yaml")
 
-// ── Types ──
+//  Types 
 
 interface DiaryEntry {
   date: string
@@ -36,7 +36,7 @@ interface GrowthEvent {
   detail: string
 }
 
-// ── Helpers ──
+//  Helpers 
 
 function parsePrimaryDA(content: string): string {
   const match = content.match(/^primary:\s*(\S+)/m)
@@ -68,7 +68,7 @@ const MOOD_ICON: Record<string, string> = {
   frustrated: "-",
 }
 
-// ── Commands ──
+//  Commands 
 
 async function cmdDiary(daDir: string, days: number) {
   const entries = await readJSONL<DiaryEntry>(join(daDir, "diary.jsonl"))
@@ -206,7 +206,7 @@ async function cmdSummary(daDir: string) {
   console.log()
 }
 
-// ── CLI Entry ──
+//  CLI Entry 
 
 async function main() {
   const args = process.argv.slice(2)

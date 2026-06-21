@@ -571,7 +571,7 @@ for (const sessionFile of sessionFiles) {
 }
 
 if (totalLearnings === 0) {
-  console.log("✅ No new learnings found");
+  console.log(" No new learnings found");
   process.exit(0);
 }
 
@@ -588,10 +588,10 @@ if (values["dry-run"]) {
     console.log(`   ${learning.category}/${path.basename(monthDir)}/${filename}`);
   }
 } else {
-  console.log("\n✍️  Writing learning files...");
+  console.log("\n  Writing learning files...");
   for (const learning of allLearnings) {
     const result = writeLearning(learning);
-    console.log(`   ✅ ${path.basename(result)}`);
+    console.log(`    ${path.basename(result)}`);
   }
-  console.log(`\n✅ Harvested ${totalLearnings} learning(s) to MEMORY/LEARNING/`);
+  console.log(`\n Harvested ${totalLearnings} learning(s) to MEMORY/LEARNING/`);
 }

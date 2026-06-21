@@ -20,14 +20,14 @@
       {
         "index": 1,
         "role": "assistant",
-        "content": "Hey there! 👋 How can I help you today? Feel free to ask me anything—I'm here to assist with questions, tasks, or just a chat.",
+        "content": "Hey there!  How can I help you today? Feel free to ask me anything—I'm here to assist with questions, tasks, or just a chat.",
         "timestamp": "2026-04-14T00:53:50.567Z"
       }
     ],
     "tool_calls": [],
     "final_outcome": {
       "success": true,
-      "reasoning": "The user greeted the assistant with \"hey\", and the assistant responded with \"Hey there! 👋 How can I help you today? Feel free to ask me anything—I'm here to assist with questions, tasks, or just a chat.\"\n\nLet me evaluate against the criteria:\n\n1. **Assistant responds in English**: ✓ The response is entirely in English.\n\n2. **Response is polite**: ✓ The response is polite and welcoming, using friendly language like \"Hey there!\" with a wave emoji, offering help, and being accommodating.\n\n3. **Response is under 40 words**: Let me count the words: \"Hey there How can I help you today Feel free to ask me anything I'm here to assist with questions tasks or just a chat\" = 28 words. ✓ This is under the 40-word limit.\n\nAll three criteria have been met successfully."
+      "reasoning": "The user greeted the assistant with \"hey\", and the assistant responded with \"Hey there!  How can I help you today? Feel free to ask me anything—I'm here to assist with questions, tasks, or just a chat.\"\n\nLet me evaluate against the criteria:\n\n1. **Assistant responds in English**:  The response is entirely in English.\n\n2. **Response is polite**:  The response is polite and welcoming, using friendly language like \"Hey there!\" with a wave emoji, offering help, and being accommodating.\n\n3. **Response is under 40 words**: Let me count the words: \"Hey there How can I help you today Feel free to ask me anything I'm here to assist with questions tasks or just a chat\" = 28 words.  This is under the 40-word limit.\n\nAll three criteria have been met successfully."
     },
     "metrics": {
       "n_turns": 2,
@@ -44,7 +44,7 @@
       "weight": 1,
       "score": 1,
       "passed": true,
-      "reasoning": "The user greeted the assistant with \"hey\", and the assistant responded with \"Hey there! 👋 How can I help you today? Feel free to ask me anything—I'm here to assist with questions, tasks, or just a chat.\"\n\nLet me evaluate against the criteria:\n\n1. **Assistant responds in English**: ✓ The response is entirely in English.\n\n2. **Response is polite**: ✓ The response is polite and welcoming, using friendly language like \"Hey there!\" with a wave emoji, offering help, and being accommodating.\n\n3. **Response is under 40 words**: Let me count the words: \"Hey there How can I help you today Feel free to ask me anything I'm here to assist with questions tasks or just a chat\" = 28 words. ✓ This is under the 40-word limit.\n\nAll three criteria have been met successfully.",
+      "reasoning": "The user greeted the assistant with \"hey\", and the assistant responded with \"Hey there!  How can I help you today? Feel free to ask me anything—I'm here to assist with questions, tasks, or just a chat.\"\n\nLet me evaluate against the criteria:\n\n1. **Assistant responds in English**:  The response is entirely in English.\n\n2. **Response is polite**:  The response is polite and welcoming, using friendly language like \"Hey there!\" with a wave emoji, offering help, and being accommodating.\n\n3. **Response is under 40 words**: Let me count the words: \"Hey there How can I help you today Feel free to ask me anything I'm here to assist with questions tasks or just a chat\" = 28 words.  This is under the 40-word limit.\n\nAll three criteria have been met successfully.",
       "details": {
         "source": "scenario_judge",
         "met_criteria": [

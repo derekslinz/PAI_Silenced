@@ -196,17 +196,17 @@ Additional .md files ARE the context files. They live directly in skill root.
 
 WRONG:```
 skills/Art/
-├── SKILL.md
-└── Context/              NEVER CREATE THIS
-    └── Aesthetic.md
+ SKILL.md
+ Context/              NEVER CREATE THIS
+     Aesthetic.md
 ```
 
 CORRECT:```
 skills/Art/
-├── SKILL.md
-├── Aesthetic.md          Context file in skill root
-├── Examples.md           Context file in skill root
-└── Tools.md              Context file in skill root
+ SKILL.md
+ Aesthetic.md          Context file in skill root
+ Examples.md           Context file in skill root
+ Tools.md              Context file in skill root
 ```
 
 The skill directory IS the context.
@@ -214,14 +214,14 @@ Example Structure
 
 ```
 skills/Art/
-├── SKILL.md              lines - minimal routing
-├── Aesthetic.md          Context file - SOP for aesthetic
-├── Examples.md           Context file - SOP for examples
-├── Tools.md              Context file - SOP for tools
-├── Workflows/            Workflows
-│   └── Essay.md
-└── Tools/                CLI tools
-    └── Generate.ts
+ SKILL.md              lines - minimal routing
+ Aesthetic.md          Context file - SOP for aesthetic
+ Examples.md           Context file - SOP for examples
+ Tools.md              Context file - SOP for tools
+ Workflows/            Workflows
+    Essay.md
+ Tools/                CLI tools
+     Generate.ts
 ```
 
 Minimal SKILL.md Template

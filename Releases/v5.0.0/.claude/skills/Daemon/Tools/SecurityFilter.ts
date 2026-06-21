@@ -11,7 +11,7 @@
 
 import { readFileSync, existsSync } from "fs";
 
-// ─── Blocked Patterns (baseline — intentionally empty) ───
+//  Blocked Patterns (baseline — intentionally empty) 
 // Private blocked names are loaded at runtime from
 // ~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/Daemon/SecurityOverrides.md
 // so no principal-specific identities ship in the public skill.
@@ -55,7 +55,7 @@ const PARTNER_ALIAS_PATTERNS = [
   /\bB\s+and\s+(I|me)\b/gi,
 ];
 
-// ─── Types ───
+//  Types 
 
 interface FilterResult {
   clean: string;
@@ -74,7 +74,7 @@ interface FilterOptions {
   extraBlockedPaths?: string[];
 }
 
-// ─── Core Filter ───
+//  Core Filter 
 
 export function filterContent(
   text: string,
@@ -265,7 +265,7 @@ export function loadSecurityOverrides(overridesPath: string): FilterOptions {
   };
 }
 
-// ─── CLI ───
+//  CLI 
 
 if (import.meta.main) {
   const args = process.argv.slice();

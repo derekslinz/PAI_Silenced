@@ -530,7 +530,7 @@ export default function AssistantPage() {
             {personality.companion && (
               <Section title="Companion" dimension="relationships">
                 <div className="flex items-center gap-4">
-                  <div className="text-3xl">🐱</div>
+                  <div className="text-3xl"></div>
                   <div>
                     <div className="text-base font-medium" style={{ color: "#E8EFFF" }}>{personality.companion.name}</div>
                     <div className="text-sm" style={{ color: "#9BB0D6" }}>

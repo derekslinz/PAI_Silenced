@@ -332,36 +332,36 @@ For Single-Mode:- Follow the specialized workflow's layout guidelines
 
 For Hybrid Composition:```
 Example: Data + Metaphor
-┌─────────────────────────────────────┐
-│                                     │
-│    [TITLE - Advocate Block]         │
-│                                     │
-│  ┌───────────┐   ┌──────────────┐  │
-│  │           │   │              │  │
-│  │   DATA    │   │  METAPHOR    │  │
-│  │   CHART   │   │ ILLUSTRATION │  │
-│  │           │   │              │  │
-│  └───────────┘   └──────────────┘  │
-│        %              %         │
-│                                     │
-│  [Explanatory text - %]          │
-│                                     │
-└─────────────────────────────────────┘
+
+                                     
+    [TITLE - Advocate Block]         
+                                     
+       
+                                
+     DATA         METAPHOR      
+     CHART       ILLUSTRATION   
+                                
+       
+        %              %         
+                                     
+  [Explanatory text - %]          
+                                     
+
 ```
 
 For Multi-Panel Infographic:```
 Example: Dashboard Grid
-┌─────────────────────────────────────┐
-│  [OVERALL TITLE]                    │
-├─────────────┬───────────────────────┤
-│  Panel :   │   Panel :            │
-│  Data viz   │   Concept diagram     │
-├─────────────┼───────────────────────┤
-│  Panel :   │   Panel :            │
-│  Timeline   │   Key stat + icon     │
-├─────────────┴───────────────────────┤
-│  [Synthesis/Conclusion panel]       │
-└─────────────────────────────────────┘
+
+  [OVERALL TITLE]                    
+
+  Panel :      Panel :            
+  Data viz      Concept diagram     
+
+  Panel :      Panel :            
+  Timeline      Key stat + icon     
+
+  [Synthesis/Conclusion panel]       
+
 ```
 
 B. Visual Hierarchy
@@ -690,17 +690,17 @@ Decision Tree Summary
 START: Analyze content deeply (Step )
    ↓
 Is content primarily ONE dimension?
-   ├─ YES → Use specialized workflow directly
-   │         (Editorial / Technical / Timeline / etc.)
-   │
-   └─ NO → Content has multiple dimensions
+    YES → Use specialized workflow directly
+            (Editorial / Technical / Timeline / etc.)
+   
+    NO → Content has multiple dimensions
              ↓
        Are there -equal dimensions?
-          ├─ YES → HYBRID composition
-          │         Design complementary elements
-          │         (Data + Metaphor, Process + Outcomes, etc.)
-          │
-          └─ NO → + dimensions or very complex
+           YES → HYBRID composition
+                   Design complementary elements
+                   (Data + Metaphor, Process + Outcomes, etc.)
+          
+           NO → + dimensions or very complex
                     ↓
                   MULTI-PANEL infographic
                   Grid or layered dashboard approach

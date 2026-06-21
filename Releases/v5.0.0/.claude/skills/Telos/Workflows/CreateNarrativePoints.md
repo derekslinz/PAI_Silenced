@@ -9,18 +9,18 @@ This is NOT a bullet-point list. This is a STORY with emotional arc, tension, an
 The Narrative Arc
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│  . OPENING     . BAD NEWS     . EVIDENCE     . STAKES           │
-│  "You asked"    "Yes, it's      "Here are      "You might not      │
-│                  that bad"       the problems"  have a company"     │
-│                                                                     │
-│         ↓              ↓              ↓              ↓              │
-│                                                                     │
-│  . THE PIVOT   . REQUIREMENTS  . THE VISION   . THE CLOSE      │
-│  "Good news:    "Extraordinary   "Here's what   "You will thrive   │
-│   there IS a     courage,         it looks       and crush your    │
-│   solution"      all the way"     like..."       competition"      │
-└─────────────────────────────────────────────────────────────────────┘
+
+  . OPENING     . BAD NEWS     . EVIDENCE     . STAKES           
+  "You asked"    "Yes, it's      "Here are      "You might not      
+                  that bad"       the problems"  have a company"     
+                                                                     
+         ↓              ↓              ↓              ↓              
+                                                                     
+  . THE PIVOT   . REQUIREMENTS  . THE VISION   . THE CLOSE      
+  "Good news:    "Extraordinary   "Here's what   "You will thrive   
+   there IS a     courage,         it looks       and crush your    
+   solution"      all the way"     like..."       competition"      
+
 ```
 
 ---

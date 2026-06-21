@@ -63,9 +63,9 @@ Confirm critical patterns are present:
 ```bash
 for pattern in extract_wisdom summarize create_threat_model analyze_claims; do
   if [ -d ~/.claude/skills/Fabric/Patterns/$pattern ]; then
-    echo "✓ $pattern"
+    echo " $pattern"
   else
-    echo "✗ $pattern MISSING"
+    echo " $pattern MISSING"
   fi
 done
 ```

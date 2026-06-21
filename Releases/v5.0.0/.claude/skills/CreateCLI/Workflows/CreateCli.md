@@ -35,22 +35,22 @@ TIER DECISION TREE
 Use this deterministic decision tree to select complexity tier:
 ```
 START: User describes CLI requirements
-│
-├─ Does it need + commands with grouping? ─ YES → Tier (Commander.js)
-│                                             NO  ↓
-│
-├─ Does it need plugin architecture? ──────── YES → Tier (Commander.js)
-│                                             NO  ↓
-│
-├─ Does it need subcommands (git-style)? ──── YES → Tier (Commander.js)
-│                                             NO  ↓
-│
-├─ Does it need complex nested options? ────── YES → Tier (Commander.js)
-│                                             NO  ↓
-│
-└─ Use Tier (llcli-style) ← DEFAULT
+
+ Does it need + commands with grouping?  YES → Tier (Commander.js)
+                                             NO  ↓
+
+ Does it need plugin architecture?  YES → Tier (Commander.js)
+                                             NO  ↓
+
+ Does it need subcommands (git-style)?  YES → Tier (Commander.js)
+                                             NO  ↓
+
+ Does it need complex nested options?  YES → Tier (Commander.js)
+                                             NO  ↓
+
+ Use Tier (llcli-style) ← DEFAULT
    ↑
-   └─ % of CLIs end up here
+    % of CLIs end up here
 ```
 
 Tier Indicators (DEFAULT):- -simple commands
@@ -111,10 +111,10 @@ For most requests → Tier
 Example decision:
 ```
 User: "CLI for GitHub API with repos, issues, search commands"
-→ commands (< ) ✓
-→ No subcommands ✓
-→ Simple arguments ✓
-→ API wrapper ✓
+→ commands (< ) 
+→ No subcommands 
+→ Simple arguments 
+→ API wrapper 
 = TIER ```
 
 ---

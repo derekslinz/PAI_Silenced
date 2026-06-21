@@ -430,7 +430,7 @@ async function main() {
 
     // Record session start time for notification timing
     recordSessionStart();
-    console.error('⏱ Session start time recorded');
+    console.error(' Session start time recorded');
 
     // Load settings for dynamic context controls
     const settings = loadSettings();
@@ -446,7 +446,7 @@ async function main() {
         console.error(` Loaded relationship context (${relationshipContext.length} chars)`);
       }
     } else {
-      console.error('⏭ Skipped relationship context (disabled)');
+      console.error(' Skipped relationship context (disabled)');
     }
 
     // Load learning readback context
@@ -476,7 +476,7 @@ async function main() {
         console.error(` Loaded learning context: ${learningParts.length} sections (${learningContext.length} chars)`);
       }
     } else {
-      console.error('⏭ Skipped learning readback (disabled)');
+      console.error(' Skipped learning readback (disabled)');
     }
 
     // Inject dynamic context if we have any
@@ -502,7 +502,7 @@ Dynamic context loaded. Constitutional rules are in the system prompt (PAI/PAI_S
         console.error(` Active work summary loaded (${activeProgress.length} chars)`);
       }
     } else {
-      console.error('⏭ Skipped active work summary (disabled)');
+      console.error(' Skipped active work summary (disabled)');
     }
 
     console.error(' PAI session initialization complete (v5.0 — static context via @imports)');

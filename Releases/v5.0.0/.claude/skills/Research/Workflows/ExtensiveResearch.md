@@ -108,7 +108,7 @@ Unique Insights by Source
 - Verifiers: [what was confirmed/refuted]
 
 Conflicts & Low-Confidence Items
-️ CONFLICT on [topic]:
+ CONFLICT on [topic]:
   Explorer (GrokResearcher): [claim] — [source]
   Verifier (PerplexityResearcher): [contradicting claim] — [source]
   Status: Unresolved
@@ -126,7 +126,7 @@ ACTIONS: explorers + verifiers = parallel agents
 RESULTS: [Full synthesized report with confidence tags]
 STATUS: Extensive mode - explorer-verifier pattern
 CAPTURE: [Key verified discoveries]
-️ NEXT: [Follow-up recommendations, especially for CONFLICT items]
+ NEXT: [Follow-up recommendations, especially for CONFLICT items]
 STORY EXPLANATION: [numbered points]
 COMPLETED: Extensive research on [topic] complete
 

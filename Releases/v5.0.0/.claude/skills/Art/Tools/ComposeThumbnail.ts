@@ -297,7 +297,7 @@ async function composeThumbnail(args: CLIArgs): Promise<void> {
     ]);
 
     // Step : Crop headshot to FACE ONLY (remove shoulders/body)
-    console.log(`   ️  Cropping headshot to face only...`);
+    console.log(`     Cropping headshot to face only...`);
     await cropToFaceOnly(args.headshot, croppedHeadshot);
 
     // Step : Composite headshot based on position
@@ -486,7 +486,7 @@ async function composeThumbnail(args: CLIArgs): Promise<void> {
     }
 
     // Step : Add colored border
-    console.log("   ️  Adding border...");
+    console.log("     Adding border...");
     await runCommand("magick", [
       withText,
       "-bordercolor", args.borderColor!,

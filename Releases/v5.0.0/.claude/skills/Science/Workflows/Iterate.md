@@ -20,34 +20,34 @@ Based on your analysis:
 
 ```
 Analysis Complete
-       │
-       ▼
-┌──────────────┐
-│ Goal Achieved? │
-└──────┬───────┘
-       │
-   ┌───┴───┐
-   │       │
+       
+       
+
+ Goal Achieved? 
+
+       
+   
+          
   YES      NO
-   │       │
-   ▼       ▼
+          
+          
  SHIP    Continue
-   │       │
-   │   ┌───┴────────────────────┐
-   │   │                        │
-   │   ▼                        ▼
-   │ Hypothesis          All Hypotheses
-   │ Confirmed?              Tested?
-   │   │                        │
-   │ ┌─┴─┐                  ┌───┴───┐
-   │ YES NO                 YES     NO
-   │ │   │                   │       │
-   │ ▼   ▼                   ▼       ▼
-   │ Implement  Test Next   Generate   Test Next
-   │ Solution   Hypothesis  New Hyp.   Hypothesis
-   │                           │
-   │                           │
-   └────── Monitor ◄───────────┘
+          
+      
+                              
+                              
+    Hypothesis          All Hypotheses
+    Confirmed?              Tested?
+                              
+                      
+    YES NO                 YES     NO
+                                 
+                                 
+    Implement  Test Next   Generate   Test Next
+    Solution   Hypothesis  New Hyp.   Hypothesis
+                              
+                              
+    Monitor 
 ```
 
 ---
@@ -290,9 +290,9 @@ Iteration closes the loop:
 
 ```
 GOAL → OBSERVE → HYPOTHESIZE → EXPERIMENT → MEASURE → ANALYZE → ITERATE
-  ▲                                                              │
-  │                                                              │
-  └──────────────────────────────────────────────────────────────┘
+                                                                
+                                                                
+  
 ```
 
 The cycle continues until:

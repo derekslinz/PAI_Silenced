@@ -197,10 +197,10 @@ ls ~/.claude/skills/[SkillName]/Tools/
 ```
 
 Verify ALL files use TitleCase:
-- `SKILL.md` ✓ (exception - always uppercase)
-- `WorkflowName.md` ✓
-- `ToolName.ts` ✓
-- `ToolName.help.md` ✓
+- `SKILL.md`  (exception - always uppercase)
+- `WorkflowName.md` 
+- `ToolName.ts` 
+- `ToolName.help.md` 
 
 Step : Final Checklist
 

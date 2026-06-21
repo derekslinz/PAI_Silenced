@@ -90,5 +90,5 @@ const proposal: Proposal = {
 
 enqueue(proposal);
 
-console.log(`✅ Proposal ${proposal.id} enqueued (${source} → ${target})`);
+console.log(` Proposal ${proposal.id} enqueued (${source} → ${target})`);
 console.log(`Review with: bun ApproveCurrentStateEntries.ts --review`);

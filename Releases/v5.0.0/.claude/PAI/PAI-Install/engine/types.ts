@@ -3,7 +3,7 @@
  * Shared types for engine, CLI, and web frontends.
  */
 
-// ─── System Detection ────────────────────────────────────────────
+//  System Detection 
 
 export interface DetectionResult {
   os: {
@@ -105,7 +105,7 @@ export interface ExistingUserContentDetection {
   };
 }
 
-// ─── Install Steps ───────────────────────────────────────────────
+//  Install Steps 
 
 export type StepId =
   | "system-detect"
@@ -130,7 +130,7 @@ export interface StepDefinition {
 
 export type StepStatus = "pending" | "active" | "completed" | "skipped" | "failed";
 
-// ─── Install State ───────────────────────────────────────────────
+//  Install State 
 
 export interface InstallState {
   version: string;
@@ -171,7 +171,7 @@ export interface StepError {
   recoverable: boolean;
 }
 
-// ─── Configuration ───────────────────────────────────────────────
+//  Configuration 
 
 export interface PAIConfig {
   principalName: string;
@@ -184,7 +184,7 @@ export interface PAIConfig {
   configDir: string;
 }
 
-// ─── WebSocket Protocol ──────────────────────────────────────────
+//  WebSocket Protocol 
 
 // Server → Client messages
 export type ServerMessage =
@@ -209,7 +209,7 @@ export type ClientMessage =
   | { type: "start_install"; config?: Partial<InstallState["collected"]> }
   | { type: "go_to_step"; step: StepId };
 
-// ─── Validation ──────────────────────────────────────────────────
+//  Validation 
 
 export interface ValidationCheck {
   name: string;
@@ -229,7 +229,7 @@ export interface InstallSummary {
   totalSteps: number;
 }
 
-// ─── Engine Events ───────────────────────────────────────────────
+//  Engine Events 
 
 export type EngineEvent =
   | { event: "step_start"; step: StepId }
@@ -246,7 +246,7 @@ export type EngineEvent =
 
 export type EngineEventHandler = (event: EngineEvent) => void | Promise<void>;
 
-// ─── Release Versions (single source of truth) ─────────────────
+//  Release Versions (single source of truth) 
 // Update these when cutting a new PAI release.
 // The installer reads these constants — no other file should hardcode versions.
 

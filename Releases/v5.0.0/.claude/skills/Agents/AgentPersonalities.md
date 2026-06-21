@@ -23,21 +23,21 @@ When to Use Each
 The Agent Spectrum
 
 ```markdown
-┌─────────────────────────────────────────────────────────────────────┐
-│                         AGENT SPECTRUM                               │
-├───────────────────┬──────────────────────┬──────────────────────────┤
-│   NAMED AGENTS    │    HYBRID USE        │    DYNAMIC AGENTS        │
-│   (Relationship)  │    (Best of Both)    │    (Task-Specific)       │
-├───────────────────┼──────────────────────┼──────────────────────────┤
-│ Remy, Ava,        │ "Security expert     │ Ephemeral specialist     │
-│ Johannes, Marcus  │ with Johannes's      │ composed from traits     │
-│                   │ skepticism"          │                          │
-├───────────────────┼──────────────────────┼──────────────────────────┤
-│ Use for:          │ Use for:             │ Use for:                 │
-│ • Recurring work  │ • Named + trait mix  │ • One-off tasks          │
-│ • Continuity      │ • Familiar but       │ • Parallel execution     │
-│                   │   specialized        │ • Novel combinations     │
-└───────────────────┴──────────────────────┴──────────────────────────┘
+
+                         AGENT SPECTRUM                               
+
+   NAMED AGENTS        HYBRID USE            DYNAMIC AGENTS        
+   (Relationship)      (Best of Both)        (Task-Specific)       
+
+ Remy, Ava,         "Security expert      Ephemeral specialist     
+ Johannes, Marcus   with Johannes's       composed from traits     
+                    skepticism"                                    
+
+ Use for:           Use for:              Use for:                 
+ • Recurring work   • Named + trait mix   • One-off tasks          
+ • Continuity       • Familiar but        • Parallel execution     
+                      specialized         • Novel combinations     
+
 ```
 
 Dynamic Agent Composition

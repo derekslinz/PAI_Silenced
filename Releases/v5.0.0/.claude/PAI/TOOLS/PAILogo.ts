@@ -26,11 +26,11 @@ const I = rgb(125, 207, 255);
 // P is the left leg, top bar, and crossbar of the A
 // A's right leg (below crossbar) is different color
 const logo = [
-  `${P}███████${R} ${I}██${R}`,
-  `${P}██${R}   ${A}██${R} ${I}██${R}`,
-  `${P}███████${R} ${I}██${R}`,
-  `${P}██${R}   ${A}██${R} ${I}██${R}`,
-  `${P}██${R}   ${A}██${R} ${I}██${R}`,
+  `${P}${R} ${I}${R}`,
+  `${P}${R}   ${A}${R} ${I}${R}`,
+  `${P}${R} ${I}${R}`,
+  `${P}${R}   ${A}${R} ${I}${R}`,
+  `${P}${R}   ${A}${R} ${I}${R}`,
 ];
 
 function printLogo(): void {

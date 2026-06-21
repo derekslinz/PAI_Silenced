@@ -186,7 +186,7 @@ If `extension/dist/manifest.json` changed (especially `version` or `key`):
 . Deletethe existing Interceptor card (don't just hit reload — if the
    manifest `key` changed, the extension ID changed and the old card is dead)
 . Load unpacked→ `~/Projects/interceptor/extension/dist`
-. Quit Chrome fully (⌘Q, not just close window) and relaunch — service worker
+. Quit Chrome fully (Q, not just close window) and relaunch — service worker
    needs a clean restart, especially with `userScripts` permission added
 . Accept any new permission prompts (e.g. `userScripts`)
 

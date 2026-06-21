@@ -194,7 +194,7 @@ export function extractCompletionSummary(text: string): string {
 
   // Use global flag and find LAST match (completion line is at end of response)
   const completedPatterns = [
-    new RegExp(`️\\s*\\*{0,2}${DA_IDENTITY.name}:?\\*{0,2}\\s*(.+?)(?:\\n|$)`, 'gi'),
+    new RegExp(`\\s*\\*{0,2}${DA_IDENTITY.name}:?\\*{0,2}\\s*(.+?)(?:\\n|$)`, 'gi'),
     /\s*\*{0,2}COMPLETED:?\*{0,2}\s*(.+?)(?:\n|$)/gi,
   ];
 
@@ -225,7 +225,7 @@ export function extractCompletionPlain(text: string): string {
 
   // Use global flag and find LAST match (completion line is at end of response)
   const completedPatterns = [
-    new RegExp(`️\\s*\\*{0,2}${DA_IDENTITY.name}:?\\*{0,2}\\s*(.+?)(?:\\n|$)`, 'gi'),
+    new RegExp(`\\s*\\*{0,2}${DA_IDENTITY.name}:?\\*{0,2}\\s*(.+?)(?:\\n|$)`, 'gi'),
     /\s*\*{0,2}COMPLETED:?\*{0,2}\s*(.+?)(?:\n|$)/gi,
   ];
 
@@ -270,11 +270,11 @@ export function extractStructuredSections(text: string): StructuredResponse {
     date: /\s*(.+?)(?:\n|$)/i,
     summary: /\s*SUMMARY:\s*(.+?)(?:\n|$)/i,
     analysis: /\s*ANALYSIS:\s*(.+?)(?:\n|$)/i,
-    actions: /⚡\s*ACTIONS:\s*(.+?)(?:\n|$)/i,
-    results: /✅\s*RESULTS:\s*(.+?)(?:\n|$)/i,
+    actions: /\s*ACTIONS:\s*(.+?)(?:\n|$)/i,
+    results: /\s*RESULTS:\s*(.+?)(?:\n|$)/i,
     status: /\s*STATUS:\s*(.+?)(?:\n|$)/i,
-    next: /➡️\s*NEXT:\s*(.+?)(?:\n|$)/i,
-    completed: new RegExp(`(?:️\\s*${DA_IDENTITY.name}:|\\s*COMPLETED:)\\s*(.+?)(?:\\n|$)`, 'i'),
+    next: /\s*NEXT:\s*(.+?)(?:\n|$)/i,
+    completed: new RegExp(`(?:\\s*${DA_IDENTITY.name}:|\\s*COMPLETED:)\\s*(.+?)(?:\\n|$)`, 'i'),
   };
 
   for (const [key, pattern] of Object.entries(patterns)) {
@@ -330,7 +330,7 @@ export function detectResponseState(lastMessage: string, transcriptContent: stri
   }
 
   const hasErrorKeyword = /\b(?:error|failed|exception|crash|broken)\b/i.test(lastMessage);
-  const hasErrorEmoji = /❌||⚠️/.test(lastMessage);
+  const hasErrorEmoji = /||/.test(lastMessage);
   if (hasErrorKeyword && hasErrorEmoji) {
     return 'error';
   }

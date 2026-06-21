@@ -89,7 +89,7 @@ Summary
 
 Totals:Critical | High | Medium | Low | Skipped
 
-️ Skipped Content
+ Skipped Content
 
 | Content | Source | Why Skipped | Evidence |
 |---------|--------|-------------|----------|

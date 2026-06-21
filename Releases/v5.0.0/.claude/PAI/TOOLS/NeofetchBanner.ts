@@ -22,9 +22,9 @@ import { spawnSync } from "child_process";
 const HOME = process.env.HOME!;
 const CLAUDE_DIR = join(HOME, ".claude");
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Terminal Width Detection
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 type DisplayMode = "compact" | "normal" | "wide";
 
@@ -91,9 +91,9 @@ function getDisplayMode(): DisplayMode {
   return "wide";
 }
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // ANSI & Tokyo Night Color System
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 const RESET = "\x1b[0m";
 const BOLD = "\x1b[1m";
@@ -132,9 +132,9 @@ const COLORS = {
   teal: rgb(45, 130, 130),        // Dark teal for URLs
 };
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Unicode Elements
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 const RETICLE = {
   topLeft: "\u231C",     // Top-left corner bracket
@@ -160,9 +160,9 @@ const BOX = {
 // Sparkline characters for sentiment histogram
 const SPARK = ["\u2581", "\u2582", "\u2583", "\u2584", "\u2585", "\u2586", "\u2587", "\u2588"];
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // PAI Isometric Cube Logo - ASCII Art with P, A, I on faces
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 // Large isometric cube with letters on three visible faces
 // Using block characters and line drawing for the cube structure
@@ -187,27 +187,27 @@ const PAI_CUBE_LOGO = [
 // Isometric PAI cube using box drawing and blocks
 // Shows P on top, A on front, I on right side
 const PAI_CUBE_ASCII = [
-  "         ╭───────────╮",
-  "        ╱     P     ╱│",
-  "       ╱───────────╱ │",
-  "      ╱           ╱  │",
-  "     ╭───────────╮   │",
-  "     │     A     │   I",
-  "     │           │  ╱",
-  "     │           │ ╱",
-  "     ╰───────────╯╱",
+  "         ",
+  "             P     ",
+  "        ",
+  "                   ",
+  "        ",
+  "          A        I",
+  "                  ",
+  "                 ",
+  "     ",
 ];
 
 // Enhanced braille-based PAI logo for smaller terminals
 const PAI_BRAILLE_LOGO = [
-  "⣿⣿⣿⣛⣛⣛⣿⣿⣿⣿⣛⣛⣛⣛⣿⣿",
-  "⣿⣿⣛⣛⣿⣿⣛⣿⣿⣛⣛⣿⣿⣿⣛⣿",
-  "⣿⣛⣛⣿⣿⣿⣿⣛⣛⣿⣿⣿⣿⣿⣛⣛",
-  "⣛⣛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣛",
-  "⣛⣿⣿⣿⣛⣛⣛⣿⣿⣿⣿⣛⣛⣿⣿⣛",
-  "⣛⣿⣛⣛⣿⣿⣛⣿⣿⣛⣛⣿⣿⣛⣿⣛",
-  "⣛⣛⣿⣿⣿⣿⣿⣛⣛⣿⣿⣿⣿⣿⣿⣛",
-  "⣿⣿⣛⣛⣛⣿⣿⣿⣿⣿⣛⣛⣛⣿⣿⣿",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
 ];
 
 // Alternative minimal cube using Unicode box drawing
@@ -283,9 +283,9 @@ const CUBE_LOGO = [
   "   \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u256F\u2571      ",
 ];
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // PAI Block Letters (5 rows)
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 const LETTERS: Record<string, string[]> = {
   P: [
@@ -312,9 +312,9 @@ const LETTERS: Record<string, string[]> = {
   " ": ["   ", "   ", "   ", "   ", "   "],
 };
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Dynamic Stats Collection
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 interface SystemStats {
   DA_NAME: string;
@@ -416,9 +416,9 @@ function getStats(): SystemStats {
   };
 }
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Utility Functions
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 function randomHex(len: number = 4): string {
   return Array.from({ length: len }, () =>
@@ -478,9 +478,9 @@ function center(str: string, width: number): string {
   return " ".repeat(Math.max(0, leftPad)) + str + " ".repeat(Math.max(0, rightPad));
 }
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Generate PAI ASCII Art
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 function generatePaiArt(): string[] {
   const name = "PAI";
@@ -500,9 +500,9 @@ function generatePaiArt(): string[] {
   return rows.map(r => r.trimEnd());
 }
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // PAI Cube Logo with Gradient Coloring
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 function colorLogo(lines: string[]): string[] {
   const b = COLORS.blue;
@@ -530,9 +530,9 @@ function colorLogo(lines: string[]): string[] {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Main Banner Generator
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 function createNeofetchBanner(): string {
   const width = getTerminalWidth();
@@ -562,16 +562,16 @@ function createNeofetchBanner(): string {
   const binary1 = generateBinary(8);
   const binary2 = generateBinary(8);
 
-  // ─────────────────────────────────────────────────────────────────
+  // 
   // TOP BORDER with targeting reticles and hex
-  // ─────────────────────────────────────────────────────────────────
+  // 
   const topBorder = `${f}${RETICLE.topLeft}${RESET} ${s}0x${hex1}${RESET} ${f}${BOX.horizontal.repeat(width - 24)}${RESET} ${s}0x${hex2}${RESET} ${f}${RETICLE.topRight}${RESET}`;
   lines.push(topBorder);
   lines.push("");
 
-  // ─────────────────────────────────────────────────────────────────
+  // 
   // LEFT: PAI Logo | RIGHT: System Stats
-  // ─────────────────────────────────────────────────────────────────
+  // 
 
   // Use ASCII cube logo for clear rendering with P, A, I visible
   const logo = colorLogo(PAI_CUBE_ASCII);
@@ -616,9 +616,9 @@ function createNeofetchBanner(): string {
 
   lines.push("");
 
-  // ─────────────────────────────────────────────────────────────────
+  // 
   // DIVIDER with binary streams
-  // ─────────────────────────────────────────────────────────────────
+  // 
   const dividerWidth = Math.min(width - 4, 80);
   const dividerPad = Math.floor((width - dividerWidth) / 2);
   const dividerHalf = Math.floor((dividerWidth - 16) / 2);
@@ -626,9 +626,9 @@ function createNeofetchBanner(): string {
   lines.push(divider);
   lines.push("");
 
-  // ─────────────────────────────────────────────────────────────────
+  // 
   // BOTTOM SECTION
-  // ─────────────────────────────────────────────────────────────────
+  // 
 
   // PAI Header
   const paiHeader = `${BOLD}${nc}P${RESET}${BOLD}${np}A${RESET}${BOLD}${c}I${RESET} ${f}|${RESET} ${t}Personal AI Infrastructure${RESET}`;
@@ -657,9 +657,9 @@ function createNeofetchBanner(): string {
   const githubUrl = `${f}${RETICLE.topLeft}${RESET} ${tl}github.com/danielmiessler/PAI${RESET} ${f}${RETICLE.topRight}${RESET}`;
   lines.push(center(githubUrl, width));
 
-  // ─────────────────────────────────────────────────────────────────
+  // 
   // BOTTOM BORDER
-  // ─────────────────────────────────────────────────────────────────
+  // 
   lines.push("");
   const bottomBorder = `${f}${RETICLE.bottomLeft}${RESET} ${s}0x${hex3}${RESET} ${f}${BOX.horizontal.repeat(width - 24)}${RESET} ${s}0x${hex4}${RESET} ${f}${RETICLE.bottomRight}${RESET}`;
   lines.push(bottomBorder);
@@ -667,9 +667,9 @@ function createNeofetchBanner(): string {
   return lines.join("\n");
 }
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Compact Banner for Narrow Terminals
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 function createCompactBanner(): string {
   const stats = getStats();
@@ -695,9 +695,9 @@ function createCompactBanner(): string {
   return lines.join("\n");
 }
 
-// ═══════════════════════════════════════════════════════════════════════
+// 
 // Main Entry Point
-// ═══════════════════════════════════════════════════════════════════════
+// 
 
 function main() {
   const args = process.argv.slice(2);

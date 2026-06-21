@@ -337,12 +337,12 @@ llcli unknown-command    # Should fail with error
 
 ```
 llcli.ts
-├── Types (interfaces)
-├── Configuration (loadConfig)
-├── API Functions (fetchLifelogs)
-├── CLI Commands (fetchToday, fetchDate, fetchSearch)
-├── Help Documentation (showHelp, showVersion)
-└── Main Entry Point (main)
+ Types (interfaces)
+ Configuration (loadConfig)
+ API Functions (fetchLifelogs)
+ CLI Commands (fetchToday, fetchDate, fetchSearch)
+ Help Documentation (showHelp, showVersion)
+ Main Entry Point (main)
 ```
 
 ### Adding New Features
@@ -431,8 +431,8 @@ Check:
 
 | Feature | Old Script | llcli |
 |---------|-----------|-------|
-| Type Safety | ❌ | ✅ |
-| Input Validation | ❌ | ✅ |
+| Type Safety |  |  |
+| Input Validation |  |  |
 | Error Handling | Basic | Comprehensive |
 | Documentation | Minimal | Full --help |
 | Testability | Hard | Easy |

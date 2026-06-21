@@ -126,8 +126,8 @@ POSSIBLE CAUSES:
 
 TESTING:
 - Cause A:
-  - Explains IS? ✓ / ✗ — [why]
-  - Consistent with IS NOT? ✓ / ✗ — [why]
+  - Explains IS?  /  — [why]
+  - Consistent with IS NOT?  /  — [why]
 - Cause B: ...
 
 SURVIVING CAUSE: [the one that explains all]
@@ -165,13 +165,13 @@ POSSIBLE CAUSES:
 
 TESTING:
 - Cause A:
-  - Explains IS What (unbounded heap): ✓ — cache grows without bound
-  - Explains IS Where (a only): ✓ — ..only deployed to a so far
-  - Explains IS When (after :): ✓ — peak session creation overwhelms
-  - Explains IS Extent (x): ✓ — cache can grow arbitrarily large
-  - Consistent with IS NOT Where (b, us-west-fine): ✓ — still on .., no cache
-  - Consistent with IS NOT When (before :fine): ✓ — lower session rate, growth slower; OOM not yet reached
-  - ✓ All consistent.
+  - Explains IS What (unbounded heap):  — cache grows without bound
+  - Explains IS Where (a only):  — ..only deployed to a so far
+  - Explains IS When (after :):  — peak session creation overwhelms
+  - Explains IS Extent (x):  — cache can grow arbitrarily large
+  - Consistent with IS NOT Where (b, us-west-fine):  — still on .., no cache
+  - Consistent with IS NOT When (before :fine):  — lower session rate, growth slower; OOM not yet reached
+  -  All consistent.
 
 SURVIVING CAUSE: ..introduces session cache without eviction; unbounded at peak load.
 

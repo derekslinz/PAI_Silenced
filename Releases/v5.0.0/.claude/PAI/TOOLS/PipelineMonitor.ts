@@ -464,7 +464,7 @@ const HTML = `<!DOCTYPE html>
                     </div>
                     \${exec.status === 'running' && currentStep ? \`
                       <div class="card-step">
-                        \${currentStep.status === 'running' ? '◉' : '○'}
+                        \${currentStep.status === 'running' ? '' : ''}
                         Step: <code>\${currentStep.id}</code>
                       </div>
                     \` : ''}
@@ -586,17 +586,17 @@ const server = Bun.serve({
 });
 
 console.log(`
-╔═══════════════════════════════════════════════════════════════════════╗
-║                     PAI Pipeline Monitor                               ║
-╠═══════════════════════════════════════════════════════════════════════╣
-║                                                                        ║
-║  Server running at:  http://localhost:${PORT}                           ║
-║  WebSocket:          ws://localhost:${PORT}/ws                          ║
-║                                                                        ║
-║  API Endpoints:                                                        ║
-║    POST /api/start   - Start new pipeline execution                    ║
-║    POST /api/update  - Update pipeline status                          ║
-║    POST /api/step    - Update step status                              ║
-║                                                                        ║
-╚═══════════════════════════════════════════════════════════════════════╝
+
+                     PAI Pipeline Monitor                               
+
+                                                                        
+  Server running at:  http://localhost:${PORT}                           
+  WebSocket:          ws://localhost:${PORT}/ws                          
+                                                                        
+  API Endpoints:                                                        
+    POST /api/start   - Start new pipeline execution                    
+    POST /api/update  - Update pipeline status                          
+    POST /api/step    - Update step status                              
+                                                                        
+
 `);

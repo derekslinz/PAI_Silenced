@@ -215,7 +215,7 @@ export function formatSuiteSummary(suite: EvalSuite, saturation?: SaturationStat
   if (saturation) {
     lines.push('Saturation Status');
     lines.push('');
-    const satIcon = saturation.saturated ? '️' : '';
+    const satIcon = saturation.saturated ? '' : '';
     lines.push(`${satIcon} Saturated:${saturation.saturated ? 'Yes' : 'No'}`);
     lines.push(`Consecutive above ${(suite.saturation_threshold ?? .) }%:${saturation.consecutive_above_threshold}/`);
     lines.push(`Recommendation:${saturation.recommended_action.replace(/_/g, ' ')}`);
@@ -349,7 +349,7 @@ Examples:
       }
       const status = checkSaturation(args[]);
       console.log(`\nSaturation Status: ${args[]}\n`);
-      console.log(`  Saturated: ${status.saturated ? '️ Yes' : 'No'}`);
+      console.log(`  Saturated: ${status.saturated ? ' Yes' : 'No'}`);
       console.log(`  Consecutive above threshold: ${status.consecutive_above_threshold}/`);
       console.log(`  Recommendation: ${status.recommended_action}`);
       break;

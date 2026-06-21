@@ -559,11 +559,11 @@ Comparing Runs:
   Run A: claude---sonnet v..(score: ., /passed)
   Run B: gpt-o v..(score: ., /passed)
 Test-by-Test Comparison:
-  -tech-article:    Run A: .✓  Run B: .✓  (Δ +.)
-  -long-form:       Run A: .✓  Run B: .✓  (Δ +.)
-  -edge-case:       Run A: .✗  Run B: .✓  (Δ -.)
-  -technical:       Run A: .✓  Run B: .✓  (Δ +.)
-  -casual:          Run A: .✓  Run B: .✓  (Δ +.)
+  -tech-article:    Run A: .  Run B: .  (Δ +.)
+  -long-form:       Run A: .  Run B: .  (Δ +.)
+  -edge-case:       Run A: .  Run B: .  (Δ -.)
+  -technical:       Run A: .  Run B: .  (Δ +.)
+  -casual:          Run A: .  Run B: .  (Δ +.)
 Summary:
   Run A won on /tests
   Avg score difference: +.in favor of Run A
@@ -692,78 +692,78 @@ File Structure
 
 ```
 ~/.claude/skills/evals/
-├── PROJECT.md                    This file
-├── SKILL.md                      Skill definition
-│
-├── cli/                          CLI implementation
-│   ├── index.ts                  Main entry point
-│   ├── commands/
-│   │   ├── use-case.ts          Use case commands
-│   │   ├── test-case.ts         Test case commands
-│   │   ├── golden.ts            Golden output commands
-│   │   ├── prompt.ts            Prompt commands
-│   │   ├── scorer.ts            Scorer commands
-│   │   ├── run.ts               Run commands
-│   │   ├── query.ts             Query commands
-│   │   ├── compare.ts           Compare commands
-│   │   └── data.ts              Data management commands
-│   └── lib/
-│       ├── storage.ts           File + DB storage
-│       ├── runner.ts            Evaluation runner
-│       ├── output.ts            Output formatting
-│       └── validation.ts        Input validation
-│
-├── scorers/                      Scorer implementations
-│   ├── index.ts
-│   ├── base.ts
-│   ├── deterministic/
-│   │   ├── sentence-counter.ts
-│   │   ├── word-counter.ts
-│   │   ├── link-counter.ts
-│   │   └── format-validator.ts
-│   ├── ai-based/
-│   │   ├── llm-judge.ts
-│   │   ├── semantic-similarity.ts
-│   │   └── style-matcher.ts
-│   └── custom/
-│       └── newsletter-tone.ts
-│
-├── use-cases/                    Evaluation use cases
-│   ├── newsletter-summary/
-│   │   ├── config.yaml
-│   │   ├── prompts/
-│   │   │   ├── v...txt
-│   │   │   └── v...txt
-│   │   ├── test-cases/
-│   │   │   ├── -tech-article.json
-│   │   │   └── -long-form.json
-│   │   └── golden-outputs/
-│   │       ├── -expected.md
-│   │       └── -expected.md
-│   └── [other-use-cases]/
-│
-├── results/                      Evaluation results (Git-ignored)
-│   └── newsletter-summary/
-│       └── --__claude---sonnet_v../
-│           ├── run.json
-│           ├── summary.json
-│           └── tests/
-│               ├── -tech-article.json
-│               └── -long-form.json
-│
-├── storage/
-│   ├── evals.db                 SQLite database (query cache)
-│   └── schema.sql               Database schema
-│
-├── types/                        TypeScript types
-│   ├── use-case.ts
-│   ├── scorer.ts
-│   ├── result.ts
-│   └── config.ts
-│
-├── package.json
-├── tsconfig.json
-└── README.md
+ PROJECT.md                    This file
+ SKILL.md                      Skill definition
+
+ cli/                          CLI implementation
+    index.ts                  Main entry point
+    commands/
+       use-case.ts          Use case commands
+       test-case.ts         Test case commands
+       golden.ts            Golden output commands
+       prompt.ts            Prompt commands
+       scorer.ts            Scorer commands
+       run.ts               Run commands
+       query.ts             Query commands
+       compare.ts           Compare commands
+       data.ts              Data management commands
+    lib/
+        storage.ts           File + DB storage
+        runner.ts            Evaluation runner
+        output.ts            Output formatting
+        validation.ts        Input validation
+
+ scorers/                      Scorer implementations
+    index.ts
+    base.ts
+    deterministic/
+       sentence-counter.ts
+       word-counter.ts
+       link-counter.ts
+       format-validator.ts
+    ai-based/
+       llm-judge.ts
+       semantic-similarity.ts
+       style-matcher.ts
+    custom/
+        newsletter-tone.ts
+
+ use-cases/                    Evaluation use cases
+    newsletter-summary/
+       config.yaml
+       prompts/
+          v...txt
+          v...txt
+       test-cases/
+          -tech-article.json
+          -long-form.json
+       golden-outputs/
+           -expected.md
+           -expected.md
+    [other-use-cases]/
+
+ results/                      Evaluation results (Git-ignored)
+    newsletter-summary/
+        --__claude---sonnet_v../
+            run.json
+            summary.json
+            tests/
+                -tech-article.json
+                -long-form.json
+
+ storage/
+    evals.db                 SQLite database (query cache)
+    schema.sql               Database schema
+
+ types/                        TypeScript types
+    use-case.ts
+    scorer.ts
+    result.ts
+    config.ts
+
+ package.json
+ tsconfig.json
+ README.md
 ```
 
 ---

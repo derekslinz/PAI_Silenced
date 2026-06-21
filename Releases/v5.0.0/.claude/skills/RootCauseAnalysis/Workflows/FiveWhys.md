@@ -69,10 +69,10 @@ When yes, record both branches:
 
 ```
 WHY :
-  ├─ Branch A: [Cause A]
-  │    WHY A: [...]
-  │    WHY A: [...]
-  └─ Branch B: [Cause B]
+   Branch A: [Cause A]
+      WHY A: [...]
+      WHY A: [...]
+   Branch B: [Cause B]
        WHY B: [...]
        WHY B: [...]
 ```
@@ -108,8 +108,8 @@ CHAIN:
 
 BRANCHES: [if any]
 - At WHY N:
-  ├─ Branch A: ...
-  └─ Branch B: ...
+   Branch A: ...
+   Branch B: ...
 
 ROOT CAUSE(S): [systemic, actionable]
 - [Cause ]

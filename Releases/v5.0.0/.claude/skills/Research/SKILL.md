@@ -5,7 +5,7 @@ effort: high
 context: fork
 ---
 
-️ MANDATORY TRIGGER
+ MANDATORY TRIGGER
 
 When user says "research" (in any form), ALWAYS invoke this skill.
 | User Says | Action |

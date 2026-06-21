@@ -172,9 +172,9 @@ function resumeProgress(project: string): void {
     process.exit(1);
   }
 
-  console.log(`\n${'═'.repeat(60)}`);
+  console.log(`\n${''.repeat(60)}`);
   console.log(`SESSION RESUME: ${project}`);
-  console.log(`${'═'.repeat(60)}\n`);
+  console.log(`${''.repeat(60)}\n`);
 
   console.log(`Status: ${progress.status}`);
   console.log(`Last Updated: ${progress.updated}\n`);
@@ -203,7 +203,7 @@ function resumeProgress(project: string): void {
   if (progress.blockers.length > 0) {
     const unresolvedBlockers = progress.blockers.filter(b => !b.resolution);
     if (unresolvedBlockers.length > 0) {
-      console.log(`\n⚠️ ACTIVE BLOCKERS:`);
+      console.log(`\n ACTIVE BLOCKERS:`);
       unresolvedBlockers.forEach(b => {
         console.log(`  • ${b.blocker}`);
       });
@@ -216,11 +216,11 @@ function resumeProgress(project: string): void {
   }
 
   if (progress.next_steps.length > 0) {
-    console.log(`\n➡️ NEXT STEPS:`);
+    console.log(`\n NEXT STEPS:`);
     progress.next_steps.forEach((s, i) => console.log(`  ${i + 1}. ${s}`));
   }
 
-  console.log(`\n${'═'.repeat(60)}\n`);
+  console.log(`\n${''.repeat(60)}\n`);
 }
 
 function listActive(): void {
@@ -243,7 +243,7 @@ function listActive(): void {
     const progress = JSON.parse(readFileSync(join(PROGRESS_DIR, file), 'utf-8')) as SessionProgress;
     const statusIcon = {
       active: '',
-      completed: '✅',
+      completed: '',
       blocked: ''
     }[progress.status];
 

@@ -122,5 +122,5 @@ Brief — Minimalist SaaS dashboard
 > PURPOSE: An admin dashboard for content moderators on a social platform. They review -items per shift.
 > AESTHETIC: Industrial minimal. Dense information, mono for data, sans for chrome.
 > CONSTRAINTS: React+Vite+shadcn, desktop-first (+ primary), AA contrast, dark default with light toggle, IBM Plex Sans + Plex Mono.
-> DIFFERENTIATION: A unified command palette (⌘K) that's visible on first load for seconds, then minimizes — guides users to the keyboard-first workflow.
+> DIFFERENTIATION: A unified command palette (K) that's visible on first load for seconds, then minimizes — guides users to the keyboard-first workflow.
 > SCOPE: Item queue (list + detail split view), filters sidebar, action toolbar, keyboard shortcut legend. No marketing content, no avatars, no "welcome back" chrome.

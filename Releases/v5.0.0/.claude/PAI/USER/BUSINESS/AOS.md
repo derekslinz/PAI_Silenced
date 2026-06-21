@@ -1,6 +1,6 @@
 # Annual Operating System (AOS)
 
-> 🏢 SAMPLE TEMPLATE — Replace with your own business data via /interview or by editing this file.
+>  SAMPLE TEMPLATE — Replace with your own business data via /interview or by editing this file.
 
 The AOS is the single document your DA reads to understand where your business is heading this year. Keep it current — outdated AOS content produces outdated advice.
 

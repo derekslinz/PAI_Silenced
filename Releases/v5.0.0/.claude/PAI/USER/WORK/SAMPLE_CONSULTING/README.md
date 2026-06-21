@@ -1,6 +1,6 @@
 # SAMPLE_CONSULTING
 
-> 💼 SAMPLE TEMPLATE — Rename this directory (e.g. `Consulting/`, `Advisory/`) and populate it with your own work context via /interview.
+>  SAMPLE TEMPLATE — Rename this directory (e.g. `Consulting/`, `Advisory/`) and populate it with your own work context via /interview.
 
 This directory holds your consulting practice — the offerings you sell, the templates you reuse, and the proposals and statements of work currently in flight.
 

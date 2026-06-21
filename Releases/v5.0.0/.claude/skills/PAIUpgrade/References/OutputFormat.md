@@ -9,7 +9,7 @@ Section order (NON-NEGOTIABLE)
 . Technique Details— full extraction with code/quotes
 . Internal Reflections— upgrade candidates from algorithm reflections (Thread )
 . Summary— one-line totals
-. ️ Skipped Content— already-done / rejected with file:line evidence
+.  Skipped Content— already-done / rejected with file:line evidence
 . Sources Processed— count footer
 
 Print only non-empty tiersin Recommendations. If no CRITICAL items, omit that header entirely.
@@ -133,7 +133,7 @@ Totals:[N] Critical | [N] High | [N] Medium | [N] Low | [N] Skipped | [N] Intern
 
 ---
 
-️ Skipped Content
+ Skipped Content
 
 | Content | Source | Why Skipped | Evidence |
 |---------|--------|-------------|----------|

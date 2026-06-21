@@ -10,7 +10,7 @@
 import { join } from "path"
 import { readFileSync } from "fs"
 
-// ── Load .env before anything else ──
+//  Load .env before anything else 
 
 const envPath = join(process.env.HOME ?? "~", ".claude", ".env")
 try {
@@ -44,7 +44,7 @@ import {
   spawnClaude,
 } from "./lib"
 
-// ── Constants ──
+//  Constants 
 
 const PULSE_DIR = join(process.env.HOME ?? "~", ".claude", "PAI", "Pulse")
 const STATE_PATH = join(PULSE_DIR, "state", "state.json")
@@ -54,7 +54,7 @@ const MAX_FAILURES = 3
 const MAX_SLEEP_MS = 60_000
 const MIN_SLEEP_MS = 1_000
 
-// ── Hook Server (absorbed from hook-server.ts) ──
+//  Hook Server (absorbed from hook-server.ts) 
 
 const hookStats = {
   requests: 0,
@@ -114,7 +114,7 @@ function handleAgentGuard(body: {
   })
 }
 
-// ── Compute next due time ──
+//  Compute next due time 
 
 function msUntilNextDue(jobs: Array<{ schedule: string; enabled: boolean }>, state: DaemonState): number {
   const now = new Date()
@@ -131,7 +131,7 @@ function msUntilNextDue(jobs: Array<{ schedule: string; enabled: boolean }>, sta
   return MAX_SLEEP_MS
 }
 
-// ── Main ──
+//  Main 
 
 async function main() {
   // Write PID file
@@ -159,7 +159,7 @@ async function main() {
   process.on("SIGTERM", shutdown)
   process.on("SIGINT", shutdown)
 
-  // ── Hook Validation Server (port 8686) ──
+  //  Hook Validation Server (port 8686) 
 
   const hookServer = Bun.serve({
     hostname: "127.0.0.1",
@@ -209,7 +209,7 @@ async function main() {
 
   log("info", "Hook server listening", { port: hookServer.port })
 
-  // ── Heartbeat Loop ──
+  //  Heartbeat Loop 
 
   while (!shuttingDown) {
     const tickStart = Date.now()

@@ -142,7 +142,7 @@ async function main() {
   }
 
   if (args.reportOnly) {
-    console.log(`️  margins exceed ${args.maxMargin}% threshold — refill needed`);
+    console.log(`  margins exceed ${args.maxMargin}% threshold — refill needed`);
     process.exit();
   }
 
@@ -160,7 +160,7 @@ async function main() {
   const sqXClamped = Math.min(sqX, full.w - sq);
   const sqYClamped = Math.min(sqY, full.h - sq);
 
-  console.log(`️  cropping to ${sq}x${sq}+${sqXClamped}+${sqYClamped} then resizing to ${args.targetSize}x${args.targetSize}`);
+  console.log(`  cropping to ${sq}x${sq}+${sqXClamped}+${sqYClamped} then resizing to ${args.targetSize}x${args.targetSize}`);
 
   await $`magick ${args.input} -crop ${`${sq}x${sq}+${sqXClamped}+${sqYClamped}`} +repage -resize ${`${args.targetSize}x${args.targetSize}`} ${args.output}`.quiet();
 

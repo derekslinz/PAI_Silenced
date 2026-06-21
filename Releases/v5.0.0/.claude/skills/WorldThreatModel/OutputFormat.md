@@ -30,7 +30,7 @@ Per-Horizon Analysis
 For EACH of the horizons, present a clearly separated section:
 
 ```markdown
-━━━ {HORIZON} Horizon ━━━
+ {HORIZON} Horizon 
 
 Verdict:{FAVORABLE | NEUTRAL | UNFAVORABLE}
 Confidence:{HIGH | MEDIUM | LOW}

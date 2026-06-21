@@ -136,10 +136,10 @@ async function main() {
     for (const f of files) {
       const r = await ingestOne(f)
       if (r.ok) {
-        console.log(`✓ ${f} → ${r.out}`)
+        console.log(` ${f} → ${r.out}`)
         ok++
       } else {
-        console.error(`✗ ${f}: ${r.reason}`)
+        console.error(` ${f}: ${r.reason}`)
         failed++
       }
     }

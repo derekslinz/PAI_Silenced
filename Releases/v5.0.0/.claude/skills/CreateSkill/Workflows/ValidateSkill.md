@@ -30,8 +30,8 @@ ls ~/.claude/skills/ | grep -i [skillname]
 ```
 
 Verify TitleCase:
-- ✓ `Blogging`, `Daemon`, `CreateSkill`
-- ✗ `createskill`, `create-skill`, `CREATE_SKILL`
+-  `Blogging`, `Daemon`, `CreateSkill`
+-  `createskill`, `create-skill`, `CREATE_SKILL`
 
 Workflow Files
 ```bash
@@ -39,8 +39,8 @@ ls ~/.claude/skills/[SkillName]/Workflows/
 ```
 
 Verify TitleCase:
-- ✓ `Create.md`, `UpdateDaemonInfo.md`, `SyncRepo.md`
-- ✗ `create.md`, `update-daemon-info.md`, `SYNC_REPO.md`
+-  `Create.md`, `UpdateDaemonInfo.md`, `SyncRepo.md`
+-  `create.md`, `update-daemon-info.md`, `SYNC_REPO.md`
 
 Tool Files
 ```bash
@@ -48,8 +48,8 @@ ls ~/.claude/skills/[SkillName]/Tools/
 ```
 
 Verify TitleCase:
-- ✓ `ManageServer.ts`, `ManageServer.help.md`
-- ✗ `manage-server.ts`, `MANAGE_SERVER.ts`
+-  `ManageServer.ts`, `ManageServer.help.md`
+-  `manage-server.ts`, `MANAGE_SERVER.ts`
 
 ---
 

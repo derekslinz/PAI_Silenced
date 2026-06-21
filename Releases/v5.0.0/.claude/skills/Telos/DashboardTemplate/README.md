@@ -268,59 +268,59 @@ Project Structure
 
 ```
 dashboard-template/
-├── app/
-│   ├── api/
-│   │   ├── chat/
-│   │   │   └── route.ts          AI chat API endpoint
-│   │   ├── file/
-│   │   │   ├── get/
-│   │   │   │   └── route.ts      Fetch individual file content
-│   │   │   └── save/
-│   │   │       └── route.ts      Save edited file content
-│   │   ├── files/
-│   │   │   └── count/
-│   │   │       └── route.ts      Get file count and list
-│   │   └── upload/
-│   │       └── route.ts          File upload handler
-│   ├── add-file/
-│   │   └── page.tsx              File upload page
-│   ├── ask/
-│   │   └── page.tsx              AI chatbot page
-│   ├── file/
-│   │   └── [slug]/
-│   │       └── page.tsx          Dynamic file viewer/editor
-│   ├── projects/
-│   │   └── page.tsx              Projects page (template)
-│   ├── teams/
-│   │   └── page.tsx              Teams page (template)
-│   ├── vulnerabilities/
-│   │   └── page.tsx              Vulnerabilities page (template)
-│   ├── progress/
-│   │   └── page.tsx              Progress page (template)
-│   ├── globals.css               Global styles
-│   ├── layout.tsx                Root layout
-│   └── page.tsx                  Overview page
-├── components/
-│   ├── ui/
-│   │   ├── card.tsx              Card component
-│   │   ├── badge.tsx             Badge component
-│   │   ├── button.tsx            Button component
-│   │   ├── progress.tsx          Progress bar
-│   │   └── table.tsx             Table component
-│   └── sidebar.tsx               Navigation sidebar
-├── lib/
-│   ├── data.ts                   Data definitions
-│   ├── telos-data.ts             TELOS file system utilities
-│   └── utils.ts                  Utility functions
-├── .env                          Environment variables (gitignored)
-├── .env.example                  Environment template
-├── .gitignore                    Git ignore rules
-├── next.config.mjs               Next.js configuration
-├── package.json                  Dependencies
-├── postcss.config.mjs            PostCSS configuration
-├── tailwind.config.ts            Tailwind configuration
-├── tsconfig.json                 TypeScript configuration
-└── README.md                     This file
+ app/
+    api/
+       chat/
+          route.ts          AI chat API endpoint
+       file/
+          get/
+             route.ts      Fetch individual file content
+          save/
+              route.ts      Save edited file content
+       files/
+          count/
+              route.ts      Get file count and list
+       upload/
+           route.ts          File upload handler
+    add-file/
+       page.tsx              File upload page
+    ask/
+       page.tsx              AI chatbot page
+    file/
+       [slug]/
+           page.tsx          Dynamic file viewer/editor
+    projects/
+       page.tsx              Projects page (template)
+    teams/
+       page.tsx              Teams page (template)
+    vulnerabilities/
+       page.tsx              Vulnerabilities page (template)
+    progress/
+       page.tsx              Progress page (template)
+    globals.css               Global styles
+    layout.tsx                Root layout
+    page.tsx                  Overview page
+ components/
+    ui/
+       card.tsx              Card component
+       badge.tsx             Badge component
+       button.tsx            Button component
+       progress.tsx          Progress bar
+       table.tsx             Table component
+    sidebar.tsx               Navigation sidebar
+ lib/
+    data.ts                   Data definitions
+    telos-data.ts             TELOS file system utilities
+    utils.ts                  Utility functions
+ .env                          Environment variables (gitignored)
+ .env.example                  Environment template
+ .gitignore                    Git ignore rules
+ next.config.mjs               Next.js configuration
+ package.json                  Dependencies
+ postcss.config.mjs            PostCSS configuration
+ tailwind.config.ts            Tailwind configuration
+ tsconfig.json                 TypeScript configuration
+ README.md                     This file
 ```
 
 Customization Tips

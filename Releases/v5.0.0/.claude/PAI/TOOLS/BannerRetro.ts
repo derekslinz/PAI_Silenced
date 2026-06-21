@@ -22,9 +22,9 @@ import { spawnSync } from "child_process";
 const HOME = process.env.HOME!;
 const CLAUDE_DIR = join(HOME, ".claude");
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Terminal Width Detection
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 function getTerminalWidth(): number {
   let width: number | null = null;
@@ -82,9 +82,9 @@ function getTerminalWidth(): number {
   return width;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // ANSI Color System - Retro Phosphor Theme
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 const RESET = "\x1b[0m";
 const BOLD = "\x1b[1m";
@@ -115,42 +115,42 @@ const COLORS = {
   purple: rgb(200, 100, 255),        // Purple accent
 };
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Box Drawing Characters - Retro DOS Style
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 const BOX = {
   // Double-line box (DOS style)
-  dtl: "╔", dtr: "╗", dbl: "╚", dbr: "╝",
-  dh: "═", dv: "║",
-  dlt: "╠", drt: "╣", dtt: "╦", dbt: "╩",
-  dcross: "╬",
+  dtl: "", dtr: "", dbl: "", dbr: "",
+  dh: "", dv: "",
+  dlt: "", drt: "", dtt: "", dbt: "",
+  dcross: "",
 
   // Single-line box
-  stl: "┌", str: "┐", sbl: "└", sbr: "┘",
-  sh: "─", sv: "│",
-  slt: "├", srt: "┤", stt: "┬", sbt: "┴",
-  scross: "┼",
+  stl: "", str: "", sbl: "", sbr: "",
+  sh: "", sv: "",
+  slt: "", srt: "", stt: "", sbt: "",
+  scross: "",
 
   // Mixed (single-double)
-  sdl: "╓", sdr: "╖", sdbl: "╙", sdbr: "╜",
-  dsl: "╒", dsr: "╕", dsbl: "╘", dsbr: "╛",
+  sdl: "", sdr: "", sdbl: "", sdbr: "",
+  dsl: "", dsr: "", dsbl: "", dsbr: "",
 
   // Blocks for progress
-  full: "█", light: "░", medium: "▒", dark: "▓",
-  half: "▌", halfR: "▐",
+  full: "", light: "", medium: "", dark: "",
+  half: "", halfR: "",
 
   // Block letter elements
-  blockFull: "█",
-  blockTop: "▀",
-  blockBottom: "▄",
-  blockLeft: "▌",
-  blockRight: "▐",
+  blockFull: "",
+  blockTop: "",
+  blockBottom: "",
+  blockLeft: "",
+  blockRight: "",
 };
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Isometric PAI Cube - Classic ASCII Art
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 // Isometric cube with P, A, I on visible faces
 // Using only classic ASCII: @ # $ % ^ & * ( ) - _ + = [ ] { } | \ / < > , . ? ! ~
@@ -277,28 +277,28 @@ const PAI_CUBE_WIDE = [
   "   +----------+",
 ];
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Block Letter KAI (using block characters)
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 const BLOCK_KAI = [
-  "█  █  █████  █████",
-  "█ █   █   █    █  ",
-  "██    █████    █  ",
-  "█ █   █   █    █  ",
-  "█  █  █   █  █████",
+  "      ",
+  "             ",
+  "          ",
+  "             ",
+  "         ",
 ];
 
 // Smaller block KAI
 const BLOCK_KAI_SMALL = [
-  "█▀▄  ▄▀█  █",
-  "█▀▄  █▀█  █",
-  "▀ ▀  ▀ ▀  █",
+  "    ",
+  "    ",
+  "      ",
 ];
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Dynamic Stats & Identity
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 interface SystemStats {
   name: string;
@@ -399,9 +399,9 @@ function getStats(): SystemStats {
   };
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Progress Bar Generation
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 function generateProgressBar(width: number, fill: number = 0.7): string {
   const filled = Math.floor(width * fill);
@@ -409,9 +409,9 @@ function generateProgressBar(width: number, fill: number = 0.7): string {
   return `[${BOX.full.repeat(filled)}${BOX.light.repeat(empty)}]`;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Main Banner Generator - Neofetch Style Layout
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 function createRetroBanner(): string {
   const width = getTerminalWidth();
@@ -429,9 +429,9 @@ function createRetroBanner(): string {
 
   const lines: string[] = [];
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // TOP SECTION: ASCII Logo (left) + System Stats (right)
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
 
   // Use the wide cube for main display
   const logo = PAI_CUBE_WIDE;
@@ -484,14 +484,14 @@ function createRetroBanner(): string {
     lines.push(logoPart + " ".repeat(gap) + statsPart);
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // SEPARATOR
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   lines.push("");
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // MIDDLE SECTION: Double-line box with branding
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   const brandingText = "  PAI | Personal AI Infrastructure  ";
   const brandingWidth = brandingText.length + 2;
 
@@ -499,30 +499,30 @@ function createRetroBanner(): string {
   lines.push(`${a}${BOX.dv}${RESET} ${g}${BOLD}PAI${RESET} ${gd}|${RESET} ${h}Personal AI Infrastructure${RESET}  ${a}${BOX.dv}${RESET}`);
   lines.push(`${a}${BOX.dbl}${BOX.dh.repeat(brandingWidth)}${BOX.dbr}${RESET}`);
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // QUOTE SECTION
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   lines.push("");
   lines.push(`  ${gd}"${RESET}${g}Magnifying human capabilities through intelligent assistance${RESET}${gd}"${RESET}`);
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // PROGRESS BAR
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   lines.push("");
   const progress = generateProgressBar(24, 0.75);
   lines.push(`  ${gd}System Status:${RESET} ${g}${progress}${RESET} ${h}75%${RESET}`);
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // BLOCK LETTER KAI
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   lines.push("");
   for (const row of BLOCK_KAI_SMALL) {
     lines.push(`    ${c}${row}${RESET}`);
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // GITHUB URL
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   lines.push("");
   lines.push(`  ${gd}${BOX.sh.repeat(40)}${RESET}`);
   lines.push(`  ${g}>${RESET} ${h}github.com/danielmiessler/PAI${RESET}${BLINK}_${RESET}`);
@@ -531,9 +531,9 @@ function createRetroBanner(): string {
   return lines.join("\n");
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Alternative: Pure Classic ASCII Version (no unicode boxes)
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 function createPureASCIIBanner(): string {
   const stats = getStats();
@@ -639,9 +639,9 @@ function createPureASCIIBanner(): string {
   return lines.join("\n");
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Compact Retro Banner (for narrower terminals)
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 function createCompactRetroBanner(): string {
   const stats = getStats();
@@ -686,9 +686,9 @@ function createCompactRetroBanner(): string {
   return lines.join("\n");
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 // Main
-// ═══════════════════════════════════════════════════════════════════════════
+// 
 
 type BannerMode = "retro" | "ascii" | "compact";
 

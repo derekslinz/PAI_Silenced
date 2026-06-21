@@ -54,7 +54,7 @@ Output Format
 
 Compact single list. Omit sections with no results. Keep total output under lines.
 ```
-═══ CONTEXT: $ARGUMENTS ═══════════════════════
+ CONTEXT: $ARGUMENTS 
 
 SESSIONS (newest first, max ):
   - [slug] — [task] | [phase] | [progress]
@@ -66,7 +66,7 @@ ISA SUMMARIES (max ):
 COMMITS (if Phase ran):
   - [hash] [message] ([repo])
 
-════════════════════════════════════════════════
+
 ```
 
 ---

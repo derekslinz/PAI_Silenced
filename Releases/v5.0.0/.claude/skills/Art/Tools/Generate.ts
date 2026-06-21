@@ -165,7 +165,7 @@ async function saveImage(data: Buffer | UintArray | any, requestedPath: string):
     const requestedExt = extname(requestedPath).toLowerCase();
     if (requestedExt && requestedExt !== detected.ext) {
       const correctedPath = requestedPath.replace(/\.[^.]+$/, detected.ext);
-      console.warn(`️ API returned ${detected.format.toUpperCase()} data (requested ${requestedExt.slice().toUpperCase()}). Saving as ${correctedPath}`);
+      console.warn(` API returned ${detected.format.toUpperCase()} data (requested ${requestedExt.slice().toUpperCase()}). Saving as ${correctedPath}`);
       await writeFile(correctedPath, buffer);
       return correctedPath;
     }
@@ -865,7 +865,7 @@ async function main(): Promise<void> {
 
     // Compare mode: generate N images with gpt-image-+ N with nano-banana, side-by-side
     if (args.model === "compare") {
-      console.log(`️  Compare Mode: ${n} image(s) from gpt-image-+ ${n} from nano-banana (total ${n })`);
+      console.log(`  Compare Mode: ${n} image(s) from gpt-image-+ ${n} from nano-banana (total ${n })`);
       const basePath = args.output.replace(/\.[^.]+$/, "");
       const gptBase = `${basePath}-gpt.png`;
       const nanoBase = `${basePath}-nano.png`;

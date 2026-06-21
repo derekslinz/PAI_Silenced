@@ -740,7 +740,7 @@ function cmdHarvest(sourceFilter: string | null, dryRun: boolean, maxNotes: numb
   let allCandidates: HarvestCandidate[] = [];
 
   console.log(" Knowledge Harvester");
-  console.log("─".repeat(40));
+  console.log("".repeat(40));
 
   // Collect candidates from each source
   if (!sourceFilter || sourceFilter === "memory") {
@@ -801,7 +801,7 @@ function cmdHarvest(sourceFilter: string | null, dryRun: boolean, maxNotes: numb
       state.harvestedPaths.push(candidate.sourcePath);
       state.totalHarvested++;
       affectedDomains.add(candidate.domain);
-      console.log(`  ✅ ${path.relative(KNOWLEDGE_DIR, writtenPath)}`);
+      console.log(`   ${path.relative(KNOWLEDGE_DIR, writtenPath)}`);
     }
   }
 
@@ -825,7 +825,7 @@ function cmdHarvest(sourceFilter: string | null, dryRun: boolean, maxNotes: numb
     // Save state
     state.lastHarvest = new Date().toISOString();
     saveHarvestState(state);
-    console.log(`\n  ✅ Harvest complete. ${toHarvest.length} note(s) written.`);
+    console.log(`\n   Harvest complete. ${toHarvest.length} note(s) written.`);
   }
 }
 
@@ -833,7 +833,7 @@ function cmdStatus(): void {
   const stats = getArchiveStats();
 
   console.log(" Knowledge Archive Status");
-  console.log("─".repeat(40));
+  console.log("".repeat(40));
   console.log(`  Total notes: ${stats.totalNotes}`);
   console.log(`  Last harvest: ${stats.lastHarvest || "never"}`);
   console.log();
@@ -856,7 +856,7 @@ function cmdStatus(): void {
   }
 
   if (stats.orphanLinks.length > 0) {
-    console.log(`\n  ⚠️  Orphan links (${stats.orphanLinks.length}):`);
+    console.log(`\n    Orphan links (${stats.orphanLinks.length}):`);
     for (const link of stats.orphanLinks.slice(0, 10)) {
       console.log(`    [[${link}]]`);
     }
@@ -884,7 +884,7 @@ function temporalWindowsOverlap(fmA: Record<string, any>, fmB: Record<string, an
 
 function cmdContradictions(): void {
   console.log(" Contradiction Candidates");
-  console.log("─".repeat(40));
+  console.log("".repeat(40));
   console.log("  Finding note pairs with high tag overlap...\n");
 
   // Collect all notes with their tags and temporal fields
@@ -954,18 +954,18 @@ function cmdContradictions(): void {
 
   console.log(`  Found ${pairs.length} pair(s) with 2+ shared tags:\n`);
   if (temporalSkipped > 0) {
-    console.log(`  ⏰ ${temporalSkipped} pair(s) skipped (non-overlapping temporal windows)\n`);
+    console.log(`   ${temporalSkipped} pair(s) skipped (non-overlapping temporal windows)\n`);
   }
 
   for (const pair of pairs.slice(0, 20)) {
     console.log(`   ${pair.shared.length} shared tags: [${pair.shared.join(", ")}]`);
     console.log(`     A: ${pair.noteA.domain}/${pair.noteA.slug} — "${pair.noteA.title}"`);
     if (pair.noteA.fm.valid_from || pair.noteA.fm.valid_until) {
-      console.log(`        ⏰ valid: ${pair.noteA.fm.valid_from || "?"} → ${pair.noteA.fm.valid_until || "present"}`);
+      console.log(`         valid: ${pair.noteA.fm.valid_from || "?"} → ${pair.noteA.fm.valid_until || "present"}`);
     }
     console.log(`     B: ${pair.noteB.domain}/${pair.noteB.slug} — "${pair.noteB.title}"`);
     if (pair.noteB.fm.valid_from || pair.noteB.fm.valid_until) {
-      console.log(`        ⏰ valid: ${pair.noteB.fm.valid_from || "?"} → ${pair.noteB.fm.valid_until || "present"}`);
+      console.log(`         valid: ${pair.noteB.fm.valid_from || "?"} → ${pair.noteB.fm.valid_until || "present"}`);
     }
     console.log();
   }
@@ -985,7 +985,7 @@ function cmdIndex(): void {
   }
   regenerateMasterMOC();
   console.log("  _index.md (master)");
-  console.log("\n  ✅ Done.");
+  console.log("\n   Done.");
 }
 
 // ============================================================================

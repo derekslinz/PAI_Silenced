@@ -171,14 +171,14 @@ async function runPipeline(pipelineName: string, input: Record<string, unknown>,
         await reportStep(executionId, step.id, "completed", result.output);
       }
 
-      console.log(`[${agent}] ✓ ${step.id} completed`);
+      console.log(`[${agent}]  ${step.id} completed`);
     } else {
       if (executionId) {
         await reportStep(executionId, step.id, "failed", undefined, result.error);
         await reportUpdate(executionId, "failed", undefined, result.error);
       }
 
-      console.log(`[${agent}] ✗ ${step.id} failed: ${result.error}`);
+      console.log(`[${agent}]  ${step.id} failed: ${result.error}`);
       return { success: false, error: result.error };
     }
 
@@ -192,7 +192,7 @@ async function runPipeline(pipelineName: string, input: Record<string, unknown>,
     await reportUpdate(executionId, "completed", finalResult);
   }
 
-  console.log(`[${agent}] ✓ Pipeline completed`);
+  console.log(`[${agent}]  Pipeline completed`);
   return { success: true, result: finalResult };
 }
 
@@ -302,7 +302,7 @@ If both steps pass, the content is ready for review.`,
 
   console.log("\n=== Demo Results ===");
   results.forEach((result, i) => {
-    console.log(`${jobs[i].agent}: ${result.success ? "✓ Success" : "✗ Failed"}`);
+    console.log(`${jobs[i].agent}: ${result.success ? " Success" : " Failed"}`);
   });
 }
 

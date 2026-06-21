@@ -40,7 +40,7 @@ PARADIGM SHIFTS
 - [Shift ]: [What changed and when]
 - [Shift ]: [What changed and when]
 
-️ COMPETITIVE LANDSCAPE
+ COMPETITIVE LANDSCAPE
 [Analysis of competition between models, tools, companies]
 
 INNOVATION VELOCITY

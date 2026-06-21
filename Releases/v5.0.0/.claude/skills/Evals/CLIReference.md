@@ -65,19 +65,19 @@ Files (Source of Truth)
 
 ```
 ~/.claude/skills/Evals/
-├── UseCases/
-│   └── <name>/
-│       ├── config.yaml         Criteria, thresholds
-│       ├── judge-config.yaml   Judge template data
-│       ├── rubric.yaml         Rubric template data
-│       ├── test-cases/         Input/expected pairs
-│       ├── golden-outputs/     Reference standards
-│       ├── prompts/            Versioned prompts
-│       └── README.md           Use case documentation
-├── Results/
-│   └── <use-case>/
-│       └── <run-id>/           Per-run results
-└── EvalServer/                 Web UI + execution engine
+ UseCases/
+    <name>/
+        config.yaml         Criteria, thresholds
+        judge-config.yaml   Judge template data
+        rubric.yaml         Rubric template data
+        test-cases/         Input/expected pairs
+        golden-outputs/     Reference standards
+        prompts/            Versioned prompts
+        README.md           Use case documentation
+ Results/
+    <use-case>/
+        <run-id>/           Per-run results
+ EvalServer/                 Web UI + execution engine
 ```
 
 SQLite (Query Optimization)

@@ -112,7 +112,7 @@ function loadState(): State {
   try {
     return JSON.parse(readFileSync(STATE_FILE, 'utf-'));
   } catch (error) {
-    console.warn('️ Failed to load state, starting fresh:', error);
+    console.warn(' Failed to load state, starting fresh:', error);
     return {
       last_check_timestamp: new Date(Date.now() - DAYS ).toISOString(),
       sources: {}
@@ -148,7 +148,7 @@ function logRun(updatesFound: number, high: number, medium: number, low: number)
 
     appendFileSync(LOG_FILE, JSON.stringify(logEntry) + '\n', 'utf-');
   } catch (error) {
-    console.warn('️ Failed to log run:', error);
+    console.warn(' Failed to log run:', error);
   }
 }
 
@@ -178,7 +178,7 @@ async function fetchBlog(source: Source, state: State): Promise<Update[]> {
   try {
     const response = await fetch(source.url!);
     if (!response.ok) {
-      console.warn(`️ Failed to fetch ${source.name}: ${response.status}`);
+      console.warn(` Failed to fetch ${source.name}: ${response.status}`);
       return [];
     }
 
@@ -209,7 +209,7 @@ async function fetchBlog(source: Source, state: State): Promise<Update[]> {
     }];
 
   } catch (error) {
-    console.warn(`️ Error fetching blog ${source.name}:`, error);
+    console.warn(` Error fetching blog ${source.name}:`, error);
     return [];
   }
 }
@@ -286,7 +286,7 @@ async function fetchGitHubRepo(source: Source, state: State): Promise<Update[]> 
     }
 
   } catch (error) {
-    console.warn(`️ Error fetching GitHub repo ${source.name}:`, error);
+    console.warn(` Error fetching GitHub repo ${source.name}:`, error);
   }
 
   return updates;
@@ -296,7 +296,7 @@ async function fetchChangelog(source: Source, state: State): Promise<Update[]> {
   try {
     const response = await fetch(source.url!);
     if (!response.ok) {
-      console.warn(`️ Failed to fetch ${source.name}: ${response.status}`);
+      console.warn(` Failed to fetch ${source.name}: ${response.status}`);
       return [];
     }
 
@@ -327,7 +327,7 @@ async function fetchChangelog(source: Source, state: State): Promise<Update[]> {
     }];
 
   } catch (error) {
-    console.warn(`️ Error fetching changelog ${source.name}:`, error);
+    console.warn(` Error fetching changelog ${source.name}:`, error);
     return [];
   }
 }
@@ -336,7 +336,7 @@ async function fetchDocs(source: Source, state: State): Promise<Update[]> {
   try {
     const response = await fetch(source.url!);
     if (!response.ok) {
-      console.warn(`️ Failed to fetch ${source.name}: ${response.status}`);
+      console.warn(` Failed to fetch ${source.name}: ${response.status}`);
       return [];
     }
 
@@ -363,7 +363,7 @@ async function fetchDocs(source: Source, state: State): Promise<Update[]> {
     }];
 
   } catch (error) {
-    console.warn(`️ Error fetching docs ${source.name}:`, error);
+    console.warn(` Error fetching docs ${source.name}:`, error);
     return [];
   }
 }
@@ -728,7 +728,7 @@ async function main() {
   if (allUpdates.length === ) {
     console.log('No new updates found. Everything is up to date!\n');
     console.log('STATUS: All monitored sources checked, no changes detected');
-    console.log('️ NEXT: Check again later or use --force to see all current content');
+    console.log(' NEXT: Check again later or use --force to see all current content');
     console.log('COMPLETED: Completed Anthropic changes monitoring check');
     return;
   }
@@ -751,7 +751,7 @@ async function main() {
   });
 
   // Generate report
-  console.log('═'.repeat());
+  console.log(''.repeat());
   console.log('\nAnthropic Changes Report\n');
   console.log(`Generated: ${new Date().toISOString().split('T')[]}`);
   console.log(`Period: Last ${DAYS} days`);
@@ -764,7 +764,7 @@ async function main() {
   // Generate and display narrative analysis
   const narrative = generateNarrative(allUpdates);
   console.log(narrative);
-  console.log('═'.repeat());
+  console.log(''.repeat());
   console.log();
 
   // HIGH PRIORITY
@@ -809,9 +809,9 @@ async function main() {
   console.log('Discord:https://discord.com/invite/PPFFzqPDZ');
   console.log('_(Manual check recommended - automated scraping not performed)_\n');
 
-  console.log('═'.repeat());
+  console.log(''.repeat());
   console.log('\nSTATUS: Report generated successfully');
-  console.log('️ NEXT: Review HIGH priority items and implement relevant recommendations');
+  console.log(' NEXT: Review HIGH priority items and implement relevant recommendations');
   console.log('COMPLETED: Completed comprehensive Anthropic changes monitoring\n');
 
   // Update state

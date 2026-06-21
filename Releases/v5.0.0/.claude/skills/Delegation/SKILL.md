@@ -31,7 +31,7 @@ Delegation Patterns
 
 . Built-In Agents
 
-️ Built-in agents are for internal workflow routing ONLY.When the user asks for custom, specialized, or uniquely-identified agents, use the Agents skill (section below) instead.
+ Built-in agents are for internal workflow routing ONLY.When the user asks for custom, specialized, or uniquely-identified agents, use the Agents skill (section below) instead.
 
 Use `Task(subagent_type="AgentType")` with these specialized agents:
 

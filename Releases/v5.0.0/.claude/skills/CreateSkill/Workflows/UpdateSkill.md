@@ -40,8 +40,8 @@ Step : Make Changes
 
 To Add a New Workflow:
 
-. Determine TitleCase name:   - ✓ `Create.md`, `UpdateDaemonInfo.md`, `SyncRepo.md`
-   - ✗ `create.md`, `update-daemon-info.md`, `SYNC_REPO.md`
+. Determine TitleCase name:   -  `Create.md`, `UpdateDaemonInfo.md`, `SyncRepo.md`
+   -  `create.md`, `update-daemon-info.md`, `SYNC_REPO.md`
 
 . Create the workflow file:```bash
 touch ~/.claude/skills/[SkillName]/Workflows/[WorkflowName].md
@@ -92,9 +92,9 @@ ls ~/.claude/skills/[SkillName]/Tools/
 ```
 
 All files must use TitleCase:
-- ✓ `WorkflowName.md`
-- ✓ `ToolName.ts`, `ToolName.help.md`
-- ✗ `workflow-name.md`, `tool_name.ts`
+-  `WorkflowName.md`
+-  `ToolName.ts`, `ToolName.help.md`
+-  `workflow-name.md`, `tool_name.ts`
 
 ---
 

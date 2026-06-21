@@ -14,7 +14,7 @@ Typical Cost column (renamed from "Tier Fit" in Algorithm v..): the lowest effor
 | ApertureOscillation | OBSERVE, THINK | Building something specific within a larger system; architecture decisions where scope framing changes the answer; feature design where tactical and strategic views may diverge; system coherence checks; scope negotiation. Complementary to IterativeDepth — ID rotates lenses, AO oscillates scope. Use AO when two distinct zoom levels (tactical target + strategic context) exist. | `Skill("ApertureOscillation")` | E+ |
 | FeedbackMemoryConsult | PLAN | First step of PLAN at Extended+. Before committing to approach, grep `~/.claude/projects/${HARNESS_USER_DIR}/memory/feedback_.md` by task keywords. Prevents repeating mistakes already documented. Turns the memory system from write-only diary into active guardrail. | `Bash('rg -l "KEYWORDS" ~/.claude/projects/${HARNESS_USER_DIR}/memory/feedback_.md')` | E+ |
 | Advisor | VERIFY | At commitment boundaries on multi-step ISAs. Before approach commitment, when stuck, once after durable deliverable before declaring done. Skip for short reactive tasks. If empirical results contradict advisor, re-call surfacing the conflict — do NOT silently switch. | `bun ~/.claude/PAI/TOOLS/Inference.ts --mode advisor <task> <state> <question>` | E+ |
-| ReReadCheck | VERIFY→LEARN boundary | Final gate before emitting response (v. RR). Re-read user's last message verbatim; enumerate every explicit ask against what shipped; block `phase: complete` on any `✗`. Targets the % "missed ask" complaint cluster. MANDATORY at every tier — at E single-part it's a one-line block. No fast-path exemption. | (inline doctrine step — no external tool) | E+ |
+| ReReadCheck | VERIFY→LEARN boundary | Final gate before emitting response (v. RR). Re-read user's last message verbatim; enumerate every explicit ask against what shipped; block `phase: complete` on any ``. Targets the % "missed ask" complaint cluster. MANDATORY at every tier — at E single-part it's a one-line block. No fast-path exemption. | (inline doctrine step — no external tool) | E+ |
 | FirstPrinciples | THINK | Architecture decisions, inherited assumptions, stuck on approach | `Skill("FirstPrinciples")` | E+ |
 | SystemsThinking | OBSERVE, THINK | Recurring problems, structural causes, feedback loops, unintended consequences, "why does this keep happening?" Iceberg model, causal loop diagrams, Senge archetypes, Meadows'  leverage points | `Skill("SystemsThinking")` | E+ |
 | RootCauseAnalysis | THINK, VERIFY | Incident postmortems, defect investigation, "why did this happen?"  Whys, Fishbone, Fault Tree, Kepner-Tregoe IS/IS-NOT, blameless postmortems. Produces contributing factors (plural), not single root. | `Skill("RootCauseAnalysis")` | E+ |
@@ -49,7 +49,7 @@ Use after code changes or before PR creation.
 
 Trigger: ISA `effort` is `advanced`, `deep`, or `comprehensive` AND the task involves writing or modifying code (implementation, refactor, debug, build, migration, fix, feature).
 
-Behavior: At PLAN phase, add Forge to `🏹 CAPABILITIES SELECTED` with target phase EXECUTE. At EXECUTE, spawn Forge via `Agent(subagent_type="Forge", ...)`. Forge's report becomes part of the VERIFY bundle.
+Behavior: At PLAN phase, add Forge to ` CAPABILITIES SELECTED` with target phase EXECUTE. At EXECUTE, spawn Forge via `Agent(subagent_type="Forge", ...)`. Forge's report becomes part of the VERIFY bundle.
 
 Explicit-name override: If {{PRINCIPAL_NAME}} mentions "Forge" in the request, invoke regardless of tier (even E/E). Name-match always wins over tier gate.
 
@@ -61,7 +61,7 @@ What this gate prevents: E+ coding work silently routed through Claude-family on
 
 Trigger: ISA `effort` is `advanced`, `deep`, or `comprehensive` AND the task involves whole-project or cross-file reasoning where context breadth materially affects correctness (architecture-fitting refactors, system-wide migrations, multi-module redesigns).
 
-Behavior: At PLAN phase, add Anvil to `🏹 CAPABILITIES SELECTED` with target phase EXECUTE. At EXECUTE, spawn Anvil via `Agent(subagent_type="Anvil", ...)`. Anvil's report becomes part of the VERIFY bundle.
+Behavior: At PLAN phase, add Anvil to ` CAPABILITIES SELECTED` with target phase EXECUTE. At EXECUTE, spawn Anvil via `Agent(subagent_type="Anvil", ...)`. Anvil's report becomes part of the VERIFY bundle.
 
 Picking Forge vs Anvil (both Moonshot-family and OpenAI-family are non-Anthropic, which satisfies the cross-vendor goal):
 
@@ -130,7 +130,7 @@ When spawning agents: provide raw source material not summaries, parallelize ind
  Output Format
 
 ```
-🏹 CAPABILITIES SELECTED:
- 🏹 [Each capability, target phase, -word reason, use as many appropriate Capabilities as possible given the amount of time you have]
-🏹 [- words on selection rationale]
+ CAPABILITIES SELECTED:
+  [Each capability, target phase, -word reason, use as many appropriate Capabilities as possible given the amount of time you have]
+ [- words on selection rationale]
 ```

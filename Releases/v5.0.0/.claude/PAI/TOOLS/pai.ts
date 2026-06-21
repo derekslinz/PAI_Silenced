@@ -74,7 +74,7 @@ function log(message: string, emoji = "") {
 
 
 function error(message: string) {
-  console.error(`❌ ${message}`);
+  console.error(` ${message}`);
   process.exit(1);
 }
 
@@ -161,7 +161,7 @@ function mergeMcpConfigs(mcpFiles: string[]): object {
   for (const file of mcpFiles) {
     const filepath = join(MCP_DIR, file);
     if (!existsSync(filepath)) {
-      log(`Warning: MCP file not found: ${file}`, "⚠️");
+      log(`Warning: MCP file not found: ${file}`, "");
       continue;
     }
     try {
@@ -170,7 +170,7 @@ function mergeMcpConfigs(mcpFiles: string[]): object {
         Object.assign(merged.mcpServers, config.mcpServers);
       }
     } catch (e) {
-      log(`Warning: Failed to parse ${file}`, "⚠️");
+      log(`Warning: Failed to parse ${file}`, "");
     }
   }
 
@@ -190,8 +190,8 @@ function setMcpProfile(profile: string) {
 
   // Create symlink
   symlinkSync(profileFile, ACTIVE_MCP);
-  log(`Switched to '${profile}' profile`, "✅");
-  log("Restart Claude Code to apply", "⚠️");
+  log(`Switched to '${profile}' profile`, "");
+  log("Restart Claude Code to apply", "");
 }
 
 function setMcpCustom(mcpNames: string[]) {
@@ -225,7 +225,7 @@ function setMcpCustom(mcpNames: string[]) {
 
   const serverCount = Object.keys((merged as any).mcpServers || {}).length;
   if (serverCount > 0) {
-    log(`Configured ${serverCount} MCP server(s): ${mcpNames.join(", ")}`, "✅");
+    log(`Configured ${serverCount} MCP server(s): ${mcpNames.join(", ")}`, "");
   }
 }
 
@@ -268,7 +268,7 @@ function findWallpaper(query: string): string | null {
 function setWallpaper(filename: string): boolean {
   const fullPath = join(WALLPAPER_DIR, filename);
   if (!existsSync(fullPath)) {
-    log(`Wallpaper not found: ${fullPath}`, "❌");
+    log(`Wallpaper not found: ${fullPath}`, "");
     return false;
   }
 
@@ -278,13 +278,13 @@ function setWallpaper(filename: string): boolean {
   try {
     const kittyResult = spawnSync(["kitty", "@", "set-background-image", fullPath]);
     if (kittyResult.exitCode === 0) {
-      log("Kitty background set", "✅");
+      log("Kitty background set", "");
     } else {
-      log("Failed to set Kitty background", "⚠️");
+      log("Failed to set Kitty background", "");
       success = false;
     }
   } catch {
-    log("Kitty not available", "⚠️");
+    log("Kitty not available", "");
   }
 
   // Set macOS desktop background
@@ -292,13 +292,13 @@ function setWallpaper(filename: string): boolean {
     const script = `tell application "System Events" to tell every desktop to set picture to "${fullPath}"`;
     const macResult = spawnSync(["osascript", "-e", script]);
     if (macResult.exitCode === 0) {
-      log("macOS desktop set", "✅");
+      log("macOS desktop set", "");
     } else {
-      log("Failed to set macOS desktop", "⚠️");
+      log("Failed to set macOS desktop", "");
       success = false;
     }
   } catch {
-    log("Could not set macOS desktop", "⚠️");
+    log("Could not set macOS desktop", "");
   }
 
   return success;
@@ -313,7 +313,7 @@ function cmdWallpaper(args: string[]) {
 
   // No args or --list: show available wallpapers
   if (args.length === 0 || args[0] === "--list" || args[0] === "-l" || args[0] === "list") {
-    log("Available wallpapers:", "️");
+    log("Available wallpapers:", "");
     console.log();
     wallpapers.forEach((w, i) => {
       console.log(`  ${i + 1}. ${getWallpaperName(w)}`);
@@ -329,18 +329,18 @@ function cmdWallpaper(args: string[]) {
   const match = findWallpaper(query);
 
   if (!match) {
-    log(`No wallpaper matching "${query}"`, "❌");
+    log(`No wallpaper matching "${query}"`, "");
     console.log("\nAvailable wallpapers:");
     wallpapers.forEach((w) => console.log(`  - ${getWallpaperName(w)}`));
     process.exit(1);
   }
 
   const name = getWallpaperName(match);
-  log(`Switching to: ${name}`, "️");
+  log(`Switching to: ${name}`, "");
 
   const success = setWallpaper(match);
   if (success) {
-    log(`Wallpaper set to ${name}`, "✅");
+    log(`Wallpaper set to ${name}`, "");
     notifyStatus(`Wallpaper changed to ${name}`);
   } else {
     error("Failed to set wallpaper");
@@ -423,7 +423,7 @@ async function cmdUpdate() {
 
   // Skip if already up to date
   if (latest && compareVersions(current, latest) >= 0) {
-    log("Already up to date", "✅");
+    log("Already up to date", "");
     return;
   }
 
@@ -433,9 +433,9 @@ async function cmdUpdate() {
   log("Step 1/2: Updating Bun...", "");
   const bunResult = spawnSync(["brew", "upgrade", "bun"]);
   if (bunResult.exitCode !== 0) {
-    log("Bun update skipped (may already be latest)", "⚠️");
+    log("Bun update skipped (may already be latest)", "");
   } else {
-    log("Bun updated", "✅");
+    log("Bun updated", "");
   }
 
   // Step 2: Update Claude Code
@@ -444,7 +444,7 @@ async function cmdUpdate() {
   if (claudeResult.exitCode !== 0) {
     error("Claude Code installation failed");
   }
-  log("Claude Code updated", "✅");
+  log("Claude Code updated", "");
 
   // Show final version
   const newVersion = getCurrentVersion();
@@ -468,12 +468,12 @@ async function cmdVersion() {
     console.log(`Latest:  v${latest}`);
     const cmp = compareVersions(current, latest);
     if (cmp >= 0) {
-      log("Up to date", "✅");
+      log("Up to date", "");
     } else {
-      log("Update available (run 'k update')", "⚠️");
+      log("Update available (run 'k update')", "");
     }
   } else {
-    log("Could not fetch latest version", "⚠️");
+    log("Could not fetch latest version", "");
   }
 }
 

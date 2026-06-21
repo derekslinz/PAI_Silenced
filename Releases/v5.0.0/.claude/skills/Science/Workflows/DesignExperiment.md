@@ -236,11 +236,11 @@ Parallel Experiment Design
 When hypotheses are independent, design experiments to run simultaneously.
 
 ```
-Hypothesis ─────► Experiment ─────► Results ─┐
-                                                   │
-Hypothesis ─────► Experiment ─────► Results ─┼─► Analysis
-                                                   │
-Hypothesis ─────► Experiment ─────► Results ─┘
+Hypothesis  Experiment  Results 
+                                                   
+Hypothesis  Experiment  Results  Analysis
+                                                   
+Hypothesis  Experiment  Results 
 ```
 
 Benefits:- Faster time to insight

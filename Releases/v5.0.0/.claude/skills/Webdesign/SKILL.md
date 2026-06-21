@@ -34,9 +34,9 @@ User-specific design preferences (color palette, typography, spacing grid, anima
 
 ```
 ~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/Webdesign/
-├── PREFERENCES.md     Design tokens, preferred frameworks
-├── README.md
-└── EXTEND.yaml
+ PREFERENCES.md     Design tokens, preferred frameworks
+ README.md
+ EXTEND.yaml
 ```
 
 The skill reads PREFERENCES.md if present and passes those tokens into Claude Design's brief and any downstream handoff bundle. Without a customization layer, the skill defaults to Claude Design's own system-extraction output.
@@ -124,25 +124,25 @@ File Organization
 
 ```
 skills/Webdesign/
-├── SKILL.md                          This file — routing + gotchas
-├── README.md                         Public-facing intro
-├── Workflows/
-│   ├── CreatePrototype.md
-│   ├── ExtractDesignSystem.md
-│   ├── RefinePrototype.md
-│   ├── WebsiteToRedesign.md
-│   ├── ExportToCode.md
-│   ├── IntegrateIntoApp.md
-│   └── DeployDesign.md
-├── Tools/
-│   ├── DriveClaudeDesign.ts          Interceptor wrapper for claude.ai/design
-│   ├── ProcessHandoffBundle.ts       Parse bundle → structured brief
-│   └── VerifyDesign.ts               Screenshot + ay probe
-└── References/
-    ├── ClaudeDesignCapabilities.md   What Claude Design does / doesn't do
-    ├── InputFormats.md               Prompt patterns, codebase prep
-    ├── ExportFormats.md              html / pdf / pptx / canva / url / bundle
-    └── HandoffBundleSpec.md          Bundle structure for Claude Code handoff
+ SKILL.md                          This file — routing + gotchas
+ README.md                         Public-facing intro
+ Workflows/
+    CreatePrototype.md
+    ExtractDesignSystem.md
+    RefinePrototype.md
+    WebsiteToRedesign.md
+    ExportToCode.md
+    IntegrateIntoApp.md
+    DeployDesign.md
+ Tools/
+    DriveClaudeDesign.ts          Interceptor wrapper for claude.ai/design
+    ProcessHandoffBundle.ts       Parse bundle → structured brief
+    VerifyDesign.ts               Screenshot + ay probe
+ References/
+     ClaudeDesignCapabilities.md   What Claude Design does / doesn't do
+     InputFormats.md               Prompt patterns, codebase prep
+     ExportFormats.md              html / pdf / pptx / canva / url / bundle
+     HandoffBundleSpec.md          Bundle structure for Claude Code handoff
 ```
 
 Execution Log

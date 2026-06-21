@@ -17,7 +17,7 @@ const HOME = process.env.HOME ?? ""
 const PULSE_DIR = join(HOME, ".claude", "PAI", "PULSE")
 const STATE_FILE = join(PULSE_DIR, "state", "work-token.json")
 
-// ── Worker Config (from PULSE.toml [worker] section) ──
+//  Worker Config (from PULSE.toml [worker] section) 
 
 interface WorkerConfig {
   name: string
@@ -50,7 +50,7 @@ function loadWorkerConfig(): WorkerConfig | null {
   }
 }
 
-// ── GitHub App Auth (installation tokens, 1-hour TTL) ──
+//  GitHub App Auth (installation tokens, 1-hour TTL) 
 
 interface TokenCache {
   token: string
@@ -105,7 +105,7 @@ async function getInstallationToken(config: WorkerConfig): Promise<string> {
   return data.token
 }
 
-// ── Issue Claiming ──
+//  Issue Claiming 
 
 interface Issue {
   number: number
@@ -252,7 +252,7 @@ async function completeIssue(
   }
 }
 
-// ── Execute Work (spawn claude session with sanitized input) ──
+//  Execute Work (spawn claude session with sanitized input) 
 
 async function executeWork(issue: Issue, config: WorkerConfig): Promise<{ output: string; success: boolean }> {
   // Sanitize: wrap issue body in boundary markers
@@ -305,7 +305,7 @@ async function executeWork(issue: Issue, config: WorkerConfig): Promise<{ output
   return { output: output.trim(), success: true }
 }
 
-// ── Main ──
+//  Main 
 
 async function main() {
   const config = loadWorkerConfig()

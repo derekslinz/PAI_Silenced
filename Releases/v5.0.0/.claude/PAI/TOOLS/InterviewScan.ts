@@ -51,7 +51,7 @@ type Target = {
   prompts: string[];
 };
 
-// ─── Registry: what files are interview-targets, and their prompts ───
+//  Registry: what files are interview-targets, and their prompts 
 //
 // PHASE ORDERING ({{PRINCIPAL_NAME}}'s explicit priority 2026-04-15):
 //   Phase 1 = Foundational TELOS context (the core of the interview)
@@ -61,7 +61,7 @@ type Target = {
 //   Phase 9 = Deferred (RHYTHMS — not needed at first)
 
 const REGISTRY: Array<Omit<Target, "content_length" | "tbd_count" | "seed_markers" | "empty_sections" | "required_fields_missing" | "completeness_score" | "priority" | "review_mode" | "why_incomplete">> = [
-  // ─── Phase 1: Foundational TELOS context ───
+  //  Phase 1: Foundational TELOS context 
   { phase: 1, path: join(TELOS_DIR, "MISSION.md"), name: "MISSION", category: "foundational", leverage: 10,
     prompts: ["What's your north-star mission — the single sentence that captures why you're building all of this?",
               "Any secondary missions that serve the north star but deserve their own articulation?",
@@ -98,7 +98,7 @@ const REGISTRY: Array<Omit<Target, "content_length" | "tbd_count" | "seed_marker
     prompts: ["Useful ways of seeing the world — true-ish frames worth holding?",
               "Frames that conflict with each other but you hold both?"] },
 
-  // ─── Phase 2: IDEAL_STATE dimensions (minus RHYTHMS, deferred) ───
+  //  Phase 2: IDEAL_STATE dimensions (minus RHYTHMS, deferred) 
   { phase: 2, path: join(IDEAL_DIR, "HEALTH.md"), name: "IDEAL_STATE/HEALTH", category: "ideal_state", leverage: 8,
     prompts: ["Weight and body-composition target?",
               "Sleep hours + efficiency target?",
@@ -129,7 +129,7 @@ const REGISTRY: Array<Omit<Target, "content_length" | "tbd_count" | "seed_marker
               "Spanish maintenance — active or dormant?",
               "Teaching / explaining cadence?"] },
 
-  // ─── Phase 3: Preference files ───
+  //  Phase 3: Preference files 
   { phase: 3, path: join(TELOS_DIR, "BOOKS.md"), name: "BOOKS", category: "preference", leverage: 5,
     prompts: ["The massive list — beyond the current 5, what books shaped you?",
               "Biographies, science, history, classics, business — categories to fill?"] },
@@ -168,7 +168,7 @@ const REGISTRY: Array<Omit<Target, "content_length" | "tbd_count" | "seed_marker
               "City council topics to always flag?",
               "State-level legislation topic areas?"] },
 
-  // ─── Phase 4: Current-state snapshot + identity ───
+  //  Phase 4: Current-state snapshot + identity 
   { phase: 4, path: join(USER_DIR, "PRINCIPAL_IDENTITY.md"), name: "PRINCIPAL_IDENTITY", category: "identity", leverage: 8,
     prompts: ["Anything in the identity file that's out-of-date or needs refinement?",
               "Aspects of how you want to be represented that aren't captured yet?"] },
@@ -176,7 +176,7 @@ const REGISTRY: Array<Omit<Target, "content_length" | "tbd_count" | "seed_marker
     prompts: ["Right now: focus, energy, mood, last meal, sleep?",
               "This week's top intent, stalled items, wins?"] },
 
-  // ─── Phase 9: Deferred ({{PRINCIPAL_NAME}} said "not needed at first") ───
+  //  Phase 9: Deferred ({{PRINCIPAL_NAME}} said "not needed at first") 
   { phase: 9, path: join(IDEAL_DIR, "RHYTHMS.md"), name: "IDEAL_STATE/RHYTHMS", category: "ideal_state", leverage: 10,
     prompts: ["Wake time and the protected anchors of an ideal day?",
               "Deep-work blocks — when, how long, how protected?",
@@ -187,7 +187,7 @@ const REGISTRY: Array<Omit<Target, "content_length" | "tbd_count" | "seed_marker
               "Yearly anchors — conferences, retreats, family travel, off-grid time?"] },
 ];
 
-// ─── Scoring ───
+//  Scoring 
 
 const PLACEHOLDER_PATTERNS = [
   /\bTBD\b/g,
@@ -276,13 +276,13 @@ const PHASE_LABELS: Record<Phase, string> = {
   9: "PHASE 9 — Deferred",
 };
 
-// ─── Output formatters ───
+//  Output formatters 
 
 function formatHuman(targets: Target[]): string {
   const overall = Math.round(targets.reduce((s, t) => s + t.completeness_score, 0) / targets.length);
 
   const lines: string[] = [];
-  lines.push(`═══ PAI Interview Gap Report ═══`);
+  lines.push(` PAI Interview Gap Report `);
   lines.push(``);
   lines.push(`Overall: ${overall}% complete across ${targets.length} interview targets`);
 
@@ -306,10 +306,10 @@ function formatHuman(targets: Target[]): string {
   for (const phase of phases) {
     const items = targets.filter((t) => t.phase === phase);
     if (items.length === 0) continue;
-    lines.push(`── ${PHASE_LABELS[phase]} ──`);
+    lines.push(` ${PHASE_LABELS[phase]} `);
     for (const t of items) {
       const mode = t.review_mode ? "review" : "fill  ";
-      const marker = t.completeness_score === 100 ? "✓" : t.completeness_score >= 80 ? "·" : "○";
+      const marker = t.completeness_score === 100 ? "" : t.completeness_score >= 80 ? "·" : "";
       lines.push(
         `  ${marker} ${mode}  ${t.name.padEnd(26)}  ${t.completeness_score.toFixed(0).padStart(3)}%  (lev ${t.leverage})  — ${t.why_incomplete.join(", ") || "—"}`
       );
@@ -321,12 +321,12 @@ function formatHuman(targets: Target[]): string {
   const next = targets.find((t) => t.phase !== 9);
   if (next) {
     const modeLabel = next.review_mode ? "REVIEW" : "FILL";
-    lines.push(`── Suggested next (${modeLabel}): ${next.name} ──`);
+    lines.push(` Suggested next (${modeLabel}): ${next.name} `);
     next.prompts.slice(0, 3).forEach((p, i) => lines.push(`  ${i + 1}. ${p}`));
     lines.push(``);
     lines.push(`Run /interview to start the conversational pass.`);
   } else {
-    lines.push(`✅ Everything in scope is either done or deferred.`);
+    lines.push(` Everything in scope is either done or deferred.`);
   }
 
   return lines.join("\n");
@@ -340,7 +340,7 @@ function formatJson(targets: Target[]): string {
 function formatNext(targets: Target[]): string {
   // Pick the highest-priority non-deferred target
   const t = targets.find((x) => x.phase !== 9);
-  if (!t) return "✅ Nothing in scope. Check --phase 9 for deferred items.";
+  if (!t) return " Nothing in scope. Check --phase 9 for deferred items.";
   const lines: string[] = [];
   const modeLabel = t.review_mode ? "REVIEW mode — read file, ask what to update/refine/add" : "FILL mode — walk through prompts to populate";
   lines.push(` ${t.name}  —  ${t.completeness_score.toFixed(0)}% complete  ·  ${PHASE_LABELS[t.phase]}`);
@@ -360,7 +360,7 @@ function formatNext(targets: Target[]): string {
   return lines.join("\n");
 }
 
-// ─── Main ───
+//  Main 
 
 function main(): void {
   const args = process.argv.slice(2);

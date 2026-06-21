@@ -1,6 +1,6 @@
 # BUSINESS/
 
-> 🏢 SAMPLE TEMPLATE — Replace with your own business data via /interview or by editing these files.
+>  SAMPLE TEMPLATE — Replace with your own business data via /interview or by editing these files.
 
 This directory holds your business-level context — the operating documents that describe your company (or companies), revenue streams, business strategy, and entity-level records.
 

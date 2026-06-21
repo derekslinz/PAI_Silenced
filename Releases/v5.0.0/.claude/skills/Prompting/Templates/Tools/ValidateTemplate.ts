@@ -273,7 +273,7 @@ Examples:
   // Output results
   console.log('\n=== Template Validation ===\n');
   console.log(`Template: ${values.template}`);
-  console.log(`Status: ${result.valid ? '✓ Valid' : '✗ Invalid'}`);
+  console.log(`Status: ${result.valid ? ' Valid' : ' Invalid'}`);
 
   if (result.variables.length > ) {
     console.log(`\nVariables (${result.variables.length}):`);
@@ -291,7 +291,7 @@ Examples:
   }
 
   if (result.errors.length > ) {
-    console.log(`\n✗ Errors (${result.errors.length}):`);
+    console.log(`\n Errors (${result.errors.length}):`);
     result.errors.forEach(e => console.log(`  - ${e}`));
   }
 

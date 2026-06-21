@@ -122,7 +122,7 @@ function cmdList(slug: string) {
   const descriptions = loadIscDescriptions(isaPath);
 
   console.log(`Checkpoints for ${slug}`);
-  console.log('─'.repeat(80));
+  console.log(''.repeat(80));
   for (const id of state.committed_iscs) {
     const desc = descriptions.get(id) || '(description not in ISA.md)';
     console.log(`${id.padEnd(12)}  ${truncate(desc, 60)}`);

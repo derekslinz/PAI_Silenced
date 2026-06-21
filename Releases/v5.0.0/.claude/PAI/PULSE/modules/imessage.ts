@@ -32,7 +32,7 @@ import { appendFile, mkdir, rename } from "fs/promises"
 // as modules/telegram.ts — prevents API billing when the module is re-enabled.
 delete process.env.ANTHROPIC_API_KEY
 
-// ── Config Interface ──
+//  Config Interface 
 
 export interface IMessageConfig {
   enabled: boolean
@@ -42,7 +42,7 @@ export interface IMessageConfig {
   sdk_timeout_ms?: number
 }
 
-// ── Health Status ──
+//  Health Status 
 
 export interface IMessageHealth {
   status: "running" | "stopped" | "error"
@@ -56,7 +56,7 @@ export interface IMessageHealth {
   last_error?: string
 }
 
-// ── Module State ──
+//  Module State 
 
 const HOME = process.env.HOME ?? ""
 const CWD = join(HOME, ".claude")
@@ -80,7 +80,7 @@ let conversationStore: ConversationStore | null = null
 let cursorPath = ""
 let chatLogPath = ""
 
-// ── Logging ──
+//  Logging 
 
 function log(level: "info" | "warn" | "error", msg: string, data?: unknown) {
   const entry = JSON.stringify({
@@ -97,7 +97,7 @@ function log(level: "info" | "warn" | "error", msg: string, data?: unknown) {
   }
 }
 
-// ── Cursor Persistence ──
+//  Cursor Persistence 
 
 async function saveCursor() {
   const tmp = cursorPath + ".tmp"
@@ -105,7 +105,7 @@ async function saveCursor() {
   await rename(tmp, cursorPath)
 }
 
-// ── Chat Log ──
+//  Chat Log 
 
 async function appendChatLog(
   handle: string,
@@ -123,7 +123,7 @@ async function appendChatLog(
   await appendFile(chatLogPath, entry).catch(() => {})
 }
 
-// ── Process a Single Message ──
+//  Process a Single Message 
 
 async function processMessage(
   text: string,
@@ -229,7 +229,7 @@ When asked to check email, use the _INBOX skill. When asked about calendar, use 
   return fullText || "Sorry, I wasn't able to generate a response. Try again?"
 }
 
-// ── Poll Loop ──
+//  Poll Loop 
 
 async function poll() {
   try {
@@ -304,7 +304,7 @@ async function poll() {
   }
 }
 
-// ── Public API ──
+//  Public API 
 
 /**
  * Start the iMessage polling loop.

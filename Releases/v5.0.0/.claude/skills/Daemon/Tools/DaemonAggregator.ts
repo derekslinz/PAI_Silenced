@@ -16,7 +16,7 @@ import { readFileSync, existsSync, writeFileSync, readdirSync, statSync } from "
 import { join, resolve } from "path";
 import { filterContent, filterDaemonData, loadSecurityOverrides } from "./SecurityFilter.ts";
 
-// ─── Path Resolution ───
+//  Path Resolution 
 
 const HOME = process.env.HOME || process.env.USERPROFILE || "";
 const PAI_DIR = process.env.PAI_DIR || join(HOME, ".claude", "PAI");
@@ -30,7 +30,7 @@ const IDENTITY_FILE = join(USER_DIR, "PRINCIPAL_IDENTITY.md");
 const CUSTOMIZATIONS_DIR = join(USER_DIR, "SKILLCUSTOMIZATIONS", "Daemon");
 const USER_DAEMON_DIR = join(USER_DIR, "Daemon");
 
-// ─── Structurally Excluded Paths (NEVER read these) ───
+//  Structurally Excluded Paths (NEVER read these) 
 
 const EXCLUDED_PATHS = [
   join(USER_DIR, "CONTACTS.md"),
@@ -42,7 +42,7 @@ const EXCLUDED_PATHS = [
   join(TELOS_DIR, "TRAUMAS.md"),
   join(KNOWLEDGE_DIR, "People"),
   join(KNOWLEDGE_DIR, "Companies"),
-  // ─── Current→Ideal Monitoring Spine (--) ───
+  //  Current→Ideal Monitoring Spine (--) 
   // the user's explicit decision: IDEAL_STATE is fully private (Decision ).
   // CURRENT_STATE contains aggregated health/finance/location/social — hardest private.
   // Preference files with location or consumption data are private.
@@ -61,7 +61,7 @@ function isExcluded(filePath: string): boolean {
   return EXCLUDED_PATHS.some((excluded) => resolved.startsWith(resolve(excluded)));
 }
 
-// ─── Public Projects List ───
+//  Public Projects List 
 
 const PUBLIC_PROJECTS = [
   "Website", "Fabric", "SecLists", "PAI", "Surface",
@@ -69,7 +69,7 @@ const PUBLIC_PROJECTS = [
   "TheAlgorithm", "FoundryServices", "Ladder", "PAI Marketing",
 ];
 
-// ─── Source Readers ───
+//  Source Readers 
 
 function readFileIfExists(path: string): string | null {
   if (isExcluded(path)) return null;
@@ -398,7 +398,7 @@ function parseDaemonMd(content: string): Record<string, unknown> {
   return sections;
 }
 
-// ─── Aggregation ───
+//  Aggregation 
 
 interface DaemonUpdate {
   about: string;
@@ -493,7 +493,7 @@ export function aggregate(): DaemonUpdate {
   };
 }
 
-// ─── Output Formatters ───
+//  Output Formatters 
 
 function toDaemonMd(data: DaemonUpdate): string {
   const sections: string[] = [
@@ -588,7 +588,7 @@ function toDaemonMd(data: DaemonUpdate): string {
   return sections.join("\n");
 }
 
-// ─── CLI ───
+//  CLI 
 
 if (import.meta.main) {
   const args = process.argv.slice();

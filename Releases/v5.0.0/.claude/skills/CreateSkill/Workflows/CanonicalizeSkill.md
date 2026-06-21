@@ -46,26 +46,26 @@ Step : Enforce TitleCase Naming
 CRITICAL: All naming must use TitleCase (PascalCase).
 Skill Directory Name
 ```
-✗ WRONG: createskill, create-skill, create_skill, CREATESKILL
-✓ CORRECT: Createskill (or CreateSkill for multi-word)
+ WRONG: createskill, create-skill, create_skill, CREATESKILL
+ CORRECT: Createskill (or CreateSkill for multi-word)
 ```
 
 Workflow File Names
 ```
-✗ WRONG: create.md, CREATE.md, create-skill.md, create_skill.md
-✓ CORRECT: Create.md, UpdateDaemonInfo.md, SyncRepo.md
+ WRONG: create.md, CREATE.md, create-skill.md, create_skill.md
+ CORRECT: Create.md, UpdateDaemonInfo.md, SyncRepo.md
 ```
 
 Reference Doc Names
 ```
-✗ WRONG: prosody-guide.md, PROSODY_GUIDE.md
-✓ CORRECT: ProsodyGuide.md, SchemaSpec.md, ApiReference.md
+ WRONG: prosody-guide.md, PROSODY_GUIDE.md
+ CORRECT: ProsodyGuide.md, SchemaSpec.md, ApiReference.md
 ```
 
 Tool Names
 ```
-✗ WRONG: manage-server.ts, MANAGE_SERVER.ts
-✓ CORRECT: ManageServer.ts (with ManageServer.help.md)
+ WRONG: manage-server.ts, MANAGE_SERVER.ts
+ CORRECT: ManageServer.ts (with ManageServer.help.md)
 ```
 
 Rename files if needed:```bash
@@ -92,18 +92,18 @@ find ~/.claude/skills/[SkillName]/ -type d -mindepth -maxdepth ```
 Common Violations to Fix
 
 Nested Workflows:```
-✗ WRONG: Workflows/Company/DueDiligence.md
-✓ FIX: Workflows/CompanyDueDiligence.md
+ WRONG: Workflows/Company/DueDiligence.md
+ FIX: Workflows/CompanyDueDiligence.md
 ```
 
 Nested Templates:```
-✗ WRONG: Templates/Primitives/Extract.md
-✓ FIX: Move to skills/Prompting/Extract.md (templates belong in Prompting)
+ WRONG: Templates/Primitives/Extract.md
+ FIX: Move to skills/Prompting/Extract.md (templates belong in Prompting)
 ```
 
 Nested Tools:```
-✗ WRONG: Tools/Utils/Helper.ts
-✓ FIX: Tools/Helper.ts (or delete if not needed)
+ WRONG: Tools/Utils/Helper.ts
+ FIX: Tools/Helper.ts (or delete if not needed)
 ```
 
 Flatten Procedure

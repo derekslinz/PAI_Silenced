@@ -17,7 +17,7 @@ import { join } from "path"
 import { readFileSync, existsSync } from "fs"
 import { parse } from "smol-toml"
 
-// ── Load .env before anything else ──
+//  Load .env before anything else 
 
 const HOME = process.env.HOME ?? "~"
 const PAI_DIR = join(HOME, ".claude", "PAI")
@@ -40,7 +40,7 @@ try {
   }
 } catch { /* .env not found — rely on process environment */ }
 
-// ── Imports ──
+//  Imports 
 
 import {
   type DaemonState,
@@ -87,7 +87,7 @@ async function loadModules(config: PulseConfig) {
   }
 }
 
-// ── Config Types ──
+//  Config Types 
 
 interface PulseConfig {
   port: number
@@ -108,7 +108,7 @@ interface PulseConfig {
   }>
 }
 
-// ── Load Unified Config ──
+//  Load Unified Config 
 
 async function loadPulseConfig(): Promise<PulseConfig> {
   const raw = await Bun.file(join(PULSE_DIR, "PULSE.toml")).text()
@@ -127,7 +127,7 @@ async function loadPulseConfig(): Promise<PulseConfig> {
   }
 }
 
-// ── Constants ──
+//  Constants 
 
 const STATE_PATH = join(PULSE_DIR, "state", "state.json")
 const PID_PATH = join(PULSE_DIR, "state", "pulse.pid")
@@ -135,7 +135,7 @@ const MAX_FAILURES = 3
 const MAX_SLEEP_MS = 60_000
 const MIN_SLEEP_MS = 1_000
 
-// ── Supervisor: restart crashed subsystems without killing the process ──
+//  Supervisor: restart crashed subsystems without killing the process 
 
 async function supervise(name: string, fn: () => Promise<void>, shuttingDown: () => boolean) {
   while (!shuttingDown()) {
@@ -154,7 +154,7 @@ async function supervise(name: string, fn: () => Promise<void>, shuttingDown: ()
   }
 }
 
-// ── Compute next due time ──
+//  Compute next due time 
 
 function msUntilNextDue(jobs: PulseConfig["jobs"], state: DaemonState): number {
   const now = new Date()
@@ -168,7 +168,7 @@ function msUntilNextDue(jobs: PulseConfig["jobs"], state: DaemonState): number {
   return MAX_SLEEP_MS
 }
 
-// ── Unified Health Response ──
+//  Unified Health Response 
 
 function buildHealthResponse(state: DaemonState, config: PulseConfig): Response {
   const subsystems: Record<string, unknown> = {}
@@ -216,7 +216,7 @@ function buildHealthResponse(state: DaemonState, config: PulseConfig): Response 
   })
 }
 
-// ── Main ──
+//  Main 
 
 async function main() {
   await Bun.write(PID_PATH, String(process.pid))
@@ -249,10 +249,10 @@ async function main() {
   process.on("SIGTERM", shutdown)
   process.on("SIGINT", shutdown)
 
-  // ── Load Modules ──
+  //  Load Modules 
   await loadModules(config)
 
-  // ── Initialize Modules ──
+  //  Initialize Modules 
   if (config.hooks?.enabled !== false) {
     startHooks(config.hooks ?? { enabled: true })
   }
@@ -262,7 +262,7 @@ async function main() {
     log("info", "Observability module loaded")
   }
 
-  // ── HTTP Server (single port, all routes) ──
+  //  HTTP Server (single port, all routes) 
 
   const server = Bun.serve({
     hostname: "127.0.0.1",
@@ -303,7 +303,7 @@ async function main() {
 
   log("info", "HTTP server listening", { port: server.port })
 
-  // ── Start Long-Running Subsystems (supervised) ──
+  //  Start Long-Running Subsystems (supervised) 
 
   if (telegramModule && config.telegram?.enabled) {
     supervise("telegram", () => telegramModule.startTelegram(config.telegram), isShuttingDown)
@@ -315,7 +315,7 @@ async function main() {
     log("info", "iMessage module started (supervised)")
   }
 
-  // ── Cron Heartbeat Loop ──
+  //  Cron Heartbeat Loop 
 
   while (!shuttingDown) {
     const tickStart = Date.now()
@@ -388,7 +388,7 @@ async function main() {
     }
   }
 
-  // ── Cleanup ──
+  //  Cleanup 
   server.stop()
   if (telegramModule) telegramModule.stopTelegram?.()
   if (imessageModule) imessageModule.stopIMessage?.()

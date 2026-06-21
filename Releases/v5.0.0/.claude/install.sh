@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# ═══════════════════════════════════════════════════════════
+# 
 #  PAI Installer v5.0 — Bootstrap Script
 #  Requirements: bash, curl
 #  This script bootstraps the installer by ensuring Bun is
 #  available, then hands off to the TypeScript installer.
-# ═══════════════════════════════════════════════════════════
+# 
 set -euo pipefail
 
-# ─── Colors ───────────────────────────────────────────────
+#  Colors 
 BLUE='\033[38;2;59;130;246m'
 LIGHT_BLUE='\033[38;2;147;197;253m'
 NAVY='\033[38;2;30;58;138m'
@@ -21,13 +21,13 @@ RESET='\033[0m'
 BOLD='\033[1m'
 ITALIC='\033[3m'
 
-# ─── Helpers ──────────────────────────────────────────────
+#  Helpers 
 info()    { echo -e "  ${BLUE}ℹ${RESET} $1"; }
-success() { echo -e "  ${GREEN}✓${RESET} $1"; }
-warn()    { echo -e "  ${YELLOW}⚠${RESET} $1"; }
-error()   { echo -e "  ${RED}✗${RESET} $1"; }
+success() { echo -e "  ${GREEN}${RESET} $1"; }
+warn()    { echo -e "  ${YELLOW}${RESET} $1"; }
+error()   { echo -e "  ${RED}${RESET} $1"; }
 
-# ─── Resolve Script Directory + Algo Version (BEFORE banner — set -u) ──
+#  Resolve Script Directory + Algo Version (BEFORE banner — set -u) 
 # Banner displays Algo version read from LATEST; both must be defined first
 # or `set -euo pipefail` aborts the script with "unbound variable" on line 46.
 SOURCE_BANNER="${BASH_SOURCE[0]}"
@@ -44,43 +44,43 @@ else
   ALGO_VERSION_DISPLAY="v?.?.?"
 fi
 
-# ─── Banner ───────────────────────────────────────────────
-B='█'
-SEP="${STEEL}│${RESET}"
-BAR="${STEEL}────────────────────────${RESET}"
+#  Banner 
+B=''
+SEP="${STEEL}${RESET}"
+BAR="${STEEL}${RESET}"
 
 echo ""
-echo -e "${STEEL}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${RESET}"
+echo -e "${STEEL}${RESET}"
 echo ""
 echo -e "                      ${NAVY}P${RESET}${BLUE}A${RESET}${LIGHT_BLUE}I${RESET} ${STEEL}|${RESET} ${GRAY}Personal AI Infrastructure${RESET}"
 echo ""
 echo -e "                     ${ITALIC}${LIGHT_BLUE}\"Magnifying human capabilities...\"${RESET}"
 echo ""
 echo ""
-echo -e "           ${NAVY}████████████████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${GRAY}\"${RESET}${LIGHT_BLUE}Welcome — let's get you set up${RESET}${GRAY}...\"${RESET}"
-echo -e "           ${NAVY}████████████████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${BAR}"
-echo -e "           ${NAVY}████${RESET}        ${NAVY}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${NAVY}⬢${RESET}  ${GRAY}PAI${RESET}       ${SILVER}v5.0.0${RESET}"
-echo -e "           ${NAVY}████${RESET}        ${NAVY}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${NAVY}⚙${RESET}  ${GRAY}Algo${RESET}      ${SILVER}${ALGO_VERSION_DISPLAY}${RESET}"
-echo -e "           ${NAVY}████████████████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${LIGHT_BLUE}✦${RESET}  ${GRAY}Installer${RESET} ${SILVER}v5.0${RESET}"
-echo -e "           ${NAVY}████████████████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${BAR}"
-echo -e "           ${NAVY}████${RESET}        ${BLUE}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}"
-echo -e "           ${NAVY}████${RESET}        ${BLUE}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}  ${YELLOW}⚠  Alpha — rough edges expected${RESET}"
-echo -e "           ${NAVY}████${RESET}        ${BLUE}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}"
-echo -e "           ${NAVY}████${RESET}        ${BLUE}████${RESET}${LIGHT_BLUE}████${RESET}   ${SEP}"
+echo -e "           ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${GRAY}\"${RESET}${LIGHT_BLUE}Welcome — let's get you set up${RESET}${GRAY}...\"${RESET}"
+echo -e "           ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${BAR}"
+echo -e "           ${NAVY}${RESET}        ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${NAVY}${RESET}  ${GRAY}PAI${RESET}       ${SILVER}v5.0.0${RESET}"
+echo -e "           ${NAVY}${RESET}        ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${NAVY}${RESET}  ${GRAY}Algo${RESET}      ${SILVER}${ALGO_VERSION_DISPLAY}${RESET}"
+echo -e "           ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${LIGHT_BLUE}${RESET}  ${GRAY}Installer${RESET} ${SILVER}v5.0${RESET}"
+echo -e "           ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${BAR}"
+echo -e "           ${NAVY}${RESET}        ${BLUE}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}"
+echo -e "           ${NAVY}${RESET}        ${BLUE}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${YELLOW}  Alpha — rough edges expected${RESET}"
+echo -e "           ${NAVY}${RESET}        ${BLUE}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}"
+echo -e "           ${NAVY}${RESET}        ${BLUE}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}"
 echo ""
 echo ""
 echo -e "                       ${STEEL}→${RESET} ${BLUE}github.com/danielmiessler/PAI${RESET}"
 echo ""
-echo -e "${STEEL}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${RESET}"
+echo -e "${STEEL}${RESET}"
 echo ""
 
-# ─── Reuse pre-banner script-dir resolution ─────────────
+#  Reuse pre-banner script-dir resolution 
 # SCRIPT_DIR was already resolved before the banner so ALGO_VERSION_DISPLAY
 # could render. Alias to the canonical SCRIPT_DIR name the rest of this
 # script uses without re-walking the symlink chain.
 SCRIPT_DIR="$SCRIPT_DIR_BANNER"
 
-# ─── OS Detection ─────────────────────────────────────────
+#  OS Detection 
 OS="$(uname -s)"
 ARCH="$(uname -m)"
 
@@ -90,7 +90,7 @@ case "$OS" in
   *)      error "Unsupported platform: $OS"; exit 1 ;;
 esac
 
-# ─── Check curl ───────────────────────────────────────────
+#  Check curl 
 if ! command -v curl &>/dev/null; then
   error "curl is required but not found."
   echo "  Please install curl and try again."
@@ -98,7 +98,7 @@ if ! command -v curl &>/dev/null; then
 fi
 success "curl found"
 
-# ─── Check/Install Git ───────────────────────────────────
+#  Check/Install Git 
 if command -v git &>/dev/null; then
   success "Git found: $(git --version 2>&1 | head -1)"
 else
@@ -127,7 +127,7 @@ else
   fi
 fi
 
-# ─── Check/Install Bun ───────────────────────────────────
+#  Check/Install Bun 
 if command -v bun &>/dev/null; then
   success "Bun found: v$(bun --version 2>/dev/null || echo 'unknown')"
 else
@@ -147,7 +147,7 @@ else
   fi
 fi
 
-# ─── Make bun reachable for non-interactive subprocess spawns ──────
+#  Make bun reachable for non-interactive subprocess spawns 
 # Critical for Claude Code hooks (`#!/usr/bin/env bun` shebang). The bun
 # curl installer puts bun at ~/.bun/bin/bun and adds an export line to
 # .zshrc — but .zshrc is only sourced for interactive shells. Hooks
@@ -193,14 +193,14 @@ if [ -x "$HOME/.bun/bin/bun" ]; then
   done
 fi
 
-# ─── Check Claude Code ───────────────────────────────────
+#  Check Claude Code 
 if command -v claude &>/dev/null; then
   success "Claude Code found"
 else
   warn "Claude Code not found — will install during setup"
 fi
 
-# ─── Launch Installer ────────────────────────────────────
+#  Launch Installer 
 # Resolve PAI-Install directory. Canonical location is $SCRIPT_DIR/PAI/PAI-Install
 # (install.sh lives at ~/.claude/ root). Fallbacks cover legacy nested layouts
 # in case install.sh is executed from inside PAI-Install/.

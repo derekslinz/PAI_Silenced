@@ -90,7 +90,7 @@ ACTIONS: researchers × query each + cross-check synthesis
 RESULTS: [Synthesized answer]
 STATUS: Standard mode - agents, cross-checked
 CAPTURE: [Key verified facts]
-️ NEXT: [Suggest extensive if CONFLICT items need resolution]
+ NEXT: [Suggest extensive if CONFLICT items need resolution]
 STORY EXPLANATION: [-numbered points]
 COMPLETED: Research on [topic] complete
 ```

@@ -87,38 +87,38 @@ GUI mode auto-installs Electron dependencies on first run and clears macOS quara
 
 ```
 PAI-Install/
-├── install.sh              # Bash bootstrap entry point
-├── main.ts                 # Mode router (gui/web/cli)
-│
-├── engine/                 # Core install logic (shared across all modes)
-│   ├── types.ts            # TypeScript interfaces (InstallState, messages, events)
-│   ├── detect.ts           # System detection (OS, tools, existing install)
-│   ├── steps.ts            # Step definitions + dependency graph
-│   ├── actions.ts          # Install action functions (clone, configure, Pulse, etc.)
-│   ├── config-gen.ts       # Fallback settings.json generator
-│   ├── validate.ts         # Post-install validation checks
-│   ├── state.ts            # State persistence (resume interrupted installs)
-│   └── index.ts            # Re-exports
-│
-├── web/                    # Web server (GUI and Web modes)
-│   ├── server.ts           # Bun HTTP + WebSocket server (port 1337)
-│   └── routes.ts           # WebSocket message handler + install orchestrator
-│
-├── cli/                    # CLI frontend
-│   ├── index.ts            # CLI entry point
-│   └── display.ts          # ANSI colors, progress bars, banners
-│
-├── public/                 # Static web assets
-│   ├── index.html          # Single-page application shell
-│   ├── styles.css          # Dark theme with glassmorphic effects
-│   ├── app.js              # Frontend JavaScript (WebSocket client, UI rendering)
-│   └── assets/             # Logos and fonts
-│
-├── electron/               # Electron native wrapper
-│   ├── main.js             # Spawns Bun server + opens BrowserWindow
-│   └── package.json        # Electron dependency
-│
-└── README.md               # This file
+ install.sh              # Bash bootstrap entry point
+ main.ts                 # Mode router (gui/web/cli)
+
+ engine/                 # Core install logic (shared across all modes)
+    types.ts            # TypeScript interfaces (InstallState, messages, events)
+    detect.ts           # System detection (OS, tools, existing install)
+    steps.ts            # Step definitions + dependency graph
+    actions.ts          # Install action functions (clone, configure, Pulse, etc.)
+    config-gen.ts       # Fallback settings.json generator
+    validate.ts         # Post-install validation checks
+    state.ts            # State persistence (resume interrupted installs)
+    index.ts            # Re-exports
+
+ web/                    # Web server (GUI and Web modes)
+    server.ts           # Bun HTTP + WebSocket server (port 1337)
+    routes.ts           # WebSocket message handler + install orchestrator
+
+ cli/                    # CLI frontend
+    index.ts            # CLI entry point
+    display.ts          # ANSI colors, progress bars, banners
+
+ public/                 # Static web assets
+    index.html          # Single-page application shell
+    styles.css          # Dark theme with glassmorphic effects
+    app.js              # Frontend JavaScript (WebSocket client, UI rendering)
+    assets/             # Logos and fonts
+
+ electron/               # Electron native wrapper
+    main.js             # Spawns Bun server + opens BrowserWindow
+    package.json        # Electron dependency
+
+ README.md               # This file
 ```
 
 ---
@@ -157,26 +157,26 @@ Messages include a `replayed` flag for reconnect replay — replayed messages sk
 
 ```
 Client                          Server
-  │                               │
-  ├── client_ready ──────────────→│
-  │←─────────────── connected ────┤
-  │                               │
-  ├── start_install ─────────────→│
-  │←──────────── step_update ─────┤  (system-detect → active)
-  │←──────── detection_result ────┤  (OS, tools, etc.)
-  │←──────────── step_update ─────┤  (system-detect → completed)
-  │                               │
-  │←──────── input_request ───────┤  ("What is your name?")
-  ├── user_input ────────────────→│
-  │←──────────── message ─────────┤  ("Welcome, {{PRINCIPAL_NAME}}!")
-  │                               │
-  │←──────── choice_request ──────┤  ("Install Pulse?")
-  ├── user_choice ───────────────→│
-  │←──────────── progress ────────┤  (Pulse install: 40%)
-  │←──────────── step_update ─────┤  (pulse → completed)
-  │                               │
-  │←──── validation_result ───────┤  (all checks)
-  │←──── install_complete ────────┤  (summary card)
+                                 
+   client_ready →
+  ← connected 
+                                 
+   start_install →
+  ← step_update   (system-detect → active)
+  ← detection_result   (OS, tools, etc.)
+  ← step_update   (system-detect → completed)
+                                 
+  ← input_request   ("What is your name?")
+   user_input →
+  ← message   ("Welcome, {{PRINCIPAL_NAME}}!")
+                                 
+  ← choice_request   ("Install Pulse?")
+   user_choice →
+  ← progress   (Pulse install: 40%)
+  ← step_update   (pulse → completed)
+                                 
+  ← validation_result   (all checks)
+  ← install_complete   (summary card)
 ```
 
 ---
@@ -217,16 +217,16 @@ This ensures fresh installs get the full PAI configuration without the installer
 
 ```
 ~/.claude/
-├── settings.json
-├── hooks/
-├── skills/
-├── MEMORY/
-│   ├── WORK/
-│   ├── STATE/
-│   ├── LEARNING/
-│   └── RELATIONSHIP/
-├── Plans/
-└── Projects/
+ settings.json
+ hooks/
+ skills/
+ MEMORY/
+    WORK/
+    STATE/
+    LEARNING/
+    RELATIONSHIP/
+ Plans/
+ Projects/
 ```
 
 ### Banner and Counts

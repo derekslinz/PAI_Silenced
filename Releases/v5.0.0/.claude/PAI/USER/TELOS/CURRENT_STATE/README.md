@@ -1,6 +1,6 @@
 # Current State
 
-> 🎯 SAMPLE TEMPLATE — This directory ships empty except for this README. The files you'll create here describe where you ARE right now across the dimensions of your life. Run `/interview` (or talk to your DA) to populate them. Pulse will surface your current state here once it exists.
+>  SAMPLE TEMPLATE — This directory ships empty except for this README. The files you'll create here describe where you ARE right now across the dimensions of your life. Run `/interview` (or talk to your DA) to populate them. Pulse will surface your current state here once it exists.
 
 ## Purpose
 

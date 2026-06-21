@@ -1,6 +1,6 @@
 # SAMPLE_CUSTOMER
 
-> 💼 SAMPLE TEMPLATE — Rename this directory to your actual customer name (e.g. `AcmeCorp/`, `BigCo/`) and populate it via /interview or by editing these files.
+>  SAMPLE TEMPLATE — Rename this directory to your actual customer name (e.g. `AcmeCorp/`, `BigCo/`) and populate it via /interview or by editing these files.
 
 This is a stub for a single customer engagement. Create one directory like this per active or past customer.
 

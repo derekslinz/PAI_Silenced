@@ -173,40 +173,40 @@ Pattern Selection Decision Tree
 
 ```
 User Request
-    │
-    ├─ Contains "wisdom" or "insights"?
-    │   └─ Yes → extract_wisdom / extract_insights
-    │
-    ├─ Contains "summarize" or "summary"?
-    │   ├─ "sentence" → create__sentence_summary
-    │   ├─ "micro" or "tldr" → create_micro_summary
-    │   └─ Default → summarize
-    │   (auto-harvest side-effect: any summarize-family pattern with a URL or
-    │    text ≥chars also fires `~/.claude/skills/_HARVEST/Tools/harvest.ts`
-    │    in the background — see Step b)    │
-    ├─ Contains "threat model"?
-    │   ├─ "stride" → create_stride_threat_model
-    │   └─ Default → create_threat_model
-    │
-    ├─ Contains "analyze"?
-    │   ├─ "claims" → analyze_claims
-    │   ├─ "code" → analyze_code
-    │   ├─ "malware" → analyze_malware
-    │   ├─ "paper" → analyze_paper
-    │   └─ Match keyword → analyze_[keyword]
-    │
-    ├─ Contains "improve"?
-    │   ├─ "writing" → improve_writing
-    │   ├─ "prompt" → improve_prompt
-    │   └─ Default → improve_writing
-    │
-    ├─ Contains "create"?
-    │   ├─ "prd" → create_prd
-    │   ├─ "mermaid" / "diagram" → create_mermaid_visualization
-    │   └─ Match keyword → create_[keyword]
-    │
-    └─ Pattern explicitly named?
-        └─ Use that pattern directly
+    
+     Contains "wisdom" or "insights"?
+        Yes → extract_wisdom / extract_insights
+    
+     Contains "summarize" or "summary"?
+        "sentence" → create__sentence_summary
+        "micro" or "tldr" → create_micro_summary
+        Default → summarize
+       (auto-harvest side-effect: any summarize-family pattern with a URL or
+        text ≥chars also fires `~/.claude/skills/_HARVEST/Tools/harvest.ts`
+        in the background — see Step b)    
+     Contains "threat model"?
+        "stride" → create_stride_threat_model
+        Default → create_threat_model
+    
+     Contains "analyze"?
+        "claims" → analyze_claims
+        "code" → analyze_code
+        "malware" → analyze_malware
+        "paper" → analyze_paper
+        Match keyword → analyze_[keyword]
+    
+     Contains "improve"?
+        "writing" → improve_writing
+        "prompt" → improve_prompt
+        Default → improve_writing
+    
+     Contains "create"?
+        "prd" → create_prd
+        "mermaid" / "diagram" → create_mermaid_visualization
+        Match keyword → create_[keyword]
+    
+     Pattern explicitly named?
+         Use that pattern directly
 ```
 
 ---

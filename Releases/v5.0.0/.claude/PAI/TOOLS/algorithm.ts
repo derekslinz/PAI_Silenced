@@ -52,7 +52,7 @@ import { spawnSync, spawn } from "child_process";
 import { randomUUID } from "crypto";
 import { generateISATemplate } from "../../../.claude/hooks/lib/isa-template";
 
-// ─── Paths ───────────────────────────────────────────────────────────────────
+//  Paths 
 
 const HOME = process.env.HOME || "~";
 const BASE_DIR = process.env.PAI_DIR || join(HOME, ".claude");
@@ -60,7 +60,7 @@ const ALGORITHMS_DIR = join(BASE_DIR, "MEMORY", "STATE", "algorithms");
 const SESSION_NAMES_PATH = join(BASE_DIR, "MEMORY", "STATE", "session-names.json");
 const PROJECTS_DIR = process.env.PROJECTS_DIR || join(HOME, "Projects");
 
-// ─── Types ──────────────────────────────────────────────────────────────────
+//  Types 
 
 interface ISAFrontmatter {
   isa: boolean;
@@ -147,7 +147,7 @@ interface LoopAlgorithmState {
   };
 }
 
-// ─── Parameter System ────────────────────────────────────────────────────────
+//  Parameter System 
 
 const IDEATE_DEFAULTS: Record<string, number> = {
   problemConnection: 0.5,
@@ -239,7 +239,7 @@ function resolveParameters(
   return params;
 }
 
-// ─── CLI Argument Parsing ────────────────────────────────────────────────────
+//  CLI Argument Parsing 
 
 interface ParsedArgs {
   subcommand: string | null;    // status, pause, resume, stop, new, or null (= run)
@@ -380,7 +380,7 @@ Examples:
 `);
 }
 
-// ─── Algorithm State Integration ─────────────────────────────────────────────
+//  Algorithm State Integration 
 
 function ensureAlgorithmsDir(): void {
   if (!existsSync(ALGORITHMS_DIR)) mkdirSync(ALGORITHMS_DIR, { recursive: true });
@@ -402,7 +402,7 @@ function writeAlgorithmState(state: LoopAlgorithmState): void {
   writeFileSync(join(ALGORITHMS_DIR, `${state.sessionId}.json`), JSON.stringify(state, null, 2));
 }
 
-// ─── Session Names ───────────────────────────────────────────────────────────
+//  Session Names 
 
 function readSessionNames(): Record<string, string> {
   try {
@@ -425,21 +425,21 @@ function removeSessionName(sessionId: string): void {
   writeFileSync(SESSION_NAMES_PATH, JSON.stringify(names, null, 2));
 }
 
-// ─── Progress Notifications (text) ───────────────────────────────────────────
+//  Progress Notifications (text) 
 // Progress is reported as text to stderr so the Algorithm loop surfaces status.
 
 function statusNotify(message: string): void {
   console.error(`[algorithm] ${message}`);
 }
 
-// ─── ISA Title Extraction ────────────────────────────────────────────────────
+//  ISA Title Extraction 
 
 function extractISATitle(content: string): string {
   const match = content.match(/^#\s+(.+)$/m);
   return match ? match[1].trim() : "Untitled ISA";
 }
 
-// ─── ISA Frontmatter Parsing ────────────────────────────────────────────────
+//  ISA Frontmatter Parsing 
 
 function readISA(path: string): { frontmatter: ISAFrontmatter; content: string; raw: string } {
   const raw = readFileSync(path, "utf-8");
@@ -510,7 +510,7 @@ function updateFrontmatter(path: string, updates: Record<string, unknown>): void
   writeFileSync(path, `---\n${yamlBlock}\n---\n${content}`);
 }
 
-// ─── Criteria Counting & Parsing ─────────────────────────────────────────────
+//  Criteria Counting & Parsing 
 
 function countCriteria(content: string): CriteriaInfo {
   const criteria: CriteriaInfo["criteria"] = [];
@@ -542,7 +542,7 @@ function countCriteria(content: string): CriteriaInfo {
   return { total: criteria.length, passing, failing, failingIds, criteria };
 }
 
-// ─── Dashboard State Sync ────────────────────────────────────────────────────
+//  Dashboard State Sync 
 
 function syncCriteriaToState(state: LoopAlgorithmState, criteriaInfo: CriteriaInfo): void {
   state.criteria = criteriaInfo.criteria.map(c => ({
@@ -627,7 +627,7 @@ function finalizeLoopState(
   }
 }
 
-// ─── Iteration Prompt (Loop Mode) ────────────────────────────────────────────
+//  Iteration Prompt (Loop Mode) 
 
 function buildIterationPrompt(isaPath: string, iteration: number, maxIterations: number): string {
   let mode = "loop";
@@ -700,7 +700,7 @@ Instructions:
 10. Focus on SAFE INCREMENTS — make 1-3 criteria pass, verify everything, move on.`;
 }
 
-// ─── Domain-Aware Criteria Partitioning ──────────────────────────────────────
+//  Domain-Aware Criteria Partitioning 
 
 interface AgentAssignment {
   agentId: number;
@@ -756,7 +756,7 @@ function partitionCriteria(criteriaInfo: CriteriaInfo, agentCount: number): Agen
   return agents.filter(a => a.criteriaIds.length > 0);
 }
 
-// ─── Parallel Agent Prompt ──────────────────────────────────────────────────
+//  Parallel Agent Prompt 
 
 function buildWorkerPrompt(
   isaPath: string,
@@ -808,7 +808,7 @@ YOUR WORKFLOW:
 8. That's it. Exit when done.`;
 }
 
-// ─── Parallel Iteration Runner ──────────────────────────────────────────────
+//  Parallel Iteration Runner 
 
 async function runParallelIteration(
   isaPath: string,
@@ -845,7 +845,7 @@ async function runParallelIteration(
   );
 
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(0);
-  console.log(`\x1b[90m  ⏱ Agents finished in ${elapsed}s\x1b[0m`);
+  console.log(`\x1b[90m   Agents finished in ${elapsed}s\x1b[0m`);
   console.log("");
 
   // Parse agent stdout for RESULT lines — agents report pass/fail via stdout only
@@ -886,7 +886,7 @@ async function runParallelIteration(
     updated: new Date().toISOString().split("T")[0],
   });
 
-  // ── Per-agent results ──
+  //  Per-agent results 
   console.log(`  \x1b[1mAgent Results:\x1b[0m`);
   for (const { assignment, exitCode } of results) {
     const cId = assignment.criteriaIds[0];
@@ -895,29 +895,29 @@ async function runParallelIteration(
     const criterion = postCriteria.criteria.find(c => c.id === cId);
     const passed = criterion?.status === "passing";
     if (exitCode !== 0) {
-      console.log(`  \x1b[31m  Agent ${assignment.agentId} ✗ CRASHED\x1b[0m  ${cId}: ${desc}`);
+      console.log(`  \x1b[31m  Agent ${assignment.agentId}  CRASHED\x1b[0m  ${cId}: ${desc}`);
     } else if (passed) {
-      console.log(`  \x1b[32m  Agent ${assignment.agentId} ✓ PASS\x1b[0m    ${cId}: ${desc}`);
+      console.log(`  \x1b[32m  Agent ${assignment.agentId}  PASS\x1b[0m    ${cId}: ${desc}`);
     } else {
-      console.log(`  \x1b[33m  Agent ${assignment.agentId} ✗ FAIL\x1b[0m    ${cId}: ${desc}`);
+      console.log(`  \x1b[33m  Agent ${assignment.agentId}  FAIL\x1b[0m    ${cId}: ${desc}`);
     }
   }
   console.log("");
 
-  // ── Full criteria scoreboard ──
-  console.log(`  \x1b[90m── Criteria Scoreboard ──────────────────────────────────────\x1b[0m`);
+  //  Full criteria scoreboard 
+  console.log(`  \x1b[90m Criteria Scoreboard \x1b[0m`);
   for (const c of postCriteria.criteria) {
-    const icon = c.status === "passing" ? "\x1b[32m✓\x1b[0m" : "\x1b[90m·\x1b[0m";
+    const icon = c.status === "passing" ? "\x1b[32m\x1b[0m" : "\x1b[90m·\x1b[0m";
     const idPad = c.id.padEnd(14);
     const desc = c.description.length > 50 ? c.description.slice(0, 47) + "..." : c.description;
     console.log(`  ${icon} ${idPad} ${desc}`);
   }
   const pct = postCriteria.total > 0 ? Math.round((postCriteria.passing / postCriteria.total) * 100) : 0;
-  console.log(`  \x1b[90m── ${postCriteria.passing}/${postCriteria.total} passing (${pct}%) ────────────────────────────────────\x1b[0m`);
+  console.log(`  \x1b[90m ${postCriteria.passing}/${postCriteria.total} passing (${pct}%) \x1b[0m`);
   console.log("");
 }
 
-// ─── Interactive Prompt ──────────────────────────────────────────────────────
+//  Interactive Prompt 
 
 function buildInteractivePrompt(isaPath: string): string {
   let title = "ISA";
@@ -946,7 +946,7 @@ Failing: ${failingList}
 Read the ISA, understand the IDEAL STATE CRITERIA, and make progress on the failing criteria. Update the ISA as you complete work.`;
 }
 
-// ─── Ideate Prompt ───────────────────────────────────────────────────────────
+//  Ideate Prompt 
 
 function buildIdeatePrompt(
   isaPath: string,
@@ -982,7 +982,7 @@ The parameters above define how creative vs. focused your ideation should be, ho
 select, and how much to mutate between cycles. Follow the ideate-loop protocol.`;
 }
 
-// ─── CHANGELOG Append ────────────────────────────────────────────────────────
+//  CHANGELOG Append 
 
 function appendISAChangelog(
   isaPath: string,
@@ -1053,7 +1053,7 @@ function detectPlateau(loopHistory: Array<{ criteriaPassing: number }>, window: 
   return recent.every(h => h.criteriaPassing === baseline);
 }
 
-// ─── Core Loop Mode ─────────────────────────────────────────────────────────
+//  Core Loop Mode 
 
 async function runLoop(isaPath: string, maxOverride?: number, agentCount: number = 1): Promise<void> {
   const absPath = resolve(isaPath);
@@ -1078,7 +1078,7 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
     process.exit(1);
   }
 
-  // ── Dashboard: Create loop session ──
+  //  Dashboard: Create loop session 
   const loopSessionId = randomUUID();
   const initialCriteria = countCriteria(content);
   const state = createLoopState(loopSessionId, absPath, frontmatter.id, isaTitle, max, initialCriteria, effortLevel, agentCount);
@@ -1087,7 +1087,7 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
   const sessionNameSuffix = agentCount > 1 ? ` (${agentCount} agents)` : "";
   writeSessionName(loopSessionId, `Loop: ${isaTitle}${sessionNameSuffix}`);
 
-  // ── Status: Loop starting ──
+  //  Status: Loop starting 
   const agentMsg = agentCount > 1 ? ` ${agentCount} parallel agents.` : "";
   statusNotify(`Starting loop on ${isaTitle}. ${initialCriteria.total} criteria, ${initialCriteria.passing} already passing.${agentMsg}`);
 
@@ -1100,21 +1100,21 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
   const bar = (p: number, t: number, w: number = 20) => {
     const pct = t > 0 ? p / t : 0;
     const filled = Math.round(pct * w);
-    return `${"█".repeat(filled)}${"░".repeat(w - filled)} ${Math.round(pct * 100)}%`;
+    return `${"".repeat(filled)}${"".repeat(w - filled)} ${Math.round(pct * 100)}%`;
   };
 
   console.log("");
-  console.log(`\x1b[36m╔${"═".repeat(66)}╗\x1b[0m`);
-  console.log(`\x1b[36m║\x1b[0m  \x1b[1mTHE ALGORITHM\x1b[0m — Loop Mode${" ".repeat(40)}\x1b[36m║\x1b[0m`);
-  console.log(`\x1b[36m╠${"═".repeat(66)}╣\x1b[0m`);
-  console.log(`\x1b[36m║\x1b[0m  ISA:       ${frontmatter.id.padEnd(53)}\x1b[36m║\x1b[0m`);
-  console.log(`\x1b[36m║\x1b[0m  Title:     ${isaTitle.slice(0, 53).padEnd(53)}\x1b[36m║\x1b[0m`);
-  console.log(`\x1b[36m║\x1b[0m  Session:   ${loopSessionId.slice(0, 8).padEnd(53)}\x1b[36m║\x1b[0m`);
+  console.log(`\x1b[36m${"".repeat(66)}\x1b[0m`);
+  console.log(`\x1b[36m\x1b[0m  \x1b[1mTHE ALGORITHM\x1b[0m — Loop Mode${" ".repeat(40)}\x1b[36m\x1b[0m`);
+  console.log(`\x1b[36m${"".repeat(66)}\x1b[0m`);
+  console.log(`\x1b[36m\x1b[0m  ISA:       ${frontmatter.id.padEnd(53)}\x1b[36m\x1b[0m`);
+  console.log(`\x1b[36m\x1b[0m  Title:     ${isaTitle.slice(0, 53).padEnd(53)}\x1b[36m\x1b[0m`);
+  console.log(`\x1b[36m\x1b[0m  Session:   ${loopSessionId.slice(0, 8).padEnd(53)}\x1b[36m\x1b[0m`);
   const configLine = `Max iterations: ${max}${agentCount > 1 ? ` | Agents: ${agentCount}` : ""}`;
-  console.log(`\x1b[36m║\x1b[0m  ${configLine.padEnd(64)}\x1b[36m║\x1b[0m`);
+  console.log(`\x1b[36m\x1b[0m  ${configLine.padEnd(64)}\x1b[36m\x1b[0m`);
   const progressLine = `Progress: ${initialCriteria.passing}/${initialCriteria.total} ${bar(initialCriteria.passing, initialCriteria.total)}`;
-  console.log(`\x1b[36m║\x1b[0m  ${progressLine.padEnd(64)}\x1b[36m║\x1b[0m`);
-  console.log(`\x1b[36m╚${"═".repeat(66)}╝\x1b[0m`);
+  console.log(`\x1b[36m\x1b[0m  ${progressLine.padEnd(64)}\x1b[36m\x1b[0m`);
+  console.log(`\x1b[36m${"".repeat(66)}\x1b[0m`);
   console.log("");
 
   // Main loop
@@ -1124,7 +1124,7 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
     frontmatter = isa.frontmatter;
     const criteria = countCriteria(isa.content);
 
-    // ── Exit: COMPLETE ──
+    //  Exit: COMPLETE 
     if (frontmatter.status === "COMPLETE") {
       updateFrontmatter(absPath, { loopStatus: "completed" });
       finalizeLoopState(state, "completed", criteria);
@@ -1134,18 +1134,18 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
       statusNotify(`Loop complete! All ${criteria.total} criteria passing after ${frontmatter.iteration} iterations.`);
 
       console.log("");
-      console.log(`\x1b[32m╔${"═".repeat(66)}╗\x1b[0m`);
-      console.log(`\x1b[32m║\x1b[0m  \x1b[1m\x1b[32m✓ THE ALGORITHM — COMPLETE\x1b[0m${" ".repeat(40)}\x1b[32m║\x1b[0m`);
-      console.log(`\x1b[32m╠${"═".repeat(66)}╣\x1b[0m`);
-      console.log(`\x1b[32m║\x1b[0m  ISA:        ${(frontmatter.id || "").padEnd(52)}\x1b[32m║\x1b[0m`);
-      console.log(`\x1b[32m║\x1b[0m  Iterations: ${String(frontmatter.iteration).padEnd(52)}\x1b[32m║\x1b[0m`);
-      console.log(`\x1b[32m║\x1b[0m  Criteria:   ${`${criteria.passing}/${criteria.total} ${bar(criteria.passing, criteria.total)}`.padEnd(52)}\x1b[32m║\x1b[0m`);
-      console.log(`\x1b[32m║\x1b[0m  Time:       ${`${totalTime}s`.padEnd(52)}\x1b[32m║\x1b[0m`);
-      console.log(`\x1b[32m╚${"═".repeat(66)}╝\x1b[0m`);
+      console.log(`\x1b[32m${"".repeat(66)}\x1b[0m`);
+      console.log(`\x1b[32m\x1b[0m  \x1b[1m\x1b[32m THE ALGORITHM — COMPLETE\x1b[0m${" ".repeat(40)}\x1b[32m\x1b[0m`);
+      console.log(`\x1b[32m${"".repeat(66)}\x1b[0m`);
+      console.log(`\x1b[32m\x1b[0m  ISA:        ${(frontmatter.id || "").padEnd(52)}\x1b[32m\x1b[0m`);
+      console.log(`\x1b[32m\x1b[0m  Iterations: ${String(frontmatter.iteration).padEnd(52)}\x1b[32m\x1b[0m`);
+      console.log(`\x1b[32m\x1b[0m  Criteria:   ${`${criteria.passing}/${criteria.total} ${bar(criteria.passing, criteria.total)}`.padEnd(52)}\x1b[32m\x1b[0m`);
+      console.log(`\x1b[32m\x1b[0m  Time:       ${`${totalTime}s`.padEnd(52)}\x1b[32m\x1b[0m`);
+      console.log(`\x1b[32m${"".repeat(66)}\x1b[0m`);
       return;
     }
 
-    // ── Exit: BLOCKED ──
+    //  Exit: BLOCKED 
     if (frontmatter.status === "BLOCKED") {
       updateFrontmatter(absPath, { loopStatus: "completed" });
       finalizeLoopState(state, "blocked", criteria);
@@ -1160,7 +1160,7 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
       return;
     }
 
-    // ── Exit: Max iterations ──
+    //  Exit: Max iterations 
     if (frontmatter.iteration >= max) {
       updateFrontmatter(absPath, { loopStatus: "failed" });
       finalizeLoopState(state, "failed", criteria);
@@ -1175,7 +1175,7 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
       return;
     }
 
-    // ── Exit: Paused externally ──
+    //  Exit: Paused externally 
     if (frontmatter.loopStatus === "paused") {
       finalizeLoopState(state, "paused", criteria);
       // Keep active=true for paused so dashboard shows it's resumable
@@ -1192,7 +1192,7 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
       return;
     }
 
-    // ── Exit: Stopped externally ──
+    //  Exit: Stopped externally 
     if (frontmatter.loopStatus === "stopped") {
       finalizeLoopState(state, "stopped", criteria);
       writeAlgorithmState(state);
@@ -1204,7 +1204,7 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
       return;
     }
 
-    // ── Run iteration ──
+    //  Run iteration 
     const newIteration = frontmatter.iteration + 1;
     const iterStartTime = Date.now();
 
@@ -1230,7 +1230,7 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
     const iterSessionSuffix = agentCount > 1 ? ` (${agentCount} agents)` : "";
     writeSessionName(loopSessionId, `Loop: ${isaTitle} [${criteria.passing}/${criteria.total} iter ${newIteration}]${iterSessionSuffix}`);
 
-    console.log(`\x1b[36m━━━ Iteration ${newIteration}/${max} ${"━".repeat(Math.max(0, 50 - String(newIteration).length - String(max).length))}\x1b[0m`);
+    console.log(`\x1b[36m Iteration ${newIteration}/${max} ${"".repeat(Math.max(0, 50 - String(newIteration).length - String(max).length))}\x1b[0m`);
     console.log(`  Progress: ${criteria.passing}/${criteria.total} ${bar(criteria.passing, criteria.total)} | Failing: ${criteria.failing}`);
     if (agentCount > 1) {
       const effectiveAgents = Math.min(agentCount, criteria.failing);
@@ -1238,7 +1238,7 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
     }
     console.log("");
 
-    // ── Parallel path: multiple agents ──
+    //  Parallel path: multiple agents 
     if (agentCount > 1 && criteria.failing > 1) {
       const assignments = partitionCriteria(criteria, agentCount);
 
@@ -1249,7 +1249,7 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
         console.log(`  \x1b[33mAgent ${a.agentId}\x1b[0m → ${detail.id}: ${desc}`);
       }
       console.log("");
-      console.log(`  \x1b[90m⏳ ${assignments.length} agents working...\x1b[0m`);
+      console.log(`  \x1b[90m ${assignments.length} agents working...\x1b[0m`);
 
       // Run parallel iteration (async)
       await runParallelIteration(absPath, assignments, newIteration);
@@ -1302,7 +1302,7 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
       continue;
     }
 
-    // ── Sequential path: single agent (existing behavior) ──
+    //  Sequential path: single agent (existing behavior) 
     const prompt = buildIterationPrompt(absPath, newIteration, max);
 
     const result = spawnSync("claude", [
@@ -1396,7 +1396,7 @@ async function runLoop(isaPath: string, maxOverride?: number, agentCount: number
   }
 }
 
-// ─── Interactive Mode ────────────────────────────────────────────────────────
+//  Interactive Mode 
 
 function runInteractive(isaPath: string): void {
   const absPath = resolve(isaPath);
@@ -1440,7 +1440,7 @@ function runInteractive(isaPath: string): void {
   });
 }
 
-// ─── Ideate Mode ─────────────────────────────────────────────────────────────
+//  Ideate Mode 
 
 function runIdeate(
   isaPath: string,
@@ -1505,7 +1505,7 @@ function runIdeate(
   });
 }
 
-// ─── ISA Creation ───────────────────────────────────────────────────────────
+//  ISA Creation 
 
 function createNewISA(title: string, effortLevel: string = "Standard", outputDir?: string): string {
   const slug = title
@@ -1546,7 +1546,7 @@ function createNewISA(title: string, effortLevel: string = "Standard", outputDir
   return fullPath;
 }
 
-// ─── ISA Discovery ──────────────────────────────────────────────────────────
+//  ISA Discovery 
 
 function findAllISAs(): string[] {
   const files: string[] = [];
@@ -1610,7 +1610,7 @@ function findAllISAs(): string[] {
   return files;
 }
 
-// ─── Status Command ─────────────────────────────────────────────────────────
+//  Status Command 
 
 function showStatus(specificPath?: string): void {
   if (specificPath) {
@@ -1663,10 +1663,10 @@ function buildProgressBar(passing: number, total: number): string {
   const width = 10;
   const filled = Math.round((passing / total) * width);
   const empty = width - filled;
-  return `[\x1b[32m${"█".repeat(filled)}\x1b[90m${"░".repeat(empty)}\x1b[0m]`;
+  return `[\x1b[32m${"".repeat(filled)}\x1b[90m${"".repeat(empty)}\x1b[0m]`;
 }
 
-// ─── Pause / Resume / Stop ──────────────────────────────────────────────────
+//  Pause / Resume / Stop 
 
 function pauseLoop(isaPath: string): void {
   const absPath = resolve(isaPath);
@@ -1702,7 +1702,7 @@ function stopLoop(isaPath: string): void {
   console.log(`\x1b[31m\u25A0 Stopped\x1b[0m Loop on ${frontmatter.id}`);
 }
 
-// ─── ISA Path Resolution ────────────────────────────────────────────────────
+//  ISA Path Resolution 
 
 function resolveISAPath(input: string): string {
   // If it's already a path, use it
@@ -1724,7 +1724,7 @@ function resolveISAPath(input: string): string {
   process.exit(1);
 }
 
-// ─── Main ────────────────────────────────────────────────────────────────────
+//  Main 
 
 const parsed = parseArgs(process.argv);
 
@@ -1742,7 +1742,7 @@ if (parsed.subcommand) {
         process.exit(1);
       }
       const isaPath = createNewISA(parsed.title, parsed.effortLevel || "Standard", isaRef || undefined);
-      console.log(`\x1b[32m✓\x1b[0m Created ISA: ${isaPath}`);
+      console.log(`\x1b[32m\x1b[0m Created ISA: ${isaPath}`);
       console.log(`\n  Run with:  algorithm -m interactive -p ${isaPath}`);
       console.log(`  Or loop:   algorithm -m loop -p ${isaPath} -n 20`);
       break;

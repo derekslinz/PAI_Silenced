@@ -19,7 +19,7 @@ import { handleWsMessage, addClient, removeClient } from "./routes";
 const PORT = parseInt(process.env.PAI_INSTALL_PORT || "1337");
 const PUBLIC_DIR = join(import.meta.dir, "..", "public");
 
-// ─── MIME Types ──────────────────────────────────────────────────
+//  MIME Types 
 
 const MIME_TYPES: Record<string, string> = {
   ".html": "text/html",
@@ -36,7 +36,7 @@ const MIME_TYPES: Record<string, string> = {
   ".ico": "image/x-icon",
 };
 
-// ─── Inactivity Timeout ──────────────────────────────────────────
+//  Inactivity Timeout 
 
 const INACTIVITY_MS = 30 * 60 * 1000; // 30 minutes
 let inactivityTimer: Timer | null = null;
@@ -49,7 +49,7 @@ function resetInactivity(): void {
   }, INACTIVITY_MS);
 }
 
-// ─── Server ──────────────────────────────────────────────────────
+//  Server 
 
 const server = Bun.serve({
   port: PORT,

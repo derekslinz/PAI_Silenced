@@ -349,43 +349,43 @@ The -point sequence should:
 Execution Checklist
 
 ```
-□ PHASE : Decomposition
-  □ Invoke FirstPrinciples/Deconstruct on the argument (NEW)
-  □ Read and understand the full argument
-  □ Extract central thesis
-  □ Identify supporting claims
-  □ Surface hidden assumptions
-  □ Break into exactly atomic claims
+ PHASE : Decomposition
+   Invoke FirstPrinciples/Deconstruct on the argument (NEW)
+   Read and understand the full argument
+   Extract central thesis
+   Identify supporting claims
+   Surface hidden assumptions
+   Break into exactly atomic claims
 
-□ PHASE : Parallel Analysis
-  □ Prepare agent prompts with unique personalities
-  □ Launch ALL agents in a SINGLE message (parallel)
-  □ Each agent: engineer, architect, pentester, or intern type
-  □ Each agent examines BOTH strengths AND weaknesses
-  □ Wait for all agents to complete
+ PHASE : Parallel Analysis
+   Prepare agent prompts with unique personalities
+   Launch ALL agents in a SINGLE message (parallel)
+   Each agent: engineer, architect, pentester, or intern type
+   Each agent examines BOTH strengths AND weaknesses
+   Wait for all agents to complete
 
-□ PHASE : Synthesis
-  □ Collect all analyses
-  □ Identify convergent STRENGTHS (+ agents = strong foundation)
-  □ Identify convergent WEAKNESSES (+ agents = critical weakness)
-  □ Categorize by type
-  □ Determine core thesis validity
+ PHASE : Synthesis
+   Collect all analyses
+   Identify convergent STRENGTHS (+ agents = strong foundation)
+   Identify convergent WEAKNESSES (+ agents = critical weakness)
+   Categorize by type
+   Determine core thesis validity
 
-□ PHASE : Steelman
-  □ Identify best supporting evidence from synthesis
-  □ Reconstruct optimal version of the argument
-  □ Draft -point steelman explanation
-  □ Each point: -words
-  □ Present the STRONGEST case FOR the argument
+ PHASE : Steelman
+   Identify best supporting evidence from synthesis
+   Reconstruct optimal version of the argument
+   Draft -point steelman explanation
+   Each point: -words
+   Present the STRONGEST case FOR the argument
 
-□ PHASE : Counter-Argument
-  □ Invoke FirstPrinciples/Challenge on all constraints (NEW)
-  □ Classify constraints as HARD/SOFT/ASSUMPTION
-  □ Apply first-principles analysis (claim type, assumptions, precedent, validity)
-  □ Draft -point counter-argument
-  □ Each point: -words
-  □ Verify logical flow and escalation
-  □ End with knockout conclusion that addresses the steelman
+ PHASE : Counter-Argument
+   Invoke FirstPrinciples/Challenge on all constraints (NEW)
+   Classify constraints as HARD/SOFT/ASSUMPTION
+   Apply first-principles analysis (claim type, assumptions, precedent, validity)
+   Draft -point counter-argument
+   Each point: -words
+   Verify logical flow and escalation
+   End with knockout conclusion that addresses the steelman
 ```
 
 ---

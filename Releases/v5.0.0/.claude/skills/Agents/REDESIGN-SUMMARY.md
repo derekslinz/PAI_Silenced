@@ -26,14 +26,14 @@ New Files Created
 
 ```
 ~/.claude/skills/Agents/
-├── ArchitectContext.md      NEW - Simple reference file
-├── EngineerContext.md        NEW - Simple reference file
-├── DesignerContext.md        NEW - Simple reference file
-├── ArtistContext.md          NEW - Simple reference file
-├── QATesterContext.md        NEW - Simple reference file
-├── AgentProfileSystem.md     UPDATED - New simplified docs
-└── Tools/
-    └── LoadAgentContext.ts   NEW - Simple loader utility
+ ArchitectContext.md      NEW - Simple reference file
+ EngineerContext.md        NEW - Simple reference file
+ DesignerContext.md        NEW - Simple reference file
+ ArtistContext.md          NEW - Simple reference file
+ QATesterContext.md        NEW - Simple reference file
+ AgentProfileSystem.md     UPDATED - New simplified docs
+ Tools/
+     LoadAgentContext.ts   NEW - Simple loader utility
 ```
 
 ---

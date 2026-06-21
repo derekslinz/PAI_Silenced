@@ -13,16 +13,16 @@ Data Flow
 
 ```
 . UpdateData workflow (run first)
-   └── Fetches from FRED, EIA, Treasury APIs
-   └── Writes to Substrate files:
+    Fetches from FRED, EIA, Treasury APIs
+    Writes to Substrate files:
        - US-Common-Metrics.md
        - us-metrics-current.csv
        - us-metrics-historical.csv
 
 . GetCurrentState workflow (this)
-   └── Reads from Substrate files
-   └── Calculates trends from historical data
-   └── Generates analysis report
+    Reads from Substrate files
+    Calculates trends from historical data
+    Generates analysis report
 ```
 
 Execution Steps
@@ -91,12 +91,12 @@ Trend Direction:- Rising (↑), Falling (↓), Stable (→)
 
 Example Output:```
 Unemployment Rate (UNRATE)
-├── Current: .% (Nov )
-├── -Year: .% → .% (-.pp, ↓ trend)
-├── -Year: .% → .% (+.pp, ↑ from pre-COVID low)
-├── -Year: .% → .% (+.pp, gradual rise)
-├── -Year: .% → .% (+.pp, slight increase)
-└── Assessment: Gradually rising from -year lows, still historically low
+ Current: .% (Nov )
+ -Year: .% → .% (-.pp, ↓ trend)
+ -Year: .% → .% (+.pp, ↑ from pre-COVID low)
+ -Year: .% → .% (+.pp, gradual rise)
+ -Year: .% → .% (+.pp, slight increase)
+ Assessment: Gradually rising from -year lows, still historically low
 ```
 
 Step : Cross-Category Analysis

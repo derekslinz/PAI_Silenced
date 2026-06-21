@@ -50,23 +50,23 @@ Running the WorkflowNameworkflow in the FirstPrinciplesskill to ACTION...
 The -Step Framework
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  STEP : DECONSTRUCT                                    │
-│  "What is this really made of?"                         │
-│  Break down to constituent parts and fundamental truths │
-└─────────────────────────────────────────────────────────┘
+
+  STEP : DECONSTRUCT                                    
+  "What is this really made of?"                         
+  Break down to constituent parts and fundamental truths 
+
                           ↓
-┌─────────────────────────────────────────────────────────┐
-│  STEP : CHALLENGE                                      │
-│  "Is this a real constraint or an assumption?"          │
-│  Classify each element as hard/soft constraint          │
-└─────────────────────────────────────────────────────────┘
+
+  STEP : CHALLENGE                                      
+  "Is this a real constraint or an assumption?"          
+  Classify each element as hard/soft constraint          
+
                           ↓
-┌─────────────────────────────────────────────────────────┐
-│  STEP : RECONSTRUCT                                    │
-│  "Given only the truths, what's optimal?"               │
-│  Build new solution from fundamentals, ignoring form    │
-└─────────────────────────────────────────────────────────┘
+
+  STEP : RECONSTRUCT                                    
+  "Given only the truths, what's optimal?"               
+  Build new solution from fundamentals, ignoring form    
+
 ```
 
 Key Questions

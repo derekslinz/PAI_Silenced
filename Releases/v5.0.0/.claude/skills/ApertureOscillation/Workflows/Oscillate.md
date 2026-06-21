@@ -48,22 +48,22 @@ Focus on:
 - What a good implementation looks like in isolation
 
 ```
-┌─────────────────────────────────────────────┐
-│ PASS /— NARROW APERTURE (Tactical)   │
-│                                              │
-│ Framing: "[tactical target] is primary.      │
-│ [strategic context] is background."          │
-│                                              │
-│ Component Logic:                             │
-│ - [What this thing naturally wants to be]    │
-│ - [Local patterns and conventions]           │
-│ - [Natural interfaces and boundaries]        │
-│                                              │
-│ Tactical Findings:                           │
-│ - [Finding ]                                │
-│ - [Finding ]                                │
-│ - [Finding ]                                │
-└─────────────────────────────────────────────┘
+
+ PASS /— NARROW APERTURE (Tactical)   
+                                              
+ Framing: "[tactical target] is primary.      
+ [strategic context] is background."          
+                                              
+ Component Logic:                             
+ - [What this thing naturally wants to be]    
+ - [Local patterns and conventions]           
+ - [Natural interfaces and boundaries]        
+                                              
+ Tactical Findings:                           
+ - [Finding ]                                
+ - [Finding ]                                
+ - [Finding ]                                
+
 ```
 
 Step : Pass — Wide Aperture (Strategic-First)
@@ -79,22 +79,22 @@ Focus on:
 - What gets prioritized differently when the system vision leads
 
 ```
-┌─────────────────────────────────────────────┐
-│ PASS /— WIDE APERTURE (Strategic)    │
-│                                              │
-│ Framing: "[strategic context] is primary.    │
-│ [tactical target] is derived."              │
-│                                              │
-│ System Requirements:                         │
-│ - [What the system needs from this piece]    │
-│ - [Coherence constraints]                    │
-│ - [Alignment demands]                        │
-│                                              │
-│ Strategic Findings:                          │
-│ - [Finding ]                                │
-│ - [Finding ]                                │
-│ - [Finding ]                                │
-└─────────────────────────────────────────────┘
+
+ PASS /— WIDE APERTURE (Strategic)    
+                                              
+ Framing: "[strategic context] is primary.    
+ [tactical target] is derived."              
+                                              
+ System Requirements:                         
+ - [What the system needs from this piece]    
+ - [Coherence constraints]                    
+ - [Alignment demands]                        
+                                              
+ Strategic Findings:                          
+ - [Finding ]                                
+ - [Finding ]                                
+ - [Finding ]                                
+
 ```
 
 Step : Pass — Oscillation (Synthesis)
@@ -110,21 +110,21 @@ Focus on:
 - Recommended resolution for each tension
 
 ```
-┌─────────────────────────────────────────────┐
-│ PASS /— OSCILLATION (Synthesis)       │
-│                                              │
-│ Divergences Found:                           │
-│ - [Where tactical and strategic disagree]    │
-│ - [What narrow aperture missed]              │
-│ - [What wide aperture missed]                │
-│                                              │
-│ Design Tensions:                             │
-│ [Tension : description + resolution]     │
-│ [Tension : description + resolution]     │
-│                                              │
-│ Alignment Status:                            │
-│ [ALIGNED | DIVERGENT — summary]              │
-└─────────────────────────────────────────────┘
+
+ PASS /— OSCILLATION (Synthesis)       
+                                              
+ Divergences Found:                           
+ - [Where tactical and strategic disagree]    
+ - [What narrow aperture missed]              
+ - [What wide aperture missed]                
+                                              
+ Design Tensions:                             
+ [Tension : description + resolution]     
+ [Tension : description + resolution]     
+                                              
+ Alignment Status:                            
+ [ALIGNED | DIVERGENT — summary]              
+
 ```
 
 Step : Output

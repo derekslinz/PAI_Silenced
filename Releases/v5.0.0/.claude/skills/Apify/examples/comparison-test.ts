@@ -44,7 +44,7 @@ async function demonstrateMCPApproach() {
   console.log('  Search results:      ,tokens')
   console.log('  Run info:            ,tokens')
   console.log('  Full dataset:       ,tokens')
-  console.log('  ────────────────────────────────')
+  console.log('  ')
   console.log('  TOTAL:             ~,tokens')
   console.log('  Plus additional reasoning overhead!\n')
 }
@@ -104,7 +104,7 @@ return filtered
   console.log('  README discovery:      tokens')
   console.log('  Code execution:        tokens')
   console.log('  Filtered results:      tokens')
-  console.log('  ────────────────────────────────')
+  console.log('  ')
   console.log('  TOTAL:              ~,tokens')
   console.log('\n  TOKEN SAVINGS: .% reduction!')
   console.log('  PERFORMANCE: Faster (no model round-trips)')
@@ -157,18 +157,18 @@ async function demonstrateFilteringComparison() {
 }
 
 async function main() {
-  console.log('\n╔═══════════════════════════════════════════════════════════╗')
-  console.log('║  MCP vs Code-First Comparison: Apify Integration         ║')
-  console.log('╚═══════════════════════════════════════════════════════════╝\n')
+  console.log('\n')
+  console.log('  MCP vs Code-First Comparison: Apify Integration         ')
+  console.log('\n')
 
   await demonstrateMCPApproach()
-  console.log('\n' + '─'.repeat() + '\n')
+  console.log('\n' + ''.repeat() + '\n')
 
   await demonstrateCodeFirstApproach()
-  console.log('\n' + '─'.repeat() + '\n')
+  console.log('\n' + ''.repeat() + '\n')
 
   await demonstrateFilteringComparison()
-  console.log('\n' + '─'.repeat() + '\n')
+  console.log('\n' + ''.repeat() + '\n')
 
   console.log('=== CONCLUSION ===\n')
   console.log('Code-first Apify integration provides:')

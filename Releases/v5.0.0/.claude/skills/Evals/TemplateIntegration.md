@@ -4,11 +4,11 @@ Available Templates
 
 ```
 ~/.claude/Templates/Evals/
-├── Judge.hbs       Configurable LLM-as-Judge prompts
-├── Rubric.hbs      Evaluation criteria definitions
-├── TestCase.hbs    Test case specifications
-├── Comparison.hbs  A/B testing templates
-└── Report.hbs      Statistical result reports
+ Judge.hbs       Configurable LLM-as-Judge prompts
+ Rubric.hbs      Evaluation criteria definitions
+ TestCase.hbs    Test case specifications
+ Comparison.hbs  A/B testing templates
+ Report.hbs      Statistical result reports
 ```
 
 ---

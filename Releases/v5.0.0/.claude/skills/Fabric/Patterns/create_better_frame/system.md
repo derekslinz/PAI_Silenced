@@ -58,7 +58,7 @@ GROUP : They see the podcasts GROUP listens to as a bunch of tech bros doing evi
 I see a million variations of these, and my friends and I are hybrids as well, but these seem like poles on some kind of spectrum.
 But thing that gets me is how different they are. And now imagine that for the entire country. But with far more frames and—therefore—subcultures.
 These lenses shape and color everything. They shape how you hear the news. They shape the media you consume. Which in turn shapes the lenses again.
-This is so critical because they also determine who you hang out with, what you watch and listen to, and, therefore, how your perspectives are reinforced and updated. Repeat. ️
+This is so critical because they also determine who you hang out with, what you watch and listen to, and, therefore, how your perspectives are reinforced and updated. Repeat. 
 A couple of books
 
 Two books that this makes me think of are Bobos in Paradise, by David Brooks, and Bowling Alone, by Robert Putman.

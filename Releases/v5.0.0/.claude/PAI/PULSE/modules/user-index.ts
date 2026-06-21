@@ -29,9 +29,9 @@ const STATE_DIR = join(PAI_DIR, "PULSE", "state")
 const INDEX_PATH = join(STATE_DIR, "user-index.json")
 const MODULE_NAME = "user-index"
 
-// ───────────────────────────────────────────────────────────────────────────
+// 
 // Types (matches DOCUMENTATION/LifeOs/LifeOsSchema.md)
-// ───────────────────────────────────────────────────────────────────────────
+// 
 
 export type Category =
   | "identity" | "voice" | "mind" | "taste" | "shape" | "ops" | "domain" | "unknown"
@@ -110,10 +110,10 @@ export interface UserIndex {
   }
 }
 
-// ───────────────────────────────────────────────────────────────────────────
+// 
 // Frontmatter fallback inference (for files without frontmatter — current state)
 // Remove once all USER/ files are migrated to the new schema.
-// ───────────────────────────────────────────────────────────────────────────
+// 
 
 const ROOT_FALLBACK: Record<string, { category: Category; kind: Kind; publish: PublishValue }> = {
   "PRINCIPAL_IDENTITY.md":   { category: "identity", kind: "narrative",  publish: "daemon-summary" },
@@ -183,9 +183,9 @@ function inferFallback(userRelPath: string): { category: Category; kind: Kind; p
   return null
 }
 
-// ───────────────────────────────────────────────────────────────────────────
+// 
 // Frontmatter parser (zero-dep, handles the subset we use)
-// ───────────────────────────────────────────────────────────────────────────
+// 
 
 function parseFrontmatter(content: string): { meta: Record<string, string>; body: string } {
   if (!content.startsWith("---\n")) return { meta: {}, body: content }
@@ -210,13 +210,13 @@ function parseFrontmatter(content: string): { meta: Record<string, string>; body
   return { meta, body }
 }
 
-// ───────────────────────────────────────────────────────────────────────────
+// 
 // Collection item parser
-// Shape: - **name** — creator · ★rating · notes
+// Shape: - **name** — creator · rating · notes
 // All parts after name optional. `(private)` prefix hides from Daemon.
-// ───────────────────────────────────────────────────────────────────────────
+// 
 
-const COLLECTION_ITEM_RE = /^-\s+(?:\((private)\)\s+)?\*\*([^*]+?)\*\*(?:\s*[—–-]\s*([^·\n]+?))?(?:\s*·\s*★(\d+))?(?:\s*·\s*(.+))?$/
+const COLLECTION_ITEM_RE = /^-\s+(?:\((private)\)\s+)?\*\*([^*]+?)\*\*(?:\s*[—–-]\s*([^·\n]+?))?(?:\s*·\s*(\d+))?(?:\s*·\s*(.+))?$/
 
 function parseCollection(body: string): CollectionItem[] {
   const items: CollectionItem[] = []
@@ -234,9 +234,9 @@ function parseCollection(body: string): CollectionItem[] {
   return items
 }
 
-// ───────────────────────────────────────────────────────────────────────────
+// 
 // Derived field computation
-// ───────────────────────────────────────────────────────────────────────────
+// 
 
 function parseCadence(value: string | undefined): number {
   if (!value || value === "never") return 0
@@ -301,9 +301,9 @@ function extractTitle(body: string, fallbackPath: string): string {
   return basename(fallbackPath, ".md")
 }
 
-// ───────────────────────────────────────────────────────────────────────────
+// 
 // File parser
-// ───────────────────────────────────────────────────────────────────────────
+// 
 
 function parseFile(absolutePath: string): UserIndexEntry {
   const content = readFileSync(absolutePath, "utf-8")
@@ -371,9 +371,9 @@ function parseFile(absolutePath: string): UserIndexEntry {
   }
 }
 
-// ───────────────────────────────────────────────────────────────────────────
+// 
 // Tree walker
-// ───────────────────────────────────────────────────────────────────────────
+// 
 
 // Skip patterns — infrastructure directories that aren't life content
 const SKIP_DIRS = new Set([
@@ -412,9 +412,9 @@ function walkUserDir(): string[] {
   return files
 }
 
-// ───────────────────────────────────────────────────────────────────────────
+// 
 // Index builder
-// ───────────────────────────────────────────────────────────────────────────
+// 
 
 function buildIndex(): UserIndex {
   const files = walkUserDir().map(parseFile)
@@ -507,9 +507,9 @@ function writeIndex(index: UserIndex): void {
   writeFileSync(INDEX_PATH, JSON.stringify(index, null, 2))
 }
 
-// ───────────────────────────────────────────────────────────────────────────
+// 
 // Pulse module contract
-// ───────────────────────────────────────────────────────────────────────────
+// 
 
 interface ModuleState {
   running: boolean
@@ -622,9 +622,9 @@ export async function handleRequest(path: string, _body: Record<string, unknown>
   return Response.json({ error: "Not found" }, { status: 404 })
 }
 
-// ───────────────────────────────────────────────────────────────────────────
+// 
 // CLI
-// ───────────────────────────────────────────────────────────────────────────
+// 
 
 async function cli(): Promise<void> {
   const args = process.argv.slice(2)
@@ -662,7 +662,7 @@ async function cli(): Promise<void> {
     return
   }
 
-  console.log(`\n═══ Life OS Index ═══`)
+  console.log(`\n Life OS Index `)
   console.log(`Generated: ${index.generated_at}`)
   console.log(`Index written to: ${INDEX_PATH}`)
   console.log(`\nTotal files: ${index.stats.total_files}`)
@@ -678,7 +678,7 @@ async function cli(): Promise<void> {
   }
   console.log(`\nDomains (${index.domains.length}):`)
   for (const d of index.domains) {
-    const overdue = d.any_overdue ? " ⚠" : ""
+    const overdue = d.any_overdue ? " " : ""
     console.log(`  ${d.name.padEnd(16)} ${d.file_count} files · ${d.avg_completeness}% complete${overdue}`)
   }
   console.log(`\nStale queue: ${index.stale_queue.length} files overdue`)

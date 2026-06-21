@@ -52,7 +52,7 @@
 {{/if}}
 
 {{#if mandatory}}
-### 🚨 MANDATORY
+###  MANDATORY
 
 {{#if action_on_fail}}
 *If ANY item below fails → **{{action_on_fail}}***
@@ -64,7 +64,7 @@
 {{/if}}
 
 {{#if recommended}}
-### ✅ RECOMMENDED
+###  RECOMMENDED
 
 {{#each recommended}}
 - [ ] {{name}} — {{description}}
@@ -87,7 +87,7 @@
 {{/if}}
 
 {{#if gate.mandatory}}
-### 🚨 MANDATORY
+###  MANDATORY
 
 {{#if gate.action_on_fail}}
 *If ANY item below fails → **{{gate.action_on_fail}}***
@@ -99,7 +99,7 @@
 {{/if}}
 
 {{#if gate.recommended}}
-### ✅ RECOMMENDED
+###  RECOMMENDED
 
 {{#each gate.recommended}}
 - [ ] {{name}} — {{description}}

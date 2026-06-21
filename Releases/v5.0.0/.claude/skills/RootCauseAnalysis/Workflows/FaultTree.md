@@ -20,15 +20,15 @@ The Structure
 
 ```
                        [ TOP EVENT ]
-                            │
+                            
                           (Gate)
-                   ┌────────┼────────┐
-                   │        │        │
+                   
+                                   
               [Event A] [Event B] [Event C]
-                   │
+                   
                  (Gate)
-              ┌────┴────┐
-              │         │
+              
+                       
          [Basic ]  [Basic ]
 ```
 
@@ -47,11 +47,11 @@ Semantics:Top event occurs if anyinput occurs.
 
 ```
 Top
- │
+ 
 (OR)
- ├── A
- ├── B
- └── C
+  A
+  B
+  C
 
 Top occurs if A OR B OR C.
 ```
@@ -66,11 +66,11 @@ Semantics:Top event occurs only if allinputs occur (usually simultaneously).
 
 ```
 Top
- │
+ 
 (AND)
- ├── A
- ├── B
- └── C
+  A
+  B
+  C
 
 Top occurs only if A AND B AND C (all three).
 ```
@@ -165,21 +165,21 @@ TOP EVENT: [...]
 
 TREE:
   [Top]
-    │
+    
    (OR)
-    ├── Intermediate A
-    │     │
-    │    (AND)
-    │     ├── Basic  (P = .)
-    │     └── Basic  (P = .)
-    │
-    ├── Intermediate B
-    │     │
-    │    (OR)
-    │     ├── Basic  (P = .)
-    │     └── Basic  (P = .)
-    │
-    └── Basic (P = .)
+     Intermediate A
+         
+        (AND)
+          Basic  (P = .)
+          Basic  (P = .)
+    
+     Intermediate B
+         
+        (OR)
+          Basic  (P = .)
+          Basic  (P = .)
+    
+     Basic (P = .)
 
 MINIMAL CUT SETS:
 . {Basic , Basic } — P = .e-. {Basic } — P = .. {Basic } — P = .. {Basic } — P = .e-
@@ -207,26 +207,26 @@ TOP EVENT: User payment processing unavailable for > seconds.
 
 TREE:
   [Payment unavailable]
-     │
+     
     (OR)
-     ├── API gateway failure
-     │     │
-     │    (OR)
-     │     ├── Gateway service down (P=.)
-     │     └── DNS resolution failure (P=.)
-     │
-     ├── Payment service failure
-     │     │
-     │    (OR)
-     │     ├── Service crash (P=.)
-     │     └── Config pushed wrong (P=.)
-     │
-     └── Database unavailable
-           │
+      API gateway failure
+          
+         (OR)
+           Gateway service down (P=.)
+           DNS resolution failure (P=.)
+     
+      Payment service failure
+          
+         (OR)
+           Service crash (P=.)
+           Config pushed wrong (P=.)
+     
+      Database unavailable
+           
           (AND)
-           ├── Primary DB failure (P=.)
-           ├── Replica promotion failure (P=.)
-           └── Manual intervention not executed in SLA (P=.)
+            Primary DB failure (P=.)
+            Replica promotion failure (P=.)
+            Manual intervention not executed in SLA (P=.)
 
 MINIMAL CUT SETS:
 . {Gateway service down} — P = .e-. {DNS resolution failure} — P = .e-. {Service crash} — P = .e-. {Config pushed wrong} — P = .e-. {Primary DB, Replica promotion, Manual intervention} — P = .e-

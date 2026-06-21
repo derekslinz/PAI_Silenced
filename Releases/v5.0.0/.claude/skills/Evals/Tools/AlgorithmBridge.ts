@@ -199,7 +199,7 @@ Examples:
   if (values['show-saturation']) {
     const status = checkSaturation(values.suite!);
     console.log(`\nSaturation Status: ${values.suite}\n`);
-    console.log(`  Saturated: ${status.saturated ? '️ Yes' : 'No'}`);
+    console.log(`  Saturated: ${status.saturated ? ' Yes' : 'No'}`);
     console.log(`  Consecutive above threshold: ${status.consecutive_above_threshold}/`);
     console.log(`  Recommendation: ${status.recommended_action}`);
     process.exit();

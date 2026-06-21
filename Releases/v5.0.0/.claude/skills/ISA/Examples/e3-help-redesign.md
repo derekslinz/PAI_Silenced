@@ -55,7 +55,7 @@ Length and layout
 
 - [x] ISC-: `duck --help | wc -l` returns ≤ lines (current baseline ).
 - [x] ISC-: Every line in `duck --help` is ≤ columns (probe: `awk 'length>' < (duck --help) | wc -l` returns ).
-- [ ] ISC-: Output has exactly three top-level sections: Summary+Examples block, Flag Reference, See Also (probe: count of section header rules `═` or `─`).
+- [ ] ISC-: Output has exactly three top-level sections: Summary+Examples block, Flag Reference, See Also (probe: count of section header rules `` or ``).
 
 Top-section content
 

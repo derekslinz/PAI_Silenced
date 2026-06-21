@@ -164,7 +164,7 @@ function rank(candidates: Candidate[], opts: {
   });
 }
 
-// ─── Main ───
+//  Main 
 
 const args = process.argv.slice(2);
 const catIdx = args.indexOf("--category");

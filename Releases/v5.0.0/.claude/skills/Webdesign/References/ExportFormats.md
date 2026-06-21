@@ -18,20 +18,20 @@ Decision Tree
 
 ```
 Q: What's the next step after export?
-│
-├─ Review / feedback → Internal URL
-│
-├─ Non-developer will edit → Canva
-│
-├─ Production code in an existing app → Bundle → IntegrateIntoApp
-│
-├─ Production code, new standalone app → Bundle → ExportToCode → DeployDesign
-│
-├─ Static one-off page → Standalone HTML → DeployDesign
-│
-├─ Client presentation → PDF or PPTX
-│
-└─ Archive / keep locally → Folder
+
+ Review / feedback → Internal URL
+
+ Non-developer will edit → Canva
+
+ Production code in an existing app → Bundle → IntegrateIntoApp
+
+ Production code, new standalone app → Bundle → ExportToCode → DeployDesign
+
+ Static one-off page → Standalone HTML → DeployDesign
+
+ Client presentation → PDF or PPTX
+
+ Archive / keep locally → Folder
 ```
 
 Bundle Format (Most Important)
@@ -40,18 +40,18 @@ The handoff bundle is the load-bearing output when code is the destination. Stru
 
 ```
 bundle/
-├── PROMPT.md                    Structured brief for Claude Code
-├── tokens.json                  Design tokens (colors, typography, spacing)
-├── preview.html                 Static preview render
-├── components/                  Component scaffolds
-│   ├── button.tsx
-│   ├── card.tsx
-│   └── ...
-├── assets/                      Images, fonts, icons
-│   ├── logo.svg
-│   ├── fonts/
-│   └── images/
-└── README.md                    Bundle metadata
+ PROMPT.md                    Structured brief for Claude Code
+ tokens.json                  Design tokens (colors, typography, spacing)
+ preview.html                 Static preview render
+ components/                  Component scaffolds
+    button.tsx
+    card.tsx
+    ...
+ assets/                      Images, fonts, icons
+    logo.svg
+    fonts/
+    images/
+ README.md                    Bundle metadata
 ```
 
 PROMPT.md — the heart of the bundle

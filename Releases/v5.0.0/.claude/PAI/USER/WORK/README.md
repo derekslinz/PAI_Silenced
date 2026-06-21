@@ -1,6 +1,6 @@
 # WORK/
 
-> 💼 SAMPLE TEMPLATE — Replace with your own work data via /interview or by editing these files.
+>  SAMPLE TEMPLATE — Replace with your own work data via /interview or by editing these files.
 
 This directory holds your day-to-day work context — the consulting engagements, customer relationships, and organizational work you do under one or more business entities. Where `BUSINESS/` describes the company itself, `WORK/` describes the work the company does.
 

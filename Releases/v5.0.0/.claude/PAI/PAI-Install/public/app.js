@@ -143,10 +143,10 @@ function renderSteps() {
   list.innerHTML = steps.map(s => {
     let icon = '○';
     let cls = s.status;
-    if (s.status === 'completed') icon = '✓';
+    if (s.status === 'completed') icon = '';
     else if (s.status === 'active') icon = '→';
     else if (s.status === 'skipped') icon = '–';
-    else if (s.status === 'failed') icon = '✗';
+    else if (s.status === 'failed') icon = '';
 
     return `<li class="step-item ${cls}">
       <span class="step-icon ${cls}">${icon}</span>
@@ -214,7 +214,7 @@ function renderDetection(data) {
   grid.className = 'detection-grid';
   grid.innerHTML = items.map(i =>
     `<div class="detection-item">
-      <span class="${i.icon}">${i.icon === 'check' ? '✓' : i.icon === 'cross' ? '✗' : 'ℹ'}</span>
+      <span class="${i.icon}">${i.icon === 'check' ? '' : i.icon === 'cross' ? '' : 'ℹ'}</span>
       <span>${i.label}: ${i.value}</span>
     </div>`
   ).join('');
@@ -409,7 +409,7 @@ function renderValidation(checks) {
   list.className = 'validation-list';
   list.innerHTML = checks.map(c =>
     `<div class="validation-item">
-      <span class="v-icon">${c.passed ? '✓' : c.critical ? '✗' : '⚠'}</span>
+      <span class="v-icon">${c.passed ? '' : c.critical ? '' : ''}</span>
       <span class="v-name">${c.name}</span>
       <span class="v-detail">${c.detail}</span>
     </div>`

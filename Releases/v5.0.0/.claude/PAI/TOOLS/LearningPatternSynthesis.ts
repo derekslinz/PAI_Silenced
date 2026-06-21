@@ -368,7 +368,7 @@ const filteredRatings = allRatings.filter(r => {
 console.log(` Analyzing ${filteredRatings.length} ratings for ${period.toLowerCase()} period`);
 
 if (filteredRatings.length === 0) {
-  console.log("✅ No ratings in this period");
+  console.log(" No ratings in this period");
   process.exit(0);
 }
 
@@ -381,7 +381,7 @@ console.log(`   Frustration Patterns: ${result.frustrations.length}`);
 console.log(`   Success Patterns: ${result.successes.length}`);
 
 if (result.topIssues.length > 0) {
-  console.log(`\n⚠️  Top Issues:`);
+  console.log(`\n  Top Issues:`);
   for (const issue of result.topIssues) {
     console.log(`   - ${issue}`);
   }
@@ -395,5 +395,5 @@ if (values["dry-run"]) {
   }
 } else {
   const filepath = writeSynthesis(result, period);
-  console.log(`\n✅ Created synthesis report: ${path.basename(filepath)}`);
+  console.log(`\n Created synthesis report: ${path.basename(filepath)}`);
 }

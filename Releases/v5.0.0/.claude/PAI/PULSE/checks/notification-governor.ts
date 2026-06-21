@@ -145,7 +145,7 @@ function pruneOld(state: GovernorState): void {
   }
 }
 
-// ─── Commands ───
+//  Commands 
 
 async function cmdNotify(args: string[]): Promise<number> {
   const channel = (args[args.indexOf("--channel") + 1] as Channel) || "telegram";
@@ -183,7 +183,7 @@ async function cmdNotify(args: string[]): Promise<number> {
   });
   saveState(state);
   logDecision({ action: "dispatch", channel, source, priority, message });
-  console.log(`✅ Dispatched via ${channel}`);
+  console.log(` Dispatched via ${channel}`);
   return 0;
 }
 
@@ -193,7 +193,7 @@ function cmdStatus(): void {
   const telegramLastHour = state.dispatched.filter(
     (d) => d.channel === "telegram" && hoursSince(d.ts) < 1
   ).length;
-  console.log("═══ Notification Governor ═══");
+  console.log(" Notification Governor ");
   console.log(`Telegram last h: ${telegramLastHour}/1`);
   console.log(`Quiet hours:     ${inQuietHours() ? "YES" : "no"}`);
   const sups = Object.entries(state.sourceSuppressions);
@@ -219,9 +219,9 @@ function cmdReportFalseAlert(source: string): void {
       reason: `2 false alerts in 7 days`,
       falseAlertTimestamps: recent,
     };
-    console.log(`⛔ Source ${source} auto-suppressed until ${until}`);
+    console.log(` Source ${source} auto-suppressed until ${until}`);
   } else {
-    console.log(`⚠️  False alert logged for ${source} (${recent.length}/2 in 7d)`);
+    console.log(`  False alert logged for ${source} (${recent.length}/2 in 7d)`);
   }
   saveState(state);
 }
@@ -234,7 +234,7 @@ function cmdClearSource(source: string): void {
   console.log(` Cleared suppression for ${source}`);
 }
 
-// ─── Main ───
+//  Main 
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);

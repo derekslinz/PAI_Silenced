@@ -99,13 +99,13 @@ User Request → Pattern Selection → Read system.md → Apply → Return Resul
 
 Pattern Structure:```
 Patterns/
-├── extract_wisdom/
-│   └── system.md       The prompt instructions
-├── summarize/
-│   └── system.md
-├── create_threat_model/
-│   └── system.md
-└── ...+ patterns
+ extract_wisdom/
+    system.md       The prompt instructions
+ summarize/
+    system.md
+ create_threat_model/
+    system.md
+ ...+ patterns
 ```
 
 Each pattern's `system.md` contains the full prompt that defines:

@@ -126,15 +126,15 @@ const MATRIX = {
 
 // Katakana characters for rain effect
 const KATAKANA = [
-  "ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ",
-  "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト",
-  "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ",
-  "マ", "ミ", "ム", "メ", "モ", "ヤ", "ユ", "ヨ",
-  "ラ", "リ", "ル", "レ", "ロ", "ワ", "ヲ", "ン",
-  "ァ", "ィ", "ゥ", "ェ", "ォ", "ッ", "ャ", "ュ", "ョ",
-  "ガ", "ギ", "グ", "ゲ", "ゴ", "ザ", "ジ", "ズ", "ゼ", "ゾ",
-  "ダ", "ヂ", "ヅ", "デ", "ド", "バ", "ビ", "ブ", "ベ", "ボ",
-  "パ", "ピ", "プ", "ペ", "ポ",
+  "", "", "", "", "", "", "", "", "", "",
+  "", "", "", "", "", "", "", "", "", "",
+  "", "", "", "", "", "", "", "", "", "",
+  "", "", "", "", "", "", "", "",
+  "", "", "", "", "", "", "", "",
+  "", "", "", "", "", "", "", "", "",
+  "", "", "", "", "", "", "", "", "", "",
+  "", "", "", "", "", "", "", "", "", "",
+  "", "", "", "", "",
 ];
 
 // Additional matrix characters
@@ -147,10 +147,10 @@ const MATRIX_CHARS = [
 
 // Half-width katakana for denser rain
 const HALFWIDTH_KANA = [
-  "ｱ", "ｲ", "ｳ", "ｴ", "ｵ", "ｶ", "ｷ", "ｸ", "ｹ", "ｺ",
-  "ｻ", "ｼ", "ｽ", "ｾ", "ｿ", "ﾀ", "ﾁ", "ﾂ", "ﾃ", "ﾄ",
-  "ﾅ", "ﾆ", "ﾇ", "ﾈ", "ﾉ", "ﾊ", "ﾋ", "ﾌ", "ﾍ", "ﾎ",
-  "ﾏ", "ﾐ", "ﾑ", "ﾒ", "ﾓ", "ﾔ", "ﾕ", "ﾖ",
+  "", "", "", "", "", "", "", "", "", "",
+  "", "", "", "", "", "", "", "", "", "",
+  "", "", "", "", "", "", "", "", "", "",
+  "", "", "", "", "", "", "", "",
 ];
 
 // =============================================================================
@@ -220,33 +220,33 @@ function generateRainColumn(height: number): string[] {
 
 // Large PAI letters that will "emerge" from the rain
 const PAI_MATRIX_LOGO = [
-  " ██████╗   █████╗  ██╗",
-  " ██╔══██╗ ██╔══██╗ ██║",
-  " ██████╔╝ ███████║ ██║",
-  " ██╔═══╝  ██╔══██║ ██║",
-  " ██║      ██║  ██║ ██║",
-  " ╚═╝      ╚═╝  ╚═╝ ╚═╝",
+  "      ",
+  "   ",
+  "   ",
+  "    ",
+  "          ",
+  "          ",
 ];
 
 // Dripping/melting PAI effect
 const PAI_DRIP = [
-  "██████╗  █████╗ ██╗",
-  "██╔══██╗██╔══██╗██║",
-  "██████╔╝███████║██║",
-  "██╔═══╝ ██╔══██║██║",
-  "██║     ██║  ██║██║",
-  "╚═╝     ╚═╝  ╚═╝╚═╝",
-  " ░       ░    ░  ░ ",
-  "  ▒       ▒    ▒   ",
-  "   ▓       ▓       ",
+  "   ",
+  "",
+  "",
+  " ",
+  "       ",
+  "       ",
+  "               ",
+  "                ",
+  "                 ",
 ];
 
 // Compact PAI logo for smaller modes
 const PAI_COMPACT = [
-  "┌───┐┌───┐┌─┐",
-  "│ ┌─┘│ ┌─┤│ │",
-  "│ │  │ ├─┤│ │",
-  "└─┘  └─┘ ┘└─┘",
+  "",
+  "   ",
+  "     ",
+  "   ",
 ];
 
 // =============================================================================
@@ -359,7 +359,7 @@ function getStats(): SystemStats {
 
 function glitchText(text: string): string {
   // Add random glitch characters around/in the text
-  const glitchChars = ["░", "▒", "▓", "█", "▄", "▀", "■", "□"];
+  const glitchChars = ["", "", "", "", "", "", "", ""];
   let result = "";
 
   for (let i = 0; i < text.length; i++) {
@@ -408,7 +408,7 @@ function createNanoBanner(stats: SystemStats): string {
   const d = MATRIX.dim;
   const w = MATRIX.white;
 
-  return `${d}ｱ${RESET}${g}PAI${RESET}${d}ｲ${RESET} ${w}${stats.name}${RESET} ${g}[ON]${RESET}`;
+  return `${d}${RESET}${g}PAI${RESET}${d}${RESET} ${w}${stats.name}${RESET} ${g}[ON]${RESET}`;
 }
 
 /**
@@ -486,7 +486,7 @@ function createMiniBanner(stats: SystemStats): string {
   lines.push(`${f}${BOLD}${"=".repeat(width)}${RESET}`);
 
   // PAI header with glitch
-  const paiHeader = `${g}${BOLD} ██████╗   █████╗  ██╗${RESET}`;
+  const paiHeader = `${g}${BOLD}      ${RESET}`;
   const hex = randomHex(8);
   const headerLine = ` ${paiHeader}  ${d}0x${hex}${RESET}`;
   lines.push(rainOverlay(headerLine.padEnd(width), 0.2));
@@ -628,7 +628,7 @@ function createNormalBanner(stats: SystemStats): string {
   }
 
   // Drip trail
-  const dripLine = `${m}░${RESET}${d}  ▒${RESET}${dk}    ▓${RESET}${d}  ░${RESET}${dk}    ▒${RESET}${m}░${RESET}`;
+  const dripLine = `${m}${RESET}${d}  ${RESET}${dk}    ${RESET}${d}  ${RESET}${dk}    ${RESET}${m}${RESET}`;
   const dripCentered = " ".repeat(Math.floor((width - 19) / 2));
   lines.push(`${dripCentered}${dripLine}`);
 

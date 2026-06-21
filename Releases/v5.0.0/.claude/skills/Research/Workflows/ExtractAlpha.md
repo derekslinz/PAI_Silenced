@@ -134,10 +134,10 @@ Why this pattern:- Ties iterative work artifacts to the work item for learning
 
 Example work item structure:```
 ~/.claude/PAI/MEMORY/WORK/-_extract-alpha-analysis/
-├── raw-transcript.txt
-├── deep thinking-notes.md
-├── draft-insights.md
-└── working-analysis.md
+ raw-transcript.txt
+ deep thinking-notes.md
+ draft-insights.md
+ working-analysis.md
 ```
 
 Permanent Output (Final Research)
@@ -154,10 +154,10 @@ What goes in history/research/:- extract_alpha.md- The final -insights (formatte
 
 Example history structure:```
 ~/.claude/History/research/--_podcast-analysis/
-├── README.md                  Research session documentation
-├── extract_alpha.md           Final -insights
-├── deep thinking-analysis.md     Full deep analysis
-└── metadata.json              Source info, timestamps, etc.
+ README.md                  Research session documentation
+ extract_alpha.md           Final -insights
+ deep thinking-analysis.md     Full deep analysis
+ metadata.json              Source info, timestamps, etc.
 ```
 
 README.md Template

@@ -88,51 +88,51 @@ async function emitSectionHeader(
 
 function summariseExistingUserContent(content: ExistingUserContentDetection): string {
   const telosParts: string[] = [];
-  if (content.telos.mission) telosParts.push("MISSION ✓");
+  if (content.telos.mission) telosParts.push("MISSION ");
   if (content.telos.goals) {
     const goalsSuffix = content.telos.goalsCount > 0 ? ` (${content.telos.goalsCount} entries)` : "";
-    telosParts.push(`GOALS ✓${goalsSuffix}`);
+    telosParts.push(`GOALS ${goalsSuffix}`);
   }
-  if (content.telos.activeProblems) telosParts.push("ACTIVE_PROBLEMS ✓");
-  if (content.telos.strategy) telosParts.push("STRATEGY ✓");
-  if (content.telos.principles) telosParts.push("PRINCIPLES ✓");
-  if (content.telos.areas) telosParts.push("AREAS ✓");
-  if (content.telos.now) telosParts.push("NOW ✓");
+  if (content.telos.activeProblems) telosParts.push("ACTIVE_PROBLEMS ");
+  if (content.telos.strategy) telosParts.push("STRATEGY ");
+  if (content.telos.principles) telosParts.push("PRINCIPLES ");
+  if (content.telos.areas) telosParts.push("AREAS ");
+  if (content.telos.now) telosParts.push("NOW ");
 
   const identityParts: string[] = [];
-  if (content.identity.principalIdentity) identityParts.push("PRINCIPAL_IDENTITY ✓");
-  if (content.identity.daIdentity) identityParts.push("DA_IDENTITY ✓");
-  if (content.identity.daIdentityYaml) identityParts.push("DA_IDENTITY.yaml ✓");
-  if (content.identity.workingStyle) identityParts.push("WORKINGSTYLE ✓");
-  if (content.identity.rhetoricalStyle) identityParts.push("RHETORICALSTYLE ✓");
-  if (content.identity.aiWritingPatterns) identityParts.push("AI_WRITING_PATTERNS ✓");
-  if (content.identity.feed) identityParts.push("FEED ✓");
-  if (content.identity.resume) identityParts.push("RESUME ✓");
-  if (content.identity.ourStory) identityParts.push("OUR_STORY ✓");
-  if (content.identity.definitions) identityParts.push("DEFINITIONS ✓");
-  if (content.identity.coreContent) identityParts.push("CORECONTENT ✓");
-  if (content.identity.beliefs) identityParts.push("BELIEFS ✓");
+  if (content.identity.principalIdentity) identityParts.push("PRINCIPAL_IDENTITY ");
+  if (content.identity.daIdentity) identityParts.push("DA_IDENTITY ");
+  if (content.identity.daIdentityYaml) identityParts.push("DA_IDENTITY.yaml ");
+  if (content.identity.workingStyle) identityParts.push("WORKINGSTYLE ");
+  if (content.identity.rhetoricalStyle) identityParts.push("RHETORICALSTYLE ");
+  if (content.identity.aiWritingPatterns) identityParts.push("AI_WRITING_PATTERNS ");
+  if (content.identity.feed) identityParts.push("FEED ");
+  if (content.identity.resume) identityParts.push("RESUME ");
+  if (content.identity.ourStory) identityParts.push("OUR_STORY ");
+  if (content.identity.definitions) identityParts.push("DEFINITIONS ");
+  if (content.identity.coreContent) identityParts.push("CORECONTENT ");
+  if (content.identity.beliefs) identityParts.push("BELIEFS ");
 
   const sections: string[] = [];
   if (telosParts.length > 0) sections.push(`TELOS: ${telosParts.join(", ")}`);
   if (identityParts.length > 0) sections.push(`IDENTITY: ${identityParts.join(", ")}`);
   if (content.contacts.contacts) {
     const contactsSuffix = content.contacts.count > 0 ? ` (${content.contacts.count} entries)` : "";
-    sections.push(`CONTACTS: CONTACTS.md ✓${contactsSuffix}`);
+    sections.push(`CONTACTS: CONTACTS.md ${contactsSuffix}`);
   }
-  if (content.opinions.opinions) sections.push("OPINIONS: OPINIONS.md ✓");
+  if (content.opinions.opinions) sections.push("OPINIONS: OPINIONS.md ");
   if (content.projects.projectsIndex || content.projects.projectsDirectory) {
     const projectBits: string[] = [];
     if (content.projects.projectsIndex) {
       const projectCountSuffix = content.projects.count > 0 ? ` (${content.projects.count} entries)` : "";
-      projectBits.push(`PROJECTS.md ✓${projectCountSuffix}`);
+      projectBits.push(`PROJECTS.md ${projectCountSuffix}`);
     }
-    if (content.projects.projectsDirectory) projectBits.push("PROJECTS/ ✓");
+    if (content.projects.projectsDirectory) projectBits.push("PROJECTS/ ");
     sections.push(`PROJECTS: ${projectBits.join(", ")}`);
   }
-  if (content.business.present) sections.push("BUSINESS: present ✓");
-  if (content.finances.present) sections.push("FINANCES: present ✓");
-  if (content.health.present) sections.push("HEALTH: present ✓");
+  if (content.business.present) sections.push("BUSINESS: present ");
+  if (content.finances.present) sections.push("FINANCES: present ");
+  if (content.health.present) sections.push("HEALTH: present ");
 
   return sections.join(" | ");
 }
@@ -257,7 +257,7 @@ function tryExec(cmd: string, timeout = 30000): string | null {
   }
 }
 
-// ─── User Context Migration (v2.5/v3.0 → v5.x) ─────────────────
+//  User Context Migration (v2.5/v3.0 → v5.x) 
 //
 // In v2.5–v3.0, user context (ABOUTME.md, TELOS/, CONTACTS.md, etc.)
 // lived at skills/PAI/USER/ (or skills/CORE/USER/ in v2.4).
@@ -554,7 +554,7 @@ export async function moveExistingClaudeToBackup(
   }
 }
 
-// ─── Step 1: System Detection ────────────────────────────────────
+//  Step 1: System Detection 
 
 export async function runSystemDetect(
   state: InstallState,
@@ -702,7 +702,7 @@ export async function runSystemDetect(
   return detection;
 }
 
-// ─── Step 2: Prerequisites ───────────────────────────────────────
+//  Step 2: Prerequisites 
 
 export async function runPrerequisites(
   state: InstallState,
@@ -813,7 +813,7 @@ export async function runPrerequisites(
   await emit({ event: "step_complete", step: "prerequisites" });
 }
 
-// ─── Step 3: API Keys (passthrough — no keys collected during install) ──
+//  Step 3: API Keys (passthrough — no keys collected during install) 
 
 export async function runApiKeys(
   state: InstallState,
@@ -835,7 +835,7 @@ export async function runApiKeys(
   await emit({ event: "step_complete", step: "api-keys" });
 }
 
-// ─── Step 4: Identity ────────────────────────────────────────────
+//  Step 4: Identity 
 
 export async function runIdentity(
   state: InstallState,
@@ -937,9 +937,9 @@ export async function runIdentity(
   await emit({ event: "step_complete", step: "identity" });
 }
 
-// ─── Step 5: Repository ──────────────────────────────────────────
+//  Step 5: Repository 
 
-// ─── Local Bundle Detection & Install ───────────────────────────
+//  Local Bundle Detection & Install 
 //
 // install.sh exports PAI_BUNDLE_DIR pointing to its own directory — the
 // root of the v5 release bundle. The wizard prefers installing from this
@@ -1162,7 +1162,7 @@ export async function runRepository(
   await emit({ event: "step_complete", step: "repository" });
 }
 
-// ─── Step 6: Configuration ───────────────────────────────────────
+//  Step 6: Configuration 
 
 export async function runConfiguration(
   state: InstallState,
@@ -1425,7 +1425,7 @@ export async function runConfiguration(
   await emit({ event: "step_complete", step: "configuration" });
 }
 
-// ─── Pulse Management ───────────────────────────────────────────
+//  Pulse Management 
 
 // PAI 5.0 ships Pulse on port 31337: the Life Dashboard, observability, and
 // scheduled jobs in one launchd-managed runtime. Health-check it by probing
@@ -1523,7 +1523,7 @@ async function installPulseMenuBar(paiDir: string, emit: EngineEventHandler): Pr
   }
 }
 
-// ─── Step 7: Pulse Setup ─────────────────────────────────────────
+//  Step 7: Pulse Setup 
 
 export async function runPulseSetup(
   state: InstallState,
@@ -1541,7 +1541,7 @@ export async function runPulseSetup(
   const daName = state.collected.aiName;
   const paiDir = state.detection?.paiDir || join(homedir(), ".claude");
 
-  // ── Install Pulse (Y/n) — Life Dashboard + observability + scheduled jobs ──
+  //  Install Pulse (Y/n) — Life Dashboard + observability + scheduled jobs 
   await emit({
     event: "message",
     content:
@@ -1562,7 +1562,7 @@ export async function runPulseSetup(
     await emit({ event: "message", content: "Pulse skipped. Install later via: bash ~/.claude/PAI/PULSE/manage.sh install" });
   }
 
-  // ── Optional menu bar app (Y/n) — separate launchd plist + .app bundle ──
+  //  Optional menu bar app (Y/n) — separate launchd plist + .app bundle 
   if (pulseReady) {
     await emit({
       event: "message",
@@ -1587,7 +1587,7 @@ export async function runPulseSetup(
   await emit({ event: "step_complete", step: "pulse" });
 }
 
-// ─── Telegram Setup ───────────────────────────────────────────────
+//  Telegram Setup 
 //
 // Optional step. If the user wants Pulse's Telegram bot to work, we collect
 // the bot token + allowed user/chat ID, validate via Telegram getMe, write
@@ -1675,7 +1675,7 @@ export async function runTelegramSetup(
 
   const paiDir = state.detection?.paiDir || join(homedir(), ".claude");
 
-  // ── Step 1: Check primary .env locations (no permission needed) ──
+  //  Step 1: Check primary .env locations (no permission needed) 
   let token = findExistingEnvKey("TELEGRAM_BOT_TOKEN");
   let validation: TelegramValidation = { valid: false };
 
@@ -1688,7 +1688,7 @@ export async function runTelegramSetup(
     }
   }
 
-  // ── Step 2: Offer to scan backup .claude* dirs (with permission) ──
+  //  Step 2: Offer to scan backup .claude* dirs (with permission) 
   if (!token) {
     const backupHits = findKeyInBackupDirs("TELEGRAM_BOT_TOKEN");
     if (backupHits.length > 0) {
@@ -1714,7 +1714,7 @@ export async function runTelegramSetup(
     }
   }
 
-  // ── Step 3: Manual entry ──
+  //  Step 3: Manual entry 
   if (!token) {
     const entered = await getInput(
       "telegram-bot-token",
@@ -1740,7 +1740,7 @@ export async function runTelegramSetup(
     await emit({ event: "message", content: `Bot validated: @${result.username}` });
   }
 
-  // ── Step 4: Allowed users / chat ID ──
+  //  Step 4: Allowed users / chat ID 
   // Reuse from primary .env first, fall back to prompt.
   let allowedUsers = findExistingEnvKey("TELEGRAM_ALLOWED_USERS") || findExistingEnvKey("TELEGRAM_PRINCIPAL_CHAT_ID");
   if (!allowedUsers) {
@@ -1758,7 +1758,7 @@ export async function runTelegramSetup(
     return;
   }
 
-  // ── Step 5: Persist to ~/.claude/.env and restart Pulse ──
+  //  Step 5: Persist to ~/.claude/.env and restart Pulse 
   state.collected.telegramBotToken = token;
   state.collected.telegramAllowedUsers = allowedUsers;
   state.collected.telegramBotUsername = validation.username;

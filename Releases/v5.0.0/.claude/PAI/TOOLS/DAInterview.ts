@@ -23,7 +23,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
-// ── Paths ────────────────────────────────────────────────────────────────────
+//  Paths 
 // Resolve relative to this script's own location. The script ships at
 // PAI/TOOLS/DAInterview.ts, so PAI/USER/DA/_presets.yaml is two levels up.
 // This works whether the script runs from a fresh clone (~/PAI-fresh/...) or
@@ -35,7 +35,7 @@ const DA_DIR = join(PAI_DIR, "USER/DA");
 const PRESETS_PATH = join(DA_DIR, "_presets.yaml");
 const REGISTRY_PATH = join(DA_DIR, "_registry.yaml");
 
-// ── Types ────────────────────────────────────────────────────────────────────
+//  Types 
 
 interface Traits {
   enthusiasm: number;
@@ -79,7 +79,7 @@ interface InterviewData {
 
 type Depth = "quick" | "standard" | "deep";
 
-// ── YAML Parsing (minimal, no deps) ─────────────────────────────────────────
+//  YAML Parsing (minimal, no deps) 
 
 function parsePresets(yamlContent: string): Record<string, Preset> {
   const presets: Record<string, Preset> = {};
@@ -148,7 +148,7 @@ function parsePresets(yamlContent: string): Record<string, Preset> {
   return presets;
 }
 
-// ── CLI Helpers ──────────────────────────────────────────────────────────────
+//  CLI Helpers 
 
 function print(text: string): void {
   process.stdout.write(text);
@@ -204,18 +204,18 @@ function askChoice(question: string, options: string[], descriptions?: string[])
   }
 }
 
-// ── Banner ───────────────────────────────────────────────────────────────────
+//  Banner 
 
 function printBanner(): void {
   println();
-  println("  ╔══════════════════════════════════════════╗");
-  println("  ║       PAI -- DA Identity Interview       ║");
-  println("  ║    Create your Digital Assistant (DA)     ║");
-  println("  ╚══════════════════════════════════════════╝");
+  println("  ");
+  println("         PAI -- DA Identity Interview       ");
+  println("      Create your Digital Assistant (DA)     ");
+  println("  ");
   println();
 }
 
-// ── Phase 1: Quick Setup ─────────────────────────────────────────────────────
+//  Phase 1: Quick Setup 
 
 function runPhase1(presets: Record<string, Preset>): InterviewData {
   println("  Phase 1: Quick Setup");
@@ -263,7 +263,7 @@ function runPhase1(presets: Record<string, Preset>): InterviewData {
   };
 }
 
-// ── Phase 2: Standard ────────────────────────────────────────────────────────
+//  Phase 2: Standard 
 
 function runPhase2(data: InterviewData): InterviewData {
   println();
@@ -305,7 +305,7 @@ function runPhase2(data: InterviewData): InterviewData {
   return data;
 }
 
-// ── Phase 3: Deep ────────────────────────────────────────────────────────────
+//  Phase 3: Deep 
 
 function runPhase3(data: InterviewData): InterviewData {
   println();
@@ -354,7 +354,7 @@ function runPhase3(data: InterviewData): InterviewData {
   return data;
 }
 
-// ── YAML Generation ──────────────────────────────────────────────────────────
+//  YAML Generation 
 
 function generateIdentityYaml(data: InterviewData): string {
   const today = new Date().toISOString().split("T")[0];
@@ -504,7 +504,7 @@ function escYaml(s: string): string {
   return s.replace(/"/g, '\\"').replace(/\n/g, " ");
 }
 
-// ── Markdown Generation ──────────────────────────────────────────────────────
+//  Markdown Generation 
 
 function generateIdentityMd(data: InterviewData): string {
   const today = new Date().toISOString().split("T")[0];
@@ -575,7 +575,7 @@ ${companionSection}
 `;
 }
 
-// ── Registry Management ──────────────────────────────────────────────────────
+//  Registry Management 
 
 function readRegistry(): { version: number; primary: string; das: Record<string, any> } {
   if (!existsSync(REGISTRY_PATH)) {
@@ -655,7 +655,7 @@ function writeRegistry(registry: { version: number; primary: string; das: Record
   writeFileSync(REGISTRY_PATH, yaml);
 }
 
-// ── Update Mode ──────────────────────────────────────────────────────────────
+//  Update Mode 
 
 function loadExistingIdentity(daDir: string): Partial<InterviewData> | null {
   const yamlPath = join(daDir, "DA_IDENTITY.yaml");
@@ -702,7 +702,7 @@ function loadExistingIdentity(daDir: string): Partial<InterviewData> | null {
   return data;
 }
 
-// ── Main ─────────────────────────────────────────────────────────────────────
+//  Main 
 
 function parseArgs(): { depth: Depth; update: boolean; daName?: string } {
   const args = process.argv.slice(2);
@@ -861,9 +861,9 @@ function main(): void {
 
   // Print summary
   println();
-  println("  ╔══════════════════════════════════════════╗");
-  println("  ║              Setup Complete               ║");
-  println("  ╚══════════════════════════════════════════╝");
+  println("  ");
+  println("                Setup Complete               ");
+  println("  ");
   println();
   println(`  DA Name:        ${data.daName}`);
   println(`  Display Name:   ${data.displayName}`);
@@ -883,7 +883,7 @@ function main(): void {
   println();
 }
 
-// ── Phase 1 with existing defaults (for --update) ────────────────────────────
+//  Phase 1 with existing defaults (for --update) 
 
 function runPhase1WithDefaults(
   presets: Record<string, Preset>,
@@ -948,6 +948,6 @@ function runPhase1WithDefaults(
   };
 }
 
-// ── Run ──────────────────────────────────────────────────────────────────────
+//  Run 
 
 main();

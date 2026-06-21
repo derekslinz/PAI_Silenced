@@ -38,13 +38,13 @@ File Structure
 
 ```
 ~/.claude/skills/Agents/
-├── ArchitectContext.md     Architecture specialist context
-├── EngineerContext.md       Implementation specialist context
-├── DesignerContext.md       UX/UI specialist context
-├── ArtistContext.md         Visual content creator context
-├── QATesterContext.md       Quality assurance specialist context
-└── Tools/
-    └── LoadAgentContext.ts  Simple loader utility
+ ArchitectContext.md     Architecture specialist context
+ EngineerContext.md       Implementation specialist context
+ DesignerContext.md       UX/UI specialist context
+ ArtistContext.md         Visual content creator context
+ QATesterContext.md       Quality assurance specialist context
+ Tools/
+     LoadAgentContext.ts  Simple loader utility
 ```
 
 ---

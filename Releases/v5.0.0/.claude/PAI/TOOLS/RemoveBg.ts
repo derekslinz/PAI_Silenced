@@ -69,14 +69,14 @@ function runRembg(bin: string, input: string, output: string): Promise<void> {
 async function removeBackground(inputPath: string, outputPath?: string): Promise<void> {
   const bin = resolveRembgBin();
   if (!existsSync(bin)) {
-    console.error(`❌ rembg not found at ${bin}`);
+    console.error(` rembg not found at ${bin}`);
     console.error("   Install: pipx install rembg  (or: uv tool install rembg)");
     console.error("   Override path: export REMBG_BIN=/path/to/rembg");
     process.exit(1);
   }
 
   if (!existsSync(inputPath)) {
-    console.error(`❌ File not found: ${inputPath}`);
+    console.error(` File not found: ${inputPath}`);
     process.exit(1);
   }
 
@@ -93,7 +93,7 @@ async function removeBackground(inputPath: string, outputPath?: string): Promise
   try {
     await runRembg(bin, inputPath, target);
   } catch (error) {
-    console.error(`❌ ${error instanceof Error ? error.message : String(error)}`);
+    console.error(` ${error instanceof Error ? error.message : String(error)}`);
     process.exit(1);
   }
 
@@ -107,7 +107,7 @@ async function removeBackground(inputPath: string, outputPath?: string): Promise
     const s = await stat(target);
     dims = ` (${(s.size / 1024).toFixed(0)}KB)`;
   } catch {}
-  console.log(`✅ Saved: ${target}${dims} in ${elapsed}ms`);
+  console.log(` Saved: ${target}${dims} in ${elapsed}ms`);
 }
 
 async function main(): Promise<void> {

@@ -94,7 +94,7 @@ def transcribe_file(file_path, model, output_format):
                 "text": segment.text.strip()
             })
 
-        print(f"✓ Transcription complete ({len(segment_list)} segments)")
+        print(f" Transcription complete ({len(segment_list)} segments)")
         return segment_list
 
     except Exception as e:
@@ -220,10 +220,10 @@ def main():
             transcript = format_transcript(segments, args.format)
             output_path = save_transcript(file_path, transcript, args.format, args.output)
             results.append({"file": file_path, "output": output_path})
-            print(f"✓ Saved to: {output_path}")
+            print(f" Saved to: {output_path}")
         except Exception as e:
             errors.append({"file": Path(file_path).name, "error": str(e)})
-            print(f"✗ Failed to transcribe {Path(file_path).name}: {e}")
+            print(f" Failed to transcribe {Path(file_path).name}: {e}")
 
     # Summary
     print("\n" + "=" * 60)

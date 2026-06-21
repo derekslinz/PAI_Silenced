@@ -24,7 +24,7 @@ const FRAMES_DIR = join(WISDOM_DIR, 'FRAMES');
 const PRINCIPLES_DIR = join(WISDOM_DIR, 'PRINCIPLES');
 const META_DIR = join(WISDOM_DIR, 'META');
 
-// ── Types ──
+//  Types 
 
 interface FrameData {
   domain: string;
@@ -55,7 +55,7 @@ interface FrameHealth {
   health: 'growing' | 'stable' | 'stale';
 }
 
-// ── Frame Parsing ──
+//  Frame Parsing 
 
 function parseFrame(filepath: string): FrameData {
   const content = readFileSync(filepath, 'utf-8');
@@ -112,7 +112,7 @@ function parseFrame(filepath: string): FrameData {
   };
 }
 
-// ── Cross-Frame Analysis ──
+//  Cross-Frame Analysis 
 
 /**
  * Find principles that appear semantically similar across 2+ frames.
@@ -190,7 +190,7 @@ function computeSimilarity(a: string, b: string): number {
   return intersection / union;
 }
 
-// ── Frame Health Assessment ──
+//  Frame Health Assessment 
 
 function assessHealth(frame: FrameData): FrameHealth {
   const daysSinceCrystallized = frame.lastCrystallized !== 'unknown'
@@ -218,7 +218,7 @@ function assessHealth(frame: FrameData): FrameHealth {
   };
 }
 
-// ── Output Generation ──
+//  Output Generation 
 
 function generatePrinciplesReport(crossPrinciples: CrossPrinciple[], frames: FrameData[]): string {
   const date = new Date().toISOString().split('T')[0];
@@ -285,7 +285,7 @@ ${healthData.filter(h => h.antiPatternCount === 0).map(h => `- **${h.domain}:** 
 `;
 }
 
-// ── Main ──
+//  Main 
 
 if (import.meta.main) {
   const { values } = parseArgs({
@@ -335,7 +335,7 @@ Output: WISDOM/PRINCIPLES/verified.md and WISDOM/META/frame-health.md
     } else {
       if (!existsSync(META_DIR)) mkdirSync(META_DIR, { recursive: true });
       writeFileSync(join(META_DIR, 'frame-health.md'), report);
-      console.log(`✅ Health report written to WISDOM/META/frame-health.md`);
+      console.log(` Health report written to WISDOM/META/frame-health.md`);
     }
     process.exit(0);
   }
@@ -352,13 +352,13 @@ Output: WISDOM/PRINCIPLES/verified.md and WISDOM/META/frame-health.md
   } else {
     if (!existsSync(PRINCIPLES_DIR)) mkdirSync(PRINCIPLES_DIR, { recursive: true });
     writeFileSync(join(PRINCIPLES_DIR, 'verified.md'), report);
-    console.log(`✅ Principles report written to WISDOM/PRINCIPLES/verified.md`);
+    console.log(` Principles report written to WISDOM/PRINCIPLES/verified.md`);
 
     // Also generate health report
     const healthData = frames.map(assessHealth);
     const healthReport = generateHealthReport(healthData);
     if (!existsSync(META_DIR)) mkdirSync(META_DIR, { recursive: true });
     writeFileSync(join(META_DIR, 'frame-health.md'), healthReport);
-    console.log(`✅ Health report written to WISDOM/META/frame-health.md`);
+    console.log(` Health report written to WISDOM/META/frame-health.md`);
   }
 }

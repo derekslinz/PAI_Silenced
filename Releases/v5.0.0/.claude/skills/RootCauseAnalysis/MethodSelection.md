@@ -6,22 +6,22 @@ Decision Flow
 
 ```
 Is this an incident or a defect?
-│
-├─ Incident (production outage, security event, data loss)
-│    │
-│    └─ Use Postmortem as wrapper
-│         ├─ Single thread, clear mechanism → Whys inside
-│         ├─ Multiple suspected categories → Fishbone inside
-│         ├─ "Works here not there" subtle → Kepner-Tregoe inside
-│         └─ Safety/security-critical → Fault Tree Analysis inside
-│
-└─ Defect (recurring bug, quality drift, process failure)
-     │
-     ├─ Simple, single-thread → Whys
-     ├─ Multi-category or brainstorm needed → Fishbone + Pareto
-     ├─ Deviation from known-good → Kepner-Tregoe IS/IS-NOT
-     ├─ Novel, never-happened-before → Apollo/RealityCharting
-     └─ Complex interacting failures → Fault Tree
+
+ Incident (production outage, security event, data loss)
+    
+     Use Postmortem as wrapper
+          Single thread, clear mechanism → Whys inside
+          Multiple suspected categories → Fishbone inside
+          "Works here not there" subtle → Kepner-Tregoe inside
+          Safety/security-critical → Fault Tree Analysis inside
+
+ Defect (recurring bug, quality drift, process failure)
+     
+      Simple, single-thread → Whys
+      Multi-category or brainstorm needed → Fishbone + Pareto
+      Deviation from known-good → Kepner-Tregoe IS/IS-NOT
+      Novel, never-happened-before → Apollo/RealityCharting
+      Complex interacting failures → Fault Tree
 ```
 
 Quick Decision Table

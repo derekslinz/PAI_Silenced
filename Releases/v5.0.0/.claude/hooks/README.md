@@ -38,54 +38,54 @@ Hooks are TypeScript scripts that execute at specific lifecycle events in Claude
 ### Execution Model
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        Claude Code Session                          │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  SessionStart ──┬──► KittyEnvPersist (terminal env + tab reset)     │
-│                 ├──► LoadContext (dynamic context injection)         │
-│                 └──► KVSync (push work.json to CF KV)              │
-│                                                                     │
-│  UserPromptSubmit ──► SessionAnalysis (rating + tab + session name) │
-│                                                                     │
-│  UserPromptSubmit ──┬──► PromptGuard (PromptInspector — no LLM)     │
-│                     ├──► SessionAnalysis (rating + tab + name)      │
-│                     └──► SatisfactionCapture                        │
-│                                                                     │
-│  PreToolUse ──┬──► SecurityPipeline (Bash/Edit/Write/MultiEdit)     │
-│               │     └─► [PatternInspector → EgressInspector]        │
-│               ├──► Context Reduction (Bash → compressed commands)   │
-│               ├──► SetQuestionTab (AskUserQuestion)                 │
-│               ├──► AgentGuard (Pulse HTTP: localhost:31337)          │
-│               └──► SkillGuard (Pulse HTTP: localhost:31337)          │
-│                                                                     │
-│  PostToolUse ──┬──► QuestionAnswered (AskUserQuestion)              │
-│                ├──► ISASync (ISA → work.json + KV sync)             │
-│                └──► ContentScanner (injection detection)            │
-│                                                                     │
-│  PermissionRequest ──► SmartApprover (trusted/read=approve)         │
-│                                                                     │
-│  PostToolUseFailure ──► ToolFailureTracker (error logging)          │
-│                                                                     │
-│  Stop ──┬──► LastResponseCache (cache response for ratings)         │
-│         ├──► ResponseTabReset (tab title/color reset)              │
-│         ├──► DocIntegrity (cross-refs + arch summary regen)        │
-│         └──► StopNotify (push notification)                        │
-│                                                                     │
-│  PreToolUse:Agent  ──► AgentInvocation (subagent_start, capture type)│
-│  PostToolUse:Agent ──► AgentInvocation (subagent_stop, duration)    │
-│  TeammateIdle ───► TeammateIdle (idle event logging)                │
-│                                                                     │
-│  ConfigChange ──► ConfigAudit (security audit trail)                │
-│                                                                     │
-│  SessionEnd ──┬──► WorkCompletionLearning (insight extraction)      │
-│               ├──► SessionCleanup (work completion + state clear)   │
-│               ├──► RelationshipMemory (relationship notes)          │
-│               ├──► UpdateCounts (system counts + usage cache)       │
-│               ├──► IntegrityCheck (PAI + doc drift detection)       │
-│               └──► KVSync (push work.json to CF KV)                │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
+
+                        Claude Code Session                          
+
+                                                                     
+  SessionStart  KittyEnvPersist (terminal env + tab reset)     
+                  LoadContext (dynamic context injection)         
+                  KVSync (push work.json to CF KV)              
+                                                                     
+  UserPromptSubmit  SessionAnalysis (rating + tab + session name) 
+                                                                     
+  UserPromptSubmit  PromptGuard (PromptInspector — no LLM)     
+                      SessionAnalysis (rating + tab + name)      
+                      SatisfactionCapture                        
+                                                                     
+  PreToolUse  SecurityPipeline (Bash/Edit/Write/MultiEdit)     
+                     [PatternInspector → EgressInspector]        
+                Context Reduction (Bash → compressed commands)   
+                SetQuestionTab (AskUserQuestion)                 
+                AgentGuard (Pulse HTTP: localhost:31337)          
+                SkillGuard (Pulse HTTP: localhost:31337)          
+                                                                     
+  PostToolUse  QuestionAnswered (AskUserQuestion)              
+                 ISASync (ISA → work.json + KV sync)             
+                 ContentScanner (injection detection)            
+                                                                     
+  PermissionRequest  SmartApprover (trusted/read=approve)         
+                                                                     
+  PostToolUseFailure  ToolFailureTracker (error logging)          
+                                                                     
+  Stop  LastResponseCache (cache response for ratings)         
+          ResponseTabReset (tab title/color reset)              
+          DocIntegrity (cross-refs + arch summary regen)        
+          StopNotify (push notification)                        
+                                                                     
+  PreToolUse:Agent   AgentInvocation (subagent_start, capture type)
+  PostToolUse:Agent  AgentInvocation (subagent_stop, duration)    
+  TeammateIdle  TeammateIdle (idle event logging)                
+                                                                     
+  ConfigChange  ConfigAudit (security audit trail)                
+                                                                     
+  SessionEnd  WorkCompletionLearning (insight extraction)      
+                SessionCleanup (work completion + state clear)   
+                RelationshipMemory (relationship notes)          
+                UpdateCounts (system counts + usage cache)       
+                IntegrityCheck (PAI + doc drift detection)       
+                KVSync (push work.json to CF KV)                
+                                                                     
+
 ```
 
 ---
@@ -233,23 +233,23 @@ Outputs: `teammate-events.jsonl`.
 
 ```
 User Message
-    │
-    ▼
-SessionAnalysis ─── explicit rating "8 - great"? ──► write rating + exit
-    │ (no explicit match)
-    ├── positive praise "great job"? ──► write rating 8 + exit
-    │ (no fast path)
-    ▼
-    ├── Set purple/thinking tab title (deterministic)
-    ├── Deterministic session name (first prompt only)
-    │
-    ▼
+    
+    
+SessionAnalysis  explicit rating "8 - great"?  write rating + exit
+     (no explicit match)
+     positive praise "great job"?  write rating 8 + exit
+     (no fast path)
+    
+     Set purple/thinking tab title (deterministic)
+     Deterministic session name (first prompt only)
+    
+    
     Single Haiku inference → sentiment + tab title + session name
-    │
-    ├── Write rating → ratings.jsonl
-    ├── Set orange/working tab title
-    ├── Store session name → session-names.json
-    └── Background Sonnet upgrade (first prompt only)
+    
+     Write rating → ratings.jsonl
+     Set orange/working tab title
+     Store session name → session-names.json
+     Background Sonnet upgrade (first prompt only)
 ```
 
 **Design**: Single consolidated hook. Three fast paths checked first (no inference). Single Haiku call returns all three outputs. Background Sonnet upgrade for session name quality on first prompt only.
@@ -258,17 +258,17 @@ SessionAnalysis ─── explicit rating "8 - great"? ──► write rating + 
 
 ```
 SessionStart
-    │
-    ▼
-Algorithm (AI) ─► Creates WORK/<slug>/ISA.md directly
-    │                                          │
-    │                                          ▼
-    │                               current-work.json (state)
-    │                                          │
-    ▼                                          │
-SessionEnd ─┬─► WorkCompletionLearning ────────┤
-            │                                  │
-            └─► SessionCleanup ─► Marks as COMPLETED
+    
+    
+Algorithm (AI)  Creates WORK/<slug>/ISA.md directly
+                                              
+                                              
+                                   current-work.json (state)
+                                              
+                                              
+SessionEnd  WorkCompletionLearning 
+                                              
+             SessionCleanup  Marks as COMPLETED
 ```
 
 **Coordination**: `current-work.json` is the shared state file. The AI creates it during Algorithm execution, SessionCleanup clears it.
@@ -277,22 +277,22 @@ SessionEnd ─┬─► WorkCompletionLearning ────────┤
 
 ```
 PreToolUse (Bash/Edit/Write/Read)
-    │
-    ▼
-SecurityPipeline ─► InspectorPipeline
-    │
-    ├─► PatternInspector (100) ─► patterns.yaml
-    ├─► EgressInspector (90) ─── outbound monitoring
-    └─► RulesInspector (50) ──── DISABLED (empty SECURITY_RULES.md)
-    │
-    ├─► allow ────────────────► Tool executes
-    ├─► require_approval ─────► User prompted
-    ├─► alert ────────────────► Logged, tool executes
-    └─► deny ─────────────────► Hard block (exit 2)
+    
+    
+SecurityPipeline  InspectorPipeline
+    
+     PatternInspector (100)  patterns.yaml
+     EgressInspector (90)  outbound monitoring
+     RulesInspector (50)  DISABLED (empty SECURITY_RULES.md)
+    
+     allow  Tool executes
+     require_approval  User prompted
+     alert  Logged, tool executes
+     deny  Hard block (exit 2)
 
-PostToolUse ─► ContentScanner ─► InjectionInspector (WebFetch/WebSearch only)
-PermissionRequest ─► SmartApprover ─► trusted/read=approve
-UserPromptSubmit ─► PromptGuard ─► PromptInspector (95) heuristic-only
+PostToolUse  ContentScanner  InjectionInspector (WebFetch/WebSearch only)
+PermissionRequest  SmartApprover  trusted/read=approve
+UserPromptSubmit  PromptGuard  PromptInspector (95) heuristic-only
 
 All events logged to: MEMORY/SECURITY/YYYY/MM/
 ```
@@ -301,25 +301,25 @@ All events logged to: MEMORY/SECURITY/YYYY/MM/
 
 ```
 UserPromptSubmit
-    │
-    ▼
+    
+    
 SessionAnalysis
-    ├─► Sets tab to PURPLE (#5B21B6) ─► "🧠 Processing..."
-    │
-    ├─► Single Haiku inference (sentiment + title + name)
-    │
-    └─► Sets tab to ORANGE (#B35A00) ─► "⚙️ Fixing auth..."
+     Sets tab to PURPLE (#5B21B6)  " Processing..."
+    
+     Single Haiku inference (sentiment + title + name)
+    
+     Sets tab to ORANGE (#B35A00)  " Fixing auth..."
 
 PreToolUse (AskUserQuestion)
-    │
-    ▼
-SetQuestionTab ─► Sets tab to AMBER (#604800) ─► Shows question summary
+    
+    
+SetQuestionTab  Sets tab to AMBER (#604800)  Shows question summary
 
 Stop
-    │
-    ▼
+    
+    
 Stop hooks:
-    └─► ResponseTabReset → DEFAULT (UL blue)
+     ResponseTabReset → DEFAULT (UL blue)
 ```
 
 ---
@@ -329,34 +329,34 @@ Stop hooks:
 ### Memory System Integration
 
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│                         MEMORY/                                  │
-├────────────────┬─────────────────┬───────────────────────────────┤
-│    WORK/       │   LEARNING/     │   STATE/                      │
-│                │                 │                               │
-│ ┌────────────┐ │ ┌─────────────┐ │ ┌───────────────────────────┐ │
-│ │ Session    │ │ │ SIGNALS/    │ │ │ current-work.json         │ │
-│ │ Directories│ │ │ ratings.jsonl│ │ │ trending-cache.json       │ │
-│ │            │ │ │             │ │ │ model-cache.txt           │ │
-│ └─────▲──────┘ │ └──────▲──────┘ │ └───────────▲───────────────┘ │
-│       │        │        │        │             │                 │
-└───────┼────────┴────────┼────────┴─────────────┼─────────────────┘
-        │                 │                      │
-        │                 │                      │
-┌───────┴─────────────────┴──────────────────────┴─────────────────┐
-│                        HOOKS                                     │
-│                                                                  │
-│  ISASync ──────────────────────────────────► work.json + KV     │
-│  KVSync ───────────────────────────────────► KV (session sync) │
-│  SessionAnalysis ─────────────────────────► ratings.jsonl      │
-│  SessionAnalysis ─────────────────────────► session-names.json │
-│  ToolFailureTracker ──────────────────────► OBSERVABILITY/     │
-│  AgentInvocation ─────────────────────────► OBSERVABILITY/     │
-│  ConfigAudit ─────────────────────────────► OBSERVABILITY/     │
-│  WorkCompletionLearning ────────────────────► LEARNING/          │
-│  SessionCleanup ────────────────────────────► WORK/ + state      │
-│                                                                  │
-└──────────────────────────────────────────────────────────────────┘
+
+                         MEMORY/                                  
+
+    WORK/          LEARNING/        STATE/                      
+                                                                
+      
+  Session       SIGNALS/       current-work.json          
+  Directories   ratings.jsonl   trending-cache.json        
+                               model-cache.txt            
+      
+                                                             
+
+                                               
+                                               
+
+                        HOOKS                                     
+                                                                  
+  ISASync  work.json + KV     
+  KVSync  KV (session sync) 
+  SessionAnalysis  ratings.jsonl      
+  SessionAnalysis  session-names.json 
+  ToolFailureTracker  OBSERVABILITY/     
+  AgentInvocation  OBSERVABILITY/     
+  ConfigAudit  OBSERVABILITY/     
+  WorkCompletionLearning  LEARNING/          
+  SessionCleanup  WORK/ + state      
+                                                                  
+
 ```
 
 ---

@@ -25,10 +25,10 @@ Core Rules
 
 MANDATORY: BOLD / HIGH-CONTRAST / SATURATED 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-️  Nano Banana Pro DEFAULTS to thin/pastel — REJECTED by the user. ️
-️  You MUST push the prompt HARD for bold, saturated, crisp.     ️
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Nano Banana Pro DEFAULTS to thin/pastel — REJECTED by the user. 
+  You MUST push the prompt HARD for bold, saturated, crisp.     
+
 ```
 
 Every technical-diagram prompt MUST repeat the following directives (multiple times if needed) or the output will come back bleached and rejected:

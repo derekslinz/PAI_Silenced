@@ -27,21 +27,21 @@ Direct TypeScript access to the most popular Apify actors without MCP overhead. 
 Available Actors
 
 Social Media (platforms)
-- Instagram(k users, .★) - Profiles, posts, hashtags, comments
-- LinkedIn(k users, .★) - Profiles, jobs, posts
-- TikTok(k users, .★) - Profiles, videos, hashtags, comments
-- YouTube(k users, .★) - Channels, videos, comments, search
-- Facebook(k users, .★) - Posts, groups, comments
+- Instagram(k users, .) - Profiles, posts, hashtags, comments
+- LinkedIn(k users, .) - Profiles, jobs, posts
+- TikTok(k users, .) - Profiles, videos, hashtags, comments
+- YouTube(k users, .) - Channels, videos, comments, search
+- Facebook(k users, .) - Posts, groups, comments
 
 Business & Lead Generation
-- Google Maps(k users, .★) - HIGHEST VALUE!  - Search businesses, extract contacts, reviews, images
+- Google Maps(k users, .) - HIGHEST VALUE!  - Search businesses, extract contacts, reviews, images
   - Perfect for lead generation
 
 E-commerce
-- Amazon(k users, .★) - Products, reviews, pricing
+- Amazon(k users, .) - Products, reviews, pricing
 
 Web Scraping
-- Web Scraper(k users, .★) - General-purpose, works with ANY website
+- Web Scraper(k users, .) - General-purpose, works with ANY website
 
 Quick Start
 
@@ -390,7 +390,7 @@ General Web
 - `scrapeWebsite(input)` - Custom multi-page crawling
 - `scrapePage(url, pageFunction)` - Single page extraction
 
-️ Configuration
+ Configuration
 
 Environment Variables:```bash
 Required - Get from https://console.apify.com/account/integrations

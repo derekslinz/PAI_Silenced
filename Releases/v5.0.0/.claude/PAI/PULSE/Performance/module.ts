@@ -42,7 +42,7 @@ export function performanceHealth(): Record<string, unknown> {
   }
 }
 
-// ── JSONL Reader ──
+//  JSONL Reader 
 
 function readJsonl<T = any>(filePath: string): T[] {
   try {
@@ -61,7 +61,7 @@ function readJsonl<T = any>(filePath: string): T[] {
   }
 }
 
-// ── Cost API ──
+//  Cost API 
 
 function handleCostApi(url: URL): Response {
   const sessions = readJsonl(SESSION_COSTS_PATH)
@@ -148,7 +148,7 @@ function handleCostApi(url: URL): Response {
   })
 }
 
-// ── Failures API ──
+//  Failures API 
 
 function handleFailuresApi(): Response {
   const failures = readJsonl(TOOL_FAILURES_PATH)
@@ -219,7 +219,7 @@ function handleFailuresApi(): Response {
   })
 }
 
-// ── Summary API ──
+//  Summary API 
 
 function handleSummaryApi(): Response {
   const sessions = readJsonl(SESSION_COSTS_PATH)
@@ -250,7 +250,7 @@ function handleSummaryApi(): Response {
   })
 }
 
-// ── Request Router ──
+//  Request Router 
 
 export async function handlePerformanceRequest(req: Request): Promise<Response | null> {
   if (!config.enabled) return null
@@ -268,7 +268,7 @@ export async function handlePerformanceRequest(req: Request): Promise<Response |
   return null
 }
 
-// ── Anthropic cost (subscription vs API billing) ──
+//  Anthropic cost (subscription vs API billing) 
 //
 // Reads the ledger + baseline written by PAI/TOOLS/CostTracker.ts and returns
 // the data the /performance "Anthropic" tab needs: latest snapshot, last-24h

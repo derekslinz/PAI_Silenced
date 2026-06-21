@@ -35,23 +35,23 @@ STEPS:
 STRUCTURE:
 ```css
 jamf-script-generator/
-├── src/
-│   ├── __init__.py
-│   ├── yaml_parser.py
-│   ├── script_generator.py
-│   ├── jamf_api.py
-│   └── main.py
-├── config/
-│   └── example.yaml
-├── logs/
-│   └── upload.log
-├── tests/
-│   ├── test_yaml_parser.py
-│   ├── test_script_generator.py
-│   ├── test_jamf_api.py
-│   └── test_main.py
-├── requirements.txt
-└── README.md
+ src/
+    __init__.py
+    yaml_parser.py
+    script_generator.py
+    jamf_api.py
+    main.py
+ config/
+    example.yaml
+ logs/
+    upload.log
+ tests/
+    test_yaml_parser.py
+    test_script_generator.py
+    test_jamf_api.py
+    test_main.py
+ requirements.txt
+ README.md
 ```
 
 DETAILED EXPLANATION:

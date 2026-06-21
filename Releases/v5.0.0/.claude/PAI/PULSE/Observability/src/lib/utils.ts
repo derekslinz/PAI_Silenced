@@ -34,7 +34,7 @@ export function getSourceIcon(source: string): string {
     claude: "",
     perplexity: "",
     direct: "",
-    onsite: "➡️",
+    onsite: "",
   };
   return icons[source.toLowerCase()] || "";
 }

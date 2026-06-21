@@ -42,8 +42,8 @@ User Customization Directory
 Create your customizations at:
 ```
 ~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/Agents/
-├── Traits.yaml       Your traits (expertise, personality, approach)
-└── NamedAgents.md    Your named agent backstories (optional)
+ Traits.yaml       Your traits (expertise, personality, approach)
+ NamedAgents.md    Your named agent backstories (optional)
 ```
 
 Overview
@@ -180,14 +180,14 @@ Hybrid Agent Model
 The Agent Spectrum
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│   NAMED AGENTS          HYBRID USE          DYNAMIC AGENTS          │
-│   (Relationship)        (Best of Both)      (Task-Specific)         │
-├──────────────────────────────────────────────────────────────────────┤
-│ Defined in USER     "Security expert       Ephemeral specialist     │
-│ NamedAgents.md      with [named agent]'s   composed from traits     │
-│                      skepticism"                                     │
-└─────────────────────────────────────────────────────────────────────┘
+
+   NAMED AGENTS          HYBRID USE          DYNAMIC AGENTS          
+   (Relationship)        (Best of Both)      (Task-Specific)         
+
+ Defined in USER     "Security expert       Ephemeral specialist     
+ NamedAgents.md      with [named agent]'s   composed from traits     
+                      skepticism"                                     
+
 ```
 
 Examples

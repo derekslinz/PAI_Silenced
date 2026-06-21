@@ -453,7 +453,7 @@ function AnthropicTab({ data }: { data: AnthropicData | null }) {
           icon={bypassSites.length > 0 ? XCircle : CheckCircle2}
           label="Bypass call sites"
           value={String(bypassSites.length)}
-          sub={bypassSites.length === 0 ? "✅ all guarded" : "🚨 review and patch"}
+          sub={bypassSites.length === 0 ? "✅ all guarded" : " review and patch"}
         />
       </div>
 

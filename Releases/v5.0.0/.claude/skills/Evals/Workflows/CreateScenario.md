@@ -80,12 +80,12 @@ Structure
 
 ```
 skills/Evals/
-├── Scenarios/                       authored scenarios live here
-│   └── <name>.scenario.ts
-├── Tools/
-│   ├── PAIAgentAdapter.ts           wraps Inference.ts as scenario AgentAdapter
-│   ├── ScenarioRunner.ts            CLI entrypoint
-│   └── ScenarioToTranscript.ts      result → Evals types
+ Scenarios/                       authored scenarios live here
+    <name>.scenario.ts
+ Tools/
+    PAIAgentAdapter.ts           wraps Inference.ts as scenario AgentAdapter
+    ScenarioRunner.ts            CLI entrypoint
+    ScenarioToTranscript.ts      result → Evals types
 ```
 
 See also
