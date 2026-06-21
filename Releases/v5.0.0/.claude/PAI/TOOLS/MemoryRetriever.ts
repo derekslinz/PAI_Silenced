@@ -35,6 +35,7 @@ import { parseArgs } from "util";
 import * as fs from "fs";
 import * as path from "path";
 import { spawnSync } from "child_process";
+import { Database } from "bun:sqlite";
 
 // ============================================================================
 // Configuration
@@ -113,8 +114,36 @@ function parseFrontmatter(content: string): { frontmatter: Frontmatter; body: st
 // File Discovery
 // ============================================================================
 
+const DB_PATH = path.join(KNOWLEDGE_DIR, "knowledge_cache.db");
+
 function discoverNotes(): KnowledgeNote[] {
+  const db = new Database(DB_PATH);
+  
+  // Initialize table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS notes (
+      filepath TEXT PRIMARY KEY,
+      mtime INTEGER NOT NULL,
+      title TEXT,
+      type TEXT,
+      tags TEXT,
+      related TEXT,
+      body TEXT,
+      word_count INTEGER
+    )
+  `);
+
   const notes: KnowledgeNote[] = [];
+  const foundFilepaths = new Set<string>();
+
+  // Prepare statements
+  const selectStmt = db.prepare("SELECT mtime, title, type, tags, related, body, word_count FROM notes WHERE filepath = ?");
+  const insertStmt = db.prepare(`
+    INSERT OR REPLACE INTO notes (filepath, mtime, title, type, tags, related, body, word_count)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+  const deleteStmt = db.prepare("DELETE FROM notes WHERE filepath = ?");
+  const selectAllStmt = db.prepare("SELECT filepath FROM notes");
 
   for (const domain of DOMAINS) {
     const domainDir = path.join(KNOWLEDGE_DIR, domain);
@@ -126,17 +155,82 @@ function discoverNotes(): KnowledgeNote[] {
 
     for (const file of files) {
       const filePath = path.join(domainDir, file);
+      foundFilepaths.add(filePath);
       try {
-        const content = fs.readFileSync(filePath, "utf-8");
-        const { frontmatter, body } = parseFrontmatter(content);
-        const wordCount = body.split(/\s+/).filter(Boolean).length;
-        notes.push({ filePath, frontmatter, body, wordCount });
-      } catch {
+        const stat = fs.statSync(filePath);
+        const mtime = Math.round(stat.mtimeMs);
+
+        // Check if DB has up-to-date cache
+        const cached = selectStmt.get(filePath) as {
+          mtime: number;
+          title: string | null;
+          type: string | null;
+          tags: string | null;
+          related: string | null;
+          body: string;
+          word_count: number;
+        } | undefined;
+
+        if (cached && cached.mtime === mtime) {
+          notes.push({
+            filePath,
+            frontmatter: {
+              title: cached.title || undefined,
+              type: cached.type || undefined,
+              tags: cached.tags ? JSON.parse(cached.tags) : undefined,
+              related: cached.related ? JSON.parse(cached.related) : undefined,
+            },
+            body: cached.body,
+            wordCount: cached.word_count,
+          });
+        } else {
+          // Parse file and update cache
+          const content = fs.readFileSync(filePath, "utf-8");
+          const { frontmatter, body } = parseFrontmatter(content);
+          const wordCount = body.split(/\s+/).filter(Boolean).length;
+          
+          const tagsStr = frontmatter.tags ? JSON.stringify(frontmatter.tags) : null;
+          const relatedStr = frontmatter.related ? JSON.stringify(frontmatter.related) : null;
+
+          insertStmt.run(
+            filePath,
+            mtime,
+            frontmatter.title || null,
+            frontmatter.type || null,
+            tagsStr,
+            relatedStr,
+            body,
+            wordCount
+          );
+
+          notes.push({
+            filePath,
+            frontmatter,
+            body,
+            wordCount,
+          });
+        }
+      } catch (err) {
         // Skip unreadable files
       }
     }
   }
 
+  // Prune deleted files from cache DB
+  try {
+    const allCached = selectAllStmt.all() as { filepath: string }[];
+    db.run("BEGIN TRANSACTION");
+    for (const row of allCached) {
+      if (!foundFilepaths.has(row.filepath)) {
+        deleteStmt.run(row.filepath);
+      }
+    }
+    db.run("COMMIT");
+  } catch (err) {
+    try { db.run("ROLLBACK"); } catch {}
+  }
+
+  db.close();
   return notes;
 }
 

@@ -44,6 +44,7 @@ import { getPaiDir, getSettingsPath } from './lib/paths';
 import { recordSessionStart } from './lib/notifications';
 import { loadLearningDigest, loadWisdomFrames, loadFailurePatterns, loadSignalTrends, loadSynthesisPatterns } from './lib/learning-readback';
 import { findArtifactPath } from './lib/isa-utils';
+import { getSettings } from './lib/identity';
 
 interface DynamicContextConfig {
   relationshipContext?: boolean;
@@ -70,15 +71,7 @@ function isDynamicEnabled(settings: Settings, key: keyof DynamicContextConfig): 
  * Load settings.json and return the settings object.
  */
 function loadSettings(): Settings {
-  const settingsPath = getSettingsPath();
-  if (existsSync(settingsPath)) {
-    try {
-      return JSON.parse(readFileSync(settingsPath, 'utf-8'));
-    } catch (err) {
-      console.error(` Failed to parse settings.json: ${err}`);
-    }
-  }
-  return {};
+  return getSettings() as Settings;
 }
 
 // v5.0: loadStartupFiles removed — static files now loaded via @imports in CLAUDE.md.template

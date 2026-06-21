@@ -149,15 +149,6 @@
             "url": "http://localhost:31337/hooks/agent-guard"
           }
         ]
-      },
-      {
-        "matcher": "AskUserQuestion",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/SetQuestionTab.hook.ts"
-          }
-        ]
       }
     ],
     "PostToolUse": [
@@ -182,15 +173,6 @@
         ]
       },
       {
-        "matcher": "AskUserQuestion",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/QuestionAnswered.hook.ts"
-          }
-        ]
-      },
-      {
         "matcher": "Write",
         "hooks": [
           {
@@ -207,6 +189,17 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/TelosSummarySync.hook.ts",
+            "timeout": 5,
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/ISASync.hook.ts",
             "timeout": 5,
             "async": true
           }
@@ -315,13 +308,32 @@
       }
     ],
     "SubagentStop": [],
-    "SessionStart": [
+    "PermissionRequest": [
+      {
+        "matcher": "Read|Glob|Grep|LS|Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/SmartApprover.hook.ts"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.claude/hooks/KittyEnvPersist.hook.ts"
-          },
+            "command": "$HOME/.claude/hooks/ToolFailureTracker.hook.ts",
+            "timeout": 5,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/LoadContext.hook.ts"
@@ -341,10 +353,6 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/LastResponseCache.hook.ts"
-          },
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/ResponseTabReset.hook.ts"
           },
           {
             "type": "command",
@@ -1140,7 +1148,6 @@
       "v5.0 eliminated packs. The release IS the .claude/ directory — install by copying directly.",
       "PRD frontmatter has 8 fields: task, slug, effort, phase, progress, mode, started, updated.",
       "PRD body has 4 sections: Context, Criteria (ISC checkboxes), Decisions, Verification.",
-      "PRDSync.hook.ts fires on Write/Edit of PRD.md and syncs frontmatter to work.json for the dashboard.",
       "Context compaction at phase boundaries prevents context rot — the #1 cause of late-phase failures."
     ]
   },

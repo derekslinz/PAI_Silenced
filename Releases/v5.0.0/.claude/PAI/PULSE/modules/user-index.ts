@@ -596,7 +596,7 @@ export async function handleRequest(path: string, _body: Record<string, unknown>
   if (!existsSync(INDEX_PATH)) {
     return Response.json({ error: "Index not generated yet" }, { status: 503 })
   }
-  const index = JSON.parse(readFileSync(INDEX_PATH, "utf-8")) as UserIndex
+  const index = await Bun.file(INDEX_PATH).json() as UserIndex
 
   if (path === "/" || path === "") return Response.json(index)
   if (path === "/stats") return Response.json(index.stats)

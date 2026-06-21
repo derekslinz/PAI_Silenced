@@ -6,11 +6,12 @@
  * All hooks and tools should import from here.
  */
 
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync, statSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 const HOME = process.env.HOME!;
 const SETTINGS_PATH = join(HOME, '.claude/settings.json');
+const CACHE_PATH = join(HOME, '.claude/settings.identity.cache.json');
 
 // Default identity (fallback if settings.json doesn't have identity section)
 const DEFAULT_IDENTITY = {
@@ -73,8 +74,42 @@ function loadSettings(): Settings {
       return cachedSettings;
     }
 
+    const settingsStat = statSync(SETTINGS_PATH);
+    const settingsMtime = settingsStat.mtimeMs;
+
+    if (existsSync(CACHE_PATH)) {
+      const cacheStat = statSync(CACHE_PATH);
+      if (cacheStat.mtimeMs >= settingsMtime) {
+        try {
+          const cacheContent = readFileSync(CACHE_PATH, 'utf-8');
+          cachedSettings = JSON.parse(cacheContent);
+          return cachedSettings!;
+        } catch {
+          // Fall through to parse SETTINGS_PATH if cache read fails
+        }
+      }
+    }
+
     const content = readFileSync(SETTINGS_PATH, 'utf-8');
-    cachedSettings = JSON.parse(content);
+    const fullSettings = JSON.parse(content);
+    
+    // Extract only the fields we care about to keep the cache file small
+    cachedSettings = {
+      daidentity: fullSettings.daidentity,
+      principal: fullSettings.principal,
+      env: fullSettings.env,
+      observability: fullSettings.observability,
+      dynamicContext: fullSettings.dynamicContext,
+      postCompactRestore: fullSettings.postCompactRestore,
+      notifications: fullSettings.notifications
+    };
+
+    try {
+      writeFileSync(CACHE_PATH, JSON.stringify(cachedSettings), 'utf-8');
+    } catch {
+      // Ignore write errors to prevent crashes if directory is read-only
+    }
+
     return cachedSettings!;
   } catch {
     cachedSettings = {};

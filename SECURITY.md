@@ -1,6 +1,6 @@
-# ⚠️ CRITICAL SECURITY NOTICE
+# CRITICAL SECURITY NOTICE
 
-## 🔴 PUBLIC REPOSITORY WARNING
+## PUBLIC REPOSITORY WARNING
 
 **PAI is a PUBLIC version of the personal PAI_DIRECTORY infrastructure**
 
@@ -8,7 +8,7 @@
 
 This repository is **PUBLIC** and visible to everyone on the internet. It's a sanitized, public instance of the personal PAI_DIRECTORY infrastructure. When moving functionality from PAI_DIRECTORY to PAI:
 
-### ❌ NEVER INCLUDE:
+### NEVER INCLUDE:
 - Personal API keys or tokens
 - Private email addresses or phone numbers
 - Financial account information
@@ -20,7 +20,7 @@ This repository is **PUBLIC** and visible to everyone on the internet. It's a sa
 - Security credentials
 - Personal file paths beyond ${PAI_DIR}
 
-### ✅ SAFE TO INCLUDE:
+### SAFE TO INCLUDE:
 - Generic command structures
 - Public documentation
 - Example configurations (with placeholder values)
@@ -28,7 +28,7 @@ This repository is **PUBLIC** and visible to everyone on the internet. It's a sa
 - General-purpose tools
 - Public API documentation
 
-### 🔍 BEFORE EVERY COMMIT:
+### BEFORE EVERY COMMIT:
 
 1. **Audit all changes** - Review every file being committed
 2. **Search for sensitive data** - grep for emails, keys, tokens
@@ -36,7 +36,7 @@ This repository is **PUBLIC** and visible to everyone on the internet. It's a sa
 4. **Verify paths** - All paths should use ${PAI_DIR}, not personal directories
 5. **Test with fresh install** - Ensure it works without your personal setup
 
-### 📋 TRANSFER CHECKLIST:
+### TRANSFER CHECKLIST:
 
 When copying from PAI_DIRECTORY to PAI:
 
@@ -48,7 +48,7 @@ When copying from PAI_DIRECTORY to PAI:
 - [ ] Update documentation to be generic
 - [ ] Test in clean environment
 
-### 🚨 IF YOU ACCIDENTALLY COMMIT SENSITIVE DATA:
+### IF YOU ACCIDENTALLY COMMIT SENSITIVE DATA:
 
 1. **Immediately** remove from GitHub
 2. Revoke any exposed API keys
@@ -57,7 +57,7 @@ When copying from PAI_DIRECTORY to PAI:
 5. Force push cleaned history
 6. Audit for any data that may have been scraped
 
-### 💡 BEST PRACTICES:
+### BEST PRACTICES:
 
 - Keep PAI_DIRECTORY private and local
 - PAI should be the generic, public template
@@ -92,7 +92,7 @@ Skills that interact with external content are potential attack vectors:
 
 #### 1. Never Use Shell Interpolation for External Input
 
-**❌ VULNERABLE (Command Injection):**
+** VULNERABLE (Command Injection):**
 ```bash
 # User-provided URL directly interpolated into shell command
 curl -L "[USER_PROVIDED_URL]"

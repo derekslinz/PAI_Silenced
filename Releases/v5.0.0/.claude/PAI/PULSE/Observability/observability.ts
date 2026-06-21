@@ -25,7 +25,7 @@
  */
 
 import { join, extname } from "path"
-import { readFileSync, readdirSync, existsSync, realpathSync } from "fs"
+import { readFileSync, readdirSync, existsSync, realpathSync, watch } from "fs"
 import YAML from "yaml"
 
 // Bun is always the runtime here (Pulse launches this via `bun`). The Next
@@ -113,10 +113,11 @@ export function observabilityHealth(): Record<string, unknown> {
 
 // ── JSONL Helper ──
 
-function readJsonlTail(filePath: string, maxLines = 100): any[] {
+async function readJsonlTail(filePath: string, maxLines = 100): Promise<any[]> {
   try {
-    if (!existsSync(filePath)) return []
-    const raw = readFileSync(filePath, "utf-8")
+    const file = Bun.file(filePath)
+    if (!(await file.exists())) return []
+    const raw = await file.text()
     const lines = raw.trim().split("\n").filter(Boolean)
     return lines
       .slice(-maxLines)
@@ -342,24 +343,31 @@ function handleAlgorithmApi(): Response {
 
 // ── /api/agents ──
 
-function handleAgentsApi(): Response {
-  return Response.json(readJsonlTail(SUBAGENT_EVENTS_PATH, 100).reverse())
+async function handleAgentsApi(): Promise<Response> {
+  const events = await readJsonlTail(SUBAGENT_EVENTS_PATH, 100)
+  return Response.json(events.reverse())
 }
 
 // ── /api/events/recent ──
 
-function handleEventsRecentApi(): Response {
-  const toolFailures = readJsonlTail(TOOL_FAILURES_PATH, 50).map((e) => ({
+async function handleEventsRecentApi(): Promise<Response> {
+  const [toolFailuresRaw, subagentEventsRaw, toolActivityRaw] = await Promise.all([
+    readJsonlTail(TOOL_FAILURES_PATH, 50),
+    readJsonlTail(SUBAGENT_EVENTS_PATH, 50),
+    readJsonlTail(TOOL_ACTIVITY_PATH, 100),
+  ])
+
+  const toolFailures = toolFailuresRaw.map((e) => ({
     ...e,
     source: "tool-failure",
     type: e.event || e.type || "tool-failure",
   }))
-  const subagentEvents = readJsonlTail(SUBAGENT_EVENTS_PATH, 50).map((e) => ({
+  const subagentEvents = subagentEventsRaw.map((e) => ({
     ...e,
     source: "subagent",
     type: e.event || e.type || "subagent",
   }))
-  const toolActivity = readJsonlTail(TOOL_ACTIVITY_PATH, 100).map((e) => ({
+  const toolActivity = toolActivityRaw.map((e) => ({
     ...e,
     source: "tool-activity",
     type: e.event || e.type || "tool_use",
@@ -377,8 +385,9 @@ function handleEventsRecentApi(): Response {
 
 // ── /api/observability/tool-failures ──
 
-function handleToolFailuresApi(): Response {
-  return Response.json(readJsonlTail(TOOL_FAILURES_PATH, 100).reverse())
+async function handleToolFailuresApi(): Promise<Response> {
+  const events = await readJsonlTail(TOOL_FAILURES_PATH, 100)
+  return Response.json(events.reverse())
 }
 
 // ── /api/novelty ──

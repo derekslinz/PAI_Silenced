@@ -33,6 +33,12 @@ const EGRESS_ALERTS: [RegExp, string][] = [
 
 const PIPE_TO_SHELL = /\|\s*(sh|bash|zsh)\b/i;
 
+// Strip single/double-quoted segments so a pipe char inside a quoted regex
+// (e.g. grep -oE '(ts|sh)') is not mistaken for a real `| sh` shell pipe.
+function stripQuoted(command: string): string {
+  return command.replace(/'[^']*'/g, "''").replace(/"[^"]*"/g, '""');
+}
+
 class EgressInspector implements Inspector {
   name = 'EgressInspector';
   priority = 90;
@@ -56,8 +62,8 @@ class EgressInspector implements Inspector {
       }
     }
 
-    // Pipe to shell interpreter
-    if (PIPE_TO_SHELL.test(command)) {
+    // Pipe to shell interpreter (ignore pipes inside quoted strings)
+    if (PIPE_TO_SHELL.test(stripQuoted(command))) {
       return deny('Piping output to shell interpreter');
     }
 
