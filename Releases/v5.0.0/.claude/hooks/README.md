@@ -412,6 +412,7 @@ Hooks are configured in `settings.json` under the `hooks` key:
 ### Matcher Patterns
 
 For `PreToolUse` hooks, matchers filter by tool name:
+
 - `"Bash"` - Matches Bash tool calls
 - `"Edit"` - Matches Edit tool calls
 - `"Write"` - Matches Write tool calls
@@ -472,6 +473,7 @@ Every hook MUST follow this documentation structure:
 ### Inline Documentation
 
 Functions should have JSDoc comments explaining:
+
 - What the function does
 - Parameters and return values
 - Any side effects

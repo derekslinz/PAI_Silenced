@@ -17,7 +17,6 @@ SETTINGS_FILE="$CLAUDE_HOME/settings.json"
 RATINGS_FILE="$PAI_DIR/MEMORY/LEARNING/SIGNALS/ratings.jsonl"
 MODEL_CACHE="$PAI_DIR/MEMORY/STATE/model-cache.txt"
 LOCATION_CACHE="$PAI_DIR/MEMORY/STATE/location-cache.json"
-WEATHER_CACHE="$PAI_DIR/MEMORY/STATE/weather-cache.json"
 USAGE_CACHE="/tmp/pai-usage-${USER:-anon}.json"
 LEARNING_CACHE="$PAI_DIR/MEMORY/STATE/learning-cache.sh"
 
@@ -86,18 +85,15 @@ settings_has_counts="${settings_has_counts:-false}"
 # 
 #  Cache            TTL     Rationale                                        
 # 
-#  Location         3600s   IP/geo rarely changes; external API              
-#  Weather           900s   15 min: weather changes slowly                   
-#  Counts           n/a     Read directly from settings.json (stop hook)     
+#  Location         3600s   IP/geo rarely changes; external API
+#  Counts           n/a     Read directly from settings.json (stop hook)
 #  Usage             900s   15 min: /api/oauth/usage has aggressive 429 limits
-#  Learning           30s   Ratings change infrequently mid-session          
-#  Session name     mtime   Invalidated when source files change             
-#  Quote              60s   1 min: keyed ZenQuotes is effectively unlimited  
+#  Learning           30s   Ratings change infrequently mid-session
+#  Session name     mtime   Invalidated when source files change
 #  Model            n/a     Written once per session, no TTL                 
 #  Terminal width   n/a     Written once, read as fallback                   
 # 
 LOCATION_CACHE_TTL=3600
-WEATHER_CACHE_TTL=900
 USAGE_CACHE_TTL=900      # 15 min: /api/oauth/usage has aggressive per-token rate limits (~5 req before 429)
 
 # Source .env for API keys
@@ -569,54 +565,7 @@ if [ "$MODE" = "mini" ] || [ "$MODE" = "normal" ]; then
 } &
 fi
 
-if [ "$MODE" = "mini" ] || [ "$MODE" = "normal" ]; then
-{
-    # 3. Weather fetch (with caching)
-    cache_age=999999
-    [ -f "$WEATHER_CACHE" ] && cache_age=$((NOW_EPOCH - $(get_mtime "$WEATHER_CACHE")))
-
-    if [ "$cache_age" -gt "$WEATHER_CACHE_TTL" ]; then
-        lat="" lon=""
-        if [ -f "$LOCATION_CACHE" ]; then
-            eval "$(jq -r '"lat=\(.lat // empty)\nlon=\(.lon // empty)"' "$LOCATION_CACHE" 2>/dev/null)"
-        fi
-        lat="${lat:-37.7749}"
-        lon="${lon:-122.4194}"
-
-        weather_json=$(curl -s --max-time 3 "https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,is_day&temperature_unit=${TEMP_UNIT}" 2>/dev/null)
-        if [ -n "$weather_json" ] && echo "$weather_json" | jq -e '.current' >/dev/null 2>&1; then
-            eval "$(echo "$weather_json" | jq -r '.current | "temp=\(.temperature_2m)\ncode=\(.weather_code)\nis_day=\(.is_day)"' 2>/dev/null)"
-            # Map open-meteo weather_code → single emoji glyph (clear/cloudy/fog/rain/snow/storm)
-            # Day vs. night uses the is_day flag to pick sun  vs. moon  for clear conditions.
-            case "$code" in
-                0)              [ "${is_day:-1}" = "0" ] && icon="" || icon="" ;;
-                1)              [ "${is_day:-1}" = "0" ] && icon="" || icon="" ;;
-                2)              icon="" ;;
-                3)              icon="" ;;
-                45|48)          icon="" ;;
-                51|53|55|56|57) icon="" ;;
-                61|63|65|66|67) icon="" ;;
-                80|81|82)       icon="" ;;
-                71|73|75|77|85|86) icon="" ;;
-                95|96|99)       icon="" ;;
-                *)              icon="" ;;
-            esac
-            temp_int=$(printf '%.0f' "$temp")
-            if [ "$TEMP_UNIT" = "celsius" ]; then
-                echo "${icon} ${temp_int}°C" > "$WEATHER_CACHE"
-            else
-                echo "${icon} ${temp_int}°F" > "$WEATHER_CACHE"
-            fi
-        fi
-    fi
-
-    if [ -f "$WEATHER_CACHE" ]; then
-        echo "weather_str='$(cat "$WEATHER_CACHE" 2>/dev/null)'" > "$_parallel_tmp/weather.sh"
-    else
-        echo "weather_str='—'" > "$_parallel_tmp/weather.sh"
-    fi
-} &
-fi
+# Weather block removed
 
 if [ "$MODE" != "nano" ]; then
 {
@@ -735,26 +684,7 @@ USAGEEOF
 } &
 fi
 
-if [ "$MODE" = "normal" ]; then
-{
-    # 6. Quote prefetch (was serial at the end — now parallel)
-    # Refresh every 60s. Keyed ZenQuotes is effectively unlimited; keyless endpoint
-    # falls back if env var missing (5 req / 30s — will hit limits at 60s cadence).
-    # Rate-limit / system messages come back with a == "zenquotes.io" — filter those
-    # so a transient 429 never clobbers a real cached quote.
-    quote_age=$((NOW_EPOCH - $(get_mtime "$QUOTE_CACHE")))
-    if [ "$quote_age" -gt 60 ] || [ ! -f "$QUOTE_CACHE" ]; then
-        if [ -n "${ZENQUOTES_API_KEY:-}" ]; then
-            _quote_url="https://zenquotes.io/api/random/${ZENQUOTES_API_KEY}"
-        else
-            _quote_url="https://zenquotes.io/api/random"
-        fi
-        new_quote=$(curl -s --max-time 2 "$_quote_url" 2>/dev/null | \
-            jq -r '.[0] | select(.q | length < 80) | select(.a != "zenquotes.io") | .q + "|" + .a' 2>/dev/null)
-        [ -n "$new_quote" ] && [ "$new_quote" != "null" ] && echo "$new_quote" > "$QUOTE_CACHE"
-    fi
-} &
-fi
+# Quote prefetch removed
 
 # --- PARALLEL BLOCK END - wait for all to complete ---
 wait
@@ -762,7 +692,6 @@ wait
 # Source all parallel results
 [ -f "$_parallel_tmp/git.sh" ] && source "$_parallel_tmp/git.sh"
 [ -f "$_parallel_tmp/location.sh" ] && source "$_parallel_tmp/location.sh"
-[ -f "$_parallel_tmp/weather.sh" ] && source "$_parallel_tmp/weather.sh"
 [ -f "$_parallel_tmp/counts.sh" ] && source "$_parallel_tmp/counts.sh"
 [ -f "$_parallel_tmp/usage.sh" ] && source "$_parallel_tmp/usage.sh"
 rm -rf "$_parallel_tmp" 2>/dev/null
@@ -846,8 +775,6 @@ USAGE_EXTRA='\033[38;2;140;90;60m'
 USAGE_STALE='\033[38;2;120;113;108m'   # Warm gray for stale labels (not values)
 
 # Quote (gold)
-QUOTE_PRIMARY='\033[38;2;252;211;77m'
-QUOTE_AUTHOR='\033[38;2;180;140;60m'
 
 # PAI Branding
 PAI_P='\033[38;2;37;99;235m'          # Blue-600 (was navy 30;58;138 — too dark on navy bg)
@@ -858,7 +785,6 @@ PAI_LABEL='\033[38;2;100;116;139m'    # Slate for "status line"
 PAI_CITY='\033[38;2;37;99;235m'       # Blue-600 — darker, saturated city blue
 PAI_STATE='\033[38;2;125;211;252m'    # Sky-300 — lighter blue, paired with city
 PAI_TIME='\033[38;2;96;165;250m'      # Medium-light blue for time
-PAI_WEATHER='\033[38;2;135;206;235m'  # Sky blue for weather
 PAI_SESSION='\033[38;2;120;135;160m'  # Muted blue-gray for session label
 
 # 
@@ -1093,7 +1019,7 @@ if [ "$MODE" != "normal" ]; then
             ;;
         mini)
             # Line 1: branding + location/time
-            printf "${SLATE_600}${RESET} ${PAI_A}${PAI_LOGO}${RESET}  ${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${SLATE_600}${RESET} ${PAI_CITY}${location_city}${RESET} ${SLATE_600}${RESET} ${PAI_TIME}${current_time}${RESET} ${SLATE_600}${RESET} ${PAI_WEATHER}${weather_str}${RESET}
+            printf "${SLATE_600}${RESET} ${PAI_A}${PAI_LOGO}${RESET}  ${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${SLATE_600}${RESET} ${PAI_CITY}${location_city}${RESET} ${SLATE_600}${RESET} ${PAI_TIME}${current_time}${RESET} ${SLATE_600}${RESET}
 "
             # Line 2: context bar (compact)
             _bar_w=20
@@ -1133,13 +1059,13 @@ _hdr_loc_plain="${_hdr_loc_plain}${location_city}"
 [ -n "$location_state" ] && _hdr_loc_plain="${_hdr_loc_plain}, ${location_state}"
 [ -z "$_hdr_loc_plain" ] && _hdr_loc_plain="—"
 if [ -n "$session_display" ]; then
-    printf "${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${SLATE_600}${RESET} ${_hdr_loc}  ${PAI_TIME}${current_time}${RESET}  ${PAI_WEATHER}${weather_str}${RESET} ${SLATE_600}${RESET} ${PAI_SESSION}${session_display}${RESET}\n"
+    printf "${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${SLATE_600}${RESET} ${_hdr_loc}  ${PAI_TIME}${current_time}${RESET}  ${SLATE_600}${RESET} ${PAI_SESSION}${session_display}${RESET}\n"
 else
-    _hdr_left="PAI  ${_hdr_loc_plain}  ${current_time}  ${weather_str} "
+    _hdr_left="PAI  ${_hdr_loc_plain}  ${current_time}"
     _hdr_fill=$((content_width - ${#_hdr_left}))
     [ "$_hdr_fill" -lt 2 ] && _hdr_fill=2
     _hdr_dashes=$(_repeat_chars "$_hdr_fill" "")
-    printf "${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${SLATE_600}${RESET} ${_hdr_loc}  ${PAI_TIME}${current_time}${RESET}  ${PAI_WEATHER}${weather_str}${RESET} ${SLATE_600}${_hdr_dashes}${RESET}\n"
+    printf "${PAI_P}P${PAI_A}A${PAI_I}I${RESET} ${SLATE_600}${RESET} ${_hdr_loc}  ${PAI_TIME}${current_time}${RESET}  ${SLATE_600}${_hdr_dashes}${RESET}\n"
 fi
 printf "${SLATE_600}%s${RESET}\n" "$SEP_DASHED"
 
@@ -1577,26 +1503,4 @@ else
 fi
 
 # 
-# LINE 7: QUOTE (normal mode only)
-# 
-
-if [ "$MODE" = "normal" ]; then
-    sep
-
-    # Quote was prefetched in parallel block — just read the cache
-    if [ -f "$QUOTE_CACHE" ]; then
-        IFS='|' read -r quote_text quote_author < "$QUOTE_CACHE"
-        full_len=$((${#quote_text} + ${#quote_author} + 6))  #  "text" —author
-
-        if [ "$full_len" -le "$content_width" ]; then
-            printf "${SLATE_400}\"${quote_text}\"${RESET} ${QUOTE_AUTHOR}—${quote_author}${RESET}\n"
-        else
-            # Word-wrap: find last space before column 60
-            wrap_at=60
-            [ "$wrap_at" -gt "${#quote_text}" ] && wrap_at=${#quote_text}
-            while [ "$wrap_at" -gt 10 ] && [ "${quote_text:$wrap_at:1}" != " " ]; do wrap_at=$((wrap_at - 1)); done
-            printf "${SLATE_400}\"${quote_text:0:$wrap_at}${RESET}\n"
-            printf "  ${SLATE_400}${quote_text:$((wrap_at + 1))}\"${RESET} ${QUOTE_AUTHOR}—${quote_author}${RESET}\n"
-        fi
-    fi
-fi
+# Quote and weather output removed
