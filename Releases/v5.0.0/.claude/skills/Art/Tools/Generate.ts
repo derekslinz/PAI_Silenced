@@ -1,16 +1,12 @@
-#!/usr/bin/env bun
+!/usr/bin/env bun
 
-/**
- * generate - UL Image Generation CLI
- *
- * Generate branded images using Flux 1.1 Pro, Nano Banana, Nano Banana Pro, or GPT-image-1.
- * Follows llcli pattern for deterministic, composable CLI design.
- *
- * Usage:
- *   generate --model nano-banana-pro --prompt "..." --size 16:9 --output /tmp/image.png
- *
- * @see ~/.claude/skills/art/README.md
- */
+/ generate - UL Image Generation CLI
+  Generate branded images using Flux .Pro, Nano Banana, Nano Banana Pro, or GPT-image-.
+ Follows llcli pattern for deterministic, composable CLI design.
+  Usage:
+   generate --model nano-banana-pro --prompt "..." --size :--output /tmp/image.png
+  @see ~/.claude/skills/art/README.md
+ /
 
 import Replicate from "replicate";
 import OpenAI from "openai";
@@ -22,26 +18,25 @@ import { extname, resolve } from "node:path";
 // Environment Loading
 // ============================================================================
 
-/**
- * Load environment variables from ${PAI_DIR}/.env
- * This ensures API keys are available regardless of how the CLI is invoked
- */
+/ Load environment variables from ${PAI_DIR}/.env
+ This ensures API keys are available regardless of how the CLI is invoked
+ /
 async function loadEnv(): Promise<void> {
   const paiDir = process.env.PAI_DIR || resolve(process.env.HOME!, '.claude');
   const envPath = resolve(paiDir, '.env');
   try {
-    const envContent = await readFile(envPath, 'utf-8');
+    const envContent = await readFile(envPath, 'utf-');
     for (const line of envContent.split('\n')) {
       const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith('#')) continue;
+      if (!trimmed || trimmed.startsWith('')) continue;
       const eqIndex = trimmed.indexOf('=');
-      if (eqIndex === -1) continue;
-      const key = trimmed.slice(0, eqIndex).trim();
-      let value = trimmed.slice(eqIndex + 1).trim();
+      if (eqIndex === -) continue;
+      const key = trimmed.slice(, eqIndex).trim();
+      let value = trimmed.slice(eqIndex + ).trim();
       // Remove surrounding quotes if present
       if ((value.startsWith('"') && value.endsWith('"')) ||
           (value.startsWith("'") && value.endsWith("'"))) {
-        value = value.slice(1, -1);
+        value = value.slice(, -);
       }
       // Only set if not already defined (allow overrides from shell)
       if (!process.env[key]) {
@@ -70,13 +65,13 @@ async function loadEnv(): Promise<void> {
 // Types
 // ============================================================================
 
-type Model = "flux" | "nano-banana" | "nano-banana-pro" | "gpt-image-1" | "gpt-image-2" | "compare";
-type ReplicateSize = "1:1" | "16:9" | "3:2" | "2:3" | "3:4" | "4:3" | "4:5" | "9:16" | "21:9";
-type OpenAISize = "1024x1024" | "1536x1024" | "1024x1536";
-type OpenAISize2 = "1024x1024" | "1536x1024" | "1024x1536" | "2048x2048" | "auto";
-type GeminiSize = "1K" | "2K" | "4K";
+type Model = "flux" | "nano-banana" | "nano-banana-pro" | "gpt-image-" | "gpt-image-" | "compare";
+type ReplicateSize = ":" | ":" | ":" | ":" | ":" | ":" | ":" | ":" | ":";
+type OpenAISize = "x" | "x" | "x";
+type OpenAISize= "x" | "x" | "x" | "x" | "auto";
+type GeminiSize = "K" | "K" | "K";
 type Quality = "low" | "medium" | "high" | "auto";
-type Size = ReplicateSize | OpenAISize | OpenAISize2 | GeminiSize;
+type Size = ReplicateSize | OpenAISize | OpenAISize| GeminiSize;
 
 interface CLIArgs {
   model: Model;
@@ -85,12 +80,12 @@ interface CLIArgs {
   output: string;
   creativeVariations?: number;
   aspectRatio?: ReplicateSize; // For Gemini models and compare mode (nano-banana side)
-  quality?: Quality; // For gpt-image-2 only
+  quality?: Quality; // For gpt-image-only
   transparent?: boolean; // Enable transparent background
-  referenceImages?: string[]; // Reference image paths (Nano Banana Pro only) - up to 14 total
+  referenceImages?: string[]; // Reference image paths (Nano Banana Pro only) - up to total
   removeBg?: boolean; // Remove background after generation using local rembg
   addBg?: string; // Add background color (hex) to transparent image
-  thumbnail?: boolean; // Generate additional thumbnail with #EAE9DF background for social previews
+  thumbnail?: boolean; // Generate additional thumbnail with EAEDF background for social previews
 }
 
 // ============================================================================
@@ -99,25 +94,25 @@ interface CLIArgs {
 
 const DEFAULTS = {
   model: "flux" as Model,
-  size: "16:9" as Size,
+  size: ":" as Size,
   output: `${process.env.HOME}/Downloads/ul-image.png`,
 };
 
-const REPLICATE_SIZES: ReplicateSize[] = ["1:1", "16:9", "3:2", "2:3", "3:4", "4:3", "4:5", "5:4", "9:16", "21:9"];
-const OPENAI_SIZES: OpenAISize[] = ["1024x1024", "1536x1024", "1024x1536"];
-const OPENAI_V2_SIZES: OpenAISize2[] = ["1024x1024", "1536x1024", "1024x1536", "2048x2048", "auto"];
-const GEMINI_SIZES: GeminiSize[] = ["1K", "2K", "4K"];
+const REPLICATE_SIZES: ReplicateSize[] = [":", ":", ":", ":", ":", ":", ":", ":", ":", ":"];
+const OPENAI_SIZES: OpenAISize[] = ["x", "x", "x"];
+const OPENAI_V_SIZES: OpenAISize[] = ["x", "x", "x", "x", "auto"];
+const GEMINI_SIZES: GeminiSize[] = ["K", "K", "K"];
 const QUALITY_VALUES: Quality[] = ["low", "medium", "high", "auto"];
 
-// Aspect ratio mapping for Gemini (used with image size like 2K)
-const GEMINI_ASPECT_RATIOS: ReplicateSize[] = ["1:1", "2:3", "3:2", "3:4", "4:3", "4:5", "5:4", "9:16", "16:9", "21:9"];
+// Aspect ratio mapping for Gemini (used with image size like K)
+const GEMINI_ASPECT_RATIOS: ReplicateSize[] = [":", ":", ":", ":", ":", ":", ":", ":", ":", ":"];
 
 // ============================================================================
 // Error Handling
 // ============================================================================
 
 class CLIError extends Error {
-  constructor(message: string, public exitCode: number = 1) {
+  constructor(message: string, public exitCode: number = ) {
     super(message);
     this.name = "CLIError";
   }
@@ -125,54 +120,52 @@ class CLIError extends Error {
 
 function handleError(error: unknown): never {
   if (error instanceof CLIError) {
-    console.error(`❌ Error: ${error.message}`);
+    console.error(`Error: ${error.message}`);
     process.exit(error.exitCode);
   }
 
   if (error instanceof Error) {
-    console.error(`❌ Unexpected error: ${error.message}`);
+    console.error(`Unexpected error: ${error.message}`);
     console.error(error.stack);
-    process.exit(1);
+    process.exit();
   }
 
-  console.error(`❌ Unknown error:`, error);
-  process.exit(1);
+  console.error(`Unknown error:`, error);
+  process.exit();
 }
 
 // ============================================================================
 // Image Format Detection
 // ============================================================================
 
-/**
- * Detect actual image format from magic bytes.
- * Prevents MIME type mismatch when API returns different format than requested.
- */
-function detectImageFormat(data: Buffer | Uint8Array): { format: string; ext: string; mime: string } | null {
-  if (data.length < 12) return null;
-  if (data[0] === 0x89 && data[1] === 0x50 && data[2] === 0x4e && data[3] === 0x47)
+/ Detect actual image format from magic bytes.
+ Prevents MIME type mismatch when API returns different format than requested.
+ /
+function detectImageFormat(data: Buffer | UintArray): { format: string; ext: string; mime: string } | null {
+  if (data.length < ) return null;
+  if (data[] === x&& data[] === x&& data[] === xe && data[] === x)
     return { format: "png", ext: ".png", mime: "image/png" };
-  if (data[0] === 0xff && data[1] === 0xd8 && data[2] === 0xff)
+  if (data[] === xff && data[] === xd&& data[] === xff)
     return { format: "jpeg", ext: ".jpg", mime: "image/jpeg" };
-  if (data[0] === 0x52 && data[1] === 0x49 && data[2] === 0x46 && data[3] === 0x46 &&
-      data[8] === 0x57 && data[9] === 0x45 && data[10] === 0x42 && data[11] === 0x50)
+  if (data[] === x&& data[] === x&& data[] === x&& data[] === x&&
+      data[] === x&& data[] === x&& data[] === x&& data[] === x)
     return { format: "webp", ext: ".webp", mime: "image/webp" };
-  if (data[0] === 0x47 && data[1] === 0x49 && data[2] === 0x46)
+  if (data[] === x&& data[] === x&& data[] === x)
     return { format: "gif", ext: ".gif", mime: "image/gif" };
   return null;
 }
 
-/**
- * Save image data with correct file extension based on actual content format.
- * Returns the final path (may differ from requested if format mismatch detected).
- */
-async function saveImage(data: Buffer | Uint8Array | any, requestedPath: string): Promise<string> {
+/ Save image data with correct file extension based on actual content format.
+ Returns the final path (may differ from requested if format mismatch detected).
+ /
+async function saveImage(data: Buffer | UintArray | any, requestedPath: string): Promise<string> {
   const buffer = data instanceof Buffer ? data : Buffer.from(data as any);
   const detected = detectImageFormat(buffer);
   if (detected) {
     const requestedExt = extname(requestedPath).toLowerCase();
     if (requestedExt && requestedExt !== detected.ext) {
       const correctedPath = requestedPath.replace(/\.[^.]+$/, detected.ext);
-      console.warn(`⚠️ API returned ${detected.format.toUpperCase()} data (requested ${requestedExt.slice(1).toUpperCase()}). Saving as ${correctedPath}`);
+      console.warn(`️ API returned ${detected.format.toUpperCase()} data (requested ${requestedExt.slice().toUpperCase()}). Saving as ${correctedPath}`);
       await writeFile(correctedPath, buffer);
       return correctedPath;
     }
@@ -181,9 +174,8 @@ async function saveImage(data: Buffer | Uint8Array | any, requestedPath: string)
   return requestedPath;
 }
 
-/**
- * Detect MIME type from image file content (magic bytes), falling back to extension.
- */
+/ Detect MIME type from image file content (magic bytes), falling back to extension.
+ /
 async function detectMimeType(filePath: string): Promise<string> {
   try {
     const data = await readFile(filePath);
@@ -212,106 +204,96 @@ function showHelp(): void {
   console.log(`
 generate - UL Image Generation CLI
 
-Generate branded images using Flux 1.1 Pro, Nano Banana, or GPT-image-1.
+Generate branded images using Flux .Pro, Nano Banana, or GPT-image-.
 
 USAGE:
   generate --model <model> --prompt "<prompt>" [OPTIONS]
 
 REQUIRED:
-  --model <model>      Model to use: flux, nano-banana, nano-banana-pro, gpt-image-1, gpt-image-2, compare
-                       "compare" runs gpt-image-2 + nano-banana side-by-side for comparison
+  --model <model>      Model to use: flux, nano-banana, nano-banana-pro, gpt-image-, gpt-image-, compare
+                       "compare" runs gpt-image-+ nano-banana side-by-side for comparison
   --prompt <text>      Image generation prompt (quote if contains spaces)
 
 OPTIONS:
   --size <size>              Image size/aspect ratio (default varies by model)
-                             Replicate (flux, nano-banana): 1:1, 16:9, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 21:9
-                             OpenAI gpt-image-1: 1024x1024, 1536x1024, 1024x1536
-                             OpenAI gpt-image-2: 1024x1024, 1536x1024, 1024x1536, 2048x2048, auto
-                             Gemini (nano-banana-pro): 1K, 2K, 4K (resolution); aspect ratio inferred or 16:9
-                             compare mode: pass gpt-image-2 size here; nano side uses --aspect-ratio
+                             Replicate (flux, nano-banana): :, :, :, :, :, :, :, :, :, :                             OpenAI gpt-image-: x, x, x                             OpenAI gpt-image-: x, x, x, x, auto
+                             Gemini (nano-banana-pro): K, K, K (resolution); aspect ratio inferred or :                             compare mode: pass gpt-image-size here; nano side uses --aspect-ratio
   --aspect-ratio <ratio>     Aspect ratio for Gemini nano-banana-pro AND compare-mode nano-banana side
-                             Options: 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 (default 16:9)
-  --quality <level>          Quality for gpt-image-2 only: low, medium, high, auto (default: high)
+                             Options: :, :, :, :, :, :, :, :, :, :(default :)
+  --quality <level>          Quality for gpt-image-only: low, medium, high, auto (default: high)
   --output <path>            Output file path (default: /tmp/ul-image.png)
   --reference-image <path>   Reference image for style/character consistency (Nano Banana Pro only)
                              Can specify MULTIPLE times for improved consistency
                              Accepts: PNG, JPEG, WebP images
-                             API Limits: Up to 5 human refs, 6 object refs, 14 total max
+                             API Limits: Up to human refs, object refs, total max
   --transparent              Enable transparent background (adds transparency instructions to prompt)
                              Note: Not all models support transparency natively; may require post-processing
   --remove-bg                Remove background after generation using local rembg
                              Creates true transparency by removing the generated background
-  --add-bg <hex>             Add background color to a transparent image (e.g., "#EAE9DF")
+  --add-bg <hex>             Add background color to a transparent image (e.g., "EAEDF")
                              Useful for creating thumbnails/social previews from transparent images
   --thumbnail                Generate BOTH transparent AND thumbnail versions for blog headers
-                             Creates: output.png (transparent) + output-thumb.png (#EAE9DF background)
+                             Creates: output.png (transparent) + output-thumb.png (EAEDF background)
                              Automatically enables --remove-bg
-  --creative-variations <n>  Generate N variations (appends -v1, -v2, etc. to output filename)
+  --creative-variations <n>  Generate N variations (appends -v, -v, etc. to output filename)
                              Use with the be-creative skill for true prompt diversity
                              CLI mode: generates N images with same prompt (tests model variability)
   --help, -h                 Show this help message
 
 EXAMPLES:
-  # Generate blog header with Nano Banana Pro (16:9, 2K quality)
-  generate --model nano-banana-pro --prompt "Abstract UL illustration..." --size 2K --aspect-ratio 16:9
+  Generate blog header with Nano Banana Pro (:, K quality)
+  generate --model nano-banana-pro --prompt "Abstract UL illustration..." --size K --aspect-ratio :
+  Generate high-res K image with Nano Banana Pro
+  generate --model nano-banana-pro --prompt "Editorial cover..." --size K --aspect-ratio :
+  Generate blog header with original Nano Banana (:)
+  generate --model nano-banana --prompt "Abstract UL illustration..." --size :
+  Generate square image with Flux
+  generate --model flux --prompt "Minimal geometric art..." --size :--output /tmp/header.png
 
-  # Generate high-res 4K image with Nano Banana Pro
-  generate --model nano-banana-pro --prompt "Editorial cover..." --size 4K --aspect-ratio 3:2
+  Generate portrait with GPT-image-  generate --model gpt-image---prompt "Editorial cover..." --size x
+  Generate with NEW gpt-image-(ChatGPT Images .) at K with high quality
+  generate --model gpt-image---prompt "Editorial cover..." --size x--quality high
 
-  # Generate blog header with original Nano Banana (16:9)
-  generate --model nano-banana --prompt "Abstract UL illustration..." --size 16:9
-
-  # Generate square image with Flux
-  generate --model flux --prompt "Minimal geometric art..." --size 1:1 --output /tmp/header.png
-
-  # Generate portrait with GPT-image-1
-  generate --model gpt-image-1 --prompt "Editorial cover..." --size 1024x1536
-
-  # Generate with NEW gpt-image-2 (ChatGPT Images 2.0) at 2K with high quality
-  generate --model gpt-image-2 --prompt "Editorial cover..." --size 2048x2048 --quality high
-
-  # Compare mode: 3 images from gpt-image-2 + 3 from nano-banana side-by-side
+  Compare mode: images from gpt-image-+ from nano-banana side-by-side
   generate --model compare --prompt "Abstract illustration..." \\
-    --creative-variations 3 --size 1024x1024 --aspect-ratio 1:1 \\
+    --creative-variations --size x--aspect-ratio :\\
     --output /tmp/shootout.png
-  # Outputs: /tmp/shootout-gpt2-{1,2,3}.png + /tmp/shootout-nano-{1,2,3}.png
+  Outputs: /tmp/shootout-gpt-{,,}.png + /tmp/shootout-nano-{,,}.png
 
-  # Generate 3 creative variations (for testing model variability)
-  generate --model gpt-image-1 --prompt "..." --creative-variations 3 --output /tmp/essay.png
-  # Outputs: /tmp/essay-v1.png, /tmp/essay-v2.png, /tmp/essay-v3.png
+  Generate creative variations (for testing model variability)
+  generate --model gpt-image---prompt "..." --creative-variations --output /tmp/essay.png
+  Outputs: /tmp/essay-v.png, /tmp/essay-v.png, /tmp/essay-v.png
 
-  # Single reference image for style guidance (Nano Banana Pro only)
+  Single reference image for style guidance (Nano Banana Pro only)
   generate --model nano-banana-pro --prompt "Tokyo Night themed illustration..." \\
-    --reference-image /tmp/style-reference.png --size 2K --aspect-ratio 16:9
-
-  # MULTIPLE reference images for character consistency (Nano Banana Pro only)
+    --reference-image /tmp/style-reference.png --size K --aspect-ratio :
+  MULTIPLE reference images for character consistency (Nano Banana Pro only)
   generate --model nano-banana-pro --prompt "Person from references at a party..." \\
-    --reference-image face1.jpg --reference-image face2.jpg --reference-image face3.jpg \\
-    --size 2K --aspect-ratio 16:9
-
+    --reference-image face.jpg --reference-image face.jpg --reference-image face.jpg \\
+    --size K --aspect-ratio :
 NOTE: For true creative diversity with different prompts, use the creative workflow which
 integrates the be-creative skill. CLI creative mode generates multiple images with the SAME prompt.
 
 MULTI-REFERENCE LIMITS (Gemini API):
-  - Up to 5 human reference images for character consistency
-  - Up to 6 object reference images
-  - Maximum 14 total reference images per request
+  - Up to human reference images for character consistency
+  - Up to object reference images
+  - Maximum total reference images per request
 
 ENVIRONMENT VARIABLES:
   REPLICATE_API_TOKEN  Required for flux and nano-banana models
-  OPENAI_API_KEY       Required for gpt-image-1 model
+  OPENAI_API_KEY       Required for gpt-image-model
   GOOGLE_API_KEY       Required for nano-banana-pro model
   REMBG_BIN            Optional override for rembg binary path (default: ~/.local/bin/rembg)
 
 ERROR CODES:
-  0  Success
-  1  General error (invalid arguments, API error, file write error)
+   Success
+   General error (invalid arguments, API error, file write error)
 
 MORE INFO:
   Documentation: ${PAI_DIR}/skills/Art/README.md
   Source: ${PAI_DIR}/skills/Art/Tools/Generate.ts
 `);
-  process.exit(0);
+  process.exit();
 }
 
 // ============================================================================
@@ -319,10 +301,10 @@ MORE INFO:
 // ============================================================================
 
 function parseArgs(argv: string[]): CLIArgs {
-  const args = argv.slice(2);
+  const args = argv.slice();
 
   // Check for help flag
-  if (args.includes("--help") || args.includes("-h") || args.length === 0) {
+  if (args.includes("--help") || args.includes("-h") || args.length === ) {
     showHelp();
   }
 
@@ -335,14 +317,14 @@ function parseArgs(argv: string[]): CLIArgs {
   const referenceImages: string[] = [];
 
   // Parse arguments
-  for (let i = 0; i < args.length; i++) {
+  for (let i = ; i < args.length; i++) {
     const flag = args[i];
 
     if (!flag.startsWith("--")) {
       throw new CLIError(`Invalid flag: ${flag}. Flags must start with --`);
     }
 
-    const key = flag.slice(2);
+    const key = flag.slice();
 
     // Handle boolean flags (no value)
     if (key === "transparent") {
@@ -360,7 +342,7 @@ function parseArgs(argv: string[]): CLIArgs {
     }
 
     // Handle flags with values
-    const value = args[i + 1];
+    const value = args[i + ];
     if (!value || value.startsWith("--")) {
       throw new CLIError(`Missing value for flag: ${flag}`);
     }
@@ -371,16 +353,16 @@ function parseArgs(argv: string[]): CLIArgs {
           value !== "flux" &&
           value !== "nano-banana" &&
           value !== "nano-banana-pro" &&
-          value !== "gpt-image-2" &&
+          value !== "gpt-image-" &&
           value !== "compare"
         ) {
-          if (value === "gpt-image-1") {
+          if (value === "gpt-image-") {
             throw new CLIError(
-              `gpt-image-1 is DEPRECATED per OpenAI docs. Use --model gpt-image-2 instead (current OpenAI image model, released Apr 21 2026, #1 on Artificial Analysis Image Arena).`
+              `gpt-image-is DEPRECATED per OpenAI docs. Use --model gpt-image-instead (current OpenAI image model, released Apr , on Artificial Analysis Image Arena).`
             );
           }
           throw new CLIError(
-            `Invalid model: ${value}. Must be: flux, nano-banana, nano-banana-pro, gpt-image-2, or compare`
+            `Invalid model: ${value}. Must be: flux, nano-banana, nano-banana-pro, gpt-image-, or compare`
           );
         }
         parsed.model = value;
@@ -415,17 +397,17 @@ function parseArgs(argv: string[]): CLIArgs {
         i++; // Skip next arg (value)
         break;
       case "creative-variations":
-        const variations = parseInt(value, 10);
-        if (isNaN(variations) || variations < 1 || variations > 10) {
-          throw new CLIError(`Invalid creative-variations: ${value}. Must be 1-10`);
+        const variations = parseInt(value, );
+        if (isNaN(variations) || variations < || variations > ) {
+          throw new CLIError(`Invalid creative-variations: ${value}. Must be -`);
         }
         parsed.creativeVariations = variations;
         i++; // Skip next arg (value)
         break;
       case "add-bg":
         // Validate hex color format
-        if (!/^#[0-9A-Fa-f]{6}$/.test(value)) {
-          throw new CLIError(`Invalid hex color: ${value}. Must be in format #RRGGBB (e.g., #EAE9DF)`);
+        if (!/^[-A-Fa-f]{}$/.test(value)) {
+          throw new CLIError(`Invalid hex color: ${value}. Must be in format RRGGBB (e.g., EAEDF)`);
         }
         parsed.addBg = value;
         i++; // Skip next arg (value)
@@ -436,7 +418,7 @@ function parseArgs(argv: string[]): CLIArgs {
   }
 
   // Assign collected reference images if any
-  if (referenceImages.length > 0) {
+  if (referenceImages.length > ) {
     parsed.referenceImages = referenceImages;
   }
 
@@ -450,52 +432,51 @@ function parseArgs(argv: string[]): CLIArgs {
   }
 
   // Validate reference-image is only used with nano-banana-pro
-  if (parsed.referenceImages && parsed.referenceImages.length > 0 && parsed.model !== "nano-banana-pro") {
+  if (parsed.referenceImages && parsed.referenceImages.length > && parsed.model !== "nano-banana-pro") {
     throw new CLIError("--reference-image is only supported with --model nano-banana-pro");
   }
 
-  // Validate reference image count (API limits: 5 human, 6 object, 14 total max)
-  if (parsed.referenceImages && parsed.referenceImages.length > 14) {
-    throw new CLIError(`Too many reference images: ${parsed.referenceImages.length}. Maximum is 14 total (5 human, 6 object)`);
+  // Validate reference image count (API limits: human, object, total max)
+  if (parsed.referenceImages && parsed.referenceImages.length > ) {
+    throw new CLIError(`Too many reference images: ${parsed.referenceImages.length}. Maximum is total (human, object)`);
   }
 
-  // Quality is only valid for gpt-image-2
-  if (parsed.quality && parsed.model !== "gpt-image-2" && parsed.model !== "compare") {
-    throw new CLIError(`--quality is only supported with --model gpt-image-2 (or compare)`);
+  // Quality is only valid for gpt-image-  if (parsed.quality && parsed.model !== "gpt-image-" && parsed.model !== "compare") {
+    throw new CLIError(`--quality is only supported with --model gpt-image-(or compare)`);
   }
 
   // Set model-appropriate default size if not explicitly provided
   if (!parsed.size) {
     switch (parsed.model) {
-      case "gpt-image-2":
-        parsed.size = "1024x1024";
+      case "gpt-image-":
+        parsed.size = "x";
         break;
       case "nano-banana-pro":
-        parsed.size = "2K";
+        parsed.size = "K";
         break;
       case "compare":
-        // compare mode: use aspect-ratio for nano side, gpt-image-2 size default
-        parsed.size = "1024x1024";
+        // compare mode: use aspect-ratio for nano side, gpt-image-size default
+        parsed.size = "x";
         break;
       default: // flux, nano-banana
-        parsed.size = "16:9";
+        parsed.size = ":";
         break;
     }
   }
 
   // Validate size based on model
-  if (parsed.model === "gpt-image-2") {
-    if (!OPENAI_V2_SIZES.includes(parsed.size as OpenAISize2)) {
-      throw new CLIError(`Invalid size for gpt-image-2: ${parsed.size}. Must be: ${OPENAI_V2_SIZES.join(", ")}`);
+  if (parsed.model === "gpt-image-") {
+    if (!OPENAI_V_SIZES.includes(parsed.size as OpenAISize)) {
+      throw new CLIError(`Invalid size for gpt-image-: ${parsed.size}. Must be: ${OPENAI_V_SIZES.join(", ")}`);
     }
   } else if (parsed.model === "compare") {
-    if (!OPENAI_V2_SIZES.includes(parsed.size as OpenAISize2)) {
-      throw new CLIError(`Invalid size for compare (gpt-image-2 side): ${parsed.size}. Must be: ${OPENAI_V2_SIZES.join(", ")}`);
+    if (!OPENAI_V_SIZES.includes(parsed.size as OpenAISize)) {
+      throw new CLIError(`Invalid size for compare (gpt-image-side): ${parsed.size}. Must be: ${OPENAI_V_SIZES.join(", ")}`);
     }
     if (parsed.aspectRatio && !REPLICATE_SIZES.includes(parsed.aspectRatio as ReplicateSize)) {
       throw new CLIError(`Invalid aspect-ratio for compare (nano-banana side): ${parsed.aspectRatio}. Must be: ${REPLICATE_SIZES.join(", ")}`);
     }
-    if (!parsed.aspectRatio) parsed.aspectRatio = "1:1";
+    if (!parsed.aspectRatio) parsed.aspectRatio = ":";
   } else if (parsed.model === "nano-banana-pro") {
     if (!GEMINI_SIZES.includes(parsed.size as GeminiSize)) {
       throw new CLIError(`Invalid size for nano-banana-pro: ${parsed.size}. Must be: ${GEMINI_SIZES.join(", ")}`);
@@ -504,9 +485,9 @@ function parseArgs(argv: string[]): CLIArgs {
     if (parsed.aspectRatio && !GEMINI_ASPECT_RATIOS.includes(parsed.aspectRatio)) {
       throw new CLIError(`Invalid aspect-ratio for nano-banana-pro: ${parsed.aspectRatio}. Must be: ${GEMINI_ASPECT_RATIOS.join(", ")}`);
     }
-    // Default to 16:9 if not specified
+    // Default to :if not specified
     if (!parsed.aspectRatio) {
-      parsed.aspectRatio = "16:9";
+      parsed.aspectRatio = ":";
     }
   } else {
     if (!REPLICATE_SIZES.includes(parsed.size as ReplicateSize)) {
@@ -539,12 +520,11 @@ const execAsync = promisify(exec);
 // Background Operations
 // ============================================================================
 
-/**
- * Add a solid background color to a transparent PNG image
- * Uses ImageMagick to composite the transparent image onto a colored background
- */
+/ Add a solid background color to a transparent PNG image
+ Uses ImageMagick to composite the transparent image onto a colored background
+ /
 async function addBackgroundColor(inputPath: string, outputPath: string, hexColor: string): Promise<void> {
-  console.log(`🎨 Adding background color ${hexColor} to image...`);
+  console.log(`Adding background color ${hexColor} to image...`);
 
   // Use ImageMagick to composite the transparent image onto a colored background
   // -background sets the fill color, -flatten composites onto that background
@@ -552,7 +532,7 @@ async function addBackgroundColor(inputPath: string, outputPath: string, hexColo
 
   try {
     await execAsync(command);
-    console.log(`✅ Thumbnail saved to ${outputPath}`);
+    console.log(`Thumbnail saved to ${outputPath}`);
   } catch (error) {
     throw new CLIError(`Failed to add background color: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -570,7 +550,7 @@ async function removeBackground(imagePath: string): Promise<string> {
     );
   }
 
-  console.log("🔲 Removing background with local rembg...");
+  console.log("Removing background with local rembg...");
 
   // rembg always emits PNG. Force the output path to .png so we don't end up
   // with PNG bytes inside a .jpg extension.
@@ -588,7 +568,7 @@ async function removeBackground(imagePath: string): Promise<string> {
     proc.stderr.on("data", (chunk) => { stderr += chunk.toString(); });
     proc.on("error", (err) => rejectFn(new CLIError(`Failed to launch rembg: ${err.message}`)));
     proc.on("close", (code) => {
-      if (code === 0) resolveFn();
+      if (code === ) resolveFn();
       else rejectFn(new CLIError(`rembg exited ${code}: ${stderr.trim()}`));
     });
   });
@@ -599,7 +579,7 @@ async function removeBackground(imagePath: string): Promise<string> {
   await rename(tempPath, finalPath);
 
   if (finalPath !== imagePath) {
-    console.log(`   ↪ renamed ${currentExt} → .png (transparency requires PNG): ${finalPath}`);
+    console.log(`   renamed ${currentExt} → .png (transparency requires PNG): ${finalPath}`);
   }
 
   // Validate output is actually PNG with alpha
@@ -611,7 +591,7 @@ async function removeBackground(imagePath: string): Promise<string> {
     );
   }
 
-  console.log("✅ Background removed successfully");
+  console.log("Background removed successfully");
   return finalPath;
 }
 
@@ -627,14 +607,14 @@ async function generateWithFlux(prompt: string, size: ReplicateSize, output: str
 
   const replicate = new Replicate({ auth: token });
 
-  console.log("🎨 Generating with Flux 1.1 Pro...");
+  console.log("Generating with Flux .Pro...");
 
-  const result = await replicate.run("black-forest-labs/flux-1.1-pro", {
+  const result = await replicate.run("black-forest-labs/flux-.-pro", {
     input: {
       prompt,
       aspect_ratio: size,
       output_format: "png",
-      output_quality: 95,
+      output_quality: ,
       prompt_upsampling: false,
     },
   });
@@ -642,7 +622,7 @@ async function generateWithFlux(prompt: string, size: ReplicateSize, output: str
   // Replicate SDK may return a FileOutput object with a url() method or toString()
   let imageData: Buffer;
   if (result && typeof (result as any).blob === "function") {
-    // FileOutput (Replicate SDK v1+) — has blob() method
+    // FileOutput (Replicate SDK v+) — has blob() method
     const blob = await (result as any).blob();
     imageData = Buffer.from(await blob.arrayBuffer());
   } else if (result && typeof (result as any).url === "function") {
@@ -659,7 +639,7 @@ async function generateWithFlux(prompt: string, size: ReplicateSize, output: str
   }
 
   const finalPath = await saveImage(imageData, output);
-  console.log(`✅ Image saved to ${finalPath}`);
+  console.log(`Image saved to ${finalPath}`);
   return finalPath;
 }
 
@@ -671,7 +651,7 @@ async function generateWithNanoBanana(prompt: string, size: ReplicateSize, outpu
 
   const replicate = new Replicate({ auth: token });
 
-  console.log("🍌 Generating with Nano Banana...");
+  console.log("Generating with Nano Banana...");
 
   const result = await replicate.run("google/nano-banana", {
     input: {
@@ -681,7 +661,7 @@ async function generateWithNanoBanana(prompt: string, size: ReplicateSize, outpu
     },
   });
 
-  // Handle FileOutput from Replicate SDK v1+
+  // Handle FileOutput from Replicate SDK v+
   let imageData: Buffer;
   if (result && typeof (result as any).blob === "function") {
     const blob = await (result as any).blob();
@@ -697,7 +677,7 @@ async function generateWithNanoBanana(prompt: string, size: ReplicateSize, outpu
     imageData = result as Buffer;
   }
   const finalPath = await saveImage(imageData, output);
-  console.log(`✅ Image saved to ${finalPath}`);
+  console.log(`Image saved to ${finalPath}`);
   return finalPath;
 }
 
@@ -709,29 +689,29 @@ async function generateWithGPTImage(prompt: string, size: OpenAISize, output: st
 
   const openai = new OpenAI({ apiKey });
 
-  console.log("🤖 Generating with GPT-image-1...");
+  console.log("Generating with GPT-image-...");
 
   const response = await openai.images.generate({
-    model: "gpt-image-1",
+    model: "gpt-image-",
     prompt,
     size,
-    n: 1,
+    n: ,
   });
 
-  const imageData = response.data[0].b64_json;
+  const imageData = response.data[].b_json;
   if (!imageData) {
     throw new CLIError("No image data returned from OpenAI API");
   }
 
-  const imageBuffer = Buffer.from(imageData, "base64");
+  const imageBuffer = Buffer.from(imageData, "base");
   const finalPath = await saveImage(imageBuffer, output);
-  console.log(`✅ Image saved to ${finalPath}`);
+  console.log(`Image saved to ${finalPath}`);
   return finalPath;
 }
 
-async function generateWithGPTImage2(
+async function generateWithGPTImage(
   prompt: string,
-  size: OpenAISize2,
+  size: OpenAISize,
   quality: Quality,
   n: number,
   outputBase: string
@@ -743,10 +723,10 @@ async function generateWithGPTImage2(
 
   const openai = new OpenAI({ apiKey });
 
-  console.log(`🧠 Generating with gpt-image-2 (ChatGPT Images 2.0) — size=${size} quality=${quality} n=${n}...`);
+  console.log(`Generating with gpt-image-(ChatGPT Images .) — size=${size} quality=${quality} n=${n}...`);
 
   const response = await openai.images.generate({
-    model: "gpt-image-2",
+    model: "gpt-image-",
     prompt,
     size,
     quality,
@@ -754,25 +734,25 @@ async function generateWithGPTImage2(
   } as any);
 
   const data = (response as any).data;
-  if (!Array.isArray(data) || data.length === 0) {
-    throw new CLIError("No image data returned from OpenAI gpt-image-2 API");
+  if (!Array.isArray(data) || data.length === ) {
+    throw new CLIError("No image data returned from OpenAI gpt-image-API");
   }
 
   const paths: string[] = [];
-  for (let i = 0; i < data.length; i++) {
+  for (let i = ; i < data.length; i++) {
     const item = data[i];
     let buffer: Buffer;
-    if (item.b64_json) {
-      buffer = Buffer.from(item.b64_json, "base64");
+    if (item.b_json) {
+      buffer = Buffer.from(item.b_json, "base");
     } else if (item.url) {
       const resp = await fetch(item.url);
       buffer = Buffer.from(await resp.arrayBuffer());
     } else {
-      throw new CLIError(`gpt-image-2 returned image ${i + 1} with neither b64_json nor url`);
+      throw new CLIError(`gpt-image-returned image ${i + } with neither b_json nor url`);
     }
-    const target = data.length === 1 ? outputBase : outputBase.replace(/\.[^.]+$/, `-${i + 1}.png`);
+    const target = data.length === ? outputBase : outputBase.replace(/\.[^.]+$/, `-${i + }.png`);
     const finalPath = await saveImage(buffer, target);
-    console.log(`✅ gpt-image-2 image saved to ${finalPath}`);
+    console.log(`gpt-image-image saved to ${finalPath}`);
     paths.push(finalPath);
   }
   return paths;
@@ -792,21 +772,21 @@ async function generateWithNanoBananaPro(
 
   const ai = new GoogleGenAI({ apiKey });
 
-  if (referenceImages && referenceImages.length > 0) {
-    console.log(`🍌✨ Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio} with ${referenceImages.length} reference image(s)...`);
+  if (referenceImages && referenceImages.length > ) {
+    console.log(`Generating with Nano Banana Pro (Gemini Pro) at ${size} ${aspectRatio} with ${referenceImages.length} reference image(s)...`);
   } else {
-    console.log(`🍌✨ Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio}...`);
+    console.log(`Generating with Nano Banana Pro (Gemini Pro) at ${size} ${aspectRatio}...`);
   }
 
   // Prepare content parts
   const parts: Array<{ text?: string; inlineData?: { mimeType: string; data: string } }> = [];
 
   // Add all reference images if provided
-  if (referenceImages && referenceImages.length > 0) {
+  if (referenceImages && referenceImages.length > ) {
     for (const referenceImage of referenceImages) {
       // Read image file
       const imageBuffer = await readFile(referenceImage);
-      const imageBase64 = imageBuffer.toString("base64");
+      const imageBase= imageBuffer.toString("base");
 
       // Detect MIME type from actual file content (magic bytes), not just extension
       const mimeType = await detectMimeType(referenceImage);
@@ -814,7 +794,7 @@ async function generateWithNanoBananaPro(
       parts.push({
         inlineData: {
           mimeType,
-          data: imageBase64,
+          data: imageBase,
         },
       });
     }
@@ -824,7 +804,7 @@ async function generateWithNanoBananaPro(
   parts.push({ text: prompt });
 
   const response = await ai.models.generateContent({
-    model: "gemini-3-pro-image-preview",
+    model: "gemini--pro-image-preview",
     contents: [{ parts }],
     config: {
       responseModalities: ["TEXT", "IMAGE"],
@@ -838,8 +818,8 @@ async function generateWithNanoBananaPro(
   // Extract image data from response
   let imageData: string | undefined;
 
-  if (response.candidates && response.candidates.length > 0) {
-    const parts = response.candidates[0].content.parts;
+  if (response.candidates && response.candidates.length > ) {
+    const parts = response.candidates[].content.parts;
     for (const part of parts) {
       // Check if this part contains inline image data
       if (part.inlineData && part.inlineData.data) {
@@ -853,9 +833,9 @@ async function generateWithNanoBananaPro(
     throw new CLIError("No image data returned from Gemini API");
   }
 
-  const imageBuffer = Buffer.from(imageData, "base64");
+  const imageBuffer = Buffer.from(imageData, "base");
   const finalPath = await saveImage(imageBuffer, output);
-  console.log(`✅ Image saved to ${finalPath}`);
+  console.log(`Image saved to ${finalPath}`);
   return finalPath;
 }
 
@@ -876,37 +856,37 @@ async function main(): Promise<void> {
       : args.prompt;
 
     if (args.transparent) {
-      console.log("🔲 Transparent background mode enabled");
-      console.log("💡 Note: Not all models support transparency natively; may require post-processing\n");
+      console.log("Transparent background mode enabled");
+      console.log("Note: Not all models support transparency natively; may require post-processing\n");
     }
 
-    const n = args.creativeVariations && args.creativeVariations > 1 ? args.creativeVariations : 1;
+    const n = args.creativeVariations && args.creativeVariations > ? args.creativeVariations : ;
     const quality: Quality = args.quality ?? "high";
 
-    // Compare mode: generate N images with gpt-image-2 + N with nano-banana, side-by-side
+    // Compare mode: generate N images with gpt-image-+ N with nano-banana, side-by-side
     if (args.model === "compare") {
-      console.log(`⚖️  Compare Mode: ${n} image(s) from gpt-image-2 + ${n} from nano-banana (total ${n * 2})`);
+      console.log(`️  Compare Mode: ${n} image(s) from gpt-image-+ ${n} from nano-banana (total ${n })`);
       const basePath = args.output.replace(/\.[^.]+$/, "");
-      const gptBase = `${basePath}-gpt2.png`;
+      const gptBase = `${basePath}-gpt.png`;
       const nanoBase = `${basePath}-nano.png`;
 
-      const gptPromise = generateWithGPTImage2(
+      const gptPromise = generateWithGPTImage(
         finalPrompt,
-        args.size as OpenAISize2,
+        args.size as OpenAISize,
         quality,
         n,
         gptBase
       ).catch((err) => {
-        console.error(`❌ gpt-image-2 side failed: ${err instanceof Error ? err.message : err}`);
+        console.error(`gpt-image-side failed: ${err instanceof Error ? err.message : err}`);
         return [] as string[];
       });
 
       const nanoPromises: Promise<string>[] = [];
-      for (let i = 1; i <= n; i++) {
-        const nanoOutput = n === 1 ? nanoBase : `${basePath}-nano-${i}.png`;
+      for (let i = ; i <= n; i++) {
+        const nanoOutput = n === ? nanoBase : `${basePath}-nano-${i}.png`;
         nanoPromises.push(
           generateWithNanoBanana(finalPrompt, args.aspectRatio!, nanoOutput).catch((err) => {
-            console.error(`❌ nano-banana variation ${i} failed: ${err instanceof Error ? err.message : err}`);
+            console.error(`nano-banana variation ${i} failed: ${err instanceof Error ? err.message : err}`);
             return "";
           })
         );
@@ -914,37 +894,37 @@ async function main(): Promise<void> {
 
       const [gptPaths, nanoPathsRaw] = await Promise.all([gptPromise, Promise.all(nanoPromises)]);
       const nanoPaths = nanoPathsRaw.filter(Boolean);
-      console.log(`\n✅ Compare complete — gpt-image-2: ${gptPaths.length}/${n}, nano-banana: ${nanoPaths.length}/${n}`);
-      console.log(`   gpt-image-2: ${gptPaths.join(", ") || "(none)"}`);
+      console.log(`\nCompare complete — gpt-image-: ${gptPaths.length}/${n}, nano-banana: ${nanoPaths.length}/${n}`);
+      console.log(`   gpt-image-: ${gptPaths.join(", ") || "(none)"}`);
       console.log(`   nano-banana: ${nanoPaths.join(", ") || "(none)"}`);
       return;
     }
 
     // Single-model multi-image (creative-variations) path
-    if (n > 1) {
-      console.log(`🎨 Creative Mode: Generating ${n} variations with ${args.model}...`);
-      console.log(`💡 Note: CLI mode uses same prompt for all variations (tests model variability)`);
+    if (n > ) {
+      console.log(`Creative Mode: Generating ${n} variations with ${args.model}...`);
+      console.log(`Note: CLI mode uses same prompt for all variations (tests model variability)`);
       console.log(`   For true creative diversity, use the creative workflow with be-creative skill\n`);
 
       const basePath = args.output.replace(/\.[^.]+$/, "");
 
-      // gpt-image-2 supports batch n natively — single API call
-      if (args.model === "gpt-image-2") {
-        const paths = await generateWithGPTImage2(
+      // gpt-image-supports batch n natively — single API call
+      if (args.model === "gpt-image-") {
+        const paths = await generateWithGPTImage(
           finalPrompt,
-          args.size as OpenAISize2,
+          args.size as OpenAISize,
           quality,
           n,
           `${basePath}.png`
         );
-        console.log(`\n✅ Generated ${paths.length} variation(s)`);
+        console.log(`\nGenerated ${paths.length} variation(s)`);
         console.log(`   Files: ${paths.join(", ")}`);
         return;
       }
 
       // Other models: fan out in parallel
       const promises: Promise<string>[] = [];
-      for (let i = 1; i <= n; i++) {
+      for (let i = ; i <= n; i++) {
         const varOutput = `${basePath}-v${i}.png`;
         console.log(`Variation ${i}/${n}: ${varOutput}`);
 
@@ -962,13 +942,13 @@ async function main(): Promise<void> {
               args.referenceImages
             )
           );
-        } else if (args.model === "gpt-image-1") {
+        } else if (args.model === "gpt-image-") {
           promises.push(generateWithGPTImage(finalPrompt, args.size as OpenAISize, varOutput));
         }
       }
 
       const actualPaths = await Promise.all(promises);
-      console.log(`\n✅ Generated ${n} variations`);
+      console.log(`\nGenerated ${n} variations`);
       console.log(`   Files: ${actualPaths.join(", ")}`);
       return;
     }
@@ -987,17 +967,17 @@ async function main(): Promise<void> {
         args.output,
         args.referenceImages
       );
-    } else if (args.model === "gpt-image-1") {
+    } else if (args.model === "gpt-image-") {
       actualOutput = await generateWithGPTImage(finalPrompt, args.size as OpenAISize, args.output);
-    } else if (args.model === "gpt-image-2") {
-      const paths = await generateWithGPTImage2(
+    } else if (args.model === "gpt-image-") {
+      const paths = await generateWithGPTImage(
         finalPrompt,
-        args.size as OpenAISize2,
+        args.size as OpenAISize,
         quality,
-        1,
+        ,
         args.output
       );
-      actualOutput = paths[0];
+      actualOutput = paths[];
     }
 
     // Remove background if requested (use actual output path)
@@ -1019,9 +999,9 @@ async function main(): Promise<void> {
     // Generate thumbnail with background color if requested (blog header mode)
     if (args.thumbnail) {
       const thumbPath = actualOutput.replace(/\.[^.]+$/, "-thumb.png");
-      const THUMBNAIL_BG_COLOR = "#EAE9DF"; // UL brand background color for social previews
+      const THUMBNAIL_BG_COLOR = "EAEDF"; // UL brand background color for social previews
       await addBackgroundColor(actualOutput, thumbPath, THUMBNAIL_BG_COLOR);
-      console.log(`\n📸 Blog header mode: Created both versions`);
+      console.log(`\nBlog header mode: Created both versions`);
       console.log(`   Transparent: ${actualOutput}`);
       console.log(`   Thumbnail:   ${thumbPath}`);
     }

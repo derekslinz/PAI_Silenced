@@ -112,7 +112,7 @@ function reject(id: string): void {
     return;
   }
   saveQueue(filtered);
-  console.log(`🗑️  Rejected: ${id}`);
+  console.log(`️  Rejected: ${id}`);
 }
 
 function approveAll(): void {

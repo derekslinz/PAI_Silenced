@@ -1,8 +1,7 @@
-#!/usr/bin/env bun
-/**
- * Trial Runner
- * Execute multiple trials and calculate pass@k / pass^k metrics
- */
+!/usr/bin/env bun
+/ Trial Runner
+ Execute multiple trials and calculate pass@k / pass^k metrics
+ /
 
 import type { Task, Trial, EvalRun, GraderResult, Transcript, GraderConfig } from '../Types/index.ts';
 import { createGrader, runGraders, type GraderContext } from '../Graders/Base.ts';
@@ -30,27 +29,26 @@ export class TrialRunner {
     this.config = config;
   }
 
-  /**
-   * Run all trials for a task
-   */
+  /   Run all trials for a task
+   /
   async run(): Promise<EvalRun> {
     const task = this.config.task;
-    const nTrials = task.trials ?? 1;
+    const nTrials = task.trials ?? ;
     const trials: Trial[] = [];
 
-    const runId = `run_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+    const runId = `run_${Date.now()}_${Math.random().toString().slice(, )}`;
     const startTime = Date.now();
 
     // Create graders
     const graders = task.graders.map(config => createGrader(config));
 
-    for (let i = 0; i < nTrials; i++) {
-      const trialId = `trial_${i + 1}`;
+    for (let i = ; i < nTrials; i++) {
+      const trialId = `trial_${i + }`;
       const trialStart = Date.now();
 
       try {
         // Execute the task
-        const execution = await this.config.executor(task, i + 1);
+        const execution = await this.config.executor(task, i + );
 
         // Create grader context
         const context: GraderContext = {
@@ -68,7 +66,7 @@ export class TrialRunner {
         const trial: Trial = {
           id: trialId,
           task_id: task.id,
-          trial_number: i + 1,
+          trial_number: i + ,
           status: passed ? 'passed' : 'failed',
           started_at: new Date(trialStart).toISOString(),
           completed_at: new Date().toISOString(),
@@ -88,13 +86,13 @@ export class TrialRunner {
         const trial: Trial = {
           id: trialId,
           task_id: task.id,
-          trial_number: i + 1,
+          trial_number: i + ,
           status: 'error',
           started_at: new Date(trialStart).toISOString(),
           completed_at: new Date().toISOString(),
           transcript: new TranscriptCapture(task.id, trialId).finalize(),
           grader_results: [],
-          score: 0,
+          score: ,
           passed: false,
           error: String(e),
         };
@@ -110,8 +108,8 @@ export class TrialRunner {
     // Calculate aggregate metrics
     const passCount = trials.filter(t => t.passed).length;
     const scores = trials.map(t => t.score);
-    const meanScore = scores.reduce((a, b) => a + b, 0) / scores.length;
-    const variance = scores.reduce((sum, s) => sum + Math.pow(s - meanScore, 2), 0) / scores.length;
+    const meanScore = scores.reduce((a, b) => a + b, ) / scores.length;
+    const variance = scores.reduce((sum, s) => sum + Math.pow(s - meanScore, ), ) / scores.length;
     const stdDev = Math.sqrt(variance);
 
     // Calculate pass@k and pass^k
@@ -136,102 +134,95 @@ export class TrialRunner {
     return evalRun;
   }
 
-  /**
-   * pass@k: Probability of at least one success in k trials
-   * This measures capability - can the agent ever succeed?
-   *
-   * Formula: 1 - (n-c choose k) / (n choose k)
-   * where n = total trials, c = successful trials, k = trials considered
-   *
-   * For k = n (using all trials): 1 if any passed, 0 otherwise
-   * Simplified: At least one trial passed
-   */
+  /   pass@k: Probability of at least one success in k trials
+   This measures capability - can the agent ever succeed?
+      Formula: - (n-c choose k) / (n choose k)
+   where n = total trials, c = successful trials, k = trials considered
+      For k = n (using all trials): if any passed, otherwise
+   Simplified: At least one trial passed
+   /
   private calculatePassAtK(trials: Trial[]): number {
     const anyPassed = trials.some(t => t.passed);
-    return anyPassed ? 1 : 0;
+    return anyPassed ? : ;
   }
 
-  /**
-   * pass^k: Probability all k trials succeed
-   * This measures consistency/reliability
-   *
-   * For k = n (using all trials): All trials must pass
-   * Simplified: pass_rate
-   */
+  /   pass^k: Probability all k trials succeed
+   This measures consistency/reliability
+      For k = n (using all trials): All trials must pass
+   Simplified: pass_rate
+   /
   private calculatePassToK(trials: Trial[]): number {
     const passCount = trials.filter(t => t.passed).length;
     return passCount / trials.length;
   }
 }
 
-/**
- * Calculate extended pass@k for different k values
- */
+/ Calculate extended pass@k for different k values
+ /
 export function calculatePassAtKForK(trials: Trial[], k: number): number {
   const n = trials.length;
   const c = trials.filter(t => t.passed).length;
 
-  if (k > n) return 0;  // Can't calculate for k > n
-  if (c === 0) return 0;  // No successes
-  if (c >= k) return 1;  // Guaranteed at least one success in any k sample
+  if (k > n) return ;  // Can't calculate for k > n
+  if (c === ) return ;  // No successes
+  if (c >= k) return ;  // Guaranteed at least one success in any k sample
 
-  // Calculate: 1 - (n-c choose k) / (n choose k)
-  // = 1 - [(n-c)! / (k! * (n-c-k)!)] / [n! / (k! * (n-k)!)]
-  // = 1 - [(n-c)! * (n-k)!] / [(n-c-k)! * n!]
+  // Calculate: - (n-c choose k) / (n choose k)
+  // = - [(n-c)! / (k! (n-c-k)!)] / [n! / (k! (n-k)!)]
+  // = - [(n-c)! (n-k)!] / [(n-c-k)! n!]
 
-  let failProb = 1;
-  for (let i = 0; i < k; i++) {
-    failProb *= (n - c - i) / (n - i);
+  let failProb = ;
+  for (let i = ; i < k; i++) {
+    failProb = (n - c - i) / (n - i);
   }
 
-  return 1 - failProb;
+  return - failProb;
 }
 
-/**
- * Format evaluation results for display
- */
+/ Format evaluation results for display
+ /
 export function formatEvalResults(run: EvalRun): string {
   const lines: string[] = [];
 
-  lines.push(`## Evaluation Results: ${run.task_id}`);
+  lines.push(`Evaluation Results: ${run.task_id}`);
   lines.push('');
-  lines.push(`**Run ID:** ${run.id}`);
-  lines.push(`**Duration:** ${(run.total_duration_ms / 1000).toFixed(2)}s`);
+  lines.push(`Run ID:${run.id}`);
+  lines.push(`Duration:${(run.total_duration_ms / ).toFixed()}s`);
   lines.push('');
-  lines.push('### Summary');
+  lines.push('Summary');
   lines.push('');
   lines.push(`| Metric | Value |`);
   lines.push(`|--------|-------|`);
   lines.push(`| Trials | ${run.n_trials} |`);
-  lines.push(`| Pass Rate | ${(run.pass_rate * 100).toFixed(1)}% |`);
-  lines.push(`| Mean Score | ${run.mean_score.toFixed(3)} |`);
-  lines.push(`| Std Dev | ${run.std_dev.toFixed(3)} |`);
-  lines.push(`| pass@k | ${(run.pass_at_k * 100).toFixed(1)}% |`);
-  lines.push(`| pass^k | ${(run.pass_to_k * 100).toFixed(1)}% |`);
+  lines.push(`| Pass Rate | ${(run.pass_rate ).toFixed()}% |`);
+  lines.push(`| Mean Score | ${run.mean_score.toFixed()} |`);
+  lines.push(`| Std Dev | ${run.std_dev.toFixed()} |`);
+  lines.push(`| pass@k | ${(run.pass_at_k ).toFixed()}% |`);
+  lines.push(`| pass^k | ${(run.pass_to_k ).toFixed()}% |`);
   lines.push('');
 
-  lines.push('### Trial Results');
+  lines.push('Trial Results');
   lines.push('');
   lines.push(`| Trial | Status | Score | Duration |`);
   lines.push(`|-------|--------|-------|----------|`);
 
   for (const trial of run.trials) {
-    const status = trial.passed ? '✅ PASS' : trial.status === 'error' ? '❌ ERROR' : '❌ FAIL';
+    const status = trial.passed ? 'PASS' : trial.status === 'error' ? 'ERROR' : 'FAIL';
     const duration = trial.transcript.metrics.wall_time_ms;
-    lines.push(`| ${trial.trial_number} | ${status} | ${trial.score.toFixed(3)} | ${(duration / 1000).toFixed(2)}s |`);
+    lines.push(`| ${trial.trial_number} | ${status} | ${trial.score.toFixed()} | ${(duration / ).toFixed()}s |`);
   }
 
   // Show grader breakdown for first trial
-  if (run.trials.length > 0 && run.trials[0].grader_results.length > 0) {
+  if (run.trials.length > && run.trials[].grader_results.length > ) {
     lines.push('');
-    lines.push('### Grader Breakdown (Trial 1)');
+    lines.push('Grader Breakdown (Trial )');
     lines.push('');
     lines.push(`| Grader | Score | Passed | Weight |`);
     lines.push(`|--------|-------|--------|--------|`);
 
-    for (const result of run.trials[0].grader_results) {
-      const passed = result.passed ? '✅' : '❌';
-      lines.push(`| ${result.grader_type} | ${result.score.toFixed(3)} | ${passed} | ${result.weight} |`);
+    for (const result of run.trials[].grader_results) {
+      const passed = result.passed ? '' : '';
+      lines.push(`| ${result.grader_type} | ${result.score.toFixed()} | ${passed} | ${result.weight} |`);
     }
   }
 
@@ -241,10 +232,10 @@ export function formatEvalResults(run: EvalRun): string {
 // CLI interface
 if (import.meta.main) {
   const { values } = parseArgs({
-    args: Bun.argv.slice(2),
+    args: Bun.argv.slice(),
     options: {
       'task-file': { type: 'string', short: 't' },
-      trials: { type: 'string', short: 'n', default: '1' },
+      trials: { type: 'string', short: 'n', default: '' },
       help: { type: 'boolean', short: 'h' },
     },
     allowPositionals: true,
@@ -259,13 +250,12 @@ Usage:
 
 Options:
   -t, --task-file    Path to task YAML file
-  -n, --trials       Number of trials (default: from task or 1)
+  -n, --trials       Number of trials (default: from task or )
   -h, --help         Show this help
 
 Example:
-  bun run TrialRunner.ts -t UseCases/coding/fix-auth/task.yaml -n 3
-`);
-    process.exit(0);
+  bun run TrialRunner.ts -t UseCases/coding/fix-auth/task.yaml -n `);
+    process.exit();
   }
 
   console.log('Note: Full execution requires an agent executor to be configured.');

@@ -16,8 +16,8 @@ The Feed System implements this transformation:
 
 ```
 NOISE (thousands of items/day from hundreds of sources)
-    │
-    ▼
+    
+    
 INTELLIGENCE (rated, labeled, priority-routed to specific destinations)
 ```
 
@@ -28,34 +28,34 @@ INTELLIGENCE (rated, labeled, priority-routed to specific destinations)
 ## Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                          FEED SYSTEM                                     │
-│                                                                         │
-│  SOURCES           PROCESSING              ROUTING         DESTINATIONS │
-│  ────────          ──────────              ───────         ──────────── │
-│                                                                         │
-│  People       ┌─► INGEST ──────────┐                                   │
-│  Channels     │   (fetch, parse,    │                                   │
-│  Feeds        │    normalize)       │   ┌─► ROUTE ──┬─► Telegram       │
-│  Publications │                     │   │  (rules,  │                   │
-│               │   SUMMARIZE ────────┤   │   AND     ├─► Discord        │
-│  RSS          │   (Haiku: short +   │   │   logic,  │                   │
-│  YouTube      │    medium)          │   │   priority)├─► Email         │
-│  Twitter/X    │                     │   │           │                   │
-│  Bluesky      │   RATE ─────────────┘   │           ├─► Blog Draft     │
-│  LinkedIn     │   (5 dimensions +       │           │                   │
-│  Mastodon     │    20 labels)    ───────┘           ├─► Social Post    │
-│  Blogs        │                                     │                   │
-│  Newsletters  │                                     ├─► Daily Digest   │
-│  Podcasts     │                                     │                   │
-│               │                                     └─► Archive        │
-│               │                                                         │
-│  Each source has:                                                       │
-│  • credibility/priority                                                 │
-│  • poll interval                                                        │
-│  • compute type (cloud/local)                                           │
-│  • tags + expertise                                                     │
-└─────────────────────────────────────────────────────────────────────────┘
+
+                          FEED SYSTEM                                     
+                                                                         
+  SOURCES           PROCESSING              ROUTING         DESTINATIONS 
+                                    
+                                                                         
+  People        INGEST                                    
+  Channels        (fetch, parse,                                       
+  Feeds            normalize)           ROUTE  Telegram       
+  Publications                           (rules,                     
+                  SUMMARIZE       AND      Discord        
+  RSS             (Haiku: short +         logic,                     
+  YouTube          medium)                priority) Email         
+  Twitter/X                                                          
+  Bluesky         RATE                Blog Draft     
+  LinkedIn        (5 dimensions +                                     
+  Mastodon         20 labels)                Social Post    
+  Blogs                                                                
+  Newsletters                                        Daily Digest   
+  Podcasts                                                             
+                                                     Archive        
+                                                                        
+  Each source has:                                                       
+  • credibility/priority                                                 
+  • poll interval                                                        
+  • compute type (cloud/local)                                           
+  • tags + expertise                                                     
+
 ```
 
 ---
@@ -214,14 +214,14 @@ The Feed System is the **source layer** for the Arbol platform. It generates the
 
 ```
 Feed System (sources + intelligence)
-    │
-    ├─► F_HN_LABEL_EMAIL (HN → rate → email)
-    │
-    ├─► F_YOUTUBE_DIGEST (YouTube → transcribe → rate → digest)
-    │
-    ├─► F_SECURITY_ALERTS (Security feeds → rate → notify if urgent)
-    │
-    └─► F_SOCIAL_CONTENT (High-rated items → generate posts → queue)
+    
+     F_HN_LABEL_EMAIL (HN → rate → email)
+    
+     F_YOUTUBE_DIGEST (YouTube → transcribe → rate → digest)
+    
+     F_SECURITY_ALERTS (Security feeds → rate → notify if urgent)
+    
+     F_SOCIAL_CONTENT (High-rated items → generate posts → queue)
 ```
 
 Every flow in Arbol that processes external content starts with the Feed System. The intelligence pipeline (ingest → summarize → rate → route) is the common backbone. Flows just connect specific sources to specific pipelines on specific schedules.

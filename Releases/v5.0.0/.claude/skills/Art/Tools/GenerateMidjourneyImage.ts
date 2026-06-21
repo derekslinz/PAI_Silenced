@@ -1,16 +1,12 @@
-#!/usr/bin/env bun
+!/usr/bin/env bun
 
-/**
- * generate-midjourney-image - Midjourney Image Generation CLI
- *
- * Generate images using Midjourney via Discord bot integration.
- * Follows llcli pattern for deterministic, composable CLI design.
- *
- * Usage:
- *   generate-midjourney-image --prompt "..." --aspect-ratio 16:9 --output /tmp/image.png
- *
- * @see ~/.claude/skills/art/SKILL.md
- */
+/ generate-midjourney-image - Midjourney Image Generation CLI
+  Generate images using Midjourney via Discord bot integration.
+ Follows llcli pattern for deterministic, composable CLI design.
+  Usage:
+   generate-midjourney-image --prompt "..." --aspect-ratio :--output /tmp/image.png
+  @see ~/.claude/skills/art/SKILL.md
+ /
 
 import { DiscordBotClient } from '../lib/discord-bot.js';
 import { MidjourneyClient, MidjourneyError } from '../lib/midjourney-client.js';
@@ -21,26 +17,25 @@ import { resolve } from 'node:path';
 // Environment Loading
 // ============================================================================
 
-/**
- * Load environment variables from ${PAI_DIR}/.env
- * This ensures API keys are available regardless of how the CLI is invoked
- */
+/ Load environment variables from ${PAI_DIR}/.env
+ This ensures API keys are available regardless of how the CLI is invoked
+ /
 async function loadEnv(): Promise<void> {
   const paiDir = process.env.PAI_DIR || resolve(process.env.HOME!, '.claude');
   const envPath = resolve(paiDir, '.env');
   try {
-    const envContent = await readFile(envPath, 'utf-8');
+    const envContent = await readFile(envPath, 'utf-');
     for (const line of envContent.split('\n')) {
       const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith('#')) continue;
+      if (!trimmed || trimmed.startsWith('')) continue;
       const eqIndex = trimmed.indexOf('=');
-      if (eqIndex === -1) continue;
-      const key = trimmed.slice(0, eqIndex).trim();
-      let value = trimmed.slice(eqIndex + 1).trim();
+      if (eqIndex === -) continue;
+      const key = trimmed.slice(, eqIndex).trim();
+      let value = trimmed.slice(eqIndex + ).trim();
       // Remove surrounding quotes if present
       if ((value.startsWith('"') && value.endsWith('"')) ||
           (value.startsWith("'") && value.endsWith("'"))) {
-        value = value.slice(1, -1);
+        value = value.slice(, -);
       }
       // Only set if not already defined (allow overrides from shell)
       if (!process.env[key]) {
@@ -74,13 +69,13 @@ interface CLIArgs {
 // ============================================================================
 
 const DEFAULTS = {
-  aspectRatio: '16:9',
-  version: process.env.MIDJOURNEY_DEFAULT_VERSION || '6.1',
-  stylize: parseInt(process.env.MIDJOURNEY_DEFAULT_STYLIZE || '100'),
-  quality: parseInt(process.env.MIDJOURNEY_DEFAULT_QUALITY || '1'),
+  aspectRatio: ':',
+  version: process.env.MIDJOURNEY_DEFAULT_VERSION || '.',
+  stylize: parseInt(process.env.MIDJOURNEY_DEFAULT_STYLIZE || ''),
+  quality: parseInt(process.env.MIDJOURNEY_DEFAULT_QUALITY || ''),
   tile: false,
   output: '/tmp/midjourney-image.png',
-  timeout: 120,
+  timeout: ,
 };
 
 // ============================================================================
@@ -88,7 +83,7 @@ const DEFAULTS = {
 // ============================================================================
 
 class CLIError extends Error {
-  constructor(message: string, public exitCode: number = 1) {
+  constructor(message: string, public exitCode: number = ) {
     super(message);
     this.name = 'CLIError';
   }
@@ -96,7 +91,7 @@ class CLIError extends Error {
 
 function handleError(error: unknown): never {
   if (error instanceof MidjourneyError) {
-    console.error(`\n❌ Midjourney Error: ${error.message}`);
+    console.error(`\nMidjourney Error: ${error.message}`);
     console.error(`   Type: ${error.type}`);
     if (error.originalPrompt) {
       console.error(`   Prompt: ${error.originalPrompt}`);
@@ -104,22 +99,22 @@ function handleError(error: unknown): never {
     if (error.suggestion) {
       console.error(`   Suggestion: ${error.suggestion}`);
     }
-    process.exit(1);
+    process.exit();
   }
 
   if (error instanceof CLIError) {
-    console.error(`❌ Error: ${error.message}`);
+    console.error(`Error: ${error.message}`);
     process.exit(error.exitCode);
   }
 
   if (error instanceof Error) {
-    console.error(`❌ Unexpected error: ${error.message}`);
+    console.error(`Unexpected error: ${error.message}`);
     console.error(error.stack);
-    process.exit(1);
+    process.exit();
   }
 
-  console.error(`❌ Unknown error:`, error);
-  process.exit(1);
+  console.error(`Unknown error:`, error);
+  process.exit();
 }
 
 // ============================================================================
@@ -139,14 +134,12 @@ REQUIRED:
   --prompt <text>         Image generation prompt (quote if contains spaces)
 
 OPTIONS:
-  --aspect-ratio <ratio>  Aspect ratio (default: 16:9)
-                          Valid: 1:1, 16:9, 9:16, 2:3, 3:2, 4:5, 5:4, 7:4, 4:7, 21:9, 9:21, 3:4, 4:3
-  --version <version>     Midjourney version (default: ${DEFAULTS.version})
-                          Valid: 6.1, 6, 5.2, 5.1, 5, niji, niji 6
-  --stylize <value>       Stylization 0-1000 (default: ${DEFAULTS.stylize})
-  --quality <value>       Quality: 0.25, 0.5, 1, 2 (default: ${DEFAULTS.quality})
-  --chaos <value>         Chaos 0-100 (optional)
-  --weird <value>         Weird 0-3000 (optional)
+  --aspect-ratio <ratio>  Aspect ratio (default: :)
+                          Valid: :, :, :, :, :, :, :, :, :, :, :, :, :  --version <version>     Midjourney version (default: ${DEFAULTS.version})
+                          Valid: ., , ., ., , niji, niji   --stylize <value>       Stylization -(default: ${DEFAULTS.stylize})
+  --quality <value>       Quality: ., ., , (default: ${DEFAULTS.quality})
+  --chaos <value>         Chaos -(optional)
+  --weird <value>         Weird -(optional)
   --tile                  Enable tiling mode (default: false)
   --output <path>         Output file path (default: ${DEFAULTS.output})
   --timeout <seconds>     Max wait time (default: ${DEFAULTS.timeout})
@@ -159,25 +152,24 @@ ENVIRONMENT VARIABLES:
   MIDJOURNEY_DEFAULT_STYLIZE  Default stylize setting
 
 EXAMPLES:
-  # Standard blog header
+  Standard blog header
   generate-midjourney-image \\
     --prompt "abstract flowing data streams, minimal shapes, Tokyo Night colors" \\
-    --aspect-ratio 16:9 \\
+    --aspect-ratio :\\
     --output /tmp/header.png
 
-  # High quality square image
+  High quality square image
   generate-midjourney-image \\
     --prompt "geometric network visualization, abstract tech concept" \\
-    --aspect-ratio 1:1 \\
-    --quality 2 \\
+    --aspect-ratio :\\
+    --quality \\
     --output /tmp/square.png
 
-  # Creative with high stylization
+  Creative with high stylization
   generate-midjourney-image \\
     --prompt "flowing organic shapes, data visualization" \\
-    --stylize 500 \\
-    --weird 1000
-`);
+    --stylize \\
+    --weird `);
 }
 
 // ============================================================================
@@ -195,14 +187,14 @@ function parseArgs(args: string[]): CLIArgs {
     timeout: DEFAULTS.timeout,
   };
 
-  for (let i = 0; i < args.length; i++) {
+  for (let i = ; i < args.length; i++) {
     const arg = args[i];
 
     switch (arg) {
       case '--help':
       case '-h':
         showHelp();
-        process.exit(0);
+        process.exit();
         break;
 
       case '--prompt':
@@ -273,7 +265,7 @@ async function main() {
     await loadEnv();
 
     // Parse arguments
-    const args = parseArgs(process.argv.slice(2));
+    const args = parseArgs(process.argv.slice());
 
     // Validate environment variables
     const botToken = process.env.DISCORD_BOT_TOKEN;
@@ -304,7 +296,7 @@ async function main() {
       timeout: args.timeout,
     });
 
-    console.log('🤖 Midjourney Image Generation');
+    console.log('Midjourney Image Generation');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log(`Prompt: ${args.prompt}`);
     console.log(`Aspect Ratio: ${args.aspectRatio}`);
@@ -348,7 +340,7 @@ async function main() {
       await discordBot.downloadImage(result.imageUrl, args.output);
 
       console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.log('✅ Success!');
+      console.log('Success!');
       console.log(`   Image URL: ${result.imageUrl}`);
       console.log(`   Saved to: ${args.output}`);
       console.log(`   Message ID: ${result.messageId}`);
@@ -357,7 +349,7 @@ async function main() {
       // Disconnect
       await discordBot.disconnect();
 
-      process.exit(0);
+      process.exit();
     } catch (error) {
       // Ensure we disconnect even on error
       await discordBot.disconnect();

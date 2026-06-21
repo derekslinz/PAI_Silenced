@@ -564,7 +564,7 @@ for (const sessionFile of sessionFiles) {
   const learnings = harvestLearnings(sessionFile);
 
   if (learnings.length > 0) {
-    console.log(`  📂 ${sessionName}: ${learnings.length} learning(s)`);
+    console.log(`   ${sessionName}: ${learnings.length} learning(s)`);
     allLearnings.push(...learnings);
     totalLearnings += learnings.length;
   }
@@ -575,13 +575,13 @@ if (totalLearnings === 0) {
   process.exit(0);
 }
 
-console.log(`\n📊 Found ${totalLearnings} learning(s)`);
+console.log(`\n Found ${totalLearnings} learning(s)`);
 console.log(`   - Corrections: ${allLearnings.filter(l => l.type === 'correction').length}`);
 console.log(`   - Errors: ${allLearnings.filter(l => l.type === 'error').length}`);
 console.log(`   - Insights: ${allLearnings.filter(l => l.type === 'insight').length}`);
 
 if (values["dry-run"]) {
-  console.log("\n🔍 DRY RUN - Would write:");
+  console.log("\n DRY RUN - Would write:");
   for (const learning of allLearnings) {
     const monthDir = getMonthDir(learning.category);
     const filename = generateLearningFilename(learning);

@@ -70,19 +70,19 @@ This means the final action in a pipeline has access to every field produced by 
 
 ```
 A_EXTRACT_TRANSCRIPT          A_LABEL_AND_RATE
-┌─────────────────┐          ┌──────────────────┐
-│ Input:           │          │ Input:            │
-│   url            │  ─────>  │   content         │  (was "transcript")
-│                  │          │   video_id        │  (passed through)
-│ Output:          │          │   title           │  (passed through)
-│   content    ────┤          │                   │
-│   video_id   ────┤          │ Output:           │
-│   title      ────┤          │   one_sentence_   │
-│   source     ────┤          │     summary       │
-└─────────────────┘          │   labels          │
-                              │   rating          │
-                              │   quality_score   │
-                              └──────────────────┘
+          
+ Input:                      Input:            
+   url              >     content           (was "transcript")
+                               video_id          (passed through)
+ Output:                       title             (passed through)
+   content                                 
+   video_id              Output:           
+   title                   one_sentence_   
+   source                    summary       
+             labels          
+                                 rating          
+                                 quality_score   
+                              
 ```
 
 ---
@@ -112,8 +112,8 @@ Each action is a flat directory:
 
 ```
 A_LABEL_AND_RATE/
-├── action.json    # Manifest: name, description, input/output schema, requires
-└── action.ts      # Implementation: execute(input, ctx) → output
+ action.json    # Manifest: name, description, input/output schema, requires
+ action.ts      # Implementation: execute(input, ctx) → output
 ```
 
 **action.json:**
@@ -328,7 +328,7 @@ bun lib/pipeline-runner.ts list
 Flows orchestrate the connection between **external content sources** and **internal pipelines** on a **schedule**. They are the outermost layer of the execution model.
 
 ```
-Source ──(schedule)──> Pipeline ──> Destination
+Source (schedule)> Pipeline > Destination
 ```
 
 ### Cloud Architecture
@@ -460,20 +460,20 @@ Each worker gets its own 1000-subrequest budget.
 ### Pattern
 
 ```
-┌──────────────────────────┐
-│ F_PRODUCER  (cron)       │
-│  fetch sources           │
-│  dedup (KV)              │
-│  sendBatch() → queue     │
-└────────────┬─────────────┘
-             │  Cloudflare Queue
-             ▼
-┌──────────────────────────┐
-│ F_CONSUMER  (queue)      │
-│  queue() handler         │
-│  extract → rate → write  │
-│  message.ack() / retry() │
-└──────────────────────────┘
+
+ F_PRODUCER  (cron)       
+  fetch sources           
+  dedup (KV)              
+  sendBatch() → queue     
+
+               Cloudflare Queue
+             
+
+ F_CONSUMER  (queue)      
+  queue() handler         
+  extract → rate → write  
+  message.ack() / retry() 
+
 ```
 
 ### Key Rules
@@ -631,12 +631,12 @@ echo "your-secret" | bunx wrangler secret put SECRET_NAME --name arbol-a-your-ac
 ### Cron Syntax Reference
 
 ```
-┌───────────── minute (0-59)
-│ ┌───────────── hour (0-23)
-│ │ ┌───────────── day of month (1-31)
-│ │ │ ┌───────────── month (1-12)
-│ │ │ │ ┌───────────── day of week (0-6, Sun=0)
-│ │ │ │ │
+ minute (0-59)
+  hour (0-23)
+   day of month (1-31)
+    month (1-12)
+     day of week (0-6, Sun=0)
+    
 * * * * *
 ```
 
@@ -654,7 +654,7 @@ echo "your-secret" | bunx wrangler secret put SECRET_NAME --name arbol-a-your-ac
 The feed poller (`F_FEEDS_POLLER`) uses a three-tier fallback to handle sites blocking Cloudflare Worker IPs:
 
 ```
-Tier 1: Direct fetch ──(403?)──> Tier 2: Jina Reader ──(fail?)──> Tier 3: Self-Hosted Proxy
+Tier 1: Direct fetch (403?)> Tier 2: Jina Reader (fail?)> Tier 3: Self-Hosted Proxy
 ```
 
 | Tier | Method | Returns | Works For |

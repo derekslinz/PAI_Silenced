@@ -83,15 +83,15 @@ Pulse has one React component per `kind:`. Four components render the entire USE
 Every file with `kind: collection` uses the same human-readable item shape. Markdown list, one item per line:
 
 ```
-- **{name}** — {creator} · ★{rating} · {notes}
+- **{name}** — {creator} · {rating} · {notes}
 ```
 
 All parts after `name` are optional. The parser is permissive — anything not matching becomes `notes`. Examples:
 
 ```markdown
-- **Meditations** — Marcus Aurelius · ★10 · stoic operating system
-- **Antifragile** — Taleb · ★9 · systems that gain from disorder
-- **Deep Work** — Newport · ★8
+- **Meditations** — Marcus Aurelius · 10 · stoic operating system
+- **Antifragile** — Taleb · 9 · systems that gain from disorder
+- **Deep Work** — Newport · 8
 - **Thinking, Fast and Slow** — Kahneman
 - **Shōgun** — James Clavell
 ```
@@ -112,8 +112,8 @@ The `publish:` frontmatter field is the universal broadcast contract. `DaemonAgg
 **Per-item override:** Inside a `kind: collection` file, prefix an item with `(private)` to exclude it from publish even when the file is `publish: daemon`:
 
 ```markdown
-- **The Dark Forest** — Liu Cixin · ★9
-- (private) **Some embarrassing book** — Author · ★3
+- **The Dark Forest** — Liu Cixin · 9
+- (private) **Some embarrassing book** — Author · 3
 ```
 
 **Classification inheritance:** Files inside a `domain` directory inherit the directory README's `publish:` unless they set their own. Always private by default for domain files (health, finances, work, business).

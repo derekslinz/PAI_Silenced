@@ -1,19 +1,16 @@
-#!/usr/bin/env bun
+!/usr/bin/env bun
 
-/**
- * DaemonAggregator — Reads PAI system data sources and produces
- * a security-filtered daemon.md update.
- *
- * This tool aggregates from TELOS, Knowledge, Projects, and Work sessions,
- * applies the SecurityFilter, and outputs either a daemon.md file or
- * a structured JSON diff for preview.
- *
- * Usage:
- *   bun DaemonAggregator.ts --output <daemon.md>          Write updated daemon.md
- *   bun DaemonAggregator.ts --preview                     Show what would change
- *   bun DaemonAggregator.ts --json                        Output as JSON (for pipeline)
- *   bun DaemonAggregator.ts --diff <current-daemon.md>    Show diff against current
- */
+/ DaemonAggregator — Reads PAI system data sources and produces
+ a security-filtered daemon.md update.
+  This tool aggregates from TELOS, Knowledge, Projects, and Work sessions,
+ applies the SecurityFilter, and outputs either a daemon.md file or
+ a structured JSON diff for preview.
+  Usage:
+   bun DaemonAggregator.ts --output <daemon.md>          Write updated daemon.md
+   bun DaemonAggregator.ts --preview                     Show what would change
+   bun DaemonAggregator.ts --json                        Output as JSON (for pipeline)
+   bun DaemonAggregator.ts --diff <current-daemon.md>    Show diff against current
+ /
 
 import { readFileSync, existsSync, writeFileSync, readdirSync, statSync } from "fs";
 import { join, resolve } from "path";
@@ -45,8 +42,8 @@ const EXCLUDED_PATHS = [
   join(TELOS_DIR, "TRAUMAS.md"),
   join(KNOWLEDGE_DIR, "People"),
   join(KNOWLEDGE_DIR, "Companies"),
-  // ─── Current→Ideal Monitoring Spine (2026-04-15) ───
-  // the user's explicit decision: IDEAL_STATE is fully private (Decision #3).
+  // ─── Current→Ideal Monitoring Spine (--) ───
+  // the user's explicit decision: IDEAL_STATE is fully private (Decision ).
   // CURRENT_STATE contains aggregated health/finance/location/social — hardest private.
   // Preference files with location or consumption data are private.
   join(TELOS_DIR, "IDEAL_STATE"),
@@ -68,7 +65,7 @@ function isExcluded(filePath: string): boolean {
 
 const PUBLIC_PROJECTS = [
   "Website", "Fabric", "SecLists", "PAI", "Surface",
-  "Human 3.0", "UL Site", "Daemon", "Substrate", "Telos",
+  "Human .", "UL Site", "Daemon", "Substrate", "Telos",
   "TheAlgorithm", "FoundryServices", "Ladder", "PAI Marketing",
 ];
 
@@ -77,7 +74,7 @@ const PUBLIC_PROJECTS = [
 function readFileIfExists(path: string): string | null {
   if (isExcluded(path)) return null;
   if (!existsSync(path)) return null;
-  return readFileSync(path, "utf-8");
+  return readFileSync(path, "utf-");
 }
 
 function readMissions(): string {
@@ -89,15 +86,15 @@ function readMissions(): string {
 
   for (const line of lines) {
     const trimmed = line.trim();
-    // Include M0 and M1 — they're public-safe philosophical missions
-    if (trimmed.match(/^[-*]\s+\*?\*?M[01]\b/)) {
-      publicMissions.push(trimmed.replace(/^[-*]\s+/, ""));
+    // Include Mand M— they're public-safe philosophical missions
+    if (trimmed.match(/^[-]\s+\?\?M[]\b/)) {
+      publicMissions.push(trimmed.replace(/^[-]\s+/, ""));
     }
   }
 
-  // M2 reworded: mind upload aspiration without partner reference
+  // Mreworded: mind upload aspiration without partner reference
   publicMissions.push(
-    "M2: Explore the transfer and storage of human minds into digital formats for future continuity."
+    "M: Explore the transfer and storage of human minds into digital formats for future continuity."
   );
 
   return publicMissions.join("\n");
@@ -113,13 +110,13 @@ function readGoals(): string {
   for (const line of lines) {
     const trimmed = line.trim();
     // Include goals for public projects, exclude revenue/follower targets
-    if (trimmed.match(/^[-*]\s+\*?\*?G\d+\b/)) {
+    if (trimmed.match(/^[-]\s+\?\?G\d+\b/)) {
       // Filter out goals with revenue, follower count, or monetization targets
       if (
         !trimmed.match(/\b(revenue|follower|subscriber|monetiz)/i) &&
         !trimmed.match(/\b\d+[Kk]\s+(follower|subscriber)/i)
       ) {
-        publicGoals.push(trimmed.replace(/^[-*]\s+/, ""));
+        publicGoals.push(trimmed.replace(/^[-]\s+/, ""));
       }
     }
   }
@@ -133,9 +130,9 @@ function readBooks(): string[] {
 
   return content
     .split("\n")
-    .filter((l) => l.match(/^[-*]\s+/))
-    .map((l) => l.replace(/^[-*]\s+/, "").trim())
-    .filter((l) => l.length > 0);
+    .filter((l) => l.match(/^[-]\s+/))
+    .map((l) => l.replace(/^[-]\s+/, "").trim())
+    .filter((l) => l.length > );
 }
 
 function readMovies(): string[] {
@@ -144,9 +141,9 @@ function readMovies(): string[] {
 
   return content
     .split("\n")
-    .filter((l) => l.match(/^[-*]\s+/))
-    .map((l) => l.replace(/^[-*]\s+/, "").trim())
-    .filter((l) => l.length > 0);
+    .filter((l) => l.match(/^[-]\s+/))
+    .map((l) => l.replace(/^[-]\s+/, "").trim())
+    .filter((l) => l.length > );
 }
 
 function readWisdom(): string[] {
@@ -155,30 +152,30 @@ function readWisdom(): string[] {
 
   // Split by double newlines to get individual quotes
   return content
-    .split(/\n{2,}/)
+    .split(/\n{,}/)
     .map((q) => q.trim())
-    .filter((q) => q.length > 10 && !q.startsWith("#"));
+    .filter((q) => q.length > && !q.startsWith(""));
 }
 
-function readRecentIdeas(limit = 10): Array<{ title: string; thesis: string }> {
+function readRecentIdeas(limit = ): Array<{ title: string; thesis: string }> {
   const indexPath = join(KNOWLEDGE_DIR, "Ideas", "_index.md");
   const content = readFileIfExists(indexPath);
   if (!content) return [];
 
   // Extract recently updated ideas from the index
-  const recentSection = content.match(/## Recently Updated\n([\s\S]*?)(?=\n## |$)/);
+  const recentSection = content.match(/Recently Updated\n([\s\S]?)(?=\n|$)/);
   if (!recentSection) return [];
 
-  const ideaSlugs = recentSection[1]
+  const ideaSlugs = recentSection[]
     .split("\n")
-    .filter((l) => l.match(/^\s*-\s+\[\[/))
-    .slice(0, limit)
+    .filter((l) => l.match(/^\s-\s+\[\[/))
+    .slice(, limit)
     .map((l) => {
       const slugMatch = l.match(/\[\[([^\]]+)\]\]/);
       const titleMatch = l.match(/"([^"]+)"/);
       return {
-        slug: slugMatch?.[1] || "",
-        title: titleMatch?.[1] || "",
+        slug: slugMatch?.[] || "",
+        title: titleMatch?.[] || "",
       };
     })
     .filter((i) => i.slug && i.title);
@@ -193,10 +190,10 @@ function readRecentIdeas(limit = 10): Array<{ title: string; thesis: string }> {
       continue;
     }
 
-    // Extract thesis section (first paragraph after ## Thesis)
-    const thesisMatch = ideaContent.match(/## Thesis\s*\n([\s\S]*?)(?=\n## |$)/);
+    // Extract thesis section (first paragraph after Thesis)
+    const thesisMatch = ideaContent.match(/Thesis\s\n([\s\S]?)(?=\n|$)/);
     const thesis = thesisMatch
-      ? thesisMatch[1].trim().split("\n")[0].trim() // First line only
+      ? thesisMatch[].trim().split("\n")[].trim() // First line only
       : "";
 
     // Skip ideas that reference internal PAI architecture
@@ -229,12 +226,12 @@ function readPublicProjects(): { technical: string[]; creative: string[]; person
 
     // Extract project name
     const cells = line.split("|").map((c) => c.trim()).filter(Boolean);
-    if (cells.length < 2) continue;
+    if (cells.length < ) continue;
 
-    const name = cells[0].replace(/\*\*/g, "").trim();
+    const name = cells[].replace(/\\/g, "").trim();
 
     if (PUBLIC_PROJECTS.includes(name)) {
-      const url = cells[2] || "";
+      const url = cells[] || "";
       if (url.includes("github.com")) {
         technical.push(`${name} — ${url}`);
       } else if (url) {
@@ -248,7 +245,7 @@ function readPublicProjects(): { technical: string[]; creative: string[]; person
   return { technical, creative, personal: [] };
 }
 
-function readWorkThemes(daysBack = 14, limit = 8): string[] {
+function readWorkThemes(daysBack = , limit = ): string[] {
   if (!existsSync(WORK_DIR)) return [];
 
   const cutoff = new Date();
@@ -258,29 +255,29 @@ function readWorkThemes(daysBack = 14, limit = 8): string[] {
 
   try {
     const dirs = readdirSync(WORK_DIR)
-      .filter((d) => d.match(/^\d{8}-/))
+      .filter((d) => d.match(/^\d{}-/))
       .sort()
       .reverse()
-      .slice(0, 50); // Check last 50 sessions max
+      .slice(, ); // Check last sessions max
 
     for (const dir of dirs) {
       // Extract date from dir name (YYYYMMDD-HHMMSS_description)
-      const dateStr = dir.slice(0, 8);
-      const year = parseInt(dateStr.slice(0, 4));
-      const month = parseInt(dateStr.slice(4, 6)) - 1;
-      const day = parseInt(dateStr.slice(6, 8));
+      const dateStr = dir.slice(, );
+      const year = parseInt(dateStr.slice(, ));
+      const month = parseInt(dateStr.slice(, )) - ;
+      const day = parseInt(dateStr.slice(, ));
       const dirDate = new Date(year, month, day);
 
       if (dirDate < cutoff) continue;
 
       // Extract theme from directory name (after the timestamp_)
-      const descPart = dir.replace(/^\d{8}-\d{6}_/, "");
+      const descPart = dir.replace(/^\d{}-\d{}_/, "");
       if (!descPart) continue;
 
       // Generalize the theme (remove specific details)
       const theme = generalizeTheme(descPart);
       if (theme) {
-        themes.set(theme, (themes.get(theme) || 0) + 1);
+        themes.set(theme, (themes.get(theme) || ) + );
       }
     }
   } catch {
@@ -289,8 +286,8 @@ function readWorkThemes(daysBack = 14, limit = 8): string[] {
 
   // Sort by frequency, return top N
   return Array.from(themes.entries())
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, limit)
+    .sort((a, b) => b[] - a[])
+    .slice(, limit)
     .map(([theme]) => theme);
 }
 
@@ -317,13 +314,13 @@ function generalizeTheme(slug: string): string | null {
     if (words.match(pattern)) return theme;
   }
 
-  // If no pattern matches, create a generic theme from the first 3 meaningful words
+  // If no pattern matches, create a generic theme from the first meaningful words
   const meaningful = words
     .split(" ")
-    .filter((w) => w.length > 3 && !["this", "that", "with", "from", "into"].includes(w))
-    .slice(0, 3);
+    .filter((w) => w.length > && !["this", "that", "with", "from", "into"].includes(w))
+    .slice(, );
 
-  if (meaningful.length >= 2) {
+  if (meaningful.length >= ) {
     return meaningful.join(" ").replace(/^\w/, (c) => c.toUpperCase());
   }
 
@@ -343,11 +340,11 @@ function readAbout(): string {
       continue; // Skip, we'll compose our own
     }
     if (line.includes("Focus:")) {
-      const focus = line.replace(/.*Focus:\*?\*?\s*/, "").trim();
+      const focus = line.replace(/.Focus:\?\?\s/, "").trim();
       parts.push(focus);
     }
     if (line.includes("Online Since:")) {
-      const since = line.replace(/.*Online Since:\*?\*?\s*/, "").trim();
+      const since = line.replace(/.Online Since:\?\?\s/, "").trim();
       parts.push(`Online since ${since}`);
     }
   }
@@ -372,9 +369,9 @@ function readExistingDaemon(): Record<string, unknown> {
     // Fall back to old location
     const oldPath = join(HOME, ".claude", "skills", "_DAEMON", "Mcp", "daemon.md");
     if (!existsSync(oldPath)) return {};
-    return parseDaemonMd(readFileSync(oldPath, "utf-8"));
+    return parseDaemonMd(readFileSync(oldPath, "utf-"));
   }
-  return parseDaemonMd(readFileSync(daemonPath, "utf-8"));
+  return parseDaemonMd(readFileSync(daemonPath, "utf-"));
 }
 
 function parseDaemonMd(content: string): Record<string, unknown> {
@@ -388,9 +385,9 @@ function parseDaemonMd(content: string): Record<string, unknown> {
       if (currentSection) {
         sections[currentSection] = sectionContent.join("\n").trim();
       }
-      currentSection = sectionMatch[1].toLowerCase();
+      currentSection = sectionMatch[].toLowerCase();
       sectionContent = [];
-    } else if (currentSection && line.trim() && !line.startsWith("#")) {
+    } else if (currentSection && line.trim() && !line.startsWith("")) {
       sectionContent.push(line);
     }
   }
@@ -430,9 +427,9 @@ export function aggregate(): DaemonUpdate {
   const books = readBooks();
   const movies = readMovies();
   const wisdom = readWisdom();
-  const recentIdeas = readRecentIdeas(10);
+  const recentIdeas = readRecentIdeas();
   const projects = readPublicProjects();
-  const workThemes = readWorkThemes(14, 8);
+  const workThemes = readWorkThemes(, );
   const goals = readGoals();
 
   // Combine missions and goals into TELOS section
@@ -443,7 +440,7 @@ export function aggregate(): DaemonUpdate {
   // Preserve existing sections that we don't have PAI sources for
   const predictions = existing.predictions
     ? (typeof existing.predictions === "string"
-        ? existing.predictions.split("\n").filter(Boolean).map((l: string) => l.replace(/^[-*]\s+/, ""))
+        ? existing.predictions.split("\n").filter(Boolean).map((l: string) => l.replace(/^[-]\s+/, ""))
         : (existing.predictions as string[]))
     : [];
 
@@ -451,20 +448,20 @@ export function aggregate(): DaemonUpdate {
 
   const dailyRoutine = existing.daily_routine
     ? (typeof existing.daily_routine === "string"
-        ? existing.daily_routine.split("\n").filter(Boolean).map((l: string) => l.replace(/^[-*]\s+/, ""))
+        ? existing.daily_routine.split("\n").filter(Boolean).map((l: string) => l.replace(/^[-]\s+/, ""))
         : (existing.daily_routine as string[]))
     : [];
 
   const podcasts = existing.favorite_podcasts
     ? (typeof existing.favorite_podcasts === "string"
-        ? existing.favorite_podcasts.split("\n").filter(Boolean).map((l: string) => l.replace(/^[-*]\s+/, ""))
+        ? existing.favorite_podcasts.split("\n").filter(Boolean).map((l: string) => l.replace(/^[-]\s+/, ""))
         : (existing.favorite_podcasts as string[]))
     : [];
 
   // Merge: PAI source books + existing daemon books (deduplicated)
   const existingBooks = existing.favorite_books
     ? (typeof existing.favorite_books === "string"
-        ? existing.favorite_books.split("\n").filter(Boolean).map((l: string) => l.replace(/^[-*]\s+/, "").replace(/^"(.+)".*$/, "$1"))
+        ? existing.favorite_books.split("\n").filter(Boolean).map((l: string) => l.replace(/^[-]\s+/, "").replace(/^"(.+)".$/, "$"))
         : (existing.favorite_books as string[]))
     : [];
   const mergedBooks = [...new Set([...books, ...existingBooks])];
@@ -472,7 +469,7 @@ export function aggregate(): DaemonUpdate {
   // Merge movies similarly
   const existingMovies = existing.favorite_movies
     ? (typeof existing.favorite_movies === "string"
-        ? existing.favorite_movies.split("\n").filter(Boolean).map((l: string) => l.replace(/^[-*]\s+/, ""))
+        ? existing.favorite_movies.split("\n").filter(Boolean).map((l: string) => l.replace(/^[-]\s+/, ""))
         : (existing.favorite_movies as string[]))
     : [];
   const mergedMovies = [...new Set([...movies, ...existingMovies])];
@@ -491,7 +488,7 @@ export function aggregate(): DaemonUpdate {
     recent_ideas: recentIdeas,
     projects,
     work_themes: workThemes,
-    wisdom: wisdom.slice(0, 5), // Top 5 quotes
+    wisdom: wisdom.slice(, ), // Top quotes
     last_updated: new Date().toISOString(),
   };
 }
@@ -500,11 +497,11 @@ export function aggregate(): DaemonUpdate {
 
 function toDaemonMd(data: DaemonUpdate): string {
   const sections: string[] = [
-    "# DAEMON DATA FILE",
+    "DAEMON DATA FILE",
     "",
-    "# This file contains personal information for the daemon profile",
-    "# Format: Section headers are marked with [SECTION_NAME]",
-    "# Auto-generated by DaemonAggregator from PAI sources",
+    "This file contains personal information for the daemon profile",
+    "Format: Section headers are marked with [SECTION_NAME]",
+    "Auto-generated by DaemonAggregator from PAI sources",
     "",
   ];
 
@@ -528,7 +525,7 @@ function toDaemonMd(data: DaemonUpdate): string {
   }
   sections.push("");
 
-  if (data.daily_routine.length > 0) {
+  if (data.daily_routine.length > ) {
     sections.push("[DAILY_ROUTINE]", "");
     for (const item of data.daily_routine) {
       sections.push(`- ${item}`);
@@ -536,7 +533,7 @@ function toDaemonMd(data: DaemonUpdate): string {
     sections.push("");
   }
 
-  if (data.preferences.length > 0) {
+  if (data.preferences.length > ) {
     sections.push("[PREFERENCES]", "");
     for (const pref of data.preferences) {
       sections.push(`- ${pref}`);
@@ -544,7 +541,7 @@ function toDaemonMd(data: DaemonUpdate): string {
     sections.push("");
   }
 
-  if (data.favorite_podcasts.length > 0) {
+  if (data.favorite_podcasts.length > ) {
     sections.push("[FAVORITE_PODCASTS]", "");
     for (const pod of data.favorite_podcasts) {
       sections.push(`- ${pod}`);
@@ -552,7 +549,7 @@ function toDaemonMd(data: DaemonUpdate): string {
     sections.push("");
   }
 
-  if (data.predictions.length > 0) {
+  if (data.predictions.length > ) {
     sections.push("[PREDICTIONS]", "");
     for (const pred of data.predictions) {
       sections.push(`- ${pred}`);
@@ -560,7 +557,7 @@ function toDaemonMd(data: DaemonUpdate): string {
     sections.push("");
   }
 
-  if (data.recent_ideas.length > 0) {
+  if (data.recent_ideas.length > ) {
     sections.push("[RECENT_IDEAS]", "");
     for (const idea of data.recent_ideas) {
       const line = idea.thesis ? `- ${idea.title}: ${idea.thesis}` : `- ${idea.title}`;
@@ -569,7 +566,7 @@ function toDaemonMd(data: DaemonUpdate): string {
     sections.push("");
   }
 
-  if (data.work_themes.length > 0) {
+  if (data.work_themes.length > ) {
     sections.push("[CURRENTLY_WORKING_ON]", "");
     for (const theme of data.work_themes) {
       sections.push(`- ${theme}`);
@@ -577,7 +574,7 @@ function toDaemonMd(data: DaemonUpdate): string {
     sections.push("");
   }
 
-  if (data.wisdom.length > 0) {
+  if (data.wisdom.length > ) {
     sections.push("[WISDOM]", "");
     for (const quote of data.wisdom) {
       sections.push(`- ${quote}`);
@@ -585,7 +582,7 @@ function toDaemonMd(data: DaemonUpdate): string {
     sections.push("");
   }
 
-  sections.push("# Note: PROJECTS are pulled dynamically");
+  sections.push("Note: PROJECTS are pulled dynamically");
   sections.push("");
 
   return sections.join("\n");
@@ -594,7 +591,7 @@ function toDaemonMd(data: DaemonUpdate): string {
 // ─── CLI ───
 
 if (import.meta.main) {
-  const args = process.argv.slice(2);
+  const args = process.argv.slice();
 
   if (args.includes("--help") || args.includes("-h")) {
     console.log(`
@@ -612,7 +609,7 @@ Options:
   --no-filter       Skip SecurityFilter (for debugging only)
   --verbose         Show aggregation details
 `);
-    process.exit(0);
+    process.exit();
   }
 
   // Load security overrides if available
@@ -641,7 +638,7 @@ Options:
       const icon = excluded ? "X" : exists ? "+" : "-";
       console.log(`  [${icon}] ${s.name}: ${status}`);
     }
-    process.exit(0);
+    process.exit();
   }
 
   console.log("Aggregating PAI data sources...\n");
@@ -655,7 +652,7 @@ Options:
     const result = filterContent(daemonMd, overrides);
     daemonMd = result.clean;
 
-    if (result.redactions.length > 0) {
+    if (result.redactions.length > ) {
       console.log(`Security filter applied: ${result.redactions.length} redactions`);
       if (args.includes("--verbose")) {
         for (const r of result.redactions) {
@@ -668,8 +665,8 @@ Options:
   }
 
   if (args.includes("--json")) {
-    console.log(JSON.stringify(data, null, 2));
-    process.exit(0);
+    console.log(JSON.stringify(data, null, ));
+    process.exit();
   }
 
   if (args.includes("--preview")) {
@@ -685,14 +682,14 @@ Options:
     console.log(`  Work themes: ${data.work_themes.length}`);
     console.log(`  Wisdom: ${data.wisdom.length}`);
     console.log(`  Predictions: ${data.predictions.length}`);
-    process.exit(0);
+    process.exit();
   }
 
   const diffIdx = args.indexOf("--diff");
-  if (diffIdx !== -1 && args[diffIdx + 1]) {
-    const currentPath = args[diffIdx + 1];
+  if (diffIdx !== -&& args[diffIdx + ]) {
+    const currentPath = args[diffIdx + ];
     if (existsSync(currentPath)) {
-      const current = readFileSync(currentPath, "utf-8");
+      const current = readFileSync(currentPath, "utf-");
       // Simple line-by-line diff summary
       const currentLines = new Set(current.split("\n").map((l) => l.trim()).filter(Boolean));
       const newLines = new Set(daemonMd.split("\n").map((l) => l.trim()).filter(Boolean));
@@ -704,34 +701,34 @@ Options:
       console.log(`  Added: ${added.length} lines`);
       console.log(`  Removed: ${removed.length} lines`);
 
-      if (added.length > 0) {
+      if (added.length > ) {
         console.log("\n+ Added:");
-        for (const line of added.slice(0, 20)) {
+        for (const line of added.slice(, )) {
           console.log(`  + ${line}`);
         }
-        if (added.length > 20) console.log(`  ... and ${added.length - 20} more`);
+        if (added.length > ) console.log(`  ... and ${added.length - } more`);
       }
 
-      if (removed.length > 0) {
+      if (removed.length > ) {
         console.log("\n- Removed:");
-        for (const line of removed.slice(0, 20)) {
+        for (const line of removed.slice(, )) {
           console.log(`  - ${line}`);
         }
-        if (removed.length > 20) console.log(`  ... and ${removed.length - 20} more`);
+        if (removed.length > ) console.log(`  ... and ${removed.length - } more`);
       }
     } else {
       console.log(`Current file not found: ${currentPath}`);
     }
-    process.exit(0);
+    process.exit();
   }
 
   const outputIdx = args.indexOf("--output");
-  if (outputIdx !== -1 && args[outputIdx + 1]) {
-    const outputPath = args[outputIdx + 1];
+  if (outputIdx !== -&& args[outputIdx + ]) {
+    const outputPath = args[outputIdx + ];
     writeFileSync(outputPath, daemonMd);
     console.log(`\nWrote daemon.md to: ${outputPath}`);
     console.log(`Size: ${daemonMd.length} bytes`);
-    process.exit(0);
+    process.exit();
   }
 
   // Default: preview mode

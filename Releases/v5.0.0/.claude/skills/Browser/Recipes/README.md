@@ -1,8 +1,8 @@
-# Browser Recipes — Parameterized Workflow Templates
+Browser Recipes — Parameterized Workflow Templates
 
 Recipes are Markdown templates with parameter placeholders that encode reusable browser task patterns. They're the composable building blocks for browser automation.
 
-## Format
+Format
 
 Each recipe is a Markdown file with YAML frontmatter:
 
@@ -12,27 +12,27 @@ name: Recipe Name
 description: What this recipe does
 tool: agent-browser | BrowserAgent | UIReviewer
 defaults:
-  param1: default_value
-  param2: default_value
+  param: default_value
+  param: default_value
 ---
 
-# Recipe Name
+Recipe Name
 
-1. Step one using {param1}
-2. Step two using {param2}
+. Step one using {param}
+. Step two using {param}
 
 {PROMPT}
 ```
 
-## Parameters
+Parameters
 
-- **`{PROMPT}`** — injected from the user's input. Always included as the final section.
-- **`{URL}`** — target URL, commonly provided by the user.
-- **`{param}`** — any custom parameter defined in `defaults`. User can override at invocation.
+- `{PROMPT}`— injected from the user's input. Always included as the final section.
+- `{URL}`— target URL, commonly provided by the user.
+- `{param}`— any custom parameter defined in `defaults`. User can override at invocation.
 
 Parameters are resolved by simple string replacement. Unresolved parameters (no default and no user input) are left as-is for the executing agent to interpret.
 
-## Frontmatter Fields
+Frontmatter Fields
 
 | Field | Required | Description |
 |-------|----------|-------------|
@@ -41,7 +41,7 @@ Parameters are resolved by simple string replacement. Unresolved parameters (no 
 | `tool` | Yes | Which tool executes: `agent-browser`, `BrowserAgent`, or `UIReviewer` |
 | `defaults` | No | Default values for template parameters |
 
-## Tool Selection
+Tool Selection
 
 | Tool | When to Use |
 |------|------------|
@@ -49,19 +49,19 @@ Parameters are resolved by simple string replacement. Unresolved parameters (no 
 | `BrowserAgent` | Needs AI to decide what to do based on page content |
 | `UIReviewer` | Structured validation with assertions |
 
-## Running Recipes
+Running Recipes
 
-Recipes are executed by the **Automate** workflow:
+Recipes are executed by the Automateworkflow:
 
 ```
-# Run a recipe by name
+Run a recipe by name
 "Automate SummarizePage for https://example.com"
 
-# Run with parameter overrides
-"Automate FormFill with URL=http://localhost:3000/signup and name=John"
+Run with parameter overrides
+"Automate FormFill with URL=http://localhost:/signup and name=John"
 ```
 
-## File Naming
+File Naming
 
 - Use PascalCase: `SummarizePage.md`, `FormFill.md`
 - One recipe per file

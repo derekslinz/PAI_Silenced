@@ -1,9 +1,8 @@
-#!/usr/bin/env bun
-/**
- * ScenarioToTranscript — converts a langwatch scenario.run() result into
- * Evals' native Transcript + Trial + GraderResult shapes so scenario runs
- * flow through the existing pass@k aggregator and Results pipeline.
- */
+!/usr/bin/env bun
+/ ScenarioToTranscript — converts a langwatch scenario.run() result into
+ Evals' native Transcript + Trial + GraderResult shapes so scenario runs
+ flow through the existing pass@k aggregator and Results pipeline.
+ /
 
 import type { ScenarioResult } from '@langwatch/scenario';
 import type {
@@ -23,7 +22,7 @@ export interface BuildTrialArgs {
 }
 
 export function scenarioResultToTranscript(taskId: string, trialId: string, r: ScenarioResult): Transcript {
-  const startedAt = new Date(Date.now() - Math.round((r.totalTime ?? 0) * 1000)).toISOString();
+  const startedAt = new Date(Date.now() - Math.round((r.totalTime ?? ) )).toISOString();
   const completedAt = new Date().toISOString();
 
   const turns: Turn[] = (r.messages ?? []).map((m, i) => ({
@@ -35,11 +34,11 @@ export function scenarioResultToTranscript(taskId: string, trialId: string, r: S
 
   const metrics: TranscriptMetrics = {
     n_turns: turns.length,
-    n_tool_calls: 0,
-    total_tokens: 0,
-    input_tokens: 0,
-    output_tokens: 0,
-    wall_time_ms: Math.round((r.totalTime ?? 0) * 1000),
+    n_tool_calls: ,
+    total_tokens: ,
+    input_tokens: ,
+    output_tokens: ,
+    wall_time_ms: Math.round((r.totalTime ?? ) ),
   };
 
   return {
@@ -55,13 +54,13 @@ export function scenarioResultToTranscript(taskId: string, trialId: string, r: S
 }
 
 export function scenarioResultToGraderResult(r: ScenarioResult, wallTimeMs: number): GraderResult {
-  const metCount = r.metCriteria?.length ?? 0;
-  const totalCriteria = metCount + (r.unmetCriteria?.length ?? 0);
-  const score = totalCriteria > 0 ? metCount / totalCriteria : r.success ? 1 : 0;
+  const metCount = r.metCriteria?.length ?? ;
+  const totalCriteria = metCount + (r.unmetCriteria?.length ?? );
+  const score = totalCriteria > ? metCount / totalCriteria : r.success ? : ;
 
   return {
     grader_type: 'llm_rubric',
-    weight: 1,
+    weight: ,
     score,
     passed: r.success,
     reasoning: r.reasoning ?? '',

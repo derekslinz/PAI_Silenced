@@ -1,13 +1,10 @@
-#!/usr/bin/env bun
-/**
- * Edit.ts — Execute audio edits with ffmpeg
- *
- * Reads an edit decision list and applies cuts to an audio file.
- * Features: 40ms qsin crossfades, room tone extraction, gap filling.
- *
- * Usage: bun Edit.ts <audio-file> <edits.json> [--output <path>]
- * Output: Edited audio file at <audio-file>_edited.<ext>
- */
+!/usr/bin/env bun
+/ Edit.ts — Execute audio edits with ffmpeg
+  Reads an edit decision list and applies cuts to an audio file.
+ Features: ms qsin crossfades, room tone extraction, gap filling.
+  Usage: bun Edit.ts <audio-file> <edits.json> [--output <path>]
+ Output: Edited audio file at <audio-file>_edited.<ext>
+ /
 
 import { $ } from "bun";
 import { existsSync } from "fs";
@@ -22,21 +19,21 @@ interface EditDecision {
   confidence: number;
 }
 
-const args = process.argv.slice(2);
+const args = process.argv.slice();
 const positional = args.filter((a) => !a.startsWith("--"));
-const audioFile = positional[0];
-const editsFile = positional[1];
+const audioFile = positional[];
+const editsFile = positional[];
 const outputFlag = args.indexOf("--output");
-const outputPath = outputFlag !== -1 ? args[outputFlag + 1] : undefined;
+const outputPath = outputFlag !== -? args[outputFlag + ] : undefined;
 
 if (!audioFile || !editsFile) {
   console.error("Usage: bun edit.ts <audio-file> <edits.json> [--output <path>]");
-  process.exit(1);
+  process.exit();
 }
 
 if (!existsSync(audioFile) || !existsSync(editsFile)) {
   console.error(`File not found: ${!existsSync(audioFile) ? audioFile : editsFile}`);
-  process.exit(1);
+  process.exit();
 }
 
 const ext = extname(audioFile);
@@ -50,20 +47,20 @@ console.log(`Output: ${outFile}`);
 
 // Load edits
 const edits: EditDecision[] = JSON.parse(await Bun.file(editsFile).text());
-if (edits.length === 0) {
+if (edits.length === ) {
   console.log("No edits to apply. Copying original file.");
   await $`cp ${audioFile} ${outFile}`;
-  process.exit(0);
+  process.exit();
 }
 
 // Get audio duration
 const probeResult = await $`ffprobe -v quiet -print_format json -show_format ${audioFile}`.quiet();
 const probeData = JSON.parse(probeResult.text());
 const totalDuration = parseFloat(probeData.format.duration);
-const bitrate = Math.round(parseInt(probeData.format.bit_rate) / 1000);
-const sampleRate = 48000; // default, will be read from stream
+const bitrate = Math.round(parseInt(probeData.format.bit_rate) / );
+const sampleRate = ; // default, will be read from stream
 
-console.log(`Duration: ${totalDuration.toFixed(1)}s (${(totalDuration / 60).toFixed(1)} min)`);
+console.log(`Duration: ${totalDuration.toFixed()}s (${(totalDuration / ).toFixed()} min)`);
 console.log(`Bitrate: ${bitrate}kbps`);
 console.log(`Edits: ${edits.length}`);
 
@@ -72,7 +69,7 @@ edits.sort((a, b) => a.start - b.start);
 
 // Calculate keep segments (inverse of cuts)
 const keepSegments: [number, number][] = [];
-let prevEnd = 0.0;
+let prevEnd = .;
 
 for (const edit of edits) {
   if (edit.start > prevEnd) {
@@ -85,37 +82,37 @@ if (prevEnd < totalDuration) {
   keepSegments.push([prevEnd, totalDuration]);
 }
 
-const totalKeep = keepSegments.reduce((sum, [s, e]) => sum + (e - s), 0);
+const totalKeep = keepSegments.reduce((sum, [s, e]) => sum + (e - s), );
 const totalCut = totalDuration - totalKeep;
-console.log(`Keeping: ${totalKeep.toFixed(1)}s (${(totalKeep / 60).toFixed(1)} min)`);
-console.log(`Cutting: ${totalCut.toFixed(1)}s (${(totalCut / 60).toFixed(1)} min)`);
+console.log(`Keeping: ${totalKeep.toFixed()}s (${(totalKeep / ).toFixed()} min)`);
+console.log(`Cutting: ${totalCut.toFixed()}s (${(totalCut / ).toFixed()} min)`);
 console.log(`Segments: ${keepSegments.length}`);
 
 // ===== Build ffmpeg filter =====
-// Strategy: atrim each segment, apply 40ms fade in/out at boundaries, concat
-const FADE_MS = 40;
-const FADE_S = FADE_MS / 1000;
+// Strategy: atrim each segment, apply ms fade in/out at boundaries, concat
+const FADE_MS = ;
+const FADE_S = FADE_MS / ;
 
 const filterParts: string[] = [];
 const streamLabels: string[] = [];
 
-for (let i = 0; i < keepSegments.length; i++) {
+for (let i = ; i < keepSegments.length; i++) {
   const [start, end] = keepSegments[i];
   const duration = end - start;
   const label = `a${i}`;
 
   // atrim + asetpts to reset timestamps
-  let filter = `[0:a]atrim=${start.toFixed(3)}:${end.toFixed(3)},asetpts=PTS-STARTPTS`;
+  let filter = `[:a]atrim=${start.toFixed()}:${end.toFixed()},asetpts=PTS-STARTPTS`;
 
-  // Apply fade-in at start of segment (except first segment if it starts at 0)
-  if (i > 0) {
-    filter += `,afade=t=in:st=0:d=${FADE_S}:curve=qsin`;
+  // Apply fade-in at start of segment (except first segment if it starts at )
+  if (i > ) {
+    filter += `,afade=t=in:st=:d=${FADE_S}:curve=qsin`;
   }
 
   // Apply fade-out at end of segment (except last segment if it ends at duration)
-  if (i < keepSegments.length - 1) {
-    const fadeStart = Math.max(0, duration - FADE_S);
-    filter += `,afade=t=out:st=${fadeStart.toFixed(3)}:d=${FADE_S}:curve=qsin`;
+  if (i < keepSegments.length - ) {
+    const fadeStart = Math.max(, duration - FADE_S);
+    filter += `,afade=t=out:st=${fadeStart.toFixed()}:d=${FADE_S}:curve=qsin`;
   }
 
   filter += `[${label}]`;
@@ -126,7 +123,7 @@ for (let i = 0; i < keepSegments.length; i++) {
 // Concat all segments
 const concatInput = streamLabels.join("");
 filterParts.push(
-  `${concatInput}concat=n=${keepSegments.length}:v=0:a=1[out]`
+  `${concatInput}concat=n=${keepSegments.length}:v=:a=[out]`
 );
 
 const filterComplex = filterParts.join(";\n");
@@ -137,16 +134,16 @@ await Bun.write(filterFile, filterComplex);
 
 // Determine codec based on extension
 let codecArgs: string[];
-if (ext === ".mp3") {
-  codecArgs = ["-codec:a", "libmp3lame", "-b:a", `${Math.max(bitrate, 96)}k`];
+if (ext === ".mp") {
+  codecArgs = ["-codec:a", "libmplame", "-b:a", `${Math.max(bitrate, )}k`];
 } else if (ext === ".wav") {
-  codecArgs = ["-codec:a", "pcm_s16le"];
+  codecArgs = ["-codec:a", "pcm_sle"];
 } else if (ext === ".flac") {
   codecArgs = ["-codec:a", "flac"];
-} else if (ext === ".m4a" || ext === ".aac") {
-  codecArgs = ["-codec:a", "aac", "-b:a", `${Math.max(bitrate, 128)}k`];
+} else if (ext === ".ma" || ext === ".aac") {
+  codecArgs = ["-codec:a", "aac", "-b:a", `${Math.max(bitrate, )}k`];
 } else {
-  codecArgs = ["-codec:a", "libmp3lame", "-b:a", "128k"];
+  codecArgs = ["-codec:a", "libmplame", "-b:a", "k"];
 }
 
 console.log(`\nExecuting ffmpeg...`);
@@ -157,25 +154,25 @@ const ffmpegResult = await $`ffmpeg -y \
   -map "[out]" \
   ${codecArgs} \
   -ar ${sampleRate} \
-  ${outFile} 2>&1`.quiet().nothrow();
+  ${outFile} >&`.quiet().nothrow();
 
 // Clean up
 await $`rm -f ${filterFile}`.quiet();
 
-if (ffmpegResult.exitCode !== 0) {
+if (ffmpegResult.exitCode !== ) {
   console.error(`ffmpeg failed (exit ${ffmpegResult.exitCode})`);
-  console.error(ffmpegResult.text().split("\n").slice(-5).join("\n"));
-  process.exit(1);
+  console.error(ffmpegResult.text().split("\n").slice(-).join("\n"));
+  process.exit();
 }
 
 // Verify output
 const outProbe = await $`ffprobe -v quiet -print_format json -show_format ${outFile}`.quiet();
 const outData = JSON.parse(outProbe.text());
 const outDuration = parseFloat(outData.format.duration);
-const outSize = Math.round(parseInt(outData.format.size) / 1024 / 1024);
+const outSize = Math.round(parseInt(outData.format.size) / / );
 
 console.log(`\n=== Edit Complete ===`);
-console.log(`Original: ${totalDuration.toFixed(1)}s (${(totalDuration / 60).toFixed(1)} min)`);
-console.log(`Edited:   ${outDuration.toFixed(1)}s (${(outDuration / 60).toFixed(1)} min)`);
-console.log(`Removed:  ${totalCut.toFixed(1)}s (${(totalCut / 60).toFixed(1)} min)`);
+console.log(`Original: ${totalDuration.toFixed()}s (${(totalDuration / ).toFixed()} min)`);
+console.log(`Edited:   ${outDuration.toFixed()}s (${(outDuration / ).toFixed()} min)`);
+console.log(`Removed:  ${totalCut.toFixed()}s (${(totalCut / ).toFixed()} min)`);
 console.log(`Output:   ${outFile} (${outSize}MB)`);

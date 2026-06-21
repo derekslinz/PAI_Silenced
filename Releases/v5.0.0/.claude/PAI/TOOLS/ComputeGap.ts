@@ -168,7 +168,7 @@ function formatHuman(gaps: DimensionGap[]): string {
       lines.push("  ✅ No gaps.");
     } else {
       for (const e of g.entries) {
-        const icon = e.severity === "critical" ? "🔴" : e.severity === "warning" ? "🟡" : "🔵";
+        const icon = e.severity === "critical" ? "" : e.severity === "warning" ? "" : "";
         lines.push(`  ${icon} ${e.metric}: ${e.current}  →  ${e.target}`);
         if (e.note) lines.push(`      ${e.note}`);
       }

@@ -543,11 +543,11 @@ if [ "$MODE" = "mini" ] || [ "$MODE" = "normal" ]; then
     # U+1F1E6 ('A') = F0 9F 87 A6, +1 per letter through U+1F1FF ('Z').
     cc_to_flag() {
         local code="${1:-}"
-        [ "${#code}" -ne 2 ] && { printf '🌐'; return; }
+        [ "${#code}" -ne 2 ] && { printf ''; return; }
         local c1 c2 b1 b2
         c1=$(printf '%d' "'${code:0:1}")
         c2=$(printf '%d' "'${code:1:1}")
-        [ "$c1" -lt 65 ] || [ "$c1" -gt 90 ] || [ "$c2" -lt 65 ] || [ "$c2" -gt 90 ] && { printf '🌐'; return; }
+        [ "$c1" -lt 65 ] || [ "$c1" -gt 90 ] || [ "$c2" -lt 65 ] || [ "$c2" -gt 90 ] && { printf ''; return; }
         b1=$(printf '%02x' $((0xA6 + c1 - 65)))
         b2=$(printf '%02x' $((0xA6 + c2 - 65)))
         printf "\xF0\x9F\x87\x${b1}\xF0\x9F\x87\x${b2}"
@@ -565,7 +565,7 @@ if [ "$MODE" = "mini" ] || [ "$MODE" = "normal" ]; then
             printf "location_flag=%q\n" "$_lc_flag"
         } > "$_parallel_tmp/location.sh"
     else
-        echo -e "location_city='UNKNOWN'\nlocation_state=''\nlocation_flag='🌐'" > "$_parallel_tmp/location.sh"
+        echo -e "location_city='UNKNOWN'\nlocation_state=''\nlocation_flag=''" > "$_parallel_tmp/location.sh"
     fi
 } &
 fi
@@ -588,19 +588,19 @@ if [ "$MODE" = "mini" ] || [ "$MODE" = "normal" ]; then
         if [ -n "$weather_json" ] && echo "$weather_json" | jq -e '.current' >/dev/null 2>&1; then
             eval "$(echo "$weather_json" | jq -r '.current | "temp=\(.temperature_2m)\ncode=\(.weather_code)\nis_day=\(.is_day)"' 2>/dev/null)"
             # Map open-meteo weather_code → single emoji glyph (clear/cloudy/fog/rain/snow/storm)
-            # Day vs. night uses the is_day flag to pick sun ☀ vs. moon 🌙 for clear conditions.
+            # Day vs. night uses the is_day flag to pick sun ☀ vs. moon  for clear conditions.
             case "$code" in
-                0)              [ "${is_day:-1}" = "0" ] && icon="🌙" || icon="☀️" ;;
-                1)              [ "${is_day:-1}" = "0" ] && icon="🌙" || icon="🌤️" ;;
+                0)              [ "${is_day:-1}" = "0" ] && icon="" || icon="☀️" ;;
+                1)              [ "${is_day:-1}" = "0" ] && icon="" || icon="️" ;;
                 2)              icon="⛅" ;;
                 3)              icon="☁️" ;;
-                45|48)          icon="🌫️" ;;
-                51|53|55|56|57) icon="🌦️" ;;
-                61|63|65|66|67) icon="🌧️" ;;
-                80|81|82)       icon="🌧️" ;;
-                71|73|75|77|85|86) icon="🌨️" ;;
+                45|48)          icon="️" ;;
+                51|53|55|56|57) icon="️" ;;
+                61|63|65|66|67) icon="️" ;;
+                80|81|82)       icon="️" ;;
+                71|73|75|77|85|86) icon="️" ;;
                 95|96|99)       icon="⛈️" ;;
-                *)              icon="🌡️" ;;
+                *)              icon="️" ;;
             esac
             temp_int=$(printf '%.0f' "$temp")
             if [ "$TEMP_UNIT" = "celsius" ]; then
@@ -1089,7 +1089,7 @@ if [ "$MODE" != "normal" ]; then
             printf " ${SLATE_600}│${RESET} ${LEARN_LABEL}✿${RESET}${_learn_color}${_learn_score}${_learn_trend}${RESET}
 "
             # Line 3: memory counts
-            printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}📁${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} ${LEARN_SESSIONS}⊕${RESET}${SLATE_300}${sessions_count}${RESET}
+            printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} ${LEARN_SESSIONS}⊕${RESET}${SLATE_300}${sessions_count}${RESET}
 "
             ;;
         mini)
@@ -1108,7 +1108,7 @@ if [ "$MODE" != "normal" ]; then
             printf "
 "
             # Line 5: memory + learning
-            printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}📁${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} ${SLATE_600}│${RESET} ${LEARN_LABEL}✿${RESET}${_learn_color}${_learn_score}${_learn_trend}${RESET}
+            printf "${LEARN_PRIMARY}◎${RESET} ${LEARN_WORK}${RESET}${SLATE_300}${work_count}${RESET} ${LEARN_SIGNALS}✦${RESET}${SLATE_300}${ratings_count}${RESET} ${SLATE_600}│${RESET} ${LEARN_LABEL}✿${RESET}${_learn_color}${_learn_score}${_learn_trend}${RESET}
 "
             ;;
     esac
@@ -1119,7 +1119,7 @@ fi
 # NORMAL MODE: Full multi-line output (80+ columns)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# Output PAI branding line: PAI │ CITY, STATE 🇺🇸  HH:MM  ☁️ temp [│ session]
+# Output PAI branding line: PAI │ CITY, STATE   HH:MM  ☁️ temp [│ session]
 # City + state arrive uppercased from the location prefetch; flag is rendered there too.
 _hdr_loc=""
 if [ -n "$location_city" ]; then
@@ -1210,7 +1210,7 @@ for _i in "${!_dims[@]}"; do
 done
 printf "\n"
 sep
-printf "${SLATE_400}CC:${RESET} ${PAI_A}${cc_version}${RESET} ${SLATE_600}│${RESET} ${SLATE_500}PAI:${PAI_A}${PAI_VERSION}${RESET} ${SLATE_400}ALG:${PAI_A}${ALGO_VERSION}${RESET} ${SLATE_600}│${RESET} ${WIELD_ACCENT}SK:${RESET} ${SLATE_300}${public_skills}${RESET}${SLATE_600}🌐${RESET} ${SLATE_500}${private_skills}${RESET}${SLATE_600}🏠${RESET} ${SLATE_600}│${RESET} ${WIELD_WORKFLOWS}WF:${RESET} ${SLATE_300}${workflows_count}${RESET} ${SLATE_600}│${RESET} ${WIELD_HOOKS}HK:${RESET} ${SLATE_300}${hooks_count}${RESET}\n"
+printf "${SLATE_400}CC:${RESET} ${PAI_A}${cc_version}${RESET} ${SLATE_600}│${RESET} ${SLATE_500}PAI:${PAI_A}${PAI_VERSION}${RESET} ${SLATE_400}ALG:${PAI_A}${ALGO_VERSION}${RESET} ${SLATE_600}│${RESET} ${WIELD_ACCENT}SK:${RESET} ${SLATE_300}${public_skills}${RESET}${SLATE_600}${RESET} ${SLATE_500}${private_skills}${RESET}${SLATE_600}${RESET} ${SLATE_600}│${RESET} ${WIELD_WORKFLOWS}WF:${RESET} ${SLATE_300}${workflows_count}${RESET} ${SLATE_600}│${RESET} ${WIELD_HOOKS}HK:${RESET} ${SLATE_300}${hooks_count}${RESET}\n"
 sep
 
 # ═══════════════════════════════════════════════════════════════════════════════

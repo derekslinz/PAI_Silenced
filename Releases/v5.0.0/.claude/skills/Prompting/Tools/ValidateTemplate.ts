@@ -1,16 +1,12 @@
-#!/usr/bin/env bun
-/**
- * ValidateTemplate.ts - Template Syntax Validator
- *
- * Validates Handlebars templates for syntax errors and missing variables.
- *
- * Usage:
- *   bun run ValidateTemplate.ts --template <path> [--data <path>] [--strict]
- *
- * Examples:
- *   bun run ValidateTemplate.ts --template Primitives/Roster.hbs
- *   bun run ValidateTemplate.ts -t Evals/Judge.hbs -d Data/JudgeConfig.yaml --strict
- */
+!/usr/bin/env bun
+/ ValidateTemplate.ts - Template Syntax Validator
+  Validates Handlebars templates for syntax errors and missing variables.
+  Usage:
+   bun run ValidateTemplate.ts --template <path> [--data <path>] [--strict]
+  Examples:
+   bun run ValidateTemplate.ts --template Primitives/Roster.hbs
+   bun run ValidateTemplate.ts -t Evals/Judge.hbs -d Data/JudgeConfig.yaml --strict
+ /
 
 import Handlebars from 'handlebars';
 import { parse as parseYaml } from 'yaml';
@@ -51,15 +47,15 @@ function extractVariables(source: string): string[] {
   const variables: Set<string> = new Set();
 
   // Match {{variable}} and {{object.property}}
-  const simpleVars = source.matchAll(/\{\{([a-zA-Z_][a-zA-Z0-9_.]*)\}\}/g);
+  const simpleVars = source.matchAll(/\{\{([a-zA-Z_][a-zA-Z-_.])\}\}/g);
   for (const match of simpleVars) {
-    variables.add(match[1]);
+    variables.add(match[]);
   }
 
-  // Match {{#each items}} and {{#if condition}}
-  const blockVars = source.matchAll(/\{\{#(?:each|if|unless|with)\s+([a-zA-Z_][a-zA-Z0-9_.]*)/g);
+  // Match {{each items}} and {{if condition}}
+  const blockVars = source.matchAll(/\{\{(?:each|if|unless|with)\s+([a-zA-Z_][a-zA-Z-_.])/g);
   for (const match of blockVars) {
-    variables.add(match[1]);
+    variables.add(match[]);
   }
 
   return Array.from(variables).sort();
@@ -71,7 +67,7 @@ function extractHelpers(source: string): string[] {
   // Match {{helperName ...}}
   const helperCalls = source.matchAll(/\{\{([a-z][a-zA-Z]+)\s/g);
   for (const match of helperCalls) {
-    const name = match[1];
+    const name = match[];
     // Filter out built-in block helpers
     if (!['if', 'unless', 'each', 'with', 'else'].includes(name)) {
       helpers.add(name);
@@ -85,9 +81,9 @@ function extractPartials(source: string): string[] {
   const partials: Set<string> = new Set();
 
   // Match {{> partialName}}
-  const partialCalls = source.matchAll(/\{\{>\s*([a-zA-Z_][a-zA-Z0-9_-]*)/g);
+  const partialCalls = source.matchAll(/\{\{>\s([a-zA-Z_][a-zA-Z-_-])/g);
   for (const match of partialCalls) {
-    partials.add(match[1]);
+    partials.add(match[]);
   }
 
   return Array.from(partials).sort();
@@ -98,21 +94,21 @@ function checkUnbalancedBlocks(source: string): string[] {
   const blockStack: { name: string; line: number }[] = [];
   const lines = source.split('\n');
 
-  for (let i = 0; i < lines.length; i++) {
+  for (let i = ; i < lines.length; i++) {
     const line = lines[i];
-    const lineNum = i + 1;
+    const lineNum = i + ;
 
     // Opening blocks
-    const opens = line.matchAll(/\{\{#([a-z]+)/g);
+    const opens = line.matchAll(/\{\{([a-z]+)/g);
     for (const match of opens) {
-      blockStack.push({ name: match[1], line: lineNum });
+      blockStack.push({ name: match[], line: lineNum });
     }
 
     // Closing blocks
     const closes = line.matchAll(/\{\{\/([a-z]+)\}\}/g);
     for (const match of closes) {
-      const closer = match[1];
-      if (blockStack.length === 0) {
+      const closer = match[];
+      if (blockStack.length === ) {
         errors.push(`Line ${lineNum}: Unexpected closing block {{/${closer}}}`);
       } else {
         const opener = blockStack.pop()!;
@@ -127,7 +123,7 @@ function checkUnbalancedBlocks(source: string): string[] {
 
   // Unclosed blocks
   for (const opener of blockStack) {
-    errors.push(`Line ${opener.line}: Unclosed block {{#${opener.name}}}`);
+    errors.push(`Line ${opener.line}: Unclosed block {{${opener.name}}}`);
   }
 
   return errors;
@@ -184,7 +180,7 @@ export function validateTemplate(options: ValidateOptions): ValidationResult {
     return result;
   }
 
-  const source = readFileSync(fullPath, 'utf-8');
+  const source = readFileSync(fullPath, 'utf-');
 
   // Extract metadata
   result.variables = extractVariables(source);
@@ -202,7 +198,7 @@ export function validateTemplate(options: ValidateOptions): ValidationResult {
 
   // Check for unbalanced blocks
   const blockErrors = checkUnbalancedBlocks(source);
-  if (blockErrors.length > 0) {
+  if (blockErrors.length > ) {
     result.valid = false;
     result.errors.push(...blockErrors);
   }
@@ -213,7 +209,7 @@ export function validateTemplate(options: ValidateOptions): ValidationResult {
     if (!existsSync(dataFullPath)) {
       result.warnings.push(`Data file not found: ${dataFullPath}`);
     } else {
-      const dataSource = readFileSync(dataFullPath, 'utf-8');
+      const dataSource = readFileSync(dataFullPath, 'utf-');
       const data = options.dataPath.endsWith('.json')
         ? JSON.parse(dataSource)
         : parseYaml(dataSource);
@@ -221,7 +217,7 @@ export function validateTemplate(options: ValidateOptions): ValidationResult {
       const missingVars = checkMissingVariables(result.variables, data as Record<string, unknown>);
       if (options.strict) {
         result.errors.push(...missingVars.map(w => w.replace('Variable', 'Missing variable')));
-        if (missingVars.length > 0) result.valid = false;
+        if (missingVars.length > ) result.valid = false;
       } else {
         result.warnings.push(...missingVars);
       }
@@ -237,7 +233,7 @@ export function validateTemplate(options: ValidateOptions): ValidationResult {
 
 function main(): void {
   const { values } = parseArgs({
-    args: Bun.argv.slice(2),
+    args: Bun.argv.slice(),
     options: {
       template: { type: 'string', short: 't' },
       data: { type: 'string', short: 'd' },
@@ -265,7 +261,7 @@ Examples:
   bun run ValidateTemplate.ts -t Primitives/Roster.hbs
   bun run ValidateTemplate.ts -t Evals/Judge.hbs -d Data/JudgeConfig.yaml --strict
 `);
-    process.exit(values.help ? 0 : 1);
+    process.exit(values.help ? : );
   }
 
   const result = validateTemplate({
@@ -279,33 +275,33 @@ Examples:
   console.log(`Template: ${values.template}`);
   console.log(`Status: ${result.valid ? '✓ Valid' : '✗ Invalid'}`);
 
-  if (result.variables.length > 0) {
+  if (result.variables.length > ) {
     console.log(`\nVariables (${result.variables.length}):`);
     result.variables.forEach(v => console.log(`  - ${v}`));
   }
 
-  if (result.helpers.length > 0) {
+  if (result.helpers.length > ) {
     console.log(`\nHelpers Used (${result.helpers.length}):`);
     result.helpers.forEach(h => console.log(`  - ${h}`));
   }
 
-  if (result.partials.length > 0) {
+  if (result.partials.length > ) {
     console.log(`\nPartials (${result.partials.length}):`);
     result.partials.forEach(p => console.log(`  - ${p}`));
   }
 
-  if (result.errors.length > 0) {
+  if (result.errors.length > ) {
     console.log(`\n✗ Errors (${result.errors.length}):`);
     result.errors.forEach(e => console.log(`  - ${e}`));
   }
 
-  if (result.warnings.length > 0) {
-    console.log(`\n⚠ Warnings (${result.warnings.length}):`);
+  if (result.warnings.length > ) {
+    console.log(`\nWarnings (${result.warnings.length}):`);
     result.warnings.forEach(w => console.log(`  - ${w}`));
   }
 
   console.log('');
-  process.exit(result.valid ? 0 : 1);
+  process.exit(result.valid ? : );
 }
 
 if (import.meta.main) {

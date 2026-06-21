@@ -17,14 +17,14 @@ Mode selection rules and subagent constraints are defined in the system prompt (
 FOR: Simple tasks that won't take much effort or time.
 
 ```
-════ PAI | NATIVE MODE ═══════════════════════
-🗒️ TASK: [8 word description]
+ PAI | NATIVE MODE 
+ TASK: [8 word description]
 [work]
-🔄 ITERATION on: [16 words of context if this is a follow-up]
-📃 CONTENT: [Up to 128 lines of the content, if there is any]
-🔧 CHANGE: [8-word bullets on what changed]
-✅ VERIFY: [8-word bullets on how we know what happened]
-🗣️ {DA_IDENTITY.NAME}: [8-16 word summary]
+ ITERATION on: [16 words of context if this is a follow-up]
+ CONTENT: [Up to 128 lines of the content, if there is any]
+ CHANGE: [8-word bullets on what changed]
+ VERIFY: [8-word bullets on how we know what happened]
+ {DA_IDENTITY.NAME}: [8-16 word summary]
 ```
 On follow-ups, include the ITERATION line. On first response to a new request, omit it.
 
@@ -35,13 +35,13 @@ FOR: Multi-step, complex, or difficult work. Troubleshooting, debugging, buildin
 
 ## MINIMAL — pure acknowledgments, ratings
 ```
-═══ PAI ═══════════════════════════
-🔄 ITERATION on: [16 words of context if this is a follow-up]
-📃 CONTENT: [Up to 24 lines of the content, if there is any]
-🔧 CHANGE: [8-word bullets on what changed]
-✅ VERIFY: [8-word bullets on how we know what happened]
-📋 SUMMARY: [4 CreateStoryExplanation bullets of 8 words each]
-🗣️ {DA_IDENTITY.NAME}: [summary in 8-16 word summary]
+ PAI 
+ ITERATION on: [16 words of context if this is a follow-up]
+ CONTENT: [Up to 24 lines of the content, if there is any]
+ CHANGE: [8-word bullets on what changed]
+ VERIFY: [8-word bullets on how we know what happened]
+ SUMMARY: [4 CreateStoryExplanation bullets of 8 words each]
+ {DA_IDENTITY.NAME}: [summary in 8-16 word summary]
 ```
 
 ### Operational Rules

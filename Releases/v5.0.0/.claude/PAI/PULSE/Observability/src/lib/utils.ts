@@ -17,26 +17,26 @@ export function formatNumber(num: number): string {
 
 export function getSourceIcon(source: string): string {
   const icons: Record<string, string> = {
-    google: "🔍",
-    bing: "🔍",
-    duckduckgo: "🦆",
+    google: "",
+    bing: "",
+    duckduckgo: "",
     twitter: "𝕏",
     x: "𝕏",
-    linkedin: "💼",
-    facebook: "📘",
-    reddit: "🤖",
-    hackernews: "🟠",
+    linkedin: "",
+    facebook: "",
+    reddit: "",
+    hackernews: "",
     youtube: "▶️",
-    newsletter: "📧",
-    "ul newsletter": "📧",
-    tldrsec: "📧",
-    chatgpt: "🤖",
-    claude: "🤖",
-    perplexity: "🤖",
-    direct: "🔗",
+    newsletter: "",
+    "ul newsletter": "",
+    tldrsec: "",
+    chatgpt: "",
+    claude: "",
+    perplexity: "",
+    direct: "",
     onsite: "➡️",
   };
-  return icons[source.toLowerCase()] || "🌐";
+  return icons[source.toLowerCase()] || "";
 }
 
 export function getCategoryColor(category: string): string {
@@ -53,7 +53,7 @@ export function getCategoryColor(category: string): string {
 }
 
 export function getCountryFlag(countryCode: string): string {
-  if (!countryCode || countryCode.length !== 2) return "🌍";
+  if (!countryCode || countryCode.length !== 2) return "";
   const codePoints = countryCode
     .toUpperCase()
     .split("")

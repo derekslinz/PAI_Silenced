@@ -343,7 +343,7 @@ const allRatings: Rating[] = content
   })
   .filter((r): r is Rating => r !== null);
 
-console.log(`📊 Loaded ${allRatings.length} total ratings`);
+console.log(` Loaded ${allRatings.length} total ratings`);
 
 // Determine period and filter
 let period = 'Weekly';
@@ -365,7 +365,7 @@ const filteredRatings = allRatings.filter(r => {
   return ratingDate >= cutoffDate;
 });
 
-console.log(`🔍 Analyzing ${filteredRatings.length} ratings for ${period.toLowerCase()} period`);
+console.log(` Analyzing ${filteredRatings.length} ratings for ${period.toLowerCase()} period`);
 
 if (filteredRatings.length === 0) {
   console.log("✅ No ratings in this period");
@@ -375,7 +375,7 @@ if (filteredRatings.length === 0) {
 // Analyze
 const result = analyzeRatings(filteredRatings, period);
 
-console.log(`\n📈 Analysis Results:`);
+console.log(`\n Analysis Results:`);
 console.log(`   Average Rating: ${result.avgRating.toFixed(1)}/10`);
 console.log(`   Frustration Patterns: ${result.frustrations.length}`);
 console.log(`   Success Patterns: ${result.successes.length}`);
@@ -388,7 +388,7 @@ if (result.topIssues.length > 0) {
 }
 
 if (values["dry-run"]) {
-  console.log("\n🔍 DRY RUN - Would write synthesis report");
+  console.log("\n DRY RUN - Would write synthesis report");
   console.log("\nRecommendations:");
   for (const rec of result.recommendations) {
     console.log(`   - ${rec}`);

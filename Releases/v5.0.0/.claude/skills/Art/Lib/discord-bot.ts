@@ -1,12 +1,9 @@
-/**
- * discord-bot.ts - Discord Bot Client for Midjourney Integration
- *
- * Official Discord bot wrapper using discord.js for legitimate interaction
- * with Midjourney bot. Handles connection, message sending, monitoring,
- * and image downloads.
- *
- * @see ~/.claude/skills/art/SKILL.md
- */
+/ discord-bot.ts - Discord Bot Client for Midjourney Integration
+  Official Discord bot wrapper using discord.js for legitimate interaction
+ with Midjourney bot. Handles connection, message sending, monitoring,
+ and image downloads.
+  @see ~/.claude/skills/art/SKILL.md
+ /
 
 import {
   Client,
@@ -21,7 +18,7 @@ import { writeFile } from 'node:fs/promises';
 // Constants
 // ============================================================================
 
-const MIDJOURNEY_BOT_ID = '936929561302675456'; // Official Midjourney bot ID
+const MIDJOURNEY_BOT_ID = ''; // Official Midjourney bot ID
 
 // ============================================================================
 // Types
@@ -60,9 +57,8 @@ export class DiscordBotClient {
     });
   }
 
-  /**
-   * Connect to Discord
-   */
+  /   Connect to Discord
+   /
   async connect(): Promise<void> {
     if (this.connected) {
       return;
@@ -71,13 +67,13 @@ export class DiscordBotClient {
     return new Promise((resolve, reject) => {
       // Set up event handlers
       this.client.once('ready', () => {
-        console.log(`✅ Discord bot connected as ${this.client.user?.tag}`);
+        console.log(`Discord bot connected as ${this.client.user?.tag}`);
         this.connected = true;
         resolve();
       });
 
       this.client.on('error', (error) => {
-        console.error('❌ Discord client error:', error);
+        console.error('Discord client error:', error);
       });
 
       // Login with bot token
@@ -85,9 +81,8 @@ export class DiscordBotClient {
     });
   }
 
-  /**
-   * Send a message to the specified channel
-   */
+  /   Send a message to the specified channel
+   /
   async sendMessage(content: string): Promise<Message> {
     if (!this.connected) {
       throw new Error('Bot not connected. Call connect() first.');
@@ -100,26 +95,24 @@ export class DiscordBotClient {
     }
 
     const message = await (channel as TextChannel).send(content);
-    console.log(`📤 Sent message: ${content}`);
+    console.log(`Sent message: ${content}`);
 
     return message;
   }
 
-  /**
-   * Wait for Midjourney's response to a prompt
-   *
-   * Polls the channel for messages from Midjourney bot that reference
-   * our initial message. Returns when the response is complete (has image attachments).
-   */
+  /   Wait for Midjourney's response to a prompt
+      Polls the channel for messages from Midjourney bot that reference
+   our initial message. Returns when the response is complete (has image attachments).
+   /
   async waitForMidjourneyResponse(
     initialMessageId: string,
     options: WaitForResponseOptions
   ): Promise<Message> {
-    const { timeout, pollInterval = 5000 } = options;
+    const { timeout, pollInterval = } = options;
     const startTime = Date.now();
-    const timeoutMs = timeout * 1000;
+    const timeoutMs = timeout ;
 
-    console.log(`⏳ Waiting for Midjourney response (timeout: ${timeout}s)...`);
+    console.log(`Waiting for Midjourney response (timeout: ${timeout}s)...`);
 
     while (Date.now() - startTime < timeoutMs) {
       // Fetch recent messages from channel
@@ -129,7 +122,7 @@ export class DiscordBotClient {
         throw new Error('Channel not found or not text-based');
       }
 
-      const messages = await (channel as TextChannel).messages.fetch({ limit: 20 });
+      const messages = await (channel as TextChannel).messages.fetch({ limit: });
 
       // Find Midjourney's response to our prompt
       for (const [_, message] of messages) {
@@ -150,10 +143,10 @@ export class DiscordBotClient {
 
         // Check if generation is complete
         if (this.isGenerationComplete(message)) {
-          console.log(`✅ Midjourney generation complete!`);
+          console.log(`Midjourney generation complete!`);
           return message;
         } else {
-          console.log(`⏳ Generation in progress... (${Math.floor((Date.now() - startTime) / 1000)}s)`);
+          console.log(`Generation in progress... (${Math.floor((Date.now() - startTime) / )}s)`);
         }
       }
 
@@ -164,16 +157,14 @@ export class DiscordBotClient {
     throw new Error(`Timeout waiting for Midjourney response after ${timeout}s`);
   }
 
-  /**
-   * Check if Midjourney generation is complete
-   *
-   * A complete generation has:
-   * - Image attachments
-   * - No "Waiting to start" or "%" progress indicators
-   */
+  /   Check if Midjourney generation is complete
+      A complete generation has:
+   - Image attachments
+   - No "Waiting to start" or "%" progress indicators
+   /
   private isGenerationComplete(message: Message): boolean {
     // Must have attachments (the generated image)
-    if (message.attachments.size === 0) {
+    if (message.attachments.size === ) {
       return false;
     }
 
@@ -182,16 +173,16 @@ export class DiscordBotClient {
     const inProgressIndicators = [
       'waiting to start',
       '(waiting)',
-      '(0%)',
-      '(1%)',
-      '(2%)',
-      '(3%)',
-      '(4%)',
-      '(5%)',
-      '(6%)',
-      '(7%)',
-      '(8%)',
-      '(9%)',
+      '(%)',
+      '(%)',
+      '(%)',
+      '(%)',
+      '(%)',
+      '(%)',
+      '(%)',
+      '(%)',
+      '(%)',
+      '(%)',
       // Continue patterns for progress
       '%)',
     ];
@@ -205,11 +196,10 @@ export class DiscordBotClient {
     return true;
   }
 
-  /**
-   * Download image from URL to local path
-   */
+  /   Download image from URL to local path
+   /
   async downloadImage(url: string, outputPath: string): Promise<void> {
-    console.log(`📥 Downloading image from ${url}...`);
+    console.log(`Downloading image from ${url}...`);
 
     const response = await fetch(url);
 
@@ -222,12 +212,11 @@ export class DiscordBotClient {
 
     await writeFile(outputPath, buffer);
 
-    console.log(`✅ Image saved to ${outputPath}`);
+    console.log(`Image saved to ${outputPath}`);
   }
 
-  /**
-   * Disconnect from Discord
-   */
+  /   Disconnect from Discord
+   /
   async disconnect(): Promise<void> {
     if (!this.connected) {
       return;
@@ -235,14 +224,13 @@ export class DiscordBotClient {
 
     await this.client.destroy();
     this.connected = false;
-    console.log('👋 Discord bot disconnected');
+    console.log('Discord bot disconnected');
   }
 
-  /**
-   * Get the first image attachment URL from a message
-   */
+  /   Get the first image attachment URL from a message
+   /
   getImageUrl(message: Message): string | null {
-    if (message.attachments.size === 0) {
+    if (message.attachments.size === ) {
       return null;
     }
 
@@ -266,9 +254,8 @@ export class DiscordBotClient {
     return attachment.url;
   }
 
-  /**
-   * Sleep utility
-   */
+  /   Sleep utility
+   /
   private sleep(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
   }

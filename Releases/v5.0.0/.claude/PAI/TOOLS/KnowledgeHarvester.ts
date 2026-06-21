@@ -739,7 +739,7 @@ function cmdHarvest(sourceFilter: string | null, dryRun: boolean, maxNotes: numb
   const state = loadHarvestState();
   let allCandidates: HarvestCandidate[] = [];
 
-  console.log("🌾 Knowledge Harvester");
+  console.log(" Knowledge Harvester");
   console.log("─".repeat(40));
 
   // Collect candidates from each source
@@ -809,12 +809,12 @@ function cmdHarvest(sourceFilter: string | null, dryRun: boolean, maxNotes: numb
     // Expire stale seedlings
     const expired = expireStaleSeedlings();
     if (expired.length > 0) {
-      console.log(`\n  📦 Archived ${expired.length} stale low-quality note(s):`);
+      console.log(`\n   Archived ${expired.length} stale low-quality note(s):`);
       for (const e of expired) console.log(`     ${e}`);
     }
 
     // Regenerate affected MOCs
-    console.log("\n  📑 Regenerating MOCs...");
+    console.log("\n   Regenerating MOCs...");
     for (const domain of affectedDomains) {
       regenerateMOC(domain);
       console.log(`     ${domain}/_index.md`);
@@ -832,7 +832,7 @@ function cmdHarvest(sourceFilter: string | null, dryRun: boolean, maxNotes: numb
 function cmdStatus(): void {
   const stats = getArchiveStats();
 
-  console.log("📊 Knowledge Archive Status");
+  console.log(" Knowledge Archive Status");
   console.log("─".repeat(40));
   console.log(`  Total notes: ${stats.totalNotes}`);
   console.log(`  Last harvest: ${stats.lastHarvest || "never"}`);
@@ -864,7 +864,7 @@ function cmdStatus(): void {
   }
 
   if (stats.staleSeedlings.length > 0) {
-    console.log(`\n  🥀 Stale low-quality notes (>${SEEDLING_EXPIRY_DAYS} days, quality ≤2):`);
+    console.log(`\n   Stale low-quality notes (>${SEEDLING_EXPIRY_DAYS} days, quality ≤2):`);
     for (const s of stats.staleSeedlings) {
       console.log(`    ${s}`);
     }
@@ -883,7 +883,7 @@ function temporalWindowsOverlap(fmA: Record<string, any>, fmB: Record<string, an
 }
 
 function cmdContradictions(): void {
-  console.log("🔍 Contradiction Candidates");
+  console.log(" Contradiction Candidates");
   console.log("─".repeat(40));
   console.log("  Finding note pairs with high tag overlap...\n");
 
@@ -958,7 +958,7 @@ function cmdContradictions(): void {
   }
 
   for (const pair of pairs.slice(0, 20)) {
-    console.log(`  📋 ${pair.shared.length} shared tags: [${pair.shared.join(", ")}]`);
+    console.log(`   ${pair.shared.length} shared tags: [${pair.shared.join(", ")}]`);
     console.log(`     A: ${pair.noteA.domain}/${pair.noteA.slug} — "${pair.noteA.title}"`);
     if (pair.noteA.fm.valid_from || pair.noteA.fm.valid_until) {
       console.log(`        ⏰ valid: ${pair.noteA.fm.valid_from || "?"} → ${pair.noteA.fm.valid_until || "present"}`);
@@ -978,7 +978,7 @@ function cmdContradictions(): void {
 }
 
 function cmdIndex(): void {
-  console.log("📑 Regenerating all MOC dashboards...");
+  console.log(" Regenerating all MOC dashboards...");
   for (const domain of DOMAINS) {
     regenerateMOC(domain);
     console.log(`  ${domain}/_index.md`);

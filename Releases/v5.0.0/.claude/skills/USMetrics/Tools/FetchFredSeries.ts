@@ -1,59 +1,53 @@
-#!/usr/bin/env bun
-/**
- * fetch-fred-series.ts
- *
- * Fetches historical data from FRED (Federal Reserve Economic Data) API
- * for use in US Metrics analysis.
- *
- * Usage:
- *   bun run fetch-fred-series.ts <series_id> [--years=10]
- *   bun run fetch-fred-series.ts UNRATE --years=10
- *   bun run fetch-fred-series.ts --all --years=10
- *
- * Environment:
- *   FRED_API_KEY - Required API key from https://fred.stlouisfed.org/docs/api/api_key.html
- */
+!/usr/bin/env bun
+/ fetch-fred-series.ts
+  Fetches historical data from FRED (Federal Reserve Economic Data) API
+ for use in US Metrics analysis.
+  Usage:
+   bun run fetch-fred-series.ts <series_id> [--years=]
+   bun run fetch-fred-series.ts UNRATE --years=   bun run fetch-fred-series.ts --all --years=  Environment:
+   FRED_API_KEY - Required API key from https://fred.stlouisfed.org/docs/api/api_key.html
+ /
 
 import { parseArgs } from "util";
 
 // Core economic series for US-Common-Metrics
 const CORE_SERIES: Record<string, { name: string; category: string; unit: string }> = {
   // Economic Output & Growth
-  "GDPC1": { name: "Real GDP", category: "Economic Output", unit: "Billions of Chained 2017 Dollars" },
-  "A191RL1Q225SBEA": { name: "Real GDP Growth Rate", category: "Economic Output", unit: "Percent Change" },
-  "INDPRO": { name: "Industrial Production Index", category: "Economic Output", unit: "Index 2017=100" },
+  "GDPC": { name: "Real GDP", category: "Economic Output", unit: "Billions of Chained Dollars" },
+  "ARLQSBEA": { name: "Real GDP Growth Rate", category: "Economic Output", unit: "Percent Change" },
+  "INDPRO": { name: "Industrial Production Index", category: "Economic Output", unit: "Index =" },
   "RSXFS": { name: "Retail Sales", category: "Economic Output", unit: "Millions of Dollars" },
 
   // Inflation & Prices
-  "CPIAUCSL": { name: "CPI-U All Items", category: "Inflation", unit: "Index 1982-84=100" },
-  "CPILFESL": { name: "Core CPI (ex Food/Energy)", category: "Inflation", unit: "Index 1982-84=100" },
-  "PCEPI": { name: "PCE Price Index", category: "Inflation", unit: "Index 2017=100" },
-  "PCEPILFE": { name: "Core PCE", category: "Inflation", unit: "Index 2017=100" },
+  "CPIAUCSL": { name: "CPI-U All Items", category: "Inflation", unit: "Index -=" },
+  "CPILFESL": { name: "Core CPI (ex Food/Energy)", category: "Inflation", unit: "Index -=" },
+  "PCEPI": { name: "PCE Price Index", category: "Inflation", unit: "Index =" },
+  "PCEPILFE": { name: "Core PCE", category: "Inflation", unit: "Index =" },
   "DCOILWTICO": { name: "WTI Crude Oil", category: "Inflation", unit: "Dollars per Barrel" },
 
   // Employment & Labor
-  "UNRATE": { name: "Unemployment Rate (U-3)", category: "Employment", unit: "Percent" },
-  "U6RATE": { name: "Underemployment Rate (U-6)", category: "Employment", unit: "Percent" },
+  "UNRATE": { name: "Unemployment Rate (U-)", category: "Employment", unit: "Percent" },
+  "URATE": { name: "Underemployment Rate (U-)", category: "Employment", unit: "Percent" },
   "PAYEMS": { name: "Nonfarm Payrolls", category: "Employment", unit: "Thousands of Persons" },
   "ICSA": { name: "Initial Jobless Claims", category: "Employment", unit: "Number" },
   "CCSA": { name: "Continuing Claims", category: "Employment", unit: "Number" },
   "JTSJOL": { name: "Job Openings", category: "Employment", unit: "Level in Thousands" },
   "JTSQUR": { name: "Quit Rate", category: "Employment", unit: "Percent" },
   "CIVPART": { name: "Labor Force Participation", category: "Employment", unit: "Percent" },
-  "CES0500000003": { name: "Average Hourly Earnings", category: "Employment", unit: "Dollars per Hour" },
+  "CES": { name: "Average Hourly Earnings", category: "Employment", unit: "Dollars per Hour" },
 
   // Housing
   "MSPUS": { name: "Median Sales Price of Houses", category: "Housing", unit: "Dollars" },
-  "EXHOSLUSM495S": { name: "Existing Home Sales", category: "Housing", unit: "Number of Units" },
-  "HSN1F": { name: "New Home Sales", category: "Housing", unit: "Thousands" },
+  "EXHOSLUSMS": { name: "Existing Home Sales", category: "Housing", unit: "Number of Units" },
+  "HSNF": { name: "New Home Sales", category: "Housing", unit: "Thousands" },
   "HOUST": { name: "Housing Starts", category: "Housing", unit: "Thousands of Units" },
   "PERMIT": { name: "Building Permits", category: "Housing", unit: "Thousands of Units" },
-  "RHORUSQ156N": { name: "Homeownership Rate", category: "Housing", unit: "Percent" },
-  "MORTGAGE30US": { name: "30-Year Mortgage Rate", category: "Housing", unit: "Percent" },
-  "CSUSHPINSA": { name: "Case-Shiller Home Price Index", category: "Housing", unit: "Index Jan 2000=100" },
+  "RHORUSQN": { name: "Homeownership Rate", category: "Housing", unit: "Percent" },
+  "MORTGAGEUS": { name: "-Year Mortgage Rate", category: "Housing", unit: "Percent" },
+  "CSUSHPINSA": { name: "Case-Shiller Home Price Index", category: "Housing", unit: "Index Jan =" },
 
   // Consumer & Personal Finance
-  "UMCSENT": { name: "Consumer Sentiment (UMich)", category: "Consumer", unit: "Index 1966:Q1=100" },
+  "UMCSENT": { name: "Consumer Sentiment (UMich)", category: "Consumer", unit: "Index :Q=" },
   "PI": { name: "Personal Income", category: "Consumer", unit: "Billions of Dollars" },
   "DSPI": { name: "Disposable Personal Income", category: "Consumer", unit: "Billions of Dollars" },
   "PSAVERT": { name: "Personal Saving Rate", category: "Consumer", unit: "Percent" },
@@ -62,17 +56,17 @@ const CORE_SERIES: Record<string, { name: string; category: string; unit: string
   "TDSP": { name: "Debt Service Ratio", category: "Consumer", unit: "Percent" },
 
   // Financial Markets
-  "DGS10": { name: "10-Year Treasury Yield", category: "Financial", unit: "Percent" },
-  "DGS2": { name: "2-Year Treasury Yield", category: "Financial", unit: "Percent" },
+  "DGS": { name: "-Year Treasury Yield", category: "Financial", unit: "Percent" },
+  "DGS": { name: "-Year Treasury Yield", category: "Financial", unit: "Percent" },
   "FEDFUNDS": { name: "Fed Funds Rate", category: "Financial", unit: "Percent" },
   "VIXCLS": { name: "VIX Volatility Index", category: "Financial", unit: "Index" },
-  "STLFSI4": { name: "Financial Stress Index", category: "Financial", unit: "Index" },
+  "STLFSI": { name: "Financial Stress Index", category: "Financial", unit: "Index" },
 
   // Trade & International
   "BOPGSTB": { name: "Trade Balance", category: "Trade", unit: "Millions of Dollars" },
   "BOPGEXP": { name: "Exports", category: "Trade", unit: "Millions of Dollars" },
   "BOPGIMP": { name: "Imports", category: "Trade", unit: "Millions of Dollars" },
-  "DTWEXBGS": { name: "Trade Weighted U.S. Dollar Index", category: "Trade", unit: "Index Jan 2006=100" },
+  "DTWEXBGS": { name: "Trade Weighted U.S. Dollar Index", category: "Trade", unit: "Index Jan =" },
 
   // Government & Fiscal
   "GFDEBTN": { name: "Federal Debt Total", category: "Fiscal", unit: "Millions of Dollars" },
@@ -112,22 +106,21 @@ interface SeriesData {
 
 async function fetchFredSeries(
   seriesId: string,
-  years: number = 10
-): Promise<SeriesData | null> {
+  years: number = ): Promise<SeriesData | null> {
   const apiKey = process.env.FRED_API_KEY;
 
   if (!apiKey) {
     console.error("Error: FRED_API_KEY environment variable not set");
     console.error("Get your free API key at: https://fred.stlouisfed.org/docs/api/api_key.html");
-    process.exit(1);
+    process.exit();
   }
 
   const endDate = new Date();
   const startDate = new Date();
   startDate.setFullYear(startDate.getFullYear() - years);
 
-  const startStr = startDate.toISOString().split('T')[0];
-  const endStr = endDate.toISOString().split('T')[0];
+  const startStr = startDate.toISOString().split('T')[];
+  const endStr = endDate.toISOString().split('T')[];
 
   const url = `https://api.stlouisfed.org/fred/series/observations?series_id=${seriesId}&api_key=${apiKey}&file_type=json&observation_start=${startStr}&observation_end=${endStr}`;
 
@@ -141,7 +134,7 @@ async function fetchFredSeries(
 
     const data: FredResponse = await response.json();
 
-    if (!data.observations || data.observations.length === 0) {
+    if (!data.observations || data.observations.length === ) {
       console.error(`No data found for ${seriesId}`);
       return null;
     }
@@ -161,15 +154,14 @@ async function fetchFredSeries(
 
     const values = observations.map(o => o.value).filter((v): v is number => v !== null);
 
-    const stats = values.length > 0 ? {
+    const stats = values.length > ? {
       min: Math.min(...values),
       max: Math.max(...values),
-      mean: values.reduce((a, b) => a + b, 0) / values.length,
+      mean: values.reduce((a, b) => a + b, ) / values.length,
       count: values.length
     } : null;
 
-    const latest = observations.length > 0
-      ? observations[observations.length - 1]
+    const latest = observations.length >       ? observations[observations.length - ]
       : null;
 
     return {
@@ -196,7 +188,7 @@ function calculateTrendStats(data: SeriesData, periodYears: number): {
   cagr: number | null;
   direction: "↑" | "↓" | "→";
 } | null {
-  if (!data.observations || data.observations.length === 0) return null;
+  if (!data.observations || data.observations.length === ) return null;
 
   const cutoffDate = new Date();
   cutoffDate.setFullYear(cutoffDate.getFullYear() - periodYears);
@@ -205,27 +197,25 @@ function calculateTrendStats(data: SeriesData, periodYears: number): {
     obs => new Date(obs.date) >= cutoffDate && obs.value !== null
   );
 
-  if (periodData.length < 2) return null;
+  if (periodData.length < ) return null;
 
-  const startValue = periodData[0].value;
-  const endValue = periodData[periodData.length - 1].value;
+  const startValue = periodData[].value;
+  const endValue = periodData[periodData.length - ].value;
 
   if (startValue === null || endValue === null) return null;
 
   const absoluteChange = endValue - startValue;
-  const percentChange = ((endValue - startValue) / Math.abs(startValue)) * 100;
+  const percentChange = ((endValue - startValue) / Math.abs(startValue)) ;
 
   // CAGR calculation
   const years = periodYears;
-  const cagr = startValue !== 0
-    ? (Math.pow(endValue / startValue, 1 / years) - 1) * 100
-    : null;
+  const cagr = startValue !==     ? (Math.pow(endValue / startValue, / years) - )     : null;
 
   // Direction determination
   let direction: "↑" | "↓" | "→";
-  if (Math.abs(percentChange) < 2) {
+  if (Math.abs(percentChange) < ) {
     direction = "→";
-  } else if (percentChange > 0) {
+  } else if (percentChange > ) {
     direction = "↑";
   } else {
     direction = "↓";
@@ -243,9 +233,9 @@ function calculateTrendStats(data: SeriesData, periodYears: number): {
 
 async function main() {
   const { values, positionals } = parseArgs({
-    args: Bun.argv.slice(2),
+    args: Bun.argv.slice(),
     options: {
-      years: { type: "string", default: "10" },
+      years: { type: "string", default: "" },
       all: { type: "boolean", default: false },
       json: { type: "boolean", default: false },
       trends: { type: "boolean", default: false },
@@ -263,7 +253,7 @@ Usage:
   bun run fetch-fred-series.ts --all [options]
 
 Options:
-  --years=N     Number of years of history (default: 10)
+  --years=N     Number of years of history (default: )
   --all         Fetch all core series
   --json        Output as JSON
   --trends      Include trend calculations
@@ -271,22 +261,22 @@ Options:
 
 Examples:
   bun run fetch-fred-series.ts UNRATE
-  bun run fetch-fred-series.ts GDPC1 --years=20 --trends
+  bun run fetch-fred-series.ts GDPC--years=--trends
   bun run fetch-fred-series.ts --all --json > data.json
 
 Environment:
   FRED_API_KEY  Your FRED API key (required)
 `);
-    process.exit(0);
+    process.exit();
   }
 
-  const years = parseInt(values.years || "10");
+  const years = parseInt(values.years || "");
   const seriesIds = values.all ? Object.keys(CORE_SERIES) : positionals;
 
-  if (seriesIds.length === 0) {
+  if (seriesIds.length === ) {
     console.error("Error: Specify a series ID or use --all");
     console.error("Run with --help for usage information");
-    process.exit(1);
+    process.exit();
   }
 
   const results: SeriesData[] = [];
@@ -298,10 +288,10 @@ Environment:
     if (data) {
       if (values.trends) {
         const trends = {
-          "10y": calculateTrendStats(data, 10),
-          "5y": calculateTrendStats(data, 5),
-          "2y": calculateTrendStats(data, 2),
-          "1y": calculateTrendStats(data, 1),
+          "y": calculateTrendStats(data, ),
+          "y": calculateTrendStats(data, ),
+          "y": calculateTrendStats(data, ),
+          "y": calculateTrendStats(data, ),
         };
         (data as any).trends = trends;
       }
@@ -310,10 +300,10 @@ Environment:
   }
 
   if (values.json) {
-    console.log(JSON.stringify(results, null, 2));
+    console.log(JSON.stringify(results, null, ));
   } else {
     for (const result of results) {
-      console.log(`\n${"=".repeat(60)}`);
+      console.log(`\n${"=".repeat()}`);
       console.log(`${result.name} (${result.series_id})`);
       console.log(`Category: ${result.category}`);
       console.log(`Unit: ${result.unit}`);
@@ -323,8 +313,8 @@ Environment:
       }
 
       if (result.stats) {
-        console.log(`Range: ${result.stats.min.toFixed(2)} - ${result.stats.max.toFixed(2)}`);
-        console.log(`Mean: ${result.stats.mean.toFixed(2)}`);
+        console.log(`Range: ${result.stats.min.toFixed()} - ${result.stats.max.toFixed()}`);
+        console.log(`Mean: ${result.stats.mean.toFixed()}`);
         console.log(`Observations: ${result.stats.count}`);
       }
 
@@ -334,7 +324,7 @@ Environment:
         for (const [period, trend] of Object.entries(trends)) {
           if (trend) {
             const t = trend as any;
-            console.log(`  ${period}: ${t.startValue?.toFixed(2)} → ${t.endValue?.toFixed(2)} (${t.percentChange?.toFixed(1)}% ${t.direction})`);
+            console.log(`  ${period}: ${t.startValue?.toFixed()} → ${t.endValue?.toFixed()} (${t.percentChange?.toFixed()}% ${t.direction})`);
           }
         }
       }

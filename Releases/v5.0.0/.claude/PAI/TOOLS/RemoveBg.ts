@@ -88,7 +88,7 @@ async function removeBackground(inputPath: string, outputPath?: string): Promise
     renameAfter = { from: inputPath, to: target };
   }
 
-  console.log(`🔲 Removing background: ${inputPath}`);
+  console.log(` Removing background: ${inputPath}`);
   const start = Date.now();
   try {
     await runRembg(bin, inputPath, target);
@@ -133,7 +133,7 @@ async function main(): Promise<void> {
     return;
   }
 
-  console.log(`🔲 Batch processing ${args.length} files...\n`);
+  console.log(` Batch processing ${args.length} files...\n`);
   let success = 0;
   let failed = 0;
 
@@ -146,7 +146,7 @@ async function main(): Promise<void> {
     }
   }
 
-  console.log(`\n📊 Complete: ${success} succeeded, ${failed} failed`);
+  console.log(`\n Complete: ${success} succeeded, ${failed} failed`);
 }
 
 main();

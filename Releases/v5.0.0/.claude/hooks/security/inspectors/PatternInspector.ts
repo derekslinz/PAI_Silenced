@@ -6,7 +6,7 @@ import type { Inspector, InspectionContext, InspectionResult } from '../types';
 import { ALLOW, deny, requireApproval, alert } from '../types';
 import { paiPath } from '../../lib/paths';
 
-// ── Types ──
+//  Types 
 
 interface PatternEntry {
   pattern: string;
@@ -35,7 +35,7 @@ interface PatternsConfig {
 
 type FileAction = 'read' | 'write' | 'delete';
 
-// ── Pattern Loading ──
+//  Pattern Loading 
 
 const USER_PATTERNS_PATH = paiPath('USER', 'SECURITY', 'PATTERNS.yaml');
 const SYSTEM_PATTERNS_PATH = paiPath('DOCUMENTATION', 'Security', 'Patterns.example.yaml');
@@ -63,7 +63,7 @@ function loadPatterns(): PatternsConfig | null {
   }
 }
 
-// ── Command Normalization ──
+//  Command Normalization 
 
 function stripEnvVarPrefix(command: string): string {
   return command.replace(
@@ -72,7 +72,7 @@ function stripEnvVarPrefix(command: string): string {
   );
 }
 
-// ── Pattern Matching ──
+//  Pattern Matching 
 
 function matchesBashPattern(command: string, pattern: string): boolean {
   try {
@@ -108,7 +108,7 @@ function matchesPathPattern(filePath: string, pattern: string): boolean {
     normalizedPath.startsWith(expandedPattern.endsWith('/') ? expandedPattern : expandedPattern + '/');
 }
 
-// ── Action Detection ──
+//  Action Detection 
 
 function getFileAction(toolName: string): FileAction | null {
   switch (toolName) {
@@ -130,7 +130,7 @@ function extractCommand(input: Record<string, unknown> | string): string {
   return (input?.command as string) || '';
 }
 
-// ── Inspection Logic ──
+//  Inspection Logic 
 
 function inspectBash(command: string, config: PatternsConfig): InspectionResult {
   const normalized = stripEnvVarPrefix(command);
@@ -189,7 +189,7 @@ function inspectPath(filePath: string, action: FileAction, config: PatternsConfi
   return ALLOW;
 }
 
-// ── Inspector Implementation ──
+//  Inspector Implementation 
 
 class PatternInspector implements Inspector {
   name = 'PatternInspector';

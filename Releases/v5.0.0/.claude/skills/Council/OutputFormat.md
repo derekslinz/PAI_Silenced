@@ -1,87 +1,75 @@
-# Output Format
+Output Format
 
 Standard format for council debate transcripts.
 
-## CRITICAL: Custom Agents Only
+CRITICAL: Custom Agents Only
 
 All council members are custom-composed via ComposeAgent. Agent names and trait descriptions come from the ComposeAgent output. NEVER use generic labels like "Architect" or "Designer" — use the actual composed agent names.
 
-## Full Debate Transcript
+Full Debate Transcript
 
 ```markdown
-## Council Debate: [Topic]
+Council Debate: [Topic]
 
-**Council Members:** [Composed agent names with trait summaries]
+Council Members:[Composed agent names with trait summaries]
 
-### Round 1: Initial Positions
+Round : Initial Positions
 
-**[Agent 1 Name] ([trait summary]):**
-[Position from their specialized perspective]
+[Agent Name] ([trait summary]):[Position from their specialized perspective]
 
-**[Agent 2 Name] ([trait summary]):**
-[Position from their specialized perspective]
+[Agent Name] ([trait summary]):[Position from their specialized perspective]
 
-**[Agent 3 Name] ([trait summary]):**
-[Position from their specialized perspective]
+[Agent Name] ([trait summary]):[Position from their specialized perspective]
 
-**[Agent 4 Name] ([trait summary]):**
-[Position from their specialized perspective]
+[Agent Name] ([trait summary]):[Position from their specialized perspective]
 
-### Round 2: Responses & Challenges
+Round : Responses & Challenges
 
-**[Agent 1 Name]:**
-[Responds to specific points from Round 1]
+[Agent Name]:[Responds to specific points from Round ]
 
-**[Agent 2 Name]:**
-[Responds to specific points from Round 1]
+[Agent Name]:[Responds to specific points from Round ]
 
 [...]
 
-### Round 3: Synthesis
+Round : Synthesis
 
-**[Agent 1 Name]:**
-[Final position, areas of agreement/disagreement]
+[Agent Name]:[Final position, areas of agreement/disagreement]
 
 [...]
 
-### Council Synthesis
+Council Synthesis
 
-**Areas of Convergence:**
-- [Points where multiple agents agreed]
+Areas of Convergence:- [Points where multiple agents agreed]
 
-**Remaining Disagreements:**
-- [Points still contested]
+Remaining Disagreements:- [Points still contested]
 
-**Recommended Path:**
-[Synthesized recommendation]
+Recommended Path:[Synthesized recommendation]
 ```
 
-## Quick Council Format
+Quick Council Format
 
 ```markdown
-## Quick Council: [Topic]
+Quick Council: [Topic]
 
-### Perspectives
+Perspectives
 
-**[Agent 1 Name] ([traits]):**
-[Brief take - 30-50 words]
+[Agent Name] ([traits]):[Brief take - -words]
 
-**[Agent 2 Name] ([traits]):**
-[Brief take]
+[Agent Name] ([traits]):[Brief take]
 
 [...]
 
-### Quick Summary
+Quick Summary
 
-**Consensus:** [Do they agree? On what?]
-**Concerns:** [Red flags raised?]
-**Recommendation:** [Proceed / Reconsider / Need full debate]
+Consensus:[Do they agree? On what?]
+Concerns:[Red flags raised?]
+Recommendation:[Proceed / Reconsider / Need full debate]
 ```
 
-## Output Requirements
+Output Requirements
 
-- **Length:** 100-150 words per agent per round (debate), 30-50 words (quick)
-- **Tone:** Professional but direct; genuine challenges
-- **Must Include:** Specific references to other agents' points in Round 2+
-- **Must Avoid:** Generic opinions, restating initial position without engagement
-- **Agent Names:** Use actual ComposeAgent names, never generic built-in type labels
+- Length:-words per agent per round (debate), -words (quick)
+- Tone:Professional but direct; genuine challenges
+- Must Include:Specific references to other agents' points in Round +
+- Must Avoid:Generic opinions, restating initial position without engagement
+- Agent Names:Use actual ComposeAgent names, never generic built-in type labels

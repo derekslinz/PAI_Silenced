@@ -1,12 +1,12 @@
-# ExecutePattern Workflow
+ExecutePattern Workflow
 
 Execute Fabric patterns natively without spawning the fabric CLI. Patterns are applied directly from local storage for faster, more integrated execution.
 
 ---
 
-## Workflow Steps
+Workflow Steps
 
-### Step 1: Identify Pattern from Intent
+Step : Identify Pattern from Intent
 
 Based on the user's request, select the appropriate pattern:
 
@@ -14,7 +14,7 @@ Based on the user's request, select the appropriate pattern:
 |---------------------|---------|
 | "extract wisdom", "wisdom" | `extract_wisdom` |
 | "summarize", "summary" | `summarize` |
-| "5 sentence", "short summary" | `create_5_sentence_summary` |
+| "sentence", "short summary" | `create__sentence_summary` |
 | "micro summary", "tldr" | `create_micro_summary` |
 | "threat model" | `create_threat_model` |
 | "stride", "stride model" | `create_stride_threat_model` |
@@ -29,9 +29,9 @@ Based on the user's request, select the appropriate pattern:
 | "mermaid", "diagram" | `create_mermaid_visualization` |
 | "rate", "evaluate" | `rate_content` or `judge_output` |
 
-**If pattern is explicitly named:** Use that pattern directly (e.g., "use extract_article_wisdom" -> `extract_article_wisdom`)
+If pattern is explicitly named:Use that pattern directly (e.g., "use extract_article_wisdom" -> `extract_article_wisdom`)
 
-### Step 2: Load Pattern System Prompt
+Step : Load Pattern System Prompt
 
 Read the pattern's system.md file:
 
@@ -44,14 +44,12 @@ if [ -f "$PATTERN_PATH" ]; then
 else
   echo "Pattern not found: $PATTERN_NAME"
   echo "Available patterns:"
-  ls ~/.claude/skills/Fabric/Patterns/ | head -20
-fi
+  ls ~/.claude/skills/Fabric/Patterns/ | head -fi
 ```
 
-### Step 3: Apply Pattern to Content
+Step : Apply Pattern to Content
 
-**Native Execution (Preferred):**
-
+Native Execution (Preferred):
 The pattern's system.md contains instructions formatted as:
 - IDENTITY AND PURPOSE
 - STEPS
@@ -59,8 +57,7 @@ The pattern's system.md contains instructions formatted as:
 
 Apply these instructions to the provided content directly. This is the AI reading and following the pattern instructions, not calling an external tool.
 
-**Example:**
-```
+Example:```
 [Content from user]
 ↓
 [Read Patterns/extract_wisdom/system.md]
@@ -70,28 +67,26 @@ Apply these instructions to the provided content directly. This is the AI readin
 [Return structured output per pattern spec]
 ```
 
-### Step 4: Special Cases Requiring Fabric CLI
+Step : Special Cases Requiring Fabric CLI
 
-**YouTube URLs:**
-```bash
+YouTube URLs:```bash
 fabric -y "YOUTUBE_URL" -p [pattern_name]
 ```
 The `-y` flag extracts the transcript automatically.
 
-**URLs with access issues (CAPTCHA, blocking):**
-```bash
+URLs with access issues (CAPTCHA, blocking):```bash
 fabric -u "URL" -p [pattern_name]
 ```
 Use when native URL fetching fails.
 
-### Step 4b: Auto-Harvest (summarize-family patterns)
+Step b: Auto-Harvest (summarize-family patterns)
 
-**Trigger:** When the selected pattern is a member of the **summarize-family** AND the input is either a URL or text ≥200 characters, fire `_HARVEST` on the SAME input as a side-effect of the summary. Two outputs from one action: the summary in chat, the KNOWLEDGE note on disk.
+Trigger:When the selected pattern is a member of the summarize-familyAND the input is either a URL or text ≥characters, fire `_HARVEST` on the SAME input as a side-effect of the summary. Two outputs from one action: the summary in chat, the KNOWLEDGE note on disk.
 
-**Summarize-family patterns** (extend as new ones land):
+Summarize-family patterns(extend as new ones land):
 
 - `summarize`
-- `create_5_sentence_summary`
+- `create__sentence_summary`
 - `create_micro_summary`
 - `summarize_paper`
 - `summarize_lecture`
@@ -100,7 +95,7 @@ Use when native URL fetching fails.
 - `summarize_debate`
 - `youtube_summary`
 
-**Invocation** — run in the BACKGROUND so it does not block the summary:
+Invocation— run in the BACKGROUND so it does not block the summary:
 
 ```bash
 bun ~/.claude/skills/_HARVEST/Tools/harvest.ts "<the same input the user sent into summarize>"
@@ -108,13 +103,12 @@ bun ~/.claude/skills/_HARVEST/Tools/harvest.ts "<the same input the user sent in
 
 Use `Bash` with `run_in_background: true`. The CLI handles source detection (URL / YouTube / text), body fetch, Arbol classification, and executor dispatch — never re-implement the writer here.
 
-**Input-type gate:**
-
+Input-type gate:
 - URL (article or YouTube) → fire harvest.
-- Raw text ≥200 characters → fire harvest with `--type text`.
-- Raw text <200 characters → SKIP harvest (too thin for a KNOWLEDGE note).
+- Raw text ≥characters → fire harvest with `--type text`.
+- Raw text <characters → SKIP harvest (too thin for a KNOWLEDGE note).
 
-**Output reporting** — alongside the summary, surface the harvest result block:
+Output reporting— alongside the summary, surface the harvest result block:
 
 ```
 --- HARVEST ---
@@ -123,62 +117,59 @@ classification: <ideas|research|people|companies>
 KNOWLEDGE path: MEMORY/KNOWLEDGE/<Type>/<slug>.md   (or "duplicate — not re-written")
 ```
 
-**Failure isolation:**
-
+Failure isolation:
 - Harvest errors MUST NOT suppress the summary. If `harvest.ts` exits non-zero, print the summary as normal AND surface the harvest error as a warning block — never swallow it, never replace summary output with the error.
 - Summary errors MUST NOT block harvest. Harvest is the persistence layer; it runs independently.
 
-**Auth & write boundary:**
-
+Auth & write boundary:
 - Auth comes from `~/.config/arbol/config.yaml`. Do not introduce a new token path or env var.
 - This workflow MUST NOT write to `MEMORY/KNOWLEDGE/` directly. The single canonical writer is `HarvestExecutor.ts`, invoked transitively by `harvest.ts`.
 
-**Idempotency:** re-running summarize on the same URL returns `arbol.status: duplicate` from the harvest CLI; no second KNOWLEDGE note is created. Surface the duplicate status to the user so they know the source was already captured.
+Idempotency:re-running summarize on the same URL returns `arbol.status: duplicate` from the harvest CLI; no second KNOWLEDGE note is created. Surface the duplicate status to the user so they know the source was already captured.
 
-### Step 5: Format Output
+Step : Format Output
 
 Return the pattern's specified output format. Most patterns define structured sections like:
 
-**extract_wisdom example:**
-```
-## SUMMARY
-[1-sentence summary]
+extract_wisdom example:```
+SUMMARY
+[-sentence summary]
 
-## IDEAS
-- [idea 1]
-- [idea 2]
+IDEAS
+- [idea ]
+- [idea ]
 ...
 
-## INSIGHTS
-- [insight 1]
-- [insight 2]
+INSIGHTS
+- [insight ]
+- [insight ]
 ...
 
-## QUOTES
-- "[quote 1]"
-- "[quote 2]"
+QUOTES
+- "[quote ]"
+- "[quote ]"
 ...
 
-## HABITS
-- [habit 1]
+HABITS
+- [habit ]
 ...
 
-## FACTS
-- [fact 1]
+FACTS
+- [fact ]
 ...
 
-## REFERENCES
-- [reference 1]
+REFERENCES
+- [reference ]
 ...
 
-## RECOMMENDATIONS
-- [recommendation 1]
+RECOMMENDATIONS
+- [recommendation ]
 ...
 ```
 
 ---
 
-## Pattern Selection Decision Tree
+Pattern Selection Decision Tree
 
 ```
 User Request
@@ -187,13 +178,12 @@ User Request
     │   └─ Yes → extract_wisdom / extract_insights
     │
     ├─ Contains "summarize" or "summary"?
-    │   ├─ "5 sentence" → create_5_sentence_summary
+    │   ├─ "sentence" → create__sentence_summary
     │   ├─ "micro" or "tldr" → create_micro_summary
     │   └─ Default → summarize
-    │   *(auto-harvest side-effect: any summarize-family pattern with a URL or
-    │    text ≥200 chars also fires `~/.claude/skills/_HARVEST/Tools/harvest.ts`
-    │    in the background — see Step 4b)*
-    │
+    │   (auto-harvest side-effect: any summarize-family pattern with a URL or
+    │    text ≥chars also fires `~/.claude/skills/_HARVEST/Tools/harvest.ts`
+    │    in the background — see Step b)    │
     ├─ Contains "threat model"?
     │   ├─ "stride" → create_stride_threat_model
     │   └─ Default → create_threat_model
@@ -221,46 +211,44 @@ User Request
 
 ---
 
-## Available Pattern Categories
+Available Pattern Categories
 
-### Extraction (30+)
+Extraction (+)
 `extract_wisdom`, `extract_insights`, `extract_main_idea`, `extract_recommendations`, `extract_article_wisdom`, `extract_book_ideas`, `extract_predictions`, `extract_questions`, `extract_controversial_ideas`, `extract_business_ideas`, `extract_skills`, `extract_patterns`, `extract_references`, `extract_instructions`, `extract_primary_problem`, `extract_primary_solution`, `extract_product_features`, `extract_core_message`
 
-### Summarization (20+)
-`summarize`, `create_5_sentence_summary`, `create_micro_summary`, `summarize_meeting`, `summarize_paper`, `summarize_lecture`, `summarize_newsletter`, `summarize_debate`, `youtube_summary`, `summarize_git_changes`, `summarize_git_diff`
+Summarization (+)
+`summarize`, `create__sentence_summary`, `create_micro_summary`, `summarize_meeting`, `summarize_paper`, `summarize_lecture`, `summarize_newsletter`, `summarize_debate`, `youtube_summary`, `summarize_git_changes`, `summarize_git_diff`
 
-### Analysis (35+)
+Analysis (+)
 `analyze_claims`, `analyze_code`, `analyze_malware`, `analyze_paper`, `analyze_logs`, `analyze_debate`, `analyze_incident`, `analyze_comments`, `analyze_email_headers`, `analyze_personality`, `analyze_presentation`, `analyze_product_feedback`, `analyze_prose`, `analyze_risk`, `analyze_sales_call`, `analyze_threat_report`, `analyze_bill`, `analyze_candidates`
 
-### Creation (50+)
+Creation (+)
 `create_threat_model`, `create_stride_threat_model`, `create_prd`, `create_design_document`, `create_user_story`, `create_mermaid_visualization`, `create_markmap_visualization`, `create_visualization`, `create_sigma_rules`, `create_report_finding`, `create_newsletter_entry`, `create_keynote`, `create_academic_paper`, `create_flash_cards`, `create_quiz`, `create_art_prompt`, `create_command`, `create_pattern`
 
-### Improvement (10+)
+Improvement (+)
 `improve_writing`, `improve_academic_writing`, `improve_prompt`, `improve_report_finding`, `review_code`, `review_design`, `refine_design_document`, `humanize`, `enrich_blog_post`, `clean_text`
 
-### Security (15)
+Security ()
 `create_threat_model`, `create_stride_threat_model`, `create_threat_scenarios`, `create_security_update`, `create_sigma_rules`, `write_nuclei_template_rule`, `write_semgrep_rule`, `analyze_threat_report`, `analyze_malware`, `analyze_incident`, `analyze_risk`
 
-### Rating/Evaluation (8)
+Rating/Evaluation ()
 `rate_ai_response`, `rate_content`, `rate_value`, `judge_output`, `label_and_rate`, `check_agreement`
 
 ---
 
-## Error Handling
+Error Handling
 
-**Pattern not found:**
-```
+Pattern not found:```
 Pattern '[name]' not found in ~/.claude/skills/Fabric/Patterns/
 
 Similar patterns:
-- [suggestion 1]
-- [suggestion 2]
+- [suggestion ]
+- [suggestion ]
 
 Run 'update fabric' to sync latest patterns.
 ```
 
-**No content provided:**
-```
+No content provided:```
 No content provided for pattern execution.
 Please provide:
 - Text directly
@@ -271,6 +259,6 @@ Please provide:
 
 ---
 
-## Output
+Output
 
 Return the structured output as defined by the pattern's OUTPUT INSTRUCTIONS section. Always preserve the pattern's specified format for consistency.

@@ -1,9 +1,8 @@
-#!/usr/bin/env bun
-/**
- * Failure to Task Converter
- * Convert real failures into evaluation test cases
- * Per Anthropic: "20-50 simple tasks drawn from real failures is a great start"
- */
+!/usr/bin/env bun
+/ Failure to Task Converter
+ Convert real failures into evaluation test cases
+ Per Anthropic: "-simple tasks drawn from real failures is a great start"
+ /
 
 import type { FailureLog, Task, GraderConfig, EvalDomain } from '../Types/index.ts';
 import { existsSync, mkdirSync, writeFileSync, readFileSync, appendFileSync } from 'fs';
@@ -15,24 +14,22 @@ const EVALS_DIR = join(import.meta.dir, '..');
 const FAILURES_LOG = join(EVALS_DIR, 'Data', 'failures.jsonl');
 const TASKS_DIR = join(EVALS_DIR, 'UseCases');
 
-/**
- * Ensure directories exist
- */
+/ Ensure directories exist
+ /
 function ensureDirs(): void {
   const dataDir = join(EVALS_DIR, 'Data');
   if (!existsSync(dataDir)) mkdirSync(dataDir, { recursive: true });
   if (!existsSync(TASKS_DIR)) mkdirSync(TASKS_DIR, { recursive: true });
 }
 
-/**
- * Log a failure for later conversion
- */
+/ Log a failure for later conversion
+ /
 export function logFailure(failure: Omit<FailureLog, 'id' | 'timestamp'>): FailureLog {
   ensureDirs();
 
   const log: FailureLog = {
     ...failure,
-    id: `failure_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+    id: `failure_${Date.now()}_${Math.random().toString().slice(, )}`,
     timestamp: new Date().toISOString(),
   };
 
@@ -41,13 +38,12 @@ export function logFailure(failure: Omit<FailureLog, 'id' | 'timestamp'>): Failu
   return log;
 }
 
-/**
- * Load all failures
- */
+/ Load all failures
+ /
 export function loadFailures(): FailureLog[] {
   if (!existsSync(FAILURES_LOG)) return [];
 
-  const content = readFileSync(FAILURES_LOG, 'utf-8');
+  const content = readFileSync(FAILURES_LOG, 'utf-');
   return content
     .trim()
     .split('\n')
@@ -55,16 +51,14 @@ export function loadFailures(): FailureLog[] {
     .map(line => JSON.parse(line) as FailureLog);
 }
 
-/**
- * Load unconverted failures
- */
+/ Load unconverted failures
+ /
 export function loadUnconvertedFailures(): FailureLog[] {
   return loadFailures().filter(f => !f.converted_to_task);
 }
 
-/**
- * Infer domain from failure category
- */
+/ Infer domain from failure category
+ /
 function inferDomain(category: string): EvalDomain {
   const domainMap: Record<string, EvalDomain> = {
     file_targeting: 'coding',
@@ -87,9 +81,8 @@ function inferDomain(category: string): EvalDomain {
   return domainMap[category.toLowerCase()] ?? 'general';
 }
 
-/**
- * Infer graders from failure category
- */
+/ Infer graders from failure category
+ /
 function inferGraders(category: string, failure: FailureLog): GraderConfig[] {
   const graders: GraderConfig[] = [];
 
@@ -97,7 +90,7 @@ function inferGraders(category: string, failure: FailureLog): GraderConfig[] {
   if (['file_targeting', 'wrong_file', 'tool_sequence'].includes(category)) {
     graders.push({
       type: 'tool_calls',
-      weight: 0.3,
+      weight: .,
       required: true,
       params: {
         required: [{ tool: 'read_file' }, { tool: 'edit_file' }],
@@ -110,9 +103,9 @@ function inferGraders(category: string, failure: FailureLog): GraderConfig[] {
   if (failure.expected_behavior) {
     graders.push({
       type: 'state_check',
-      weight: 0.3,
+      weight: .,
       params: {
-        check_files: [{ path: '.', contains: [failure.expected_behavior.slice(0, 50)] }],
+        check_files: [{ path: '.', contains: [failure.expected_behavior.slice(, )] }],
       },
     });
   }
@@ -120,7 +113,7 @@ function inferGraders(category: string, failure: FailureLog): GraderConfig[] {
   // Add LLM rubric for quality assessment
   graders.push({
     type: 'llm_rubric',
-    weight: 0.4,
+    weight: .,
     params: {
       rubric: `The agent should: ${failure.expected_behavior ?? 'complete the task correctly'}
 
@@ -128,16 +121,15 @@ The agent should NOT: ${failure.actual_behavior ?? 'fail the task'}
 
 Evaluate if the agent avoided the failure mode described.`,
       reasoning_first: true,
-      scale: '1-5',
+      scale: '-',
     },
   });
 
   return graders;
 }
 
-/**
- * Convert a failure to a task
- */
+/ Convert a failure to a task
+ /
 export function convertFailureToTask(failure: FailureLog): Task {
   const domain = inferDomain(failure.category);
   const graders = inferGraders(failure.category, failure);
@@ -151,8 +143,8 @@ export function convertFailureToTask(failure: FailureLog): Task {
     tracked_metrics: [
       { type: 'transcript', metrics: ['n_turns', 'n_toolcalls'] },
     ],
-    trials: 1,
-    pass_threshold: 0.75,
+    trials: ,
+    pass_threshold: .,
     tags: [failure.category, failure.severity, 'from_failure'],
     source: 'failure_log',
     created_at: new Date().toISOString(),
@@ -168,9 +160,8 @@ export function convertFailureToTask(failure: FailureLog): Task {
   return task;
 }
 
-/**
- * Save a task to the filesystem
- */
+/ Save a task to the filesystem
+ /
 export function saveTask(task: Task, suiteName?: string): string {
   ensureDirs();
 
@@ -186,9 +177,8 @@ export function saveTask(task: Task, suiteName?: string): string {
   return taskPath;
 }
 
-/**
- * Mark a failure as converted
- */
+/ Mark a failure as converted
+ /
 export function markConverted(failureId: string, taskId: string): void {
   const failures = loadFailures();
   const updated = failures.map(f =>
@@ -198,9 +188,8 @@ export function markConverted(failureId: string, taskId: string): void {
   writeFileSync(FAILURES_LOG, updated.map(f => JSON.stringify(f)).join('\n') + '\n');
 }
 
-/**
- * Convert all unconverted failures
- */
+/ Convert all unconverted failures
+ /
 export function convertAllFailures(suiteName?: string): Task[] {
   const failures = loadUnconvertedFailures();
   const tasks: Task[] = [];
@@ -210,32 +199,31 @@ export function convertAllFailures(suiteName?: string): Task[] {
     const path = saveTask(task, suiteName);
     markConverted(failure.id, task.id);
     tasks.push(task);
-    console.log(`Converted: ${failure.description.slice(0, 50)}... → ${path}`);
+    console.log(`Converted: ${failure.description.slice(, )}... → ${path}`);
   }
 
   return tasks;
 }
 
-/**
- * Format failure for display
- */
+/ Format failure for display
+ /
 function formatFailure(failure: FailureLog): string {
   const severityIcon = {
-    low: '🟡',
-    medium: '🟠',
-    high: '🔴',
-    critical: '💥',
+    low: '',
+    medium: '',
+    high: '',
+    critical: '',
   }[failure.severity];
 
-  const converted = failure.converted_to_task ? '✅' : '⏳';
+  const converted = failure.converted_to_task ? '' : '';
 
-  return `${converted} ${severityIcon} [${failure.category}] ${failure.description.slice(0, 60)}...`;
+  return `${converted} ${severityIcon} [${failure.category}] ${failure.description.slice(, )}...`;
 }
 
 // CLI interface
 if (import.meta.main) {
   const { values, positionals } = parseArgs({
-    args: Bun.argv.slice(2),
+    args: Bun.argv.slice(),
     options: {
       category: { type: 'string', short: 'c' },
       severity: { type: 'string', short: 's', default: 'medium' },
@@ -253,7 +241,7 @@ if (import.meta.main) {
     console.log(`
 FailureToTask - Convert failures into evaluation tasks
 
-Per Anthropic: "20-50 simple tasks drawn from real failures is a great start"
+Per Anthropic: "-simple tasks drawn from real failures is a great start"
 
 Commands:
   log <description>   Log a new failure
@@ -277,14 +265,14 @@ Examples:
   bun run FailureToTask.ts list
   bun run FailureToTask.ts convert-all --suite regression-core
 `);
-    process.exit(0);
+    process.exit();
   }
 
   switch (command) {
     case 'log': {
-      if (!args[0]) {
+      if (!args[]) {
         console.error('Usage: log <description> -c category');
-        process.exit(1);
+        process.exit();
       }
       const failure = logFailure({
         description: args.join(' '),
@@ -316,15 +304,15 @@ Examples:
     }
 
     case 'convert': {
-      if (!args[0]) {
+      if (!args[]) {
         console.error('Usage: convert <failure-id>');
-        process.exit(1);
+        process.exit();
       }
       const failures = loadFailures();
-      const failure = failures.find(f => f.id === args[0]);
+      const failure = failures.find(f => f.id === args[]);
       if (!failure) {
-        console.error(`Failure not found: ${args[0]}`);
-        process.exit(1);
+        console.error(`Failure not found: ${args[]}`);
+        process.exit();
       }
       const task = convertFailureToTask(failure);
       const path = saveTask(task, values.suite);
@@ -343,11 +331,11 @@ Examples:
       const failures = loadFailures();
       const categories: Record<string, number> = {};
       const severities: Record<string, number> = {};
-      let converted = 0;
+      let converted = ;
 
       for (const f of failures) {
-        categories[f.category] = (categories[f.category] ?? 0) + 1;
-        severities[f.severity] = (severities[f.severity] ?? 0) + 1;
+        categories[f.category] = (categories[f.category] ?? ) + ;
+        severities[f.severity] = (severities[f.severity] ?? ) + ;
         if (f.converted_to_task) converted++;
       }
 
@@ -356,7 +344,7 @@ Examples:
       console.log(`  Converted: ${converted}`);
       console.log(`  Pending: ${failures.length - converted}`);
       console.log(`\n  By Category:`);
-      for (const [cat, count] of Object.entries(categories).sort((a, b) => b[1] - a[1])) {
+      for (const [cat, count] of Object.entries(categories).sort((a, b) => b[] - a[])) {
         console.log(`    ${cat}: ${count}`);
       }
       console.log(`\n  By Severity:`);
@@ -368,6 +356,6 @@ Examples:
 
     default:
       console.error(`Unknown command: ${command}`);
-      process.exit(1);
+      process.exit();
   }
 }

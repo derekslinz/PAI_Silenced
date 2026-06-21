@@ -108,7 +108,7 @@ function main(): void {
   if (similarity >= 0.6) {
     // Output warning to stderr — this gets injected into model context
     process.stderr.write(
-      `⚠️ REPEAT DETECTION: This message is ${Math.round(similarity * 100)}% similar to the previous message. ` +
+      ` REPEAT DETECTION: This message is ${Math.round(similarity * 100)}% similar to the previous message. ` +
       `The user is likely REPEATING a request you missed. ` +
       `STOP. Re-read their message carefully. Do NOT proceed with what you were doing before. ` +
       `Address their ACTUAL request this time.`,

@@ -35,7 +35,7 @@ import { paiPath } from './lib/paths';
 import { updateSessionNameInWorkJson, upsertSession } from './lib/isa-utils';
 import { pushStateToTargets } from './lib/observability-transport';
 
-// ── Types ──
+//  Types 
 
 interface HookInput {
   session_id: string;
@@ -73,7 +73,7 @@ function appendPromptProcessingTelemetry(entry: Record<string, unknown>): void {
   } catch {}
 }
 
-// ── Constants ──
+//  Constants 
 
 const BASE_DIR = process.env.PAI_DIR || join(process.env.HOME!, '.claude', 'PAI');
 const SESSION_NAMES_PATH = paiPath('MEMORY', 'STATE', 'session-names.json');
@@ -82,7 +82,7 @@ const MIN_PROMPT_LENGTH = 3;
 const LOCK_TIMEOUT = 3000;
 const LOCK_STALE = 10000;
 
-// ── Stdin Reader ──
+//  Stdin Reader 
 
 async function readStdinWithTimeout(timeout: number = 5000): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -94,9 +94,9 @@ async function readStdinWithTimeout(timeout: number = 5000): Promise<string> {
   });
 }
 
-// ══════════════════════════════════════════════════
+// 
 // FAST PATH DETECTION (for skip logic)
-// ══════════════════════════════════════════════════
+// 
 
 function isExplicitRating(prompt: string): boolean {
   const trimmed = prompt.trim();
@@ -130,9 +130,9 @@ const SYSTEM_TEXT_PATTERNS = [
   /^Note:.*was read before/i,
 ];
 
-// ══════════════════════════════════════════════════
+// 
 // TAB TITLE — Deterministic Extraction
-// ══════════════════════════════════════════════════
+// 
 
 /** Convert a base verb to gerund form. */
 function toGerund(verb: string): string {
@@ -211,9 +211,9 @@ function quickTitle(prompt: string): string | null {
   return null;
 }
 
-// ══════════════════════════════════════════════════
+// 
 // SESSION NAMING — Deterministic + Lock
-// ══════════════════════════════════════════════════
+// 
 
 interface SessionNames { [sessionId: string]: string; }
 
@@ -667,9 +667,9 @@ function syncNameToJsonl(sessionId: string, title: string): void {
 const ALGO_ACTION_RE = /\b(implement|build|create|architect|design|migrate|deploy|refactor)\b/i;
 function isNativeMode(prompt: string): boolean { return !ALGO_ACTION_RE.test(prompt.trim()); }
 
-// ══════════════════════════════════════════════════
+// 
 // COMBINED INFERENCE
-// ══════════════════════════════════════════════════
+// 
 
 const PRINCIPAL_NAME = getPrincipal().name;
 const ASSISTANT_NAME = getIdentity().name;
@@ -808,9 +808,9 @@ function getRecentContext(transcriptPath: string, maxTurns: number = 6, includeA
   } catch { return ''; }
 }
 
-// ══════════════════════════════════════════════════
+// 
 // MAIN
-// ══════════════════════════════════════════════════
+// 
 
 async function main() {
   try {
@@ -822,12 +822,12 @@ async function main() {
 
     if (!prompt || !sessionId) { process.exit(0); }
 
-    // ── Determine session state ──
+    //  Determine session state 
     const existingNames = readSessionNames();
     const isFirstPrompt = !existingNames[sessionId];
     const sanitizedPrompt = sanitizePromptForNaming(prompt);
 
-    // ── Detect current mode for tracking ──
+    //  Detect current mode for tracking 
     const trimmedLower = prompt.trim().toLowerCase().replace(/[.!?,'"]/g, '');
     const trimmedWords = trimmedLower.split(/\s+/);
     const isMinimalInteraction = isExplicitRating(prompt) || (
@@ -840,7 +840,7 @@ async function main() {
       isMinimalInteraction ? 'minimal' :
       !isNativeMode(prompt) ? 'algorithm' : 'native';
 
-    // ── Session name: compute deterministic fallback but DEFER storage until after inference ──
+    //  Session name: compute deterministic fallback but DEFER storage until after inference 
     // Inference understands intent (project, goal). Deterministic is last resort only.
     let pendingFallbackName: string | null = null;
     if (isFirstPrompt && sanitizedPrompt) {
@@ -868,7 +868,7 @@ async function main() {
     // Start now, await before process.exit so the fetch actually completes
     const kvPush = pushStateToTargets().catch(() => {});
 
-    // ── FAST PATH: Ratings and praise — skip inference, emit MINIMAL ──
+    //  FAST PATH: Ratings and praise — skip inference, emit MINIMAL 
     if (isExplicitRating(prompt)) {
       console.error('[PromptProcessing] Explicit rating — skipping inference, mode MINIMAL');
       emitAdditionalContext('MINIMAL', null, 'explicit rating');
@@ -896,7 +896,7 @@ async function main() {
       }
     }
 
-    // ── FAST PATH: System text — no classification (system-injected, not user prompt) ──
+    //  FAST PATH: System text — no classification (system-injected, not user prompt) 
     if (SYSTEM_TEXT_PATTERNS.some(re => re.test(prompt.trim()))) {
       console.error('[PromptProcessing] System text detected, skipping');
       await kvPush; process.exit(0);
@@ -913,14 +913,14 @@ async function main() {
       await kvPush; process.exit(0);
     }
 
-    // ── DETERMINISTIC TAB TITLE (immediate, purple/thinking) ──
+    //  DETERMINISTIC TAB TITLE (immediate, purple/thinking) 
     const sessionLabel = getSessionOneWord(sessionId);
     const prefix = sessionLabel ? `${sessionLabel} | ` : '';
     const deterministicTitle = quickTitle(prompt);
     const thinkingTitle = deterministicTitle || getWorkingFallback();
-    setTabState({ title: `🧠 ${prefix}${thinkingTitle}`, state: 'thinking', sessionId });
+    setTabState({ title: ` ${prefix}${thinkingTitle}`, state: 'thinking', sessionId });
 
-    // ── INFERENCE: Tab title + session name ──
+    //  INFERENCE: Tab title + session name 
     console.error('[PromptProcessing] Running inference (tab title' + (isFirstPrompt ? ' + session name)...' : ')...'));
 
     const cleanPrompt = prompt.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 1000);
@@ -943,7 +943,7 @@ async function main() {
       if (result.success && result.parsed) {
         const r = result.parsed as InferenceResult;
 
-        // ── Process tab title ──
+        //  Process tab title 
         let finalTitle = deterministicTitle && isValidWorkingTitle(deterministicTitle) ? deterministicTitle : getWorkingFallback();
         if (r.tab_title) {
           const inferredWords = r.tab_title.split(/\s+/);
@@ -958,9 +958,9 @@ async function main() {
           const derived = sessionNameToTabTitle(r.session_name);
           if (derived) finalTitle = derived;
         }
-        setTabState({ title: `⚙️ ${prefix}${finalTitle}`, state: 'working', sessionId });
+        setTabState({ title: ` ${prefix}${finalTitle}`, state: 'working', sessionId });
 
-        // ── Process session name from inference (first prompt only) ──
+        //  Process session name from inference (first prompt only) 
         // Inference understands intent — it's the PRIMARY source for session names
         let inferenceNameStored = false;
         if (isFirstPrompt && r.session_name) {
@@ -983,7 +983,7 @@ async function main() {
           storeName(sessionId, pendingFallbackName, 'deterministic-fallback');
         }
 
-        // ── Emit MODE/TIER additionalContext for harness floor ──
+        //  Emit MODE/TIER additionalContext for harness floor 
         const validModes: Mode[] = ['MINIMAL', 'NATIVE', 'ALGORITHM'];
         const finalMode: Mode = (r.mode && validModes.includes(r.mode as Mode)) ? (r.mode as Mode) : 'ALGORITHM';
         const finalTier: number | null = (finalMode === 'ALGORITHM')
@@ -1013,7 +1013,7 @@ async function main() {
           storeName(sessionId, pendingFallbackName, 'deterministic-fallback');
         }
         const fallbackTitle = deterministicTitle && isValidWorkingTitle(deterministicTitle) ? deterministicTitle : getWorkingFallback();
-        setTabState({ title: `⚙️ ${prefix}${fallbackTitle}`, state: 'working', sessionId });
+        setTabState({ title: ` ${prefix}${fallbackTitle}`, state: 'working', sessionId });
         emitAdditionalContext('ALGORITHM', 3, `inference failed: ${result.error ?? 'unknown'}`);
         appendPromptProcessingTelemetry({
           timestamp: new Date().toISOString(),
@@ -1033,7 +1033,7 @@ async function main() {
         storeName(sessionId, pendingFallbackName, 'deterministic-fallback');
       }
       const fallbackTitle = deterministicTitle && isValidWorkingTitle(deterministicTitle) ? deterministicTitle : getWorkingFallback();
-      setTabState({ title: `⚙️ ${prefix}${fallbackTitle}`, state: 'working', sessionId });
+      setTabState({ title: ` ${prefix}${fallbackTitle}`, state: 'working', sessionId });
       emitAdditionalContext('ALGORITHM', 3, `inference error: ${String(err).slice(0, 80)}`);
       appendPromptProcessingTelemetry({
         timestamp: new Date().toISOString(),

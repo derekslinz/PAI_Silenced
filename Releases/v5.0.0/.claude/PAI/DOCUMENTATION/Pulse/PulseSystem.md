@@ -528,43 +528,43 @@ bun run checks/github.ts
 
 ```
 ~/.claude/Pulse/
-├── pulse.ts                  # Main daemon -- startup, module init, heartbeat loop
-├── PULSE.toml                # Job + module configuration
-├── manage.sh                 # Process management -- start/stop/status/install
-├── com.pai.pulse.plist       # launchd config -- auto-start, keep-alive
-├── lib/
-│   ├── config.ts             # TOML loader, module config parsing
-│   ├── cron.ts               # Cron expression parser and schedule evaluation
-│   ├── dispatch.ts           # Output routing (telegram, ntfy, log)
-│   ├── state.ts              # Atomic state persistence
-│   └── spawn.ts              # Script and Claude process spawning
-├── modules/
-│   ├── hooks.ts              # Skill-guard + agent-guard validation
-│   ├── telegram.ts           # grammY polling bot + claude-agent-sdk sessions
-│   ├── wiki.ts               # Wiki/docs API — indexer, search, backlinks, graph
-│   ├── user-index.ts         # Life OS biography indexer (PAI/USER tree)
-│   ├── syslog.ts             # System log aggregation
-│   └── imessage.ts           # SQLite polling bot + claude-agent-sdk sessions (disabled by default)
-├── Assistant/
-│   └── module.ts             # Digital Assistant identity, heartbeat, scheduling (private — DA-specific)
-├── Observability/
-│   ├── observability.ts      # Data APIs + Observatory dashboard + security APIs
-│   ├── src/                  # Next.js 15.5 dashboard source
-│   └── out/                  # Static export served by Pulse
-├── checks/
-│   ├── email.ts              # Email triage -- Gmail API + Haiku urgency
-│   ├── calendar.ts           # Calendar reminders -- Google Calendar API
-│   ├── github.ts             # GitHub PR monitor -- REST API + dedup
-│   ├── github-work.ts        # GitHub Issues work polling for PAI Workers (optional)
-│   └── health.ts             # Website health -- HTTP HEAD checks
-├── state/
-│   ├── state.json            # Daemon state -- per-job lastRun, failures
-│   ├── pulse.pid             # Current process ID
-│   ├── email-seen.json       # Email dedup list
-│   └── github-seen.json      # GitHub PR dedup list
-└── logs/
-    ├── pulse-stdout.log      # Structured JSON logs
-    └── pulse-stderr.log      # Error output
+ pulse.ts                  # Main daemon -- startup, module init, heartbeat loop
+ PULSE.toml                # Job + module configuration
+ manage.sh                 # Process management -- start/stop/status/install
+ com.pai.pulse.plist       # launchd config -- auto-start, keep-alive
+ lib/
+    config.ts             # TOML loader, module config parsing
+    cron.ts               # Cron expression parser and schedule evaluation
+    dispatch.ts           # Output routing (telegram, ntfy, log)
+    state.ts              # Atomic state persistence
+    spawn.ts              # Script and Claude process spawning
+ modules/
+    hooks.ts              # Skill-guard + agent-guard validation
+    telegram.ts           # grammY polling bot + claude-agent-sdk sessions
+    wiki.ts               # Wiki/docs API — indexer, search, backlinks, graph
+    user-index.ts         # Life OS biography indexer (PAI/USER tree)
+    syslog.ts             # System log aggregation
+    imessage.ts           # SQLite polling bot + claude-agent-sdk sessions (disabled by default)
+ Assistant/
+    module.ts             # Digital Assistant identity, heartbeat, scheduling (private — DA-specific)
+ Observability/
+    observability.ts      # Data APIs + Observatory dashboard + security APIs
+    src/                  # Next.js 15.5 dashboard source
+    out/                  # Static export served by Pulse
+ checks/
+    email.ts              # Email triage -- Gmail API + Haiku urgency
+    calendar.ts           # Calendar reminders -- Google Calendar API
+    github.ts             # GitHub PR monitor -- REST API + dedup
+    github-work.ts        # GitHub Issues work polling for PAI Workers (optional)
+    health.ts             # Website health -- HTTP HEAD checks
+ state/
+    state.json            # Daemon state -- per-job lastRun, failures
+    pulse.pid             # Current process ID
+    email-seen.json       # Email dedup list
+    github-seen.json      # GitHub PR dedup list
+ logs/
+     pulse-stdout.log      # Structured JSON logs
+     pulse-stderr.log      # Error output
 ```
 
 ---

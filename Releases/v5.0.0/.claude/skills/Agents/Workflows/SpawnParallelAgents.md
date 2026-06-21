@@ -1,24 +1,22 @@
-# SpawnParallelAgents Workflow
+SpawnParallelAgents Workflow
 
-**Launches multiple parallel agents for grunt work - same task, different inputs.**
-
+Launches multiple parallel agents for grunt work - same task, different inputs.
 ---
 
-## When to Use
+When to Use
 
 {PRINCIPAL.NAME} says:
 
-- "Launch 5 agents to research these companies"
+- "Launch agents to research these companies"
 - "Spin up agents to process this list"
 - "Create agents to analyze these files" (no "custom")
 
-**KEY: No "custom" keyword = simple parallel workers for grunt work (fast execution)**
+KEY: No "custom" keyword = simple parallel workers for grunt work (fast execution)
+NOT the same as custom agents- for unique personalities/colors, use the CreateCustomAgent workflow.
 
-**NOT the same as custom agents** - for unique personalities/colors, use the CreateCustomAgent workflow.
+The Workflow
 
-## The Workflow
-
-### Step 1: Identify Task List
+Step : Identify Task List
 
 Extract what needs to be done in parallel:
 
@@ -27,33 +25,32 @@ Extract what needs to be done in parallel:
 - URLs to check
 - Data points to investigate
 
-### Step 2: Create Task-Specific Prompts
+Step : Create Task-Specific Prompts
 
-**Each agent gets a DETAILED prompt with FULL CONTEXT and TIMING SCOPE:**
-
+Each agent gets a DETAILED prompt with FULL CONTEXT and TIMING SCOPE:
 ```typescript
-const agent1Prompt = `
-## Context
+const agentPrompt = `
+Context
 We're researching competitors in the AI security space for strategic planning.
 
-## Current State
-We have 10 companies identified. You're analyzing Company A.
+Current State
+We have companies identified. You're analyzing Company A.
 
-## Task
-1. Research Company A's recent product launches (last 6 months)
-2. Identify their target market and positioning
-3. Note any key partnerships or acquisitions
-4. Assess their technical approach
+Task
+. Research Company A's recent product launches (last months)
+. Identify their target market and positioning
+. Note any key partnerships or acquisitions
+. Assess their technical approach
 
-## Success Criteria
+Success Criteria
 - Specific product names and launch dates
 - Clear target market definition
 - List of partnerships with dates
 - Technical stack/approach summary
 
-## Scope
+Scope
 Timing: STANDARD — focused implementation.
-- Under 1500 words
+- Under words
 - Stay on task, minimal tangents
 - Deliver the work, verify it works
 
@@ -61,39 +58,36 @@ Company A: Acme AI Security Corp
 `;
 ```
 
-### Step 3: Launch ALL Agents in SINGLE Message
+Step : Launch ALL Agents in SINGLE Message
 
-**CRITICAL: Use ONE message with MULTIPLE Task calls for true parallel execution:**
-
+CRITICAL: Use ONE message with MULTIPLE Task calls for true parallel execution:
 ```typescript
 // Send as a SINGLE message with all Task calls:
 Task({
   description: "Research Company A",
-  prompt: agent1Prompt,
+  prompt: agentPrompt,
   subagent_type: "general-purpose",
   model: "haiku"  // or "sonnet" depending on complexity
 })
 Task({
   description: "Research Company B",
-  prompt: agent2Prompt,
+  prompt: agentPrompt,
   subagent_type: "general-purpose",
   model: "haiku"
 })
 Task({
   description: "Research Company C",
-  prompt: agent3Prompt,
+  prompt: agentPrompt,
   subagent_type: "general-purpose",
   model: "haiku"
 })
 // ... up to N agents
 ```
 
-**All agents run simultaneously and return results together.**
+All agents run simultaneously and return results together.
+Step : Spotcheck Results (Mandatory)
 
-### Step 4: Spotcheck Results (Mandatory)
-
-**ALWAYS launch a spotcheck agent after parallel work completes:**
-
+ALWAYS launch a spotcheck agent after parallel work completes:
 ```typescript
 Task({
   description: "Spotcheck parallel results",
@@ -104,10 +98,10 @@ Company B: [results]
 Company C: [results]
 
 Check for:
-1. Missing information across any companies
-2. Inconsistent data formats
-3. Obvious gaps or errors
-4. Recommendations for follow-up research
+. Missing information across any companies
+. Inconsistent data formats
+. Obvious gaps or errors
+. Recommendations for follow-up research
 
 Provide a brief assessment and any issues found.`,
   subagent_type: "general-purpose",
@@ -115,34 +109,31 @@ Provide a brief assessment and any issues found.`,
 })
 ```
 
-## Timing & Model Selection
+Timing & Model Selection
 
-**Timing flows from the Algorithm.** The main agent validates a timing tier (fast|standard|deep) in the THINK phase. Every agent prompt MUST include a `## Scope` section:
+Timing flows from the Algorithm.The main agent validates a timing tier (fast|standard|deep) in the THINK phase. Every agent prompt MUST include a `Scope` section:
 
 | Timing | Model | Scope |
 | -------- | ------- | ------- |
-| `fast` | `haiku` | Under 500 words, direct answer only |
-| `standard` | `sonnet` | Focused work, under 1500 words |
+| `fast` | `haiku` | Under words, direct answer only |
+| `standard` | `sonnet` | Focused work, under words |
 | `deep` | `opus` | Comprehensive analysis, no limit |
 
-**Choose model based on timing tier AND task complexity:**
-
+Choose model based on timing tier AND task complexity:
 | Task Type | Model | Reason |
 | -----------  | ------- | -------- |
-| Simple checks (URL validation, file existence, basic lookups) | `haiku` | 10-20x faster, more than sufficient |
+| Simple checks (URL validation, file existence, basic lookups) | `haiku` | -x faster, more than sufficient |
 | Standard research/analysis (company research, code review) | `sonnet` | Balanced capability and speed |
 | Deep reasoning (strategic analysis, architectural decisions) | `opus` | Maximum intelligence required |
 
-**Parallel execution especially benefits from `haiku` - spawning 10 haiku agents is both faster AND cheaper than 1 opus agent doing sequential work.**
+Parallel execution especially benefits from `haiku` - spawning haiku agents is both faster AND cheaper than opus agent doing sequential work.
+Example: Research Companies
 
-## Example: Research 5 Companies
+{PRINCIPAL.NAME}:"Launch agents to research these AI security companies"
 
-**{PRINCIPAL.NAME}:** "Launch agents to research these 5 AI security companies"
-
-**{DA_IDENTITY.NAME}'s Execution:**
-
+{DA_IDENTITY.NAME}'s Execution:
 ```typescript
-// Single message with 5 Task calls:
+// Single message with Task calls:
 Task({
   description: "Research Acme AI Security",
   prompt: "Research Acme AI Security Corp: products, market, partnerships, tech stack",
@@ -177,24 +168,24 @@ Task({
 // After results return, spotcheck:
 Task({
   description: "Spotcheck company research",
-  prompt: "Review these 5 company research results for consistency and gaps: [results]",
+  prompt: "Review these company research results for consistency and gaps: [results]",
   subagent_type: "general-purpose",
   model: "haiku"
 })
 ```
 
-**Result:** 5 agents research in parallel, spotcheck validates consistency.
+Result:agents research in parallel, spotcheck validates consistency.
 
-## Common Patterns
+Common Patterns
 
-### Pattern 1: List Processing
+Pattern : List Processing
 
-**Input:** List of items (companies, files, URLs, people)
-**Action:** Create one agent per item, identical task structure
-**Model:** `haiku` for simple tasks, `sonnet` for analysis
+Input:List of items (companies, files, URLs, people)
+Action:Create one agent per item, identical task structure
+Model:`haiku` for simple tasks, `sonnet` for analysis
 
 ```typescript
-const items = ["Item1", "Item2", "Item3", "Item4", "Item5"];
+const items = ["Item", "Item", "Item", "Item", "Item"];
 
 // Single message with all agents:
 items.forEach(item => {
@@ -207,11 +198,11 @@ items.forEach(item => {
 });
 ```
 
-### Pattern 2: Multi-File Analysis
+Pattern : Multi-File Analysis
 
-**Input:** Multiple files to analyze
-**Action:** One agent per file, same analysis criteria
-**Model:** `sonnet` for code analysis, `haiku` for simple checks
+Input:Multiple files to analyze
+Action:One agent per file, same analysis criteria
+Model:`sonnet` for code analysis, `haiku` for simple checks
 
 ```typescript
 const files = ["src/auth.ts", "src/db.ts", "src/api.ts"];
@@ -227,18 +218,18 @@ files.forEach(file => {
 });
 ```
 
-### Pattern 3: Data Point Investigation
+Pattern : Data Point Investigation
 
-**Input:** Multiple data points/questions
-**Action:** One agent per question, independent research
-**Model:** `sonnet` for research, `haiku` for fact-checking
+Input:Multiple data points/questions
+Action:One agent per question, independent research
+Model:`sonnet` for research, `haiku` for fact-checking
 
 ```typescript
 const questions = [
   "What is OpenAI's current revenue?",
   "How many employees does Anthropic have?",
   "What's Google's AI chip roadmap?",
-  "When is GPT-5 releasing?",
+  "When is GPT-releasing?",
   "What's the latest on AI regulation in EU?"
 ];
 
@@ -253,21 +244,20 @@ questions.forEach(q => {
 });
 ```
 
-## Spotcheck Pattern (Mandatory)
+Spotcheck Pattern (Mandatory)
 
-**WHY:** Parallel agents may produce inconsistent formats, miss details, or have conflicting information.
+WHY:Parallel agents may produce inconsistent formats, miss details, or have conflicting information.
 
-**WHEN:** After EVERY parallel agent batch completes
+WHEN:After EVERY parallel agent batch completes
 
-**HOW:**
-
+HOW:
 ```typescript
 Task({
   description: "Spotcheck results",
   prompt: `Review these parallel results:
 
-[Agent 1 results]
-[Agent 2 results]
+[Agent results]
+[Agent results]
 [Agent N results]
 
 Verify:
@@ -282,29 +272,23 @@ Flag any issues for follow-up.`,
 })
 ```
 
-## Common Mistakes to Avoid
+Common Mistakes to Avoid
 
-**❌ WRONG: Sequential execution**
-
+WRONG: Sequential execution
 ```typescript
-await Task({ ... }); // Agent 1 (blocks)
-await Task({ ... }); // Agent 2 (waits for 1)
-await Task({ ... }); // Agent 3 (waits for 2)
-// Takes 3x as long!
+await Task({ ... }); // Agent (blocks)
+await Task({ ... }); // Agent (waits for )
+await Task({ ... }); // Agent (waits for )
+// Takes x as long!
 ```
 
-**✅ RIGHT: Parallel execution**
-
+RIGHT: Parallel execution
 ```typescript
 // Send ONE message with multiple Task calls:
-Task({ ... })  // Agent 1
-Task({ ... })  // Agent 2
-Task({ ... })  // Agent 3
-// All run simultaneously
+Task({ ... })  // Agent Task({ ... })  // Agent Task({ ... })  // Agent // All run simultaneously
 ```
 
-**❌ WRONG: Using the deprecated Intern agent type**
-
+WRONG: Using the deprecated Intern agent type
 ```typescript
 // Intern type has been removed from the system
 Task({
@@ -315,8 +299,7 @@ Task({
 })
 ```
 
-**✅ RIGHT: Use general-purpose agents or agents composed via ComposeAgent**
-
+RIGHT: Use general-purpose agents or agents composed via ComposeAgent
 ```typescript
 // For simple parallel work, use general-purpose type
 Task({
@@ -329,15 +312,13 @@ Task({
 // or use a specialized type like "Engineer", "Architect", etc.
 ```
 
-**❌ WRONG: Skipping spotcheck**
-
+WRONG: Skipping spotcheck
 ```typescript
 // Launch agents, get results, done
 // No validation = potential inconsistencies
 ```
 
-**✅ RIGHT: Always spotcheck**
-
+RIGHT: Always spotcheck
 ```typescript
 // Launch agents
 // Get results
@@ -345,8 +326,7 @@ Task({
 // THEN report as complete
 ```
 
-**❌ WRONG: Using opus for simple parallel tasks**
-
+WRONG: Using opus for simple parallel tasks
 ```typescript
 // Each agent uses opus = slow + expensive
 Task({ ..., model: "opus" })
@@ -354,18 +334,17 @@ Task({ ..., model: "opus" })
 Task({ ..., model: "opus" })
 ```
 
-**✅ RIGHT: Use haiku for grunt work**
-
+RIGHT: Use haiku for grunt work
 ```typescript
-// 10-20x faster, sufficient for simple tasks
+// -x faster, sufficient for simple tasks
 Task({ ..., model: "haiku" })
 Task({ ..., model: "haiku" })
 Task({ ..., model: "haiku" })
 ```
 
-## When to Use Custom Agents Instead
+When to Use Custom Agents Instead
 
-Use **CreateCustomAgent workflow** when:
+Use CreateCustomAgent workflowwhen:
 
 - User says "custom agents" (the key trigger)
 - You need distinct personalities/perspectives
@@ -373,18 +352,18 @@ Use **CreateCustomAgent workflow** when:
 - Different analytical approaches required
 - Each agent brings unique expertise
 
-Use **SpawnParallelAgents workflow** when:
+Use SpawnParallelAgents workflowwhen:
 
 - Simple parallel processing (no "custom" keyword)
 - Same task, different inputs
 - Speed matters more than personality
 - Identity diversity not needed
 
-## Related Workflows
+Related Workflows
 
-- **CreateCustomAgent** - For agents with unique personalities and colors
-- **ListTraits** - Show available traits for custom agents
+- CreateCustomAgent- For agents with unique personalities and colors
+- ListTraits- Show available traits for custom agents
 
-## References
+References
 
 - Agent personalities: `~/.claude/skills/Agents/AgentPersonalities.md`

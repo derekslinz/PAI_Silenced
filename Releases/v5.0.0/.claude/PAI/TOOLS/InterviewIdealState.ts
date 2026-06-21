@@ -199,7 +199,7 @@ function showNext(state: InterviewState): void {
 
   if (next) {
     const tbdCount = countTbd(join(IDEAL_DIR, `${next}.md`));
-    console.log(`📋 NEXT: IDEAL_STATE/${next}.md  (${tbdCount} TBD markers)\n`);
+    console.log(` NEXT: IDEAL_STATE/${next}.md  (${tbdCount} TBD markers)\n`);
     console.log(`Questions for {{DA_NAME}} to ask:`);
     DIMENSION_PROMPTS[next]?.forEach((q, i) => console.log(`  ${i + 1}. ${q}`));
     console.log(`\nWhen done, mark: bun InterviewIdealState.ts --mark-done ${next}`);
@@ -208,7 +208,7 @@ function showNext(state: InterviewState): void {
 
   const nextPref = pendingPrefs[0];
   const tbdCount = countTbd(join(TELOS_DIR, `${nextPref}.md`));
-  console.log(`📋 NEXT (preference file): ${nextPref}.md  (${tbdCount} TBD markers)\n`);
+  console.log(` NEXT (preference file): ${nextPref}.md  (${tbdCount} TBD markers)\n`);
   console.log(`Questions for {{DA_NAME}} to ask:`);
   PREFERENCE_PROMPTS[nextPref]?.forEach((q, i) => console.log(`  ${i + 1}. ${q}`));
   console.log(`\nWhen done, mark: bun InterviewIdealState.ts --mark-done ${nextPref}`);
@@ -219,13 +219,13 @@ function showStatus(state: InterviewState): void {
   console.log("IDEAL_STATE dimensions:");
   for (const d of DIMENSIONS) {
     const tbd = countTbd(join(IDEAL_DIR, `${d}.md`));
-    const mark = state.dimensions[d].status === "done" ? "✅" : tbd === 0 ? "🟡" : "⬜";
+    const mark = state.dimensions[d].status === "done" ? "✅" : tbd === 0 ? "" : "⬜";
     console.log(`  ${mark} ${d.padEnd(16)}  ${tbd} TBD remaining`);
   }
   console.log("\nPreference files:");
   for (const f of PREFERENCE_FILES) {
     const tbd = countTbd(join(TELOS_DIR, `${f}.md`));
-    const mark = state.preference_files[f].status === "done" ? "✅" : tbd === 0 ? "🟡" : "⬜";
+    const mark = state.preference_files[f].status === "done" ? "✅" : tbd === 0 ? "" : "⬜";
     console.log(`  ${mark} ${f.padEnd(20)}  ${tbd} TBD remaining`);
   }
   const dimDone = Object.values(state.dimensions).filter((d) => d.status === "done").length;
@@ -245,7 +245,7 @@ function showDimension(name: string): void {
   const path = isDimension ? join(IDEAL_DIR, `${upper}.md`) : join(TELOS_DIR, `${upper}.md`);
   const prompts = isDimension ? DIMENSION_PROMPTS[upper] : PREFERENCE_PROMPTS[upper];
   const tbd = countTbd(path);
-  console.log(`📋 ${upper}  —  ${tbd} TBD markers  —  ${path}\n`);
+  console.log(` ${upper}  —  ${tbd} TBD markers  —  ${path}\n`);
   console.log(`Questions:`);
   prompts?.forEach((q, i) => console.log(`  ${i + 1}. ${q}`));
 }

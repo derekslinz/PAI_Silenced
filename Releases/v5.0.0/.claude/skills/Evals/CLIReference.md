@@ -1,6 +1,6 @@
-# Evals CLI Reference
+Evals CLI Reference
 
-## CLI-First Architecture
+CLI-First Architecture
 
 This skill follows the CLI-First Architecture pattern:
 
@@ -10,80 +10,78 @@ User Request -> AI orchestrates -> EvalServer CLI -> Deterministic results
 
 ---
 
-## CLI Commands
+CLI Commands
 
-### Use Case Management
+Use Case Management
 
 ```bash
-# Create new use case
+Create new use case
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts use-case create --name <name>
 
-# List all use cases
+List all use cases
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts use-case list
 
-# Show use case details
+Show use case details
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts use-case show <name>
 ```
 
-### Test Case Management
+Test Case Management
 
 ```bash
-# Add test case to use case
+Add test case to use case
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts test-case add --use-case <name>
 
-# List test cases for use case
+List test cases for use case
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts test-case list --use-case <name>
 ```
 
-### Run Evaluations
+Run Evaluations
 
 ```bash
-# Run eval for use case (optional model specification)
+Run eval for use case (optional model specification)
 bun run ~/.claude/skills/Evals/EvalServer/cli-run.ts --use-case <name> [--model <model>]
 ```
 
 ---
 
-## Web UI
+Web UI
 
 Start the EvalServer for visual evaluation:
 
 ```bash
 cd ~/.claude/skills/Evals/EvalServer
-bun run dev  # Starts on http://localhost:5173
-```
+bun run dev  Starts on http://localhost:```
 
-**Features:**
-- Real-time eval execution with streaming
+Features:- Real-time eval execution with streaming
 - Visual test case management
 - Results comparison dashboard
 - Bi-directional file <-> UI sync
 
 ---
 
-## Storage Strategy
+Storage Strategy
 
-### Files (Source of Truth)
+Files (Source of Truth)
 
 ```
 ~/.claude/skills/Evals/
 ├── UseCases/
 │   └── <name>/
-│       ├── config.yaml         # Criteria, thresholds
-│       ├── judge-config.yaml   # Judge template data
-│       ├── rubric.yaml         # Rubric template data
-│       ├── test-cases/         # Input/expected pairs
-│       ├── golden-outputs/     # Reference standards
-│       ├── prompts/            # Versioned prompts
-│       └── README.md           # Use case documentation
+│       ├── config.yaml         Criteria, thresholds
+│       ├── judge-config.yaml   Judge template data
+│       ├── rubric.yaml         Rubric template data
+│       ├── test-cases/         Input/expected pairs
+│       ├── golden-outputs/     Reference standards
+│       ├── prompts/            Versioned prompts
+│       └── README.md           Use case documentation
 ├── Results/
 │   └── <use-case>/
-│       └── <run-id>/           # Per-run results
-└── EvalServer/                 # Web UI + execution engine
+│       └── <run-id>/           Per-run results
+└── EvalServer/                 Web UI + execution engine
 ```
 
-### SQLite (Query Optimization)
+SQLite (Query Optimization)
 
 - Database: `EvalServer/storage/evals.db`
-- **Used ONLY for**: Fast queries, analytics, comparisons
-- **Can be rebuilt** from files
+- Used ONLY for: Fast queries, analytics, comparisons
+- Can be rebuiltfrom files

@@ -1,257 +1,241 @@
-# Analyze Results Workflow
+Analyze Results Workflow
 
-**Phase 6 of the Scientific Cycle**
-
+Phase of the Scientific Cycle
 Compare results to the goal. This workflow ensures honest, objective analysis without confirmation bias.
 
 ---
 
-## The Core Question
+The Core Question
 
-**"Did we achieve what we set out to achieve?"**
-
+"Did we achieve what we set out to achieve?"
 Compare results to PRE-DEFINED success criteria. Not to your expectations. Not to what you hoped for. To what you committed to before starting.
 
 ---
 
-## The Analysis Process
+The Analysis Process
 
-### Step 1: Compare to Success Criteria
+Step : Compare to Success Criteria
 
 Pull up the goals defined in DefineGoal. Compare directly.
 
 ```markdown
-## Goal Comparison
+Goal Comparison
 
 | Success Criterion | Required | Actual | Status |
 |-------------------|----------|--------|--------|
-| [Criterion 1]     | [Value]  | [Value] | ✅/❌ |
-| [Criterion 2]     | [Value]  | [Value] | ✅/❌ |
-| [Criterion 3]     | [Value]  | [Value] | ✅/❌ |
+| [Criterion ]     | [Value]  | [Value] | /|
+| [Criterion ]     | [Value]  | [Value] | /|
+| [Criterion ]     | [Value]  | [Value] | /|
 
-**Overall Goal Status:** [ACHIEVED / PARTIALLY ACHIEVED / NOT ACHIEVED]
+Overall Goal Status:[ACHIEVED / PARTIALLY ACHIEVED / NOT ACHIEVED]
 ```
 
-### Step 2: Determine Hypothesis Status
+Step : Determine Hypothesis Status
 
 For each hypothesis tested:
 
 ```markdown
-## Hypothesis Verdicts
+Hypothesis Verdicts
 
-### H1: [Name]
-**Status:** [CONFIRMED / REFUTED / INCONCLUSIVE]
+H: [Name]
+Status:[CONFIRMED / REFUTED / INCONCLUSIVE]
 
-**Evidence:**
-- [What the data showed]
+Evidence:- [What the data showed]
 - [How it relates to falsification criteria]
 
-**Confidence:** [High/Medium/Low] because [reasoning]
+Confidence:[High/Medium/Low] because [reasoning]
 
-### H2: [Name]
+H: [Name]
 [Same structure]
 ```
 
-**Decision Framework:**
-
+Decision Framework:
 | Evidence vs Prediction | Verdict |
 |------------------------|---------|
 | Data matches prediction | CONFIRMED |
 | Data contradicts prediction | REFUTED |
 | Data unclear/insufficient | INCONCLUSIVE |
 
-### Step 3: Identify Learnings
+Step : Identify Learnings
 
 What did we learn, beyond the hypothesis verdict?
 
 ```markdown
-## Key Learnings
+Key Learnings
 
-**What We Learned:**
-1. [Insight that changes our understanding]
-2. [Something we now know that we didn't before]
+What We Learned:. [Insight that changes our understanding]
+. [Something we now know that we didn't before]
 
-**What Surprised Us:**
-1. [Unexpected finding 1]
-2. [Unexpected finding 2]
+What Surprised Us:. [Unexpected finding ]
+. [Unexpected finding ]
 
-**What Changed About Our Mental Model:**
-- [Before: We thought X]
+What Changed About Our Mental Model:- [Before: We thought X]
 - [After: We now understand Y]
 ```
 
-### Step 4: Acknowledge Limitations
+Step : Acknowledge Limitations
 
 Be honest about what the data can and cannot tell us.
 
 ```markdown
-## Limitations
+Limitations
 
-**Methodological Limitations:**
-- [Limitation 1 - how it affects conclusions]
-- [Limitation 2 - how it affects conclusions]
+Methodological Limitations:- [Limitation - how it affects conclusions]
+- [Limitation - how it affects conclusions]
 
-**Generalizability:**
-- [Can we generalize these results? Why/why not?]
+Generalizability:- [Can we generalize these results? Why/why not?]
 
-**Alternative Interpretations:**
-- [Other explanations for the data]
+Alternative Interpretations:- [Other explanations for the data]
 - [What would change our interpretation?]
 ```
 
-### Step 5: Generate New Questions
+Step : Generate New Questions
 
 Good analysis raises new questions.
 
 ```markdown
-## New Questions
+New Questions
 
-**Questions That Emerged:**
-1. [New question from the findings]
-2. [Follow-up investigation needed]
+Questions That Emerged:. [New question from the findings]
+. [Follow-up investigation needed]
 
-**Hypotheses for Next Cycle:**
-- [New hypothesis suggested by data]
+Hypotheses for Next Cycle:- [New hypothesis suggested by data]
 - [Refinement of existing hypothesis]
 ```
 
 ---
 
-## Confirmation Bias Countermeasures
+Confirmation Bias Countermeasures
 
-### 1. Check Against Pre-Registered Criteria
+. Check Against Pre-Registered Criteria
 
 Did you define success criteria before gathering data? Compare ONLY to those.
 
 If you find yourself saying "Well, we didn't hit the metric, but..." — that's a red flag.
 
-### 2. Consider the Opposite
+. Consider the Opposite
 
 Ask: "If I wanted to argue the opposite conclusion, what would I say?"
 
-### 3. Seek Disconfirming Interpretation
+. Seek Disconfirming Interpretation
 
 Ask: "What interpretation of this data would make me LESS confident in my conclusion?"
 
-### 4. Steel-Man the Failure
+. Steel-Man the Failure
 
 If hypothesis was refuted, don't dismiss. Ask: "What can we learn from this failure?"
 
-### 5. Red Team Your Analysis
+. Red Team Your Analysis
 
 Use RedTeam skill to attack your conclusions.
 
 ---
 
-## Statistical Considerations
+Statistical Considerations
 
 When sample sizes and quantitative data warrant it:
 
 ```markdown
-## Statistical Analysis
+Statistical Analysis
 
-**Test Used:** [Name and justification]
+Test Used:[Name and justification]
 
-**Results:**
-- Test statistic: [Value]
+Results:- Test statistic: [Value]
 - p-value: [Value]
 - Effect size: [Value and interpretation]
 - Confidence interval: [Range]
 
-**Interpretation:**
-- [What this means in practical terms]
+Interpretation:- [What this means in practical terms]
 
-**Caveats:**
-- [Statistical limitations]
+Caveats:- [Statistical limitations]
 - [Assumption violations if any]
 ```
 
-**Rules of Thumb:**
-- p < 0.05 is conventional significance, but effect size matters more
+Rules of Thumb:- p < .is conventional significance, but effect size matters more
 - Large samples can make tiny effects "significant"
 - Small samples can hide real effects
 - Confidence intervals tell you more than p-values
 
 ---
 
-## Analysis Quality Checklist
+Analysis Quality Checklist
 
-| Criterion | Question | ✅ |
+| Criterion | Question | |
 |-----------|----------|---|
-| **Pre-Committed** | Comparing to criteria defined before data? | |
-| **Objective** | Letting data speak, not forcing interpretation? | |
-| **Honest** | Acknowledging negative or null results? | |
-| **Complete** | Considering all the data, not cherry-picking? | |
-| **Humble** | Acknowledging limitations and alternatives? | |
-| **Learning-Focused** | Extracting insights, not just verdicts? | |
+| Pre-Committed| Comparing to criteria defined before data? | |
+| Objective| Letting data speak, not forcing interpretation? | |
+| Honest| Acknowledging negative or null results? | |
+| Complete| Considering all the data, not cherry-picking? | |
+| Humble| Acknowledging limitations and alternatives? | |
+| Learning-Focused| Extracting insights, not just verdicts? | |
 
 ---
 
-## Template
+Template
 
 ```markdown
-# Analysis: [Experiment Name]
+Analysis: [Experiment Name]
 
-**Analysis Date:** [When]
-**Analyst:** [Who]
+Analysis Date:[When]
+Analyst:[Who]
 
-## Goal Comparison
+Goal Comparison
 | Criterion | Required | Achieved | Status |
 |-----------|----------|----------|--------|
-| [Crit 1]  | [Value]  | [Value]  | ✅/❌  |
+| [Crit ]  | [Value]  | [Value]  | / |
 
-**Overall:** [ACHIEVED / NOT ACHIEVED]
+Overall:[ACHIEVED / NOT ACHIEVED]
 
-## Hypothesis Verdicts
-- **H1:** [CONFIRMED/REFUTED/INCONCLUSIVE] - [brief reasoning]
-- **H2:** [CONFIRMED/REFUTED/INCONCLUSIVE] - [brief reasoning]
+Hypothesis Verdicts
+- H:[CONFIRMED/REFUTED/INCONCLUSIVE] - [brief reasoning]
+- H:[CONFIRMED/REFUTED/INCONCLUSIVE] - [brief reasoning]
 
-## Key Learnings
-1. [Main insight]
-2. [Secondary insight]
+Key Learnings
+. [Main insight]
+. [Secondary insight]
 
-## Surprises
+Surprises
 - [What we didn't expect]
 
-## Limitations
+Limitations
 - [Methodological concern]
 
-## New Questions
-1. [Follow-up question]
+New Questions
+. [Follow-up question]
 
-## Recommendations
+Recommendations
 - [What to do next]
 ```
 
 ---
 
-## Common Pitfalls
+Common Pitfalls
 
-### Pitfall 1: Moving Goalposts
-❌ "We didn't hit the number, but qualitatively it's better..."
-✅ "We didn't hit the number. That's a failure. What did we learn?"
+Pitfall : Moving Goalposts
+"We didn't hit the number, but qualitatively it's better..."
+"We didn't hit the number. That's a failure. What did we learn?"
 
-### Pitfall 2: Cherry-Picking
-❌ Highlighting only data that supports the hypothesis
-✅ Presenting all data, including contradictory evidence
+Pitfall : Cherry-Picking
+Highlighting only data that supports the hypothesis
+Presenting all data, including contradictory evidence
 
-### Pitfall 3: Over-Interpreting
-❌ Drawing sweeping conclusions from limited data
-✅ Matching confidence to evidence strength
+Pitfall : Over-Interpreting
+Drawing sweeping conclusions from limited data
+Matching confidence to evidence strength
 
-### Pitfall 4: Dismissing Failures
-❌ "The experiment didn't work, let's move on"
-✅ "The experiment failed - why? What does that teach us?"
+Pitfall : Dismissing Failures
+"The experiment didn't work, let's move on"
+"The experiment failed - why? What does that teach us?"
 
-### Pitfall 5: Confirmation Interpretation
-❌ Interpreting ambiguous data as supporting your belief
-✅ Explicitly considering alternative interpretations
+Pitfall : Confirmation Interpretation
+Interpreting ambiguous data as supporting your belief
+Explicitly considering alternative interpretations
 
 ---
 
-## Integration with Next Phase
+Integration with Next Phase
 
-Analysis feeds into **Iterate**.
+Analysis feeds into Iterate.
 
 Based on analysis:
 - Goal achieved → Document, ship, move on

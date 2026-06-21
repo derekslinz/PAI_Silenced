@@ -32,11 +32,11 @@ User Request → AI generates code/actions ad-hoc → Inconsistent results
 ```
 
 **Problems:**
-- ❌ Inconsistent outputs (prompts drift, model variations)
-- ❌ Hard to debug (what exactly happened?)
-- ❌ Not reproducible (same request, different results)
-- ❌ Difficult to test (prompts change, behavior changes)
-- ❌ No version control (prompt changes don't track behavior)
+-  Inconsistent outputs (prompts drift, model variations)
+-  Hard to debug (what exactly happened?)
+-  Not reproducible (same request, different results)
+-  Difficult to test (prompts change, behavior changes)
+-  No version control (prompt changes don't track behavior)
 
 ### New Way (CLI-First)
 ```
@@ -44,11 +44,11 @@ User Request → AI uses deterministic CLI → Consistent results
 ```
 
 **Advantages:**
-- ✅ Consistent outputs (same command = same result)
-- ✅ Easy to debug (inspect CLI command that was run)
-- ✅ Reproducible (CLI commands are deterministic)
-- ✅ Testable (test CLI directly, independently of AI)
-- ✅ Version controlled (CLI changes are explicit code changes)
+-  Consistent outputs (same command = same result)
+-  Easy to debug (inspect CLI command that was run)
+-  Reproducible (CLI commands are deterministic)
+-  Testable (test CLI directly, independently of AI)
+-  Version controlled (CLI changes are explicit code changes)
 
 ---
 
@@ -381,7 +381,7 @@ const failures = await bash('evals query runs --status failed --json');
 
 ## When to Apply This Pattern
 
-### ✅ Apply CLI-First When:
+###  Apply CLI-First When:
 
 1. **Repeated Operations**: Task will be performed multiple times
 2. **Deterministic Results**: Same input should always produce same output
@@ -398,7 +398,7 @@ const failures = await bash('evals query runs --status failed --json');
 - Data processing (ETL pipelines, transformations)
 - Project scaffolding (creating skills, commands)
 
-### ❌ Don't Need CLI-First When:
+###  Don't Need CLI-First When:
 
 1. **One-Off Operations**: Will only be done once or rarely
 2. **Simple File Operations**: Just reading or writing a single file

@@ -11,27 +11,27 @@ Defense-in-depth via a composable inspector pipeline. Inspired by Block Goose's 
 Four hooks, one pipeline, five inspectors (four active, one disabled).
 
 ```
-                    ┌─────────────────────────────────┐
- PreToolUse ───────►│  SecurityPipeline.hook.ts        │
-                    │  ┌───────────────────────────┐  │
-                    │  │ InspectorPipeline          │  │
-                    │  │  1. PatternInspector (100)  │  │──► deny (exit 2)
-                    │  │  2. EgressInspector  (90)   │  │──► require_approval (ask)
-                    │  │  3. RulesInspector   (50)   │  │──► alert (log + allow)
-                    │  │     (DISABLED — empty rules) │  │
-                    │  └───────────────────────────┘  │──► allow (silent)
-                    └─────────────────────────────────┘
+                    
+ PreToolUse   SecurityPipeline.hook.ts        
+                        
+                       InspectorPipeline            
+                        1. PatternInspector (100)     deny (exit 2)
+                        2. EgressInspector  (90)      require_approval (ask)
+                        3. RulesInspector   (50)      alert (log + allow)
+                           (DISABLED — empty rules)   
+                         allow (silent)
+                    
 
- PostToolUse ──────► ContentScanner.hook.ts
+ PostToolUse  ContentScanner.hook.ts
                      InjectionInspector scans tool output
                      Advisory only — injects warning, cannot block
 
- PermissionRequest ► SmartApprover.hook.ts
+ PermissionRequest  SmartApprover.hook.ts
                      Trusted workspace → auto-approve
                      Read operations → auto-approve
                      Write operations → user decides
 
- UserPromptSubmit ─► PromptGuard.hook.ts
+ UserPromptSubmit  PromptGuard.hook.ts
                      PromptInspector scans user prompts
                      Heuristic-only (no LLM) — can block
 ```

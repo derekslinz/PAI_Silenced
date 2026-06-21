@@ -32,7 +32,7 @@ import { getISOTimestamp, getPSTComponents } from './lib/time';
 import { captureFailure } from '../PAI/TOOLS/FailureCapture';
 import { addRatingPulse } from './lib/isa-utils';
 
-// ── Types ──
+//  Types 
 
 interface HookInput {
   session_id: string;
@@ -61,7 +61,7 @@ interface SentimentResult {
   detailed_context: string;
 }
 
-// ── Constants ──
+//  Constants 
 
 const BASE_DIR = process.env.PAI_DIR || join(process.env.HOME!, '.claude', 'PAI');
 const SIGNALS_DIR = join(BASE_DIR, 'MEMORY', 'LEARNING', 'SIGNALS');
@@ -69,7 +69,7 @@ const RATINGS_FILE = join(SIGNALS_DIR, 'ratings.jsonl');
 const LAST_RESPONSE_CACHE = join(BASE_DIR, 'MEMORY', 'STATE', 'last-response.txt');
 const MIN_PROMPT_LENGTH = 3;
 
-// ── Stdin Reader ──
+//  Stdin Reader 
 
 async function readStdinWithTimeout(timeout: number = 5000): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -81,7 +81,7 @@ async function readStdinWithTimeout(timeout: number = 5000): Promise<string> {
   });
 }
 
-// ── Cached Response ──
+//  Cached Response 
 
 function getLastResponse(): string {
   try {
@@ -90,14 +90,14 @@ function getLastResponse(): string {
   return '';
 }
 
-// ── Word-to-Number Map (for "ten", "eight", etc.) ──
+//  Word-to-Number Map (for "ten", "eight", etc.) 
 
 const WORD_NUMBERS: Record<string, number> = {
   one: 1, two: 2, three: 3, four: 4, five: 5,
   six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
 };
 
-// ── Explicit Rating Detection ──
+//  Explicit Rating Detection 
 
 function parseExplicitRating(prompt: string): { rating: number; comment?: string } | null {
   const trimmed = prompt.trim();
@@ -131,7 +131,7 @@ function parseExplicitRating(prompt: string): { rating: number; comment?: string
   return { rating, comment: rest };
 }
 
-// ── Positive Praise Fast Path ──
+//  Positive Praise Fast Path 
 
 const POSITIVE_PRAISE_WORDS = new Set([
   'excellent', 'amazing', 'brilliant', 'fantastic', 'wonderful', 'beautiful',
@@ -143,7 +143,7 @@ const POSITIVE_PHRASES = new Set([
   'love it', 'nailed it', 'looks great', 'looks good', 'thats great', 'that works',
 ]);
 
-// ── System Text Detection ──
+//  System Text Detection 
 
 const SYSTEM_TEXT_PATTERNS = [
   /^<task-notification>/i,
@@ -153,7 +153,7 @@ const SYSTEM_TEXT_PATTERNS = [
   /^Note:.*was read before/i,
 ];
 
-// ── Rating Writer ──
+//  Rating Writer 
 
 function writeRating(entry: RatingEntry): void {
   if (!existsSync(SIGNALS_DIR)) mkdirSync(SIGNALS_DIR, { recursive: true });
@@ -163,7 +163,7 @@ function writeRating(entry: RatingEntry): void {
   console.error(`[SatisfactionCapture] Wrote ${entry.source} rating ${entry.rating}`);
 }
 
-// ── Low Rating Learning Capture ──
+//  Low Rating Learning Capture 
 
 function captureLowRatingLearning(
   rating: number,
@@ -224,7 +224,7 @@ This response was rated ${rating}/10 by ${getPrincipalName()}. Use this as an im
   console.error(`[SatisfactionCapture] Captured low ${source} rating learning`);
 }
 
-// ── Inference Prompt ──
+//  Inference Prompt 
 
 const PRINCIPAL_NAME = getPrincipal().name;
 const ASSISTANT_NAME = getIdentity().name;
@@ -267,7 +267,7 @@ OUTPUT FORMAT (JSON only):
 }`;
 }
 
-// ── Recent Transcript Context ──
+//  Recent Transcript Context 
 
 function getRecentContext(transcriptPath: string, maxTurns: number = 4): string {
   try {
@@ -306,9 +306,9 @@ function getRecentContext(transcriptPath: string, maxTurns: number = 4): string 
   } catch { return ''; }
 }
 
-// ══════════════════════════════════════════════════
+// 
 // MAIN
-// ══════════════════════════════════════════════════
+// 
 
 async function main() {
   try {
@@ -320,7 +320,7 @@ async function main() {
 
     if (!prompt || !sessionId) { process.exit(0); }
 
-    // ── SKIP: System text ──
+    //  SKIP: System text 
     if (SYSTEM_TEXT_PATTERNS.some(re => re.test(prompt.trim()))) {
       console.error('[SatisfactionCapture] System text, skipping');
       process.exit(0);
@@ -331,7 +331,7 @@ async function main() {
       process.exit(0);
     }
 
-    // ── FAST PATH: Explicit rating ──
+    //  FAST PATH: Explicit rating 
     const explicitResult = parseExplicitRating(prompt);
     if (explicitResult) {
       console.error(`[SatisfactionCapture] Explicit rating: ${explicitResult.rating}`);
@@ -367,7 +367,7 @@ async function main() {
       process.exit(0);
     }
 
-    // ── FAST PATH: Positive praise ──
+    //  FAST PATH: Positive praise 
     const normalizedPrompt = prompt.trim().toLowerCase().replace(/[.!?,'"]/g, '');
     const promptWords = normalizedPrompt.split(/\s+/);
     if (promptWords.length <= 2) {
@@ -395,7 +395,7 @@ async function main() {
       }
     }
 
-    // ── INFERENCE PATH: Implicit satisfaction analysis ──
+    //  INFERENCE PATH: Implicit satisfaction analysis 
     // Stagger 2s to avoid racing SessionAnalysis for the same claude --print slot
     await new Promise(resolve => setTimeout(resolve, 2000));
     console.error('[SatisfactionCapture] Running satisfaction inference...');

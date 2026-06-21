@@ -1,21 +1,17 @@
-#!/usr/bin/env bun
+!/usr/bin/env bun
 
-/**
- * UL Abstract Illustration Prompt Generator
- *
- * ⚠️ DEPRECATED - THIS TOOL USES OLD CHARACTER-BASED SYSTEM
- * ⚠️ NEEDS COMPLETE REWRITE FOR ABSTRACT SHAPES/IMPRESSIONS ONLY
- * ⚠️ DO NOT USE UNTIL UPDATED
- *
- * This tool needs to be rewritten to generate prompts using:
- * - Abstract shapes and forms (NO characters)
- * - Visual motifs (networks, flows, structures, horizons)
- * - Composition approaches (centered, horizon, flow, opposition, layered)
- *
- * Usage (when updated):
- *   bun run generate-prompt.ts --input essay.md --type essay-illustration
- *   bun run generate-prompt.ts --input essay.md --type blog-header --format json
- */
+/ UL Abstract Illustration Prompt Generator
+  ️ DEPRECATED - THIS TOOL USES OLD CHARACTER-BASED SYSTEM
+ ️ NEEDS COMPLETE REWRITE FOR ABSTRACT SHAPES/IMPRESSIONS ONLY
+ ️ DO NOT USE UNTIL UPDATED
+  This tool needs to be rewritten to generate prompts using:
+ - Abstract shapes and forms (NO characters)
+ - Visual motifs (networks, flows, structures, horizons)
+ - Composition approaches (centered, horizon, flow, opposition, layered)
+  Usage (when updated):
+   bun run generate-prompt.ts --input essay.md --type essay-illustration
+   bun run generate-prompt.ts --input essay.md --type blog-header --format json
+ /
 
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -33,7 +29,7 @@ type TokyoNightColor =
   | "Neon Green"
   | "Warm Yellow"
   | "Soft Magenta";
-type Human3Motif = "agents" | "networks" | "aura" | "substrates" | "horizons" | "ts_stacks";
+type HumanMotif = "agents" | "networks" | "aura" | "substrates" | "horizons" | "ts_stacks";
 type BackgroundType = "sepia" | "dark_tokyo_night";
 type OutputFormat = "text" | "json";
 
@@ -45,7 +41,7 @@ interface PromptConfig {
   coreObjectDescription: string;
   overallMood: string;
   accentColors: TokyoNightColor[];
-  human3Motifs: Human3Motif[];
+  humanMotifs: HumanMotif[];
   backgroundType: BackgroundType;
   imageType: "essay-illustration" | "blog-header";
 }
@@ -58,7 +54,7 @@ interface PromptOutput {
   core_object_description: string;
   overall_mood: string;
   accent_colors: string[];
-  human3_motifs: string[];
+  human_motifs: string[];
   image_prompt: string;
   suggested_filename?: string;
 }
@@ -73,12 +69,12 @@ const ART_AESTHETIC_PATH = resolve(
 );
 
 const COLOR_HEX_MAP: Record<TokyoNightColor, string> = {
-  "Electric Blue": "#7aa2f7",
-  "Vivid Purple": "#bb9af7",
-  "Bright Cyan": "#7dcfff",
-  "Neon Green": "#9ece6a",
-  "Warm Yellow": "#e0af68",
-  "Soft Magenta": "#ff007c",
+  "Electric Blue": "aaf",
+  "Vivid Purple": "bbaf",
+  "Bright Cyan": "dcfff",
+  "Neon Green": "ecea",
+  "Warm Yellow": "eaf",
+  "Soft Magenta": "ffc",
 };
 
 const CHARACTER_DESCRIPTIONS = {
@@ -100,15 +96,15 @@ function parseArgs(): {
   colors?: string;
   motifs?: string;
 } {
-  const args = process.argv.slice(2);
+  const args = process.argv.slice();
   const parsed: any = {
     type: "essay-illustration",
     format: "text",
   };
 
-  for (let i = 0; i < args.length; i += 2) {
+  for (let i = ; i < args.length; i += ) {
     const key = args[i].replace(/^--/, "");
-    const value = args[i + 1];
+    const value = args[i + ];
     parsed[key] = value;
   }
 
@@ -117,7 +113,7 @@ function parseArgs(): {
 
 function readEssayContent(path: string): string {
   try {
-    return readFileSync(path, "utf-8");
+    return readFileSync(path, "utf-");
   } catch (error) {
     console.error(`Error reading essay file: ${path}`);
     throw error;
@@ -134,11 +130,11 @@ function analyzeContent(essayContent: string): {
   // In a production version, this could use more sophisticated NLP or LLM analysis
 
   const lines = essayContent.split("\n");
-  const firstParagraph = lines.slice(0, 5).join(" ");
+  const firstParagraph = lines.slice(, ).join(" ");
 
-  // Extract title (first # line)
-  const titleLine = lines.find((line) => line.startsWith("# "));
-  const theme = titleLine?.replace(/^# /, "") || "essay topic";
+  // Extract title (first line)
+  const titleLine = lines.find((line) => line.startsWith(""));
+  const theme = titleLine?.replace(/^/, "") || "essay topic";
 
   // Simple tone detection based on keywords
   const contentLower = essayContent.toLowerCase();
@@ -218,12 +214,12 @@ function selectColors(
 function selectMotifs(
   essayContent: string,
   override?: string
-): Human3Motif[] {
+): HumanMotif[] {
   if (override) {
-    return override.split(",").map((m) => m.trim() as Human3Motif);
+    return override.split(",").map((m) => m.trim() as HumanMotif);
   }
 
-  const motifs: Human3Motif[] = [];
+  const motifs: HumanMotif[] = [];
   const contentLower = essayContent.toLowerCase();
 
   if (contentLower.includes("agent") || contentLower.includes("ai")) {
@@ -239,7 +235,7 @@ function selectMotifs(
     motifs.push("aura");
   }
 
-  return motifs.slice(0, 2); // Max 2 motifs
+  return motifs.slice(, ); // Max motifs
 }
 
 function buildVisualMetaphor(
@@ -275,8 +271,8 @@ function buildVisualMetaphor(
   return metaphor;
 }
 
-function buildMotifsDescription(motifs: Human3Motif[]): string {
-  if (motifs.length === 0) return "";
+function buildMotifsDescription(motifs: HumanMotif[]): string {
+  if (motifs.length === ) return "";
 
   const descriptions: string[] = [];
 
@@ -305,7 +301,7 @@ function buildMotifsDescription(motifs: Human3Motif[]): string {
     }
   }
 
-  return `Optionally include Human 3.0 motifs that fit the essay: ${descriptions.join(", ")}.`;
+  return `Optionally include Human .motifs that fit the essay: ${descriptions.join(", ")}.`;
 }
 
 // ============================================================================
@@ -321,7 +317,7 @@ function generatePrompt(config: PromptConfig): string {
     coreObjectDescription,
     overallMood,
     accentColors,
-    human3Motifs,
+    humanMotifs,
     backgroundType,
     imageType,
   } = config;
@@ -335,22 +331,22 @@ function generatePrompt(config: PromptConfig): string {
   const characterDesc = CHARACTER_DESCRIPTIONS[characterFocus];
 
   // Build motifs description
-  const motifsDesc = buildMotifsDescription(human3Motifs);
+  const motifsDesc = buildMotifsDescription(humanMotifs);
 
   // Background description
   const backgroundDesc =
     backgroundType === "sepia"
       ? "Soft sepia-toned paper background with lots of empty space."
-      : "Dark gradient background transitioning from #1a1b26 to #24283b.";
+      : "Dark gradient background transitioning from abto b.";
 
   // Base prompt
   let prompt = `Minimal Tokyo Night–inspired illustration for ${imageType === "blog-header" ? "a blog post" : "an essay"} about ${essayTheme}.
 
-${backgroundDesc} Thin, slightly imperfect deep navy linework and flat color fills only, no shading. Tokyo Night–inspired accent color${accentColors.length > 1 ? "s" : ""} ${colorDescriptions} used sparingly.
+${backgroundDesc} Thin, slightly imperfect deep navy linework and flat color fills only, no shading. Tokyo Night–inspired accent color${accentColors.length > ? "s" : ""} ${colorDescriptions} used sparingly.
 
 ${characterDesc}
 
-Show ${characterFocus === "both" ? "Maya and Theo" : characterFocus} in a ${compositionType} scene${imageType === "blog-header" ? " optimized for horizontal 16:9 composition" : ""}. ${emotionalToneDescription.charAt(0).toUpperCase() + emotionalToneDescription.slice(1)}, interacting with ${coreObjectDescription}.
+Show ${characterFocus === "both" ? "Maya and Theo" : characterFocus} in a ${compositionType} scene${imageType === "blog-header" ? " optimized for horizontal :composition" : ""}. ${emotionalToneDescription.charAt().toUpperCase() + emotionalToneDescription.slice()}, interacting with ${coreObjectDescription}.
 
 ${motifsDesc}
 
@@ -362,10 +358,10 @@ The overall mood should be ${overallMood}. No text, no letters, no numbers, and 
 
 === BLOG HEADER SPECIFICATIONS ===
 
-Output format: PNG, 1536x1024 (16:9 landscape for blog header)
+Output format: PNG, x(:landscape for blog header)
 Horizontal composition optimized for wide format
 Primary focus in upper two-thirds of frame
-Maximum quality settings (95% quality)
+Maximum quality settings (% quality)
 Editorial cover image quality like The Atlantic or New Yorker or New York Times`;
   }
 
@@ -388,7 +384,7 @@ function main() {
     console.error("  --character      maya | kai | both");
     console.error('  --colors         "Electric Blue,Neon Green" (comma-separated)');
     console.error('  --motifs         "agents,networks" (comma-separated)');
-    process.exit(1);
+    process.exit();
   }
 
   // Read essay content
@@ -401,7 +397,7 @@ function main() {
   const compositionType = selectComposition(essayContent, args.composition);
   const characterFocus = selectCharacter(compositionType, args.character);
   const accentColors = selectColors(essayContent, args.colors);
-  const human3Motifs = selectMotifs(essayContent, args.motifs);
+  const humanMotifs = selectMotifs(essayContent, args.motifs);
 
   // Build visual metaphor
   const coreObjectDescription = buildVisualMetaphor(
@@ -417,9 +413,9 @@ function main() {
     compositionType,
     emotionalToneDescription: `They are ${analysis.tone}`,
     coreObjectDescription,
-    overallMood: analysis.tone.split(" ").slice(0, 2).join(" "), // Simplified mood
+    overallMood: analysis.tone.split(" ").slice(, ).join(" "), // Simplified mood
     accentColors,
-    human3Motifs,
+    humanMotifs,
     backgroundType: "sepia",
     imageType: args.type,
   };
@@ -437,15 +433,15 @@ function main() {
       core_object_description: coreObjectDescription,
       overall_mood: config.overallMood,
       accent_colors: accentColors,
-      human3_motifs: human3Motifs,
+      human_motifs: humanMotifs,
       image_prompt: imagePrompt,
       suggested_filename: analysis.theme
         .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/[^a-z-]+/g, "-")
         .replace(/^-|-$/g, "") + ".png",
     };
 
-    console.log(JSON.stringify(output, null, 2));
+    console.log(JSON.stringify(output, null, ));
   } else {
     console.log(imagePrompt);
   }

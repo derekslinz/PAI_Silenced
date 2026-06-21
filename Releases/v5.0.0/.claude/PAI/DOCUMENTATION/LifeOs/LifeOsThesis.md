@@ -29,24 +29,24 @@ The confusion most people have when they start building in this space: they thin
 ## The Three Layers
 
 ```
-┌─────────────────────────────────────────────────┐
-│                                                 │
-│  THE DA — your digital assistant                │  ← Primary interface
-│  (the voice/face/personality you interact with) │
-│                                                 │
-├─────────────────────────────────────────────────┤
-│                                                 │
-│  PULSE — the Life Dashboard                     │  ← Visible surface
-│  (where you SEE your current state, goals,      │
-│   workflows, progress, day-in-the-life preview) │
-│                                                 │
-├─────────────────────────────────────────────────┤
-│                                                 │
-│  PAI — the Life Operating System                │  ← The framework
-│  (memory, skills, hooks, algorithm, agents,     │
-│   telos, workflows — everything the DA runs on) │
-│                                                 │
-└─────────────────────────────────────────────────┘
+
+                                                 
+  THE DA — your digital assistant                  ← Primary interface
+  (the voice/face/personality you interact with) 
+                                                 
+
+                                                 
+  PULSE — the Life Dashboard                       ← Visible surface
+  (where you SEE your current state, goals,      
+   workflows, progress, day-in-the-life preview) 
+                                                 
+
+                                                 
+  PAI — the Life Operating System                  ← The framework
+  (memory, skills, hooks, algorithm, agents,     
+   telos, workflows — everything the DA runs on) 
+                                                 
+
 ```
 
 **PAI** is the OS. **Pulse** is one window onto that OS — the dashboard where you watch it run, see current state vs ideal state, monitor your goals and workflows. **The DA** is the interface you talk to. Different layers. Different jobs.

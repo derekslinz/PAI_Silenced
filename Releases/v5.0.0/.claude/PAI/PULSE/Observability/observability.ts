@@ -2456,7 +2456,7 @@ function handleLifeCardApi(): Response {
 //   2. Runtime marker file — `~/.claude/PAI/USER/.template-mode`. Written by
 //      `install.sh` on fresh install; deleted by `/interview` on completion.
 // Either signal flips templateMode → banner renders. DA name pulled from
-// USER/DA_IDENTITY.md so the copy reads in the user's voice.
+// USER/DA_IDENTITY.md.
 function handleOnboardingState(): Response {
   const markerPath = join(PAI_DIR, "USER", ".template-mode")
   const daIdentityPath = join(PAI_DIR, "USER", "DA_IDENTITY.md")

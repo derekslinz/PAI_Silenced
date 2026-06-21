@@ -226,7 +226,7 @@ function cmdReject(id: string): void {
   }
   queue.splice(idx, 1);
   saveQueue(queue);
-  console.log(`🗑️  Rejected ${id}`);
+  console.log(`️  Rejected ${id}`);
 }
 
 function cmdApproveTarget(target: string): void {

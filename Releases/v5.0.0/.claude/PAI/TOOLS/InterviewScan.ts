@@ -343,7 +343,7 @@ function formatNext(targets: Target[]): string {
   if (!t) return "✅ Nothing in scope. Check --phase 9 for deferred items.";
   const lines: string[] = [];
   const modeLabel = t.review_mode ? "REVIEW mode — read file, ask what to update/refine/add" : "FILL mode — walk through prompts to populate";
-  lines.push(`📋 ${t.name}  —  ${t.completeness_score.toFixed(0)}% complete  ·  ${PHASE_LABELS[t.phase]}`);
+  lines.push(` ${t.name}  —  ${t.completeness_score.toFixed(0)}% complete  ·  ${PHASE_LABELS[t.phase]}`);
   lines.push(`File: ${t.path}`);
   lines.push(`Leverage: ${t.leverage}/10  ·  Priority: ${t.priority}  ·  ${modeLabel}`);
   lines.push(`Why incomplete: ${t.why_incomplete.join(", ") || "—"}`);

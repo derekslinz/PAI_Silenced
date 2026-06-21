@@ -18,7 +18,7 @@ interface PatternDef {
   severity: 'block' | 'warn';
 }
 
-// ── Injection: attempts to override instructions ──
+//  Injection: attempts to override instructions 
 
 const INJECTION_PATTERNS: PatternDef[] = [
   { regex: /ignore\s+(all\s+)?previous\s+instructions/i, category: 'injection', description: 'Ignore previous instructions', severity: 'block' },
@@ -32,7 +32,7 @@ const INJECTION_PATTERNS: PatternDef[] = [
   { regex: /do\s+not\s+(follow|obey|listen|apply)\s+(your|the|any|previous)/i, category: 'injection', description: 'Instruction override attempt', severity: 'block' },
 ];
 
-// ── Security disable: attempts to weaken defenses ──
+//  Security disable: attempts to weaken defenses 
 
 const SECURITY_DISABLE_PATTERNS: PatternDef[] = [
   { regex: /disable\s+(all\s+)?(security|logging|hooks?|monitoring|protection)/i, category: 'security_disable', description: 'Security disable directive', severity: 'block' },
@@ -40,7 +40,7 @@ const SECURITY_DISABLE_PATTERNS: PatternDef[] = [
   { regex: /turn\s+off\s+(all\s+)?(security|logging|monitoring)/i, category: 'security_disable', description: 'Security turn-off directive', severity: 'block' },
 ];
 
-// ── Evasion: encoded payloads ──
+//  Evasion: encoded payloads 
 
 const EVASION_PATTERNS: PatternDef[] = [
   { regex: /\batob\s*\(/i, category: 'evasion', description: 'Base64 decode function', severity: 'warn' },
@@ -49,7 +49,7 @@ const EVASION_PATTERNS: PatternDef[] = [
   { regex: /\\x[0-9a-f]{2}.*\\x[0-9a-f]{2}.*\\x[0-9a-f]{2}/i, category: 'evasion', description: 'Hex-encoded content', severity: 'warn' },
 ];
 
-// ── Exfiltration: sensitive data + outbound intent (both must match) ──
+//  Exfiltration: sensitive data + outbound intent (both must match) 
 
 const SENSITIVE_DATA_PATTERNS = [
   /\.env\b/i, /\bapi[_-]?key\b/i, /\bsecret[_-]?key\b/i, /\bcredential/i,

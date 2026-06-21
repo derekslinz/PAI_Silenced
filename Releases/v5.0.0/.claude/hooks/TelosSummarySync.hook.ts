@@ -39,9 +39,9 @@ if (filePath.endsWith('updates.md')) process.exit(0);
 
 try {
   execSync(`bun run ${GENERATOR}`, { timeout: 5000, stdio: 'pipe' });
-  console.error('📋 TELOS summary auto-regenerated after source file change');
+  console.error(' TELOS summary auto-regenerated after source file change');
 } catch (err) {
-  console.error(`⚠️ TELOS summary regeneration failed: ${err}`);
+  console.error(` TELOS summary regeneration failed: ${err}`);
 }
 
 process.exit(0);

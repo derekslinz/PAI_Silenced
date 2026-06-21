@@ -1,32 +1,29 @@
-#!/usr/bin/env bun
-/**
- * Transcribe.ts — Word-level transcription via Whisper
- *
- * Uses insanely-fast-whisper (MPS accelerated) for word-level timestamps.
- * Falls back to standard whisper CLI if unavailable.
- *
- * Usage: bun Transcribe.ts <audio-file> [--output <path>]
- * Output: JSON file with word-level timestamps at <audio-file>.transcript.json
- */
+!/usr/bin/env bun
+/ Transcribe.ts — Word-level transcription via Whisper
+  Uses insanely-fast-whisper (MPS accelerated) for word-level timestamps.
+ Falls back to standard whisper CLI if unavailable.
+  Usage: bun Transcribe.ts <audio-file> [--output <path>]
+ Output: JSON file with word-level timestamps at <audio-file>.transcript.json
+ /
 
 import { $ } from "bun";
 import { existsSync } from "fs";
 import { basename, dirname, join } from "path";
 
-const args = process.argv.slice(2);
+const args = process.argv.slice();
 const inputFile = args.find((a) => !a.startsWith("--"));
 const outputFlag = args.indexOf("--output");
 const outputPath =
-  outputFlag !== -1 ? args[outputFlag + 1] : undefined;
+  outputFlag !== -? args[outputFlag + ] : undefined;
 
 if (!inputFile) {
   console.error("Usage: bun transcribe.ts <audio-file> [--output <path>]");
-  process.exit(1);
+  process.exit();
 }
 
 if (!existsSync(inputFile)) {
   console.error(`File not found: ${inputFile}`);
-  process.exit(1);
+  process.exit();
 }
 
 const outFile =
@@ -37,9 +34,9 @@ console.log(`Output: ${outFile}`);
 
 // Check which whisper variant is available
 const hasFastWhisper =
-  (await $`which insanely-fast-whisper 2>/dev/null`.quiet().nothrow()).exitCode === 0;
+  (await $`which insanely-fast-whisper >/dev/null`.quiet().nothrow()).exitCode === ;
 const hasWhisper =
-  (await $`which whisper 2>/dev/null`.quiet().nothrow()).exitCode === 0;
+  (await $`which whisper >/dev/null`.quiet().nothrow()).exitCode === ;
 
 if (hasFastWhisper) {
   console.log("Using insanely-fast-whisper (MPS accelerated)...");
@@ -48,10 +45,10 @@ if (hasFastWhisper) {
     --transcript-path ${outFile} \
     --device-id mps \
     --timestamp word \
-    --model-name openai/whisper-large-v3 \
-    --batch-size 4 2>&1`.quiet().nothrow();
+    --model-name openai/whisper-large-v\
+    --batch-size >&`.quiet().nothrow();
 
-  if (result.exitCode !== 0) {
+  if (result.exitCode !== ) {
     console.error("insanely-fast-whisper failed, trying standard whisper...");
   } else {
     console.log("Transcription complete.");
@@ -61,7 +58,7 @@ if (hasFastWhisper) {
 if (!hasFastWhisper || !existsSync(outFile)) {
   if (!hasWhisper) {
     console.error("No whisper variant found. Install: pip install openai-whisper");
-    process.exit(1);
+    process.exit();
   }
 
   console.log("Using standard whisper...");
@@ -73,7 +70,7 @@ if (!hasFastWhisper || !existsSync(outFile)) {
     --language en \
     --word_timestamps True \
     --output_format json \
-    --output_dir ${tmpDir} 2>&1`.quiet();
+    --output_dir ${tmpDir} >&`.quiet();
 
   // Find and move the output
   const whisperOut = join(tmpDir, basename(inputFile).replace(/\.[^.]+$/, ".json"));
@@ -92,19 +89,19 @@ if (!hasFastWhisper || !existsSync(outFile)) {
     }
 
     const fullText = chunks.map((c) => c.text).join("");
-    await Bun.write(outFile, JSON.stringify({ text: fullText, chunks }, null, 2));
+    await Bun.write(outFile, JSON.stringify({ text: fullText, chunks }, null, ));
     await $`rm -rf ${tmpDir}`;
     console.log("Transcription complete.");
   } else {
     console.error("Whisper produced no output.");
     await $`rm -rf ${tmpDir}`;
-    process.exit(1);
+    process.exit();
   }
 }
 
 // Validate output
 const transcript = JSON.parse(await Bun.file(outFile).text());
-const chunkCount = transcript.chunks?.length || 0;
-const textLen = transcript.text?.length || 0;
+const chunkCount = transcript.chunks?.length || ;
+const textLen = transcript.text?.length || ;
 console.log(`Words: ${chunkCount} | Text: ${textLen} chars`);
 console.log(`Saved: ${outFile}`);

@@ -120,9 +120,9 @@ function main() {
     if (content) {
       parts.push(content.trim());
       restoredCount++;
-      console.error(`🔄 Restored: ${relPath} (${content.length} chars)`);
+      console.error(` Restored: ${relPath} (${content.length} chars)`);
     } else {
-      console.error(`⚠️ Not found: ${relPath}`);
+      console.error(` Not found: ${relPath}`);
     }
   }
 
@@ -143,7 +143,7 @@ function main() {
     parts.push('# DA Identity (Critical Sections)\n');
     parts.push(identitySections);
     restoredCount++;
-    console.error(`🔄 Restored: DA_IDENTITY critical sections (${identitySections.length} chars)`);
+    console.error(` Restored: DA_IDENTITY critical sections (${identitySections.length} chars)`);
   }
 
   // Current work status
@@ -186,7 +186,7 @@ function main() {
     ].join('\n');
 
     console.log(output);
-    console.error(`✅ PostCompact: restored ${restoredCount} context sources (${output.length} chars)`);
+    console.error(` PostCompact: restored ${restoredCount} context sources (${output.length} chars)`);
   }
 
   process.exit(0);

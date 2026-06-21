@@ -1,15 +1,13 @@
-# Common CLI Patterns
+Common CLI Patterns
 
-**Reusable patterns for TypeScript CLIs based on llcli and production CLIs.**
-
+Reusable patterns for TypeScript CLIs based on llcli and production CLIs.
 ---
 
-## 🎯 CORE PATTERNS
+CORE PATTERNS
 
-### 1. Configuration Loading
+. Configuration Loading
 
-**Pattern from llcli:**
-
+Pattern from llcli:
 ```typescript
 interface Config {
   apiKey: string;
@@ -18,25 +16,25 @@ interface Config {
 
 const DEFAULTS = {
   baseUrl: 'https://api.example.com',
-  timeout: 30000,
-  limit: 20,
+  timeout: ,
+  limit: ,
 } as const;
 
 function loadConfig(): Config {
   const envPath = join(homedir(), '.claude', '.env');
 
   try {
-    const envContent = readFileSync(envPath, 'utf-8');
+    const envContent = readFileSync(envPath, 'utf-');
     const apiKey = envContent
       .split('\n')
       .find(line => line.startsWith('API_KEY='))
-      ?.split('=')[1]
+      ?.split('=')[]
       ?.trim();
 
     if (!apiKey) {
       console.error('Error: API_KEY not found in ${PAI_DIR}/.env');
       console.error('Add: API_KEY=your_key_here');
-      process.exit(1);
+      process.exit();
     }
 
     return {
@@ -46,23 +44,21 @@ function loadConfig(): Config {
   } catch (error) {
     console.error('Error: Cannot read ${PAI_DIR}/.env');
     console.error('Create file: touch ${PAI_DIR}/.env');
-    process.exit(1);
+    process.exit();
   }
 }
 ```
 
-**Key principles:**
-- Load from ${PAI_DIR}/.env (PAI standard)
+Key principles:- Load from ${PAI_DIR}/.env (PAI standard)
 - Clear error messages with resolution steps
 - Defaults for optional config
 - Type-safe Config interface
 
 ---
 
-### 2. API Client Pattern
+. API Client Pattern
 
-**Fetch wrapper with error handling:**
-
+Fetch wrapper with error handling:
 ```typescript
 async function apiRequest<T>(
   config: Config,
@@ -91,7 +87,7 @@ async function apiRequest<T>(
     } else {
       console.error('Unknown error:', error);
     }
-    process.exit(1);
+    process.exit();
   }
 }
 
@@ -103,17 +99,14 @@ const data = await apiRequest<ResponseType>(config, 'endpoint', {
 
 ---
 
-### 3. Command Function Pattern
+. Command Function Pattern
 
-**One function per command:**
-
+One function per command:
 ```typescript
-/**
- * Fetch items by date
- *
- * @param date - Date in YYYY-MM-DD format
- * @param options - Command options
- */
+/ Fetch items by date
+  @param date - Date in YYYY-MM-DD format
+ @param options - Command options
+ /
 async function fetchByDate(
   date: string,
   options: { limit?: number } = {}
@@ -121,10 +114,10 @@ async function fetchByDate(
   const config = loadConfig();
 
   // Validate input
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+  if (!/^\d{}-\d{}-\d{}$/.test(date)) {
     console.error('Error: Date must be YYYY-MM-DD format');
-    console.error('Example: 2025-11-17');
-    process.exit(1);
+    console.error('Example: --');
+    process.exit();
   }
 
   // Build params
@@ -137,12 +130,11 @@ async function fetchByDate(
   const data = await apiRequest<ApiResponse>(config, 'items', params);
 
   // Output JSON
-  console.log(JSON.stringify(data, null, 2));
+  console.log(JSON.stringify(data, null, ));
 }
 ```
 
-**Principles:**
-- Clear function signature
+Principles:- Clear function signature
 - Input validation with helpful errors
 - Use loadConfig() inside function
 - JSON output to stdout
@@ -150,31 +142,30 @@ async function fetchByDate(
 
 ---
 
-### 4. Argument Parsing Pattern
+. Argument Parsing Pattern
 
-**Manual parsing with validation:**
-
+Manual parsing with validation:
 ```typescript
 function parseArguments(args: string[]): {
   command: string;
   args: string[];
   options: Record<string, string | boolean>;
 } {
-  if (args.length === 0) {
+  if (args.length === ) {
     return { command: 'help', args: [], options: {} };
   }
 
-  const command = args[0];
+  const command = args[];
   const options: Record<string, string | boolean> = {};
   const commandArgs: string[] = [];
 
-  for (let i = 1; i < args.length; i++) {
+  for (let i = ; i < args.length; i++) {
     const arg = args[i];
 
     if (arg.startsWith('--')) {
       // Long option
-      const key = arg.slice(2);
-      const next = args[i + 1];
+      const key = arg.slice();
+      const next = args[i + ];
 
       if (next && !next.startsWith('-')) {
         options[key] = next;
@@ -184,7 +175,7 @@ function parseArguments(args: string[]): {
       }
     } else if (arg.startsWith('-')) {
       // Short option
-      const key = arg.slice(1);
+      const key = arg.slice();
       options[key] = true;
     } else {
       // Positional argument
@@ -198,44 +189,38 @@ function parseArguments(args: string[]): {
 
 ---
 
-### 5. Help Text Pattern
+. Help Text Pattern
 
-**Comprehensive, actionable help:**
-
+Comprehensive, actionable help:
 ```typescript
 function showHelp(): void {
   console.log(`
 ${CLI_NAME} - ${DESCRIPTION}
-${'='.repeat(CLI_NAME.length + DESCRIPTION.length + 3)}
+${'='.repeat(CLI_NAME.length + DESCRIPTION.length + )}
 
 USAGE:
   ${CLI_NAME} <command> [arguments] [options]
 
 COMMANDS:
-  command1 <arg>               Description of command1
-  command2 [optional]          Description of command2
-  help, --help, -h             Show this help
+  command<arg>               Description of command  command[optional]          Description of command  help, --help, -h             Show this help
   version, --version, -v       Show version
 
 OPTIONS:
-  --limit <n>                  Max results (default: 20)
+  --limit <n>                  Max results (default: )
   --format <type>              Output format (json, csv)
   --verbose                    Verbose logging
 
 EXAMPLES:
-  # Common use case 1
-  $ ${CLI_NAME} command1 value
+  Common use case   $ ${CLI_NAME} commandvalue
 
-  # Common use case 2
-  $ ${CLI_NAME} command2 --limit 50
-
-  # Piping to jq
-  $ ${CLI_NAME} command1 value | jq '.data[]'
+  Common use case   $ ${CLI_NAME} command--limit 
+  Piping to jq
+  $ ${CLI_NAME} commandvalue | jq '.data[]'
 
 OUTPUT:
   JSON to stdout (deterministic)
   Errors to stderr
-  Exit code: 0 = success, 1 = error
+  Exit code: = success, = error
 
 CONFIGURATION:
   API Key: ${PAI_DIR}/.env (API_KEY=your_key)
@@ -257,18 +242,16 @@ Version: ${VERSION}
 
 ---
 
-### 6. Error Handling Pattern
+. Error Handling Pattern
 
-**Type-safe custom errors:**
-
+Type-safe custom errors:
 ```typescript
 class CLIError extends Error {
   constructor(
     message: string,
     public readonly code: string,
     public readonly hint?: string,
-    public readonly exitCode: number = 1
-  ) {
+    public readonly exitCode: number =   ) {
     super(message);
     this.name = 'CLIError';
   }
@@ -292,7 +275,7 @@ function handleError(error: unknown): never {
     console.error('Unknown error:', error);
   }
 
-  process.exit(1);
+  process.exit();
 }
 
 // Usage
@@ -309,21 +292,20 @@ process.on('unhandledRejection', handleError);
 
 ---
 
-### 7. Main Entry Pattern
+. Main Entry Pattern
 
-**Structured main with routing:**
-
+Structured main with routing:
 ```typescript
 async function main(): Promise<void> {
-  const args = process.argv.slice(2);
+  const args = process.argv.slice();
 
   // Help/version shortcuts
-  if (!args.length || args[0] === 'help' || args[0] === '--help') {
+  if (!args.length || args[] === 'help' || args[] === '--help') {
     showHelp();
     return;
   }
 
-  if (args[0] === 'version' || args[0] === '--version') {
+  if (args[] === 'version' || args[] === '--version') {
     console.log(`${CLI_NAME} version ${VERSION}`);
     return;
   }
@@ -333,12 +315,12 @@ async function main(): Promise<void> {
 
   // Route to command
   switch (command) {
-    case 'command1':
-      await command1(cmdArgs[0], options);
+    case 'command':
+      await command(cmdArgs[], options);
       break;
 
-    case 'command2':
-      await command2(cmdArgs, options);
+    case 'command':
+      await command(cmdArgs, options);
       break;
 
     default:
@@ -356,10 +338,9 @@ main().catch(handleError);
 
 ---
 
-### 8. File I/O Pattern
+. File I/O Pattern
 
-**Safe file operations:**
-
+Safe file operations:
 ```typescript
 import { readFile, writeFile, access } from 'fs/promises';
 import { constants } from 'fs';
@@ -369,7 +350,7 @@ async function readJsonFile<T>(path: string): Promise<T> {
     // Check file exists and is readable
     await access(path, constants.R_OK);
 
-    const content = await readFile(path, 'utf-8');
+    const content = await readFile(path, 'utf-');
     return JSON.parse(content) as T;
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
@@ -390,8 +371,8 @@ async function readJsonFile<T>(path: string): Promise<T> {
 
 async function writeJsonFile<T>(path: string, data: T): Promise<void> {
   try {
-    const json = JSON.stringify(data, null, 2);
-    await writeFile(path, json, 'utf-8');
+    const json = JSON.stringify(data, null, );
+    await writeFile(path, json, 'utf-');
   } catch (error) {
     throw new CLIError(
       `Cannot write file: ${path}`,
@@ -404,10 +385,9 @@ async function writeJsonFile<T>(path: string, data: T): Promise<void> {
 
 ---
 
-### 9. Progress Indicator Pattern
+. Progress Indicator Pattern
 
-**For long operations:**
-
+For long operations:
 ```typescript
 import ora from 'ora';
 
@@ -418,8 +398,8 @@ async function processMany(items: string[]): Promise<void> {
   }).start();
 
   try {
-    for (let i = 0; i < items.length; i++) {
-      spinner.text = `Processing ${i + 1}/${items.length}: ${items[i]}`;
+    for (let i = ; i < items.length; i++) {
+      spinner.text = `Processing ${i + }/${items.length}: ${items[i]}`;
       await processItem(items[i]);
     }
 
@@ -433,10 +413,9 @@ async function processMany(items: string[]): Promise<void> {
 
 ---
 
-### 10. Testing Pattern
+. Testing Pattern
 
-**Vitest for CLIs:**
-
+Vitest for CLIs:
 ```typescript
 import { describe, it, expect } from 'vitest';
 import { exec } from 'child_process';
@@ -467,14 +446,14 @@ describe('CLI', () => {
 
 ---
 
-## ✅ PATTERN CHECKLIST
+PATTERN CHECKLIST
 
 When building a CLI, use these patterns:
 
 - [ ] Configuration loading (from ${PAI_DIR}/.env)
 - [ ] API client with error handling
 - [ ] One function per command
-- [ ] Manual argument parsing (Tier 1) or Commander (Tier 2)
+- [ ] Manual argument parsing (Tier ) or Commander (Tier )
 - [ ] Comprehensive help text
 - [ ] Custom CLIError class
 - [ ] Main entry with routing
@@ -484,4 +463,4 @@ When building a CLI, use these patterns:
 
 ---
 
-**All patterns battle-tested in llcli and production CLIs.**
+All patterns battle-tested in llcli and production CLIs.

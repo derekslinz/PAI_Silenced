@@ -25,23 +25,23 @@ User Request
 Claude Code projects/ (native transcript storage - 30-day retention)
     ↓
 Hook Events trigger domain-specific captures:
-    ├── Algorithm (AI) → WORK/
-    ├── SatisfactionCapture → LEARNING/SIGNALS/
-    ├── WorkCompletionLearning → LEARNING/
-    └── SecurityPipeline → SECURITY/
+     Algorithm (AI) → WORK/
+     SatisfactionCapture → LEARNING/SIGNALS/
+     WorkCompletionLearning → LEARNING/
+     SecurityPipeline → SECURITY/
     ↓
 Knowledge capture (inline):
-    └── Algorithm LEARN phase → KNOWLEDGE/ (writes People/Companies/Ideas/Research with schema)
+     Algorithm LEARN phase → KNOWLEDGE/ (writes People/Companies/Ideas/Research with schema)
     ↓
 Harvesting (periodic):
-    ├── SessionHarvester → LEARNING/ (extracts corrections, errors, insights)
-    ├── SessionHarvester --mine → KNOWLEDGE/_harvest-queue/ (mines decisions, preferences, milestones, problems)
-    ├── KnowledgeHarvester → KNOWLEDGE/ (validates schema, maintenance, reflections disabled)
-    └── LearningPatternSynthesis → LEARNING/SYNTHESIS/ (aggregates ratings)
+     SessionHarvester → LEARNING/ (extracts corrections, errors, insights)
+     SessionHarvester --mine → KNOWLEDGE/_harvest-queue/ (mines decisions, preferences, milestones, problems)
+     KnowledgeHarvester → KNOWLEDGE/ (validates schema, maintenance, reflections disabled)
+     LearningPatternSynthesis → LEARNING/SYNTHESIS/ (aggregates ratings)
     ↓
 Retrieval & Navigation (on-demand):
-    ├── MemoryRetriever → compressed context from KNOWLEDGE/ (BM25 search + LLM compression)
-    └── KnowledgeGraph → associative traversal over KNOWLEDGE/ (tags + wikilinks + related fields)
+     MemoryRetriever → compressed context from KNOWLEDGE/ (BM25 search + LLM compression)
+     KnowledgeGraph → associative traversal over KNOWLEDGE/ (tags + wikilinks + related fields)
 ```
 
 **Key insight:** Hooks write directly to specialized directories. There is no intermediate "firehose" layer - Claude Code's `projects/` serves that purpose natively. Retrieval tools read the same markdown files without any intermediate index or database.
@@ -52,57 +52,57 @@ Retrieval & Navigation (on-demand):
 
 ```
 ~/.claude/PAI/MEMORY/
-├── KNOWLEDGE/              # Organized, browsable knowledge archive (entity-based, v2.1)
-│   ├── _index.md           # Master MOC dashboard
-│   ├── _schema.md          # Object type definitions (People, Companies, Ideas, Research)
-│   ├── _archive/           # Retired seedlings + purged noise (90-day expiry)
-│   ├── _embeddings/        # Per-note vectors (deferred)
-│   ├── _harvest-queue/     # Flagged items for next harvest
-│   ├── People/             # Human beings — OSINT, contacts, profiles
-│   ├── Companies/          # Organizations — research, competitors, partners
-│   ├── Ideas/              # Insights, theses, analyses, frameworks
-│   └── Research/           # Multi-source investigations with methodology and verified findings
-├── WORK/                   # PRIMARY work tracking
-│   └── {timestamp}_{slug}/
-│       └── ISA.md          # Single source of truth (metadata + ISC + decisions + changelog)
-├── LEARNING/               # Learnings (includes signals)
-│   ├── SYSTEM/             # PAI/tooling learnings
-│   │   └── YYYY-MM/
-│   ├── ALGORITHM/          # Task execution learnings
-│   │   └── YYYY-MM/
-│   ├── FAILURES/           # Full context dumps for low ratings (1-3)
-│   │   └── YYYY-MM/
-│   │       └── {timestamp}_{8-word-description}/
-│   │           ├── CONTEXT.md      # Human-readable analysis
-│   │           ├── transcript.jsonl # Raw conversation
-│   │           ├── sentiment.json  # Sentiment metadata
-│   │           └── tool-calls.json # Tool invocations
-│   ├── SYNTHESIS/          # Aggregated pattern analysis
-│   │   └── YYYY-MM/
-│   │       └── weekly-patterns.md
-│   ├── REFLECTIONS/        # Algorithm performance reflections
-│   │   └── algorithm-reflections.jsonl
-│   └── SIGNALS/            # User satisfaction ratings
-│       └── ratings.jsonl
-├── RESEARCH/               # Agent output captures
-│   └── YYYY-MM/
-├── SECURITY/               # Security audit events
-│   └── security-events.jsonl
-├── STATE/                  # Operational state
-│   ├── algorithms/         # Per-session algorithm state (phase, criteria, effort level)
-│   ├── kitty-sessions/     # Per-session Kitty terminal env (listenOn, windowId)
-│   ├── tab-titles/         # Per-window tab state (title, color, phase)
-│   ├── events.jsonl        # Unified event log (append-only, typed events from hooks)
-│   ├── session-names.json  # Auto-generated session names (from SessionAutoName hook)
-│   ├── current-work.json
-│   ├── trending-cache.json
-│   ├── progress/           # Multi-session project tracking
-│   └── integrity/          # System health checks
-├── PAISYSTEMUPDATES/         # Architecture change history
-│   ├── index.json
-│   ├── CHANGELOG.md
-│   └── YYYY/MM/
-└── README.md
+ KNOWLEDGE/              # Organized, browsable knowledge archive (entity-based, v2.1)
+    _index.md           # Master MOC dashboard
+    _schema.md          # Object type definitions (People, Companies, Ideas, Research)
+    _archive/           # Retired seedlings + purged noise (90-day expiry)
+    _embeddings/        # Per-note vectors (deferred)
+    _harvest-queue/     # Flagged items for next harvest
+    People/             # Human beings — OSINT, contacts, profiles
+    Companies/          # Organizations — research, competitors, partners
+    Ideas/              # Insights, theses, analyses, frameworks
+    Research/           # Multi-source investigations with methodology and verified findings
+ WORK/                   # PRIMARY work tracking
+    {timestamp}_{slug}/
+        ISA.md          # Single source of truth (metadata + ISC + decisions + changelog)
+ LEARNING/               # Learnings (includes signals)
+    SYSTEM/             # PAI/tooling learnings
+       YYYY-MM/
+    ALGORITHM/          # Task execution learnings
+       YYYY-MM/
+    FAILURES/           # Full context dumps for low ratings (1-3)
+       YYYY-MM/
+           {timestamp}_{8-word-description}/
+               CONTEXT.md      # Human-readable analysis
+               transcript.jsonl # Raw conversation
+               sentiment.json  # Sentiment metadata
+               tool-calls.json # Tool invocations
+    SYNTHESIS/          # Aggregated pattern analysis
+       YYYY-MM/
+           weekly-patterns.md
+    REFLECTIONS/        # Algorithm performance reflections
+       algorithm-reflections.jsonl
+    SIGNALS/            # User satisfaction ratings
+        ratings.jsonl
+ RESEARCH/               # Agent output captures
+    YYYY-MM/
+ SECURITY/               # Security audit events
+    security-events.jsonl
+ STATE/                  # Operational state
+    algorithms/         # Per-session algorithm state (phase, criteria, effort level)
+    kitty-sessions/     # Per-session Kitty terminal env (listenOn, windowId)
+    tab-titles/         # Per-window tab state (title, color, phase)
+    events.jsonl        # Unified event log (append-only, typed events from hooks)
+    session-names.json  # Auto-generated session names (from SessionAutoName hook)
+    current-work.json
+    trending-cache.json
+    progress/           # Multi-session project tracking
+    integrity/          # System health checks
+ PAISYSTEMUPDATES/         # Architecture change history
+    index.json
+    CHANGELOG.md
+    YYYY/MM/
+ README.md
 ```
 
 ---

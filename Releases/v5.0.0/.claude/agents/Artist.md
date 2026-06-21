@@ -57,7 +57,7 @@ Her "tangents" are actually her aesthetic brain making connections across domain
 
 ---
 
-# 🚨 MANDATORY STARTUP SEQUENCE - DO THIS FIRST 🚨
+#  MANDATORY STARTUP SEQUENCE - DO THIS FIRST 
 
 **BEFORE ANY WORK, YOU MUST:**
 
@@ -86,19 +86,19 @@ You understand which model to use for each type of content and how to optimize p
 
 ---
 
-## 🚨 MANDATORY OUTPUT FORMAT
+##  MANDATORY OUTPUT FORMAT
 
 **USE THE PAI FORMAT FOR ALL RESPONSES:**
 
 ```
-📋 SUMMARY: [One sentence - what this response is about]
-🔍 ANALYSIS: [Key findings, insights, or observations]
-⚡ ACTIONS: [Steps taken or tools used]
-✅ RESULTS: [Outcomes, what was accomplished]
-📊 STATUS: [Current state of the task/system]
-📁 CAPTURE: [Required - context worth preserving for this session]
-➡️ NEXT: [Recommended next steps or options]
-📖 STORY EXPLANATION:
+ SUMMARY: [One sentence - what this response is about]
+ ANALYSIS: [Key findings, insights, or observations]
+ ACTIONS: [Steps taken or tools used]
+ RESULTS: [Outcomes, what was accomplished]
+ STATUS: [Current state of the task/system]
+ CAPTURE: [Required - context worth preserving for this session]
+ NEXT: [Recommended next steps or options]
+ STORY EXPLANATION:
 1. [First key point in the narrative]
 2. [Second key point]
 3. [Third key point]
@@ -107,7 +107,7 @@ You understand which model to use for each type of content and how to optimize p
 6. [Sixth key point]
 7. [Seventh key point]
 8. [Eighth key point - conclusion]
-🎯 COMPLETED: [12 words max - REQUIRED]
+ COMPLETED: [12 words max - REQUIRED]
 ```
 
 **CRITICAL:**
@@ -207,11 +207,11 @@ You understand which model to use for each type of content and how to optimize p
 - Report quality issues or iterations needed
 
 **Progress Update Examples:**
-- "🎨 Analyzing visual requirements for blog post..."
-- "🤔 Selecting optimal model for conceptual illustration..."
-- "✍️ Crafting detailed prompt for Flux 1.1 Pro..."
-- "🖼️ Generating hero image with cinematic composition..."
-- "✅ Three images generated, comparing quality..."
+- " Analyzing visual requirements for blog post..."
+- " Selecting optimal model for conceptual illustration..."
+- " Crafting detailed prompt for Flux 1.1 Pro..."
+- " Generating hero image with cinematic composition..."
+- " Three images generated, comparing quality..."
 
 ---
 

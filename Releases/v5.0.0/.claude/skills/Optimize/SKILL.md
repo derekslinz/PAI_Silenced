@@ -5,66 +5,63 @@ disable-model-invocation: true
 effort: medium
 ---
 
-# /optimize — Autonomous Optimization v2
+/optimize — Autonomous Optimization v
+Run an autonomous optimization loop against any target. Two modes:
 
-Run an autonomous optimization loop against **any target**. Two modes:
-
-- **Metric mode** — code targets with a shell command that produces a number (the original)
-- **Eval mode** — skills, prompts, agents, or any text target judged by LLM-as-judge binary evals
+- Metric mode— code targets with a shell command that produces a number (the original)
+- Eval mode— skills, prompts, agents, or any text target judged by LLM-as-judge binary evals
 
 The agent modifies the target, measures the result, keeps improvements, discards failures, and repeats.
 
 Inspired by Karpathy's [autoresearch](https://github.com/karpathy/autoresearch) and extended with LLM-as-judge evaluation.
 
-## Invocation
+Invocation
 
-### Metric Mode (code targets)
+Metric Mode (code targets)
 
 ```
 /optimize --metric "lighthouse_score" --higher-is-better \
-  --measure "npx lighthouse http://localhost:3000 --output=json" \
-  --extract "jq '.categories.performance.score * 100' lighthouse.json" \
-  --files "src/**/*.tsx,src/**/*.css" \
-  --budget 120
-
-/optimize --resume        # Resume a previous optimization loop
-/optimize --status        # Show results summary from last/current run
+  --measure "npx lighthouse http://localhost:--output=json" \
+  --extract "jq '.categories.performance.score ' lighthouse.json" \
+  --files "src//.tsx,src//.css" \
+  --budget 
+/optimize --resume        Resume a previous optimization loop
+/optimize --status        Show results summary from last/current run
 ```
 
-### Eval Mode (skill/prompt/agent targets)
+Eval Mode (skill/prompt/agent targets)
 
 ```
 /optimize --target "~/.claude/skills/ExtractWisdom"
 /optimize --target "~/.claude/skills/Research/Workflows/QuickResearch.md"
 /optimize --target "prompts/my-prompt.md"
-/optimize --target "~/.claude/skills/ExtractWisdom" --max-experiments 20
-```
+/optimize --target "~/.claude/skills/ExtractWisdom" --max-experiments ```
 
 In eval mode, the system automatically:
-1. Detects the target type (skill, prompt, agent, code, function)
-2. Reads the target to understand its purpose and constraints
-3. Generates 3-6 binary eval criteria and 3-5 test inputs
-4. Presents criteria + inputs for your approval before starting
-5. Runs the optimization loop using LLM-as-judge scoring
-6. Presents a recommendation (apply/reject/partial) when done
+. Detects the target type (skill, prompt, agent, code, function)
+. Reads the target to understand its purpose and constraints
+. Generates -binary eval criteria and -test inputs
+. Presents criteria + inputs for your approval before starting
+. Runs the optimization loop using LLM-as-judge scoring
+. Presents a recommendation (apply/reject/partial) when done
 
-## What Happens
+What Happens
 
 This skill triggers the PAI Algorithm in `mode: optimize`:
 
-1. **OBSERVE** — Define or auto-detect the target, set eval_mode
-2. **THINK** — Analyze codebase/skill, generate hypothesis queue
-3. **PLAN** — Prioritize hypotheses by expected impact
-4. **BUILD** — Phase 0: TARGET ANALYSIS (see `optimize-loop.md`)
+. OBSERVE— Define or auto-detect the target, set eval_mode
+. THINK— Analyze codebase/skill, generate hypothesis queue
+. PLAN— Prioritize hypotheses by expected impact
+. BUILD— Phase : TARGET ANALYSIS (see `optimize-loop.md`)
    - Detect target type, auto-generate eval criteria (eval mode), set up sandbox, baseline
-5. **EXECUTE** — The autonomous loop (`optimize-loop.md`):
+. EXECUTE— The autonomous loop (`optimize-loop.md`):
    - Hypothesize → Modify target → Measure (metric or eval) → Keep/Revert → Repeat
-   - Metric mode: ~12 experiments/hour (at 5-min budget)
-   - Eval mode: ~6-8 experiments/hour (multi-run judging is slower)
-6. **VERIFY** — Phase 9: RECOMMEND — diff, summary, apply/reject/partial options
-7. **LEARN** — Phase 10: EXTRACT LEARNINGS — what worked, what didn't, structured insights
+   - Metric mode: ~experiments/hour (at -min budget)
+   - Eval mode: ~-experiments/hour (multi-run judging is slower)
+. VERIFY— Phase : RECOMMEND — diff, summary, apply/reject/partial options
+. LEARN— Phase : EXTRACT LEARNINGS — what worked, what didn't, structured insights
 
-## Arguments — Metric Mode
+Arguments — Metric Mode
 
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -74,99 +71,88 @@ This skill triggers the PAI Algorithm in `mode: optimize`:
 | `--higher-is-better` | | (default) | Higher metric values are better |
 | `--lower-is-better` | | | Lower metric values are better |
 | `--extract COMMAND` | | Last number in stdout | Extract metric from output |
-| `--budget SECONDS` | | 300 | Time budget per experiment |
+| `--budget SECONDS` | | | Time budget per experiment |
 | `--target VALUE` | | none | Stop when metric reaches this value |
 | `--max-experiments N` | | none | Stop after N experiments |
 | `--locked GLOB` | | none | Files the agent must NOT modify |
 | `--constraints TEXT` | | none | Additional rules (e.g., "tests must pass") |
 
-## Arguments — Eval Mode
+Arguments — Eval Mode
 
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `--target PATH` | yes | | Path to skill directory, prompt file, or agent definition |
 | `--max-experiments N` | | none | Stop after N experiments |
-| `--runs N` | | 3 | Runs per experiment (more = more reliable, slower) |
-| `--criteria "Q1" "Q2"` | | auto-generated | Override auto-generated eval criteria |
-| `--inputs "I1" "I2"` | | auto-generated | Override auto-generated test inputs |
-| `--budget SECONDS` | | 300 | Time budget per experiment |
+| `--runs N` | | | Runs per experiment (more = more reliable, slower) |
+| `--criteria "Q" "Q"` | | auto-generated | Override auto-generated eval criteria |
+| `--inputs "I" "I"` | | auto-generated | Override auto-generated test inputs |
+| `--budget SECONDS` | | | Time budget per experiment |
 
-## Shared Arguments
+Shared Arguments
 
 | Argument | Description |
 |----------|-------------|
 | `--resume` | Resume a previous optimization run |
 | `--status` | Show results summary |
 
-## Algorithm Integration
+Algorithm Integration
 
 When `/optimize` is invoked, the Algorithm enters with `mode: optimize` in the ISA frontmatter. The eval_mode is set based on arguments:
 
 - `--measure` provided → `eval_mode: metric` (git branch sandbox)
 - `--target` provided → `eval_mode: eval` (directory sandbox)
 
-ISC criteria become **guard rails** — assertions that must hold true across ALL experiments. Guard rails must REMAIN satisfied perpetually. A violation triggers automatic revert regardless of score improvement.
+ISC criteria become guard rails— assertions that must hold true across ALL experiments. Guard rails must REMAIN satisfied perpetually. A violation triggers automatic revert regardless of score improvement.
 
-**Reference files:**
-- `~/.claude/PAI/ALGORITHM/optimize-loop.md` — the full loop protocol
+Reference files:- `~/.claude/PAI/ALGORITHM/optimize-loop.md` — the full loop protocol
 - `~/.claude/PAI/ALGORITHM/eval-guide.md` — how to write good eval criteria
 - `~/.claude/PAI/ALGORITHM/target-types.md` — target detection and ISC generation
 
-## Examples
+Examples
 
-### Metric Mode
+Metric Mode
 
-**Optimize page load time:**
-```
+Optimize page load time:```
 /optimize --metric "lighthouse_perf" --higher-is-better \
-  --measure "npx lighthouse http://localhost:3000 --output=json --output-path=lh.json" \
-  --extract "jq '.categories.performance.score * 100' lh.json" \
-  --files "src/**/*.tsx,src/**/*.css" \
-  --target 95 --budget 120
-```
+  --measure "npx lighthouse http://localhost:--output=json --output-path=lh.json" \
+  --extract "jq '.categories.performance.score ' lh.json" \
+  --files "src//.tsx,src//.css" \
+  --target --budget ```
 
-**Optimize bundle size:**
-```
+Optimize bundle size:```
 /optimize --metric "bundle_bytes" --lower-is-better \
-  --measure "bun run build 2>&1 && du -sb dist/ | cut -f1" \
-  --files "src/**/*.ts" \
+  --measure "bun run build >&&& du -sb dist/ | cut -f" \
+  --files "src//.ts" \
   --constraints "all tests must pass"
 ```
 
-**ML training (Karpathy-style):**
-```
+ML training (Karpathy-style):```
 /optimize --metric "val_bpb" --lower-is-better \
-  --measure "uv run train.py > run.log 2>&1 && grep '^val_bpb:' run.log | cut -d' ' -f2" \
+  --measure "uv run train.py > run.log >&&& grep '^val_bpb:' run.log | cut -d' ' -f" \
   --files "train.py" \
   --locked "prepare.py" \
-  --budget 300
-```
+  --budget ```
 
-### Eval Mode
+Eval Mode
 
-**Optimize a skill's Extract workflow:**
-```
-/optimize --target "~/.claude/skills/ExtractWisdom" --max-experiments 15
-```
+Optimize a skill's Extract workflow:```
+/optimize --target "~/.claude/skills/ExtractWisdom" --max-experiments ```
 
-**Optimize a standalone prompt:**
-```
-/optimize --target "prompts/summarize-article.md" --runs 5
-```
+Optimize a standalone prompt:```
+/optimize --target "prompts/summarize-article.md" --runs ```
 
-**Optimize with custom criteria:**
-```
+Optimize with custom criteria:```
 /optimize --target "~/.claude/skills/Research/Workflows/QuickResearch.md" \
   --criteria "Does the output contain specific facts with sources?" \
             "Is the output structured with clear sections?" \
             "Does the output avoid generic filler?" \
-  --inputs "research quantum computing breakthroughs 2025" \
+  --inputs "research quantum computing breakthroughs " \
            "quick research on supply chain security" \
            "find recent developments in AI agents"
 ```
 
-## Gotchas
+Gotchas
 
-- **Hill-climbing can get stuck in local optima.** If score plateaus, consider resetting with different initial conditions.
-- **Eval mode vs metric mode:** Use metric mode for quantifiable targets (latency, size). Use eval mode for qualitative targets (skill quality, prompt effectiveness).
-- **Regression tolerance prevents catastrophic changes.** Don't set it to 0 — some regression in secondary metrics is acceptable if primary metric improves significantly.
+- Hill-climbing can get stuck in local optima.If score plateaus, consider resetting with different initial conditions.
+- Eval mode vs metric mode:Use metric mode for quantifiable targets (latency, size). Use eval mode for qualitative targets (skill quality, prompt effectiveness).
+- Regression tolerance prevents catastrophic changes.Don't set it to — some regression in secondary metrics is acceptable if primary metric improves significantly.

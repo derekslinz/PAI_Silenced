@@ -94,7 +94,7 @@ export function writeFrontmatterField(content: string, field: string, value: str
   return fmMatch[1] + lines.join('\n') + fmMatch[3] + content.slice(fmMatch[0].length);
 }
 
-// ── Criteria section parsing ──────────────────────────────────────────────
+//  Criteria section parsing 
 //
 // One canonical regex, centralized. Matches every historical heading variant:
 //   ## Criteria
@@ -196,7 +196,7 @@ export interface CriterionEntry {
   category?: string;
 }
 
-// ── Category tokens (legacy, pre-v5.3.0) ──────────────────────────────────
+//  Category tokens (legacy, pre-v5.3.0) 
 // Algorithm v5.3.0 dropped category tags from the surface format. This set is
 // retained ONLY to recognize legacy bracketed letters in pre-v5.3.0 ISAs so the
 // parser remains backward-compatible. New ISAs do not emit brackets — the
@@ -255,7 +255,7 @@ export function parseCriteriaList(content: string): CriterionEntry[] {
     .filter((c): c is CriterionEntry => c !== null);
 }
 
-// ── Intent/context extraction (empty-state UI fallback) ──────────────────
+//  Intent/context extraction (empty-state UI fallback) 
 // When an ISA has no parseable ISCs, the dashboard still needs something
 // meaningful to show on the card. In priority order:
 //   1. `## Intent` section body (1–2 sentences)
@@ -292,7 +292,7 @@ export function extractIntentSnippet(content: string): string {
   return '';
 }
 
-// ── Loud-fail signal for non-parseable ISAs ───────────────────────────────
+//  Loud-fail signal for non-parseable ISAs 
 // Emits one of:
 //   'missing-section'   — no recognized Criteria heading at all
 //   'empty-section'     — heading present, zero `- [ ]` checkbox lines
@@ -319,9 +319,9 @@ export function diagnoseCriteria(content: string): CriteriaParseWarning {
 /**
  * Parse capabilities from ISA content.
  * The Algorithm writes a section like:
- *   🏹 CAPABILITIES SELECTED:
- *    🏹 [capability name] ...
- * Also handles inline " 🏹 CapName | reason" format.
+ *    CAPABILITIES SELECTED:
+ *     [capability name] ...
+ * Also handles inline "  CapName | reason" format.
  * Returns capability names only (stripped of reasoning text).
  */
 export function parseCapabilities(content: string): string[] {
@@ -333,7 +333,7 @@ export function parseCapabilities(content: string): string[] {
     const trimmed = line.trim();
 
     // Detect start of capabilities block
-    if (trimmed.match(/🏹\s*CAPABILIT(?:IES|Y)\s*SELECTED/i)) {
+    if (trimmed.match(/\s*CAPABILIT(?:IES|Y)\s*SELECTED/i)) {
       inCapabilitiesBlock = true;
       continue;
     }
@@ -349,13 +349,13 @@ export function parseCapabilities(content: string): string[] {
         continue;
       }
       // Another non-capability header also ends the block
-      if (!trimmed.includes('🏹') && !trimmed.startsWith('-') && !trimmed.startsWith('*')) {
+      if (!trimmed.includes('') && !trimmed.startsWith('-') && !trimmed.startsWith('*')) {
         inCapabilitiesBlock = false;
         continue;
       }
 
-      // Parse " 🏹 CapName | reason" or " 🏹 CapName — reason" or just " 🏹 CapName"
-      const capMatch = trimmed.match(/🏹\s+(.+)/);
+      // Parse "  CapName | reason" or "  CapName — reason" or just "  CapName"
+      const capMatch = trimmed.match(/\s+(.+)/);
       if (capMatch) {
         let capText = capMatch[1].trim();
         // Strip reasoning after | or — or :
@@ -460,7 +460,7 @@ export function writeRegistry(reg: { sessions: Record<string, any> }): void {
   renameSync(tmp, WORK_JSON);
 }
 
-// ── Phase tracking (single-source: ISA frontmatter) ───────────────────────
+//  Phase tracking (single-source: ISA frontmatter) 
 //
 // 2026-04-27: Voice phase capture was removed. ISA frontmatter is the SOLE
 // writer of phaseHistory and `session.phase`. The PhaseSource type retains

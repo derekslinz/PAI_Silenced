@@ -1,19 +1,17 @@
-# Hand-Drawn Comics Workflow
+Hand-Drawn Comics Workflow
 
-**Comic strips in UL editorial illustration style, NOT cartoonish.**
+Comic strips in UL editorial illustration style, NOT cartoonish.
+---
+
+Creates EDITORIAL COMICS— -panel storytelling with sophisticated hand-drawn aesthetic, maintaining UL flat color and black linework.
 
 ---
 
-Creates **EDITORIAL COMICS** — 3-4 panel storytelling with sophisticated hand-drawn aesthetic, maintaining UL flat color and black linework.
+Purpose
 
----
+Editorial comics use sequential panels to explain concepts, tell stories, or illustrate scenarios. These are sophisticated comics— not cutesy or cartoonish, but thoughtful illustrated narratives with editorial style.
 
-## Purpose
-
-Editorial comics use sequential panels to explain concepts, tell stories, or illustrate scenarios. These are **sophisticated comics** — not cutesy or cartoonish, but thoughtful illustrated narratives with editorial style.
-
-**Use this workflow for:**
-- Explaining complex concepts through narrative
+Use this workflow for:- Explaining complex concepts through narrative
 - "AGI arrives" scenario panels
 - Before/during/after sequences
 - Illustrated thought experiments
@@ -22,45 +20,45 @@ Editorial comics use sequential panels to explain concepts, tell stories, or ill
 
 ---
 
-## Visual Aesthetic: Sophisticated Sequential Art
+Visual Aesthetic: Sophisticated Sequential Art
 
-**Think:** New Yorker cartoon style, not Sunday funnies
+Think:New Yorker cartoon style, not Sunday funnies
 
-### Core Characteristics
-1. **Multi-panel** — 3-4 panels telling sequential story
-2. **Editorial style** — Maintains UL flat color, black linework aesthetic
-3. **Simplified figures** — Characters stylized, not realistic or cutesy
-4. **Hand-drawn** — Imperfect linework, gestural quality
-5. **Narrative flow** — Panels build on each other to make a point
-6. **Minimal dialogue** — Text supports, doesn't dominate
-7. **Sophisticated humor/insight** — Smart, not silly
+Core Characteristics
+. Multi-panel— -panels telling sequential story
+. Editorial style— Maintains UL flat color, black linework aesthetic
+. Simplified figures— Characters stylized, not realistic or cutesy
+. Hand-drawn— Imperfect linework, gestural quality
+. Narrative flow— Panels build on each other to make a point
+. Minimal dialogue— Text supports, doesn't dominate
+. Sophisticated humor/insight— Smart, not silly
 
 ---
 
-## Color System for Comics
+Color System for Comics
 
-### Structure
+Structure
 ```
-Black #000000 — All linework, panel borders, character outlines
-```
-
-### Character/Element Accents
-```
-Deep Purple #4A148C — Key character or important element
-Deep Teal #00796B — Secondary character or contrast element
-Charcoal #2D2D2D — Dialogue text, captions
+Black — All linework, panel borders, character outlines
 ```
 
-### Background
+Character/Element Accents
 ```
-Light Cream #F5E6D3 — Panel backgrounds
+Deep Purple AC — Key character or important element
+Deep Teal B — Secondary character or contrast element
+Charcoal DDD — Dialogue text, captions
+```
+
+Background
+```
+Light Cream FED— Panel backgrounds
 OR
-White #FFFFFF — Clean backgrounds
+White FFFFFF — Clean backgrounds
 OR
 Varied per panel — Different cream/light tones for panel differentiation
 ```
 
-### Color Strategy
+Color Strategy
 - Characters primarily black linework
 - Purple accent on protagonist or key element
 - Teal on secondary character if needed
@@ -69,116 +67,105 @@ Varied per panel — Different cream/light tones for panel differentiation
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+MANDATORY WORKFLOW STEPS
 
-### Step 1: Define Comic Narrative
+Step : Define Comic Narrative
 
-**Plan the story:**
-
-1. **What's the concept/scenario?**
-   - What are you explaining or illustrating
+Plan the story:
+. What's the concept/scenario?   - What are you explaining or illustrating
    - The arc or transformation to show
 
-2. **How many panels?**
-   - 3 panels (setup → action → result)
-   - 4 panels (setup → complication → action → result)
+. How many panels?   - panels (setup → action → result)
+   - panels (setup → complication → action → result)
 
-3. **What happens in each panel?**
-   - Panel 1: [Scene/action]
-   - Panel 2: [Scene/action]
-   - Panel 3: [Scene/action]
-   - Panel 4: [Scene/action] (if using 4)
+. What happens in each panel?   - Panel : [Scene/action]
+   - Panel : [Scene/action]
+   - Panel : [Scene/action]
+   - Panel : [Scene/action] (if using )
 
-4. **What's the punchline/insight?**
-   - Final panel delivers the point
+. What's the punchline/insight?   - Final panel delivers the point
    - What makes this memorable
 
-**Output:**
-```
+Output:```
 COMIC CONCEPT: [What you're illustrating]
-PANELS: [3 or 4]
+PANELS: [or ]
 
 NARRATIVE ARC:
-Panel 1: [Setup - what's the initial state]
-Panel 2: [Action/Complication - what changes]
-Panel 3: [Escalation or Result]
-Panel 4: [Punchline/Insight - the point] (if using 4)
+Panel : [Setup - what's the initial state]
+Panel : [Action/Complication - what changes]
+Panel : [Escalation or Result]
+Panel : [Punchline/Insight - the point] (if using )
 
 DIALOGUE (Minimal):
-Panel 1: "[Optional brief text]"
-Panel 2: "[Optional brief text]"
-Panel 3: "[Optional brief text]"
-Panel 4: "[Punchline or insight]"
+Panel : "[Optional brief text]"
+Panel : "[Optional brief text]"
+Panel : "[Optional brief text]"
+Panel : "[Punchline or insight]"
 
 KEY CHARACTERS:
-- [Character/Element 1]: [Description, purple accent]
-- [Character/Element 2]: [Description, teal accent if needed]
+- [Character/Element ]: [Description, purple accent]
+- [Character/Element ]: [Description, teal accent if needed]
 ```
 
 ---
 
-### Step 2: Design Panel Layout
+Step : Design Panel Layout
 
-**Plan the comic structure:**
+Plan the comic structure:
+. Panel arrangement:   - Horizontal strip (-panels left to right)
+   - Vertical strip (-panels top to bottom)
+   - Grid (xfor panels)
 
-1. **Panel arrangement:**
-   - Horizontal strip (3-4 panels left to right)
-   - Vertical strip (3-4 panels top to bottom)
-   - Grid (2x2 for 4 panels)
-
-2. **Panel size:**
-   - Equal sized panels (classic)
+. Panel size:   - Equal sized panels (classic)
    - Varied sizes for emphasis
    - Final panel larger (punchline emphasis)
 
-3. **Panel content:**
-   - What's illustrated in each panel
+. Panel content:   - What's illustrated in each panel
    - Character positions and actions
    - Background elements (minimal)
 
-**Output:**
-```
+Output:```
 PANEL LAYOUT: [Horizontal strip / Vertical strip / Grid]
 
 PANEL STRUCTURE:
-- Panel 1: [Same size / Smaller / Larger]
-  * Content: [What's shown]
-  * Characters: [Positions]
-  * Background: [Minimal elements]
+- Panel : [Same size / Smaller / Larger]
+  Content: [What's shown]
+  Characters: [Positions]
+  Background: [Minimal elements]
 
-- Panel 2: [Size]
-  * Content: [What's shown]
-  * Characters: [Positions]
-  * Background: [Elements]
+- Panel : [Size]
+  Content: [What's shown]
+  Characters: [Positions]
+  Background: [Elements]
 
-- Panel 3: [Size]
-  * Content: [What's shown]
-  * Characters: [Positions]
-  * Background: [Elements]
+- Panel : [Size]
+  Content: [What's shown]
+  Characters: [Positions]
+  Background: [Elements]
 
-- Panel 4: [Size - often larger for punchline]
-  * Content: [What's shown]
-  * Characters: [Positions]
-  * Background: [Elements]
+- Panel : [Size - often larger for punchline]
+  Content: [What's shown]
+  Characters: [Positions]
+  Background: [Elements]
 
 COLOR CODING:
-- Main character/element: Purple (#4A148C) accents
-- Secondary: Teal (#00796B) accents (if needed)
+- Main character/element: Purple (AC) accents
+- Secondary: Teal (B) accents (if needed)
 - Backgrounds: Light cream or white, simple
 ```
 
 ---
 
-### Step 3: Construct Prompt
+Step : Construct Prompt
 
-### Prompt Template
+Prompt Template
 
 ```
 Hand-drawn editorial comic strip in New Yorker style.
 
 STYLE REFERENCE: New Yorker cartoon, editorial illustration comic, sophisticated sequential art
 
-BACKGROUND: Light Cream (#F5E6D3) OR varied light tones per panel
+BACKGROUND: Light Cream (FED) OR varied light tones per panel
 
 AESTHETIC:
 - Hand-drawn editorial style (NOT cartoonish or cute)
@@ -189,10 +176,10 @@ AESTHETIC:
 - Minimal backgrounds (not busy scenes)
 - Smart humor or insight, not silly
 
-COMIC STRUCTURE: [3-panel / 4-panel] [horizontal strip / vertical strip / grid]
+COMIC STRUCTURE: [-panel / -panel] [horizontal strip / vertical strip / grid]
 
 PANEL LAYOUT:
-- [Number] panels arranged [horizontally left-to-right / vertically / grid 2x2]
+- [Number] panels arranged [horizontally left-to-right / vertically / grid x]
 - Each panel has black border (hand-drawn, slightly wobbly)
 - Panel sizes: [Equal / Varied - specify which panels larger]
 
@@ -200,30 +187,30 @@ TYPOGRAPHY FOR DIALOGUE (Advocate Condensed):
 - Minimal text, supports visual narrative
 - Font: Advocate condensed
 - Size: Small readable
-- Color: Charcoal (#2D2D2D)
+- Color: Charcoal (DDD)
 - Style: Hand-lettered in speech bubbles or captions
 
 COMIC NARRATIVE: "[Overall concept being illustrated]"
 
-PANEL 1 - [SETUP]:
+PANEL - [SETUP]:
 Scene: [Describe what's happening]
 Characters: [Who's present, what they're doing]
-- Main character: Simplified figure with Purple (#4A148C) accent on [element]
+- Main character: Simplified figure with Purple (AC) accent on [element]
 - Hand-drawn black linework, imperfect
 Background: Light cream, minimal [optional elements]
 Dialogue: "[Brief text]" OR no text
 Represents: [Initial state]
 
-PANEL 2 - [ACTION/COMPLICATION]:
+PANEL - [ACTION/COMPLICATION]:
 Scene: [What changes or happens]
 Characters: [Actions, positions]
 - Main character: [Reacting or acting]
-- [Optional secondary character]: Teal (#00796B) accent
+- [Optional secondary character]: Teal (B) accent
 Background: [Minimal elements]
 Dialogue: "[Brief text]" OR no text
 Represents: [The change]
 
-PANEL 3 - [ESCALATION/RESULT]:
+PANEL - [ESCALATION/RESULT]:
 Scene: [Situation develops]
 Characters: [New positions or states]
 - Main character: [Further development]
@@ -231,7 +218,7 @@ Background: [Minimal]
 Dialogue: "[Brief text]" OR no text
 Represents: [Progression]
 
-PANEL 4 - [PUNCHLINE/INSIGHT]: (if using 4 panels)
+PANEL - [PUNCHLINE/INSIGHT]: (if using panels)
 Scene: [Final state or revelation]
 Characters: [Final positions]
 - Main character: [Conclusion state]
@@ -243,7 +230,7 @@ Represents: [The point being made]
 CHARACTER DESIGN - PLANEFORM AESTHETIC (CRITICAL):
 - All figures constructed from ANGULAR PLANES (like architectural paper models)
 - NO round forms, NO smooth curves, NO circles on bodies
-- Adult proportions (1:7 head-to-body ratio), elongated and dignified
+- Adult proportions (:head-to-body ratio), elongated and dignified
 - NO cute proportions (big heads, stubby limbs)
 - Faces are MINIMAL geometric blocks — NOT detailed, NOT cute, NO big eyes
 - Emotion through GESTURE and SILHOUETTE only
@@ -260,11 +247,11 @@ VISUAL CONTINUITY:
 - Color accents (purple/teal) consistent
 
 COLOR USAGE:
-- Black (#000000) for all linework, panel borders, character outlines
-- Deep Purple (#4A148C) accent on main character or key element
-- Deep Teal (#00796B) accent on secondary character (if present)
-- Charcoal (#2D2D2D) for all dialogue and captions
-- Light Cream (#F5E6D3) OR White (#FFFFFF) panel backgrounds
+- Black () for all linework, panel borders, character outlines
+- Deep Purple (AC) accent on main character or key element
+- Deep Teal (B) accent on secondary character (if present)
+- Charcoal (DDD) for all dialogue and captions
+- Light Cream (FED) OR White (FFFFFF) panel backgrounds
 - Minimal flat color fills, mostly linework
 
 CRITICAL REQUIREMENTS:
@@ -277,66 +264,65 @@ CRITICAL REQUIREMENTS:
 - Maintains UL aesthetic (black linework, flat color, imperfect)
 - Smart insight or humor (sophisticated, not silly)
 
-Optional: Sign small in bottom right corner of final panel in charcoal (#2D2D2D).
+Optional: Sign small in bottom right corner of final panel in charcoal (DDD).
 ```
 
 ---
 
-### Step 4: Determine Aspect Ratio
+Step : Determine Aspect Ratio
 
 | Comic Layout | Aspect Ratio | Reasoning |
 |--------------|--------------|-----------|
-| 3-panel horizontal | 16:9 or 21:9 | Wide strip format |
-| 4-panel horizontal | 21:9 | Extra wide for 4 panels |
-| 3-panel vertical | 9:16 | Tall strip |
-| 4-panel grid (2x2) | 1:1 | Square balanced |
-| Variable | 4:3 | Flexible proportions |
+| -panel horizontal | :or :| Wide strip format |
+| -panel horizontal | :| Extra wide for panels |
+| -panel vertical | :| Tall strip |
+| -panel grid (x) | :| Square balanced |
+| Variable | :| Flexible proportions |
 
-**Default: 16:9 (horizontal)** — Classic comic strip format
+Default: :(horizontal)— Classic comic strip format
 
 ---
 
-### Step 5: Execute Generation
+Step : Execute Generation
 
 ```bash
 bun run ~/.claude/skills/art/Tools/Generate.ts \
   --model nano-banana-pro \
   --prompt "[YOUR PROMPT]" \
-  --size 2K \
-  --aspect-ratio 16:9 \
+  --size K \
+  --aspect-ratio :\
   --output /path/to/comic.png
 ```
 
-**Model Recommendation:** nano-banana-pro or flux (both handle sequential panels well)
+Model Recommendation:nano-banana-pro or flux (both handle sequential panels well)
 
-**Immediately Open:**
-```bash
+Immediately Open:```bash
 open /path/to/comic.png
 ```
 
 ---
 
-### Step 6: Validation (MANDATORY)
+Step : Validation (MANDATORY)
 
-#### Must Have
-- [ ] **Clear panel structure** — Panels obviously sequential
-- [ ] **Editorial aesthetic** — Sophisticated, not cartoonish
-- [ ] **Narrative flow** — Story/concept clear across panels
-- [ ] **Character consistency** — Same character recognizable in all panels
-- [ ] **Hand-drawn quality** — Imperfect linework, gestural
-- [ ] **Minimal backgrounds** — Simple, not busy
-- [ ] **Smart insight** — Punchline or point lands effectively
-- [ ] **UL aesthetic maintained** — Flat color, black linework
+Must Have
+- [ ] Clear panel structure— Panels obviously sequential
+- [ ] Editorial aesthetic— Sophisticated, not cartoonish
+- [ ] Narrative flow— Story/concept clear across panels
+- [ ] Character consistency— Same character recognizable in all panels
+- [ ] Hand-drawn quality— Imperfect linework, gestural
+- [ ] Minimal backgrounds— Simple, not busy
+- [ ] Smart insight— Punchline or point lands effectively
+- [ ] UL aesthetic maintained— Flat color, black linework
 
-#### Character Validation (Planeform Aesthetic)
-- [ ] **Angular construction** — Bodies built from planes, NOT round forms
-- [ ] **Adult proportions** — Elongated (1:7), NOT stubby/cute (1:3)
-- [ ] **Minimal faces** — Geometric blocks, NOT detailed cute faces
-- [ ] **Gesture expression** — Emotion through posture, NOT facial features
-- [ ] **NOT cartoonish** — Sophisticated editorial, NOT children's book style
-- [ ] **Constructivist influence** — El Lissitzky, Schlemmer aesthetic visible
+Character Validation (Planeform Aesthetic)
+- [ ] Angular construction— Bodies built from planes, NOT round forms
+- [ ] Adult proportions— Elongated (:), NOT stubby/cute (:)
+- [ ] Minimal faces— Geometric blocks, NOT detailed cute faces
+- [ ] Gesture expression— Emotion through posture, NOT facial features
+- [ ] NOT cartoonish— Sophisticated editorial, NOT children's book style
+- [ ] Constructivist influence— El Lissitzky, Schlemmer aesthetic visible
 
-#### Must NOT Have
+Must NOT Have
 - [ ] Cartoonish or cutesy style
 - [ ] Round forms or smooth curves on figures
 - [ ] Big heads, stubby proportions
@@ -349,78 +335,71 @@ open /path/to/comic.png
 - [ ] Silly humor (should be sophisticated)
 - [ ] Generic AI illustration style
 
-#### If Validation Fails
+If Validation Fails
 
 | Problem | Fix |
 |---------|-----|
 | Too cartoonish | "Sophisticated editorial style, New Yorker cartoon aesthetic, NOT cartoonish" |
-| Can't follow story | Clarify narrative arc: "Panel 1 setup → Panel 2 complication → Panel 3 result" |
+| Can't follow story | Clarify narrative arc: "Panel setup → Panel complication → Panel result" |
 | Characters inconsistent | "Same simplified character across all panels, consistent design" |
 | Too complex | "Minimal backgrounds, simple scenes, focus on key action" |
 | Too much text | "Visual storytelling prioritized, minimal dialogue, brief text" |
 | Looks corporate | Reference "hand-drawn editorial comic, imperfect wobbly lines, gestural quality" |
 
-**Character-Specific Failures:**
-
+Character-Specific Failures:
 | Problem | Fix |
 |---------|-----|
-| **Characters too round/cute** | "Figures built from ANGULAR PLANES ONLY. NO round forms. Constructivist angular construction like El Lissitzky, Oskar Schlemmer." |
-| **Cartoon proportions** | "Adult proportions (1:7 head-to-body). Elongated dignified figures. NO big heads, NO stubby limbs." |
-| **Too much facial detail** | "Faces are MINIMAL geometric blocks. NO detailed features, NO big eyes. Emotion through GESTURE only." |
-| **Generic AI illustration** | "Bauhaus figure studies. Russian Constructivism. Architectural magazine illustration. NOT children's book." |
+| Characters too round/cute| "Figures built from ANGULAR PLANES ONLY. NO round forms. Constructivist angular construction like El Lissitzky, Oskar Schlemmer." |
+| Cartoon proportions| "Adult proportions (:head-to-body). Elongated dignified figures. NO big heads, NO stubby limbs." |
+| Too much facial detail| "Faces are MINIMAL geometric blocks. NO detailed features, NO big eyes. Emotion through GESTURE only." |
+| Generic AI illustration| "Bauhaus figure studies. Russian Constructivism. Architectural magazine illustration. NOT children's book." |
 
 ---
 
-## Example Use Cases
+Example Use Cases
 
-### Example 1: "AGI Arrives" (4 panels)
-- **Panel 1:** Person at desk, normal work
-- **Panel 2:** AGI announcement (computer screen glowing)
-- **Panel 3:** Person staring, processing
-- **Panel 4:** Person still at desk: "...so what do I do now?"
-- **Layout:** Horizontal 21:9
-- **Character:** Purple accent on person
+Example : "AGI Arrives" (panels)
+- Panel :Person at desk, normal work
+- Panel :AGI announcement (computer screen glowing)
+- Panel :Person staring, processing
+- Panel :Person still at desk: "...so what do I do now?"
+- Layout:Horizontal :- Character:Purple accent on person
 
-### Example 2: "Security Theater vs Real Security" (3 panels)
-- **Panel 1:** Fancy lock on cardboard door (theater)
-- **Panel 2:** Simple lock on solid door (real)
-- **Panel 3:** Thief easily bypassing fancy lock, stopped by simple door
-- **Layout:** Horizontal 16:9
-- **Accents:** Purple on real security, teal on theater
+Example : "Security Theater vs Real Security" (panels)
+- Panel :Fancy lock on cardboard door (theater)
+- Panel :Simple lock on solid door (real)
+- Panel :Thief easily bypassing fancy lock, stopped by simple door
+- Layout:Horizontal :- Accents:Purple on real security, teal on theater
 
-### Example 3: "Junior vs Senior Engineer" (4 panels grid)
-- **Panel 1 (top-left):** Junior with complex spaghetti code
-- **Panel 2 (top-right):** Senior with simple elegant line
-- **Panel 3 (bottom-left):** Both present to boss
-- **Panel 4 (bottom-right):** Boss confused by junior's complexity, nodding at senior's simplicity
-- **Layout:** Grid 1:1
-- **Accents:** Purple on senior, teal on junior
+Example : "Junior vs Senior Engineer" (panels grid)
+- Panel (top-left):Junior with complex spaghetti code
+- Panel (top-right):Senior with simple elegant line
+- Panel (bottom-left):Both present to boss
+- Panel (bottom-right):Boss confused by junior's complexity, nodding at senior's simplicity
+- Layout:Grid :- Accents:Purple on senior, teal on junior
 
 ---
 
-## Quick Reference
+Quick Reference
 
-**Editorial Comic Formula:**
-```
-1. Define narrative (concept, panels, arc, insight)
-2. Design layout (arrangement, panel sizes, content)
-3. Construct prompt with sequential structure
-4. Choose aspect ratio for panel layout
-5. Generate with nano-banana-pro
-6. Validate for flow and sophistication
+Editorial Comic Formula:```
+. Define narrative (concept, panels, arc, insight)
+. Design layout (arrangement, panel sizes, content)
+. Construct prompt with sequential structure
+. Choose aspect ratio for panel layout
+. Generate with nano-banana-pro
+. Validate for flow and sophistication
 ```
 
-**Color Strategy:**
-- Characters: Black linework + purple/teal accents
+Color Strategy:- Characters: Black linework + purple/teal accents
 - Backgrounds: Simple light cream/white
 - Dialogue: Charcoal
 - Panels: Black borders
 
-**Key Principle:**
-- **Sophisticated, not silly** — New Yorker style, editorial intelligence
-- **Visual storytelling** — Minimal dialogue, panels tell the story
-- **UL aesthetic** — Flat color, hand-drawn, imperfect
+Key Principle:- Sophisticated, not silly— New Yorker style, editorial intelligence
+- Visual storytelling— Minimal dialogue, panels tell the story
+- UL aesthetic— Flat color, hand-drawn, imperfect
 
 ---
 
-**The workflow: Define → Design → Construct → Generate → Validate → Complete**
+The workflow: Define → Design → Construct → Generate → Validate → Complete

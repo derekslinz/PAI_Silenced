@@ -4,30 +4,28 @@ description: "Audits any AI instruction set for over-prompting using the core te
 effort: medium
 ---
 
-## Customization
+Customization
 
-**Before executing, check for user customizations at:**
-`~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/BitterPillEngineering/`
+Before executing, check for user customizations at:`~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/BitterPillEngineering/`
 
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
-# BitterPillEngineering
+BitterPillEngineering
 
-Audit any AI instruction set for over-prompting. Based on the principle that **less scaffolding = better output** — every unnecessary rule competes for attention and degrades the rules that matter.
+Audit any AI instruction set for over-prompting. Based on the principle that less scaffolding = better output— every unnecessary rule competes for attention and degrades the rules that matter.
 
-The core test: *"Would a smarter model make this unnecessary?"* If yes, it's scaffolding, not architecture.
+The core test: "Would a smarter model make this unnecessary?"If yes, it's scaffolding, not architecture.
 
-## Workflow Routing
+Workflow Routing
 
 | Workflow | Trigger | File |
 |----------|---------|------|
-| **Audit** | "audit setup", "full audit", "check all rules" | `Workflows/Audit.md` |
-| **QuickCheck** | "quick check", "check this file", "check these rules" | `Workflows/QuickCheck.md` |
+| Audit| "audit setup", "full audit", "check all rules" | `Workflows/Audit.md` |
+| QuickCheck| "quick check", "check this file", "check these rules" | `Workflows/QuickCheck.md` |
 
-## Examples
+Examples
 
-**Example 1: Full system audit**
-```
+Example : Full system audit```
 User: "Run BPE on my setup"
 → Invokes Audit workflow
 → Reads all force-loaded files from settings.json
@@ -35,94 +33,92 @@ User: "Run BPE on my setup"
 → Returns categorized report with estimated token savings
 ```
 
-**Example 2: Check a single file**
-```
+Example : Check a single file```
 User: "Quick check this CLAUDE.md"
 → Invokes QuickCheck workflow
 → Reads the target file
 → Returns concise keep/cut/sharpen verdict
 ```
 
-**Example 3: Post-cleanup validation**
-```
+Example : Post-cleanup validation```
 User: "I trimmed my rules, check if anything's still redundant"
 → Invokes Audit workflow
 → Compares remaining rules against Claude defaults
 → Flags any surviving dead weight
 ```
 
-## Gotchas
+Gotchas
 
-- Claude's built-in system prompt changes across versions — what was "default behavior" 3 months ago may not be now. When in doubt, test rather than assume.
+- Claude's built-in system prompt changes across versions — what was "default behavior" months ago may not be now. When in doubt, test rather than assume.
 - Rules that seem redundant with defaults may have been added because Claude was inconsistent about following the default. Check failure history before cutting.
 - "One-off fix" rules sometimes prevent recurring failures. Check if the failure pattern is truly gone before removing.
 - The `loadAtStartup` list in settings.json and `postCompactRestore.fullFiles` must stay in sync — if you remove a file from one, check the other.
 
-## The Five Questions
+The Five Questions
 
 For every rule, instruction, or preference found, evaluate:
 
-1. **Default behavior?** Does Claude already do this without being told?
-2. **Contradiction?** Does this conflict with another rule in the same or different file?
-3. **Redundancy?** Is this already covered by a different rule or file?
-4. **One-off fix?** Was this added to fix one specific bad output rather than improve outputs generally?
-5. **Vague?** Would Claude interpret this differently every time? (e.g., "be more natural", numeric personality scales)
+. Default behavior?Does Claude already do this without being told?
+. Contradiction?Does this conflict with another rule in the same or different file?
+. Redundancy?Is this already covered by a different rule or file?
+. One-off fix?Was this added to fix one specific bad output rather than improve outputs generally?
+. Vague?Would Claude interpret this differently every time? (e.g., "be more natural", numeric personality scales)
 
-## Classification
+Classification
 
 | Category | Action |
 |----------|--------|
-| Restates default behavior | **CUT** — the model already does this |
-| Contradicts another rule | **RESOLVE** — pick one, cut the other |
-| Duplicates another rule | **MERGE** — one location, one statement |
-| One-off fix for past mistake | **EVALUATE** — still relevant or already learned? |
-| Vague / unquantifiable | **SHARPEN** — add specific DO/DON'T examples, or cut |
-| Loaded but rarely actionable | **MOVE to on-demand** — load via CONTEXT_ROUTING when needed |
-| Specific, actionable, non-default | **KEEP** — this is what good instructions look like |
+| Restates default behavior | CUT— the model already does this |
+| Contradicts another rule | RESOLVE— pick one, cut the other |
+| Duplicates another rule | MERGE— one location, one statement |
+| One-off fix for past mistake | EVALUATE— still relevant or already learned? |
+| Vague / unquantifiable | SHARPEN— add specific DO/DON'T examples, or cut |
+| Loaded but rarely actionable | MOVE to on-demand— load via CONTEXT_ROUTING when needed |
+| Specific, actionable, non-default | KEEP— this is what good instructions look like |
 
-## Anti-Fragile vs Fragile
+Anti-Fragile vs Fragile
 
-**Keep (anti-fragile):** Verification harnesses, ISC, data pipelines, specific DO/DON'T examples, tool preferences, routing rules.
+Keep (anti-fragile):Verification harnesses, ISC, data pipelines, specific DO/DON'T examples, tool preferences, routing rules.
 
-**Cut (fragile):** CoT orchestrators, format parsers, retry cascades, numeric personality scales, abstract value statements, process descriptions that aren't followed.
+Cut (fragile):CoT orchestrators, format parsers, retry cascades, numeric personality scales, abstract value statements, process descriptions that aren't followed.
 
-## Output Format
+Output Format
 
 ```
-## BitterPillEngineering Audit
+BitterPillEngineering Audit
 
-**Scope:** [what was audited]
-**Files read:** [count]
-**Rules evaluated:** [count]
+Scope:[what was audited]
+Files read:[count]
+Rules evaluated:[count]
 
-### CUT (restating defaults)
+CUT (restating defaults)
 - [rule] — [reason]
 
-### RESOLVE (contradictions)
+RESOLVE (contradictions)
 - [rule A] vs [rule B] — [which to keep and why]
 
-### MERGE (redundancies)
+MERGE (redundancies)
 - [locations] — [merge into where]
 
-### EVALUATE (one-off fixes)
+EVALUATE (one-off fixes)
 - [rule] — [still needed? verdict]
 
-### SHARPEN or CUT (vague)
+SHARPEN or CUT (vague)
 - [rule] — [sharpen how, or cut why]
 
-### MOVE to on-demand
+MOVE to on-demand
 - [content] — [how often it's actually needed]
 
-### KEEP (carrying weight)
+KEEP (carrying weight)
 - [rule] — [why it matters]
 
-**Estimated savings:** [lines] lines, ~[tokens] tokens
+Estimated savings:[lines] lines, ~[tokens] tokens
 ```
 
-## Execution Log
+Execution Log
 
 After completing any workflow, append a single JSONL entry:
 
 ```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"BitterPillEngineering","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.claude/PAI/MEMORY/SKILLS/execution.jsonl
+echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"BitterPillEngineering","workflow":"WORKFLOW_USED","input":"_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.claude/PAI/MEMORY/SKILLS/execution.jsonl
 ```

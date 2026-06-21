@@ -126,21 +126,21 @@ These define user-specific preferences. If the directory does not exist, proceed
 
 ```
 ~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/
-├── README.md                    # Documentation for this system
-├── Art/                         # Art skill customizations
-│   ├── EXTEND.yaml              # Extension manifest
-│   ├── PREFERENCES.md           # Aesthetic preferences
-│   ├── CharacterSpecs.md        # Character design specs
-│   └── SceneConstruction.md     # Scene building guidelines
-├── Agents/                      # Agents skill customizations
-│   ├── EXTEND.yaml              # Extension manifest
-│   └── PREFERENCES.md           # Named agent summary
-├── Webdesign/                   # Webdesign customizations
-│   ├── EXTEND.yaml              # Extension manifest
-│   └── PREFERENCES.md           # Design tokens, palette
-└── [SkillName]/                 # Any skill can have customizations
-    ├── EXTEND.yaml              # Required manifest
-    └── [config-files]           # Skill-specific configs
+ README.md                    # Documentation for this system
+ Art/                         # Art skill customizations
+    EXTEND.yaml              # Extension manifest
+    PREFERENCES.md           # Aesthetic preferences
+    CharacterSpecs.md        # Character design specs
+    SceneConstruction.md     # Scene building guidelines
+ Agents/                      # Agents skill customizations
+    EXTEND.yaml              # Extension manifest
+    PREFERENCES.md           # Named agent summary
+ Webdesign/                   # Webdesign customizations
+    EXTEND.yaml              # Extension manifest
+    PREFERENCES.md           # Design tokens, palette
+ [SkillName]/                 # Any skill can have customizations
+     EXTEND.yaml              # Required manifest
+     [config-files]           # Skill-specific configs
 ```
 
 ### EXTEND.yaml Manifest
@@ -327,19 +327,19 @@ User: "[Another typical request]"
 
 ```
 skills/SkillName/
-├── SKILL.md                    # Minimal routing - loads on invocation
-├── Aesthetic.md                # Context file - SOP for aesthetic handling
-├── Examples.md                 # Context file - SOP for examples
-├── ApiReference.md             # Context file - SOP for API usage
-├── Tools.md                    # Context file - SOP for tool usage
-├── Workflows/                  # Workflow execution files
-│   ├── Create.md
-│   └── Update.md
-└── Tools/                      # Actual CLI tools
-    └── Generate.ts
+ SKILL.md                    # Minimal routing - loads on invocation
+ Aesthetic.md                # Context file - SOP for aesthetic handling
+ Examples.md                 # Context file - SOP for examples
+ ApiReference.md             # Context file - SOP for API usage
+ Tools.md                    # Context file - SOP for tool usage
+ Workflows/                  # Workflow execution files
+    Create.md
+    Update.md
+ Tools/                      # Actual CLI tools
+     Generate.ts
 ```
 
-### 🚨 CRITICAL: NO Context/ Subdirectory 🚨
+###  CRITICAL: NO Context/ Subdirectory 
 
 **NEVER create a Context/ or Docs/ subdirectory.**
 
@@ -348,18 +348,18 @@ The additional .md files ARE the context files. They live **directly in the skil
 **WRONG (DO NOT DO THIS):**
 ```
 skills/SkillName/
-├── SKILL.md
-└── Context/              ❌ NEVER CREATE THIS DIRECTORY
-    ├── Aesthetic.md
-    └── Examples.md
+ SKILL.md
+ Context/               NEVER CREATE THIS DIRECTORY
+     Aesthetic.md
+     Examples.md
 ```
 
 **CORRECT:**
 ```
 skills/SkillName/
-├── SKILL.md
-├── Aesthetic.md          ✅ Context file in skill root
-└── Examples.md           ✅ Context file in skill root
+ SKILL.md
+ Aesthetic.md           Context file in skill root
+ Examples.md            Context file in skill root
 ```
 
 **The skill directory itself IS the context.** Additional .md files are context files that provide SOPs for specific aspects of the skill's operation.
@@ -367,23 +367,23 @@ skills/SkillName/
 ### What Goes In SKILL.md (Minimal)
 
 Keep only these in SKILL.md:
-- ✅ YAML frontmatter with triggers
-- ✅ Brief description (1-2 lines)
-- ✅ Workflow routing table
-- ✅ Quick reference (3-5 bullet points)
-- ✅ Pointers to detailed docs via SkillSearch
+-  YAML frontmatter with triggers
+-  Brief description (1-2 lines)
+-  Workflow routing table
+-  Quick reference (3-5 bullet points)
+-  Pointers to detailed docs via SkillSearch
 
 ### What Goes In Additional .md Context Files (Loaded On-Demand)
 
 These are **additional SOPs** (Standard Operating Procedures) for specific aspects. They live in skill root and can reference Workflows/, Tools/, etc.
 
 Move these to separate context files in skill root:
-- ❌ Extended documentation → `Documentation.md`
-- ❌ API reference → `ApiReference.md`
-- ❌ Detailed examples → `Examples.md`
-- ❌ Tool documentation → `Tools.md`
-- ❌ Aesthetic guides → `Aesthetic.md`
-- ❌ Configuration details → `Configuration.md`
+-  Extended documentation → `Documentation.md`
+-  API reference → `ApiReference.md`
+-  Detailed examples → `Examples.md`
+-  Tool documentation → `Tools.md`
+-  Aesthetic guides → `Aesthetic.md`
+-  Configuration details → `Configuration.md`
 
 **These are SOPs, not just docs.** They provide specific handling instructions for workflows to reference.
 
@@ -461,16 +461,16 @@ Generate images with: `bun Tools/Generate.ts`
 ### When To Use
 
 Use dynamic loading for skills with:
-- ✅ SKILL.md > 100 lines
-- ✅ Multiple documentation sections
-- ✅ Extensive API reference
-- ✅ Detailed examples
-- ✅ Tool documentation
+-  SKILL.md > 100 lines
+-  Multiple documentation sections
+-  Extensive API reference
+-  Detailed examples
+-  Tool documentation
 
 Don't bother for:
-- ❌ Simple skills (< 50 lines total)
-- ❌ Pure utility wrappers (use PAI/DOCUMENTATION/Tools/Tools.md instead)
-- ❌ Skills that are already minimal
+-  Simple skills (< 50 lines total)
+-  Pure utility wrappers (use PAI/DOCUMENTATION/Tools/Tools.md instead)
+-  Skills that are already minimal
 
 ---
 
@@ -675,17 +675,17 @@ Every skill follows this structure:
 
 ```
 SkillName/                    # TitleCase directory name
-├── SKILL.md                  # Main skill file (always uppercase)
-├── QuickStartGuide.md        # Context/reference files in root (TitleCase)
-├── DefenseMechanisms.md      # Context/reference files in root (TitleCase)
-├── Examples.md               # Context/reference files in root (TitleCase)
-├── Tools/                    # CLI tools (ALWAYS present, even if empty)
-│   ├── ToolName.ts           # TypeScript CLI tool (TitleCase)
-│   └── ToolName.help.md      # Tool documentation (TitleCase)
-└── Workflows/                # Work execution workflows (TitleCase)
-    ├── Create.md             # Workflow file
-    ├── UpdateInfo.md         # Workflow file
-    └── SyncRepo.md           # Workflow file
+ SKILL.md                  # Main skill file (always uppercase)
+ QuickStartGuide.md        # Context/reference files in root (TitleCase)
+ DefenseMechanisms.md      # Context/reference files in root (TitleCase)
+ Examples.md               # Context/reference files in root (TitleCase)
+ Tools/                    # CLI tools (ALWAYS present, even if empty)
+    ToolName.ts           # TypeScript CLI tool (TitleCase)
+    ToolName.help.md      # Tool documentation (TitleCase)
+ Workflows/                # Work execution workflows (TitleCase)
+     Create.md             # Workflow file
+     UpdateInfo.md         # Workflow file
+     SyncRepo.md           # Workflow file
 ```
 
 - **SKILL.md** - Contains single-line description in YAML, workflow routing and documentation in body
@@ -706,7 +706,7 @@ Skills use a **flat hierarchy** - no deep nesting of subdirectories.
 
 **Maximum depth:** `skills/SkillName/Category/`
 
-### ✅ ALLOWED (2 levels max)
+###  ALLOWED (2 levels max)
 
 ```
 skills/OSINT/SKILL.md                                         # Skill root
@@ -720,7 +720,7 @@ skills/PromptInjection/DefenseMechanisms.md                   # Context file - i
 skills/PromptInjection/QuickStartGuide.md                     # Context file - in root
 ```
 
-### ❌ FORBIDDEN (Too deep OR wrong location)
+###  FORBIDDEN (Too deep OR wrong location)
 
 ```
 skills/OSINT/Resources/Examples.md                            # Context files go in root, NOT Resources/
@@ -756,14 +756,14 @@ skills/Research/Workflows/Analysis/Deep.md                    # THREE levels - N
 
 **CRITICAL RULE: Documentation, guides, reference materials, and context files live in the skill ROOT directory, NOT in subdirectories.**
 
-❌ **WRONG** - Don't create subdirectories for context files:
+ **WRONG** - Don't create subdirectories for context files:
 ```
 skills/SkillName/Resources/Guide.md          # NO - no Resources/ subdirectory
 skills/SkillName/Docs/Reference.md           # NO - no Docs/ subdirectory
 skills/SkillName/Guides/QuickStart.md        # NO - no Guides/ subdirectory
 ```
 
-✅ **CORRECT** - Put context files directly in skill root:
+ **CORRECT** - Put context files directly in skill root:
 ```
 skills/SkillName/Guide.md                    # YES - in root
 skills/SkillName/Reference.md                # YES - in root

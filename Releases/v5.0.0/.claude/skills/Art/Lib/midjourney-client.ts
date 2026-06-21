@@ -1,12 +1,9 @@
-/**
- * midjourney-client.ts - Midjourney Interaction Client
- *
- * High-level client for interacting with Midjourney bot through Discord.
- * Handles prompt formatting, command submission, response parsing,
- * and error detection.
- *
- * @see ~/.claude/skills/art/SKILL.md
- */
+/ midjourney-client.ts - Midjourney Interaction Client
+  High-level client for interacting with Midjourney bot through Discord.
+ Handles prompt formatting, command submission, response parsing,
+ and error detection.
+  @see ~/.claude/skills/art/SKILL.md
+ /
 
 import { DiscordBotClient } from './discord-bot.js';
 import { Message } from 'discord.js';
@@ -64,22 +61,20 @@ export class MidjourneyClient {
     this.discordBot = discordBot;
   }
 
-  /**
-   * Generate image with Midjourney
-   *
-   * Submits prompt, waits for generation, and returns image URL
-   */
+  /   Generate image with Midjourney
+      Submits prompt, waits for generation, and returns image URL
+   /
   async generateImage(options: MidjourneyOptions): Promise<MidjourneyResult> {
     const {
       prompt,
-      aspectRatio = '16:9',
-      version = '6.1',
-      stylize = 100,
-      quality = 1,
+      aspectRatio = ':',
+      version = '.',
+      stylize = ,
+      quality = ,
       chaos,
       weird,
       tile = false,
-      timeout = 120,
+      timeout = ,
     } = options;
 
     // Format the Midjourney prompt
@@ -94,7 +89,7 @@ export class MidjourneyClient {
       tile,
     });
 
-    console.log(`🎨 Submitting to Midjourney: ${formattedPrompt}`);
+    console.log(`Submitting to Midjourney: ${formattedPrompt}`);
 
     // Send the /imagine command
     const initialMessage = await this.discordBot.sendMessage(`/imagine prompt: ${formattedPrompt}`);
@@ -104,7 +99,7 @@ export class MidjourneyClient {
     try {
       responseMessage = await this.discordBot.waitForMidjourneyResponse(initialMessage.id, {
         timeout,
-        pollInterval: 5000,
+        pollInterval: ,
       });
     } catch (error) {
       if (error instanceof Error && error.message.includes('Timeout')) {
@@ -140,11 +135,9 @@ export class MidjourneyClient {
     };
   }
 
-  /**
-   * Format Midjourney prompt with parameters
-   *
-   * Converts structured options into Midjourney command syntax
-   */
+  /   Format Midjourney prompt with parameters
+      Converts structured options into Midjourney command syntax
+   /
   private formatPrompt(options: {
     prompt: string;
     aspectRatio: string;
@@ -165,13 +158,13 @@ export class MidjourneyClient {
     // Add version
     formattedPrompt += ` --v ${version}`;
 
-    // Add stylize (default is 100, only add if different)
-    if (stylize !== 100) {
+    // Add stylize (default is , only add if different)
+    if (stylize !== ) {
       formattedPrompt += ` --s ${stylize}`;
     }
 
-    // Add quality (default is 1, only add if different)
-    if (quality !== 1) {
+    // Add quality (default is , only add if different)
+    if (quality !== ) {
       formattedPrompt += ` --q ${quality}`;
     }
 
@@ -191,9 +184,8 @@ export class MidjourneyClient {
     return formattedPrompt;
   }
 
-  /**
-   * Detect errors in Midjourney response
-   */
+  /   Detect errors in Midjourney response
+   /
   private detectErrors(message: Message, originalPrompt: string): void {
     const content = message.content.toLowerCase();
 
@@ -256,9 +248,8 @@ export class MidjourneyClient {
     }
   }
 
-  /**
-   * Parse Midjourney response to extract metadata
-   */
+  /   Parse Midjourney response to extract metadata
+   /
   parseResponse(message: Message): {
     prompt: string;
     parameters: Record<string, string>;
@@ -266,8 +257,8 @@ export class MidjourneyClient {
     const content = message.content;
 
     // Extract prompt (usually before the first --)
-    const promptMatch = content.match(/^(.+?)(?:\s+--|\s*$)/);
-    const prompt = promptMatch ? promptMatch[1].trim() : content;
+    const promptMatch = content.match(/^(.+?)(?:\s+--|\s$)/);
+    const prompt = promptMatch ? promptMatch[].trim() : content;
 
     // Extract parameters
     const parameters: Record<string, string> = {};
@@ -275,20 +266,19 @@ export class MidjourneyClient {
     let match;
 
     while ((match = paramRegex.exec(content)) !== null) {
-      parameters[match[1]] = match[2];
+      parameters[match[]] = match[];
     }
 
     return { prompt, parameters };
   }
 
-  /**
-   * Validate Midjourney options before submission
-   */
+  /   Validate Midjourney options before submission
+   /
   static validateOptions(options: MidjourneyOptions): void {
     // Validate aspect ratio
     const validAspectRatios = [
-      '1:1', '16:9', '9:16', '2:3', '3:2', '4:5', '5:4', '7:4', '4:7',
-      '21:9', '9:21', '3:4', '4:3'
+      ':', ':', ':', ':', ':', ':', ':', ':', ':',
+      ':', ':', ':', ':'
     ];
 
     if (options.aspectRatio && !validAspectRatios.includes(options.aspectRatio)) {
@@ -298,7 +288,7 @@ export class MidjourneyClient {
     }
 
     // Validate version
-    const validVersions = ['6.1', '6', '5.2', '5.1', '5', 'niji', 'niji 6'];
+    const validVersions = ['.', '', '.', '.', '', 'niji', 'niji '];
 
     if (options.version && !validVersions.includes(options.version)) {
       throw new Error(
@@ -306,31 +296,31 @@ export class MidjourneyClient {
       );
     }
 
-    // Validate stylize (0-1000)
-    if (options.stylize !== undefined && (options.stylize < 0 || options.stylize > 1000)) {
-      throw new Error('Stylize must be between 0 and 1000');
+    // Validate stylize (-)
+    if (options.stylize !== undefined && (options.stylize < || options.stylize > )) {
+      throw new Error('Stylize must be between and ');
     }
 
     // Validate quality
-    const validQualities = [0.25, 0.5, 1, 2];
+    const validQualities = [., ., , ];
 
     if (options.quality !== undefined && !validQualities.includes(options.quality)) {
-      throw new Error('Quality must be 0.25, 0.5, 1, or 2');
+      throw new Error('Quality must be ., ., , or ');
     }
 
-    // Validate chaos (0-100)
-    if (options.chaos !== undefined && (options.chaos < 0 || options.chaos > 100)) {
-      throw new Error('Chaos must be between 0 and 100');
+    // Validate chaos (-)
+    if (options.chaos !== undefined && (options.chaos < || options.chaos > )) {
+      throw new Error('Chaos must be between and ');
     }
 
-    // Validate weird (0-3000)
-    if (options.weird !== undefined && (options.weird < 0 || options.weird > 3000)) {
-      throw new Error('Weird must be between 0 and 3000');
+    // Validate weird (-)
+    if (options.weird !== undefined && (options.weird < || options.weird > )) {
+      throw new Error('Weird must be between and ');
     }
 
     // Validate timeout
-    if (options.timeout !== undefined && options.timeout < 30) {
-      throw new Error('Timeout must be at least 30 seconds');
+    if (options.timeout !== undefined && options.timeout < ) {
+      throw new Error('Timeout must be at least seconds');
     }
   }
 }

@@ -1,45 +1,43 @@
 ---
 name: ArXiv
-description: "Search and retrieve arXiv academic papers by topic, category, or paper ID — with AlphaXiv-enriched AI-generated overviews. Uses arXiv Atom API (no auth) for discovery and search across cs.AI, cs.LG, cs.CL (NLP/LLMs), cs.CR (security), cs.MA (multi-agent), cs.SE, and cs.IR. Supports title (ti:), abstract (abs:), author (au:), and category (cat:) search fields with boolean operators (AND, OR, ANDNOT); sorts by lastUpdatedDate or relevance; paginates up to 2,000 results per call with 3s rate limit between calls. AlphaXiv enrichment fetches markdown summaries from alphaxiv.org/overview/{ID}.md; full text from alphaxiv.org/abs/{ID}.md as fallback; 404 means summary not yet generated. Workflows: Latest (new papers by category), Search (topic/keyword search), Paper (single paper deep-dive by ID or URL). API returns Atom XML — parse with text processing, not jq. HTTPS required with -L flag; check published date not lastUpdatedDate for truly new submissions. Output: paper title, authors, abstract, AlphaXiv summary, and direct arXiv URL. USE WHEN arxiv, papers, latest papers, research papers, new papers, what's new in AI research, recent ML papers, paper lookup, arxiv search, find paper by ID, summarize paper, latest NLP research, latest LLM papers, multi-agent papers, cs.AI latest, AI safety papers, software engineering papers, information retrieval papers. NOT FOR general web research (use Research), extracting content from arbitrary URLs (use Parser), or cybersecurity annual report analysis (use AnnualReports)."
+description: "Search and retrieve arXiv academic papers by topic, category, or paper ID — with AlphaXiv-enriched AI-generated overviews. Uses arXiv Atom API (no auth) for discovery and search across cs.AI, cs.LG, cs.CL (NLP/LLMs), cs.CR (security), cs.MA (multi-agent), cs.SE, and cs.IR. Supports title (ti:), abstract (abs:), author (au:), and category (cat:) search fields with boolean operators (AND, OR, ANDNOT); sorts by lastUpdatedDate or relevance; paginates up to ,results per call with s rate limit between calls. AlphaXiv enrichment fetches markdown summaries from alphaxiv.org/overview/{ID}.md; full text from alphaxiv.org/abs/{ID}.md as fallback; means summary not yet generated. Workflows: Latest (new papers by category), Search (topic/keyword search), Paper (single paper deep-dive by ID or URL). API returns Atom XML — parse with text processing, not jq. HTTPS required with -L flag; check published date not lastUpdatedDate for truly new submissions. Output: paper title, authors, abstract, AlphaXiv summary, and direct arXiv URL. USE WHEN arxiv, papers, latest papers, research papers, new papers, what's new in AI research, recent ML papers, paper lookup, arxiv search, find paper by ID, summarize paper, latest NLP research, latest LLM papers, multi-agent papers, cs.AI latest, AI safety papers, software engineering papers, information retrieval papers. NOT FOR general web research (use Research), extracting content from arbitrary URLs (use Parser), or cybersecurity annual report analysis (use AnnualReports)."
 effort: low
 ---
 
-## Customization
+Customization
 
-**Before executing, check for user customizations at:**
-`~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/ArXiv/`
+Before executing, check for user customizations at:`~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/ArXiv/`
 
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
-# ArXiv
+ArXiv
 
 Search arXiv for latest papers by topic or category. Uses arXiv's Atom API for search/discovery and AlphaXiv's markdown endpoint for enriched paper overviews. No API keys needed.
 
-## Workflow Routing
+Workflow Routing
 
 | Trigger | Workflow |
 |---------|----------|
 | "latest papers in X", "new papers on X", "what's new in AI research" | `Workflows/Latest.md` |
 | "search arxiv for X", "find papers about X", "arxiv papers on X" | `Workflows/Search.md` |
-| arxiv URL, paper ID like `2401.12345`, "explain this paper" | `Workflows/Paper.md` |
+| arxiv URL, paper ID like `.`, "explain this paper" | `Workflows/Paper.md` |
 
-## Quick Reference
+Quick Reference
 
-**arXiv API** (no auth):
+arXiv API(no auth):
 - Base: `https://export.arxiv.org/api/query`
 - Search fields: `ti:` (title), `au:` (author), `abs:` (abstract), `cat:` (category), `all:` (everything)
 - Booleans: `AND`, `OR`, `ANDNOT`
 - Sort: `sortBy=lastUpdatedDate&sortOrder=descending` for latest
-- Pagination: `start=0&max_results=10` (max 2000 per call)
-- Rate limit: 3s between calls
+- Pagination: `start=&max_results=` (max per call)
+- Rate limit: s between calls
 
-**AlphaXiv enrichment** (no auth):
+AlphaXiv enrichment(no auth):
 - Overview: `curl -s "https://alphaxiv.org/overview/{PAPER_ID}.md"`
 - Full text: `curl -s "https://alphaxiv.org/abs/{PAPER_ID}.md"` (fallback)
-- Not all papers have overviews — 404 means analysis not yet generated
+- Not all papers have overviews — means analysis not yet generated
 
-**Key categories for our work:**
-- `cs.AI` — Artificial Intelligence
+Key categories for our work:- `cs.AI` — Artificial Intelligence
 - `cs.LG` — Machine Learning
 - `cs.CL` — Computation and Language (NLP/LLMs)
 - `cs.CR` — Cryptography and Security
@@ -47,20 +45,20 @@ Search arXiv for latest papers by topic or category. Uses arXiv's Atom API for s
 - `cs.MA` — Multi-Agent Systems
 - `cs.IR` — Information Retrieval
 
-## Gotchas
+Gotchas
 
-- arXiv API **requires HTTPS** and `-L` (follows redirects). HTTP 301s to HTTPS silently.
+- arXiv API requires HTTPSand `-L` (follows redirects). HTTP s to HTTPS silently.
 - arXiv API returns Atom XML, not JSON. Parse with text processing, not `jq`.
 - `lastUpdatedDate` includes edits to old papers. For truly new submissions, check `<published>` dates.
 - AlphaXiv overviews are AI-generated summaries. Great for quick understanding, but verify claims against the actual paper for anything you'd cite.
-- arXiv API rate limit is 3 seconds between calls. Batch your queries.
-- `max_results` caps at 2000. For broader sweeps, paginate with `start`.
+- arXiv API rate limit is seconds between calls. Batch your queries.
+- `max_results` caps at . For broader sweeps, paginate with `start`.
 - Category search (`cat:cs.AI`) returns papers with that as primary OR cross-listed category.
 
-## Execution Log
+Execution Log
 
 After completing any workflow, append a single JSONL entry:
 
 ```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"ArXiv","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.claude/PAI/MEMORY/SKILLS/execution.jsonl
+echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"ArXiv","workflow":"WORKFLOW_USED","input":"_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.claude/PAI/MEMORY/SKILLS/execution.jsonl
 ```

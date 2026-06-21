@@ -233,7 +233,7 @@ function generateNotification(
   evidenceType: Evidence['type']
 ): string {
   const direction = newConfidence > oldConfidence ? 'increased' : 'decreased';
-  const emoji = newConfidence > oldConfidence ? '📈' : '📉';
+  const emoji = newConfidence > oldConfidence ? '' : '';
 
   return `
 ${emoji} Opinion Confidence ${direction.toUpperCase()}
@@ -252,7 +252,7 @@ This change exceeds the notification threshold (${NOTIFICATION_THRESHOLD * 100}%
 function listOpinions(): void {
   const opinions = parseOpinions();
 
-  console.log('\n📊 Current Opinions\n');
+  console.log('\n Current Opinions\n');
 
   const categories = new Map<string, Opinion[]>();
   for (const opinion of opinions.values()) {
@@ -287,7 +287,7 @@ function showOpinion(statement: string): void {
   }
 
   console.log(`
-📋 Opinion Details
+ Opinion Details
 
 **Statement:** ${opinion.statement}
 **Confidence:** ${(opinion.confidence * 100).toFixed(0)}%

@@ -1,13 +1,13 @@
-# UpdateData Workflow
+UpdateData Workflow
 
-**Skill:** USMetrics
-**Purpose:** Fetch current data from all sources and update the Substrate US-Common-Metrics dataset
+Skill:USMetrics
+Purpose:Fetch current data from all sources and update the Substrate US-Common-Metrics dataset
 
-## Overview
+Overview
 
 This workflow pulls live data from FRED, EIA, Treasury FiscalData, and other APIs, then writes the current values to the Substrate dataset files. The GetCurrentState workflow then reads from these populated files.
 
-## Data Flow
+Data Flow
 
 ```
 APIs (FRED, EIA, Treasury)
@@ -24,17 +24,17 @@ GetCurrentState workflow
 Analysis report
 ```
 
-## Execution Steps
+Execution Steps
 
-### Step 1: Initialize
+Step : Initialize
 
 Output the workflow status message:
 
 ```
-Running **UpdateData** in **USMetrics**...
+Running UpdateDatain USMetrics...
 ```
 
-### Step 2: Run Update Tool
+Step : Run Update Tool
 
 Execute the update script:
 
@@ -43,66 +43,63 @@ bun ~/.claude/skills/USMetrics/Tools/UpdateSubstrateMetrics.ts
 ```
 
 This tool:
-1. Fetches current values from all configured APIs
-2. Writes to `~/Projects/Substrate/Data/US-Common-Metrics/US-Common-Metrics.md`
-3. Exports to `us-metrics-current.csv`
-4. Appends to `us-metrics-historical.csv` (with timestamp)
-5. Logs update status
+. Fetches current values from all configured APIs
+. Writes to `~/Projects/Substrate/Data/US-Common-Metrics/US-Common-Metrics.md`
+. Exports to `us-metrics-current.csv`
+. Appends to `us-metrics-historical.csv` (with timestamp)
+. Logs update status
 
-### Step 3: Verify Update
+Step : Verify Update
 
 Check the update was successful:
 - Verify `US-Common-Metrics.md` has current values (not placeholders)
 - Verify `us-metrics-current.csv` exists and has data
 - Check update log for any failed fetches
 
-## API Sources
+API Sources
 
 | Source | API | Metrics | Auth |
 |--------|-----|---------|------|
-| **FRED** | api.stlouisfed.org | GDP, CPI, unemployment, rates, etc. | FRED_API_KEY |
-| **EIA** | api.eia.gov | Gas prices, oil prices | EIA_API_KEY |
-| **Treasury** | api.fiscaldata.treasury.gov | Federal debt, budget | None |
+| FRED| api.stlouisfed.org | GDP, CPI, unemployment, rates, etc. | FRED_API_KEY |
+| EIA| api.eia.gov | Gas prices, oil prices | EIA_API_KEY |
+| Treasury| api.fiscaldata.treasury.gov | Federal debt, budget | None |
 
-## Environment Requirements
+Environment Requirements
 
 ```bash
-export FRED_API_KEY="your_key"    # Required
-export EIA_API_KEY="your_key"     # Required for energy data
+export FRED_API_KEY="your_key"    Required
+export EIA_API_KEY="your_key"     Required for energy data
 ```
 
-## Output Files
+Output Files
 
-### US-Common-Metrics.md
+US-Common-Metrics.md
 
 The markdown file gets values populated in the metric tables:
 
 ```markdown
 | Metric | Value | Period | Updated | Source |
 |--------|-------|--------|---------|--------|
-| Real GDP | $22.67T | Q3 2024 | 2024-11-27 | BEA/FRED |
-| CPI YoY | 2.6% | Oct 2024 | 2024-11-13 | BLS/FRED |
+| Real GDP | $.T | Q| --| BEA/FRED |
+| CPI YoY | .% | Oct | --| BLS/FRED |
 ```
 
-### us-metrics-current.csv
+us-metrics-current.csv
 
 ```csv
 metric_id,metric_name,value,unit,period,updated,source,fred_id
-GDPC1,Real GDP,22670.532,Billions of Chained 2017 Dollars,2024-07-01,2024-11-27,BEA/FRED,GDPC1
-CPIAUCSL,CPI All Items,315.562,Index 1982-84=100,2024-10-01,2024-11-13,BLS/FRED,CPIAUCSL
+GDPC,Real GDP,.,Billions of Chained Dollars,--,--,BEA/FRED,GDPCCPIAUCSL,CPI All Items,.,Index -=,--,--,BLS/FRED,CPIAUCSL
 ```
 
-### us-metrics-historical.csv
+us-metrics-historical.csv
 
 Appends each update as a new row with timestamp:
 
 ```csv
 fetch_timestamp,metric_id,value,period
-2024-12-01T10:30:00Z,GDPC1,22670.532,2024-07-01
-2024-12-01T10:30:00Z,UNRATE,4.1,2024-10-01
-```
+--T::Z,GDPC,.,----T::Z,UNRATE,.,--```
 
-## Trigger Phrases
+Trigger Phrases
 
 - "Update US metrics"
 - "Refresh the metrics data"
@@ -110,14 +107,14 @@ fetch_timestamp,metric_id,value,period
 - "Update Substrate metrics"
 - "Fetch current values"
 
-## Error Handling
+Error Handling
 
-- **API failure**: Log which metrics failed, continue with others
-- **Missing API key**: Warn and skip that source
-- **Rate limit**: Implement delays between requests
-- **Partial update**: Mark which metrics are stale in output
+- API failure: Log which metrics failed, continue with others
+- Missing API key: Warn and skip that source
+- Rate limit: Implement delays between requests
+- Partial update: Mark which metrics are stale in output
 
-## Update Schedule Recommendation
+Update Schedule Recommendation
 
 | Frequency | Metrics |
 |-----------|---------|
@@ -125,7 +122,7 @@ fetch_timestamp,metric_id,value,period
 | Weekly | Gas prices, jobless claims, mortgage rates |
 | Monthly | CPI, employment, GDP, housing data |
 
-## Notes
+Notes
 
 - FRED is the primary aggregator - most metrics come through FRED even if original source is BLS/BEA/etc.
 - Treasury FiscalData is used directly for daily debt figures

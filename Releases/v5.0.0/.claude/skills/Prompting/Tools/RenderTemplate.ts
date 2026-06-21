@@ -1,17 +1,13 @@
-#!/usr/bin/env bun
-/**
- * RenderTemplate.ts - PAI Templating Engine
- *
- * Renders Handlebars templates with YAML data sources.
- *
- * Usage:
- *   bun run RenderTemplate.ts --template <path> --data <path> [--output <path>] [--preview]
- *
- * Examples:
- *   bun run RenderTemplate.ts --template Primitives/Roster.hbs --data Data/Agents.yaml
- *   bun run RenderTemplate.ts -t Evals/Judge.hbs -d Data/JudgeConfig.yaml -o Compiled/judge.md
- *   bun run RenderTemplate.ts --template Primitives/Gate.hbs --data Data/Gates.yaml --preview
- */
+!/usr/bin/env bun
+/ RenderTemplate.ts - PAI Templating Engine
+  Renders Handlebars templates with YAML data sources.
+  Usage:
+   bun run RenderTemplate.ts --template <path> --data <path> [--output <path>] [--preview]
+  Examples:
+   bun run RenderTemplate.ts --template Primitives/Roster.hbs --data Data/Agents.yaml
+   bun run RenderTemplate.ts -t Evals/Judge.hbs -d Data/JudgeConfig.yaml -o Compiled/judge.md
+   bun run RenderTemplate.ts --template Primitives/Gate.hbs --data Data/Gates.yaml --preview
+ /
 
 import Handlebars from 'handlebars';
 import { parse as parseYaml } from 'yaml';
@@ -35,15 +31,15 @@ Handlebars.registerHelper('lowercase', (str: string) => {
 
 // Title case text
 Handlebars.registerHelper('titlecase', (str: string) => {
-  return str?.replace(/\w\S*/g, (txt) =>
-    txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  return str?.replace(/\w\S/g, (txt) =>
+    txt.charAt().toUpperCase() + txt.substr().toLowerCase()
   ) ?? '';
 });
 
 // Indent text by N spaces
 Handlebars.registerHelper('indent', (str: string, spaces: number) => {
   if (!str) return '';
-  const indent = ' '.repeat(typeof spaces === 'number' ? spaces : 2);
+  const indent = ' '.repeat(typeof spaces === 'number' ? spaces : );
   return str.split('\n').map(line => indent + line).join('\n');
 });
 
@@ -70,15 +66,15 @@ Handlebars.registerHelper('includes', (arr: unknown[], value: unknown) => {
 // Get current date/time
 Handlebars.registerHelper('now', (format?: string) => {
   const now = new Date();
-  if (format === 'date') return now.toISOString().split('T')[0];
-  if (format === 'time') return now.toTimeString().split(' ')[0];
+  if (format === 'date') return now.toISOString().split('T')[];
+  if (format === 'time') return now.toTimeString().split(' ')[];
   return now.toISOString();
 });
 
 // Pluralize word based on count
 Handlebars.registerHelper('pluralize', (count: number, singular: string, plural?: string) => {
   const pluralForm = typeof plural === 'string' ? plural : `${singular}s`;
-  return count === 1 ? singular : pluralForm;
+  return count === ? singular : pluralForm;
 });
 
 // Format number with commas
@@ -87,16 +83,16 @@ Handlebars.registerHelper('formatNumber', (num: number) => {
 });
 
 // Calculate percentage
-Handlebars.registerHelper('percent', (value: number, total: number, decimals = 0) => {
-  if (!total) return '0';
-  return ((value / total) * 100).toFixed(typeof decimals === 'number' ? decimals : 0);
+Handlebars.registerHelper('percent', (value: number, total: number, decimals = ) => {
+  if (!total) return '';
+  return ((value / total) ).toFixed(typeof decimals === 'number' ? decimals : );
 });
 
 // Truncate text to length
 Handlebars.registerHelper('truncate', (str: string, length: number) => {
   if (!str) return '';
-  const maxLen = typeof length === 'number' ? length : 100;
-  return str.length > maxLen ? str.substring(0, maxLen) + '...' : str;
+  const maxLen = typeof length === 'number' ? length : ;
+  return str.length > maxLen ? str.substring(, maxLen) + '...' : str;
 });
 
 // Default value if undefined
@@ -106,7 +102,7 @@ Handlebars.registerHelper('default', (value: unknown, defaultValue: unknown) => 
 
 // JSON stringify
 Handlebars.registerHelper('json', (obj: unknown, pretty = false) => {
-  return JSON.stringify(obj, null, pretty ? 2 : undefined);
+  return JSON.stringify(obj, null, pretty ? : undefined);
 });
 
 // Markdown code block
@@ -118,8 +114,8 @@ Handlebars.registerHelper('codeblock', (code: string, language?: string) => {
 // Repeat helper for generating repeated content
 Handlebars.registerHelper('repeat', (count: number, options: Handlebars.HelperOptions) => {
   let result = '';
-  for (let i = 0; i < count; i++) {
-    result += options.fn({ index: i, first: i === 0, last: i === count - 1 });
+  for (let i = ; i < count; i++) {
+    result += options.fn({ index: i, first: i === , last: i === count - });
   }
   return result;
 });
@@ -151,7 +147,7 @@ function loadTemplate(templatePath: string): HandlebarsTemplateDelegate {
     throw new Error(`Template not found: ${fullPath}`);
   }
 
-  const templateSource = readFileSync(fullPath, 'utf-8');
+  const templateSource = readFileSync(fullPath, 'utf-');
   return Handlebars.compile(templateSource);
 }
 
@@ -162,7 +158,7 @@ function loadData(dataPath: string): Record<string, unknown> {
     throw new Error(`Data file not found: ${fullPath}`);
   }
 
-  const dataSource = readFileSync(fullPath, 'utf-8');
+  const dataSource = readFileSync(fullPath, 'utf-');
 
   // Support both YAML and JSON
   if (dataPath.endsWith('.json')) {
@@ -183,7 +179,7 @@ function registerPartials(templatesDir: string): void {
     if (file.endsWith('.hbs')) {
       const partialName = basename(file, '.hbs');
       const partialPath = resolve(partialsDir, file);
-      const partialSource = readFileSync(partialPath, 'utf-8');
+      const partialSource = readFileSync(partialPath, 'utf-');
       Handlebars.registerPartial(partialName, partialSource);
     }
   }
@@ -226,7 +222,7 @@ export function renderTemplate(options: RenderOptions): string {
 
 function main(): void {
   const { values } = parseArgs({
-    args: Bun.argv.slice(2),
+    args: Bun.argv.slice(),
     options: {
       template: { type: 'string', short: 't' },
       data: { type: 'string', short: 'd' },
@@ -275,7 +271,7 @@ Available Helpers:
   {{codeblock code lang}}     - Markdown code block
   {{repeat count}}...{{/repeat}} - Repeat content N times
 `);
-    process.exit(values.help ? 0 : 1);
+    process.exit(values.help ? : );
   }
 
   try {
@@ -287,7 +283,7 @@ Available Helpers:
     });
   } catch (error) {
     console.error(`Error: ${(error as Error).message}`);
-    process.exit(1);
+    process.exit();
   }
 }
 

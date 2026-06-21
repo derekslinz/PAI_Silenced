@@ -334,7 +334,7 @@ Include dead ends — failed approaches prevent future sessions from re-explorin
 ```markdown
 - 2026-02-24 02:00: Chose X over Y because Z
 - 2026-02-24 02:15: Rejected approach A due to performance concern
-- 2026-02-24 02:30: ❌ DEAD END: Tried B — failed because C (don't retry)
+- 2026-02-24 02:30:  DEAD END: Tried B — failed because C (don't retry)
 - 2026-02-24 03:00: refined: Goal sharpened — added "without breaking external API" after research surfaced consumer count
 - 2026-02-24 03:15: refined: ISC-7 split into ISC-7.1 / ISC-7.2 — Verify probe revealed two distinct failure modes
 ```

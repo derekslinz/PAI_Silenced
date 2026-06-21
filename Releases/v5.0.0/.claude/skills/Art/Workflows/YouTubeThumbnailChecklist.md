@@ -1,18 +1,16 @@
-# YouTube Thumbnail Generation Checklists
+YouTube Thumbnail Generation Checklists
 
-**Two-phase validation: Before generation and after generation**
-
+Two-phase validation: Before generation and after generation
 ---
 
-## PRE-GENERATION CHECKLIST
+PRE-GENERATION CHECKLIST
 
-**Complete this BEFORE running any generation commands. If ANY item fails, STOP and fix it.**
-
-### Phase 1: Reference Analysis
+Complete this BEFORE running any generation commands. If ANY item fails, STOP and fix it.
+Phase : Reference Analysis
 
 ```
 □ Opened BOTH example thumbnails AND SPECIFICATIONS.md
-□ Viewing example thumbnail in Preview/Finder at 100% size
+□ Viewing example thumbnail in Preview/Finder at % size
 □ Identified which example thumbnail most closely matches this use case
 □ Screenshot or note exact colors from example using Digital Color Meter
 □ Measured text positions in example using ruler/measurement tool
@@ -21,11 +19,11 @@
 □ Checked logo size and exact position in example
 ```
 
-### Phase 2: Content Preparation
+Phase : Content Preparation
 
 ```
 □ Determined thumbnail type (Main/Audio/Sponsored)
-□ Extracted title text from content (3-7 words max)
+□ Extracted title text from content (-words max)
 □ Identified content mood/tone for headshot selection
 □ Selected specific headshot file from HeadshotExamples/ OR
 □ Planned to generate NEW headshot using Headshot skill
@@ -33,7 +31,7 @@
 □ If generating art: wrote specific dark-palette prompt
 ```
 
-### Phase 3: Font Verification
+Phase : Font Verification
 
 ```
 □ Ran: magick -list font | grep -i [font-name]
@@ -43,50 +41,47 @@
 □ Test rendered sample text to verify font appearance
 ```
 
-### Phase 4: Specification Confirmation
+Phase : Specification Confirmation
 
-**Check each specification against example:**
-
+Check each specification against example:
 ```
-□ Canvas size: 1280x720 confirmed
+□ Canvas size: xconfirmed
 □ Background color: [HEX] confirmed from example
 □ Border color: [HEX] confirmed from example
 □ Border thickness: [N]px confirmed from example
 □ Corner radius: [N]px confirmed from example
 □ Logo position: [X]px from right, [Y]px from top confirmed
 □ Logo size: [W]x[H]px confirmed
-□ Line 1 position: [Y]px from top confirmed
-□ Line 1 size: [N]px confirmed
-□ Line 1 color: [HEX] confirmed
-□ Line 2 position: [Y]px from top confirmed
-□ Line 2 size: [N]px confirmed
-□ Line 2 color: [HEX] confirmed
-□ Line 3 position: [Y]px from top confirmed
-□ Line 3 size: [N]px confirmed
-□ Line 3 color: [HEX] confirmed
-□ Line 4 position: [Y]px from top confirmed
-□ Line 4 size: [N]px confirmed
-□ Line 4 color: [HEX] confirmed
+□ Line position: [Y]px from top confirmed
+□ Line size: [N]px confirmed
+□ Line color: [HEX] confirmed
+□ Line position: [Y]px from top confirmed
+□ Line size: [N]px confirmed
+□ Line color: [HEX] confirmed
+□ Line position: [Y]px from top confirmed
+□ Line size: [N]px confirmed
+□ Line color: [HEX] confirmed
+□ Line position: [Y]px from top confirmed
+□ Line size: [N]px confirmed
+□ Line color: [HEX] confirmed
 □ Headshot width: ~[N]% of canvas confirmed
 □ Headshot height: ~[N]% of canvas confirmed
 □ Headshot position: [X]px from edge confirmed
 □ Art opacity: [N]% confirmed from example
 ```
 
-### Phase 5: Asset Generation Plan
+Phase : Asset Generation Plan
 
-**For Background Art:**
-```
+For Background Art:```
 □ Art type determined (diagram/code/generated)
-□ If generated: prompt includes "dark navy background #1A2744"
-□ If generated: prompt includes "deep purple #4A148C accents"
+□ If generated: prompt includes "dark navy background A"
+□ If generated: prompt includes "deep purple AC accents"
 □ If generated: prompt explicitly states "NO light backgrounds, NO beige"
 □ If generated: prompt specifies "left-weighted composition"
 □ Generation command ready with correct parameters
 ```
 
-**For Headshot:**
-```
+For Headshot:```
 □ If using existing: confirmed exact file path
 □ If using existing: confirmed headshot matches content mood
 □ If generating new: Headshot skill will be used (NOT nano-banana-pro)
@@ -94,10 +89,9 @@
 □ If generating new: expression/mood specified in prompt
 ```
 
-### Phase 6: Command Validation
+Phase : Command Validation
 
-**Before running ImageMagick command:**
-```
+Before running ImageMagick command:```
 □ All file paths confirmed to exist
 □ All hex colors confirmed from example (not from memory)
 □ All font names confirmed available in ImageMagick
@@ -111,35 +105,32 @@
 
 ---
 
-## POST-GENERATION VALIDATION CHECKLIST
+POST-GENERATION VALIDATION CHECKLIST
 
-**Complete this AFTER generating thumbnail. If ANY item fails, regenerate with corrections.**
-
-### Phase 1: File Validation
+Complete this AFTER generating thumbnail. If ANY item fails, regenerate with corrections.
+Phase : File Validation
 
 ```
 □ File exists at specified path
 □ File size is reasonable (not corrupted)
 □ File opens in Preview/Finder
-□ Resolution is EXACTLY 1280x720 pixels
+□ Resolution is EXACTLY xpixels
 □ File format is PNG
 ```
 
-### Phase 2: Side-by-Side Visual Comparison
+Phase : Side-by-Side Visual Comparison
 
-**Open example thumbnail AND your generated thumbnail side-by-side in Finder**
-
+Open example thumbnail AND your generated thumbnail side-by-side in Finder
 ```
 □ Opened example thumbnail: [filename]
 □ Opened generated thumbnail: [filename]
-□ Viewing both at same zoom level (100%)
+□ Viewing both at same zoom level (%)
 □ Can see both simultaneously
 ```
 
-### Phase 3: Border & Canvas Validation
+Phase : Border & Canvas Validation
 
-**Compare border pixel-by-pixel:**
-```
+Compare border pixel-by-pixel:```
 □ Border color matches example EXACTLY (use Digital Color Meter)
 □ Border thickness matches example EXACTLY
 □ Corner radius matches example EXACTLY
@@ -147,14 +138,13 @@
 □ No anti-aliasing artifacts or jagged edges
 ```
 
-**Compare background:**
-```
+Compare background:```
 □ Background color matches example EXACTLY
 □ No visible gradient unless example has gradient
 □ Background fills entire canvas
 ```
 
-### Phase 4: Logo Validation
+Phase : Logo Validation
 
 ```
 □ Logo is present
@@ -164,66 +154,61 @@
 □ Logo color correct for thumbnail type
 ```
 
-### Phase 5: Typography Validation
+Phase : Typography Validation
 
-**For each text line, validate against example:**
-
-**Line 1:**
-```
+For each text line, validate against example:
+Line :```
 □ Font family matches example (geometric sans, not Helvetica)
-□ Font weight matches example (Bold 700)
-□ Font size matches example (±2px tolerance)
+□ Font weight matches example (Bold )
+□ Font size matches example (±px tolerance)
 □ Text color matches example EXACTLY
 □ Letter spacing matches example
-□ Position from top matches example (±3px tolerance)
-□ Position from left matches example (±3px tolerance)
+□ Position from top matches example (±px tolerance)
+□ Position from left matches example (±px tolerance)
 □ Text transform matches (UPPERCASE vs Title Case)
 ```
 
-**Line 2:**
-```
+Line :```
 □ Font family matches example
-□ Font weight matches example (Extra Bold 800)
-□ Font size matches example (±2px tolerance)
+□ Font weight matches example (Extra Bold )
+□ Font size matches example (±px tolerance)
 □ Text color matches example EXACTLY
 □ Letter spacing matches example
-□ Position from top matches example (±3px tolerance)
-□ Position from left matches example (±3px tolerance)
+□ Position from top matches example (±px tolerance)
+□ Position from left matches example (±px tolerance)
 □ Text transform matches
 ```
 
-**Line 3:**
-```
+Line :```
 □ Font family matches example
-□ Font weight matches example (Bold 700)
-□ Font size matches example (±2px tolerance)
+□ Font weight matches example (Bold )
+□ Font size matches example (±px tolerance)
 □ Text color matches example EXACTLY
 □ Letter spacing matches example
-□ Position from top matches example (±3px tolerance)
-□ Position from left matches example (±3px tolerance)
+□ Position from top matches example (±px tolerance)
+□ Position from left matches example (±px tolerance)
 □ Text transform matches
 ```
 
-**Line 4:**
-```
+Line :```
 □ Font family matches example
-□ Font weight matches example (Medium 500)
-□ Font size matches example (±2px tolerance)
+□ Font weight matches example (Medium )
+□ Font size matches example (±px tolerance)
 □ Text color matches example EXACTLY
 □ Letter spacing matches example
-□ Position from top matches example (±3px tolerance)
-□ Position from left matches example (±3px tolerance)
+□ Position from top matches example (±px tolerance)
+□ Position from left matches example (±px tolerance)
 □ Text transform matches
 ```
 
-### Phase 6: Headshot Validation
+Phase : Headshot Validation
 
 ```
 □ Headshot is present
 □ Headshot is NEW/CUSTOM (not reused from previous thumbnails) OR
 □ Headshot is appropriate existing photo from HeadshotExamples/
 □ Headshot matches content mood/tone
-□ Headshot size matches example proportion (~35-40% width)
+□ Headshot size matches example proportion (~-% width)
 □ Headshot position matches example (right side)
 □ Headshot vertical alignment matches example
 □ Background removed cleanly (no artifacts)
@@ -231,7 +216,7 @@
 □ No blur or quality degradation
 ```
 
-### Phase 7: Background Art Validation
+Phase : Background Art Validation
 
 ```
 □ Background art is present
@@ -245,38 +230,35 @@
 □ Art coverage matches example proportion
 ```
 
-### Phase 8: Composition Validation
+Phase : Composition Validation
 
-**Overall layout check:**
-```
-□ Text block occupies left ~55% of frame (matches example)
-□ Headshot occupies right ~40% of frame (matches example)
+Overall layout check:```
+□ Text block occupies left ~% of frame (matches example)
+□ Headshot occupies right ~% of frame (matches example)
 □ White space and breathing room matches example
 □ No elements are crowded or overlapping incorrectly
 □ Visual hierarchy matches example (what draws eye first)
 □ Balance between text/art/headshot matches example
 ```
 
-### Phase 9: Color Accuracy Validation
+Phase : Color Accuracy Validation
 
-**Use Digital Color Meter to sample colors from both images:**
-
+Use Digital Color Meter to sample colors from both images:
 ```
 □ Background: Generated [HEX] vs Example [HEX] - MATCH
 □ Border: Generated [HEX] vs Example [HEX] - MATCH
-□ Line 1 text: Generated [HEX] vs Example [HEX] - MATCH
-□ Line 2 text: Generated [HEX] vs Example [HEX] - MATCH
-□ Line 3 text: Generated [HEX] vs Example [HEX] - MATCH
-□ Line 4 text: Generated [HEX] vs Example [HEX] - MATCH
+□ Line text: Generated [HEX] vs Example [HEX] - MATCH
+□ Line text: Generated [HEX] vs Example [HEX] - MATCH
+□ Line text: Generated [HEX] vs Example [HEX] - MATCH
+□ Line text: Generated [HEX] vs Example [HEX] - MATCH
 □ Logo: Generated [HEX] vs Example [HEX] - MATCH
 ```
 
-### Phase 10: Readability Validation
+Phase : Readability Validation
 
-**Test thumbnail at YouTube display sizes:**
-
+Test thumbnail at YouTube display sizes:
 ```
-□ Created small preview: magick [file] -resize 320x180 [preview-file]
+□ Created small preview: magick [file] -resize x[preview-file]
 □ Opened small preview (simulates YouTube sidebar)
 □ Main title is readable at small size
 □ Headshot is recognizable at small size
@@ -284,7 +266,7 @@
 □ Colors have sufficient contrast at small size
 ```
 
-### Phase 11: Professional Quality Validation
+Phase : Professional Quality Validation
 
 ```
 □ No pixelation or compression artifacts
@@ -298,7 +280,7 @@
 
 ---
 
-## VALIDATION DECISION TREE
+VALIDATION DECISION TREE
 
 ```
 ALL POST-GENERATION CHECKS PASSED?
@@ -307,76 +289,63 @@ ALL POST-GENERATION CHECKS PASSED?
 
 WHICH PHASE FAILED?
     ↓
-    ├─ Phase 3 (Border/Canvas) → Fix border/background, regenerate
-    ├─ Phase 4 (Logo) → Fix logo size/position/style, regenerate
-    ├─ Phase 5 (Typography) → Fix fonts/sizes/positions, regenerate
-    ├─ Phase 6 (Headshot) → Generate new headshot, recompose
-    ├─ Phase 7 (Background Art) → Generate new art, recompose
-    ├─ Phase 8 (Composition) → Adjust layout, regenerate
-    ├─ Phase 9 (Colors) → Fix hex values, regenerate
-    └─ Phase 10 (Readability) → Increase font size, simplify, regenerate
+    ├─ Phase (Border/Canvas) → Fix border/background, regenerate
+    ├─ Phase (Logo) → Fix logo size/position/style, regenerate
+    ├─ Phase (Typography) → Fix fonts/sizes/positions, regenerate
+    ├─ Phase (Headshot) → Generate new headshot, recompose
+    ├─ Phase (Background Art) → Generate new art, recompose
+    ├─ Phase (Composition) → Adjust layout, regenerate
+    ├─ Phase (Colors) → Fix hex values, regenerate
+    └─ Phase (Readability) → Increase font size, simplify, regenerate
 
 AFTER FIX → RERUN ENTIRE POST-GENERATION CHECKLIST
 ```
 
 ---
 
-## CRITICAL FAILURE MODES TO AVOID
+CRITICAL FAILURE MODES TO AVOID
 
-**These are the most common ways thumbnails fail. Check these TWICE:**
+These are the most common ways thumbnails fail. Check these TWICE:
+. Wrong Font Family   - Using Helvetica instead of Inter/Montserrat
+   - Using system serif instead of Playfair Display (Audio)
+   - Confirm font name with: `magick -list font | grep [name]`
 
-1. **Wrong Font Family**
-   - ❌ Using Helvetica instead of Inter/Montserrat
-   - ❌ Using system serif instead of Playfair Display (Audio)
-   - ✅ Confirm font name with: `magick -list font | grep [name]`
+. Wrong Font Weight   - Using Bold () when should be Extra Bold ()
+   - Using Regular when should be Bold
+   - Check example closely for weight
 
-2. **Wrong Font Weight**
-   - ❌ Using Bold (700) when should be Extra Bold (800)
-   - ❌ Using Regular when should be Bold
-   - ✅ Check example closely for weight
+. Wrong Border Color   - Using bf(too bright) instead of AD   - Using FFat % (neon) instead of subtle green
+   - Use Digital Color Meter to sample exact hex from example
 
-3. **Wrong Border Color**
-   - ❌ Using #3b82f6 (too bright) instead of #4A90D9
-   - ❌ Using #00FF00 at 100% (neon) instead of subtle green
-   - ✅ Use Digital Color Meter to sample exact hex from example
+. Wrong Canvas Size   - Using xinstead of x   - Confirm with: `magick identify [file]`
 
-4. **Wrong Canvas Size**
-   - ❌ Using 1920x1080 instead of 1280x720
-   - ✅ Confirm with: `magick identify [file]`
+. Reused Headshot   - Using same headshot from previous thumbnail
+   - Not generating custom headshot for this specific thumbnail
+   - Generate NEW headshot OR select appropriate existing photo
 
-5. **Reused Headshot**
-   - ❌ Using same headshot from previous thumbnail
-   - ❌ Not generating custom headshot for this specific thumbnail
-   - ✅ Generate NEW headshot OR select appropriate existing photo
+. Reused Background Art   - Using same art from previous thumbnail
+   - Generic art that doesn't match topic
+   - Generate NEW art specific to this thumbnail's topic
 
-6. **Reused Background Art**
-   - ❌ Using same art from previous thumbnail
-   - ❌ Generic art that doesn't match topic
-   - ✅ Generate NEW art specific to this thumbnail's topic
+. Light Background Art   - Art with beige/cream/light colors
+   - Art that doesn't blend with dark navy background
+   - Explicitly specify dark palette in generation prompt
 
-7. **Light Background Art**
-   - ❌ Art with beige/cream/light colors
-   - ❌ Art that doesn't blend with dark navy background
-   - ✅ Explicitly specify dark palette in generation prompt
+. Wrong Text Positioning   - Text too high (not enough top padding)
+   - Text too cramped (insufficient line spacing)
+   - Measure exact Y positions from example
 
-8. **Wrong Text Positioning**
-   - ❌ Text too high (not enough top padding)
-   - ❌ Text too cramped (insufficient line spacing)
-   - ✅ Measure exact Y positions from example
+. Wrong Logo   - Using UL logo instead of TI: mark
+   - Wrong logo size or position
+   - Check example for exact logo style and placement
 
-9. **Wrong Logo**
-   - ❌ Using UL logo instead of TI: mark
-   - ❌ Wrong logo size or position
-   - ✅ Check example for exact logo style and placement
-
-10. **Insufficient Validation**
-    - ❌ Calling thumbnail "done" without side-by-side comparison
-    - ❌ Not checking at small size
-    - ✅ Complete ENTIRE post-generation checklist
+. Insufficient Validation    - Calling thumbnail "done" without side-by-side comparison
+    - Not checking at small size
+    - Complete ENTIRE post-generation checklist
 
 ---
 
-## MANDATORY WORKFLOW
+MANDATORY WORKFLOW
 
 ```
 BEFORE GENERATION:
@@ -394,4 +363,4 @@ AFTER GENERATION:
 
 ---
 
-**NO THUMBNAIL IS COMPLETE UNTIL EVERY CHECKLIST ITEM PASSES.**
+NO THUMBNAIL IS COMPLETE UNTIL EVERY CHECKLIST ITEM PASSES.

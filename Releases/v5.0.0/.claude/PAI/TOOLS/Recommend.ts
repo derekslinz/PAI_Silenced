@@ -202,7 +202,7 @@ if (args.includes("--json")) {
     process.exit(0);
   }
   const top = ranked[0];
-  console.log(`🎯 Recommend: ${top.name}`);
+  console.log(` Recommend: ${top.name}`);
   if (top.attrs.cuisine) console.log(`   Cuisine: ${top.attrs.cuisine}`);
   if (top.attrs.location) console.log(`   Location: ${top.attrs.location}`);
   if (top.rating) console.log(`   Rating: ${top.rating}`);

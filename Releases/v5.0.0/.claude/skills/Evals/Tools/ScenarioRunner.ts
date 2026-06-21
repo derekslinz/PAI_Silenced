@@ -1,16 +1,12 @@
-#!/usr/bin/env bun
-/**
- * ScenarioRunner — CLI entrypoint for multi-turn agent scenarios.
- *
- * Usage:
- *   bun Tools/ScenarioRunner.ts --scenario Scenarios/<name>.scenario.ts
- *   bun Tools/ScenarioRunner.ts --scenario <path> --trials 3
- *   bun Tools/ScenarioRunner.ts --scenario <path> --json
- *
- * Loads a scenario module (default export or named `scenario`), runs
- * scenario.run() for N trials, converts results through ScenarioToTranscript,
- * and writes an EvalRun JSON to Results/<scenario-id>/<run-id>/.
- */
+!/usr/bin/env bun
+/ ScenarioRunner — CLI entrypoint for multi-turn agent scenarios.
+  Usage:
+   bun Tools/ScenarioRunner.ts --scenario Scenarios/<name>.scenario.ts
+   bun Tools/ScenarioRunner.ts --scenario <path> --trials    bun Tools/ScenarioRunner.ts --scenario <path> --json
+  Loads a scenario module (default export or named `scenario`), runs
+ scenario.run() for N trials, converts results through ScenarioToTranscript,
+ and writes an EvalRun JSON to Results/<scenario-id>/<run-id>/.
+ /
 
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { resolve, basename, dirname, join } from 'path';
@@ -26,32 +22,32 @@ interface Args {
   timeoutMs: number;
 }
 
-const DEFAULT_TIMEOUT_MS = 180_000;
+const DEFAULT_TIMEOUT_MS = _;
 
 function parseArgs(): Args {
-  const args = process.argv.slice(2);
-  const out: Args = { scenario: '', trials: 1, json: false, timeoutMs: DEFAULT_TIMEOUT_MS };
-  for (let i = 0; i < args.length; i++) {
+  const args = process.argv.slice();
+  const out: Args = { scenario: '', trials: , json: false, timeoutMs: DEFAULT_TIMEOUT_MS };
+  for (let i = ; i < args.length; i++) {
     const a = args[i];
     if (a === '--scenario' || a === '-s') out.scenario = args[++i];
-    else if (a === '--trials' || a === '-t') out.trials = parseInt(args[++i], 10);
+    else if (a === '--trials' || a === '-t') out.trials = parseInt(args[++i], );
     else if (a === '--suite') out.suite = args[++i];
-    else if (a === '--timeout-ms') out.timeoutMs = parseInt(args[++i], 10);
+    else if (a === '--timeout-ms') out.timeoutMs = parseInt(args[++i], );
     else if (a === '--json') out.json = true;
     else if (a === '--help' || a === '-h') {
       printHelp();
-      process.exit(0);
+      process.exit();
     }
   }
   if (!out.scenario) {
     printHelp();
-    process.exit(2);
+    process.exit();
   }
   return out;
 }
 
 function printHelp(): void {
-  process.stderr.write(`\nScenarioRunner — run a multi-turn agent scenario.\n\nRequired:\n  --scenario <path>    Path to a .scenario.ts module\n\nOptional:\n  --trials <n>         Number of trials for pass@k (default 1)\n  --timeout-ms <ms>    Per-trial timeout (default 180000 = 3 min)\n  --suite <name>       Evals Suite to associate this run with\n  --json               Emit run JSON to stdout in addition to file\n  -h, --help           Show this help\n\n`);
+  process.stderr.write(`\nScenarioRunner — run a multi-turn agent scenario.\n\nRequired:\n  --scenario <path>    Path to a .scenario.ts module\n\nOptional:\n  --trials <n>         Number of trials for pass@k (default )\n  --timeout-ms <ms>    Per-trial timeout (default = min)\n  --suite <name>       Evals Suite to associate this run with\n  --json               Emit run JSON to stdout in addition to file\n  -h, --help           Show this help\n\n`);
 }
 
 function withTimeout<T>(p: Promise<T>, ms: number, label: string): Promise<T> {
@@ -64,7 +60,7 @@ function withTimeout<T>(p: Promise<T>, ms: number, label: string): Promise<T> {
 function requireAnthropicKey(): void {
   if (!process.env.ANTHROPIC_API_KEY) {
     process.stderr.write('\nERROR: ANTHROPIC_API_KEY is not set. scenario\'s UserSimulatorAgent and JudgeAgent require it.\nExport it in your shell, or add it to your environment, before running a scenario.\n\n');
-    process.exit(3);
+    process.exit();
   }
 }
 
@@ -72,13 +68,13 @@ async function loadScenarioModule(path: string): Promise<{ config: ScenarioConfi
   const resolved = resolve(process.cwd(), path);
   if (!existsSync(resolved)) {
     process.stderr.write(`\nERROR: scenario file not found: ${resolved}\n\n`);
-    process.exit(4);
+    process.exit();
   }
   const mod = await import(resolved);
   const candidate = mod.default ?? mod.scenario ?? mod.config;
   if (!candidate || !candidate.name || !candidate.description || !Array.isArray(candidate.agents)) {
     process.stderr.write(`\nERROR: ${path} must export default (or named 'scenario'/'config') a ScenarioConfig { name, description, agents }.\n\n`);
-    process.exit(5);
+    process.exit();
   }
   const id = candidate.id ?? basename(resolved).replace(/\.scenario\.ts$/, '').replace(/\.ts$/, '');
   return { config: candidate as ScenarioConfig, id };
@@ -86,18 +82,18 @@ async function loadScenarioModule(path: string): Promise<{ config: ScenarioConfi
 
 function computePassRates(trials: Trial[]): { passRate: number; meanScore: number; stdDev: number; passAtK: number; passToK: number } {
   const n = trials.length;
-  if (n === 0) return { passRate: 0, meanScore: 0, stdDev: 0, passAtK: 0, passToK: 0 };
+  if (n === ) return { passRate: , meanScore: , stdDev: , passAtK: , passToK: };
   const passed = trials.filter((t) => t.passed).length;
   const scores = trials.map((t) => t.score);
-  const mean = scores.reduce((a, b) => a + b, 0) / n;
-  const variance = scores.reduce((a, b) => a + (b - mean) ** 2, 0) / n;
+  const mean = scores.reduce((a, b) => a + b, ) / n;
+  const variance = scores.reduce((a, b) => a + (b - mean) , ) / n;
   const passRate = passed / n;
   return {
     passRate,
     meanScore: mean,
     stdDev: Math.sqrt(variance),
-    passAtK: passed >= 1 ? 1 : 0,
-    passToK: passed === n ? 1 : 0,
+    passAtK: passed >= ? : ,
+    passToK: passed === n ? : ,
   };
 }
 
@@ -117,7 +113,7 @@ async function main(): Promise<void> {
   const startedAt = new Date().toISOString();
   const startMs = Date.now();
 
-  for (let i = 1; i <= args.trials; i++) {
+  for (let i = ; i <= args.trials; i++) {
     const trialStart = Date.now();
     let result: ScenarioResult;
     let error: string | undefined;
@@ -132,15 +128,15 @@ async function main(): Promise<void> {
         reasoning: `Scenario threw: ${error}`,
         metCriteria: [],
         unmetCriteria: [],
-        totalTime: (Date.now() - trialStart) / 1000,
+        totalTime: (Date.now() - trialStart) / ,
         error,
       } as ScenarioResult;
     }
 
     const trial = buildTrial({ taskId: scenarioId, trialNumber: i, result, error });
     trials.push(trial);
-    writeFileSync(join(runDir, 'transcripts', `trial_${i}.json`), JSON.stringify(trial, null, 2));
-    process.stderr.write(`  trial ${i}/${args.trials}: ${trial.passed ? 'PASS' : 'FAIL'} score=${trial.score.toFixed(2)}\n`);
+    writeFileSync(join(runDir, 'transcripts', `trial_${i}.json`), JSON.stringify(trial, null, ));
+    process.stderr.write(`  trial ${i}/${args.trials}: ${trial.passed ? 'PASS' : 'FAIL'} score=${trial.score.toFixed()}\n`);
   }
 
   const rates = computePassRates(trials);
@@ -167,16 +163,16 @@ async function main(): Promise<void> {
   };
 
   const runJsonPath = join(runDir, 'run.json');
-  writeFileSync(runJsonPath, JSON.stringify(evalRun, null, 2));
+  writeFileSync(runJsonPath, JSON.stringify(evalRun, null, ));
 
-  process.stderr.write(`\nSummary:\n  pass_rate: ${(rates.passRate * 100).toFixed(1)}%\n  mean_score: ${rates.meanScore.toFixed(2)}\n  pass@k: ${rates.passAtK}  pass^k: ${rates.passToK}\n  run.json: ${runJsonPath}\n\n`);
+  process.stderr.write(`\nSummary:\n  pass_rate: ${(rates.passRate ).toFixed()}%\n  mean_score: ${rates.meanScore.toFixed()}\n  pass@k: ${rates.passAtK}  pass^k: ${rates.passToK}\n  run.json: ${runJsonPath}\n\n`);
 
-  if (args.json) process.stdout.write(JSON.stringify(evalRun, null, 2) + '\n');
+  if (args.json) process.stdout.write(JSON.stringify(evalRun, null, ) + '\n');
 
-  process.exit(rates.passAtK ? 0 : 1);
+  process.exit(rates.passAtK ? : );
 }
 
 main().catch((e) => {
   process.stderr.write(`\nFATAL: ${e instanceof Error ? e.stack ?? e.message : String(e)}\n\n`);
-  process.exit(10);
+  process.exit();
 });

@@ -1,17 +1,13 @@
-#!/usr/bin/env bun
-/**
- * GenerateAnalysis.ts
- *
- * Generates the US Economic State Analysis document
- * by fetching data and producing the structured markdown report.
- *
- * Usage:
- *   bun run GenerateAnalysis.ts [--output=path]
- *
- * Environment:
- *   FRED_API_KEY - Required for FRED data
- *   EIA_API_KEY - Required for energy data
- */
+!/usr/bin/env bun
+/ GenerateAnalysis.ts
+  Generates the US Economic State Analysis document
+ by fetching data and producing the structured markdown report.
+  Usage:
+   bun run GenerateAnalysis.ts [--output=path]
+  Environment:
+   FRED_API_KEY - Required for FRED data
+   EIA_API_KEY - Required for energy data
+ /
 
 import { parseArgs } from "util";
 
@@ -24,19 +20,19 @@ const EIA_API_KEY = process.env.EIA_API_KEY;
 
 // Priority series for the analysis (most impactful metrics)
 const PRIORITY_SERIES = {
-  economic: ["GDPC1", "A191RL1Q225SBEA", "INDPRO", "RSXFS"],
+  economic: ["GDPC", "ARLQSBEA", "INDPRO", "RSXFS"],
   inflation: ["CPIAUCSL", "CPILFESL", "PCEPI", "PCEPILFE"],
-  employment: ["UNRATE", "PAYEMS", "ICSA", "CIVPART", "CES0500000003"],
-  housing: ["MSPUS", "MORTGAGE30US", "HOUST", "CSUSHPINSA"],
+  employment: ["UNRATE", "PAYEMS", "ICSA", "CIVPART", "CES"],
+  housing: ["MSPUS", "MORTGAGEUS", "HOUST", "CSUSHPINSA"],
   consumer: ["UMCSENT", "PSAVERT", "TOTALSL", "DRCCLACBS"],
-  financial: ["FEDFUNDS", "DGS10", "DGS2", "VIXCLS"],
+  financial: ["FEDFUNDS", "DGS", "DGS", "VIXCLS"],
   trade: ["BOPGSTB", "DTWEXBGS"],
   fiscal: ["GFDEBTN", "FYFSD"],
 };
 
 const SERIES_NAMES: Record<string, string> = {
-  "GDPC1": "Real GDP",
-  "A191RL1Q225SBEA": "GDP Growth Rate",
+  "GDPC": "Real GDP",
+  "ARLQSBEA": "GDP Growth Rate",
   "INDPRO": "Industrial Production",
   "RSXFS": "Retail Sales",
   "CPIAUCSL": "CPI All Items",
@@ -47,9 +43,9 @@ const SERIES_NAMES: Record<string, string> = {
   "PAYEMS": "Nonfarm Payrolls",
   "ICSA": "Initial Jobless Claims",
   "CIVPART": "Labor Force Participation",
-  "CES0500000003": "Average Hourly Earnings",
+  "CES": "Average Hourly Earnings",
   "MSPUS": "Median Home Price",
-  "MORTGAGE30US": "30-Year Mortgage Rate",
+  "MORTGAGEUS": "-Year Mortgage Rate",
   "HOUST": "Housing Starts",
   "CSUSHPINSA": "Case-Shiller Index",
   "UMCSENT": "Consumer Sentiment",
@@ -57,8 +53,8 @@ const SERIES_NAMES: Record<string, string> = {
   "TOTALSL": "Consumer Credit",
   "DRCCLACBS": "Credit Card Delinquency",
   "FEDFUNDS": "Fed Funds Rate",
-  "DGS10": "10-Year Treasury",
-  "DGS2": "2-Year Treasury",
+  "DGS": "-Year Treasury",
+  "DGS": "-Year Treasury",
   "VIXCLS": "VIX",
   "BOPGSTB": "Trade Balance",
   "DTWEXBGS": "USD Index",
@@ -81,10 +77,10 @@ interface SeriesResult {
   observations: Observation[];
   latest: Observation | null;
   trends: {
-    "10y": TrendStat | null;
-    "5y": TrendStat | null;
-    "2y": TrendStat | null;
-    "1y": TrendStat | null;
+    "y": TrendStat | null;
+    "y": TrendStat | null;
+    "y": TrendStat | null;
+    "y": TrendStat | null;
   };
 }
 
@@ -96,7 +92,7 @@ interface TrendStat {
   direction: "↑" | "↓" | "→";
 }
 
-async function fetchFredSeries(seriesId: string, years: number = 10): Promise<SeriesResult | null> {
+async function fetchFredSeries(seriesId: string, years: number = ): Promise<SeriesResult | null> {
   if (!FRED_API_KEY) {
     console.error("FRED_API_KEY not set");
     return null;
@@ -106,7 +102,7 @@ async function fetchFredSeries(seriesId: string, years: number = 10): Promise<Se
   const startDate = new Date();
   startDate.setFullYear(startDate.getFullYear() - years);
 
-  const url = `https://api.stlouisfed.org/fred/series/observations?series_id=${seriesId}&api_key=${FRED_API_KEY}&file_type=json&observation_start=${startDate.toISOString().split('T')[0]}&observation_end=${endDate.toISOString().split('T')[0]}`;
+  const url = `https://api.stlouisfed.org/fred/series/observations?series_id=${seriesId}&api_key=${FRED_API_KEY}&file_type=json&observation_start=${startDate.toISOString().split('T')[]}&observation_end=${endDate.toISOString().split('T')[]}`;
 
   try {
     const response = await fetch(url);
@@ -119,14 +115,14 @@ async function fetchFredSeries(seriesId: string, years: number = 10): Promise<Se
       .filter((o: any) => o.value !== ".")
       .map((o: any) => ({ date: o.date, value: parseFloat(o.value) }));
 
-    const latest = observations[observations.length - 1] || null;
+    const latest = observations[observations.length - ] || null;
 
     // Calculate trends
     const trends = {
-      "10y": calculateTrend(observations, 10),
-      "5y": calculateTrend(observations, 5),
-      "2y": calculateTrend(observations, 2),
-      "1y": calculateTrend(observations, 1),
+      "y": calculateTrend(observations, ),
+      "y": calculateTrend(observations, ),
+      "y": calculateTrend(observations, ),
+      "y": calculateTrend(observations, ),
     };
 
     return {
@@ -147,16 +143,16 @@ function calculateTrend(observations: Observation[], years: number): TrendStat |
   cutoff.setFullYear(cutoff.getFullYear() - years);
 
   const filtered = observations.filter(o => new Date(o.date) >= cutoff);
-  if (filtered.length < 2) return null;
+  if (filtered.length < ) return null;
 
-  const start = filtered[0].value;
-  const end = filtered[filtered.length - 1].value;
+  const start = filtered[].value;
+  const end = filtered[filtered.length - ].value;
   const change = end - start;
-  const pctChange = (change / Math.abs(start)) * 100;
+  const pctChange = (change / Math.abs(start)) ;
 
   let direction: "↑" | "↓" | "→";
-  if (Math.abs(pctChange) < 2) direction = "→";
-  else if (pctChange > 0) direction = "↑";
+  if (Math.abs(pctChange) < ) direction = "→";
+  else if (pctChange > ) direction = "↑";
   else direction = "↓";
 
   return { start, end, change, pctChange, direction };
@@ -165,14 +161,14 @@ function calculateTrend(observations: Observation[], years: number): TrendStat |
 async function fetchEIAGasPrice(): Promise<{ value: number; date: string } | null> {
   if (!EIA_API_KEY) return null;
 
-  const url = `https://api.eia.gov/v2/petroleum/pri/gnd/data/?api_key=${EIA_API_KEY}&frequency=weekly&data[0]=value&facets[product][]=EPMR&facets[duession][]=Y&sort[0][column]=period&sort[0][direction]=desc&length=1`;
+  const url = `https://api.eia.gov/v/petroleum/pri/gnd/data/?api_key=${EIA_API_KEY}&frequency=weekly&data[]=value&facets[product][]=EPMR&facets[duession][]=Y&sort[][column]=period&sort[][direction]=desc&length=`;
 
   try {
     const response = await fetch(url);
     if (!response.ok) return null;
 
     const data = await response.json();
-    const item = data.response?.data?.[0];
+    const item = data.response?.data?.[];
     if (!item) return null;
 
     return { value: parseFloat(item.value), date: item.period };
@@ -187,85 +183,84 @@ async function fetchEIAGasPrice(): Promise<{ value: number; date: string } | nul
 
 function formatValue(value: number, seriesId: string): string {
   // Format based on series type
-  if (["UNRATE", "CIVPART", "PSAVERT", "MORTGAGE30US", "FEDFUNDS", "DGS10", "DGS2", "DRCCLACBS"].includes(seriesId)) {
-    return `${value.toFixed(1)}%`;
+  if (["UNRATE", "CIVPART", "PSAVERT", "MORTGAGEUS", "FEDFUNDS", "DGS", "DGS", "DRCCLACBS"].includes(seriesId)) {
+    return `${value.toFixed()}%`;
   }
-  if (["GDPC1", "GFDEBTN", "BOPGSTB", "TOTALSL"].includes(seriesId)) {
-    return value >= 1000000 ? `$${(value / 1000000).toFixed(2)}T` : `$${(value / 1000).toFixed(1)}B`;
+  if (["GDPC", "GFDEBTN", "BOPGSTB", "TOTALSL"].includes(seriesId)) {
+    return value >= ? `$${(value / ).toFixed()}T` : `$${(value / ).toFixed()}B`;
   }
   if (["MSPUS"].includes(seriesId)) {
-    return `$${(value / 1000).toFixed(0)}K`;
+    return `$${(value / ).toFixed()}K`;
   }
   if (["PAYEMS", "ICSA"].includes(seriesId)) {
-    return value >= 1000 ? `${(value / 1000).toFixed(1)}M` : `${value.toFixed(0)}K`;
+    return value >= ? `${(value / ).toFixed()}M` : `${value.toFixed()}K`;
   }
-  return value.toFixed(2);
+  return value.toFixed();
 }
 
 function generateMarkdown(results: Map<string, SeriesResult>, gasPrice: { value: number; date: string } | null): string {
-  const now = new Date().toISOString().replace('T', ' ').split('.')[0];
+  const now = new Date().toISOString().replace('T', ' ').split('.')[];
 
-  let md = `# US Economic State Analysis
+  let md = `US Economic State Analysis
 
-**Generated:** ${now}
-**Data Period:** 10 years through present
-**Sources:** Federal Reserve Economic Data (FRED), Energy Information Administration (EIA)
+Generated:${now}
+Data Period:years through present
+Sources:Federal Reserve Economic Data (FRED), Energy Information Administration (EIA)
 
 ---
 
-## Executive Summary
+Executive Summary
 
 `;
 
   // Build summary based on key metrics
   const unrate = results.get("UNRATE");
   const cpi = results.get("CPIAUCSL");
-  const gdp = results.get("GDPC1");
+  const gdp = results.get("GDPC");
   const fedfunds = results.get("FEDFUNDS");
 
   if (unrate?.latest) {
-    md += `- **Unemployment** at ${formatValue(unrate.latest.value, "UNRATE")} (${unrate.trends["1y"]?.direction || "→"} YoY)\n`;
+    md += `- Unemploymentat ${formatValue(unrate.latest.value, "UNRATE")} (${unrate.trends["y"]?.direction || "→"} YoY)\n`;
   }
-  if (cpi?.trends["1y"]) {
-    md += `- **Inflation (CPI)** running ${cpi.trends["1y"].pctChange.toFixed(1)}% YoY\n`;
+  if (cpi?.trends["y"]) {
+    md += `- Inflation (CPI)running ${cpi.trends["y"].pctChange.toFixed()}% YoY\n`;
   }
-  if (gdp?.trends["1y"]) {
-    md += `- **Real GDP** ${gdp.trends["1y"].direction} ${Math.abs(gdp.trends["1y"].pctChange).toFixed(1)}% over past year\n`;
+  if (gdp?.trends["y"]) {
+    md += `- Real GDP${gdp.trends["y"].direction} ${Math.abs(gdp.trends["y"].pctChange).toFixed()}% over past year\n`;
   }
   if (fedfunds?.latest) {
-    md += `- **Fed Funds Rate** at ${formatValue(fedfunds.latest.value, "FEDFUNDS")}\n`;
+    md += `- Fed Funds Rateat ${formatValue(fedfunds.latest.value, "FEDFUNDS")}\n`;
   }
   if (gasPrice) {
-    md += `- **Gas Prices** at $${gasPrice.value.toFixed(2)}/gallon (as of ${gasPrice.date})\n`;
+    md += `- Gas Pricesat $${gasPrice.value.toFixed()}/gallon (as of ${gasPrice.date})\n`;
   }
 
   md += `
 ---
 
-## Current Snapshot
+Current Snapshot
 
-| Category | Metric | Current | 1Y Change | Trend |
+| Category | Metric | Current | Y Change | Trend |
 |----------|--------|---------|-----------|-------|
 `;
 
   // Snapshot table
   const categories = [
-    { name: "Economy", ids: ["GDPC1", "A191RL1Q225SBEA"] },
+    { name: "Economy", ids: ["GDPC", "ARLQSBEA"] },
     { name: "Inflation", ids: ["CPIAUCSL", "PCEPILFE"] },
     { name: "Employment", ids: ["UNRATE", "PAYEMS"] },
-    { name: "Housing", ids: ["MSPUS", "MORTGAGE30US"] },
+    { name: "Housing", ids: ["MSPUS", "MORTGAGEUS"] },
     { name: "Consumer", ids: ["UMCSENT", "PSAVERT"] },
-    { name: "Markets", ids: ["FEDFUNDS", "DGS10"] },
+    { name: "Markets", ids: ["FEDFUNDS", "DGS"] },
   ];
 
   for (const cat of categories) {
     for (const id of cat.ids) {
       const r = results.get(id);
-      if (r?.latest && r.trends["1y"]) {
-        const changeStr = r.trends["1y"].pctChange >= 0
-          ? `+${r.trends["1y"].pctChange.toFixed(1)}%`
-          : `${r.trends["1y"].pctChange.toFixed(1)}%`;
-        md += `| ${cat.name} | ${r.name} | ${formatValue(r.latest.value, id)} | ${changeStr} | ${r.trends["1y"].direction} |\n`;
+      if (r?.latest && r.trends["y"]) {
+        const changeStr = r.trends["y"].pctChange >=           ? `+${r.trends["y"].pctChange.toFixed()}%`
+          : `${r.trends["y"].pctChange.toFixed()}%`;
+        md += `| ${cat.name} | ${r.name} | ${formatValue(r.latest.value, id)} | ${changeStr} | ${r.trends["y"].direction} |\n`;
       }
     }
   }
@@ -273,7 +268,7 @@ function generateMarkdown(results: Map<string, SeriesResult>, gasPrice: { value:
   md += `
 ---
 
-## Detailed Trend Analysis
+Detailed Trend Analysis
 
 `;
 
@@ -290,18 +285,18 @@ function generateMarkdown(results: Map<string, SeriesResult>, gasPrice: { value:
   ];
 
   for (const cat of categoryDetails) {
-    md += `### ${cat.title}\n\n`;
-    md += `| Metric | Current | 10Y | 5Y | 2Y | 1Y |\n`;
+    md += `${cat.title}\n\n`;
+    md += `| Metric | Current | Y | Y | Y | Y |\n`;
     md += `|--------|---------|-----|----|----|----|\n`;
 
     for (const id of cat.ids) {
       const r = results.get(id);
       if (r?.latest) {
-        const t10 = r.trends["10y"] ? `${r.trends["10y"].pctChange >= 0 ? "+" : ""}${r.trends["10y"].pctChange.toFixed(1)}%` : "—";
-        const t5 = r.trends["5y"] ? `${r.trends["5y"].pctChange >= 0 ? "+" : ""}${r.trends["5y"].pctChange.toFixed(1)}%` : "—";
-        const t2 = r.trends["2y"] ? `${r.trends["2y"].pctChange >= 0 ? "+" : ""}${r.trends["2y"].pctChange.toFixed(1)}%` : "—";
-        const t1 = r.trends["1y"] ? `${r.trends["1y"].pctChange >= 0 ? "+" : ""}${r.trends["1y"].pctChange.toFixed(1)}%` : "—";
-        md += `| ${r.name} | ${formatValue(r.latest.value, id)} | ${t10} | ${t5} | ${t2} | ${t1} |\n`;
+        const t= r.trends["y"] ? `${r.trends["y"].pctChange >= ? "+" : ""}${r.trends["y"].pctChange.toFixed()}%` : "—";
+        const t= r.trends["y"] ? `${r.trends["y"].pctChange >= ? "+" : ""}${r.trends["y"].pctChange.toFixed()}%` : "—";
+        const t= r.trends["y"] ? `${r.trends["y"].pctChange >= ? "+" : ""}${r.trends["y"].pctChange.toFixed()}%` : "—";
+        const t= r.trends["y"] ? `${r.trends["y"].pctChange >= ? "+" : ""}${r.trends["y"].pctChange.toFixed()}%` : "—";
+        md += `| ${r.name} | ${formatValue(r.latest.value, id)} | ${t} | ${t} | ${t} | ${t} |\n`;
       }
     }
     md += `\n`;
@@ -309,17 +304,17 @@ function generateMarkdown(results: Map<string, SeriesResult>, gasPrice: { value:
 
   md += `---
 
-## Cross-Metric Analysis
+Cross-Metric Analysis
 
-### Inflation-Employment Dynamics
+Inflation-Employment Dynamics
 
 `;
 
-  if (unrate?.latest && cpi?.trends["1y"]) {
-    md += `Current unemployment (${formatValue(unrate.latest.value, "UNRATE")}) with CPI change of ${cpi.trends["1y"].pctChange.toFixed(1)}% YoY suggests `;
-    if (unrate.latest.value < 4.5 && cpi.trends["1y"].pctChange > 3) {
+  if (unrate?.latest && cpi?.trends["y"]) {
+    md += `Current unemployment (${formatValue(unrate.latest.value, "UNRATE")}) with CPI change of ${cpi.trends["y"].pctChange.toFixed()}% YoY suggests `;
+    if (unrate.latest.value < .&& cpi.trends["y"].pctChange > ) {
       md += `a tight labor market with persistent inflationary pressure.\n`;
-    } else if (unrate.latest.value < 4.5 && cpi.trends["1y"].pctChange < 3) {
+    } else if (unrate.latest.value < .&& cpi.trends["y"].pctChange < ) {
       md += `the economy is approaching a "soft landing" scenario.\n`;
     } else {
       md += `moderate labor market conditions.\n`;
@@ -327,29 +322,29 @@ function generateMarkdown(results: Map<string, SeriesResult>, gasPrice: { value:
   }
 
   md += `
-### Yield Curve Status
+Yield Curve Status
 
 `;
 
-  const dgs10 = results.get("DGS10");
-  const dgs2 = results.get("DGS2");
-  if (dgs10?.latest && dgs2?.latest) {
-    const spread = dgs10.latest.value - dgs2.latest.value;
-    md += `- 10Y Treasury: ${formatValue(dgs10.latest.value, "DGS10")}\n`;
-    md += `- 2Y Treasury: ${formatValue(dgs2.latest.value, "DGS2")}\n`;
-    md += `- Spread: ${spread.toFixed(2)}pp (${spread < 0 ? "INVERTED - recessionary signal" : "Normal"})\n`;
+  const dgs= results.get("DGS");
+  const dgs= results.get("DGS");
+  if (dgs?.latest && dgs?.latest) {
+    const spread = dgs.latest.value - dgs.latest.value;
+    md += `- Y Treasury: ${formatValue(dgs.latest.value, "DGS")}\n`;
+    md += `- Y Treasury: ${formatValue(dgs.latest.value, "DGS")}\n`;
+    md += `- Spread: ${spread.toFixed()}pp (${spread < ? "INVERTED - recessionary signal" : "Normal"})\n`;
   }
 
   md += `
-### Housing Affordability
+Housing Affordability
 
 `;
 
   const homePrice = results.get("MSPUS");
-  const mortgage = results.get("MORTGAGE30US");
+  const mortgage = results.get("MORTGAGEUS");
   if (homePrice?.latest && mortgage?.latest) {
-    md += `With median home price at ${formatValue(homePrice.latest.value, "MSPUS")} and mortgage rates at ${formatValue(mortgage.latest.value, "MORTGAGE30US")}, `;
-    if (homePrice.latest.value > 400000 && mortgage.latest.value > 6) {
+    md += `With median home price at ${formatValue(homePrice.latest.value, "MSPUS")} and mortgage rates at ${formatValue(mortgage.latest.value, "MORTGAGEUS")}, `;
+    if (homePrice.latest.value > && mortgage.latest.value > ) {
       md += `housing affordability remains severely stressed.\n`;
     } else {
       md += `housing affordability is challenging but stabilizing.\n`;
@@ -359,48 +354,48 @@ function generateMarkdown(results: Map<string, SeriesResult>, gasPrice: { value:
   md += `
 ---
 
-## Pattern Detection
+Pattern Detection
 
-### Historical Extremes
+Historical Extremes
 
 `;
 
   // Check for extremes
   const extremes: string[] = [];
   for (const [id, r] of results) {
-    if (r.trends["10y"]) {
-      if (Math.abs(r.trends["10y"].pctChange) > 50) {
-        extremes.push(`- **${r.name}**: ${r.trends["10y"].pctChange > 0 ? "+" : ""}${r.trends["10y"].pctChange.toFixed(0)}% over 10 years (significant move)`);
+    if (r.trends["y"]) {
+      if (Math.abs(r.trends["y"].pctChange) > ) {
+        extremes.push(`- ${r.name}: ${r.trends["y"].pctChange > ? "+" : ""}${r.trends["y"].pctChange.toFixed()}% over years (significant move)`);
       }
     }
   }
 
-  if (extremes.length > 0) {
+  if (extremes.length > ) {
     md += extremes.join("\n") + "\n";
   } else {
     md += "No extreme outliers detected in current data.\n";
   }
 
   md += `
-### Recent Momentum Shifts
+Recent Momentum Shifts
 
 `;
 
   // Look for acceleration/deceleration
   const shifts: string[] = [];
   for (const [id, r] of results) {
-    if (r.trends["5y"] && r.trends["1y"]) {
-      const fiveYrAnnual = r.trends["5y"].pctChange / 5;
-      const oneYr = r.trends["1y"].pctChange;
-      if (Math.abs(oneYr) > Math.abs(fiveYrAnnual) * 2 && Math.abs(oneYr) > 5) {
-        shifts.push(`- **${r.name}**: Accelerating (1Y: ${oneYr.toFixed(1)}% vs 5Y avg: ${fiveYrAnnual.toFixed(1)}%/yr)`);
-      } else if (Math.abs(oneYr) < Math.abs(fiveYrAnnual) / 2 && Math.abs(fiveYrAnnual) > 5) {
-        shifts.push(`- **${r.name}**: Decelerating (1Y: ${oneYr.toFixed(1)}% vs 5Y avg: ${fiveYrAnnual.toFixed(1)}%/yr)`);
+    if (r.trends["y"] && r.trends["y"]) {
+      const fiveYrAnnual = r.trends["y"].pctChange / ;
+      const oneYr = r.trends["y"].pctChange;
+      if (Math.abs(oneYr) > Math.abs(fiveYrAnnual) && Math.abs(oneYr) > ) {
+        shifts.push(`- ${r.name}: Accelerating (Y: ${oneYr.toFixed()}% vs Y avg: ${fiveYrAnnual.toFixed()}%/yr)`);
+      } else if (Math.abs(oneYr) < Math.abs(fiveYrAnnual) / && Math.abs(fiveYrAnnual) > ) {
+        shifts.push(`- ${r.name}: Decelerating (Y: ${oneYr.toFixed()}% vs Y avg: ${fiveYrAnnual.toFixed()}%/yr)`);
       }
     }
   }
 
-  if (shifts.length > 0) {
+  if (shifts.length > ) {
     md += shifts.join("\n") + "\n";
   } else {
     md += "No significant momentum shifts detected.\n";
@@ -409,40 +404,39 @@ function generateMarkdown(results: Map<string, SeriesResult>, gasPrice: { value:
   md += `
 ---
 
-## Research Recommendations
+Research Recommendations
 
-### High Priority Investigations
+High Priority Investigations
 
-1. **Labor Market Dynamics**: Examine the relationship between job openings, quit rate, and wage growth
-2. **Inflation Persistence**: Analyze components of CPI to identify sticky inflation drivers
-3. **Housing Market**: Investigate regional variations in home prices vs. mortgage rate sensitivity
+. Labor Market Dynamics: Examine the relationship between job openings, quit rate, and wage growth
+. Inflation Persistence: Analyze components of CPI to identify sticky inflation drivers
+. Housing Market: Investigate regional variations in home prices vs. mortgage rate sensitivity
 
-### Risks to Monitor
+Risks to Monitor
 
-1. **Credit Conditions**: Watch credit card delinquency and consumer credit growth rates
-2. **Yield Curve**: Monitor 10Y-2Y spread for recession signals
-3. **Consumer Sentiment**: Track sentiment vs. actual spending divergence
+. Credit Conditions: Watch credit card delinquency and consumer credit growth rates
+. Yield Curve: Monitor Y-Y spread for recession signals
+. Consumer Sentiment: Track sentiment vs. actual spending divergence
 
-### Data Gaps
+Data Gaps
 
-1. Add regional breakdowns for key metrics
-2. Include leading economic indicators (LEI)
-3. Add wage growth by sector data
-
----
-
-## Sources
-
-- **FRED (Federal Reserve Economic Data)**: Primary source for most indicators
-- **EIA (Energy Information Administration)**: Gas and oil prices
-- **Treasury FiscalData**: Federal debt and deficit data
-- **BLS (Bureau of Labor Statistics)**: Employment statistics
-- **Census Bureau**: Housing data
+. Add regional breakdowns for key metrics
+. Include leading economic indicators (LEI)
+. Add wage growth by sector data
 
 ---
 
-*Analysis generated by US-Metrics skill using Substrate US-Common-Metrics dataset*
-`;
+Sources
+
+- FRED (Federal Reserve Economic Data): Primary source for most indicators
+- EIA (Energy Information Administration): Gas and oil prices
+- Treasury FiscalData: Federal debt and deficit data
+- BLS (Bureau of Labor Statistics): Employment statistics
+- Census Bureau: Housing data
+
+---
+
+Analysis generated by US-Metrics skill using Substrate US-Common-Metrics dataset`;
 
   return md;
 }
@@ -453,7 +447,7 @@ function generateMarkdown(results: Map<string, SeriesResult>, gasPrice: { value:
 
 async function main() {
   const { values } = parseArgs({
-    args: Bun.argv.slice(2),
+    args: Bun.argv.slice(),
     options: {
       output: { type: "string" },
       help: { type: "boolean", short: "h" },
@@ -476,7 +470,7 @@ Environment:
   FRED_API_KEY   Required for FRED data
   EIA_API_KEY    Optional for gas prices
 `);
-    process.exit(0);
+    process.exit();
   }
 
   console.error("Fetching data from FRED API...");
@@ -487,12 +481,12 @@ Environment:
   const allSeries = Object.values(PRIORITY_SERIES).flat();
   for (const id of allSeries) {
     console.error(`  Fetching ${id}...`);
-    const result = await fetchFredSeries(id, 10);
+    const result = await fetchFredSeries(id, );
     if (result) {
       results.set(id, result);
     }
     // Small delay to be nice to the API
-    await new Promise(r => setTimeout(r, 100));
+    await new Promise(r => setTimeout(r, ));
   }
 
   console.error("Fetching gas prices from EIA...");

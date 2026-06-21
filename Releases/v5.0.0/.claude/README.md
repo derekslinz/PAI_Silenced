@@ -25,7 +25,7 @@
 - [Claude Code](https://docs.claude.com/claude-code) installed
 - An [Anthropic API key](https://console.anthropic.com/) (required — Claude Code uses it)
 
-### ⚠️ Important: back up existing `~/.claude/` first
+###  Important: back up existing `~/.claude/` first
 
 If you already use Claude Code, `~/.claude/` already exists with your settings, hooks, and agents. **Back it up before installing PAI:**
 
@@ -70,18 +70,18 @@ In your first Claude session, run `/interview` to personalize your DA with your 
 
 ```
 ~/.claude/
-├── CLAUDE.md                    # operational procedures + context routing
-├── settings.json                # Claude Code config + DA identity
-├── PAI/                         # the engine
-│   ├── ALGORITHM/v3.29.0.md     # the universal problem-solving framework
-│   ├── DOCUMENTATION/           # every subsystem fully documented
-│   ├── PULSE/                   # daemon, menu bar, scheduled tasks
-│   ├── TOOLS/                   # CLI utilities (Inference, GenerateTelosSummary, etc.)
-│   └── USER/                    # YOUR scaffolds — ABOUTME, TELOS/, DA_IDENTITY, etc.
-├── skills/                      # 40+ composable capabilities
-├── agents/                      # specialist subagent definitions
-├── hooks/                       # lifecycle integration (SessionStart → Stop)
-└── MEMORY/                      # durable knowledge + active work state
+ CLAUDE.md                    # operational procedures + context routing
+ settings.json                # Claude Code config + DA identity
+ PAI/                         # the engine
+    ALGORITHM/v3.29.0.md     # the universal problem-solving framework
+    DOCUMENTATION/           # every subsystem fully documented
+    PULSE/                   # daemon, menu bar, scheduled tasks
+    TOOLS/                   # CLI utilities (Inference, GenerateTelosSummary, etc.)
+    USER/                    # YOUR scaffolds — ABOUTME, TELOS/, DA_IDENTITY, etc.
+ skills/                      # 40+ composable capabilities
+ agents/                      # specialist subagent definitions
+ hooks/                       # lifecycle integration (SessionStart → Stop)
+ MEMORY/                      # durable knowledge + active work state
 ```
 
 The DA reads `CLAUDE.md` at every session start, which `@`-imports your identity, DA personality, projects, and TELOS. Every skill, agent, and hook composes with these durable contexts.

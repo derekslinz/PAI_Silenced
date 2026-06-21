@@ -75,7 +75,7 @@ function loadSettings(): Settings {
     try {
       return JSON.parse(readFileSync(settingsPath, 'utf-8'));
     } catch (err) {
-      console.error(`⚠️ Failed to parse settings.json: ${err}`);
+      console.error(` Failed to parse settings.json: ${err}`);
     }
   }
   return {};
@@ -114,7 +114,7 @@ function loadRelationshipContext(paiDir: string): string | null {
         parts.push(highConfidence.slice(0, 6).join('\n'));
       }
     } catch (err) {
-      console.error(`⚠️ Failed to load opinions: ${err}`);
+      console.error(` Failed to load opinions: ${err}`);
     }
   }
 
@@ -300,7 +300,7 @@ function getRecentWorkSessions(paiDir: string): WorkSession[] {
       } catch { /* skip malformed */ }
     }
   } catch (err) {
-    console.error(`⚠️ Error scanning WORK dirs: ${err}`);
+    console.error(` Error scanning WORK dirs: ${err}`);
   }
 
   return sessions;
@@ -353,7 +353,7 @@ function getProjectProgress(paiDir: string): WorkSession[] {
       } catch { /* skip malformed */ }
     }
   } catch (err) {
-    console.error(`⚠️ Error reading progress files: ${err}`);
+    console.error(` Error reading progress files: ${err}`);
   }
 
   return sessions;
@@ -370,12 +370,12 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
     return null;
   }
 
-  let summary = '\n📋 ACTIVE WORK:\n';
+  let summary = '\n ACTIVE WORK:\n';
 
   if (recentSessions.length > 0) {
-    summary += '\n  ── Recent Sessions (last 48h) ──\n';
+    summary += '\n   Recent Sessions (last 48h) \n';
     for (const s of recentSessions) {
-      summary += `\n  ⚡ ${s.title}\n`;
+      summary += `\n   ${s.title}\n`;
       summary += `     ${s.timestamp} | Status: ${s.status}\n`;
       if (s.isa) {
         summary += `     ISA: ${s.isa.id} (${s.isa.status}, ${s.isa.progress})\n`;
@@ -384,10 +384,10 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
   }
 
   if (projects.length > 0) {
-    summary += '\n  ── Tracked Projects ──\n';
+    summary += '\n   Tracked Projects \n';
     for (const proj of projects) {
-      const staleTag = proj.stale ? ' ⚠️ STALE (>14d)' : '';
-      summary += `\n  ${proj.stale ? '🟡' : '🔵'} ${proj.name}${staleTag}\n`;
+      const staleTag = proj.stale ? '  STALE (>14d)' : '';
+      summary += `\n  ${proj.stale ? '' : ''} ${proj.name}${staleTag}\n`;
 
       if (proj.objectives && proj.objectives.length > 0) {
         summary += '     Objectives:\n';
@@ -406,8 +406,8 @@ async function checkActiveProgress(paiDir: string): Promise<string | null> {
   }
 
   const toolsDir = paiDir + '/Tools';
-  summary += `\n💡 To resume project: \`bun run ${toolsDir}/SessionProgress.ts resume <project>\`\n`;
-  summary += `💡 To complete project: \`bun run ${toolsDir}/SessionProgress.ts complete <project>\`\n`;
+  summary += `\n To resume project: \`bun run ${toolsDir}/SessionProgress.ts resume <project>\`\n`;
+  summary += ` To complete project: \`bun run ${toolsDir}/SessionProgress.ts complete <project>\`\n`;
 
   return summary;
 }
@@ -420,7 +420,7 @@ async function main() {
                       process.env.CLAUDE_AGENT_TYPE !== undefined;
 
     if (isSubagent) {
-      console.error('🤖 Subagent session - skipping context loading');
+      console.error(' Subagent session - skipping context loading');
       process.exit(0);
     }
 
@@ -430,11 +430,11 @@ async function main() {
 
     // Record session start time for notification timing
     recordSessionStart();
-    console.error('⏱️ Session start time recorded');
+    console.error('⏱ Session start time recorded');
 
     // Load settings for dynamic context controls
     const settings = loadSettings();
-    console.error('✅ Loaded settings.json');
+    console.error(' Loaded settings.json');
 
     // v5.0: Static startup files now loaded via @imports in CLAUDE.md (native Claude Code mechanism)
 
@@ -443,10 +443,10 @@ async function main() {
     if (isDynamicEnabled(settings, 'relationshipContext')) {
       relationshipContext = loadRelationshipContext(paiDir);
       if (relationshipContext) {
-        console.error(`💕 Loaded relationship context (${relationshipContext.length} chars)`);
+        console.error(` Loaded relationship context (${relationshipContext.length} chars)`);
       }
     } else {
-      console.error('⏭️ Skipped relationship context (disabled)');
+      console.error('⏭ Skipped relationship context (disabled)');
     }
 
     // Load learning readback context
@@ -458,7 +458,7 @@ async function main() {
       const signalTrends = loadSignalTrends(paiDir);
       const synthesisPatterns = loadSynthesisPatterns(paiDir);
       if (synthesisPatterns) {
-        console.error(`🧭 Loaded synthesis patterns (${synthesisPatterns.length} chars)`);
+        console.error(` Loaded synthesis patterns (${synthesisPatterns.length} chars)`);
       }
 
       const learningParts: string[] = [];
@@ -473,10 +473,10 @@ async function main() {
         : '';
 
       if (learningParts.length > 0) {
-        console.error(`📚 Loaded learning context: ${learningParts.length} sections (${learningContext.length} chars)`);
+        console.error(` Loaded learning context: ${learningParts.length} sections (${learningContext.length} chars)`);
       }
     } else {
-      console.error('⏭️ Skipped learning readback (disabled)');
+      console.error('⏭ Skipped learning readback (disabled)');
     }
 
     // Inject dynamic context if we have any
@@ -489,9 +489,9 @@ Dynamic context loaded. Constitutional rules are in the system prompt (PAI/PAI_S
 </system-reminder>`;
 
       console.log(message);
-      console.log('\n✅ PAI dynamic context loaded...');
+      console.log('\n PAI dynamic context loaded...');
     } else {
-      console.log('\n✅ PAI session ready...');
+      console.log('\n PAI session ready...');
     }
 
     // Active work summary
@@ -499,16 +499,16 @@ Dynamic context loaded. Constitutional rules are in the system prompt (PAI/PAI_S
       const activeProgress = await checkActiveProgress(paiDir);
       if (activeProgress) {
         console.log(activeProgress);
-        console.error(`📋 Active work summary loaded (${activeProgress.length} chars)`);
+        console.error(` Active work summary loaded (${activeProgress.length} chars)`);
       }
     } else {
-      console.error('⏭️ Skipped active work summary (disabled)');
+      console.error('⏭ Skipped active work summary (disabled)');
     }
 
-    console.error('✅ PAI session initialization complete (v5.0 — static context via @imports)');
+    console.error(' PAI session initialization complete (v5.0 — static context via @imports)');
     process.exit(0);
   } catch (error) {
-    console.error('❌ Error in LoadContext hook:', error);
+    console.error(' Error in LoadContext hook:', error);
     process.exit(0); // Non-fatal — don't block session startup
   }
 }

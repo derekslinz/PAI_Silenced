@@ -28,7 +28,7 @@ const TRUSTED_PREFIXES = [
   '/var/folders/',
 ];
 
-// ── Permission Cache ──
+//  Permission Cache 
 
 interface PermissionCache {
   [toolKey: string]: 'allow' | 'ask';
@@ -58,7 +58,7 @@ function saveCache(): void {
   }
 }
 
-// ── Path Classification ──
+//  Path Classification 
 
 function isTrustedPath(filePath: string): boolean {
   const expanded = filePath.startsWith('~')
@@ -79,7 +79,7 @@ function bashTargetsTrustedPath(command: string): boolean {
   return patterns.some(p => command.includes(p));
 }
 
-// ── Read/Write Classification ──
+//  Read/Write Classification 
 
 async function classifyReadWrite(toolName: string, toolInput: Record<string, unknown>): Promise<'read' | 'write'> {
   // Static classification for known tools
@@ -106,7 +106,7 @@ async function classifyReadWrite(toolName: string, toolInput: Record<string, unk
   return 'write'; // Default to write (conservative)
 }
 
-// ── Main ──
+//  Main 
 
 async function main(): Promise<void> {
   const { readFileSync } = await import('fs');

@@ -5,14 +5,14 @@
  * in the tab title system. NOT related to Algorithm format.
  *
  * Tab title validators enforce the state machine:
- *   - Working titles (⚙️): gerund start ("Fixing auth bug.")
- *   - Completion titles (✓): past tense, NO gerund ("Fixed auth bug.")
+ *   - Working titles (): gerund start ("Fixing auth bug.")
+ *   - Completion titles (): past tense, NO gerund ("Fixed auth bug.")
  *   - Question titles: noun phrase, no period ("Auth method")
  *
  * Renamed from response-format.ts (v0.2.32) — old name was misleading.
  */
 
-// ─── Tab Title Validation ───────────────────────────────────────
+//  Tab Title Validation 
 
 // Incomplete endings — dangling articles, prepositions, conjunctions
 const INCOMPLETE_ENDINGS = new Set([
@@ -56,7 +56,7 @@ function isValidTitleBase(text: string): { valid: boolean; firstWord: string } {
 
 /**
  * Working-phase title: MUST start with gerund (-ing verb).
- * Used by UpdateTabTitle for 🧠/⚙️ titles.
+ * Used by UpdateTabTitle for / titles.
  */
 export function isValidWorkingTitle(text: string): boolean {
   const { valid, firstWord } = isValidTitleBase(text);
@@ -68,7 +68,7 @@ export function isValidWorkingTitle(text: string): boolean {
 /**
  * Completion-phase title: must NOT start with gerund.
  * Past tense or other non-gerund verb forms.
- * Used by TabState for ✓ titles.
+ * Used by TabState for  titles.
  */
 export function isValidCompletionTitle(text: string): boolean {
   const { valid, firstWord } = isValidTitleBase(text);
@@ -91,7 +91,7 @@ export function isValidQuestionTitle(text: string): boolean {
   return true;
 }
 
-// ─── Progressive Title Trimming ─────────────────────────────────
+//  Progressive Title Trimming 
 
 /**
  * Try progressively shorter word counts (from maxWords down to 2) until valid.
@@ -113,7 +113,7 @@ export function trimToValidTitle(
   return null;
 }
 
-// ─── Fallbacks ──────────────────────────────────────────────────
+//  Fallbacks 
 
 export function getWorkingFallback(): string {
   return 'Analyzing input.';
@@ -128,7 +128,7 @@ export function getQuestionFallback(): string {
 }
 
 
-// ─── Past Tense Conversion ─────────────────────────────────────
+//  Past Tense Conversion 
 
 const IRREGULAR_PAST: Record<string, string> = {
   building: 'Built', running: 'Ran', writing: 'Wrote', reading: 'Read',

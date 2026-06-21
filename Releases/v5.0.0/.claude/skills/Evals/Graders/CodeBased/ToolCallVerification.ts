@@ -1,7 +1,6 @@
-/**
- * Tool Call Verification Grader
- * Verify that specific tools were called with expected parameters
- */
+/ Tool Call Verification Grader
+ Verify that specific tools were called with expected parameters
+ /
 
 import { BaseGrader, registerGrader, type GraderContext } from '../Base.ts';
 import type { GraderConfig, GraderResult, ToolCallsParams } from '../../Types/index.ts';
@@ -29,8 +28,8 @@ export class ToolCallVerificationGrader extends BaseGrader {
               const actual = tc.params[key];
 
               // Support glob patterns for paths
-              if (typeof expected === 'string' && expected.includes('*')) {
-                const pattern = new RegExp('^' + expected.replace(/\*/g, '.*') + '$');
+              if (typeof expected === 'string' && expected.includes('')) {
+                const pattern = new RegExp('^' + expected.replace(/\/g, '.') + '$');
                 if (!pattern.test(String(actual))) return false;
               } else if (actual !== expected) {
                 return false;
@@ -45,7 +44,7 @@ export class ToolCallVerificationGrader extends BaseGrader {
           check: `required.${req.tool}`,
           passed: !!matchingCall,
           details: matchingCall
-            ? `Found: ${JSON.stringify(matchingCall.params).slice(0, 100)}`
+            ? `Found: ${JSON.stringify(matchingCall.params).slice(, )}`
             : `Not found in ${toolCalls.length} tool calls`,
         });
       }
@@ -66,7 +65,7 @@ export class ToolCallVerificationGrader extends BaseGrader {
     // Check sequence (tools must be called in order)
     if (params.sequence) {
       const toolOrder = toolCalls.map(tc => tc.name);
-      let seqIndex = 0;
+      let seqIndex = ;
 
       for (const tool of toolOrder) {
         if (seqIndex < params.sequence.length && tool === params.sequence[seqIndex]) {
@@ -95,7 +94,7 @@ export class ToolCallVerificationGrader extends BaseGrader {
     }
 
     const passCount = checks.filter(c => c.passed).length;
-    const score = checks.length > 0 ? passCount / checks.length : 1;
+    const score = checks.length > ? passCount / checks.length : ;
     const passed = passCount === checks.length;
 
     return this.createResult(score, passed, performance.now() - start, {

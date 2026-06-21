@@ -1,23 +1,21 @@
-# Humanize: Turn stiff AI text 🤖 into human-sounding gold 🪙
-
-**Humanize** aims to help make AI writing sound more like a real person wrote it. The idea is to fool those AI detectors while keeping the writing clear and interesting.
+Humanize: Turn stiff AI text into human-sounding gold 
+Humanizeaims to help make AI writing sound more like a real person wrote it. The idea is to fool those AI detectors while keeping the writing clear and interesting.
 
 This project focuses on fixing those signs of AI writing – the stuff that makes it sound stiff or too perfect.
 
-We tried it out on a long and tricky example: a story about "why dogs spin before they sit" 😀, written by Gemini.  Here's how the output did on some AI checkers:
+We tried it out on a long and tricky example: a story about "why dogs spin before they sit" , written by Gemini.  Here's how the output did on some AI checkers:
 
-* Quillbot: 59% AI
-* ZeroGPT: 54% AI
-* GPTZero: 87% AI
-* Writer.com: 15% AI
+Quillbot: % AI
+ZeroGPT: % AI
+GPTZero: % AI
+Writer.com: % AI
 
-Other example give 0% score, so it reall depends on the input text, which AI and which scanner you use.
+Other example give % score, so it reall depends on the input text, which AI and which scanner you use.
 
-Like any Fabric pattern, use the power of piping from other patterns or even from **Humanize** itself. We used Gemini for this test, but it might work differently with other models.  So play around and see what you find... and yes, this text have been Humanized (and revised) 😉
+Like any Fabric pattern, use the power of piping from other patterns or even from Humanizeitself. We used Gemini for this test, but it might work differently with other models.  So play around and see what you find... and yes, this text have been Humanized (and revised) 
+Have fun using Humanize!
 
-Have fun using **Humanize**!
-
-## Input AI text example:
+Input AI text example:
 ```
 The Mystery of the Spinning Dog
 
@@ -49,7 +47,7 @@ If you have a dog that spins before settling down, you can try to observe its be
 
 By observing your dog's behavior, you may be able to uncover the unique reasons behind its spinning ritual.
 ```
-## Humanize output:
+Humanize output:
 ```
 Ever seen your dog spin in circles before settling down for a nap?  It's a pretty common thing, but why do they do it?  Nobody's entirely sure, but there are a few good guesses.
 
@@ -63,5 +61,5 @@ And then there's the "it's just fun" theory.  Maybe they're just excited or play
 
 It's probably a mix of all these things.  Every dog is different, so their reasons might be a little different too.  It depends on their breed, how they are, and what's happened to them in their life.
 
-If your dog does this, try watching them.  What are they doing right before they start spinning? Are they tired, or excited?  Paying attention might give you a clue about why *your* dog does it.  It's a fun little mystery to solve together!
+If your dog does this, try watching them.  What are they doing right before they start spinning? Are they tired, or excited?  Paying attention might give you a clue about why yourdog does it.  It's a fun little mystery to solve together!
 ```

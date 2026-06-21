@@ -8,19 +8,19 @@ Single-source, multi-destination event pipeline for PAI tool activity, subagent 
 
 ```
 JSONL Sources (local disk)          settings.json
-  ├─ tool-activity.jsonl (100)   ──→  observability.targets[]
-  ├─ tool-failures.jsonl (50)         ├─ { type: "cloudflare-kv", name: "production" }
-  └─ subagent-events.jsonl (50)       ├─ { type: "http", name: "local", url: "..." }
-                                      └─ ... (0-N targets)
-          │                                    │
-          ▼                                    ▼
-   collectEvents()  ───────────────→  pushEventsToTargets()
+   tool-activity.jsonl (100)   →  observability.targets[]
+   tool-failures.jsonl (50)          { type: "cloudflare-kv", name: "production" }
+   subagent-events.jsonl (50)        { type: "http", name: "local", url: "..." }
+                                       ... (0-N targets)
+                                              
+                                              
+   collectEvents()  →  pushEventsToTargets()
    (observability-transport.ts)       (fan-out to all targets)
-          │                                    │
-          ▼                                    ▼
+                                              
+                                              
    Pulse (Observability/observability.ts) CF KV (sync:events)
-   localhost:31337                 └─→ Worker /api/events/recent
-   └─→ /api/events/recent              └─→ admin.example.com
+   localhost:31337                 → Worker /api/events/recent
+   → /api/events/recent              → admin.example.com
 ```
 
 ## Data Flow
@@ -284,14 +284,14 @@ Distinct from the event pipeline above, session state (active sessions, phase, p
 
 ```
 Writers (atomic read-modify-write via isa-utils.ts:writeRegistry)
-├─ SessionAnalysis.hook.ts      UserPromptSubmit → upsertSession (native or starting)
-├─ ToolActivityTracker.hook.ts  PostToolUse → bumpLastToolActivity (30s debounced)
-├─ ISASync.hook.ts              syncToWorkJson() → promote native entry to full ISA session
-└─ ISAAutoName.hook.ts          updateSessionNameInWorkJson()
+ SessionAnalysis.hook.ts      UserPromptSubmit → upsertSession (native or starting)
+ ToolActivityTracker.hook.ts  PostToolUse → bumpLastToolActivity (30s debounced)
+ ISASync.hook.ts              syncToWorkJson() → promote native entry to full ISA session
+ ISAAutoName.hook.ts          updateSessionNameInWorkJson()
 
 Readers (both use identical mapping)
-├─ Pulse Observability          localhost:31337 → observability.ts handleAlgorithmApi
-└─ ULAdmin daemon               localhost:4000  → server/src/algorithm-watcher.ts
+ Pulse Observability          localhost:31337 → observability.ts handleAlgorithmApi
+ ULAdmin daemon               localhost:4000  → server/src/algorithm-watcher.ts
 ```
 
 **Display lanes:**

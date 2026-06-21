@@ -61,7 +61,7 @@ const saveIndex = args.indexOf('--save');
 const outputFile = saveIndex !== -1 ? args[saveIndex + 1] : null;
 
 // Extract transcript using fabric
-console.log(`📺 Extracting transcript from: ${url}`);
+console.log(` Extracting transcript from: ${url}`);
 
 try {
   const transcript = execSync(`fabric -y "${url}"`, {
@@ -79,7 +79,7 @@ try {
 
   if (outputFile) {
     writeFileSync(outputFile, transcript, 'utf-8');
-    console.log(`💾 Saved to: ${outputFile}`);
+    console.log(` Saved to: ${outputFile}`);
   } else {
     console.log('--- TRANSCRIPT START ---\n');
     console.log(transcript);

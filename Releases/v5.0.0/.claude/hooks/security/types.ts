@@ -5,7 +5,7 @@
  * inspectors in the security pipeline. Inspired by Goose's ToolInspector pattern.
  */
 
-// ── Inspection Results ──
+//  Inspection Results 
 
 export type InspectionAction = 'allow' | 'deny' | 'require_approval' | 'alert';
 
@@ -29,7 +29,7 @@ export function requireApproval(reason: string, permissionDecisionReason?: strin
   return {
     action: 'require_approval',
     reason,
-    permissionDecisionReason: permissionDecisionReason ?? `[PAI SECURITY] ⚠️ ${reason}\n\nProceed?`,
+    permissionDecisionReason: permissionDecisionReason ?? `[PAI SECURITY]  ${reason}\n\nProceed?`,
   };
 }
 
@@ -37,7 +37,7 @@ export function alert(reason: string): InspectionResult {
   return { action: 'alert', reason };
 }
 
-// ── Inspection Context ──
+//  Inspection Context 
 
 export interface InspectionContext {
   sessionId: string;
@@ -49,7 +49,7 @@ export interface InspectionContext {
   prompt?: string;
 }
 
-// ── Inspector Interface ──
+//  Inspector Interface 
 
 export interface Inspector {
   /** Inspector name for logging */
@@ -60,7 +60,7 @@ export interface Inspector {
   inspect(ctx: InspectionContext): Promise<InspectionResult> | InspectionResult;
 }
 
-// ── Security Events ──
+//  Security Events 
 
 export interface SecurityEvent {
   timestamp: string;

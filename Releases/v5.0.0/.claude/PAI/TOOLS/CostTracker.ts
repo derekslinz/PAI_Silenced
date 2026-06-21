@@ -351,7 +351,7 @@ function formatStatus(snap: CostSnapshot): string {
   if (snap.alerts.length === 0) {
     lines.push(`✅ No alerts`);
   } else {
-    lines.push(`🚨 Alerts:`);
+    lines.push(` Alerts:`);
     for (const a of snap.alerts) lines.push(`  ! ${a}`);
   }
   return lines.join("\n");
@@ -372,7 +372,7 @@ async function main(): Promise<void> {
       console.log(`Found ${sites.length} potential API-billing call site(s):`);
       console.log(``);
       for (const s of sites) {
-        const icon = s.classification === "bypass" ? "🔴" : s.classification === "legit" ? "✅" : "❓";
+        const icon = s.classification === "bypass" ? "" : s.classification === "legit" ? "✅" : "❓";
         console.log(`${icon} ${s.file}:${s.line}`);
         console.log(`   ${s.reason}`);
       }
@@ -383,7 +383,7 @@ async function main(): Promise<void> {
       appendFileSync(LEDGER_PATH, JSON.stringify(snapshot) + "\n");
       console.log(`Logged snapshot to ${LEDGER_PATH.replace(HOME, "~")}`);
       if (snapshot.alerts.length > 0) {
-        for (const a of snapshot.alerts) console.log(`  🚨 ${a}`);
+        for (const a of snapshot.alerts) console.log(`   ${a}`);
       }
       break;
     }

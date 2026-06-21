@@ -114,7 +114,7 @@ function main(): void {
     const hit = findMatch(target.content);
     if (!hit) continue;
     process.stderr.write(
-      `[ContainmentGuard] 🚨 BLOCKED: ${toolName} ${target.filePath} (${target.label}) would write '${hit}' outside Z1-Z4 containment. ` +
+      `[ContainmentGuard]  BLOCKED: ${toolName} ${target.filePath} (${target.label}) would write '${hit}' outside Z1-Z4 containment. ` +
       `Route via env var, move the file under PAI/USER/, PAI/MEMORY/, skills/_*, or rewrite the content.\n`,
     );
     process.exit(2);

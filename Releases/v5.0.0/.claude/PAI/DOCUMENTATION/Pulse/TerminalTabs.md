@@ -8,11 +8,11 @@ The PAI system uses Kitty terminal tab colors and title suffixes to provide inst
 
 | State | Icon | Format | Suffix | Inactive Background | When |
 |-------|------|--------|--------|---------------------|------|
-| **Inference** | 🧠 | Normal | `…` | Purple `#1E0A3C` | AI thinking (Haiku/Sonnet inference) |
-| **Working** | ⚙️ | *Italic* | `…` | Orange `#804000` | Processing your request |
-| **Completed** | ✓ | Normal | (none) | Green `#022800` | Task finished successfully |
-| **Awaiting Input** | ❓ | **BOLD CAPS** | (none) | Teal `#0D4F4F` | AskUserQuestion tool used |
-| **Error** | ⚠ | Normal | `!` | Orange `#804000` | Error detected in response |
+| **Inference** |  | Normal | `…` | Purple `#1E0A3C` | AI thinking (Haiku/Sonnet inference) |
+| **Working** |  | *Italic* | `…` | Orange `#804000` | Processing your request |
+| **Completed** |  | Normal | (none) | Green `#022800` | Task finished successfully |
+| **Awaiting Input** |  | **BOLD CAPS** | (none) | Teal `#0D4F4F` | AskUserQuestion tool used |
+| **Error** |  | Normal | `!` | Orange `#804000` | Error detected in response |
 
 **Text Colors:**
 - Active tab: White `#FFFFFF`
@@ -50,29 +50,29 @@ function detectResponseState(lastMessage, transcriptPath): ResponseState {
 - Scans last 20 transcript entries for `AskUserQuestion` tool use
 
 **Error Detection:**
-- Checks `📊 STATUS:` section for: error, failed, broken, problem, issue
+- Checks ` STATUS:` section for: error, failed, broken, problem, issue
 - Checks for error keywords + error emoji combination
 
 ## Examples
 
 | Scenario | Tab Appearance | Notes |
 |----------|----------------|-------|
-| AI inference running | `🧠 Analyzing…` (purple when inactive) | Brain icon shows AI is thinking |
-| Processing request | `⚙️ 𝘍𝘪𝘹𝘪𝘯𝘨 𝘣𝘶𝘨…` (orange when inactive) | Gear icon + italic text |
-| Task completed | `✓Fixing bug` (green when inactive) | Checkmark, normal text |
-| Need clarification | `❓𝗤𝗨𝗘𝗦𝗧𝗜𝗢𝗡` (teal when inactive) | Bold ALL CAPS |
-| Error occurred | `⚠Fixing bug!` (orange when inactive) | Warning icon + exclamation |
+| AI inference running | ` Analyzing…` (purple when inactive) | Brain icon shows AI is thinking |
+| Processing request | `  …` (orange when inactive) | Gear icon + italic text |
+| Task completed | `Fixing bug` (green when inactive) | Checkmark, normal text |
+| Need clarification | `` (teal when inactive) | Bold ALL CAPS |
+| Error occurred | `Fixing bug!` (orange when inactive) | Warning icon + exclamation |
 
 **Note:** Active tab always shows dark blue (#002B80) background. State colors only visible when tab is inactive.
 
 ### Text Formatting
 
-- **Working state:** Uses Unicode Mathematical Italic (`𝘈𝘉𝘊...`) for italic appearance
-- **Question state:** Uses Unicode Mathematical Bold (`𝗔𝗕𝗖...`) in ALL CAPS
+- **Working state:** Uses Unicode Mathematical Italic (`...`) for italic appearance
+- **Question state:** Uses Unicode Mathematical Bold (`...`) in ALL CAPS
 
 ## Algorithm Phase Tab System
 
-Separate from the State System above, **Algorithm runs** drive tab titles/colors via `setPhaseTab()` in `hooks/lib/tab-setter.ts`. Each phase (OBSERVE, THINK, PLAN, BUILD, EXECUTE, VERIFY, LEARN, COMPLETE) has a distinct emoji prefix and background color defined in `hooks/lib/tab-constants.ts::PHASE_TAB_CONFIG`. The title format is `{symbol} {ONE_WORD} | {description}` — for example `⚡ ALGORITHM STATE SYNC | Fixing Algorithm State Sync.`.
+Separate from the State System above, **Algorithm runs** drive tab titles/colors via `setPhaseTab()` in `hooks/lib/tab-setter.ts`. Each phase (OBSERVE, THINK, PLAN, BUILD, EXECUTE, VERIFY, LEARN, COMPLETE) has a distinct emoji prefix and background color defined in `hooks/lib/tab-constants.ts::PHASE_TAB_CONFIG`. The title format is `{symbol} {ONE_WORD} | {description}` — for example ` ALGORITHM STATE SYNC | Fixing Algorithm State Sync.`.
 
 **Two drivers feed `setPhaseTab`:**
 
@@ -139,11 +139,11 @@ const TAB_COLORS = {
 
 // Tab icons and formatting
 const TAB_ICONS = {
-  inference: '🧠',   // Brain - AI thinking
-  working: '⚙️',     // Gear - processing (italic text)
-  completed: '✓',    // Checkmark
-  awaiting: '❓',    // Question (bold caps text)
-  error: '⚠',       // Warning
+  inference: '',   // Brain - AI thinking
+  working: '',     // Gear - processing (italic text)
+  completed: '',    // Checkmark
+  awaiting: '',    // Question (bold caps text)
+  error: '',       // Warning
 };
 
 const TAB_SUFFIXES = {

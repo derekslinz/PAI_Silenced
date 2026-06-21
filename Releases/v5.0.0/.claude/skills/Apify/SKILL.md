@@ -1,151 +1,138 @@
 ---
 name: Apify
-description: "Scrape social media platforms, business data, and e-commerce via Apify actors — Instagram profiles/posts/hashtags/comments, LinkedIn profiles/jobs/posts, TikTok profiles/hashtags/videos/comments, YouTube channels/search/comments, Facebook posts/groups/comments, Google Maps business search with contact/review/image extraction, Amazon products/reviews/pricing, and general-purpose multi-page web crawling with custom pageFunction extraction logic. File-based TypeScript wrappers (scrapeInstagramProfile, searchGoogleMaps, scrapeAmazonProduct, scrapeWebsite, etc.) filter and transform data in code before returning to model context, achieving 95-99% token savings over direct MCP protocol. Parallel multi-platform queries via Promise.all for social listening dashboards. Lead enrichment pipeline: Google Maps → qualified filter → optional LinkedIn enrichment. Competitive analysis across Instagram, YouTube, and TikTok simultaneously. USE WHEN scrape Instagram, scrape LinkedIn, scrape TikTok, scrape YouTube, scrape Facebook, Google Maps leads, Amazon reviews, business intelligence, multi-platform social listening, competitive analysis, lead generation, social monitoring, Apify actors, web crawl, extract contacts. NOT FOR X/Twitter bookmarks (use a dedicated X-API skill) or progressive scraping (use BrightData)."
+description: "Scrape social media platforms, business data, and e-commerce via Apify actors — Instagram profiles/posts/hashtags/comments, LinkedIn profiles/jobs/posts, TikTok profiles/hashtags/videos/comments, YouTube channels/search/comments, Facebook posts/groups/comments, Google Maps business search with contact/review/image extraction, Amazon products/reviews/pricing, and general-purpose multi-page web crawling with custom pageFunction extraction logic. File-based TypeScript wrappers (scrapeInstagramProfile, searchGoogleMaps, scrapeAmazonProduct, scrapeWebsite, etc.) filter and transform data in code before returning to model context, achieving -% token savings over direct MCP protocol. Parallel multi-platform queries via Promise.all for social listening dashboards. Lead enrichment pipeline: Google Maps → qualified filter → optional LinkedIn enrichment. Competitive analysis across Instagram, YouTube, and TikTok simultaneously. USE WHEN scrape Instagram, scrape LinkedIn, scrape TikTok, scrape YouTube, scrape Facebook, Google Maps leads, Amazon reviews, business intelligence, multi-platform social listening, competitive analysis, lead generation, social monitoring, Apify actors, web crawl, extract contacts. NOT FOR X/Twitter bookmarks (use a dedicated X-API skill) or progressive scraping (use BrightData)."
 effort: medium
 ---
 
-## Customization
+Customization
 
-**Before executing, check for user customizations at:**
-`~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/Apify/`
+Before executing, check for user customizations at:`~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/Apify/`
 
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
-# Apify - Social Media & Web Scraping
+Apify - Social Media & Web Scraping
 
-Direct TypeScript access to 9 popular Apify actors with 99% token savings.
+Direct TypeScript access to popular Apify actors with % token savings.
 
-## 🔌 File-Based MCP
+File-Based MCP
 
-This skill is a **file-based MCP** - a code-first API wrapper that replaces token-heavy MCP protocol calls.
+This skill is a file-based MCP- a code-first API wrapper that replaces token-heavy MCP protocol calls.
 
-**Why file-based?** Filter data in code BEFORE returning to model context = 97.5% token savings.
+Why file-based?Filter data in code BEFORE returning to model context = .% token savings.
 
-## 🎯 Overview
+Overview
 
-Direct TypeScript access to the 9 most popular Apify actors without MCP overhead. Filter and transform data in code BEFORE it reaches the model context.
+Direct TypeScript access to the most popular Apify actors without MCP overhead. Filter and transform data in code BEFORE it reaches the model context.
 
-## 📊 Available Actors
+Available Actors
 
-### Social Media (5 platforms)
-- **Instagram** (145k users, 4.60★) - Profiles, posts, hashtags, comments
-- **LinkedIn** (26k users, 4.10★) - Profiles, jobs, posts
-- **TikTok** (90k users, 4.61★) - Profiles, videos, hashtags, comments
-- **YouTube** (40k users, 4.40★) - Channels, videos, comments, search
-- **Facebook** (35k users, 4.56★) - Posts, groups, comments
+Social Media (platforms)
+- Instagram(k users, .★) - Profiles, posts, hashtags, comments
+- LinkedIn(k users, .★) - Profiles, jobs, posts
+- TikTok(k users, .★) - Profiles, videos, hashtags, comments
+- YouTube(k users, .★) - Channels, videos, comments, search
+- Facebook(k users, .★) - Posts, groups, comments
 
-### Business & Lead Generation
-- **Google Maps** (198k users, 4.76★) - **HIGHEST VALUE!**
-  - Search businesses, extract contacts, reviews, images
+Business & Lead Generation
+- Google Maps(k users, .★) - HIGHEST VALUE!  - Search businesses, extract contacts, reviews, images
   - Perfect for lead generation
 
-### E-commerce
-- **Amazon** (8k users, 4.97★) - Products, reviews, pricing
+E-commerce
+- Amazon(k users, .★) - Products, reviews, pricing
 
-### Web Scraping
-- **Web Scraper** (94k users, 4.39★) - General-purpose, works with ANY website
+Web Scraping
+- Web Scraper(k users, .★) - General-purpose, works with ANY website
 
-## 🚀 Quick Start
+Quick Start
 
-### Basic Usage Pattern
+Basic Usage Pattern
 
 ```typescript
 import { scrapeInstagramProfile, searchGoogleMaps } from 'actors'
 
-// 1. Call the actor wrapper
+// . Call the actor wrapper
 const profile = await scrapeInstagramProfile({
   username: 'target_username',
-  maxPosts: 50
-})
+  maxPosts: })
 
-// 2. Filter in code - BEFORE data reaches model!
-const viral = profile.latestPosts?.filter(p => p.likesCount > 10000)
+// . Filter in code - BEFORE data reaches model!
+const viral = profile.latestPosts?.filter(p => p.likesCount > )
 
-// 3. Only filtered results reach model context
-console.log(viral) // ~10 posts instead of 50
-```
+// . Only filtered results reach model context
+console.log(viral) // ~posts instead of ```
 
-## 📚 Examples by Use Case
+Examples by Use Case
 
-### Social Media Monitoring
+Social Media Monitoring
 
-**Instagram - Track engagement:**
-```typescript
+Instagram - Track engagement:```typescript
 import { scrapeInstagramProfile, scrapeInstagramPosts } from 'actors'
 
 // Get profile with recent posts
 const profile = await scrapeInstagramProfile({
   username: 'competitor',
-  maxPosts: 100
-})
+  maxPosts: })
 
-// Filter in code - only high-performing posts from last 30 days
-const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000)
+// Filter in code - only high-performing posts from last days
+const thirtyDaysAgo = Date.now() - ()
 const topRecent = profile.latestPosts
   ?.filter(p =>
     new Date(p.timestamp).getTime() > thirtyDaysAgo &&
-    p.likesCount > 5000
-  )
+    p.likesCount >   )
   .sort((a, b) => b.likesCount - a.likesCount)
-  .slice(0, 10)
+  .slice(, )
 
-// Only 10 posts reach model instead of 100!
+// Only posts reach model instead of !
 ```
 
-**LinkedIn - Job search:**
-```typescript
+LinkedIn - Job search:```typescript
 import { searchLinkedInJobs } from 'actors'
 
 const jobs = await searchLinkedInJobs({
   keywords: 'AI engineer',
   location: 'San Francisco',
   remote: true,
-  maxResults: 200
-})
+  maxResults: })
 
 // Filter in code - only senior roles at well-funded startups
 const topJobs = jobs.filter(j =>
   j.seniority?.includes('Senior') &&
-  parseInt(j.applicants || '0') > 50
-)
+  parseInt(j.applicants || '') > )
 ```
 
-**TikTok - Trend analysis:**
-```typescript
+TikTok - Trend analysis:```typescript
 import { scrapeTikTokHashtag } from 'actors'
 
 const videos = await scrapeTikTokHashtag({
   hashtag: 'ai',
-  maxResults: 500
-})
+  maxResults: })
 
 // Filter in code - only viral content
 const viral = videos
-  .filter(v => v.playCount > 1000000)
+  .filter(v => v.playCount > )
   .sort((a, b) => b.playCount - a.playCount)
-  .slice(0, 20)
+  .slice(, )
 ```
 
-### Lead Generation (Business Intelligence)
+Lead Generation (Business Intelligence)
 
-**Google Maps - Local business leads:**
-```typescript
+Google Maps - Local business leads:```typescript
 import { searchGoogleMaps } from 'actors'
 
 // Search with contact info extraction
 const places = await searchGoogleMaps({
   query: 'restaurants in Austin',
-  maxResults: 500,
+  maxResults: ,
   includeReviews: true,
-  maxReviewsPerPlace: 20,
+  maxReviewsPerPlace: ,
   scrapeContactInfo: true // Extracts emails from websites!
 })
 
 // Filter in code - only highly-rated with email/phone
 const qualifiedLeads = places
   .filter(p =>
-    p.rating >= 4.5 &&
-    p.reviewsCount >= 100 &&
+    p.rating >= .&&
+    p.reviewsCount >= &&
     (p.email || p.phone)
   )
   .map(p => ({
@@ -162,92 +149,84 @@ const qualifiedLeads = places
 console.log(`Found ${qualifiedLeads.length} qualified leads`)
 ```
 
-**Google Maps - Review sentiment analysis:**
-```typescript
+Google Maps - Review sentiment analysis:```typescript
 import { scrapeGoogleMapsReviews } from 'actors'
 
 const reviews = await scrapeGoogleMapsReviews({
-  placeUrl: 'https://maps.google.com/maps?cid=12345',
-  maxResults: 1000
-})
+  placeUrl: 'https://maps.google.com/maps?cid=',
+  maxResults: })
 
 // Filter in code - analyze sentiment by rating
 const recentNegative = reviews
   .filter(r => {
-    const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000)
+    const thirtyDaysAgo = Date.now() - ()
     return (
-      r.rating <= 2 &&
+      r.rating <= &&
       new Date(r.publishedAtDate).getTime() > thirtyDaysAgo &&
-      r.text.length > 50
-    )
+      r.text.length >     )
   })
 
 // Identify common complaints
 const complaints = recentNegative.map(r => r.text)
 ```
 
-### E-commerce & Competitive Intelligence
+E-commerce & Competitive Intelligence
 
-**Amazon - Price monitoring:**
-```typescript
+Amazon - Price monitoring:```typescript
 import { scrapeAmazonProduct } from 'actors'
 
 const product = await scrapeAmazonProduct({
-  productUrl: 'https://www.amazon.com/dp/B08L5VT894',
+  productUrl: 'https://www.amazon.com/dp/BLVT',
   includeReviews: true,
-  maxReviews: 200
-})
+  maxReviews: })
 
 // Filter in code - only recent negative reviews
 const recentNegative = product.reviews
   ?.filter(r => {
-    const weekAgo = Date.now() - (7 * 24 * 60 * 60 * 1000)
+    const weekAgo = Date.now() - ()
     return (
-      r.rating <= 2 &&
+      r.rating <= &&
       new Date(r.date).getTime() > weekAgo
     )
   })
 
 console.log(`Price: $${product.price}`)
-console.log(`Rating: ${product.rating}/5`)
+console.log(`Rating: ${product.rating}/`)
 console.log(`Recent issues: ${recentNegative?.length} complaints`)
 ```
 
-### Custom Web Scraping
+Custom Web Scraping
 
-**Any Website - Custom extraction:**
-```typescript
+Any Website - Custom extraction:```typescript
 import { scrapeWebsite } from 'actors'
 
 const products = await scrapeWebsite({
   startUrls: ['https://example.com/products'],
   linkSelector: 'a.product-link',
-  maxPagesPerCrawl: 100,
+  maxPagesPerCrawl: ,
   pageFunction: `
     async function pageFunction(context) {
       const { request, $, log } = context
 
       return {
         url: request.url,
-        title: $('h1.product-title').text(),
+        title: $('h.product-title').text(),
         price: $('span.price').text(),
-        inStock: $('.in-stock').length > 0,
+        inStock: $('.in-stock').length > ,
         description: $('.description').text()
       }
     }
   `
 })
 
-// Filter in code - only available products under $100
-const affordable = products.filter(p =>
+// Filter in code - only available products under $const affordable = products.filter(p =>
   p.inStock &&
-  parseFloat(p.price.replace('$', '')) < 100
-)
+  parseFloat(p.price.replace('$', '')) < )
 ```
 
-## 🎨 Advanced Patterns
+Advanced Patterns
 
-### Pattern 1: Multi-Platform Social Listening
+Pattern : Multi-Platform Social Listening
 
 ```typescript
 import {
@@ -258,41 +237,40 @@ import {
 
 // Run all platforms in parallel
 const [instagramPosts, tiktokVideos, youtubeVideos] = await Promise.all([
-  scrapeInstagramHashtag({ hashtag: 'ai', maxResults: 100 }),
-  scrapeTikTokHashtag({ hashtag: 'ai', maxResults: 100 }),
-  searchYouTube({ query: '#ai', maxResults: 100 })
+  scrapeInstagramHashtag({ hashtag: 'ai', maxResults: }),
+  scrapeTikTokHashtag({ hashtag: 'ai', maxResults: }),
+  searchYouTube({ query: 'ai', maxResults: })
 ])
 
 // Combine and filter - only viral content across all platforms
 const allViral = [
-  ...instagramPosts.filter(p => p.likesCount > 10000),
-  ...tiktokVideos.filter(v => v.playCount > 100000),
-  ...youtubeVideos.filter(v => v.viewsCount > 50000)
+  ...instagramPosts.filter(p => p.likesCount > ),
+  ...tiktokVideos.filter(v => v.playCount > ),
+  ...youtubeVideos.filter(v => v.viewsCount > )
 ]
 
-console.log(`Found ${allViral.length} viral posts across 3 platforms`)
+console.log(`Found ${allViral.length} viral posts across platforms`)
 ```
 
-### Pattern 2: Lead Enrichment Pipeline
+Pattern : Lead Enrichment Pipeline
 
 ```typescript
 import { searchGoogleMaps, scrapeLinkedInProfile } from 'actors'
 
-// 1. Find businesses on Google Maps
+// . Find businesses on Google Maps
 const restaurants = await searchGoogleMaps({
   query: 'restaurants in SF',
-  maxResults: 100,
+  maxResults: ,
   scrapeContactInfo: true
 })
 
-// 2. Filter for qualified leads
+// . Filter for qualified leads
 const qualified = restaurants.filter(r =>
-  r.rating >= 4.5 &&
+  r.rating >= .&&
   r.email &&
-  r.reviewsCount >= 50
-)
+  r.reviewsCount >= )
 
-// 3. Enrich with LinkedIn data (if available)
+// . Enrich with LinkedIn data (if available)
 const enriched = await Promise.all(
   qualified.map(async (restaurant) => {
     // Try to find LinkedIn company page
@@ -302,7 +280,7 @@ const enriched = await Promise.all(
 )
 ```
 
-### Pattern 3: Competitive Analysis Dashboard
+Pattern : Competitive Analysis Dashboard
 
 ```typescript
 import {
@@ -314,9 +292,9 @@ import {
 async function analyzeCompetitor(username: string) {
   // Gather data from all platforms
   const [instagram, youtube, tiktok] = await Promise.all([
-    scrapeInstagramProfile({ username, maxPosts: 30 }),
-    scrapeYouTubeChannel({ channelUrl: `https://youtube.com/@${username}`, maxVideos: 30 }),
-    scrapeTikTokProfile({ username, maxVideos: 30 })
+    scrapeInstagramProfile({ username, maxPosts: }),
+    scrapeYouTubeChannel({ channelUrl: `https://youtube.com/@${username}`, maxVideos: }),
+    scrapeTikTokProfile({ username, maxVideos: })
   ])
 
   // Calculate engagement metrics in code
@@ -339,154 +317,140 @@ async function analyzeCompetitor(username: string) {
 }
 ```
 
-## 💰 Token Savings Calculator
+Token Savings Calculator
 
-**Example: Instagram profile with 100 posts**
-
-**MCP Approach:**
-```
-1. search-actors → 1,000 tokens
-2. call-actor → 1,000 tokens
-3. get-actor-output → 50,000 tokens (100 unfiltered posts)
-TOTAL: ~52,000 tokens
+Example: Instagram profile with posts
+MCP Approach:```
+. search-actors → ,tokens
+. call-actor → ,tokens
+. get-actor-output → ,tokens (unfiltered posts)
+TOTAL: ~,tokens
 ```
 
-**File-Based Approach:**
-```typescript
+File-Based Approach:```typescript
 const profile = await scrapeInstagramProfile({
   username: 'user',
-  maxPosts: 100
-})
+  maxPosts: })
 
-// Filter in code - only top 10 posts
+// Filter in code - only top posts
 const top = profile.latestPosts
   ?.sort((a, b) => b.likesCount - a.likesCount)
-  .slice(0, 10)
+  .slice(, )
 
-// TOTAL: ~500 tokens (only 10 filtered posts reach model)
+// TOTAL: ~tokens (only filtered posts reach model)
 ```
 
-**Savings: 99% reduction (52,000 → 500 tokens)**
+Savings: % reduction (,→ tokens)
+Actor Reference
 
-## 🔧 Actor Reference
+Social Media
 
-### Social Media
-
-#### Instagram
+Instagram
 - `scrapeInstagramProfile(input)` - Profile + posts
 - `scrapeInstagramPosts(input)` - Posts from user
 - `scrapeInstagramHashtag(input)` - Posts by hashtag
 - `scrapeInstagramComments(input)` - Comments on post
 
-#### LinkedIn
+LinkedIn
 - `scrapeLinkedInProfile(input)` - Profile + experience + email
 - `searchLinkedInJobs(input)` - Job listings
 - `scrapeLinkedInPosts(input)` - Posts from profile/company
 
-#### TikTok
+TikTok
 - `scrapeTikTokProfile(input)` - Profile + videos
 - `scrapeTikTokHashtag(input)` - Videos by hashtag
 - `scrapeTikTokComments(input)` - Comments on video
 
-#### YouTube
+YouTube
 - `scrapeYouTubeChannel(input)` - Channel + videos
 - `searchYouTube(input)` - Search videos
 - `scrapeYouTubeComments(input)` - Comments on video
 
-#### Facebook
+Facebook
 - `scrapeFacebookPosts(input)` - Posts from pages
 - `scrapeFacebookGroups(input)` - Group posts
 - `scrapeFacebookComments(input)` - Post comments
 
-### Business & Lead Generation
+Business & Lead Generation
 
-#### Google Maps
+Google Maps
 - `searchGoogleMaps(input)` - Search places (with contact extraction!)
 - `scrapeGoogleMapsPlace(input)` - Single place details
 - `scrapeGoogleMapsReviews(input)` - Place reviews
 
-### E-commerce
+E-commerce
 
-#### Amazon
+Amazon
 - `scrapeAmazonProduct(input)` - Product details + reviews
 - `scrapeAmazonReviews(input)` - Product reviews only
 
-### Web Scraping
+Web Scraping
 
-#### General Web
+General Web
 - `scrapeWebsite(input)` - Custom multi-page crawling
 - `scrapePage(url, pageFunction)` - Single page extraction
 
-## ⚙️ Configuration
+️ Configuration
 
-**Environment Variables:**
-```bash
-# Required - Get from https://console.apify.com/account/integrations
+Environment Variables:```bash
+Required - Get from https://console.apify.com/account/integrations
 APIFY_TOKEN=apify_api_xxxxx...
 ```
 
-**Actor Run Options:**
-```typescript
+Actor Run Options:```typescript
 {
-  memory: 2048,    // MB: 128, 256, 512, 1024, 2048, 4096, 8192
-  timeout: 300,    // seconds
+  memory: ,    // MB: , , , , , ,   timeout: ,    // seconds
   build: 'latest'  // or specific build number
 }
 ```
 
-## 🎯 When to Use This vs MCP
+When to Use This vs MCP
 
-**Use File-Based (this skill):**
-- ✅ Need to filter large datasets (>100 results)
-- ✅ Want to transform/aggregate data in code
-- ✅ Multiple sequential operations
-- ✅ Control flow (loops, conditionals)
-- ✅ Maximum token efficiency
+Use File-Based (this skill):- Need to filter large datasets (>results)
+- Want to transform/aggregate data in code
+- Multiple sequential operations
+- Control flow (loops, conditionals)
+- Maximum token efficiency
 
-**Use MCP:**
-- ❌ Simple single operations with small results (<10 items)
-- ❌ One-off exploratory queries
-- ❌ Don't want to write code
+Use MCP:- Simple single operations with small results (<items)
+- One-off exploratory queries
+- Don't want to write code
 
-## 🔗 Links
+Links
 
 - Apify Platform: https://apify.com
 - Actor Store: https://apify.com/store
-- API Docs: https://docs.apify.com/api/v2
-
+- API Docs: https://docs.apify.com/api/v
 ---
 
-**Remember: Filter data in code BEFORE returning to model context. This is where the 99% token savings happen!**
+Remember: Filter data in code BEFORE returning to model context. This is where the % token savings happen!
+Gotchas
 
-## Gotchas
+- Actor selection matters.Each social platform has specific actors — don't use a generic scraper for Instagram when a dedicated Instagram actor exists.
+- Rate limits vary by platform and plan.Check actor documentation for limits before running large scrapes.
+- Scraped data format varies by actor.Read the actor's output schema before processing results.
 
-- **Actor selection matters.** Each social platform has specific actors — don't use a generic scraper for Instagram when a dedicated Instagram actor exists.
-- **Rate limits vary by platform and plan.** Check actor documentation for limits before running large scrapes.
-- **Scraped data format varies by actor.** Read the actor's output schema before processing results.
+Examples
 
-## Examples
-
-**Example 1: Scrape Instagram profile**
-```
+Example : Scrape Instagram profile```
 User: "get the recent posts from this Instagram account"
 → Selects Instagram Profile actor
 → Runs with target profile URL
 → Returns structured post data (text, engagement, dates)
 ```
 
-**Example 2: LinkedIn company scrape**
-```
+Example : LinkedIn company scrape```
 User: "scrape this company's LinkedIn page"
 → Selects LinkedIn Company actor
 → Returns company info, employee count, recent posts
 ```
 
-## Execution Log
+Execution Log
 
 After completing any workflow, append a single JSONL entry:
 
 ```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Apify","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.claude/PAI/MEMORY/SKILLS/execution.jsonl
+echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Apify","workflow":"WORKFLOW_USED","input":"_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.claude/PAI/MEMORY/SKILLS/execution.jsonl
 ```
 
-Replace `WORKFLOW_USED` with the workflow executed, `8_WORD_SUMMARY` with a brief input description, and `SECONDS` with approximate wall-clock time. Log `status: "error"` if the workflow failed.
+Replace `WORKFLOW_USED` with the workflow executed, `_WORD_SUMMARY` with a brief input description, and `SECONDS` with approximate wall-clock time. Log `status: "error"` if the workflow failed.

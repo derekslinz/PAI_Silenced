@@ -1,90 +1,77 @@
-# Reverse Lookup Workflow
+Reverse Lookup Workflow
 
-**Purpose:** Identify a person from partial information (phone, email, image, username)
+Purpose:Identify a person from partial information (phone, email, image, username)
 
-**When to Use:**
-- User has a phone number and wants to know who it belongs to
+When to Use:- User has a phone number and wants to know who it belongs to
 - User has an email and wants to find the person
 - User has a photo and wants to identify the person
 - User has a username and wants to find the real identity
 - Any "reverse" search scenario
 
-**Prerequisites:**
-- At least one identifier (phone, email, image, username)
+Prerequisites:- At least one identifier (phone, email, image, username)
 - Legitimate purpose for the search
 
 ---
 
-## Reverse Phone Lookup
+Reverse Phone Lookup
 
-### Step 1: Free Phone Lookup Services
+Step : Free Phone Lookup Services
 
-**CallerID Test:**
-- URL: https://calleridtest.com
+CallerID Test:- URL: https://calleridtest.com
 - Enter phone number
 - Returns: Name, carrier, location
 
-**NumLookup:**
-- URL: https://www.numlookup.com
+NumLookup:- URL: https://www.numlookup.com
 - Free carrier and location lookup
 - Limited name information
 
-**USPhoneBook:**
-- URL: https://www.usphonebook.com
+USPhoneBook:- URL: https://www.usphonebook.com
 - Free reverse phone search
 - Shows name, address, relatives
 
-### Step 2: People Search Aggregator Reverse Lookup
+Step : People Search Aggregator Reverse Lookup
 
-**TruePeopleSearch:**
-- Has reverse phone lookup feature
+TruePeopleSearch:- Has reverse phone lookup feature
 - Enter number in search
 - Often provides full contact record
 
-**That's Them:**
-- URL: https://thatsthem.com
+That's Them:- URL: https://thatsthem.com
 - Reverse phone feature
 - Shows associated names and addresses
 
-### Step 3: Additional Phone Research
+Step : Additional Phone Research
 
-**Check Carrier Type:**
-- Mobile vs. landline
+Check Carrier Type:- Mobile vs. landline
 - VoIP (may be harder to trace)
 - Prepaid (limited registration data)
 
-**Search Phone Number in Google:**
-```
-"512-555-1234"
-"5125551234"
+Search Phone Number in Google:```
+"--"
+""
 ```
 May find:
 - Business listings
 - Online classified ads
 - Public posts with number
 
-**Check Whitepages/Yellow Pages:**
-- Landlines especially
+Check Whitepages/Yellow Pages:- Landlines especially
 - Business associations
 
-### Phone Lookup Output:
+Phone Lookup Output:
 ```markdown
-## Reverse Phone Results: [Phone Number]
+Reverse Phone Results: [Phone Number]
 
-**Carrier:** [Carrier name]
-**Type:** [Mobile/Landline/VoIP]
-**Location:** [City, State]
+Carrier:[Carrier name]
+Type:[Mobile/Landline/VoIP]
+Location:[City, State]
 
-**Associated Names:**
-- [Name 1] - [Confidence level]
-- [Name 2] - [Confidence level]
+Associated Names:- [Name ] - [Confidence level]
+- [Name ] - [Confidence level]
 
-**Associated Addresses:**
-- [Address 1]
-- [Address 2]
+Associated Addresses:- [Address ]
+- [Address ]
 
-**Sources Checked:**
-- CallerID Test
+Sources Checked:- CallerID Test
 - NumLookup
 - TruePeopleSearch
 - Google search
@@ -92,56 +79,52 @@ May find:
 
 ---
 
-## Reverse Email Lookup
+Reverse Email Lookup
 
-### Step 1: Email Account Discovery with Holehe
+Step : Email Account Discovery with Holehe
 
-**Tool:** Holehe (checks 120+ services)
+Tool:Holehe (checks + services)
 ```bash
-# Install
+Install
 pip install holehe
 
-# Run
+Run
 holehe target@example.com
 ```
 
-**Output Shows:**
-- Services where email is registered
+Output Shows:- Services where email is registered
 - Social media accounts
 - Dating sites
 - Forums and communities
 
-### Step 2: Epieos Email Lookup
+Step : Epieos Email Lookup
 
-**URL:** https://epieos.com
-**Features:**
-- Links email to social accounts
+URL:https://epieos.com
+Features:- Links email to social accounts
 - Shows Google account info (name, photo)
 - Breach data associations
 
-### Step 3: Hunter.io
+Step : Hunter.io
 
-**URL:** https://hunter.io
-**Best For:**
-- Corporate email patterns
+URL:https://hunter.io
+Best For:- Corporate email patterns
 - Finding all emails at a domain
 - Verifying email validity
 
-**Use Case:** If you have company domain, can find other employees and patterns
+Use Case:If you have company domain, can find other employees and patterns
 
-### Step 4: Google the Email
+Step : Google the Email
 
 ```
 "target@example.com"
 ```
 
-**May Find:**
-- Forum posts
+May Find:- Forum posts
 - Public profiles
 - Documents with email listed
 - Business directories
 
-### Step 5: Check Social Media Registration
+Step : Check Social Media Registration
 
 Manually check if email might be used for:
 - Facebook (via forgot password - shows partial email)
@@ -149,224 +132,203 @@ Manually check if email might be used for:
 - Twitter
 - Instagram
 
-**Note:** Do not attempt to reset passwords or gain access
+Note:Do not attempt to reset passwords or gain access
 
-### Email Lookup Output:
+Email Lookup Output:
 ```markdown
-## Reverse Email Results: [Email]
+Reverse Email Results: [Email]
 
-**Email Provider:** [Gmail/Yahoo/Corporate]
-**Validity:** [Valid/Invalid/Catch-all]
+Email Provider:[Gmail/Yahoo/Corporate]
+Validity:[Valid/Invalid/Catch-all]
 
-**Linked Accounts (Holehe):**
-- [Service 1]: Registered
-- [Service 2]: Registered
-- [Service 3]: Not found
+Linked Accounts (Holehe):- [Service ]: Registered
+- [Service ]: Registered
+- [Service ]: Not found
 
-**Google Account Info (Epieos):**
-- Name: [If available]
+Google Account Info (Epieos):- Name: [If available]
 - Photo: [If available]
 
-**Other Findings:**
-- [Any forum posts, profiles, etc.]
+Other Findings:- [Any forum posts, profiles, etc.]
 ```
 
 ---
 
-## Reverse Image Search
+Reverse Image Search
 
-### Step 1: Google Images
+Step : Google Images
 
-**URL:** https://images.google.com
-**Method:**
-- Click camera icon
+URL:https://images.google.com
+Method:- Click camera icon
 - Upload image or paste URL
 - Review matching images
 
-**Best For:** Finding image across websites, identifying public figures
+Best For:Finding image across websites, identifying public figures
 
-### Step 2: TinEye
+Step : TinEye
 
-**URL:** https://tineye.com
-**Features:**
-- 79.5+ billion indexed images
+URL:https://tineye.com
+Features:- .+ billion indexed images
 - Shows where image appears online
 - Finds modified versions of image
 - Sort by oldest (find original source)
 
-**Best For:** Finding image origin, detecting photo manipulation
+Best For:Finding image origin, detecting photo manipulation
 
-### Step 3: Yandex Images
+Step : Yandex Images
 
-**URL:** https://yandex.com/images
-**Features:**
-- Excellent for faces
+URL:https://yandex.com/images
+Features:- Excellent for faces
 - Strong European/Russian coverage
 - Often finds what Google misses
 
-**Best For:** Face matching, Eastern European sources
+Best For:Face matching, Eastern European sources
 
-### Step 4: PimEyes (Paid)
+Step : PimEyes (Paid)
 
-**URL:** https://pimeyes.com
-**Features:**
-- Dedicated facial recognition
+URL:https://pimeyes.com
+Features:- Dedicated facial recognition
 - Billions of indexed faces
 - Finds social media profiles
 
-**Legal Note:** Verify legality in your jurisdiction; some areas restrict facial recognition
+Legal Note:Verify legality in your jurisdiction; some areas restrict facial recognition
 
-### Step 5: FaceCheck.id
+Step : FaceCheck.id
 
-**URL:** https://facecheck.id
-**Features:**
-- Alternative to PimEyes
+URL:https://facecheck.id
+Features:- Alternative to PimEyes
 - Social media focused
 - Browser extension available
 
-### Image Search Output:
+Image Search Output:
 ```markdown
-## Reverse Image Results
+Reverse Image Results
 
-**Image Analyzed:** [Description/filename]
+Image Analyzed:[Description/filename]
 
-**Google Images:**
-- [Number] results found
+Google Images:- [Number] results found
 - Key matches: [URLs]
 
-**TinEye:**
-- [Number] results
+TinEye:- [Number] results
 - Oldest source: [URL, date]
 
-**Yandex:**
-- [Number] face matches
+Yandex:- [Number] face matches
 - Notable matches: [URLs]
 
-**Identified Person:**
-- Name: [If determined]
+Identified Person:- Name: [If determined]
 - Confidence: [HIGH/MEDIUM/LOW]
 - Source: [How determined]
 ```
 
 ---
 
-## Reverse Username Search
+Reverse Username Search
 
-### Step 1: Sherlock (Command Line)
+Step : Sherlock (Command Line)
 
 ```bash
-# Install
+Install
 pip install sherlock-project
 
-# Run
+Run
 sherlock target_username --print-found
 
-# Output to file
+Output to file
 sherlock target_username -o results.txt
 ```
 
-**Checks 400+ platforms** for username registration
+Checks + platformsfor username registration
 
-### Step 2: WhatsMyName (Web)
+Step : WhatsMyName (Web)
 
-**URL:** https://whatsmyname.app
-**Features:**
-- Web-based alternative to Sherlock
+URL:https://whatsmyname.app
+Features:- Web-based alternative to Sherlock
 - Hundreds of sites checked
 - Shows direct profile URLs
 
-### Step 3: Namechk
+Step : Namechk
 
-**URL:** https://namechk.com
-**Features:**
-- Quick availability check
+URL:https://namechk.com
+Features:- Quick availability check
 - Major platforms covered
 - Social and domain availability
 
-### Step 4: Search Username in Google
+Step : Search Username in Google
 
 ```
 "target_username"
 inurl:"target_username"
 ```
 
-**May Find:**
-- Profiles not in database
+May Find:- Profiles not in database
 - Forum posts
 - Comments on websites
 - Code repositories
 
-### Step 5: Check Common Patterns
+Step : Check Common Patterns
 
 If you found one username, try variations:
 - target_username → targetusername → target.username
-- target_username1 → target_username2
-- Check if matches real name pattern
+- target_username→ target_username- Check if matches real name pattern
 
-### Username Lookup Output:
+Username Lookup Output:
 ```markdown
-## Reverse Username Results: [username]
+Reverse Username Results: [username]
 
-**Platforms Found (Sherlock):**
-| Platform | URL | Status |
+Platforms Found (Sherlock):| Platform | URL | Status |
 |----------|-----|--------|
 | GitHub | github.com/[username] | Found |
 | Instagram | instagram.com/[username] | Found |
 | Reddit | reddit.com/u/[username] | Not Found |
 
-**Profile Analysis:**
-- Most active: [Platform]
+Profile Analysis:- Most active: [Platform]
 - Consistent identity: [Yes/No]
 - Real name indicators: [Any found]
 
-**Cross-Reference:**
-- Email pattern: [If discovered]
+Cross-Reference:- Email pattern: [If discovered]
 - Location indicators: [From bios]
 - Other usernames used: [Variations found]
 ```
 
 ---
 
-## Outputs
+Outputs
 
-**What this workflow produces:**
-- Identity information from partial identifier
+What this workflow produces:- Identity information from partial identifier
 - Associated accounts and profiles
 - Cross-reference data for verification
 - Confidence assessment
 
-**Deliverable Format:**
-- Structured report per identifier type
+Deliverable Format:- Structured report per identifier type
 - All sources documented
 - Confidence level stated
 
 ---
 
-## API Options (For Automation)
+API Options (For Automation)
 
-### Phone APIs:
+Phone APIs:
 | Provider | Cost | Notes |
 |----------|------|-------|
-| Telnyx | $0.003/query | Carrier, LRN |
-| Twilio Lookup | $0.02/query | Name, carrier |
+| Telnyx | $./query | Carrier, LRN |
+| Twilio Lookup | $./query | Name, carrier |
 | NumVerify | Free tier | Basic validation |
 
-### Email APIs:
+Email APIs:
 | Provider | Cost | Notes |
 |----------|------|-------|
-| Hunter.io | $49+/mo | Verification + discovery |
+| Hunter.io | $+/mo | Verification + discovery |
 | FullContact | Enterprise | Identity enrichment |
 
-### Use Apify MCP for social scraping automation
+Use Apify MCP for social scraping automation
 
 ---
 
-## Related Workflows
+Related Workflows
 
-- **find-person.md** - Full investigation workflow
-- **social-media-search.md** - After identifying username
-- **verify-identity.md** - Confirming findings
+- find-person.md- Full investigation workflow
+- social-media-search.md- After identifying username
+- verify-identity.md- Confirming findings
 
 ---
 
-**Last Updated:** 2025-11-25
+Last Updated:--

@@ -49,7 +49,7 @@ async function main(): Promise<void> {
 
   switch (result.action) {
     case 'deny':
-      console.error(`[PAI SECURITY] 🚨 BLOCKED: ${result.reason}`);
+      console.error(`[PAI SECURITY]  BLOCKED: ${result.reason}`);
       process.exit(2);
       break;
 
@@ -64,7 +64,7 @@ async function main(): Promise<void> {
       break;
 
     case 'alert':
-      console.error(`[PAI SECURITY] ⚠️ ALERT: ${result.reason}`);
+      console.error(`[PAI SECURITY]  ALERT: ${result.reason}`);
       break;
 
     case 'allow':

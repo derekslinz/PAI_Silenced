@@ -1,31 +1,22 @@
-#!/usr/bin/env bun
+!/usr/bin/env bun
 
-/**
- * ComposeAgent - Dynamic Agent Composition from Traits
- *
- * Composes specialized agents on-the-fly by combining traits.
- * Merges base traits (ships with PAI) with user customizations.
- *
- * Configuration files:
- *   Base:  ~/.claude/skills/Agents/Data/Traits.yaml
- *   User:  ~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/Agents/Traits.yaml
- *
- * Usage:
- *   # Infer traits from task description
- *   bun run ComposeAgent.ts --task "Review this security architecture"
- *
- *   # Specify traits explicitly
- *   bun run ComposeAgent.ts --traits "security,skeptical,thorough"
- *
- *   # Output formats
- *   bun run ComposeAgent.ts --task "..." --output json
- *   bun run ComposeAgent.ts --task "..." --output prompt (default)
- *
- *   # List available traits
- *   bun run ComposeAgent.ts --list
- *
- * @version 2.0.0
- */
+/ ComposeAgent - Dynamic Agent Composition from Traits
+  Composes specialized agents on-the-fly by combining traits.
+ Merges base traits (ships with PAI) with user customizations.
+  Configuration files:
+   Base:  ~/.claude/skills/Agents/Data/Traits.yaml
+   User:  ~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/Agents/Traits.yaml
+  Usage:
+   Infer traits from task description
+   bun run ComposeAgent.ts --task "Review this security architecture"
+    Specify traits explicitly
+   bun run ComposeAgent.ts --traits "security,skeptical,thorough"
+    Output formats
+   bun run ComposeAgent.ts --task "..." --output json
+   bun run ComposeAgent.ts --task "..." --output prompt (default)
+    List available traits
+   bun run ComposeAgent.ts --list
+  @version .. /
 
 import { parseArgs } from "util";
 import { readFileSync, existsSync, readdirSync, unlinkSync, mkdirSync, writeFileSync } from "fs";
@@ -66,26 +57,25 @@ interface ComposedAgent {
 
 // Color palette for custom agents - vibrant, distinguishable colors
 const AGENT_COLOR_PALETTE = [
-  "#FF6B35", // Coral Orange
-  "#4ECDC4", // Teal
-  "#9B59B6", // Purple
-  "#2ECC71", // Emerald
-  "#E74C3C", // Red
-  "#3498DB", // Blue
-  "#F39C12", // Orange
-  "#1ABC9C", // Turquoise
-  "#E91E63", // Pink
-  "#00BCD4", // Cyan
-  "#8BC34A", // Light Green
-  "#FF5722", // Deep Orange
-  "#673AB7", // Deep Purple
-  "#009688", // Teal Dark
-  "#FFC107", // Amber
+  "FFB", // Coral Orange
+  "ECDC", // Teal
+  "BB", // Purple
+  "ECC", // Emerald
+  "ECC", // Red
+  "DB", // Blue
+  "FC", // Orange
+  "ABCC", // Turquoise
+  "EE", // Pink
+  "BCD", // Cyan
+  "BCA", // Light Green
+  "FF", // Deep Orange
+  "AB", // Deep Purple
+  "", // Teal Dark
+  "FFC", // Amber
 ];
 
-/**
- * Deep merge two objects (user overrides base)
- */
+/ Deep merge two objects (user overrides base)
+ /
 function deepMerge<T extends Record<string, unknown>>(base: T, user: Partial<T>): T {
   const result = { ...base };
 
@@ -116,21 +106,20 @@ function deepMerge<T extends Record<string, unknown>>(base: T, user: Partial<T>)
   return result;
 }
 
-/**
- * Load and merge traits from base + user YAML files
- */
+/ Load and merge traits from base + user YAML files
+ /
 function loadTraits(): TraitsData {
   // Load base traits (required)
   if (!existsSync(BASE_TRAITS_PATH)) {
     console.error(`Error: Base traits file not found at ${BASE_TRAITS_PATH}`);
-    process.exit(1);
+    process.exit();
   }
-  const baseContent = readFileSync(BASE_TRAITS_PATH, "utf-8");
+  const baseContent = readFileSync(BASE_TRAITS_PATH, "utf-");
   const base = parseYaml(baseContent) as TraitsData;
 
   // Load user traits (optional)
   if (existsSync(USER_TRAITS_PATH)) {
-    const userContent = readFileSync(USER_TRAITS_PATH, "utf-8");
+    const userContent = readFileSync(USER_TRAITS_PATH, "utf-");
     const user = parseYaml(userContent) as Partial<TraitsData>;
 
     // Merge each section
@@ -147,21 +136,19 @@ function loadTraits(): TraitsData {
   return base;
 }
 
-/**
- * Load and compile the agent template
- */
+/ Load and compile the agent template
+ /
 function loadTemplate(): HandlebarsTemplateDelegate {
   if (!existsSync(TEMPLATE_PATH)) {
     console.error(`Error: Template file not found at ${TEMPLATE_PATH}`);
-    process.exit(1);
+    process.exit();
   }
-  const content = readFileSync(TEMPLATE_PATH, "utf-8");
+  const content = readFileSync(TEMPLATE_PATH, "utf-");
   return Handlebars.compile(content);
 }
 
-/**
- * Infer appropriate traits from a task description
- */
+/ Infer appropriate traits from a task description
+ /
 function inferTraitsFromTask(task: string, traits: TraitsData): string[] {
   const inferred: string[] = [];
   const taskLower = task.toLowerCase();
@@ -199,27 +186,25 @@ function inferTraitsFromTask(task: string, traits: TraitsData): string[] {
   return [...new Set(inferred)];
 }
 
-/**
- * Generate a unique color for an agent based on trait combination
- * Uses a hash of the sorted traits to ensure consistent color per combination
- */
+/ Generate a unique color for an agent based on trait combination
+ Uses a hash of the sorted traits to ensure consistent color per combination
+ /
 function generateAgentColor(traitKeys: string[]): string {
   // Create a hash from the sorted traits
   const sortedTraits = [...traitKeys].sort().join(",");
-  let hash = 0;
-  for (let i = 0; i < sortedTraits.length; i++) {
+  let hash = ;
+  for (let i = ; i < sortedTraits.length; i++) {
     const char = sortedTraits.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash; // Convert to 32bit integer
+    hash = ((hash << ) - hash) + char;
+    hash = hash & hash; // Convert to bit integer
   }
   // Use absolute value and modulo to get palette index
   const index = Math.abs(hash) % AGENT_COLOR_PALETTE.length;
   return AGENT_COLOR_PALETTE[index];
 }
 
-/**
- * Compose an agent from traits
- */
+/ Compose an agent from traits
+ /
 function composeAgent(
   traitKeys: string[],
   task: string,
@@ -237,10 +222,10 @@ function composeAgent(
   }
 
   const nameParts: string[] = [];
-  if (expertise.length) nameParts.push(expertise[0].name);
-  if (personality.length) nameParts.push(personality[0].name);
-  if (approach.length) nameParts.push(approach[0].name);
-  const name = nameParts.length > 0 ? nameParts.join(" ") : "Dynamic Agent";
+  if (expertise.length) nameParts.push(expertise[].name);
+  if (personality.length) nameParts.push(personality[].name);
+  if (approach.length) nameParts.push(approach[].name);
+  const name = nameParts.length > ? nameParts.join(" ") : "Dynamic Agent";
 
   const color = generateAgentColor(traitKeys);
 
@@ -276,69 +261,64 @@ function composeAgent(
   };
 }
 
-/**
- * List all available traits
- */
+/ List all available traits
+ /
 function listTraits(traits: TraitsData): void {
   console.log("AVAILABLE TRAITS (base + user merged)\n");
 
   console.log("EXPERTISE (domain knowledge):");
   for (const [key, def] of Object.entries(traits.expertise)) {
-    console.log(`  ${key.padEnd(15)} - ${def.name}`);
+    console.log(`  ${key.padEnd()} - ${def.name}`);
   }
 
   console.log("\nPERSONALITY (behavior style):");
   for (const [key, def] of Object.entries(traits.personality)) {
-    console.log(`  ${key.padEnd(15)} - ${def.name}`);
+    console.log(`  ${key.padEnd()} - ${def.name}`);
   }
 
   console.log("\nAPPROACH (work style):");
   for (const [key, def] of Object.entries(traits.approach)) {
-    console.log(`  ${key.padEnd(15)} - ${def.name}`);
+    console.log(`  ${key.padEnd()} - ${def.name}`);
   }
 
-  if (traits.examples && Object.keys(traits.examples).length > 0) {
+  if (traits.examples && Object.keys(traits.examples).length > ) {
     console.log("\nEXAMPLE COMPOSITIONS:");
     for (const [key, example] of Object.entries(traits.examples)) {
-      console.log(`  ${key.padEnd(18)} - ${example.description}`);
+      console.log(`  ${key.padEnd()} - ${example.description}`);
       console.log(`                      traits: ${example.traits.join(", ")}`);
     }
   }
 }
 
-/**
- * Generate a URL-safe slug from a name
- */
+/ Generate a URL-safe slug from a name
+ /
 function slugify(name: string): string {
   return name
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/[^a-z-]+/g, "-")
     .replace(/^-|-$/g, "")
-    .slice(0, 40);
+    .slice(, );
 }
 
-/**
- * Save a composed agent to ~/.claude/custom-agents/{slug}.md
- *
- * Produces a CLAUDE CODE COMPATIBLE agent file that can be:
- * 1. Copied to ~/.claude/agents/ and used as a built-in agent
- * 2. Loaded via --load for re-composition with a new task
- *
- * The body is a complete system prompt matching built-in agent format.
- */
+/ Save a composed agent to ~/.claude/custom-agents/{slug}.md
+  Produces a CLAUDE CODE COMPATIBLE agent file that can be:
+ . Copied to ~/.claude/agents/ and used as a built-in agent
+ . Loaded via --load for re-composition with a new task
+  The body is a complete system prompt matching built-in agent format.
+ /
 function saveAgent(agent: ComposedAgent): string {
   mkdirSync(CUSTOM_AGENTS_DIR, { recursive: true });
 
   const slug = slugify(agent.name);
   const filePath = `${CUSTOM_AGENTS_DIR}/${slug}.md`;
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toISOString().split("T")[];
 
   // Generate meaningful persona title from traits (e.g., "The Skeptical Security Expert")
   const titleParts: string[] = [];
-  if (agent.personality.length) titleParts.push(agent.personality[0].name);
-  if (agent.expertise.length) titleParts.push(agent.expertise[0].name);
+  if (agent.personality.length) titleParts.push(agent.personality[].name);
+  if (agent.expertise.length) titleParts.push(agent.expertise[].name);
   const personaTitle =
-    titleParts.length > 0 ? "The " + titleParts.join(" ") : "Custom Specialist";
+    titleParts.length > ? "The " + titleParts.join(" ") : "Custom Specialist";
 
   // Generate meaningful background from trait descriptions (flatten newlines for YAML)
   const flatten = (s: string) => s.replace(/\n/g, " ").replace(/\s+/g, " ").trim();
@@ -350,14 +330,13 @@ function saveAgent(agent: ComposedAgent): string {
     bgParts
       .join(". ")
       .replace(/\.\./g, ".")
-      .replace(/\. *$/, "") + "." || "Composed specialist agent.";
+      .replace(/\. $/, "") + "." || "Composed specialist agent.";
 
   // Generate meaningful description
   const expertiseNames = agent.expertise.map((e) => e.name);
   const personalityNames = agent.personality.map((p) => p.name.toLowerCase());
   const description =
-    expertiseNames.length > 0
-      ? `${agent.name} — ${expertiseNames.join(" and ")} with ${personalityNames.join(", ")} approach.`
+    expertiseNames.length >       ? `${agent.name} — ${expertiseNames.join(" and ")} with ${personalityNames.join(", ")} approach.`
       : `${agent.name} — custom agent with ${personalityNames.join(", ")} approach.`;
 
   // Build Claude Code compatible body
@@ -379,34 +358,32 @@ source: "ComposeAgent"
 permissions:
   allow:
     - "Bash"
-    - "Read(*)"
-    - "Write(*)"
-    - "Edit(*)"
-    - "MultiEdit(*)"
-    - "Grep(*)"
-    - "Glob(*)"
-    - "WebFetch(domain:*)"
+    - "Read()"
+    - "Write()"
+    - "Edit()"
+    - "MultiEdit()"
+    - "Grep()"
+    - "Glob()"
+    - "WebFetch(domain:)"
     - "WebSearch"
-    - "mcp__*"
-    - "TodoWrite(*)"
+    - "mcp__"
+    - "TodoWrite()"
 ---
 
 ${body}
 `;
 
-  writeFileSync(filePath, content, "utf-8");
+  writeFileSync(filePath, content, "utf-");
   return filePath;
 }
 
-/**
- * Build a Claude Code compatible agent body (system prompt).
- *
- * Matches the structural format of built-in agents in ~/.claude/agents/*.md:
- * - Character heading with name and archetype
- * - Domain expertise, personality, approach sections
- * - Startup sequence, output format
- * - Core identity and key practices
- */
+/ Build a Claude Code compatible agent body (system prompt).
+  Matches the structural format of built-in agents in ~/.claude/agents/.md:
+ - Character heading with name and archetype
+ - Domain expertise, personality, approach sections
+ - Startup sequence, output format
+ - Core identity and key practices
+ /
 function buildSavedAgentBody(
   agent: ComposedAgent,
   personaTitle: string,
@@ -414,23 +391,23 @@ function buildSavedAgentBody(
 ): string {
   const expertiseBlock = agent.expertise.length
     ? agent.expertise
-        .map((e) => `### ${e.name}\n\n${e.description}`)
+        .map((e) => `${e.name}\n\n${e.description}`)
         .join("\n\n")
     : "";
 
   const personalityBlock = agent.personality.length
     ? agent.personality
-        .map((p) => `- **${p.name}**: ${p.description}`)
+        .map((p) => `- ${p.name}: ${p.description}`)
         .join("\n")
     : "";
 
   const approachBlock = agent.approach.length
-    ? agent.approach.map((a) => `- **${a.name}**: ${a.description}`).join("\n")
+    ? agent.approach.map((a) => `- ${a.name}: ${a.description}`).join("\n")
     : "";
 
   const identityList = [
-    ...agent.expertise.map((e) => `- **${e.name}**: ${e.description}`),
-    ...agent.personality.map((p) => `- **${p.name}**: ${p.description}`),
+    ...agent.expertise.map((e) => `- ${e.name}: ${e.description}`),
+    ...agent.personality.map((p) => `- ${p.name}: ${p.description}`),
   ].join("\n");
 
   const combinedList = [
@@ -439,53 +416,51 @@ function buildSavedAgentBody(
     ...agent.approach.map((a) => `- ${a.name} methodology`),
   ].join("\n");
 
-  return `# Character: ${agent.name} — "${personaTitle}"
+  return `Character: ${agent.name} — "${personaTitle}"
 
-**Real Name**: ${agent.name}
-**Character Archetype**: "${personaTitle}"
+Real Name: ${agent.name}
+Character Archetype: "${personaTitle}"
 
-${expertiseBlock ? `## Domain Expertise\n\n${expertiseBlock}\n` : ""}
-## Personality
+${expertiseBlock ? `Domain Expertise\n\n${expertiseBlock}\n` : ""}
+Personality
 
 ${personalityBlock}
 
-## Working Approach
+Working Approach
 
 ${approachBlock}
 
 ---
 
-## 🚨 MANDATORY OUTPUT FORMAT
+MANDATORY OUTPUT FORMAT
 
-**USE THE PAI FORMAT FROM PAI FOR ALL RESPONSES:**
-
+USE THE PAI FORMAT FROM PAI FOR ALL RESPONSES:
 \`\`\`
-📋 SUMMARY: [One sentence - what this response is about]
-🔍 ANALYSIS: [Key findings, insights, or observations]
-⚡ ACTIONS: [Steps taken or tools used]
-✅ RESULTS: [Outcomes, what was accomplished]
-📊 STATUS: [Current state of the task/system]
-📁 CAPTURE: [Required - context worth preserving for this session]
-➡️ NEXT: [Recommended next steps or options]
-📖 STORY EXPLANATION:
-1. [First key point in the narrative]
-2. [Second key point]
-3. [Third key point]
-4. [Fourth key point]
-5. [Fifth key point]
-6. [Sixth key point]
-7. [Seventh key point]
-8. [Eighth key point - conclusion]
-🎯 COMPLETED: [12 words max - REQUIRED]
+SUMMARY: [One sentence - what this response is about]
+ANALYSIS: [Key findings, insights, or observations]
+ACTIONS: [Steps taken or tools used]
+RESULTS: [Outcomes, what was accomplished]
+STATUS: [Current state of the task/system]
+CAPTURE: [Required - context worth preserving for this session]
+️ NEXT: [Recommended next steps or options]
+STORY EXPLANATION:
+. [First key point in the narrative]
+. [Second key point]
+. [Third key point]
+. [Fourth key point]
+. [Fifth key point]
+. [Sixth key point]
+. [Seventh key point]
+. [Eighth key point - conclusion]
+COMPLETED: [words max - REQUIRED]
 \`\`\`
 
-**CRITICAL:**
-- STORY EXPLANATION MUST BE A NUMBERED LIST (1-8 items)
+CRITICAL:- STORY EXPLANATION MUST BE A NUMBERED LIST (-items)
 - This is a CONSTITUTIONAL REQUIREMENT
 
 ---
 
-## Core Identity
+Core Identity
 
 You are ${agent.name}, a specialist with:
 
@@ -493,7 +468,7 @@ ${identityList}
 
 ---
 
-## Invocation
+Invocation
 
 To re-compose this agent with a specific task:
 
@@ -509,36 +484,32 @@ bun run ~/.claude/skills/Agents/Tools/ComposeAgent.ts --traits "${agent.traits.j
 
 ---
 
-## Key Practices
+Key Practices
 
-**Always:**
-- Use PAI output format for all responses
+Always:- Use PAI output format for all responses
 - Leverage your domain expertise
 - Deliver work that exceeds expectations
 
-**Never:**
-- Use simple/minimal output formats
+Never:- Use simple/minimal output formats
 - Accept mediocre quality
 - Ignore your domain expertise
 
 ---
 
-## Final Notes
+Final Notes
 
 You are ${agent.name} who combines:
 ${combinedList}
 
-**Remember:**
-1. Use PAI output format
-2. Leverage your expertise
-3. Deliver quality work
+Remember:. Use PAI output format
+. Leverage your expertise
+. Deliver quality work
 
 Let's get to work.`;
 }
 
-/**
- * List all saved custom agents
- */
+/ List all saved custom agents
+ /
 function listSavedAgents(): void {
   if (!existsSync(CUSTOM_AGENTS_DIR)) {
     console.log("No custom agents directory found. Use --save to create one.");
@@ -547,33 +518,32 @@ function listSavedAgents(): void {
 
   const files = readdirSync(CUSTOM_AGENTS_DIR).filter((f) => f.endsWith(".md") && f !== "README.md");
 
-  if (files.length === 0) {
+  if (files.length === ) {
     console.log("No saved custom agents found. Use --save to create one.");
     return;
   }
 
   console.log("SAVED CUSTOM AGENTS\n");
   for (const file of files) {
-    const content = readFileSync(`${CUSTOM_AGENTS_DIR}/${file}`, "utf-8");
-    const nameMatch = content.match(/^name:\s*"?([^"\n]+)"?/m);
-    const traitsMatch = content.match(/^traits:\s*\[([^\]]+)\]/m);
-    const colorMatch = content.match(/^color:\s*"?([^"\n]+)"?/m);
+    const content = readFileSync(`${CUSTOM_AGENTS_DIR}/${file}`, "utf-");
+    const nameMatch = content.match(/^name:\s"?([^"\n]+)"?/m);
+    const traitsMatch = content.match(/^traits:\s\[([^\]]+)\]/m);
+    const colorMatch = content.match(/^color:\s"?([^"\n]+)"?/m);
     const slug = file.replace(/\.md$/, "");
 
-    const name = nameMatch?.[1] || slug;
-    const traits = traitsMatch?.[1]?.replace(/"/g, "") || "unknown";
-    const color = colorMatch?.[1] || "none";
+    const name = nameMatch?.[] || slug;
+    const traits = traitsMatch?.[]?.replace(/"/g, "") || "unknown";
+    const color = colorMatch?.[] || "none";
 
-    console.log(`  ${slug.padEnd(25)} ${name}`);
-    console.log(`${"".padEnd(27)} traits: ${traits}`);
-    console.log(`${"".padEnd(27)} color: ${color}`);
+    console.log(`  ${slug.padEnd()} ${name}`);
+    console.log(`${"".padEnd()} traits: ${traits}`);
+    console.log(`${"".padEnd()} color: ${color}`);
     console.log();
   }
 }
 
-/**
- * Load a saved custom agent's prompt
- */
+/ Load a saved custom agent's prompt
+ /
 function loadAgent(name: string, traits: TraitsData, task?: string): ComposedAgent | null {
   const slug = slugify(name);
   const filePath = `${CUSTOM_AGENTS_DIR}/${slug}.md`;
@@ -584,15 +554,15 @@ function loadAgent(name: string, traits: TraitsData, task?: string): ComposedAge
     return null;
   }
 
-  const content = readFileSync(filePath, "utf-8");
-  const traitsMatch = content.match(/^traits:\s*\[([^\]]+)\]/m);
+  const content = readFileSync(filePath, "utf-");
+  const traitsMatch = content.match(/^traits:\s\[([^\]]+)\]/m);
 
   if (!traitsMatch) {
     console.error(`Error: Could not extract traits from ${filePath}`);
     return null;
   }
 
-  const traitKeys = traitsMatch[1]
+  const traitKeys = traitsMatch[]
     .replace(/"/g, "")
     .split(",")
     .map((t) => t.trim());
@@ -600,9 +570,8 @@ function loadAgent(name: string, traits: TraitsData, task?: string): ComposedAge
   return composeAgent(traitKeys, task || "", traits);
 }
 
-/**
- * Delete a saved custom agent
- */
+/ Delete a saved custom agent
+ /
 function deleteAgent(name: string): boolean {
   const slug = slugify(name);
   const filePath = `${CUSTOM_AGENTS_DIR}/${slug}.md`;
@@ -617,12 +586,11 @@ function deleteAgent(name: string): boolean {
   return true;
 }
 
-/**
- * Main entry point
- */
+/ Main entry point
+ /
 async function main() {
   const { values } = parseArgs({
-    args: Bun.argv.slice(2),
+    args: Bun.argv.slice(),
     options: {
       task: { type: "string", short: "t" },
       traits: { type: "string", short: "r" },
@@ -665,25 +633,25 @@ CONFIGURATION:
   Add your custom expertise, personalities, and approaches in the user file.
 
 EXAMPLES:
-  # Infer traits from task and save
+  Infer traits from task and save
   bun run ComposeAgent.ts -t "Review this security architecture" --save
 
-  # Specify traits explicitly
+  Specify traits explicitly
   bun run ComposeAgent.ts -r "security,skeptical,adversarial,thorough"
 
-  # Save and get JSON output
+  Save and get JSON output
   bun run ComposeAgent.ts -t "Analyze competitors" -o json --save
 
-  # List saved custom agents
+  List saved custom agents
   bun run ComposeAgent.ts --list-saved
 
-  # Load a saved agent
+  Load a saved agent
   bun run ComposeAgent.ts --load "security-skeptical"
 
-  # Delete a saved agent
+  Delete a saved agent
   bun run ComposeAgent.ts --delete "security-skeptical"
 
-  # See all available traits (base + user merged)
+  See all available traits (base + user merged)
   bun run ComposeAgent.ts --list
 
 OUTPUT (json format includes):
@@ -716,7 +684,7 @@ OUTPUT (json format includes):
 
   if (values.load) {
     const agent = loadAgent(values.load, traits, values.task);
-    if (!agent) process.exit(1);
+    if (!agent) process.exit();
 
     switch (values.output) {
       case "json":
@@ -725,7 +693,7 @@ OUTPUT (json format includes):
           traits: agent.traits,
           color: agent.color,
           prompt: agent.prompt,
-        }, null, 2));
+        }, null, ));
         break;
       case "summary":
         console.log(`LOADED AGENT: ${agent.name}`);
@@ -749,10 +717,10 @@ OUTPUT (json format includes):
     traitKeys = [...new Set([...traitKeys, ...inferred])];
   }
 
-  if (traitKeys.length === 0) {
+  if (traitKeys.length === ) {
     console.error("Error: Provide --task or --traits to compose an agent");
     console.error("Use --help for usage information");
-    process.exit(1);
+    process.exit();
   }
 
   const allTraitKeys = [
@@ -761,10 +729,10 @@ OUTPUT (json format includes):
     ...Object.keys(traits.approach),
   ];
   const invalidTraits = traitKeys.filter((t) => !allTraitKeys.includes(t));
-  if (invalidTraits.length > 0) {
+  if (invalidTraits.length > ) {
     console.error(`Error: Unknown traits: ${invalidTraits.join(", ")}`);
     console.error("Use --list to see available traits");
-    process.exit(1);
+    process.exit();
   }
 
   const agent = composeAgent(traitKeys, values.task || "", traits, values.timing);
@@ -789,8 +757,7 @@ OUTPUT (json format includes):
             prompt: agent.prompt,
           },
           null,
-          2
-        )
+                  )
       );
       break;
 

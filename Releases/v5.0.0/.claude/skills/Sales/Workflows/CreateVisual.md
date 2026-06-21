@@ -1,67 +1,59 @@
-# Create Sales Visual
+Create Sales Visual
 
-**Create a charcoal sketch visual asset for an existing sales narrative.**
-
+Create a charcoal sketch visual asset for an existing sales narrative.
 ---
 
-## Purpose
+Purpose
 
 Takes a sales narrative or value proposition and creates a matching visual asset — charcoal gestural sketch that captures the emotional core of the value proposition.
 
 ---
 
-## Process
+Process
 
-### Step 1: Gather Input
+Step : Gather Input
 
-**Requires:**
-- Sales narrative OR value proposition summary
+Requires:- Sales narrative OR value proposition summary
 - Target emotional response (optional — will derive if not provided)
 
-### Step 2: Identify Emotional Register
+Step : Identify Emotional Register
 
-**If not provided, derive from the narrative:**
-
+If not provided, derive from the narrative:
 | Value Proposition Type | Emotional Register | Warm:Cool |
 |------------------------|-------------------|-----------|
-| **Solves painful problem** | HOPE / POSSIBILITY | 80:20 |
-| **Prevents disaster/risk** | URGENCY / WARNING | 60:40 |
-| **Enables new capabilities** | WONDER / DISCOVERY | 40:60 |
-| **Saves time/effort** | DETERMINATION / EFFORT | 70:30 |
-| **Deep expertise/insight** | CONTEMPLATION | 50:50 |
-| **Team/collaboration** | CONNECTION | 90:10 |
+| Solves painful problem| HOPE / POSSIBILITY | :|
+| Prevents disaster/risk| URGENCY / WARNING | :|
+| Enables new capabilities| WONDER / DISCOVERY | :|
+| Saves time/effort| DETERMINATION / EFFORT | :|
+| Deep expertise/insight| CONTEMPLATION | :|
+| Team/collaboration| CONNECTION | :|
 
 
-### Step 3: Derive Visual Concept
+Step : Derive Visual Concept
 
-**Key Questions:**
-
-1. **What are the CONCRETE SUBJECTS?**
-   - Human figure? AI/robot figure? Both?
+Key Questions:
+. What are the CONCRETE SUBJECTS?   - Human figure? AI/robot figure? Both?
    - What objects represent the product/outcome?
    - What's physically present in the scene?
 
-2. **What's the VISUAL METAPHOR?**
-   - What scene captures the transformation?
+. What's the VISUAL METAPHOR?   - What scene captures the transformation?
    - What would make someone "get it" instantly?
    - What's the single image that tells the story?
 
-3. **What's the COMPOSITION?**
-   - Minimalist with breathing space
+. What's the COMPOSITION?   - Minimalist with breathing space
    - Centered subjects floating in empty space
    - Few elements, each intentional
 
-### Step 4: Construct Prompt
+Step : Construct Prompt
 
-**Use the Art Skill essay-art template:**
-
+Use the Art Skill essay-art template:
 ```
 Sophisticated charcoal architectural sketch. [ARTIST REFERENCE] influence.
 
-EMOTIONAL REGISTER: [From Step 2]
+EMOTIONAL REGISTER: [From Step ]
 
 SCENE:
-[Visual concept from Step 3]
+[Visual concept from Step ]
 
 MINIMALIST COMPOSITION:
 - Subject(s) CENTERED in the frame
@@ -75,12 +67,12 @@ CONCRETE SUBJECTS:
 HUMAN FIGURE — GESTURAL ABSTRACTED SKETCH:
 - MULTIPLE OVERLAPPING LINES suggesting the form
 - Quick, confident, ENERGETIC gestural marks
-- Burnt Sienna (#8B4513) WASH accent touches
+- Burnt Sienna (B) WASH accent touches
 
 [If AI/tech figure:]
 ROBOT/TECH FIGURE — GESTURAL ANGULAR SKETCH:
 - Angular rigid gestural marks
-- Deep Purple (#4A148C) WASH accent touches
+- Deep Purple (AC) WASH accent touches
 
 LINEWORK:
 - Loose charcoal/graphite pencil strokes
@@ -88,7 +80,7 @@ LINEWORK:
 - NOT clean vectors, NOT smooth
 
 COLOR — CHARCOAL DOMINANT:
-- CHARCOAL AND GRAY DOMINANT — 85%
+- CHARCOAL AND GRAY DOMINANT — %
 - Sienna accents on human elements
 - Purple accents on tech elements
 - Background is EMPTY — white/cream negative space
@@ -103,33 +95,32 @@ Sign {DA_IDENTITY.NAME} small in charcoal bottom right.
 NO other text.
 ```
 
-### Step 5: Generate Image
+Step : Generate Image
 
 ```bash
 bun run ~/.claude/skills/art/Tools/Generate.ts \
   --model nano-banana-pro \
   --prompt "[YOUR PROMPT]" \
-  --size 2K \
-  --aspect-ratio 1:1 \
+  --size K \
+  --aspect-ratio :\
   --remove-bg \
   --output /path/to/output.png
 ```
 
-### Step 6: Validate
+Step : Validate
 
-**Check:**
-- [ ] Visual matches the narrative emotionally
+Check:- [ ] Visual matches the narrative emotionally
 - [ ] Concrete subjects are visible
 - [ ] Minimalist composition with empty space
 - [ ] Charcoal sketch aesthetic (not clean vectors)
 - [ ] Transparent background
 - [ ] Someone could connect the visual to the value proposition
 
-**If validation fails:** Regenerate with adjusted prompt.
+If validation fails:Regenerate with adjusted prompt.
 
 ---
 
-## Output
+Output
 
 - PNG image with transparent background
 - Charcoal gestural sketch aesthetic
@@ -138,4 +129,4 @@ bun run ~/.claude/skills/art/Tools/Generate.ts \
 
 ---
 
-**The goal:** A visual that makes the value proposition instantly graspable.
+The goal:A visual that makes the value proposition instantly graspable.

@@ -633,7 +633,7 @@ if (jsonOutput) {
     }
   }
   if (orphan.length > 0) {
-    console.error(`\n📦 ORPHANS (${orphan.length}):`);
+    console.error(`\n ORPHANS (${orphan.length}):`);
     for (const f of orphan) {
       console.error(`  ${f.file}`);
     }

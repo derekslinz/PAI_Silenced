@@ -1,12 +1,12 @@
-# UpdatePatterns Workflow
+UpdatePatterns Workflow
 
 Update Fabric patterns from the upstream repository to keep patterns current with latest improvements and additions.
 
 ---
 
-## Prerequisites
+Prerequisites
 
-**Fabric CLI must be installed.** The update pulls from the official fabric repository.
+Fabric CLI must be installed.The update pulls from the official fabric repository.
 
 To install fabric:
 ```bash
@@ -15,16 +15,16 @@ go install github.com/danielmiessler/fabric@latest
 
 ---
 
-## Workflow Steps
+Workflow Steps
 
-### Step 2: Check Current Pattern Count
+Step : Check Current Pattern Count
 
 ```bash
-CURRENT_COUNT=$(ls -1 ~/.claude/skills/Fabric/Patterns/ 2>/dev/null | wc -l | tr -d ' ')
+CURRENT_COUNT=$(ls -~/.claude/skills/Fabric/Patterns/ >/dev/null | wc -l | tr -d ' ')
 echo "Current patterns: $CURRENT_COUNT"
 ```
 
-### Step 3: Update via Fabric CLI
+Step : Update via Fabric CLI
 
 The fabric CLI handles pulling the latest patterns from the upstream repository:
 
@@ -34,7 +34,7 @@ fabric -U
 
 This updates patterns in `~/.config/fabric/patterns/`.
 
-### Step 4: Sync to Skill Directory
+Step : Sync to Skill Directory
 
 Copy updated patterns to the Fabric skill's local storage:
 
@@ -42,10 +42,10 @@ Copy updated patterns to the Fabric skill's local storage:
 rsync -av --delete ~/.config/fabric/patterns/ ~/.claude/skills/Fabric/Patterns/
 ```
 
-### Step 5: Report Results
+Step : Report Results
 
 ```bash
-NEW_COUNT=$(ls -1 ~/.claude/skills/Fabric/Patterns/ 2>/dev/null | wc -l | tr -d ' ')
+NEW_COUNT=$(ls -~/.claude/skills/Fabric/Patterns/ >/dev/null | wc -l | tr -d ' ')
 echo ""
 echo "Pattern update complete!"
 echo "Previous count: $CURRENT_COUNT"
@@ -56,7 +56,7 @@ if [ "$NEW_COUNT" -gt "$CURRENT_COUNT" ]; then
 fi
 ```
 
-### Step 6: Verify Key Patterns Exist
+Step : Verify Key Patterns Exist
 
 Confirm critical patterns are present:
 
@@ -72,12 +72,12 @@ done
 
 ---
 
-## Alternative: Manual Git Update
+Alternative: Manual Git Update
 
 If fabric CLI is not available, you can update from the fabric repository directly:
 
 ```bash
-# Clone or update fabric repo
+Clone or update fabric repo
 cd /tmp
 if [ -d fabric ]; then
   cd fabric && git pull
@@ -86,30 +86,29 @@ else
   cd fabric
 fi
 
-# Sync patterns
+Sync patterns
 rsync -av --delete patterns/ ~/.claude/skills/Fabric/Patterns/
 
-# Cleanup
+Cleanup
 cd /tmp && rm -rf fabric
 ```
 
 ---
 
-## Verification
+Verification
 
 After update, verify with:
 
 ```bash
-# Count patterns
-ls -1 ~/.claude/skills/Fabric/Patterns/ | wc -l
+Count patterns
+ls -~/.claude/skills/Fabric/Patterns/ | wc -l
 
-# List recent additions (if patterns have dates)
-ls -lt ~/.claude/skills/Fabric/Patterns/ | head -10
-```
+List recent additions (if patterns have dates)
+ls -lt ~/.claude/skills/Fabric/Patterns/ | head -```
 
 ---
 
-## Output
+Output
 
 Report to user:
 - Previous pattern count

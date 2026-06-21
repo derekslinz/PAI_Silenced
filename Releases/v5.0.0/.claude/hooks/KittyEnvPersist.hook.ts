@@ -61,17 +61,17 @@ try {
   if (source === 'compact') {
     const current = readTabState(sessionId);
     if (current && (current.state === 'working' || current.state === 'thinking')) {
-      console.error(`🔄 Tab in ${current.state} state — preserving title through compaction`);
+      console.error(` Tab in ${current.state} state — preserving title through compaction`);
     } else {
       setTabState({ title: `${getDAName()} ready…`, state: 'idle', sessionId });
-      console.error('🔄 Tab title reset to clean state (post-compact, no live work)');
+      console.error(' Tab title reset to clean state (post-compact, no live work)');
     }
   } else {
     setTabState({ title: `${getDAName()} ready…`, state: 'idle', sessionId });
-    console.error(`🔄 Tab title reset for new session (source=${source || 'unspecified'})`);
+    console.error(` Tab title reset for new session (source=${source || 'unspecified'})`);
   }
 } catch (err) {
-  console.error(`⚠️ Failed to reset tab title: ${err}`);
+  console.error(` Failed to reset tab title: ${err}`);
 }
 
 process.exit(0);

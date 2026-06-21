@@ -498,7 +498,7 @@ Monitor({
   description: "Test failure watcher",
   persistent: false,
   timeout_ms: 600000,
-  command: "tail -f /tmp/test-output.log | grep --line-buffered -E '(FAIL|ERROR|✗|AssertionError)'"
+  command: "tail -f /tmp/test-output.log | grep --line-buffered -E '(FAIL|ERROR||AssertionError)'"
 })
 ```
 

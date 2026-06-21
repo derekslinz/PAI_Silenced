@@ -1,38 +1,35 @@
-# Adaptive Content Visualization Workflow
+Adaptive Content Visualization Workflow
 
-**Intelligent multi-modal visualization combining optimal approaches based on content analysis.**
+Intelligent multi-modal visualization combining optimal approaches based on content analysis.
+---
+
+Creates ADAPTIVE VISUALIZATIONS— analyzes content to select and orchestrate the best combination of visualization techniques, from pure data viz to mixed-media infographics to multi-panel compositions.
 
 ---
 
-Creates **ADAPTIVE VISUALIZATIONS** — analyzes content to select and orchestrate the best combination of visualization techniques, from pure data viz to mixed-media infographics to multi-panel compositions.
+Purpose
 
----
+The Visualize workflow is the intelligent visualization orchestrator. Unlike the specialized workflows (which each serve specific purposes), Visualize analyzes your content and chooses the optimal visualization strategy — which may be one approach, or a sophisticated combination of multiple techniques.
 
-## Purpose
-
-The Visualize workflow is the **intelligent visualization orchestrator**. Unlike the 12 specialized workflows (which each serve specific purposes), Visualize analyzes your content and chooses the optimal visualization strategy — which may be one approach, or a sophisticated combination of multiple techniques.
-
-**Use this workflow when:**
-- You have content but aren't sure what visualization approach to use
+Use this workflow when:- You have content but aren't sure what visualization approach to use
 - The content has multiple dimensions (data + narrative + concepts)
 - You want the most effective visualization, not a predetermined format
 - You're asking "what's the best way to visualize this?"
 - You want to leverage Nano Banana Pro's full capabilities
 
-**This workflow DOES NOT use:**
-- Predetermined templates
+This workflow DOES NOT use:- Predetermined templates
 - One-size-fits-all approaches
 - Single-mode visualizations when combinations would be better
 
 ---
 
-## 🚨 INFOGRAPHICS: Use Excalidraw Whiteboard Style
+INFOGRAPHICS: Use Excalidraw Whiteboard Style
 
-**Infographics use the EXCALIDRAW whiteboard sketch aesthetic** — hand-drawn with wobbly boxes, sketchy lines, and imperfect organic shapes. This is the same style as mermaid.md technical diagrams but with richer graphics and narrative.
+Infographics use the EXCALIDRAW whiteboard sketch aesthetic— hand-drawn with wobbly boxes, sketchy lines, and imperfect organic shapes. This is the same style as mermaid.md technical diagrams but with richer graphics and narrative.
 
-**Key principle:** Infographics = Excalidraw aesthetic + Rich graphics + Visual narrative
+Key principle:Infographics = Excalidraw aesthetic + Rich graphics + Visual narrative
 
-### Excalidraw Infographic Aesthetic
+Excalidraw Infographic Aesthetic
 
 ```
 STYLE: Excalidraw whiteboard sketch with rich graphics
@@ -45,52 +42,52 @@ STYLE: Excalidraw whiteboard sketch with rich graphics
 - RICH GRAPHICS — icons, illustrations, visual metaphors (all sketchy)
 ```
 
-### What Makes a Good Excalidraw Infographic
+What Makes a Good Excalidraw Infographic
 
-1. **Hand-Drawn Feel** — Everything looks sketched, not digital
-2. **Wobbly Shapes** — No perfect rectangles, circles, or lines
-3. **Rich Graphics** — Icons and illustrations in sketchy style
-4. **Visual Narrative** — Panels flow and tell a story
-5. **Strategic Color** — Purple/teal accents on key elements, mostly black
+. Hand-Drawn Feel— Everything looks sketched, not digital
+. Wobbly Shapes— No perfect rectangles, circles, or lines
+. Rich Graphics— Icons and illustrations in sketchy style
+. Visual Narrative— Panels flow and tell a story
+. Strategic Color— Purple/teal accents on key elements, mostly black
 
-### AVOID
-
-```
-❌ Perfect geometric shapes
-❌ Ruler-straight lines and arrows
-❌ Digital precision
-❌ Smooth polished vectors
-❌ Perfect alignment
-❌ Clean corporate infographic style
-```
-
-### Color Usage
+AVOID
 
 ```
-- Black (#000000): All primary structure (boxes, arrows, icons)
-- Deep Purple (#4A148C): Critical elements, key stats, title (10-20%)
-- Deep Teal (#00796B): Secondary highlights (5-10%)
-- Charcoal (#2D2D2D): All text labels
-- Background: Light Cream #F5E6D3 or White #FFFFFF
+Perfect geometric shapes
+Ruler-straight lines and arrows
+Digital precision
+Smooth polished vectors
+Perfect alignment
+Clean corporate infographic style
 ```
 
-### Background Rules
+Color Usage
 
 ```
-DEFAULT: Light Cream/Sepia #F5E6D3 (matches blog aesthetic)
+- Black (): All primary structure (boxes, arrows, icons)
+- Deep Purple (AC): Critical elements, key stats, title (-%)
+- Deep Teal (B): Secondary highlights (-%)
+- Charcoal (DDD): All text labels
+- Background: Light Cream FEDor White FFFFFF
+```
+
+Background Rules
+
+```
+DEFAULT: Light Cream/Sepia FED(matches blog aesthetic)
 WHITE ONLY IF: User explicitly requests "white background" in prompt
 TRANSPARENT: Use Images skill to remove background for overlay use
 ```
 
-**Light Cream (#F5E6D3) is the DEFAULT background.** Only use white (#FFFFFF) if the user explicitly requests it.
+Light Cream (FED) is the DEFAULT background.Only use white (FFFFFF) if the user explicitly requests it.
 
-**For transparent background** — use the **Images skill** for background removal:
+For transparent background— use the Images skillfor background removal:
 
 ```bash
 bun ~/.claude/PAI/TOOLS/RemoveBg.ts /path/to/visualization.png
 ```
 
-### Title/Subtitle Alignment
+Title/Subtitle Alignment
 
 ```
 ALWAYS LEFT-JUSTIFIED — Never centered
@@ -98,7 +95,7 @@ ALWAYS LEFT-JUSTIFIED — Never centered
 - Subtitle: Below title, aligned left
 ```
 
-### Infographic Prompt Template
+Infographic Prompt Template
 
 ```
 Excalidraw-style whiteboard infographic with rich hand-drawn graphics.
@@ -111,39 +108,38 @@ STYLE: Excalidraw whiteboard sketch aesthetic
 - Variable line weight (boxes thicker, details thinner)
 - Whiteboard/sketch paper feel
 
-BACKGROUND: Light Cream #F5E6D3 (DEFAULT) — only use White #FFFFFF if explicitly requested
+BACKGROUND: Light Cream FED(DEFAULT) — only use White FFFFFF if explicitly requested
 
-TYPOGRAPHY SYSTEM (3-TIER):
+TYPOGRAPHY SYSTEM (-TIER):
 
-TIER 1 - TITLE & SUBTITLE (Valkyrie):
+TIER - TITLE & SUBTITLE (Valkyrie):
 Title:
 - "[Title]"
 - Font: Valkyrie serif ITALIC
 - Position: LEFT-JUSTIFIED, top-left with margin
-- Color: Purple #4A148C (or Black #000000)
-- Size: Large, 3-4x body text
+- Color: Purple AC (or Black )
+- Size: Large, -x body text
 
 Subtitle:
 - "[Subtitle]"
 - Font: Valkyrie serif REGULAR (NOT italic)
 - Position: LEFT-JUSTIFIED, below title
-- Color: Charcoal #2D2D2D
-- Size: Small, 1-1.5x body text
+- Color: Charcoal DDD
+- Size: Small, -.x body text
 
-TIER 2 - PANEL HEADERS & LABELS (Concourse + Valkyrie):
+TIER - PANEL HEADERS & LABELS (Concourse + Valkyrie):
 Panel Headers:
 - Font: Concourse geometric sans-serif, bold
-- Color: Black #000000
-- Style: Uppercase
+- Color: Black - Style: Uppercase
 
 Content Labels:
 - Technical labels: Concourse geometric sans
 - Descriptions: Valkyrie serif
-- Color: Charcoal #2D2D2D
+- Color: Charcoal DDD
 
-TIER 3 - ANNOTATIONS (Advocate):
+TIER - ANNOTATIONS (Advocate):
 - Font: Advocate condensed italic
-- Color: Purple #4A148C or Teal #00796B
+- Color: Purple AC or Teal B
 - Style: Smaller, insight/commentary voice
 
 [Describe each panel with SKETCHY VISUAL ELEMENTS:]
@@ -165,43 +161,41 @@ CRITICAL:
 - Use proper font hierarchy (Valkyrie, Concourse, Advocate)
 ```
 
-**Reference:** See `mermaid.md` for complete Excalidraw aesthetic specification.
+Reference:See `mermaid.md` for complete Excalidraw aesthetic specification.
 
 ---
 
-## Nano Banana Pro Capabilities
+Nano Banana Pro Capabilities
 
-**Understanding what's possible:**
+Understanding what's possible:
+Core Strengths
+. Exceptional text rendering— Clean typography, readable labels, multiple text tiers
+. Data visualization— Charts, graphs, quantitative displays
+. Infographic composition— Multi-element layouts, mixed media
+. Iconic illustration— Simple recognizable symbols and icons
+. Multi-panel layouts— Grids, sequences, comparative layouts
+. Hybrid compositions— Data + illustration + typography together
+. Slide-quality output— Presentation-ready visualizations
 
-### Core Strengths
-1. **Exceptional text rendering** — Clean typography, readable labels, multiple text tiers
-2. **Data visualization** — Charts, graphs, quantitative displays
-3. **Infographic composition** — Multi-element layouts, mixed media
-4. **Iconic illustration** — Simple recognizable symbols and icons
-5. **Multi-panel layouts** — Grids, sequences, comparative layouts
-6. **Hybrid compositions** — Data + illustration + typography together
-7. **Slide-quality output** — Presentation-ready visualizations
-
-### What Nano Banana Pro Excels At
-- **Text-heavy compositions** — Infographics with lots of labels
-- **Data + context** — Numbers with explanatory illustrations
-- **Icon systems** — Repeated simplified icons showing quantities
-- **Multi-tier typography** — Clear hierarchies (titles, labels, annotations)
-- **Mixed media** — Charts alongside illustrations
-- **Grid layouts** — Organized multi-element compositions
-- **Comparative panels** — Side-by-side or sequential comparisons
+What Nano Banana Pro Excels At
+- Text-heavy compositions— Infographics with lots of labels
+- Data + context— Numbers with explanatory illustrations
+- Icon systems— Repeated simplified icons showing quantities
+- Multi-tier typography— Clear hierarchies (titles, labels, annotations)
+- Mixed media— Charts alongside illustrations
+- Grid layouts— Organized multi-element compositions
+- Comparative panels— Side-by-side or sequential comparisons
 
 ---
 
-## 🚨 MANDATORY WORKFLOW STEPS
+MANDATORY WORKFLOW STEPS
 
-### Step 1: Deep Content Analysis (MANDATORY - Use deep thinking)
+Step : Deep Content Analysis (MANDATORY - Use deep thinking)
 
-**🎯 CRITICAL: Use extended thinking to analyze content thoroughly before proceeding.**
-
+CRITICAL: Use extended thinking to analyze content thoroughly before proceeding.
 Analyze the content across these dimensions:
 
-#### A. Content Type Identification
+A. Content Type Identification
 What types of information are present?
 - [ ] Quantitative data (numbers, statistics, metrics)
 - [ ] Qualitative concepts (ideas, principles, arguments)
@@ -212,7 +206,7 @@ What types of information are present?
 - [ ] Spatial relationships (maps, territories, domains)
 - [ ] Process flows (steps, recipes, methodologies)
 
-#### B. Communication Goal
+B. Communication Goal
 What's the primary purpose?
 - Explain a complex concept → Conceptual visualization
 - Show data insights → Data visualization dominant
@@ -222,7 +216,7 @@ What's the primary purpose?
 - Guide action → Process/recipe format
 - Make memorable → Metaphor + data hybrid
 
-#### C. Audience Context
+C. Audience Context
 Who's this for?
 - Technical audience → More data, precision, structure
 - General audience → More metaphor, simplification, narrative
@@ -230,23 +224,22 @@ Who's this for?
 - Social media → Punchy, scannable, shareable
 - Consulting deliverable → Professional, multi-faceted, comprehensive
 
-#### D. Complexity Assessment
+D. Complexity Assessment
 How much information needs to be conveyed?
-- **Simple (1-2 key points):** Single focused visualization
-- **Medium (3-5 dimensions):** Hybrid or two-element composition
-- **Complex (6+ dimensions):** Multi-panel infographic or dashboard
+- Simple (-key points):Single focused visualization
+- Medium (-dimensions):Hybrid or two-element composition
+- Complex (+ dimensions):Multi-panel infographic or dashboard
 
-**Output from Analysis:**
-```
+Output from Analysis:```
 CONTENT TYPE: [Primary and secondary types from above]
 INFORMATION DENSITY: [Simple / Medium / Complex]
 COMMUNICATION GOAL: [Primary purpose]
 AUDIENCE: [Who this is for]
 
 KEY ELEMENTS TO VISUALIZE:
-1. [Element type: data/concept/narrative/etc.]
-2. [Element type]
-3. [Element type]
+. [Element type: data/concept/narrative/etc.]
+. [Element type]
+. [Element type]
 ...
 
 VISUALIZATION OPPORTUNITIES:
@@ -259,44 +252,40 @@ VISUALIZATION OPPORTUNITIES:
 
 ---
 
-### Step 2: Visualization Strategy Selection (MANDATORY - Use deep thinking)
+Step : Visualization Strategy Selection (MANDATORY - Use deep thinking)
 
-**Based on Step 1 analysis, determine the optimal approach:**
+Based on Step analysis, determine the optimal approach:
+Strategy Options
 
-#### Strategy Options
-
-**A. SINGLE-MODE (Use one specialized workflow)**
-When content clearly fits one visualization type:
+A. SINGLE-MODE (Use one specialized workflow)When content clearly fits one visualization type:
 - Pure data → Create data visualization
 - Pure concept → Use editorial illustration or framework
 - Pure comparison → Use comparison workflow
 - Pure process → Use recipe card workflow
 
-**B. HYBRID COMPOSITION (Combine 2-3 elements)**
-When content has multiple dimensions:
-- **Data + Metaphor:** Chart/graph with editorial illustration accent
-- **Data + Process:** Numbers showing outcomes at each step
-- **Concept + Structure:** Framework with illustrated metaphors in quadrants
-- **Timeline + Data:** Progression with quantitative milestones
-- **Comparison + Data:** Split screen with metrics on each side
+B. HYBRID COMPOSITION (Combine -elements)When content has multiple dimensions:
+- Data + Metaphor:Chart/graph with editorial illustration accent
+- Data + Process:Numbers showing outcomes at each step
+- Concept + Structure:Framework with illustrated metaphors in quadrants
+- Timeline + Data:Progression with quantitative milestones
+- Comparison + Data:Split screen with metrics on each side
 
-**C. MULTI-PANEL INFOGRAPHIC (Dashboard approach)**
-When content is complex and multifaceted:
-- **Grid layout:** 4-6 panels each showing different aspect
-- **Layered composition:** Top section data, middle concepts, bottom process
-- **Dashboard:** Multiple charts/graphs with unified design
-- **Slide series:** Sequential slides each focusing on one dimension
+C. MULTI-PANEL INFOGRAPHIC (Dashboard approach)When content is complex and multifaceted:
+- Grid layout:-panels each showing different aspect
+- Layered composition:Top section data, middle concepts, bottom process
+- Dashboard:Multiple charts/graphs with unified design
+- Slide series:Sequential slides each focusing on one dimension
 
-#### Decision Framework
+Decision Framework
 
 ```
-IF content has 1 primary dimension:
+IF content has primary dimension:
   → Use specialized workflow directly
 
-IF content has 2-3 dimensions of equal importance:
+IF content has -dimensions of equal importance:
   → Design HYBRID composition
 
-IF content has 4+ distinct dimensions:
+IF content has + distinct dimensions:
   → Design MULTI-PANEL infographic
 
 IF content is primarily quantitative:
@@ -312,40 +301,36 @@ IF content tells a story:
   → Could be comic, timeline, or multi-step
 ```
 
-**Output from Strategy Selection:**
-```
+Output from Strategy Selection:```
 VISUALIZATION STRATEGY: [Single-mode / Hybrid / Multi-panel]
 
 CHOSEN APPROACH:
 [Describe the specific visualization approach]
 
 COMPOSITION ELEMENTS:
-Primary element (60-70%): [Type and purpose]
-Secondary element (20-30%): [Type and purpose]
-Tertiary element (10%): [Type and purpose - optional]
+Primary element (-%): [Type and purpose]
+Secondary element (-%): [Type and purpose]
+Tertiary element (%): [Type and purpose - optional]
 
 LAYOUT STRUCTURE:
 [Describe how elements are arranged spatially]
 
-ASPECT RATIO: [1:1 / 16:9 / 9:16 / 4:3]
+ASPECT RATIO: [:/ :/ :/ :]
 Rationale: [Why this ratio for this content]
 ```
 
 ---
 
-### Step 3: Design Composition (MANDATORY - Use deep thinking)
+Step : Design Composition (MANDATORY - Use deep thinking)
 
-**Plan the visual hierarchy and spatial organization:**
-
-#### A. Spatial Layout
+Plan the visual hierarchy and spatial organization:
+A. Spatial Layout
 Design how elements occupy the canvas:
 
-**For Single-Mode:**
-- Follow the specialized workflow's layout guidelines
+For Single-Mode:- Follow the specialized workflow's layout guidelines
 - Optimize for Nano Banana Pro's strengths
 
-**For Hybrid Composition:**
-```
+For Hybrid Composition:```
 Example: Data + Metaphor
 ┌─────────────────────────────────────┐
 │                                     │
@@ -357,48 +342,47 @@ Example: Data + Metaphor
 │  │   CHART   │   │ ILLUSTRATION │  │
 │  │           │   │              │  │
 │  └───────────┘   └──────────────┘  │
-│        40%              40%         │
+│        %              %         │
 │                                     │
-│  [Explanatory text - 20%]          │
+│  [Explanatory text - %]          │
 │                                     │
 └─────────────────────────────────────┘
 ```
 
-**For Multi-Panel Infographic:**
-```
+For Multi-Panel Infographic:```
 Example: Dashboard Grid
 ┌─────────────────────────────────────┐
 │  [OVERALL TITLE]                    │
 ├─────────────┬───────────────────────┤
-│  Panel 1:   │   Panel 2:            │
+│  Panel :   │   Panel :            │
 │  Data viz   │   Concept diagram     │
 ├─────────────┼───────────────────────┤
-│  Panel 3:   │   Panel 4:            │
+│  Panel :   │   Panel :            │
 │  Timeline   │   Key stat + icon     │
 ├─────────────┴───────────────────────┤
 │  [Synthesis/Conclusion panel]       │
 └─────────────────────────────────────┘
 ```
 
-#### B. Visual Hierarchy
+B. Visual Hierarchy
 Establish information priority:
-1. **Primary (Immediate attention):** 50-60% of visual weight
-2. **Secondary (Supporting context):** 25-35% of visual weight
-3. **Tertiary (Details/annotations):** 10-15% of visual weight
+. Primary (Immediate attention):-% of visual weight
+. Secondary (Supporting context):-% of visual weight
+. Tertiary (Details/annotations):-% of visual weight
 
-#### C. Typography System
-Apply 3-tier system across all elements:
-- **Tier 1 (Advocate Block):** Main title, section headers
-- **Tier 2 (Concourse Sans):** Data labels, chart axes, element labels
-- **Tier 3 (Advocate Condensed Italic):** Annotations, insights, editorial voice
+C. Typography System
+Apply -tier system across all elements:
+- Tier (Advocate Block):Main title, section headers
+- Tier (Concourse Sans):Data labels, chart axes, element labels
+- Tier (Advocate Condensed Italic):Annotations, insights, editorial voice
 
-#### D. Color Strategy
+D. Color Strategy
 Maintain UL aesthetic while supporting information hierarchy:
-- **Black #000000:** Primary structure (chart axes, borders, main elements)
-- **Purple #4A148C:** Critical insights, key data points, optimal zones
-- **Teal #00796B:** Secondary data, supporting elements, context
-- **Charcoal #2D2D2D:** All body text and labels
-- **Background:** Light Cream #F5E6D3 (DEFAULT — only use white if explicitly requested)
+- Black :Primary structure (chart axes, borders, main elements)
+- Purple AC:Critical insights, key data points, optimal zones
+- Teal B:Secondary data, supporting elements, context
+- Charcoal DDD:All body text and labels
+- Background:Light Cream FED(DEFAULT — only use white if explicitly requested)
 
 Strategic color use:
 - Don't color everything
@@ -406,20 +390,19 @@ Strategic color use:
 - Teal for supporting information
 - Black for structure and clarity
 
-**Output from Design:**
-```
+Output from Design:```
 COMPOSITION LAYOUT:
 [Detailed spatial description or ASCII diagram]
 
 VISUAL HIERARCHY:
-Primary (50-60%): [Element and placement]
-Secondary (25-35%): [Element and placement]
-Tertiary (10-15%): [Element and placement]
+Primary (-%): [Element and placement]
+Secondary (-%): [Element and placement]
+Tertiary (-%): [Element and placement]
 
 TYPOGRAPHY ASSIGNMENTS:
-Tier 1: [Where used - titles, headers]
-Tier 2: [Where used - labels, axes]
-Tier 3: [Where used - annotations, insights]
+Tier : [Where used - titles, headers]
+Tier : [Where used - labels, axes]
+Tier : [Where used - annotations, insights]
 
 COLOR CODING:
 Purple: [Specific elements to highlight]
@@ -437,11 +420,10 @@ ELEMENT SPECIFICATIONS:
 
 ---
 
-### Step 4: Construct Comprehensive Prompt (MANDATORY - Use deep thinking)
+Step : Construct Comprehensive Prompt (MANDATORY - Use deep thinking)
 
-**Build the generation prompt leveraging Nano Banana Pro's capabilities:**
-
-#### Prompt Structure Template
+Build the generation prompt leveraging Nano Banana Pro's capabilities:
+Prompt Structure Template
 
 ```
 [VISUALIZATION TYPE] in editorial infographic style optimized for Nano Banana Pro.
@@ -450,7 +432,7 @@ OVERALL CONCEPT: "[What this visualization communicates]"
 
 STYLE REFERENCE: [Professional infographic / Data journalism / Editorial slide / Mixed media visualization]
 
-BACKGROUND: Light Cream #F5E6D3 (DEFAULT) — only use White #FFFFFF if user explicitly requests it
+BACKGROUND: Light Cream FED(DEFAULT) — only use White FFFFFF if user explicitly requests it
 
 AESTHETIC:
 - Professional infographic quality (deliverable standard)
@@ -460,57 +442,57 @@ AESTHETIC:
 - Flat colors, no gradients or shadows
 - Readable at multiple scales (works as thumbnail and full-size)
 
-ASPECT RATIO: [1:1 / 16:9 / 9:16 / 4:3]
+ASPECT RATIO: [:/ :/ :/ :]
 
 COMPOSITION STRUCTURE:
 [Detailed description of spatial layout]
 
-TYPOGRAPHY SYSTEM (3-TIER HIERARCHY):
+TYPOGRAPHY SYSTEM (-TIER HIERARCHY):
 
-TIER 1 - VISUALIZATION HEADER & SUBTITLE (Valkyrie Two-Part System):
+TIER - VISUALIZATION HEADER & SUBTITLE (Valkyrie Two-Part System):
 Header (Main Title):
 - "[Header Text]"
 - Font: Valkyrie serif italic (elegant, sophisticated)
-- Size: Large - 3-4x body text (prominent, commanding attention)
+- Size: Large - -x body text (prominent, commanding attention)
 - Style: Italicized, sentence case or title case (NOT all-caps)
-- Color: Black #000000 (or Purple #4A148C for emphasis)
+- Color: Black (or Purple AC for emphasis)
 - Position: Top-left with margin
 
 Subtitle (Clarifying Detail):
 - "[Subtitle Text]"
 - Font: Valkyrie serif regular (warm, readable)
-- Size: Small - 1-1.5x body text (noticeably smaller than header, supportive)
+- Size: Small - -.x body text (noticeably smaller than header, supportive)
 - Style: Regular (NOT italicized), sentence case (first letter capitalized, rest lowercase except proper nouns)
-- Color: Black #000000 or Charcoal #2D2D2D
+- Color: Black or Charcoal DDD
 - Position: Small gap below header, aligned left
 
-TIER 2 - ELEMENT LABELS (Concourse Sans):
+TIER - ELEMENT LABELS (Concourse Sans):
 - [List all labels: chart axes, data labels, section headers]
 - Font: Concourse geometric sans-serif, clean, modern
 - Size: Medium readable
-- Color: Charcoal #2D2D2D
+- Color: Charcoal DDD
 - Positions: [Specify for each]
 
-TIER 3 - ANNOTATIONS (Advocate Condensed Italic):
+TIER - ANNOTATIONS (Advocate Condensed Italic):
 - [List all annotations and insights]
 - Font: Advocate condensed italic (editorial voice)
-- Size: Small (60% of Tier 2)
-- Color: Purple #4A148C (insights) or Teal #00796B (technical notes)
+- Size: Small (% of Tier )
+- Color: Purple AC (insights) or Teal B (technical notes)
 - Positions: [Near relevant elements]
 
 [FOR EACH MAJOR ELEMENT IN COMPOSITION:]
 
-ELEMENT 1: [TYPE - e.g., Bar Chart / Line Graph / Icon Grid]
+ELEMENT : [TYPE - e.g., Bar Chart / Line Graph / Icon Grid]
 - Purpose: [What this element communicates]
 - Position: [Location in composition]
 - Size: [Dimensions or % of canvas]
 - Data to show: [Specific data points or values]
 - Style: [Precise data viz / Hand-drawn editorial / Hybrid]
 - Color: Black structure, Purple highlights on [specific], Teal on [specific]
-- Labels: [Tier 2 typography for all labels]
+- Labels: [Tier typography for all labels]
 - Details: [Any specific styling notes]
 
-ELEMENT 2: [TYPE - e.g., Editorial Illustration / Framework Diagram]
+ELEMENT : [TYPE - e.g., Editorial Illustration / Framework Diagram]
 - Purpose: [What this element communicates]
 - Position: [Location in composition]
 - Size: [Dimensions or % of canvas]
@@ -522,11 +504,11 @@ ELEMENT 2: [TYPE - e.g., Editorial Illustration / Framework Diagram]
 [Continue for all elements...]
 
 COLOR USAGE (Strategic, not overwhelming):
-- Black (#000000): [All primary structure, chart elements, borders]
-- Deep Purple (#4A148C): [Critical data points, key insights, optimal zones]
-- Deep Teal (#00796B): [Secondary data, supporting elements]
-- Charcoal (#2D2D2D): [All text labels and annotations]
-- Background: Light Cream #F5E6D3 (DEFAULT — white only if explicitly requested)
+- Black (): [All primary structure, chart elements, borders]
+- Deep Purple (AC): [Critical data points, key insights, optimal zones]
+- Deep Teal (B): [Secondary data, supporting elements]
+- Charcoal (DDD): [All text labels and annotations]
+- Background: Light Cream FED(DEFAULT — white only if explicitly requested)
 
 CRITICAL REQUIREMENTS FOR NANO BANANA PRO:
 - Exceptional text rendering required (multiple labels, clean typography)
@@ -547,19 +529,17 @@ VALIDATION CHECKPOINTS:
 - Are data elements accurate and precise?
 - Do editorial elements enhance (not distract from) information?
 
-Optional: Sign small in bottom right corner in charcoal (#2D2D2D).
+Optional: Sign small in bottom right corner in charcoal (DDD).
 ```
 
 ---
 
-### Step 5: Generate with Nano Banana Pro
+Step : Generate with Nano Banana Pro
 
-**Execute the visualization using intent-to-flag mapping:**
+Execute the visualization using intent-to-flag mapping:
+Intent-to-Flag Mapping
 
-#### Intent-to-Flag Mapping
-
-**Interpret user request and select appropriate flags:**
-
+Interpret user request and select appropriate flags:
 | User Says | Flag | When to Use |
 |-----------|------|-------------|
 | "fast", "quick", "draft" | `--model nano-banana` | Faster iteration, slightly lower quality |
@@ -568,20 +548,19 @@ Optional: Sign small in bottom right corner in charcoal (#2D2D2D).
 
 | User Says | Flag | Resolution |
 |-----------|------|------------|
-| "draft", "preview" | `--size 1K` | Quick iterations |
-| (default), "standard" | `--size 2K` | Standard output |
-| "high res", "print", "large" | `--size 4K` | Maximum resolution |
+| "draft", "preview" | `--size K` | Quick iterations |
+| (default), "standard" | `--size K` | Standard output |
+| "high res", "print", "large" | `--size K` | Maximum resolution |
 
 | User Says | Flag | Use Case |
 |-----------|------|----------|
-| "square", "social" | `--aspect-ratio 1:1` | Social media, grids |
-| "wide", "slide", "presentation" | `--aspect-ratio 16:9` | Slides, presentations |
-| "portrait", "mobile" | `--aspect-ratio 9:16` | Mobile, vertical |
+| "square", "social" | `--aspect-ratio :` | Social media, grids |
+| "wide", "slide", "presentation" | `--aspect-ratio :` | Slides, presentations |
+| "portrait", "mobile" | `--aspect-ratio :` | Mobile, vertical |
 | "blog header" | `--thumbnail` | Creates transparent + thumb versions |
-| "variations", "options" | `--creative-variations 3` | Multiple versions |
+| "variations", "options" | `--creative-variations ` | Multiple versions |
 
-**Construct command based on intent:**
-
+Construct command based on intent:
 ```bash
 bun run ~/.claude/skills/art/Tools/Generate.ts \
   --model [SELECTED_MODEL] \
@@ -593,134 +572,122 @@ bun run ~/.claude/skills/art/Tools/Generate.ts \
   --output /path/to/visualization.png
 ```
 
-**Why Nano Banana Pro for this workflow:**
-- Best text rendering among all models (critical for infographics)
+Why Nano Banana Pro for this workflow:- Best text rendering among all models (critical for infographics)
 - Handles complex multi-element compositions well
 - Excellent at data visualization elements
 - Can combine precise (charts) with expressive (editorial) styles
 - Reliable for professional deliverable quality
 
-**Immediately open for review:**
-```bash
+Immediately open for review:```bash
 open /path/to/visualization.png
 ```
 
 ---
 
-### Step 6: Comprehensive Validation (MANDATORY)
+Step : Comprehensive Validation (MANDATORY)
 
-**Validate across multiple dimensions:**
+Validate across multiple dimensions:
+Information Effectiveness
+- [ ] Primary message clear:Main insight obvious within seconds
+- [ ] Data accuracy:Numbers, proportions, relationships accurate
+- [ ] Visual hierarchy works:Eye flows from primary → secondary → tertiary
+- [ ] All elements readable:Text legible, charts clear, icons recognizable
+- [ ] Story cohesion:Elements work together, not competing
 
-#### Information Effectiveness
-- [ ] **Primary message clear:** Main insight obvious within 3 seconds
-- [ ] **Data accuracy:** Numbers, proportions, relationships accurate
-- [ ] **Visual hierarchy works:** Eye flows from primary → secondary → tertiary
-- [ ] **All elements readable:** Text legible, charts clear, icons recognizable
-- [ ] **Story cohesion:** Elements work together, not competing
+Design Quality
+- [ ] Professional deliverable:Client/publication ready
+- [ ] UL aesthetic maintained:Flat colors, appropriate hand-drawn vs precise
+- [ ] Typography hierarchy clear:tiers obviously distinct
+- [ ] Color strategic:Purple/teal highlight key elements, not overwhelming
+- [ ] Composition balanced:Visual weight distributed appropriately
 
-#### Design Quality
-- [ ] **Professional deliverable:** Client/publication ready
-- [ ] **UL aesthetic maintained:** Flat colors, appropriate hand-drawn vs precise
-- [ ] **Typography hierarchy clear:** 3 tiers obviously distinct
-- [ ] **Color strategic:** Purple/teal highlight key elements, not overwhelming
-- [ ] **Composition balanced:** Visual weight distributed appropriately
+Technical Execution
+- [ ] Text rendering clean:No blurry or malformed letters
+- [ ] Data viz precision:Charts/graphs accurate and clear
+- [ ] Scale works:Readable as thumbnail AND full-size
+- [ ] No gradients/shadows:Flat aesthetic maintained
+- [ ] Aspect ratio appropriate:Format suits content and use case
 
-#### Technical Execution
-- [ ] **Text rendering clean:** No blurry or malformed letters
-- [ ] **Data viz precision:** Charts/graphs accurate and clear
-- [ ] **Scale works:** Readable as thumbnail AND full-size
-- [ ] **No gradients/shadows:** Flat aesthetic maintained
-- [ ] **Aspect ratio appropriate:** Format suits content and use case
+Audience Appropriateness
+- [ ] Matches audience sophistication:Not too simple or too complex
+- [ ] Serves communication goal:Actually achieves intended purpose
+- [ ] Platform optimized:Works for intended distribution (social/email/presentation)
 
-#### Audience Appropriateness
-- [ ] **Matches audience sophistication:** Not too simple or too complex
-- [ ] **Serves communication goal:** Actually achieves intended purpose
-- [ ] **Platform optimized:** Works for intended distribution (social/email/presentation)
+If Validation Fails
 
-#### If Validation Fails
-
-**Common issues and fixes:**
-
+Common issues and fixes:
 | Problem | Diagnosis | Fix |
 |---------|-----------|-----|
-| **Too cluttered** | Too many elements competing | Simplify: reduce to 2-3 main elements, increase whitespace |
-| **Message unclear** | No clear visual hierarchy | Strengthen primary element (make larger, add purple), reduce secondary |
-| **Text unreadable** | Font too small or wrong tier | Increase label sizes, strengthen typography tier differentiation |
-| **Data imprecise** | Chart rendering issues | Add specific data points in prompt, request precision explicitly |
-| **Looks generic** | Missing UL aesthetic | Add hand-drawn editorial elements, strategic purple/teal, flatten any gradients |
-| **Elements disconnected** | Poor composition | Redesign spatial layout, add visual connectors (arrows, borders, grouping) |
-| **Color chaos** | Too much color everywhere | Limit purple to 2-3 key elements, teal to 1-2 supporting, rest black/charcoal |
-| **Not professional** | Too sketchy or too rigid | Balance: data viz precise, editorial elements hand-drawn, clean typography |
+| Too cluttered| Too many elements competing | Simplify: reduce to -main elements, increase whitespace |
+| Message unclear| No clear visual hierarchy | Strengthen primary element (make larger, add purple), reduce secondary |
+| Text unreadable| Font too small or wrong tier | Increase label sizes, strengthen typography tier differentiation |
+| Data imprecise| Chart rendering issues | Add specific data points in prompt, request precision explicitly |
+| Looks generic| Missing UL aesthetic | Add hand-drawn editorial elements, strategic purple/teal, flatten any gradients |
+| Elements disconnected| Poor composition | Redesign spatial layout, add visual connectors (arrows, borders, grouping) |
+| Color chaos| Too much color everywhere | Limit purple to -key elements, teal to -supporting, rest black/charcoal |
+| Not professional| Too sketchy or too rigid | Balance: data viz precise, editorial elements hand-drawn, clean typography |
 
-**Regeneration Process:**
-1. Identify specific validation failures
-2. Update prompt with targeted fixes
-3. Regenerate with refined prompt
-4. Re-validate against all checkpoints
-5. Repeat until ALL validation criteria pass
+Regeneration Process:. Identify specific validation failures
+. Update prompt with targeted fixes
+. Regenerate with refined prompt
+. Re-validate against all checkpoints
+. Repeat until ALL validation criteria pass
 
-**CRITICAL: Do not declare completion until validation passes.**
+CRITICAL: Do not declare completion until validation passes.
+---
+
+Visualization Pattern Library
+
+Common effective combinations:
+Pattern : Data + Metaphor Hybrid
+When:Data needs conceptual context
+Layout:% data visualization + % editorial illustration + % explanatory text
+Example:Growth chart with rocket ship illustration showing trajectory
+Aspect::or :
+Pattern : Comparative Dashboard
+When:Analyzing multiple dimensions of comparison
+Layout:Split or grid with data on each side/panel
+Example:"Before AI vs After AI" with metrics and illustrations for each state
+Aspect::(split) or :(grid)
+
+Pattern : Process + Outcomes
+When:Showing methodology with results
+Layout:Vertical or horizontal flow with data at key milestones
+Example:-step recipe with success metrics at each step
+Aspect::(vertical) or :(horizontal)
+
+Pattern : Icon Quantification
+When:Showing quantities through repeated visual elements
+Layout:Grid of icons where quantity = visual count
+Example:"out of developers" shown as purple icons + gray icons
+Aspect::or :
+Pattern : Annotated Data Story
+When:Data needs narrative explanation
+Layout:Primary chart with hand-drawn annotations explaining insights
+Example:Timeline chart with purple arrows: "this is when everything changed"
+Aspect::or :
+Pattern : Multi-Chart Dashboard
+When:Multiple related datasets
+Layout:Grid of -charts with unified design language
+Example:-panel view: bar chart, line graph, pie chart, key stat
+Aspect::or :
+Pattern : Framework + Data
+When:Conceptual model with quantitative evidence
+Layout:Framework structure (x, Venn, pyramid) with data in each zone
+Example:xmatrix with percentage of companies in each quadrant
+Aspect::
+Pattern : Infographic Slide
+When:Comprehensive content for presentation
+Layout:Title + multiple small visualizations + key takeaway
+Example:Slide with mini-charts + key stats + insight annotation
+Aspect::(slide format)
 
 ---
 
-## Visualization Pattern Library
-
-**Common effective combinations:**
-
-### Pattern 1: Data + Metaphor Hybrid
-**When:** Data needs conceptual context
-**Layout:** 50% data visualization + 40% editorial illustration + 10% explanatory text
-**Example:** Growth chart with rocket ship illustration showing trajectory
-**Aspect:** 16:9 or 1:1
-
-### Pattern 2: Comparative Dashboard
-**When:** Analyzing multiple dimensions of comparison
-**Layout:** Split or grid with data on each side/panel
-**Example:** "Before AI vs After AI" with metrics and illustrations for each state
-**Aspect:** 16:9 (split) or 1:1 (grid)
-
-### Pattern 3: Process + Outcomes
-**When:** Showing methodology with results
-**Layout:** Vertical or horizontal flow with data at key milestones
-**Example:** 5-step recipe with success metrics at each step
-**Aspect:** 9:16 (vertical) or 16:9 (horizontal)
-
-### Pattern 4: Icon Quantification
-**When:** Showing quantities through repeated visual elements
-**Layout:** Grid of icons where quantity = visual count
-**Example:** "78 out of 100 developers" shown as 78 purple icons + 22 gray icons
-**Aspect:** 1:1 or 4:3
-
-### Pattern 5: Annotated Data Story
-**When:** Data needs narrative explanation
-**Layout:** Primary chart with hand-drawn annotations explaining insights
-**Example:** Timeline chart with purple arrows: "*this is when everything changed*"
-**Aspect:** 16:9 or 21:9
-
-### Pattern 6: Multi-Chart Dashboard
-**When:** Multiple related datasets
-**Layout:** Grid of 2-4 charts with unified design language
-**Example:** 4-panel view: bar chart, line graph, pie chart, key stat
-**Aspect:** 16:9 or 1:1
-
-### Pattern 7: Framework + Data
-**When:** Conceptual model with quantitative evidence
-**Layout:** Framework structure (2x2, Venn, pyramid) with data in each zone
-**Example:** 2x2 matrix with percentage of companies in each quadrant
-**Aspect:** 1:1
-
-### Pattern 8: Infographic Slide
-**When:** Comprehensive content for presentation
-**Layout:** Title + multiple small visualizations + key takeaway
-**Example:** Slide with 3 mini-charts + 2 key stats + insight annotation
-**Aspect:** 16:9 (slide format)
-
----
-
-## Decision Tree Summary
+Decision Tree Summary
 
 ```
-START: Analyze content deeply (Step 1)
+START: Analyze content deeply (Step )
    ↓
 Is content primarily ONE dimension?
    ├─ YES → Use specialized workflow directly
@@ -728,12 +695,12 @@ Is content primarily ONE dimension?
    │
    └─ NO → Content has multiple dimensions
              ↓
-       Are there 2-3 equal dimensions?
+       Are there -equal dimensions?
           ├─ YES → HYBRID composition
           │         Design complementary elements
           │         (Data + Metaphor, Process + Outcomes, etc.)
           │
-          └─ NO → 4+ dimensions or very complex
+          └─ NO → + dimensions or very complex
                     ↓
                   MULTI-PANEL infographic
                   Grid or layered dashboard approach
@@ -741,20 +708,20 @@ Is content primarily ONE dimension?
 
 For HYBRID or MULTI-PANEL:
    ↓
-Design composition (Step 3)
+Design composition (Step )
    → Spatial layout
    → Visual hierarchy
    → Typography tiers
    → Color strategy
    ↓
-Construct comprehensive prompt (Step 4)
+Construct comprehensive prompt (Step )
    → Detailed element specifications
    → Leverage Nano Banana Pro strengths
    → Clear validation checkpoints
    ↓
-Generate with nano-banana-pro (Step 5)
+Generate with nano-banana-pro (Step )
    ↓
-VALIDATE comprehensively (Step 6)
+VALIDATE comprehensively (Step )
    → Information effectiveness
    → Design quality
    → Technical execution
@@ -766,32 +733,31 @@ FAIL? → Diagnose, fix, regenerate
 
 ---
 
-## Quick Reference
+Quick Reference
 
-### When to Use Visualize Workflow
+When to Use Visualize Workflow
 - Content has multiple dimensions to visualize
 - You want optimal approach, not predetermined format
 - Combining data + concepts + narrative
 - Creating professional infographics or slides
 - Need sophisticated composition beyond single workflow
 
-### Nano Banana Pro Advantages
+Nano Banana Pro Advantages
 - Best text rendering (critical for labels/annotations)
 - Multi-element composition handling
 - Data visualization capabilities
 - Professional infographic quality
 - Hybrid precision + expressiveness
 
-### Core Principles
-1. **Analyze first** — Deep content analysis before choosing approach
-2. **Strategic combination** — Use hybrid only when it serves content
-3. **Visual hierarchy** — Clear primary/secondary/tertiary structure
-4. **Color discipline** — Purple/teal strategic, not everywhere
-5. **Professional quality** — Deliverable to clients/publications
-6. **Validate thoroughly** — Information + design + technical + audience
+Core Principles
+. Analyze first— Deep content analysis before choosing approach
+. Strategic combination— Use hybrid only when it serves content
+. Visual hierarchy— Clear primary/secondary/tertiary structure
+. Color discipline— Purple/teal strategic, not everywhere
+. Professional quality— Deliverable to clients/publications
+. Validate thoroughly— Information + design + technical + audience
 
 ---
 
-**The workflow: Analyze → Strategy → Design → Prompt → Generate → Validate → Complete**
-
-**The meta-principle: Let content dictate form. Use the full power of Nano Banana Pro to create the most effective visualization, whether that's one approach or a sophisticated orchestration of multiple techniques.**
+The workflow: Analyze → Strategy → Design → Prompt → Generate → Validate → Complete
+The meta-principle: Let content dictate form. Use the full power of Nano Banana Pro to create the most effective visualization, whether that's one approach or a sophisticated orchestration of multiple techniques.

@@ -1,366 +1,324 @@
-# Design Experiment Workflow
+Design Experiment Workflow
 
-**Phase 3 of the Scientific Cycle**
-
+Phase of the Scientific Cycle
 Design the smallest experiment that meaningfully tests the hypothesis. This workflow ensures experiments are efficient, valid, and actionable.
 
 ---
 
-## The Core Principle
+The Core Principle
 
-**Minimum Viable Experiment**
-
+Minimum Viable Experiment
 Not every experiment needs to be comprehensive. The goal is LEARNING, not perfection.
 
 Ask:
-- What's the **fastest** way to learn if this works?
-- What's the **cheapest** way to get meaningful data?
-- What would **DISPROVE** the hypothesis?
-- What's the **minimum sample size** for confidence?
+- What's the fastestway to learn if this works?
+- What's the cheapestway to get meaningful data?
+- What would DISPROVEthe hypothesis?
+- What's the minimum sample sizefor confidence?
 
 ---
 
-## The Experiment Design Process
+The Experiment Design Process
 
-### Step 1: Define Success Criteria
+Step : Define Success Criteria
 
-**Before running, know what outcomes mean.**
-
+Before running, know what outcomes mean.
 ```markdown
-## Success Criteria
+Success Criteria
 
-**Hypothesis CONFIRMED if:**
-[Specific observable outcome that supports the hypothesis]
+Hypothesis CONFIRMED if:[Specific observable outcome that supports the hypothesis]
 
-**Hypothesis REFUTED if:**
-[Specific observable outcome that contradicts the hypothesis]
+Hypothesis REFUTED if:[Specific observable outcome that contradicts the hypothesis]
 
-**INCONCLUSIVE if:**
-[Conditions that mean we need more data]
+INCONCLUSIVE if:[Conditions that mean we need more data]
 ```
 
-**The key insight:** Define these BEFORE running the experiment. This prevents post-hoc rationalization.
+The key insight:Define these BEFORE running the experiment. This prevents post-hoc rationalization.
 
-### Step 2: Identify Variables
+Step : Identify Variables
 
 ```markdown
-## Variables
+Variables
 
-**Independent Variable (what we're changing):**
-[The thing we're manipulating]
+Independent Variable (what we're changing):[The thing we're manipulating]
 
-**Dependent Variable (what we're measuring):**
-[The outcome we're observing]
+Dependent Variable (what we're measuring):[The outcome we're observing]
 
-**Control Variables (what we're holding constant):**
-- [Variable 1]: held at [value]
-- [Variable 2]: held at [value]
+Control Variables (what we're holding constant):- [Variable ]: held at [value]
+- [Variable ]: held at [value]
 
-**Confounding Variables (what might skew results):**
-- [Potential confounder 1]: mitigated by [strategy]
-- [Potential confounder 2]: mitigated by [strategy]
+Confounding Variables (what might skew results):- [Potential confounder ]: mitigated by [strategy]
+- [Potential confounder ]: mitigated by [strategy]
 ```
 
-### Step 3: Design the Test
+Step : Design the Test
 
 ```markdown
-## Experiment Design
+Experiment Design
 
-**Method:**
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
+Method:. [Step ]
+. [Step ]
+. [Step ]
 
-**Control (baseline):**
-[What we're comparing against]
+Control (baseline):[What we're comparing against]
 
-**Treatment:**
-[What we're testing]
+Treatment:[What we're testing]
 
-**Measurement Approach:**
-- Primary metric: [What we're measuring]
+Measurement Approach:- Primary metric: [What we're measuring]
 - How measured: [Collection method]
 - When measured: [Timing]
 - By whom: [Who collects]
 ```
 
-### Step 4: Plan Data Collection
+Step : Plan Data Collection
 
 ```markdown
-## Data Collection Plan
+Data Collection Plan
 
-**Data Points:**
-- [Metric 1]: collected via [method]
-- [Metric 2]: collected via [method]
+Data Points:- [Metric ]: collected via [method]
+- [Metric ]: collected via [method]
 
-**Sample Size:**
-[How many data points needed]
+Sample Size:[How many data points needed]
 
-**Duration:**
-[How long to run]
+Duration:[How long to run]
 
-**Collection Schedule:**
-[When/how often to collect]
+Collection Schedule:[When/how often to collect]
 
-**Data Storage:**
-[Where raw data will be preserved]
+Data Storage:[Where raw data will be preserved]
 ```
 
-### Step 5: Define Stopping Rules
+Step : Define Stopping Rules
 
 ```markdown
-## Stopping Rules
+Stopping Rules
 
-**Stop early if:**
-- [Condition for early success]
+Stop early if:- [Condition for early success]
 - [Condition for early failure]
 - [Safety condition]
 
-**Continue until:**
-- [Minimum duration/sample reached]
+Continue until:- [Minimum duration/sample reached]
 
-**Declare done when:**
-- [Clear endpoint condition]
+Declare done when:- [Clear endpoint condition]
 ```
 
 ---
 
-## Experiment Quality Checklist
+Experiment Quality Checklist
 
-| Criterion | Question | ✅ |
+| Criterion | Question | |
 |-----------|----------|---|
-| **Minimal** | Is this the smallest test that gives meaningful data? | |
-| **Falsifiable** | Could this experiment prove the hypothesis wrong? | |
-| **Measurable** | Do we know exactly what we're measuring? | |
-| **Controlled** | Have we isolated the variable we're testing? | |
-| **Reproducible** | Could someone else run this experiment? | |
-| **Pre-committed** | Are success criteria defined before running? | |
+| Minimal| Is this the smallest test that gives meaningful data? | |
+| Falsifiable| Could this experiment prove the hypothesis wrong? | |
+| Measurable| Do we know exactly what we're measuring? | |
+| Controlled| Have we isolated the variable we're testing? | |
+| Reproducible| Could someone else run this experiment? | |
+| Pre-committed| Are success criteria defined before running? | |
 
 ---
 
-## Domain-Specific Experiment Patterns
+Domain-Specific Experiment Patterns
 
-### Code Experiments
+Code Experiments
 
-**Tool:** Worktrees for parallel experiments
+Tool:Worktrees for parallel experiments
 
 ```markdown
-## Code Experiment Design
+Code Experiment Design
 
-**Hypothesis:** [Implementation approach X will work]
+Hypothesis:[Implementation approach X will work]
 
-**Branches:**
-- control: Current implementation
-- treatment-1: Approach A
-- treatment-2: Approach B
+Branches:- control: Current implementation
+- treatment-: Approach A
+- treatment-: Approach B
 
-**Test Method:**
-- Run test suite on each branch
+Test Method:- Run test suite on each branch
 - Measure performance benchmarks
 - Compare code complexity metrics
 
-**Success Criteria:**
-- All tests pass
+Success Criteria:- All tests pass
 - Performance meets threshold
 - Complexity doesn't increase
 ```
 
-### Prompt Experiments
+Prompt Experiments
 
-**Tool:** Evals Skill (MANDATORY)
+Tool:Evals Skill (MANDATORY)
 
-**For ALL prompt experiments, invoke the Evals skill directly.**
-
+For ALL prompt experiments, invoke the Evals skill directly.
 Evals implements the Science Protocol for prompt engineering. Don't reinvent evaluation - use the battle-tested methodology.
 
-**Invocation:**
-```
+Invocation:```
 → Invoke Evals skill, ComparePrompts workflow
 → Follow Evals' Science Protocol Alignment checklist
 → Use Evals' statistical rigor (SEM, confidence intervals)
 ```
 
-**What Evals Provides:**
-- Position swapping (mitigates LLM positional bias)
+What Evals Provides:- Position swapping (mitigates LLM positional bias)
 - Multi-judge panels (reduces individual model quirks)
 - Statistical significance testing
 - Pre-commitment enforcement
 - Paradigm check when stuck
 
 ```markdown
-## Prompt Experiment Design
+Prompt Experiment Design
 
-**Hypothesis:** [Prompt variant X will perform better]
-**Falsified if:** [Variant X performance ≤ baseline, or improvement < threshold]
+Hypothesis:[Prompt variant X will perform better]
+Falsified if:[Variant X performance ≤ baseline, or improvement < threshold]
 
-**Variants (aim for 3+):**
-- baseline: Current prompt
-- variant-1: [Modified prompt A]
-- variant-2: [Modified prompt B]
-- variant-3: [Modified prompt C - different direction]
+Variants (aim for +):- baseline: Current prompt
+- variant-: [Modified prompt A]
+- variant-: [Modified prompt B]
+- variant-: [Modified prompt C - different direction]
 
-**Eval Method (via Evals skill):**
-- Run eval suite with each variant
-- N=100 samples per variant
+Eval Method (via Evals skill):- Run eval suite with each variant
+- N=samples per variant
 - Position swapping enabled
 - Measure accuracy, format compliance
 
-**Success Criteria (pre-committed):**
-- Variant exceeds baseline by > 5%
-- Statistical significance p < 0.05
-- No regression on secondary metrics
+Success Criteria (pre-committed):- Variant exceeds baseline by > %
+- Statistical significance p < .- No regression on secondary metrics
 ```
 
-**CLI Quick Reference:**
-```bash
-# Run prompt comparison via Evals skill
+CLI Quick Reference:```bash
+Run prompt comparison via Evals skill
 bun run ~/.claude/skills/Evals/EvalServer/cli-run.ts \
   --use-case <name> \
-  --compare prompts/baseline.md prompts/variant-1.md \
+  --compare prompts/baseline.md prompts/variant-.md \
   --position-swap
 ```
 
-### Feature Experiments
+Feature Experiments
 
-**Tool:** Feature flags, A/B tests
+Tool:Feature flags, A/B tests
 
 ```markdown
-## Feature Experiment Design
+Feature Experiment Design
 
-**Hypothesis:** [Feature X will improve metric Y]
+Hypothesis:[Feature X will improve metric Y]
 
-**Groups:**
-- control: 50% of users (no feature)
-- treatment: 50% of users (with feature)
+Groups:- control: % of users (no feature)
+- treatment: % of users (with feature)
 
-**Measurement:**
-- Primary: [Conversion rate]
+Measurement:- Primary: [Conversion rate]
 - Secondary: [Engagement, retention]
 
-**Duration:** 2 weeks minimum
+Duration:weeks minimum
 
-**Success Criteria:**
-- Lift > 5% with 95% confidence
+Success Criteria:- Lift > % with % confidence
 - No degradation in secondary metrics
 ```
 
-### Research Experiments
+Research Experiments
 
-**Tool:** Parallel research agents
+Tool:Parallel research agents
 
 ```markdown
-## Research Experiment Design
+Research Experiment Design
 
-**Hypothesis:** [Theory X explains phenomenon Y]
+Hypothesis:[Theory X explains phenomenon Y]
 
-**Investigation Approach:**
-- Agent 1: Search for supporting evidence
-- Agent 2: Search for contradicting evidence
-- Agent 3: Search for alternative explanations
+Investigation Approach:- Agent : Search for supporting evidence
+- Agent : Search for contradicting evidence
+- Agent : Search for alternative explanations
 
-**Evidence Evaluation:**
-- Source quality rating
+Evidence Evaluation:- Source quality rating
 - Recency
 - Consensus level
 
-**Success Criteria:**
-- Preponderance of high-quality evidence
+Success Criteria:- Preponderance of high-quality evidence
 - No strong contradicting evidence
 ```
 
 ---
 
-## Parallel Experiment Design
+Parallel Experiment Design
 
 When hypotheses are independent, design experiments to run simultaneously.
 
 ```
-Hypothesis 1 ─────► Experiment 1 ─────► Results 1 ─┐
+Hypothesis ─────► Experiment ─────► Results ─┐
                                                    │
-Hypothesis 2 ─────► Experiment 2 ─────► Results 2 ─┼─► Analysis
+Hypothesis ─────► Experiment ─────► Results ─┼─► Analysis
                                                    │
-Hypothesis 3 ─────► Experiment 3 ─────► Results 3 ─┘
+Hypothesis ─────► Experiment ─────► Results ─┘
 ```
 
-**Benefits:**
-- Faster time to insight
+Benefits:- Faster time to insight
 - Reduces sequential bias
 - Enables direct comparison
 
-**Requirements:**
-- Experiments must be independent
+Requirements:- Experiments must be independent
 - Resources available for parallel execution
 - Results can be meaningfully compared
 
 ---
 
-## Template
+Template
 
 ```markdown
-# Experiment Design: [Name]
+Experiment Design: [Name]
 
-**Testing Hypothesis:** [Which hypothesis]
-**Date:** [When designed]
+Testing Hypothesis:[Which hypothesis]
+Date:[When designed]
 
-## Success Criteria
+Success Criteria
 - CONFIRMED if: [condition]
 - REFUTED if: [condition]
 - INCONCLUSIVE if: [condition]
 
-## Variables
-- **Independent:** [What we change]
-- **Dependent:** [What we measure]
-- **Controls:** [What we hold constant]
+Variables
+- Independent:[What we change]
+- Dependent:[What we measure]
+- Controls:[What we hold constant]
 
-## Method
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
+Method
+. [Step ]
+. [Step ]
+. [Step ]
 
-## Data Collection
-- **Metrics:** [What we collect]
-- **Sample Size:** [How many]
-- **Duration:** [How long]
+Data Collection
+- Metrics:[What we collect]
+- Sample Size:[How many]
+- Duration:[How long]
 
-## Stopping Rules
+Stopping Rules
 - Stop early if: [condition]
 - Continue until: [condition]
 
-## Resources Needed
-- [Resource 1]
-- [Resource 2]
+Resources Needed
+- [Resource ]
+- [Resource ]
 ```
 
 ---
 
-## Common Pitfalls
+Common Pitfalls
 
-### Pitfall 1: Over-Engineering
-❌ Building elaborate test infrastructure for a simple question
-✅ Finding the minimum viable test that answers the question
+Pitfall : Over-Engineering
+Building elaborate test infrastructure for a simple question
+Finding the minimum viable test that answers the question
 
-### Pitfall 2: Confirmation Design
-❌ Designing tests that can only succeed
-✅ Designing tests that could definitively fail
+Pitfall : Confirmation Design
+Designing tests that can only succeed
+Designing tests that could definitively fail
 
-### Pitfall 3: Moving Targets
-❌ Changing success criteria after seeing results
-✅ Pre-committing to criteria before running
+Pitfall : Moving Targets
+Changing success criteria after seeing results
+Pre-committing to criteria before running
 
-### Pitfall 4: Ignoring Confounders
-❌ Assuming all differences are due to the treatment
-✅ Identifying and controlling for other variables
+Pitfall : Ignoring Confounders
+Assuming all differences are due to the treatment
+Identifying and controlling for other variables
 
-### Pitfall 5: Insufficient Sample
-❌ Declaring results from N=3
-✅ Understanding minimum sample for statistical validity
+Pitfall : Insufficient Sample
+Declaring results from N=Understanding minimum sample for statistical validity
 
 ---
 
-## Integration with Next Phases
+Integration with Next Phases
 
 A well-designed experiment enables:
-- **Clear execution** - steps are defined
-- **Objective measurement** - metrics are specified
-- **Honest analysis** - success criteria are pre-committed
-- **Efficient iteration** - learn quickly, move on
+- Clear execution- steps are defined
+- Objective measurement- metrics are specified
+- Honest analysis- success criteria are pre-committed
+- Efficient iteration- learn quickly, move on

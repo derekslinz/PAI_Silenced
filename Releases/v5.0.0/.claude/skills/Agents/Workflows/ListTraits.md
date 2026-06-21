@@ -1,10 +1,9 @@
-# ListTraits Workflow
+ListTraits Workflow
 
-**Shows all available traits that can be composed into custom agents.**
-
+Shows all available traits that can be composed into custom agents.
 ---
 
-## When to Use
+When to Use
 
 User says:
 
@@ -13,15 +12,15 @@ User says:
 - "List agent types"
 - "What expertise areas do you have?"
 
-## The Workflow
+The Workflow
 
-### Step 1: Run ComposeAgent with --list Flag
+Step : Run ComposeAgent with --list Flag
 
 ```bash
 bun run ~/.claude/skills/Agents/Tools/ComposeAgent.ts --list
 ```
 
-### Step 2: Present Results to User
+Step : Present Results to User
 
 The tool outputs:
 
@@ -81,7 +80,7 @@ EXAMPLE COMPOSITIONS:
                          traits: analytical, pragmatic, rapid
 ```
 
-### Step 3: Explain Composition System
+Step : Explain Composition System
 
 Add context for user:
 
@@ -103,14 +102,13 @@ Examples:
 Just describe what you need naturally, and I'll compose the right agent.
 ```
 
-## Example Interaction
+Example Interaction
 
-**User:** "What kinds of agents can you create?"
+User:"What kinds of agents can you create?"
 
-**System:**
-
+System:
 ```text
-I can compose agents from 28 traits across three categories:
+I can compose agents from traits across three categories:
 
 EXPERTISE (what they know):
 security, legal, finance, medical, technical, research, creative,
@@ -132,7 +130,7 @@ Just tell me what you need:
 I'll compose the right agent for the task.
 ```
 
-## Quick Reference Card (Optional)
+Quick Reference Card (Optional)
 
 For frequent use, provide a condensed version:
 
@@ -156,12 +154,12 @@ Popular Combos:
 - Red team:           contrarian + skeptical + bold
 ```
 
-## Related Workflows
+Related Workflows
 
-- **CreateCustomAgent** - Actually create agents with these traits
-- **SpawnParallelAgents** - Launch generic agents (no trait customization)
+- CreateCustomAgent- Actually create agents with these traits
+- SpawnParallelAgents- Launch generic agents (no trait customization)
 
-## References
+References
 
 - Full trait definitions: `~/.claude/skills/Agents/Data/Traits.yaml`
 - ComposeAgent tool: `~/.claude/skills/Agents/Tools/ComposeAgent.ts`

@@ -1,100 +1,97 @@
-# Agent Profile System
+Agent Profile System
 
-**Simple agent context loading for specialized agent types.**
-
-**Status:** ✅ Redesigned (v2.0.0 - Simplified)
-**Date:** 2025-12-18
-
+Simple agent context loading for specialized agent types.
+Status:Redesigned (v..- Simplified)
+Date:--
 ---
 
-## Core Concept
+Core Concept
 
 When spawning specialized agents (Architect, Engineer, Designer, etc.), each agent needs to know:
-1. What their role is
-2. Which parts of the PAI Skills system are relevant to their work
-3. What output format to use
+. What their role is
+. Which parts of the PAI Skills system are relevant to their work
+. What output format to use
 
-**The Solution**: ONE markdown context file per agent type that acts as a "reading list" pointing to relevant Skills.
+The Solution: ONE markdown context file per agent type that acts as a "reading list" pointing to relevant Skills.
 
 ---
 
-## Design Philosophy
+Design Philosophy
 
-**SIMPLE, NOT ELABORATE**
-
+SIMPLE, NOT ELABORATE
 This system does NOT:
-- ❌ Duplicate content from PAI (PAI auto-loads at session start)
-- ❌ Use elaborate YAML structures with memory blocks
-- ❌ Create redundant init prompts
-- ❌ Use multiple files with different names per agent
+- Duplicate content from PAI (PAI auto-loads at session start)
+- Use elaborate YAML structures with memory blocks
+- Create redundant init prompts
+- Use multiple files with different names per agent
 
 This system DOES:
-- ✅ Reference existing Skills (doesn't duplicate them)
-- ✅ Use ONE markdown context file per agent type
-- ✅ Supplement what PAI already provides
-- ✅ Act as a curated "reading list" for each agent
-- ✅ Leverage our existing Skills system
+- Reference existing Skills (doesn't duplicate them)
+- Use ONE markdown context file per agent type
+- Supplement what PAI already provides
+- Act as a curated "reading list" for each agent
+- Leverage our existing Skills system
 
 ---
 
-## File Structure
+File Structure
 
 ```
 ~/.claude/skills/Agents/
-├── ArchitectContext.md     # Architecture specialist context
-├── EngineerContext.md       # Implementation specialist context
-├── DesignerContext.md       # UX/UI specialist context
-├── ArtistContext.md         # Visual content creator context
-├── QATesterContext.md       # Quality assurance specialist context
+├── ArchitectContext.md     Architecture specialist context
+├── EngineerContext.md       Implementation specialist context
+├── DesignerContext.md       UX/UI specialist context
+├── ArtistContext.md         Visual content creator context
+├── QATesterContext.md       Quality assurance specialist context
 └── Tools/
-    └── LoadAgentContext.ts  # Simple loader utility
+    └── LoadAgentContext.ts  Simple loader utility
 ```
 
 ---
 
-## Context File Format
+Context File Format
 
-Each `*Context.md` file follows this simple structure:
+Each `Context.md` file follows this simple structure:
 
 ```markdown
-# [AgentType] Agent Context
+[AgentType] Agent Context
 
-**Role**: [One-line role description]
-**Model**: opus|sonnet|haiku
-
----
-
-## Required Knowledge (Pre-load from Skills)
-
-### [Category]
-- **skills/Path/To/File.md** - Description of what this provides
+Role: [One-line role description]
+Model: opus|sonnet|haiku
 
 ---
 
-## Task-Specific Knowledge
+Required Knowledge (Pre-load from Skills)
+
+[Category]
+- skills/Path/To/File.md- Description of what this provides
+
+---
+
+Task-Specific Knowledge
 
 Load these dynamically based on task keywords:
 
-- **keyword** → skills/Path/To/Relevant.md
+- keyword→ skills/Path/To/Relevant.md
 
 ---
 
-## Key Principles (from PAI)
+Key Principles (from PAI)
 
 [Brief list - these are ALREADY LOADED via PAI, just reference them]
 
 ---
 
-## Output Format
+Output Format
 
 [Optional template for this agent type's outputs]
 ```
 
 ---
 
-## How It Works
+How It Works
 
-### 1. Agent Spawning (Manual)
+. Agent Spawning (Manual)
 
 When you need to spawn an agent, use the Task tool with the agent's context:
 
@@ -115,25 +112,25 @@ Task({
 });
 ```
 
-### 2. What Gets Loaded
+. What Gets Loaded
 
 The agent receives:
-1. **PAI context** (auto-loaded at session start)
+. PAI context(auto-loaded at session start)
    - Constitutional principles
    - Stack preferences
    - Security protocols
    - Etc.
 
-2. **Agent-specific context** (from `*Context.md` file)
+. Agent-specific context(from `Context.md` file)
    - Role definition
    - References to relevant Skills
    - Task-specific knowledge pointers
    - Output format guidance
 
-3. **Current task** (provided when spawning)
+. Current task(provided when spawning)
    - The specific work to be done
 
-### 3. Context Composition
+. Context Composition
 
 The loader simply concatenates:
 ```
@@ -141,7 +138,7 @@ The loader simply concatenates:
 
 ---
 
-## Current Task
+Current Task
 
 [Task Description]
 ```
@@ -150,57 +147,55 @@ That's it. Simple. No elaborate profile system. Just a reading list.
 
 ---
 
-## Available Agent Types
+Available Agent Types
 
 | Agent Type | Context File | Role |
 |------------|--------------|------|
-| **Architect** | ArchitectContext.md | Software architecture specialist |
-| **Engineer** | EngineerContext.md | Implementation specialist with TDD focus |
-| **Designer** | DesignerContext.md | UX/UI design specialist |
-| **Artist** | ArtistContext.md | Visual content creator for UL |
-| **QATester** | QATesterContext.md | Quality assurance validation (Gate 4) |
+| Architect| ArchitectContext.md | Software architecture specialist |
+| Engineer| EngineerContext.md | Implementation specialist with TDD focus |
+| Designer| DesignerContext.md | UX/UI design specialist |
+| Artist| ArtistContext.md | Visual content creator for UL |
+| QATester| QATesterContext.md | Quality assurance validation (Gate ) |
 
 ---
 
-## CLI Usage
+CLI Usage
 
 ```bash
-# List available agent types
+List available agent types
 bun run ~/.claude/skills/Agents/Tools/LoadAgentContext.ts
 
-# View context for specific agent
+View context for specific agent
 bun run ~/.claude/skills/Agents/Tools/LoadAgentContext.ts Architect
 
-# Generate enriched prompt for spawning
+Generate enriched prompt for spawning
 bun run ~/.claude/skills/Agents/Tools/LoadAgentContext.ts Architect "Design new skill system"
 ```
 
 ---
 
-## Adding New Agent Types
+Adding New Agent Types
 
 To add a new agent type:
 
-1. Create `[AgentType]Context.md` in `~/.claude/skills/Agents/`
-2. Follow the context file format above
-3. Reference relevant Skills (don't duplicate content)
-4. Specify model preference (opus/sonnet/haiku)
-5. Done!
+. Create `[AgentType]Context.md` in `~/.claude/skills/Agents/`
+. Follow the context file format above
+. Reference relevant Skills (don't duplicate content)
+. Specify model preference (opus/sonnet/haiku)
+. Done!
 
 The loader automatically discovers new context files.
 
 ---
 
-## Key Differences from Letta Code
+Key Differences from Letta Code
 
-**Letta Code's approach:**
-- Multiple files per agent with different names
+Letta Code's approach:- Multiple files per agent with different names
 - Complex profile structures
 - Memory blocks that duplicate knowledge
 - Elaborate init prompts
 
-**Our approach:**
-- ONE file per agent type: `[AgentType]Context.md`
+Our approach:- ONE file per agent type: `[AgentType]Context.md`
 - Simple markdown format
 - References to existing Skills (not duplication)
 - Leverages PAI auto-loading
@@ -208,23 +203,23 @@ The loader automatically discovers new context files.
 
 ---
 
-## Why This Is Better
+Why This Is Better
 
-1. **No Duplication**: PAI already loads constitutional principles, stack preferences, etc. No need to repeat them.
+. No Duplication: PAI already loads constitutional principles, stack preferences, etc. No need to repeat them.
 
-2. **Simple**: One markdown file per agent. Easy to understand, easy to maintain.
+. Simple: One markdown file per agent. Easy to understand, easy to maintain.
 
-3. **Leverages Existing System**: Uses our Skills system as the knowledge repository.
+. Leverages Existing System: Uses our Skills system as the knowledge repository.
 
-4. **Supplements, Doesn't Replace**: Adds to what PAI provides, doesn't try to replace it.
+. Supplements, Doesn't Replace: Adds to what PAI provides, doesn't try to replace it.
 
-5. **Curated Reading Lists**: Each context file points agents to the relevant parts of our extensive Skills system.
+. Curated Reading Lists: Each context file points agents to the relevant parts of our extensive Skills system.
 
-6. **Maintainable**: When Skills change, context files just need reference updates, not content rewrites.
+. Maintainable: When Skills change, context files just need reference updates, not content rewrites.
 
 ---
 
-## Integration with Task Tool
+Integration with Task Tool
 
 When spawning agents, the main agent can:
 
@@ -247,54 +242,50 @@ await Task({
 
 The spawned agent gets:
 - All of PAI (auto-loaded)
-- Agent-specific context (from *Context.md)
+- Agent-specific context (from Context.md)
 - Current task description
 
 ---
 
-## Future Enhancements
+Future Enhancements
 
 Potential future improvements (only if needed):
 
-1. **Dynamic Skill Loading**: If task description matches keywords, automatically append relevant Skill content
-2. **Project-Specific Context**: Load `.pai/agent-context.md` for project-specific patterns
-3. **Task History**: Track which agents worked on which tasks for continuity
-4. **Context Caching**: Cache loaded Skills to avoid repeated file reads
+. Dynamic Skill Loading: If task description matches keywords, automatically append relevant Skill content
+. Project-Specific Context: Load `.pai/agent-context.md` for project-specific patterns
+. Task History: Track which agents worked on which tasks for continuity
+. Context Caching: Cache loaded Skills to avoid repeated file reads
 
 But start simple. The current design may be sufficient.
 
 ---
 
-## Migration from v1.0.0 (YAML Profiles)
+Migration from v..(YAML Profiles)
 
-**Old system (v1.0.0):**
-- Used elaborate YAML files (`Architect.yaml`, etc.)
+Old system (v..):- Used elaborate YAML files (`Architect.yaml`, etc.)
 - Had memory blocks that duplicated PAI content
 - Had redundant init prompts
 - Used AgentProfileLoader.ts with complex parsing
 
-**New system (v2.0.0):**
-- Uses simple markdown files (`ArchitectContext.md`, etc.)
+New system (v..):- Uses simple markdown files (`ArchitectContext.md`, etc.)
 - References Skills, doesn't duplicate
 - Uses LoadAgentContext.ts with simple loading
 - Much cleaner and more maintainable
 
-**YAML files are now deprecated.** Use the markdown context files instead.
+YAML files are now deprecated.Use the markdown context files instead.
 
 ---
 
-## Summary
+Summary
 
-**Simple agent context system:**
-- ONE markdown file per agent type
+Simple agent context system:- ONE markdown file per agent type
 - References Skills (doesn't duplicate)
 - Supplements PAI (doesn't replace)
 - Acts as curated "reading list"
 - Easy to understand and maintain
 
-**When spawning agents, they get:**
-- PAI context (auto-loaded)
-- Agent-specific context (from *Context.md)
+When spawning agents, they get:- PAI context (auto-loaded)
+- Agent-specific context (from Context.md)
 - Current task description
 
 That's it. Simple. Effective. No over-engineering.

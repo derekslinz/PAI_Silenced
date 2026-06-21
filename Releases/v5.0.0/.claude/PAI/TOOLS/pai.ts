@@ -313,14 +313,14 @@ function cmdWallpaper(args: string[]) {
 
   // No args or --list: show available wallpapers
   if (args.length === 0 || args[0] === "--list" || args[0] === "-l" || args[0] === "list") {
-    log("Available wallpapers:", "🖼️");
+    log("Available wallpapers:", "️");
     console.log();
     wallpapers.forEach((w, i) => {
       console.log(`  ${i + 1}. ${getWallpaperName(w)}`);
     });
     console.log();
-    log("Usage: k -w <name>", "💡");
-    log("Example: k -w circuit-board", "💡");
+    log("Usage: k -w <name>", "");
+    log("Example: k -w circuit-board", "");
     return;
   }
 
@@ -336,7 +336,7 @@ function cmdWallpaper(args: string[]) {
   }
 
   const name = getWallpaperName(match);
-  log(`Switching to: ${name}`, "🖼️");
+  log(`Switching to: ${name}`, "️");
 
   const success = setWallpaper(match);
   if (success) {
@@ -389,7 +389,7 @@ async function cmdLaunch(options: { mcp?: string; resume?: boolean; skipPerms?: 
   // Startup status (text). Reads daidentity.startupCatchphrase from
   // settings.json so the user's install-time catchphrase is honored. Falls
   // back to the historical "<name> here, ready to go." default when unset.
-  notifyStatus(`[🎯 focused] ${getStartupCatchphrase()}`);
+  notifyStatus(`[ focused] ${getStartupCatchphrase()}`);
 
   // Launch Claude
   // BILLING: subscription, not API. Strip ANTHROPIC_API_KEY before spawn so the
@@ -407,7 +407,7 @@ async function cmdLaunch(options: { mcp?: string; resume?: boolean; skipPerms?: 
 }
 
 async function cmdUpdate() {
-  log("Checking for updates...", "🔍");
+  log("Checking for updates...", "");
 
   const current = getCurrentVersion();
   const latest = await getLatestVersion();
@@ -427,10 +427,10 @@ async function cmdUpdate() {
     return;
   }
 
-  log("Updating Claude Code...", "🔄");
+  log("Updating Claude Code...", "");
 
   // Step 1: Update Bun
-  log("Step 1/2: Updating Bun...", "📦");
+  log("Step 1/2: Updating Bun...", "");
   const bunResult = spawnSync(["brew", "upgrade", "bun"]);
   if (bunResult.exitCode !== 0) {
     log("Bun update skipped (may already be latest)", "⚠️");
@@ -439,7 +439,7 @@ async function cmdUpdate() {
   }
 
   // Step 2: Update Claude Code
-  log("Step 2/2: Installing latest Claude Code...", "🤖");
+  log("Step 2/2: Installing latest Claude Code...", "");
   const claudeResult = spawnSync(["bash", "-c", "curl -fsSL https://claude.ai/install.sh | bash"]);
   if (claudeResult.exitCode !== 0) {
     error("Claude Code installation failed");
@@ -454,7 +454,7 @@ async function cmdUpdate() {
 }
 
 async function cmdVersion() {
-  log("Checking versions...", "🔍");
+  log("Checking versions...", "");
 
   const current = getCurrentVersion();
   const latest = await getLatestVersion();
@@ -478,7 +478,7 @@ async function cmdVersion() {
 }
 
 function cmdProfiles() {
-  log("Available MCP Profiles:", "📋");
+  log("Available MCP Profiles:", "");
   console.log();
 
   const current = getCurrentProfile();
@@ -494,15 +494,15 @@ function cmdProfiles() {
   }
 
   console.log();
-  log("Usage: k mcp set <profile>", "💡");
+  log("Usage: k mcp set <profile>", "");
 }
 
 function cmdMcpList() {
-  log("Available MCPs:", "📋");
+  log("Available MCPs:", "");
   console.log();
 
   // Individual MCPs
-  log("Individual MCPs (use with -m):", "📦");
+  log("Individual MCPs (use with -m):", "");
   const mcps = getIndividualMcps();
   for (const mcp of mcps) {
     const shortcut = Object.entries(MCP_SHORTCUTS)
@@ -513,7 +513,7 @@ function cmdMcpList() {
   }
 
   console.log();
-  log("Profiles (use with 'k mcp set'):", "📁");
+  log("Profiles (use with 'k mcp set'):", "");
   const profiles = getMcpProfiles();
   for (const profile of profiles) {
     const desc = PROFILE_DESCRIPTIONS[profile] || "";
@@ -521,7 +521,7 @@ function cmdMcpList() {
   }
 
   console.log();
-  log("Examples:", "💡");
+  log("Examples:", "");
   console.log("  k -m bd          # Bright Data only");
   console.log("  k -m bd,ap       # Bright Data + Apify");
   console.log("  k mcp set research  # Full research profile");

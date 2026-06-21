@@ -288,7 +288,7 @@ function main(): void {
   console.log(``);
   console.log(`Proposed routing:`);
   for (const [target, n] of Object.entries(byTarget).sort((a, b) => b[1] - a[1])) {
-    const icon = target === "UNCLEAR" ? "❓" : target.startsWith("memory/feedback") ? "🧠" : "📂";
+    const icon = target === "UNCLEAR" ? "❓" : target.startsWith("memory/feedback") ? "" : "";
     console.log(`  ${icon}  ${target.padEnd(38)}  ${n} chunks`);
   }
   console.log(``);

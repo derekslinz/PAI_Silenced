@@ -4,7 +4,7 @@
 
 ---
 
-## 🚨 THREE AGENT SYSTEMS — CRITICAL DISTINCTION
+##  THREE AGENT SYSTEMS — CRITICAL DISTINCTION
 
 PAI has three agent systems that serve different purposes. Confusing them causes routing failures.
 
@@ -16,29 +16,29 @@ PAI has three agent systems that serve different purposes. Confusing them causes
 
 ---
 
-## 🚫 FORBIDDEN PATTERNS
+##  FORBIDDEN PATTERNS
 
 **When user says "custom agents":**
 
 ```typescript
-// ❌ WRONG - These are Task tool subagent_types, NOT custom agents
+//  WRONG - These are Task tool subagent_types, NOT custom agents
 Task({ subagent_type: "Architect", prompt: "..." })
 Task({ subagent_type: "Designer", prompt: "..." })
 Task({ subagent_type: "Engineer", prompt: "..." })
 
-// ✅ RIGHT - Invoke the Agents skill for custom agents
+//  RIGHT - Invoke the Agents skill for custom agents
 Skill("Agents")  // → CreateCustomAgent workflow
 // OR follow the workflow directly:
 // 1. Run ComposeAgent with different trait combinations
 // 2. Launch agents with the generated prompts
 // 3. Each gets a unique personality
 
-// ❌ WRONG - User says "specialized agents to brainstorm"
+//  WRONG - User says "specialized agents to brainstorm"
 Task({ subagent_type: "Designer", prompt: "Brainstorm UI ideas..." })
 Task({ subagent_type: "Architect", prompt: "Brainstorm layout ideas..." })
 Task({ subagent_type: "Engineer", prompt: "Brainstorm state ideas..." })
 
-// ✅ RIGHT - Use Agents skill for ANY user-requested specialized agents
+//  RIGHT - Use Agents skill for ANY user-requested specialized agents
 Skill("Agents")  // → CreateCustomAgent workflow with unique traits per agent
 // Each agent gets: unique name and unique personality via ComposeAgent
 ```
@@ -80,7 +80,7 @@ bun run ~/.claude/skills/Agents/Tools/ComposeAgent.ts --traits "research,analyti
 
 ---
 
-## ⚠️ Task Tool Subagent Types — INTERNAL WORKFLOW USE ONLY
+##  Task Tool Subagent Types — INTERNAL WORKFLOW USE ONLY
 
 **These are NOT for user-requested custom/specialized agents.** When the user asks for specialized agents, custom agents, or agents with unique perspectives, ALWAYS use the Agents skill (ComposeAgent) instead. See Routing Rules above.
 

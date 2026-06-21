@@ -1,47 +1,46 @@
-# Agent Profile System Redesign Summary
+Agent Profile System Redesign Summary
 
-**Date**: 2025-12-18
-**Version**: v2.0.0 (Simplified)
-
----
-
-## What Changed
-
-### Before (v1.0.0 - Over-engineered)
-
-- ❌ 5 elaborate YAML files with memory blocks and init prompts
-- ❌ Duplicated PAI content (stack preferences, coding standards)
-- ❌ Complex AgentProfileLoader.ts with YAML parsing
-- ❌ Three layers of redundant context
-
-### After (v2.0.0 - Simplified)
-
-- ✅ 5 simple markdown context files (one per agent type)
-- ✅ References Skills, doesn't duplicate content
-- ✅ Simple LoadAgentContext.ts (just reads markdown)
-- ✅ Supplements PAI without redundancy
+Date: --Version: v..(Simplified)
 
 ---
 
-## New Files Created
+What Changed
+
+Before (v..- Over-engineered)
+
+- elaborate YAML files with memory blocks and init prompts
+- Duplicated PAI content (stack preferences, coding standards)
+- Complex AgentProfileLoader.ts with YAML parsing
+- Three layers of redundant context
+
+After (v..- Simplified)
+
+- simple markdown context files (one per agent type)
+- References Skills, doesn't duplicate content
+- Simple LoadAgentContext.ts (just reads markdown)
+- Supplements PAI without redundancy
+
+---
+
+New Files Created
 
 ```
 ~/.claude/skills/Agents/
-├── ArchitectContext.md      ✅ NEW - Simple reference file
-├── EngineerContext.md        ✅ NEW - Simple reference file
-├── DesignerContext.md        ✅ NEW - Simple reference file
-├── ArtistContext.md          ✅ NEW - Simple reference file
-├── QATesterContext.md        ✅ NEW - Simple reference file
-├── AgentProfileSystem.md     🔄 UPDATED - New simplified docs
+├── ArchitectContext.md      NEW - Simple reference file
+├── EngineerContext.md        NEW - Simple reference file
+├── DesignerContext.md        NEW - Simple reference file
+├── ArtistContext.md          NEW - Simple reference file
+├── QATesterContext.md        NEW - Simple reference file
+├── AgentProfileSystem.md     UPDATED - New simplified docs
 └── Tools/
-    └── LoadAgentContext.ts   ✅ NEW - Simple loader utility
+    └── LoadAgentContext.ts   NEW - Simple loader utility
 ```
 
 ---
 
-## Deprecated Files (Backed Up)
+Deprecated Files (Backed Up)
 
-Old YAML system backed up to: `~/.claude/History/Backups/2025-12-18-AgentProfiles/`
+Old YAML system backed up to: `~/.claude/History/Backups/---AgentProfiles/`
 
 - Architect.yaml
 - Engineer.yaml
@@ -52,28 +51,28 @@ Old YAML system backed up to: `~/.claude/History/Backups/2025-12-18-AgentProfile
 
 ---
 
-## How It Works Now
+How It Works Now
 
-### 1. Each Agent Has ONE Context File
+. Each Agent Has ONE Context File
 
 Example: `ArchitectContext.md`
 
 ```markdown
-# Architect Agent Context
+Architect Agent Context
 
-**Role**: Software architecture specialist
-**Model**: opus
+Role: Software architecture specialist
+Model: opus
 
-## Required Knowledge (Pre-load from Skills)
-- **PAI/CONSTITUTION.md** - Foundational principles
-- **PAI/CoreStack.md** - Stack preferences
+Required Knowledge (Pre-load from Skills)
+- PAI/CONSTITUTION.md- Foundational principles
+- PAI/CoreStack.md- Stack preferences
 
-## Task-Specific Knowledge
-- **api** → skills/Development/References/APIDesign.md
-- **security** → PAI/SecurityProtocols.md
+Task-Specific Knowledge
+- api→ skills/Development/References/APIDesign.md
+- security→ PAI/SecurityProtocols.md
 ```
 
-### 2. Simple Loader Reads Context
+. Simple Loader Reads Context
 
 ```typescript
 const loader = new AgentContextLoader();
@@ -86,7 +85,7 @@ const { prompt, model } = loader.generateEnrichedPrompt(
 // model = opus (from context file)
 ```
 
-### 3. Spawn Agent with Enriched Prompt
+. Spawn Agent with Enriched Prompt
 
 ```typescript
 await Task({
@@ -99,35 +98,35 @@ await Task({
 
 ---
 
-## Key Benefits
+Key Benefits
 
-1. **No Duplication**: PAI already provides constitutional principles, stack preferences, etc.
-2. **Simple**: One markdown file per agent - easy to understand and maintain
-3. **References Skills**: Acts as "reading list" pointing to existing knowledge
-4. **Supplements PAI**: Adds agent-specific context without replacing base knowledge
-5. **Maintainable**: When Skills change, just update references, not content
+. No Duplication: PAI already provides constitutional principles, stack preferences, etc.
+. Simple: One markdown file per agent - easy to understand and maintain
+. References Skills: Acts as "reading list" pointing to existing knowledge
+. Supplements PAI: Adds agent-specific context without replacing base knowledge
+. Maintainable: When Skills change, just update references, not content
 
 ---
 
-## Testing
+Testing
 
 All commands work as expected:
 
 ```bash
-# List available agents
+List available agents
 bun run ~/.claude/skills/Agents/Tools/LoadAgentContext.ts
-# Output: Architect, Artist, Engineer, Designer, QATester
+Output: Architect, Artist, Engineer, Designer, QATester
 
-# View specific context
+View specific context
 bun run ~/.claude/skills/Agents/Tools/LoadAgentContext.ts Architect
 
-# Generate enriched prompt
+Generate enriched prompt
 bun run ~/.claude/skills/Agents/Tools/LoadAgentContext.ts Engineer "Implement TDD workflow"
 ```
 
 ---
 
-## Migration Notes
+Migration Notes
 
 - Old YAML profiles are deprecated but backed up
 - New system uses markdown context files
@@ -136,27 +135,27 @@ bun run ~/.claude/skills/Agents/Tools/LoadAgentContext.ts Engineer "Implement TD
 
 ---
 
-## What Agents Get When Spawned
+What Agents Get When Spawned
 
-1. **PAI context** (auto-loaded at session start)
+. PAI context(auto-loaded at session start)
    - Constitutional principles
    - Stack preferences
    - Security protocols
 
-2. **Agent-specific context** (from `*Context.md`)
+. Agent-specific context(from `Context.md`)
    - Role definition
    - References to relevant Skills
    - Task-specific knowledge pointers
    - Output format guidance
 
-3. **Current task** (provided when spawning)
+. Current task(provided when spawning)
    - The specific work to be done
 
 ---
 
-## Summary
+Summary
 
-**Before**: Over-engineered YAML system with duplicated content
-**After**: Simple markdown "reading lists" that reference existing Skills
+Before: Over-engineered YAML system with duplicated content
+After: Simple markdown "reading lists" that reference existing Skills
 
 This is the goal: agents get loaded with knowledge of "how to do that particular task of our entire system" by referencing the Skills system, not duplicating it.

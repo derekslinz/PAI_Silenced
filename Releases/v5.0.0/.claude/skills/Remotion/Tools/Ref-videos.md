@@ -5,18 +5,18 @@ metadata:
   tags: video, media, trim, volume, speed, loop, pitch
 ---
 
-# Using videos in Remotion
+Using videos in Remotion
 
-## Prerequisites
+Prerequisites
 
 First, the @remotion/media package needs to be installed.  
 If it is not, use the following command:
 
 ```bash
-npx remotion add @remotion/media # If project uses npm
-bunx remotion add @remotion/media # If project uses bun
-yarn remotion add @remotion/media # If project uses yarn
-pnpm exec remotion add @remotion/media # If project uses pnpm
+npx remotion add @remotion/media If project uses npm
+bunx remotion add @remotion/media If project uses bun
+yarn remotion add @remotion/media If project uses yarn
+pnpm exec remotion add @remotion/media If project uses pnpm
 ```
 
 Use `<Video>` from `@remotion/media` to embed videos into your composition.
@@ -26,17 +26,17 @@ import { Video } from "@remotion/media";
 import { staticFile } from "remotion";
 
 export const MyComposition = () => {
-  return <Video src={staticFile("video.mp4")} />;
+  return <Video src={staticFile("video.mp")} />;
 };
 ```
 
 Remote URLs are also supported:
 
 ```tsx
-<Video src="https://remotion.media/video.mp4" />
+<Video src="https://remotion.media/video.mp" />
 ```
 
-## Trimming
+Trimming
 
 Use `trimBefore` and `trimAfter` to remove portions of the video. Values are in seconds.
 
@@ -45,14 +45,14 @@ const { fps } = useVideoConfig();
 
 return (
   <Video
-    src={staticFile("video.mp4")}
-    trimBefore={2 * fps} // Skip the first 2 seconds
-    trimAfter={10 * fps} // End at the 10 second mark
+    src={staticFile("video.mp")}
+    trimBefore={fps} // Skip the first seconds
+    trimAfter={fps} // End at the second mark
   />
 );
 ```
 
-## Delaying
+Delaying
 
 Wrap the video in a `<Sequence>` to delay when it appears:
 
@@ -63,51 +63,51 @@ import { Video } from "@remotion/media";
 const { fps } = useVideoConfig();
 
 return (
-  <Sequence from={1 * fps}>
-    <Video src={staticFile("video.mp4")} />
+  <Sequence from={fps}>
+    <Video src={staticFile("video.mp")} />
   </Sequence>
 );
 ```
 
-The video will appear after 1 second.
+The video will appear after second.
 
-## Sizing and Position
+Sizing and Position
 
 Use the `style` prop to control size and position:
 
 ```tsx
 <Video
-  src={staticFile("video.mp4")}
+  src={staticFile("video.mp")}
   style={{
-    width: 500,
-    height: 300,
+    width: ,
+    height: ,
     position: "absolute",
-    top: 100,
-    left: 50,
+    top: ,
+    left: ,
   }}
 />
 ```
 
-## `objectFit` prop (v4.0.442+)
+`objectFit` prop (v..+)
 
 `objectFit` is now a first-class prop on `<Video>` — use it directly instead of via `style`. Valid values: `"cover" | "contain" | "fill" | "scale-down" | "none"`.
 
 ```tsx
 <Video
-  src={staticFile("video.mp4")}
+  src={staticFile("video.mp")}
   objectFit="cover"
-  style={{ width: 1920, height: 1080 }}
+  style={{ width: , height: }}
 />
 ```
 
 Use when overlaying source footage whose aspect ratio doesn't match the composition — `cover` fills and crops, `contain` letterboxes.
 
-## Volume
+Volume
 
-Set a static volume (0 to 1):
+Set a static volume (to ):
 
 ```tsx
-<Video src={staticFile("video.mp4")} volume={0.5} />
+<Video src={staticFile("video.mp")} volume={.} />
 ```
 
 Or use a callback for dynamic volume based on the current frame:
@@ -119,9 +119,9 @@ const { fps } = useVideoConfig();
 
 return (
   <Video
-    src={staticFile("video.mp4")}
+    src={staticFile("video.mp")}
     volume={(f) =>
-      interpolate(f, [0, 1 * fps], [0, 1], { extrapolateRight: "clamp" })
+      interpolate(f, [, fps], [, ], { extrapolateRight: "clamp" })
     }
   />
 );
@@ -130,54 +130,54 @@ return (
 Use `muted` to silence the video entirely:
 
 ```tsx
-<Video src={staticFile("video.mp4")} muted />
+<Video src={staticFile("video.mp")} muted />
 ```
 
-## Speed
+Speed
 
 Use `playbackRate` to change the playback speed:
 
 ```tsx
-<Video src={staticFile("video.mp4")} playbackRate={2} /> {/* 2x speed */}
-<Video src={staticFile("video.mp4")} playbackRate={0.5} /> {/* Half speed */}
+<Video src={staticFile("video.mp")} playbackRate={} /> {/x speed /}
+<Video src={staticFile("video.mp")} playbackRate={.} /> {/Half speed /}
 ```
 
 Reverse playback is not supported.
 
-## Looping
+Looping
 
 Use `loop` to loop the video indefinitely:
 
 ```tsx
-<Video src={staticFile("video.mp4")} loop />
+<Video src={staticFile("video.mp")} loop />
 ```
 
 Use `loopVolumeCurveBehavior` to control how the frame count behaves when looping:
 
-- `"repeat"`: Frame count resets to 0 each loop (for `volume` callback)
+- `"repeat"`: Frame count resets to each loop (for `volume` callback)
 - `"extend"`: Frame count continues incrementing
 
 ```tsx
 <Video
-  src={staticFile("video.mp4")}
+  src={staticFile("video.mp")}
   loop
   loopVolumeCurveBehavior="extend"
-  volume={(f) => interpolate(f, [0, 300], [1, 0])} // Fade out over multiple loops
+  volume={(f) => interpolate(f, [, ], [, ])} // Fade out over multiple loops
 />
 ```
 
-## Pitch
+Pitch
 
-Use `toneFrequency` to adjust the pitch without affecting speed. Values range from 0.01 to 2:
+Use `toneFrequency` to adjust the pitch without affecting speed. Values range from .to :
 
 ```tsx
 <Video
-  src={staticFile("video.mp4")}
-  toneFrequency={1.5} // Higher pitch
+  src={staticFile("video.mp")}
+  toneFrequency={.} // Higher pitch
 />
 <Video
-  src={staticFile("video.mp4")}
-  toneFrequency={0.8} // Lower pitch
+  src={staticFile("video.mp")}
+  toneFrequency={.} // Lower pitch
 />
 ```
 

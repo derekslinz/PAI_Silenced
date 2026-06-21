@@ -164,7 +164,7 @@ async function cmdNotify(args: string[]): Promise<number> {
   const decision = shouldDispatch(state, channel, source, message, priority);
   if (!decision.allow) {
     logDecision({ action: "suppress", channel, source, priority, reason: decision.reason });
-    console.log(`🔕 SUPPRESS: ${decision.reason}`);
+    console.log(` SUPPRESS: ${decision.reason}`);
     return 2;
   }
 
@@ -231,7 +231,7 @@ function cmdClearSource(source: string): void {
   delete state.sourceSuppressions[source];
   state.sourceFalseAlertHistory[source] = [];
   saveState(state);
-  console.log(`🔓 Cleared suppression for ${source}`);
+  console.log(` Cleared suppression for ${source}`);
 }
 
 // ─── Main ───

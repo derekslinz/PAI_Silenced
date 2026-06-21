@@ -151,18 +151,18 @@ The Algorithm CLI integrates with the PAI dashboard by writing state to `MEMORY/
 Loop mode displays a live progress dashboard:
 
 ```
-╔══════════════════════════════════════════════════════════════════════╗
-║  THE ALGORITHM — Loop Mode                                         ║
-╠══════════════════════════════════════════════════════════════════════╣
-║  ISA:       ISA-20260213-auth                                      ║
-║  Title:     Authentication System                                  ║
-║  Session:   a1b2c3d4                                               ║
-║  Max iterations: 20 | Agents: 4                                    ║
-║  Progress: 8/12 ████████████░░░░░░░░ 67%                          ║
-╚══════════════════════════════════════════════════════════════════════╝
 
-━━━ Iteration 5/20 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Progress: 8/12 ████████████░░░░░░░░ 67% | Failing: 4
+  THE ALGORITHM — Loop Mode                                         
+
+  ISA:       ISA-20260213-auth                                      
+  Title:     Authentication System                                  
+  Session:   a1b2c3d4                                               
+  Max iterations: 20 | Agents: 4                                    
+  Progress: 8/12  67%                          
+
+
+ Iteration 5/20 
+  Progress: 8/12  67% | Failing: 4
   Agents this round: 4
 
   Agent 1 → ISC-AUTH-1: JWT middleware validates token signatures
@@ -174,17 +174,17 @@ Loop mode displays a live progress dashboard:
   ⏱ Agents finished in 45s
 
   Agent Results:
-    Agent 1 ✓ PASS    ISC-AUTH-1: JWT middleware validates token...
-    Agent 2 ✓ PASS    ISC-AUTH-2: Refresh token rotation prevents...
-    Agent 3 ✗ FAIL    ISC-API-1: All endpoints return standard er...
-    Agent 4 ✓ PASS    ISC-TEST-1: Integration test suite passes c...
+    Agent 1  PASS    ISC-AUTH-1: JWT middleware validates token...
+    Agent 2  PASS    ISC-AUTH-2: Refresh token rotation prevents...
+    Agent 3  FAIL    ISC-API-1: All endpoints return standard er...
+    Agent 4  PASS    ISC-TEST-1: Integration test suite passes c...
 
-  ── Criteria Scoreboard ──────────────────────────────────────
-  ✓ ISC-AUTH-1     JWT middleware validates token signatures
-  ✓ ISC-AUTH-2     Refresh token rotation prevents replay attacks
+   Criteria Scoreboard 
+   ISC-AUTH-1     JWT middleware validates token signatures
+   ISC-AUTH-2     Refresh token rotation prevents replay attacks
   · ISC-API-1      All endpoints return standard error format
-  ✓ ISC-TEST-1     Integration test suite passes completely
-  ── 11/12 passing (92%) ──────────────────────────────────────
+   ISC-TEST-1     Integration test suite passes completely
+   11/12 passing (92%) 
 
   Iteration 5 Summary: +3 | 11/12 passing (92%) | 45s
 ```

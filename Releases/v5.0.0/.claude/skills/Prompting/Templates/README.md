@@ -1,38 +1,36 @@
-# PAI Templating System
+PAI Templating System
 
-**Version:** 1.0.0
-**Rollback Point:** v2.5.0
+Version:..Rollback Point:v..
+Overview
 
-## Overview
+The PAI templating system enables prompts that write prompts—dynamic composition where structure is fixed but content is parameterized. Based on Anthropic's official `{{variable}}` syntax and industry best practices.
 
-The PAI templating system enables **prompts that write prompts**—dynamic composition where structure is fixed but content is parameterized. Based on Anthropic's official `{{variable}}` syntax and industry best practices.
-
-## Directory Structure
+Directory Structure
 
 ```markdown
 Templates/
-├── Primitives/       # Core template files (.hbs)
-│   ├── Roster.hbs    # Agent/skill definitions
-│   ├── Structure.hbs # Workflow patterns
-│   ├── Briefing.hbs  # Agent context handoff
-│   └── Gate.hbs      # Validation checklists
-├── Data/             # YAML data sources
-│   ├── Agents.yaml   # All agent definitions
-│   ├── Skills.yaml   # All skill definitions
-│   └── ValidationGates.yaml # Standard validation gates
-├── Evals/            # Eval-specific templates
-│   ├── Judge.hbs     # LLM-as-Judge prompt template
-│   ├── Rubric.hbs    # Evaluation rubric generator
-│   ├── TestCase.hbs  # Test case definition
-│   ├── Comparison.hbs # A/B comparison template
-│   └── Report.hbs    # Eval results report
-├── Compiled/         # Generated output (gitignored)
-└── Tools/            # Rendering utilities
-    ├── RenderTemplate.ts   # Core rendering engine
-    └── ValidateTemplate.ts # Template syntax checker
+├── Primitives/       Core template files (.hbs)
+│   ├── Roster.hbs    Agent/skill definitions
+│   ├── Structure.hbs Workflow patterns
+│   ├── Briefing.hbs  Agent context handoff
+│   └── Gate.hbs      Validation checklists
+├── Data/             YAML data sources
+│   ├── Agents.yaml   All agent definitions
+│   ├── Skills.yaml   All skill definitions
+│   └── ValidationGates.yaml Standard validation gates
+├── Evals/            Eval-specific templates
+│   ├── Judge.hbs     LLM-as-Judge prompt template
+│   ├── Rubric.hbs    Evaluation rubric generator
+│   ├── TestCase.hbs  Test case definition
+│   ├── Comparison.hbs A/B comparison template
+│   └── Report.hbs    Eval results report
+├── Compiled/         Generated output (gitignored)
+└── Tools/            Rendering utilities
+    ├── RenderTemplate.ts   Core rendering engine
+    └── ValidateTemplate.ts Template syntax checker
 ```
 
-## Core Syntax
+Core Syntax
 
 PAI uses Handlebars notation for template variables:
 
@@ -40,77 +38,73 @@ PAI uses Handlebars notation for template variables:
 | -------- | --------- | --------- |
 | `{{variable}}` | Simple interpolation | `Hello {{name}}` |
 | `{{object.property}}` | Nested access | `{{agent.role}}` |
-| `{{#each items}}...{{/each}}` | Iteration | List generation |
-| `{{#if condition}}...{{/if}}` | Conditional | Optional sections |
+| `{{each items}}...{{/each}}` | Iteration | List generation |
+| `{{if condition}}...{{/if}}` | Conditional | Optional sections |
 | `{{> partial}}` | Include partial | Reusable components |
 
-## Four Core Primitives
+Four Core Primitives
 
-### 1. ROSTER — Agent & Skill Definitions
+. ROSTER — Agent & Skill Definitions
 
 Data-driven generation of structured definitions from YAML.
 
-**Use Cases:**
-
-- 32 RedTeam agent personalities
-- 83 skill frontmatter definitions
+Use Cases:
+- RedTeam agent personalities
+- skill frontmatter definitions
 - Team composition overviews
 
-### 2. STRUCTURE — Workflow Patterns
+. STRUCTURE — Workflow Patterns
 
 Standardized multi-step execution patterns.
 
-**Use Cases:**
-
-- Phased analysis (RedTeam 5-phase)
-- Round-based debate (Council 3-round)
+Use Cases:
+- Phased analysis (RedTeam -phase)
+- Round-based debate (Council -round)
 - Sequential pipeline (Development gates)
 
-### 3. BRIEFING — Agent Context Handoff
+. BRIEFING — Agent Context Handoff
 
 How agents receive tasks and context.
 
-**Use Cases:**
-
+Use Cases:
 - Research agent queries
 - RedTeam analyst prompts
 - Delegation context packages
 
-### 4. GATE — Validation Checklists
+. GATE — Validation Checklists
 
 Reusable quality and completion checks.
 
-**Use Cases:**
-
+Use Cases:
 - Art mandatory elements
 - Development completion gates
 - Research source verification
 
-## Eval Templates
+Eval Templates
 
-### JUDGE — LLM-as-Judge Prompt
+JUDGE — LLM-as-Judge Prompt
 
 Configurable judge prompts with reasoning-first pattern.
 
-### RUBRIC — Evaluation Criteria
+RUBRIC — Evaluation Criteria
 
 Structured rubrics with dimensions and scoring scales.
 
-### TEST_CASE — Test Definition
+TEST_CASE — Test Definition
 
 Input/expected output pairs with metadata.
 
-### COMPARISON — A/B Testing
+COMPARISON — A/B Testing
 
 Side-by-side prompt variant comparison.
 
-### REPORT — Results Summary
+REPORT — Results Summary
 
 Statistical reporting with confidence intervals.
 
-## Usage
+Usage
 
-### Basic Rendering
+Basic Rendering
 
 ```bash
 bun run ~/.claude/skills/Prompting/Tools/RenderTemplate.ts \
@@ -119,111 +113,105 @@ bun run ~/.claude/skills/Prompting/Tools/RenderTemplate.ts \
   --output Compiled/AgentRoster.md
 ```
 
-### Inline in Prompts
+Inline in Prompts
 
 ```handlebars
 {{> briefing agent=current_agent task=current_task}}
 ```
 
-## Best Practices
+Best Practices
 
-1. **Separation of Concerns**
-   - Templates: Structure and formatting
+. Separation of Concerns   - Templates: Structure and formatting
    - Data: Content and parameters
    - Logic: Rendering and validation
 
-2. **Keep Templates Simple**
-   - Avoid complex logic in templates
+. Keep Templates Simple   - Avoid complex logic in templates
    - Use helpers for transformations
    - Business logic belongs in TypeScript
 
-3. **Version Control**
-   - Templates and data in separate files
+. Version Control   - Templates and data in separate files
    - Track changes independently
    - Enable A/B testing of structures
 
-4. **Validate Before Rendering**
-   - Check all required variables exist
+. Validate Before Rendering   - Check all required variables exist
    - Validate data against schema
    - Test with edge cases
 
-5. **DRY Principle**
-   - Extract repeated patterns into partials
+. DRY Principle   - Extract repeated patterns into partials
    - Use presets for common configurations
    - Single source of truth for definitions
 
-## Rollback Instructions
+Rollback Instructions
 
-If anything breaks, rollback to v2.5.0:
+If anything breaks, rollback to v..:
 
 ```bash
 cd ~/.claude
-git checkout v2.5.0
-# Or to just undo templating:
+git checkout v..Or to just undo templating:
 rm -rf Templates/
-git checkout v2.5.0 -- PAI/Prompting.md
+git checkout v..-- PAI/Prompting.md
 ```
 
-## Token Savings
+Token Savings
 
 | Area | Before | After | Savings |
 | ------ | -------- | ------- | --------- |
-| SKILL.md Frontmatter | 20,750 | 8,300 | 60% |
-| Agent Personalities | 3,000 | 1,200 | 60% |
-| Workflow Steps | 7,500 | 3,000 | 60% |
-| Agent Briefings | 6,400 | 1,900 | 70% |
-| **TOTAL** | ~53,000 | ~18,000 | **65%** |
+| SKILL.md Frontmatter | ,| ,| % |
+| Agent Personalities | ,| ,| % |
+| Workflow Steps | ,| ,| % |
+| Agent Briefings | ,| ,| % |
+| TOTAL| ~,| ~,| %|
 
-## Available Helpers
+Available Helpers
 
 The RenderTemplate.ts engine provides these custom Handlebars helpers:
 
-### String Helpers
+String Helpers
 
 | Helper | Example | Output |
 | -------- | --------- | -------- |
 | `uppercase` | `{{uppercase "hello"}}` | `HELLO` |
 | `lowercase` | `{{lowercase "HELLO"}}` | `hello` |
 | `titlecase` | `{{titlecase "hello world"}}` | `Hello World` |
-| `truncate` | `{{truncate text 50}}` | First 50 chars... |
+| `truncate` | `{{truncate text }}` | First chars... |
 
-### Formatting Helpers
+Formatting Helpers
 
 | Helper | Example | Output |
 | -------- | --------- | -------- |
-| `indent` | `{{indent text 2}}` | Indented by 2 spaces |
+| `indent` | `{{indent text }}` | Indented by spaces |
 | `join` | `{{join items ", "}}` | `a, b, c` |
 | `json` | `{{json object}}` | JSON string |
 | `codeblock` | `{{codeblock code "ts"}}` | Fenced code block |
 
-### Logic Helpers
+Logic Helpers
 
 | Helper | Example | Purpose |
 | -------- | --------- | --------- |
-| `eq` | `{{#if (eq a b)}}` | Equality check |
-| `gt` | `{{#if (gt a b)}}` | Greater than |
-| `lt` | `{{#if (lt a b)}}` | Less than |
-| `includes` | `{{#if (includes arr item)}}` | Array contains |
+| `eq` | `{{if (eq a b)}}` | Equality check |
+| `gt` | `{{if (gt a b)}}` | Greater than |
+| `lt` | `{{if (lt a b)}}` | Less than |
+| `includes` | `{{if (includes arr item)}}` | Array contains |
 
-### Number Helpers
-
-| Helper | Example | Output |
-| -------- | --------- | -------- |
-| `formatNumber` | `{{formatNumber 1234567}}` | `1,234,567` |
-| `percent` | `{{percent 0.85 1}}` | `85.0` |
-
-### Utility Helpers
+Number Helpers
 
 | Helper | Example | Output |
 | -------- | --------- | -------- |
-| `now` | `{{now "YYYY-MM-DD"}}` | `2025-12-09` |
+| `formatNumber` | `{{formatNumber }}` | `,,` |
+| `percent` | `{{percent .}}` | `.` |
+
+Utility Helpers
+
+| Helper | Example | Output |
+| -------- | --------- | -------- |
+| `now` | `{{now "YYYY-MM-DD"}}` | `--` |
 | `pluralize` | `{{pluralize count "item"}}` | `items` or `item` |
 | `default` | `{{default value "fallback"}}` | Value or fallback |
-| `repeat` | `{{repeat 3 "="}}` | `===` |
+| `repeat` | `{{repeat "="}}` | `===` |
 
-## CLI Usage
+CLI Usage
 
-### Render a Template
+Render a Template
 
 ```bash
 bun run ~/.claude/skills/Prompting/Tools/RenderTemplate.ts \
@@ -232,7 +220,7 @@ bun run ~/.claude/skills/Prompting/Tools/RenderTemplate.ts \
   --output Compiled/AgentRoster.md
 ```
 
-### Preview Without Writing
+Preview Without Writing
 
 ```bash
 bun run ~/.claude/skills/Prompting/Tools/RenderTemplate.ts \
@@ -241,7 +229,7 @@ bun run ~/.claude/skills/Prompting/Tools/RenderTemplate.ts \
   --preview
 ```
 
-### Validate Template Syntax
+Validate Template Syntax
 
 ```bash
 bun run ~/.claude/skills/Prompting/Tools/ValidateTemplate.ts \
@@ -249,9 +237,9 @@ bun run ~/.claude/skills/Prompting/Tools/ValidateTemplate.ts \
   --data Data/sample-briefing.yaml
 ```
 
-## Quick Reference
+Quick Reference
 
-### Template Selection Guide
+Template Selection Guide
 
 | I want to... | Use Template | With Data |
 | -------------- | -------------- | ----------- |
@@ -264,48 +252,44 @@ bun run ~/.claude/skills/Prompting/Tools/ValidateTemplate.ts \
 | Set up A/B test | `Comparison.hbs` | Comparison config |
 | Generate results report | `Report.hbs` | Results data |
 
-### Common Patterns
+Common Patterns
 
-**Iterate over agents:**
-
+Iterate over agents:
 ```handlebars
-{{#each agents}}
-- **{{name}}**: {{description}}
+{{each agents}}
+- {{name}}: {{description}}
 {{/each}}
 ```
 
-**Conditional sections:**
-
+Conditional sections:
 ```handlebars
-{{#if reasoning_required}}
+{{if reasoning_required}}
 Provide your reasoning BEFORE giving a score.
 {{/if}}
 ```
 
-**Include partial:**
-
+Include partial:
 ```handlebars
 {{> validation-gate gate=art_validation}}
 ```
 
-**Nested property access:**
-
+Nested property access:
 ```handlebars
 {{agent.config.settings.timeout}}
 ```
 
-## Research Foundation
+Research Foundation
 
 This system is based on research from:
 
-- **Anthropic**: `{{handlebars}}` syntax, context engineering patterns
-- **OpenAI**: Structured Outputs, meta-prompting
-- **LangChain**: LCEL composition, prompt templates
-- **Academic**: The Prompt Report (58 techniques), DSPy
+- Anthropic: `{{handlebars}}` syntax, context engineering patterns
+- OpenAI: Structured Outputs, meta-prompting
+- LangChain: LCEL composition, prompt templates
+- Academic: The Prompt Report (techniques), DSPy
 
-## Related Documentation
+Related Documentation
 
 - `~/.claude/PAI/Prompting.md` (Templating section)
-- `~/.claude/History/research/2025-12/2025-12-09-templating-system-research.md`
-- `~/.claude/History/learnings/2025-12/2025-12-09-021700_LEARNING_complete-templating-system-and-evals-integration.md`
+- `~/.claude/History/research/-/---templating-system-research.md`
+- `~/.claude/History/learnings/-/---_LEARNING_complete-templating-system-and-evals-integration.md`
 - `~/.claude/skills/Evals/SKILL.md`

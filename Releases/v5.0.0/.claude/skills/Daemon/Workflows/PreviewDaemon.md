@@ -1,23 +1,23 @@
-# PreviewDaemon Workflow
+PreviewDaemon Workflow
 
-**Purpose:** Show what an UpdateDaemon would change without writing or deploying anything.
+Purpose:Show what an UpdateDaemon would change without writing or deploying anything.
 
-## Trigger Phrases
+Trigger Phrases
 
 - "preview daemon"
 - "preview daemon update"
 - "what would daemon update look like"
 - "daemon diff"
 
-## Process
+Process
 
-### Step 1: Run Aggregator in Preview Mode
+Step : Run Aggregator in Preview Mode
 
 ```bash
 bun ${CLAUDE_SKILL_DIR}/Tools/DaemonAggregator.ts --diff ${PAI_USER_DIR}/Daemon/daemon.md --verbose
 ```
 
-### Step 2: Show Section-by-Section Summary
+Step : Show Section-by-Section Summary
 
 Present changes grouped by section:
 - Which sections have new content
@@ -25,26 +25,26 @@ Present changes grouped by section:
 - How many security redactions would be applied
 - Source data freshness per section
 
-### Step 3: Highlight Risks
+Step : Highlight Risks
 
 Flag any sections where:
-- Content is older than 30 days
+- Content is older than days
 - Security filter made redactions (show what was caught)
 - PAI source file is missing
 
-## Output Format
+Output Format
 
 ```
 Daemon Preview — what would change:
 
   [ABOUT]: unchanged
-  [MISSION]: 2 goals updated from TELOS
-  [FAVORITE_BOOKS]: +2 new (from TELOS/BOOKS.md)
-  [RECENT_IDEAS]: 10 new ideas (title + thesis)
-  [CURRENTLY_WORKING_ON]: 6 themes from last 14 days
-  [WISDOM]: 5 quotes added
+  [MISSION]: goals updated from TELOS
+  [FAVORITE_BOOKS]: +new (from TELOS/BOOKS.md)
+  [RECENT_IDEAS]: new ideas (title + thesis)
+  [CURRENTLY_WORKING_ON]: themes from last days
+  [WISDOM]: quotes added
 
-  Security: 0 redactions needed
+  Security: redactions needed
   Sources: all present and fresh
 
   To apply: run "update daemon"

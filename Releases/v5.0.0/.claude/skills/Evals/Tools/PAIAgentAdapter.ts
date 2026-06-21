@@ -1,11 +1,9 @@
-#!/usr/bin/env bun
-/**
- * PAIAgentAdapter — wraps PAI's Inference.ts as a scenario AgentAdapter.
- *
- * Lets scenario.run() drive a PAI agent in multi-turn simulations without
- * pulling in the ai-sdk Anthropic provider for the agent-under-test path
- * (scenario's UserSimulatorAgent + JudgeAgent still use ai-sdk directly).
- */
+!/usr/bin/env bun
+/ PAIAgentAdapter — wraps PAI's Inference.ts as a scenario AgentAdapter.
+  Lets scenario.run() drive a PAI agent in multi-turn simulations without
+ pulling in the ai-sdk Anthropic provider for the agent-under-test path
+ (scenario's UserSimulatorAgent + JudgeAgent still use ai-sdk directly).
+ /
 
 import { inference, type InferenceLevel } from '../../../PAI/TOOLS/Inference.ts';
 import { AgentAdapter, AgentRole, type AgentInput, type AgentReturnTypes } from '@langwatch/scenario';
@@ -28,7 +26,7 @@ export class PAIAgentAdapter extends AgentAdapter {
     this.opts = {
       systemPrompt: options.systemPrompt ?? 'You are a helpful assistant.',
       level: options.level ?? 'standard',
-      timeout: options.timeout ?? 60_000,
+      timeout: options.timeout ?? _,
     };
   }
 

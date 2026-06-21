@@ -1,8 +1,7 @@
-#!/usr/bin/env bun
-/**
- * Eval Suite Manager
- * Manage capability vs regression suites with saturation monitoring
- */
+!/usr/bin/env bun
+/ Eval Suite Manager
+ Manage capability vs regression suites with saturation monitoring
+ /
 
 import type { EvalSuite, EvalType, SaturationStatus, EvalRun, Task } from '../Types/index.ts';
 import { existsSync, mkdirSync, readdirSync, writeFileSync, readFileSync } from 'fs';
@@ -14,9 +13,8 @@ const EVALS_DIR = join(import.meta.dir, '..');
 const SUITES_DIR = join(EVALS_DIR, 'Suites');
 const RESULTS_DIR = join(EVALS_DIR, 'Results');
 
-/**
- * Ensure directories exist
- */
+/ Ensure directories exist
+ /
 function ensureDirs(): void {
   if (!existsSync(SUITES_DIR)) mkdirSync(SUITES_DIR, { recursive: true });
   if (!existsSync(join(SUITES_DIR, 'Capability'))) mkdirSync(join(SUITES_DIR, 'Capability'));
@@ -24,9 +22,8 @@ function ensureDirs(): void {
   if (!existsSync(RESULTS_DIR)) mkdirSync(RESULTS_DIR, { recursive: true });
 }
 
-/**
- * Create a new eval suite
- */
+/ Create a new eval suite
+ /
 export function createSuite(
   name: string,
   type: EvalType,
@@ -46,8 +43,8 @@ export function createSuite(
     type,
     domain: options?.domain as any,
     tasks: options?.tasks ?? [],
-    pass_threshold: options?.pass_threshold ?? (type === 'regression' ? 0.95 : 0.70),
-    saturation_threshold: options?.saturation_threshold ?? 0.95,
+    pass_threshold: options?.pass_threshold ?? (type === 'regression' ? .: .),
+    saturation_threshold: options?.saturation_threshold ?? .,
     created_at: new Date().toISOString(),
   };
 
@@ -59,9 +56,8 @@ export function createSuite(
   return suite;
 }
 
-/**
- * Load a suite by name
- */
+/ Load a suite by name
+ /
 export function loadSuite(name: string): EvalSuite | null {
   ensureDirs();
 
@@ -69,16 +65,15 @@ export function loadSuite(name: string): EvalSuite | null {
   for (const dir of ['Capability', 'Regression']) {
     const filePath = join(SUITES_DIR, dir, `${name}.yaml`);
     if (existsSync(filePath)) {
-      return parseYaml(readFileSync(filePath, 'utf-8')) as EvalSuite;
+      return parseYaml(readFileSync(filePath, 'utf-')) as EvalSuite;
     }
   }
 
   return null;
 }
 
-/**
- * List all suites
- */
+/ List all suites
+ /
 export function listSuites(type?: EvalType): EvalSuite[] {
   ensureDirs();
 
@@ -91,7 +86,7 @@ export function listSuites(type?: EvalType): EvalSuite[] {
 
     for (const file of readdirSync(dirPath)) {
       if (file.endsWith('.yaml')) {
-        const suite = parseYaml(readFileSync(join(dirPath, file), 'utf-8')) as EvalSuite;
+        const suite = parseYaml(readFileSync(join(dirPath, file), 'utf-')) as EvalSuite;
         suites.push(suite);
       }
     }
@@ -100,9 +95,8 @@ export function listSuites(type?: EvalType): EvalSuite[] {
   return suites;
 }
 
-/**
- * Add a task to a suite
- */
+/ Add a task to a suite
+ /
 export function addTaskToSuite(suiteName: string, taskId: string): boolean {
   const suite = loadSuite(suiteName);
   if (!suite) return false;
@@ -119,9 +113,8 @@ export function addTaskToSuite(suiteName: string, taskId: string): boolean {
   return true;
 }
 
-/**
- * Check saturation status for a suite
- */
+/ Check saturation status for a suite
+ /
 export function checkSaturation(suiteName: string): SaturationStatus {
   const suite = loadSuite(suiteName);
   if (!suite) {
@@ -136,13 +129,13 @@ export function checkSaturation(suiteName: string): SaturationStatus {
     const runDirs = readdirSync(suiteResultsDir)
       .filter(d => d.startsWith('run_'))
       .sort()
-      .slice(-10);  // Last 10 runs
+      .slice(-);  // Last runs
 
     for (const runDir of runDirs) {
       const runPath = join(suiteResultsDir, runDir, 'run.json');
       if (existsSync(runPath)) {
         try {
-          const run = JSON.parse(readFileSync(runPath, 'utf-8')) as EvalRun;
+          const run = JSON.parse(readFileSync(runPath, 'utf-')) as EvalRun;
           history.push({
             date: run.completed_at ?? run.started_at,
             rate: run.pass_rate,
@@ -155,9 +148,9 @@ export function checkSaturation(suiteName: string): SaturationStatus {
   }
 
   // Calculate saturation
-  const threshold = suite.saturation_threshold ?? 0.95;
-  const recentAboveThreshold = history.slice(-3).filter(h => h.rate >= threshold);
-  const saturated = recentAboveThreshold.length >= 3;
+  const threshold = suite.saturation_threshold ?? .;
+  const recentAboveThreshold = history.slice(-).filter(h => h.rate >= threshold);
+  const saturated = recentAboveThreshold.length >= ;
 
   let recommendedAction: 'graduate_to_regression' | 'add_harder_cases' | 'keep';
 
@@ -178,9 +171,8 @@ export function checkSaturation(suiteName: string): SaturationStatus {
   };
 }
 
-/**
- * Graduate a suite from capability to regression
- */
+/ Graduate a suite from capability to regression
+ /
 export function graduateSuite(suiteName: string): boolean {
   const suite = loadSuite(suiteName);
   if (!suite || suite.type !== 'capability') {
@@ -189,7 +181,7 @@ export function graduateSuite(suiteName: string): boolean {
 
   // Update type
   suite.type = 'regression';
-  suite.pass_threshold = 0.95;  // Higher threshold for regression
+  suite.pass_threshold = .;  // Higher threshold for regression
   suite.updated_at = new Date().toISOString();
 
   // Move file
@@ -205,43 +197,42 @@ export function graduateSuite(suiteName: string): boolean {
   return true;
 }
 
-/**
- * Format suite summary for display
- */
+/ Format suite summary for display
+ /
 export function formatSuiteSummary(suite: EvalSuite, saturation?: SaturationStatus): string {
   const lines: string[] = [];
 
-  const typeIcon = suite.type === 'capability' ? '🎯' : '🔒';
-  lines.push(`## ${typeIcon} ${suite.name}`);
+  const typeIcon = suite.type === 'capability' ? '' : '';
+  lines.push(`${typeIcon} ${suite.name}`);
   lines.push('');
-  lines.push(`**Type:** ${suite.type}`);
-  lines.push(`**Description:** ${suite.description}`);
-  if (suite.domain) lines.push(`**Domain:** ${suite.domain}`);
-  lines.push(`**Tasks:** ${suite.tasks.length}`);
-  lines.push(`**Pass Threshold:** ${(suite.pass_threshold ?? 0.75) * 100}%`);
+  lines.push(`Type:${suite.type}`);
+  lines.push(`Description:${suite.description}`);
+  if (suite.domain) lines.push(`Domain:${suite.domain}`);
+  lines.push(`Tasks:${suite.tasks.length}`);
+  lines.push(`Pass Threshold:${(suite.pass_threshold ?? .) }%`);
   lines.push('');
 
   if (saturation) {
-    lines.push('### Saturation Status');
+    lines.push('Saturation Status');
     lines.push('');
-    const satIcon = saturation.saturated ? '⚠️' : '✅';
-    lines.push(`${satIcon} **Saturated:** ${saturation.saturated ? 'Yes' : 'No'}`);
-    lines.push(`**Consecutive above ${(suite.saturation_threshold ?? 0.95) * 100}%:** ${saturation.consecutive_above_threshold}/3`);
-    lines.push(`**Recommendation:** ${saturation.recommended_action.replace(/_/g, ' ')}`);
+    const satIcon = saturation.saturated ? '️' : '';
+    lines.push(`${satIcon} Saturated:${saturation.saturated ? 'Yes' : 'No'}`);
+    lines.push(`Consecutive above ${(suite.saturation_threshold ?? .) }%:${saturation.consecutive_above_threshold}/`);
+    lines.push(`Recommendation:${saturation.recommended_action.replace(/_/g, ' ')}`);
 
-    if (saturation.pass_rate_history.length > 0) {
+    if (saturation.pass_rate_history.length > ) {
       lines.push('');
-      lines.push('**Recent Pass Rates:**');
-      for (const entry of saturation.pass_rate_history.slice(-5)) {
+      lines.push('Recent Pass Rates:');
+      for (const entry of saturation.pass_rate_history.slice(-)) {
         const date = new Date(entry.date).toLocaleDateString();
-        lines.push(`- ${date}: ${(entry.rate * 100).toFixed(1)}%`);
+        lines.push(`- ${date}: ${(entry.rate ).toFixed()}%`);
       }
     }
   }
 
-  if (suite.tasks.length > 0) {
+  if (suite.tasks.length > ) {
     lines.push('');
-    lines.push('### Tasks');
+    lines.push('Tasks');
     lines.push('');
     for (const task of suite.tasks) {
       lines.push(`- ${task}`);
@@ -254,7 +245,7 @@ export function formatSuiteSummary(suite: EvalSuite, saturation?: SaturationStat
 // CLI interface
 if (import.meta.main) {
   const { values, positionals } = parseArgs({
-    args: Bun.argv.slice(2),
+    args: Bun.argv.slice(),
     options: {
       type: { type: 'string', short: 't', default: 'capability' },
       description: { type: 'string', short: 'd' },
@@ -292,17 +283,17 @@ Examples:
   bun run SuiteManager.ts check-saturation auth-security
   bun run SuiteManager.ts graduate auth-security
 `);
-    process.exit(0);
+    process.exit();
   }
 
   switch (command) {
     case 'create': {
-      if (!args[0] || !values.description) {
+      if (!args[] || !values.description) {
         console.error('Usage: create <name> -d "description"');
-        process.exit(1);
+        process.exit();
       }
       const suite = createSuite(
-        args[0],
+        args[],
         values.type as EvalType,
         values.description,
         { domain: values.domain }
@@ -312,74 +303,74 @@ Examples:
     }
 
     case 'list': {
-      const type = args[0] as EvalType | undefined;
+      const type = args[] as EvalType | undefined;
       const suites = listSuites(type);
-      console.log(`\n${type ? type.charAt(0).toUpperCase() + type.slice(1) : 'All'} Suites:\n`);
+      console.log(`\n${type ? type.charAt().toUpperCase() + type.slice() : 'All'} Suites:\n`);
       for (const suite of suites) {
-        const icon = suite.type === 'capability' ? '🎯' : '🔒';
+        const icon = suite.type === 'capability' ? '' : '';
         console.log(`  ${icon} ${suite.name} (${suite.tasks.length} tasks)`);
       }
       break;
     }
 
     case 'show': {
-      if (!args[0]) {
+      if (!args[]) {
         console.error('Usage: show <name>');
-        process.exit(1);
+        process.exit();
       }
-      const suite = loadSuite(args[0]);
+      const suite = loadSuite(args[]);
       if (!suite) {
-        console.error(`Suite not found: ${args[0]}`);
-        process.exit(1);
+        console.error(`Suite not found: ${args[]}`);
+        process.exit();
       }
-      const saturation = checkSaturation(args[0]);
+      const saturation = checkSaturation(args[]);
       console.log('\n' + formatSuiteSummary(suite, saturation));
       break;
     }
 
     case 'add-task': {
-      if (!args[0] || !args[1]) {
+      if (!args[] || !args[]) {
         console.error('Usage: add-task <suite> <task>');
-        process.exit(1);
+        process.exit();
       }
-      if (addTaskToSuite(args[0], args[1])) {
-        console.log(`Added task ${args[1]} to suite ${args[0]}`);
+      if (addTaskToSuite(args[], args[])) {
+        console.log(`Added task ${args[]} to suite ${args[]}`);
       } else {
         console.error(`Failed to add task to suite`);
-        process.exit(1);
+        process.exit();
       }
       break;
     }
 
     case 'check-saturation': {
-      if (!args[0]) {
+      if (!args[]) {
         console.error('Usage: check-saturation <name>');
-        process.exit(1);
+        process.exit();
       }
-      const status = checkSaturation(args[0]);
-      console.log(`\nSaturation Status: ${args[0]}\n`);
-      console.log(`  Saturated: ${status.saturated ? '⚠️ Yes' : '✅ No'}`);
-      console.log(`  Consecutive above threshold: ${status.consecutive_above_threshold}/3`);
+      const status = checkSaturation(args[]);
+      console.log(`\nSaturation Status: ${args[]}\n`);
+      console.log(`  Saturated: ${status.saturated ? '️ Yes' : 'No'}`);
+      console.log(`  Consecutive above threshold: ${status.consecutive_above_threshold}/`);
       console.log(`  Recommendation: ${status.recommended_action}`);
       break;
     }
 
     case 'graduate': {
-      if (!args[0]) {
+      if (!args[]) {
         console.error('Usage: graduate <name>');
-        process.exit(1);
+        process.exit();
       }
-      if (graduateSuite(args[0])) {
-        console.log(`Graduated suite ${args[0]} from capability to regression`);
+      if (graduateSuite(args[])) {
+        console.log(`Graduated suite ${args[]} from capability to regression`);
       } else {
         console.error(`Failed to graduate suite (not found or not a capability suite)`);
-        process.exit(1);
+        process.exit();
       }
       break;
     }
 
     default:
       console.error(`Unknown command: ${command}`);
-      process.exit(1);
+      process.exit();
   }
 }

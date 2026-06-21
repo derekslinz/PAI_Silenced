@@ -269,7 +269,7 @@ function generateHealthReport(healthData: FrameHealth[]): string {
 | Domain | Health | Confidence | Observations | Last Updated | Principles | Anti-Patterns |
 |--------|--------|-----------|-------------|-------------|------------|---------------|
 ${healthData.map(h => {
-    const icon = h.health === 'growing' ? '🟢' : h.health === 'stable' ? '🟡' : '🔴';
+    const icon = h.health === 'growing' ? '' : h.health === 'stable' ? '' : '';
     return `| ${h.domain} | ${icon} ${h.health} | ${h.confidence}% | ${h.observationCount}+ | ${h.lastCrystallized} | ${h.principleCount} | ${h.antiPatternCount} |`;
   }).join('\n')}
 
@@ -323,7 +323,7 @@ Output: WISDOM/PRINCIPLES/verified.md and WISDOM/META/frame-health.md
     process.exit(0);
   }
 
-  console.log(`📊 Loading ${frameFiles.length} frames...`);
+  console.log(` Loading ${frameFiles.length} frames...`);
   const frames = frameFiles.map(f => parseFrame(join(FRAMES_DIR, f)));
 
   if (values.health) {
@@ -341,7 +341,7 @@ Output: WISDOM/PRINCIPLES/verified.md and WISDOM/META/frame-health.md
   }
 
   // Run cross-frame synthesis
-  console.log('🔍 Analyzing cross-frame principles...');
+  console.log(' Analyzing cross-frame principles...');
   const crossPrinciples = findCrossPrinciples(frames);
   console.log(`   Found ${crossPrinciples.length} cross-domain principles`);
 

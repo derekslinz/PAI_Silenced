@@ -1,108 +1,98 @@
-# ViewResults Workflow
+ViewResults Workflow
 
 Query and display evaluation results, generate reports, and track trends.
 
 ---
 
-## Prerequisites
+Prerequisites
 
 - Evaluations have been run
 - Results exist in Results/ directory or SQLite database
 
-## Execution
+Execution
 
-### Step 1: Identify Query
+Step : Identify Query
 
 Ask the user:
-1. Which use case?
-2. What time range? (latest, last week, specific run)
-3. What to show? (summary, details, comparison, trends)
-4. What format? (table, report, chart)
+. Which use case?
+. What time range? (latest, last week, specific run)
+. What to show? (summary, details, comparison, trends)
+. What format? (table, report, chart)
 
-### Step 2: Quick Status Check
+Step : Quick Status Check
 
-**Latest Results for Use Case:**
-
+Latest Results for Use Case:
 ```bash
-# Show most recent run
+Show most recent run
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts results \
   --use-case <name> \
   --latest
 ```
 
-**All Recent Runs:**
-
+All Recent Runs:
 ```bash
-# List last 10 runs
+List last runs
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts results \
   --use-case <name> \
-  --limit 10
-```
+  --limit ```
 
-### Step 3: View Detailed Results
+Step : View Detailed Results
 
-**Single Run Details:**
-
+Single Run Details:
 ```bash
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts results \
   --run-id <run-id> \
   --verbose
 ```
 
-**Per-Test-Case Breakdown:**
-
+Per-Test-Case Breakdown:
 ```bash
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts results \
   --run-id <run-id> \
   --show-cases
 ```
 
-### Step 4: Generate Report
+Step : Generate Report
 
-**Standard Report:**
-
+Standard Report:
 ```bash
-# Generate markdown report
+Generate markdown report
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts report \
   --run-id <run-id> \
   --output ~/.claude/skills/Evals/Results/<use-case>/<run-id>/report.md
 ```
 
-**Using Report Template:**
-
+Using Report Template:
 ```bash
-# Render with template
+Render with template
 bun run ~/.claude/Templates/Tools/RenderTemplate.ts \
   -t Evals/Report.hbs \
   -d ~/.claude/skills/Evals/Results/<use-case>/<run-id>/results.yaml \
   -o ~/.claude/skills/Evals/Results/<use-case>/<run-id>/report.md
 ```
 
-### Step 5: Query Database
+Step : Query Database
 
-**Direct SQLite Queries:**
-
+Direct SQLite Queries:
 ```bash
 cd ~/.claude/skills/Evals/EvalServer
 
-# Recent runs by use case
-sqlite3 storage/evals.db "
+Recent runs by use case
+sqlitestorage/evals.db "
   SELECT run_id, model, pass_rate, mean_score, created_at
   FROM eval_runs
   WHERE use_case = '<name>'
   ORDER BY created_at DESC
-  LIMIT 10
-"
+  LIMIT "
 
-# Failed test cases
-sqlite3 storage/evals.db "
+Failed test cases
+sqlitestorage/evals.db "
   SELECT test_id, score, failure_reason
   FROM eval_results
-  WHERE run_id = '<run-id>' AND passed = 0
-"
+  WHERE run_id = '<run-id>' AND passed = "
 
-# Score trends over time
-sqlite3 storage/evals.db "
+Score trends over time
+sqlitestorage/evals.db "
   SELECT date(created_at), avg(mean_score)
   FROM eval_runs
   WHERE use_case = '<name>'
@@ -111,32 +101,29 @@ sqlite3 storage/evals.db "
 "
 ```
 
-### Step 6: Compare Runs
+Step : Compare Runs
 
-**Two Runs Side-by-Side:**
-
+Two Runs Side-by-Side:
 ```bash
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts compare \
-  --run-a <run-id-1> \
-  --run-b <run-id-2>
+  --run-a <run-id-> \
+  --run-b <run-id->
 ```
 
-**Trend Analysis:**
-
+Trend Analysis:
 ```bash
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts trend \
   --use-case <name> \
-  --days 30
-```
+  --days ```
 
-### Step 7: Report Summary
+Step : Report Summary
 
 Use structured response format:
 
 ```markdown
-📋 SUMMARY: Evaluation results for <use-case>
+SUMMARY: Evaluation results for <use-case>
 
-📊 STATUS:
+STATUS:
 | Metric | Value |
 |--------|-------|
 | Run ID | <run-id> |
@@ -148,78 +135,75 @@ Use structured response format:
 | Passed | N |
 | Failed | N |
 
-📖 STORY EXPLANATION:
-1. Retrieved evaluation run from <date>
-2. <N> test cases were evaluated
-3. Deterministic scorers ran first (format, length, voice)
-4. AI judges evaluated accuracy and style
-5. Weighted scores calculated
-6. <Pass rate>% passed the 0.75 threshold
-7. <Key finding about top/bottom performers>
-8. <Recommendation based on results>
+STORY EXPLANATION:
+. Retrieved evaluation run from <date>
+. <N> test cases were evaluated
+. Deterministic scorers ran first (format, length, voice)
+. AI judges evaluated accuracy and style
+. Weighted scores calculated
+. <Pass rate>% passed the .threshold
+. <Key finding about top/bottom performers>
+. <Recommendation based on results>
 
-🎯 COMPLETED: Results retrieved for <use-case>, <pass-rate>% pass rate.
+COMPLETED: Results retrieved for <use-case>, <pass-rate>% pass rate.
 ```
 
-## Query Patterns
+Query Patterns
 
-### By Time Range
+By Time Range
 
 ```bash
-# Last 24 hours
---since "24 hours ago"
+Last hours
+--since "hours ago"
 
-# Last week
---since "7 days ago"
+Last week
+--since "days ago"
 
-# Specific date range
---from "2024-01-01" --to "2024-01-15"
+Specific date range
+--from "--" --to "--"
 ```
 
-### By Score Threshold
+By Score Threshold
 
 ```bash
-# Only failed runs
---min-pass-rate 0 --max-pass-rate 0.74
+Only failed runs
+--min-pass-rate --max-pass-rate .
+Only excellent runs
+--min-pass-rate .```
 
-# Only excellent runs
---min-pass-rate 0.90
-```
-
-### By Model
+By Model
 
 ```bash
-# Specific model
---model claude-3-5-sonnet-20241022
-
-# Compare models
+Specific model
+--model claude---sonnet-
+Compare models
 --compare-models
 ```
 
-### By Test Case
+By Test Case
 
 ```bash
-# Specific test
---test-id 001-basic
+Specific test
+--test-id -basic
 
-# All failures
+All failures
 --failures-only
 ```
 
-## Output Formats
+Output Formats
 
-### Table (Default)
+Table (Default)
 
 ```
 ┌──────────┬────────────────────────────┬───────────┬────────────┐
 │ Run ID   │ Model                      │ Pass Rate │ Mean Score │
 ├──────────┼────────────────────────────┼───────────┼────────────┤
-│ abc123   │ claude-3-5-sonnet-20241022 │ 92%       │ 4.3        │
-│ def456   │ gpt-4o                     │ 88%       │ 4.1        │
+│ abc  │ claude---sonnet-│ %       │ .       │
+│ def  │ gpt-o                     │ %       │ .       │
 └──────────┴────────────────────────────┴───────────┴────────────┘
 ```
 
-### JSON
+JSON
 
 ```bash
 --format json
@@ -227,22 +211,21 @@ Use structured response format:
 
 ```json
 {
-  "run_id": "abc123",
+  "run_id": "abc",
   "use_case": "newsletter_summaries",
-  "model": "claude-3-5-sonnet-20241022",
+  "model": "claude---sonnet-",
   "summary": {
-    "total_cases": 12,
-    "passed": 11,
-    "failed": 1,
-    "pass_rate": 0.917,
-    "mean_score": 4.3,
-    "std_dev": 0.5
-  },
+    "total_cases": ,
+    "passed": ,
+    "failed": ,
+    "pass_rate": .,
+    "mean_score": .,
+    "std_dev": .  },
   "per_test_case": [...]
 }
 ```
 
-### Markdown Report
+Markdown Report
 
 ```bash
 --format markdown
@@ -250,7 +233,7 @@ Use structured response format:
 
 Uses Report.hbs template to generate full report.
 
-### CSV Export
+CSV Export
 
 ```bash
 --format csv --output results.csv
@@ -258,62 +241,61 @@ Uses Report.hbs template to generate full report.
 
 For spreadsheet analysis.
 
-## Trend Analysis
+Trend Analysis
 
-### Regression Detection
+Regression Detection
 
 ```bash
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts trend \
   --use-case <name> \
   --detect-regression \
-  --threshold 0.10  # Alert if >10% drop
+  --threshold . Alert if >% drop
 ```
 
-### Performance Over Time
+Performance Over Time
 
 ```
-📈 Trend: newsletter_summaries (last 30 days)
+Trend: newsletter_summaries (last days)
 
 Date       | Pass Rate | Mean Score | Change
 -----------|-----------|------------|--------
-2024-01-15 | 92%       | 4.3        | +5%
-2024-01-10 | 87%       | 4.1        | -2%
-2024-01-05 | 89%       | 4.2        | baseline
+--| %       | .       | +%
+--| %       | .       | -%
+--| %       | .       | baseline
 
 Trend: ↑ Improving
 Alert: None
 ```
 
-## Web UI Options
+Web UI Options
 
-### Dashboard View
+Dashboard View
 
-1. Open http://localhost:5173
-2. Select use case from sidebar
-3. View:
+. Open http://localhost:. Select use case from sidebar
+. View:
    - Latest run summary
    - Pass rate trend chart
    - Failing test cases
    - Model comparison
 
-### Run Details
+Run Details
 
-1. Click on specific run
-2. View:
+. Click on specific run
+. View:
    - Per-test-case scores
    - Judge reasoning
    - Output samples
    - Diff against baseline
 
-### Export Options
+Export Options
 
 - Download JSON
 - Export to CSV
 - Generate PDF report
 
-## Common Queries
+Common Queries
 
-### "How did the last eval go?"
+"How did the last eval go?"
 
 ```bash
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts results \
@@ -322,7 +304,7 @@ bun run ~/.claude/skills/Evals/EvalServer/cli.ts results \
   --summary
 ```
 
-### "Why did test X fail?"
+"Why did test X fail?"
 
 ```bash
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts results \
@@ -331,15 +313,14 @@ bun run ~/.claude/skills/Evals/EvalServer/cli.ts results \
   --verbose
 ```
 
-### "Is performance improving or declining?"
+"Is performance improving or declining?"
 
 ```bash
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts trend \
   --use-case <name> \
-  --days 14
-```
+  --days ```
 
-### "Which model is best for this task?"
+"Which model is best for this task?"
 
 ```bash
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts compare \
@@ -348,15 +329,15 @@ bun run ~/.claude/skills/Evals/EvalServer/cli.ts compare \
   --recent
 ```
 
-### "Show me all failures this week"
+"Show me all failures this week"
 
 ```bash
 bun run ~/.claude/skills/Evals/EvalServer/cli.ts results \
   --use-case <name> \
-  --since "7 days ago" \
+  --since "days ago" \
   --failures-only
 ```
 
-## Done
+Done
 
 Results retrieved and reported. Use findings to guide prompt/model decisions.

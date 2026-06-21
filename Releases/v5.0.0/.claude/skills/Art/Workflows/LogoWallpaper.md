@@ -1,32 +1,31 @@
-# Create <brand> wallpaper
+Create <brand> wallpaper
 
-**Generate branded wallpapers with embedded logo concepts for Kitty terminal and macOS desktop.**
+Generate branded wallpapers with embedded logo concepts for Kitty terminal and macOS desktop.
+---
+
+Creates K :wallpapersthat integrate <brand> logos as organic design elements — emblazoned, embossed, or woven into the composition.
 
 ---
 
-Creates **4K 16:9 wallpapers** that integrate <brand> logos as organic design elements — emblazoned, embossed, or woven into the composition.
-
----
-
-## Purpose
+Purpose
 
 Generate cohesive wallpapers that:
 - Match the existing <brand> wallpaper aesthetic (dark tech, circuits, geometric patterns)
 - Embed logo shapes/concepts as integral design elements (not just overlaid)
-- Work for both Kitty terminal backgrounds (with 0.85 tint) and macOS desktop
+- Work for both Kitty terminal backgrounds (with .tint) and macOS desktop
 - Maintain the blue/purple/teal color palette
 
 ---
 
-## Prerequisites
+Prerequisites
 
-**Logos Directory:** `~/Projects/Logos/`
+Logos Directory:`~/Projects/Logos/`
 Place logo files (PNG, SVG) here. The workflow will use these as reference for shape/concept integration.
 
-**Wallpaper Output:** `~/Projects/Wallpaper/`
+Wallpaper Output:`~/Projects/Wallpaper/`
 Generated wallpapers are saved here and immediately available via `k -w <name>`.
 
-**Reference Wallpapers:** `~/Projects/Wallpaper/`
+Reference Wallpapers:`~/Projects/Wallpaper/`
 Existing wallpapers to match aesthetic:
 - `blue-lines.png` - Abstract flowing lines
 - `blue-purple-circuits.png` - Circuit board pattern
@@ -35,26 +34,24 @@ Existing wallpapers to match aesthetic:
 
 ---
 
-## Workflow Steps
+Workflow Steps
 
-### Step 1: Gather Input
+Step : Gather Input
 
-**Required from user:**
-1. **Logo selection** — Which logo from `~/Projects/Logos/` to embed
-2. **Style direction** — Circuit, geometric, abstract, flowing, etc.
-3. **Integration style** — How logo appears:
-   - **Emblazoned** — Logo shape as glowing focal point
-   - **Embossed** — Logo as subtle raised/pressed texture
-   - **Woven** — Logo dissolved into pattern (circuits flow through it)
-   - **Negative space** — Logo revealed by absence of pattern
-4. **Output name** — Filename for the wallpaper (kebab-case, no extension)
+Required from user:. Logo selection— Which logo from `~/Projects/Logos/` to embed
+. Style direction— Circuit, geometric, abstract, flowing, etc.
+. Integration style— How logo appears:
+   - Emblazoned— Logo shape as glowing focal point
+   - Embossed— Logo as subtle raised/pressed texture
+   - Woven— Logo dissolved into pattern (circuits flow through it)
+   - Negative space— Logo revealed by absence of pattern
+. Output name— Filename for the wallpaper (kebab-case, no extension)
 
-**If no specific direction given:**
-- Default to "woven" integration (most subtle)
+If no specific direction given:- Default to "woven" integration (most subtle)
 - Match closest existing wallpaper style
 - Use primary <brand> logo if available
 
-### Step 2: Analyze Logo
+Step : Analyze Logo
 
 Read the selected logo file to understand:
 - Primary shapes and forms
@@ -62,14 +59,14 @@ Read the selected logo file to understand:
 - Aspect ratio and proportions
 
 ```bash
-# List available logos
+List available logos
 ls ~/Projects/Logos/
 
-# View selected logo
+View selected logo
 open ~/Projects/Logos/<logo-name>.png
 ```
 
-### Step 3: Load Reference Wallpaper
+Step : Load Reference Wallpaper
 
 View an existing wallpaper to match the aesthetic:
 
@@ -77,21 +74,19 @@ View an existing wallpaper to match the aesthetic:
 open ~/Projects/Wallpaper/blue-purple-circuits.png
 ```
 
-**Key aesthetic elements to maintain:**
-- Dark background (#0a0a0f to #1a1a2e)
-- Blue (#4a90d9), Purple (#8b5cf6), Teal (#06b6d4) accents
+Key aesthetic elements to maintain:- Dark background (aaf to aae)
+- Blue (ad), Purple (bcf), Teal (bd) accents
 - Tech/digital feel (circuits, data streams, geometric patterns)
 - Depth through blur and glow effects
 - High contrast accent lines/nodes
 
-### Step 4: Construct Prompt
+Step : Construct Prompt
 
-**Base prompt template:**
-
+Base prompt template:
 ```
-Dark tech wallpaper for terminal/desktop, 16:9 4K resolution.
+Dark tech wallpaper for terminal/desktop, :K resolution.
 
-BACKGROUND: Deep dark blue-black gradient (#0a0a0f to #1a1a2e)
+BACKGROUND: Deep dark blue-black gradient (aaf to aae)
 
 INTEGRATION: [LOGO_NAME] logo shape [INTEGRATION_STYLE]:
 - [Describe how logo integrates with the pattern]
@@ -103,9 +98,9 @@ PATTERN STYLE: [STYLE_DIRECTION]
 - [How pattern interacts with logo shape]
 
 COLOR PALETTE:
-- Primary: Electric blue (#4a90d9) — main circuit lines/elements
-- Secondary: Deep purple (#8b5cf6) — accent glows, key nodes
-- Tertiary: Cyan/teal (#06b6d4) — highlights, energy points
+- Primary: Electric blue (ad) — main circuit lines/elements
+- Secondary: Deep purple (bcf) — accent glows, key nodes
+- Tertiary: Cyan/teal (bd) — highlights, energy points
 - Background: Near-black with subtle blue undertone
 
 EFFECTS:
@@ -116,49 +111,45 @@ EFFECTS:
 
 CRITICAL:
 - Logo shape is INTEGRAL to design, not overlaid
-- Must work as terminal background with 85% dark tint overlay
+- Must work as terminal background with % dark tint overlay
 - No text, no watermarks
 - High contrast details for visibility through tint
 - Professional, sophisticated tech aesthetic
 ```
 
-### Step 5: Generate Wallpaper
+Step : Generate Wallpaper
 
 ```bash
 bun run ~/.claude/skills/Art/Tools/Generate.ts \
   --model nano-banana-pro \
   --prompt "[CONSTRUCTED_PROMPT]" \
-  --size 4K \
-  --aspect-ratio 16:9 \
+  --size K \
+  --aspect-ratio :\
   --reference-image ~/Projects/Logos/<selected-logo>.png \
   --output ~/Projects/Wallpaper/<output-name>.png
 ```
 
-**Parameters:**
-- `--size 4K` — Maximum resolution
-- `--aspect-ratio 16:9` — Standard widescreen
+Parameters:- `--size K` — Maximum resolution
+- `--aspect-ratio :` — Standard widescreen
 - `--reference-image` — Logo file for shape guidance
 
-### Step 6: Preview and Validate
+Step : Preview and Validate
 
-**Open the generated wallpaper:**
-```bash
+Open the generated wallpaper:```bash
 open ~/Projects/Wallpaper/<output-name>.png
 ```
 
-**Validation checklist:**
-- [ ] Logo shape is recognizable but integrated (not pasted on)
+Validation checklist:- [ ] Logo shape is recognizable but integrated (not pasted on)
 - [ ] Color palette matches <brand> aesthetic (blue/purple/teal on dark)
 - [ ] Pattern has enough contrast to show through Kitty tint
 - [ ] No artifacts, text, or watermarks
 - [ ] Professional quality suitable for desktop/terminal
 
-**If validation fails:**
-- Adjust prompt specificity for logo integration
+If validation fails:- Adjust prompt specificity for logo integration
 - Try different integration style
 - Regenerate with refined prompt
 
-### Step 7: Apply Wallpaper
+Step : Apply Wallpaper
 
 Once validated, apply immediately:
 
@@ -170,31 +161,31 @@ This sets both Kitty terminal and macOS desktop backgrounds.
 
 ---
 
-## Integration Styles Reference
+Integration Styles Reference
 
-### Emblazoned
-Logo as the **glowing focal point** — circuits/patterns radiate outward from it.
+Emblazoned
+Logo as the glowing focal point— circuits/patterns radiate outward from it.
 ```
 Logo shape as central glowing element, circuit traces emanating outward from its edges,
 energy nodes at key logo vertices, pattern density increases near logo
 ```
 
-### Embossed
-Logo as **subtle texture** — raised or pressed into the pattern layer.
+Embossed
+Logo as subtle texture— raised or pressed into the pattern layer.
 ```
 Logo shape visible as subtle raised/depressed region in the pattern,
 same color palette but slightly different luminosity, discoverable not obvious
 ```
 
-### Woven
-Logo shape **defines pattern flow** — elements flow through/around it.
+Woven
+Logo shape defines pattern flow— elements flow through/around it.
 ```
 Circuit traces and geometric elements flow through and around logo shape,
 logo boundary influences pattern direction, shape emerges from negative space
 ```
 
-### Negative Space
-Logo **revealed by absence** — pattern stops at logo boundaries.
+Negative Space
+Logo revealed by absence— pattern stops at logo boundaries.
 ```
 Dense pattern everywhere except logo shape, logo appears as void/window,
 subtle glow at logo edges where pattern meets empty space
@@ -202,30 +193,30 @@ subtle glow at logo edges where pattern meets empty space
 
 ---
 
-## Style Directions Reference
+Style Directions Reference
 
-### Circuit
+Circuit
 Dense circuit board traces, nodes, and connection points.
 ```
 PCB-style traces with right-angle turns, solder points as nodes,
 varying trace widths, layer depth with traces at different z-levels
 ```
 
-### Geometric
+Geometric
 Abstract geometric shapes, grids, and mathematical patterns.
 ```
 Interlocking geometric shapes, hexagonal grids, triangular tessellation,
 isometric depth, clean edges with subtle glow
 ```
 
-### Flowing
+Flowing
 Organic flowing lines, data streams, particle flows.
 ```
 Smooth curved lines suggesting data flow, particle streams,
 gradient intensity along flow direction, organic movement feel
 ```
 
-### Abstract
+Abstract
 Non-representational artistic interpretation.
 ```
 Abstract color fields, gradient washes, subtle texture,
@@ -234,13 +225,13 @@ artistic interpretation of tech aesthetic, minimal but sophisticated
 
 ---
 
-## Example Prompts
+Example Prompts
 
-### Example 1: <brand> logo Woven into Circuits
+Example : <brand> logo Woven into Circuits
 ```
-Dark tech wallpaper for terminal/desktop, 16:9 4K resolution.
+Dark tech wallpaper for terminal/desktop, :K resolution.
 
-BACKGROUND: Deep dark blue-black gradient (#0a0a0f to #1a1a2e)
+BACKGROUND: Deep dark blue-black gradient (aaf to aae)
 
 INTEGRATION: <brand> logo shape woven into circuit pattern:
 - Circuit traces flow through and around the logo silhouette
@@ -255,28 +246,28 @@ PATTERN STYLE: Dense circuit board
 - Trace density varies to create visual interest
 
 COLOR PALETTE:
-- Primary: Electric blue (#4a90d9) — main traces
-- Secondary: Deep purple (#8b5cf6) — key nodes, logo edge glow
-- Tertiary: Cyan (#06b6d4) — energy highlights
-- Background: Near-black (#0a0a0f)
+- Primary: Electric blue (ad) — main traces
+- Secondary: Deep purple (bcf) — key nodes, logo edge glow
+- Tertiary: Cyan (bd) — energy highlights
+- Background: Near-black (aaf)
 
 EFFECTS:
 - Depth of field blur at edges
 - Subtle purple glow where logo shape meets pattern
-- Fine detail in traces (visible at 4K)
+- Fine detail in traces (visible at K)
 - Atmospheric corner vignette
 
-CRITICAL: Logo integrated into design, not overlaid. Must show through 85% dark tint.
+CRITICAL: Logo integrated into design, not overlaid. Must show through % dark tint.
 ```
 
-### Example 2: Logo Emblazoned in Geometric Field
+Example : Logo Emblazoned in Geometric Field
 ```
-Dark tech wallpaper for terminal/desktop, 16:9 4K resolution.
+Dark tech wallpaper for terminal/desktop, :K resolution.
 
-BACKGROUND: Deep space gradient (#0a0a0f to #1a1a2e)
+BACKGROUND: Deep space gradient (aaf to aae)
 
 INTEGRATION: <brand> logo as central emblazoned element:
-- Logo shape glows at center with purple (#8b5cf6) core
+- Logo shape glows at center with purple (bcf) core
 - Geometric patterns radiate outward from logo edges
 - Energy lines connect logo vertices to outer pattern
 - Logo is the source/origin of all pattern elements
@@ -288,9 +279,9 @@ PATTERN STYLE: Geometric hexagonal grid
 - Clean geometric precision
 
 COLOR PALETTE:
-- Primary: Electric blue (#4a90d9) — grid lines
-- Secondary: Deep purple (#8b5cf6) — logo glow, accent nodes
-- Tertiary: Cyan (#06b6d4) — energy connections
+- Primary: Electric blue (ad) — grid lines
+- Secondary: Deep purple (bcf) — logo glow, accent nodes
+- Tertiary: Cyan (bd) — energy connections
 - Background: Near-black with blue undertone
 
 EFFECTS:
@@ -304,23 +295,19 @@ CRITICAL: Logo as design origin point, not pasted overlay. High contrast for tin
 
 ---
 
-## Quick Reference
+Quick Reference
 
 | Parameter | Value |
 |-----------|-------|
 | Model | nano-banana-pro |
-| Size | 4K |
-| Aspect Ratio | 16:9 |
+| Size | K |
+| Aspect Ratio | :|
 | Output Directory | ~/Projects/Wallpaper/ |
 | Logo Source | ~/Projects/Logos/ |
 | Apply Command | `k -w <name>` |
 
-**Color Palette:**
-- Background: #0a0a0f to #1a1a2e
-- Blue: #4a90d9
-- Purple: #8b5cf6
-- Teal/Cyan: #06b6d4
+Color Palette:- Background: aaf to aae
+- Blue: ad- Purple: bcf- Teal/Cyan: bd
+Integration Styles:Emblazoned, Embossed, Woven, Negative Space
 
-**Integration Styles:** Emblazoned, Embossed, Woven, Negative Space
-
-**Pattern Styles:** Circuit, Geometric, Flowing, Abstract
+Pattern Styles:Circuit, Geometric, Flowing, Abstract

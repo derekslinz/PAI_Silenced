@@ -97,7 +97,7 @@ async function addBackground(
     process.exit(1);
   }
 
-  console.log(`🎨 Adding background ${hexColor} to ${inputPath}`);
+  console.log(` Adding background ${hexColor} to ${inputPath}`);
 
   // Use ImageMagick to composite the transparent image onto a colored background
   const command = `magick "${inputPath}" -background "${hexColor}" -flatten "${outputPath}"`;

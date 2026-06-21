@@ -4,27 +4,26 @@ description: "Manage the public daemon profile — a living digital representati
 effort: medium
 ---
 
-## Customization
+Customization
 
-**Before executing, check for user customizations at:**
-`~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/Daemon/`
+Before executing, check for user customizations at:`~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/Daemon/`
 
 If this directory exists, load and apply any SecurityOverrides.md or PREFERENCES.md found there. These override default security classification. If the directory does not exist, proceed with skill defaults.
 
-# Daemon Skill
+Daemon Skill
 
 Manages your public daemon profile — a living digital representation of what you're working on, thinking about, reading, and building. Automatically aggregates data from your PAI system with deterministic security filtering to ensure only publicly safe content is published.
 
-## Workflow Routing
+Workflow Routing
 
 | Workflow | Trigger | File |
 |----------|---------|------|
-| **UpdateDaemon** | "update daemon", "refresh daemon" | `Workflows/UpdateDaemon.md` |
-| **ReadDaemon** | "read daemon", "check daemon", "daemon status" | `Workflows/ReadDaemon.md` |
-| **PreviewDaemon** | "preview daemon", "daemon diff" | `Workflows/PreviewDaemon.md` |
-| **DeployDaemon** | "deploy daemon", "push daemon", "ship daemon" | `Workflows/DeployDaemon.md` |
+| UpdateDaemon| "update daemon", "refresh daemon" | `Workflows/UpdateDaemon.md` |
+| ReadDaemon| "read daemon", "check daemon", "daemon status" | `Workflows/ReadDaemon.md` |
+| PreviewDaemon| "preview daemon", "daemon diff" | `Workflows/PreviewDaemon.md` |
+| DeployDaemon| "deploy daemon", "push daemon", "ship daemon" | `Workflows/DeployDaemon.md` |
 
-## Architecture
+Architecture
 
 Two-repo pattern: public framework + private content.
 
@@ -54,7 +53,7 @@ PAI SOURCES (private, read-only)
           OUR_STORY.md, OPINIONS.md, BUSINESS/
 ```
 
-## Skill Structure
+Skill Structure
 
 ```
 skills/Daemon/
@@ -71,62 +70,61 @@ skills/Daemon/
     └── SecurityClassification.md  (public/private data categories)
 ```
 
-## Important Paths
+Important Paths
 
 | Purpose | Path |
 |---------|------|
-| **Private data repo** | `~/Projects/daemon-dm/` |
-| **daemon-data.json** | `~/Projects/daemon-dm/daemon-data.json` |
-| **Deploy script** | `~/Projects/daemon-dm/deploy.sh` |
-| **Public framework repo** | `~/Projects/daemon/` |
-| **Security classification** | `${CLAUDE_SKILL_DIR}/Docs/SecurityClassification.md` |
-| **Security overrides** | `${PAI_USER_DIR}/SKILLCUSTOMIZATIONS/Daemon/SecurityOverrides.md` |
+| Private data repo| `~/Projects/daemon-dm/` |
+| daemon-data.json| `~/Projects/daemon-dm/daemon-data.json` |
+| Deploy script| `~/Projects/daemon-dm/deploy.sh` |
+| Public framework repo| `~/Projects/daemon/` |
+| Security classification| `${CLAUDE_SKILL_DIR}/Docs/SecurityClassification.md` |
+| Security overrides| `${PAI_USER_DIR}/SKILLCUSTOMIZATIONS/Daemon/SecurityOverrides.md` |
 
-## Live Endpoints
+Live Endpoints
 
 | Endpoint | Purpose |
 |----------|---------|
 | `daemon.example.com` | Public website (Cloudflare Pages, fully static) |
 
-## Security Philosophy
+Security Philosophy
 
-1. **Private by default:** All data is private until explicitly classified as public
-2. **Code-level enforcement:** SecurityFilter.ts is deterministic pattern matching, NOT LLM judgment
-3. **Structural exclusion:** Sensitive files (CONTACTS, FINANCES, HEALTH) are never opened by the aggregator
-4. **Defense in depth:** Aggregator filter + SecurityFilter + pre-commit hook + manual approval
-5. **Fail closed:** If uncertain, exclude the content
+. Private by default:All data is private until explicitly classified as public
+. Code-level enforcement:SecurityFilter.ts is deterministic pattern matching, NOT LLM judgment
+. Structural exclusion:Sensitive files (CONTACTS, FINANCES, HEALTH) are never opened by the aggregator
+. Defense in depth:Aggregator filter + SecurityFilter + pre-commit hook + manual approval
+. Fail closed:If uncertain, exclude the content
 
-## Data Sources
+Data Sources
 
 The DaemonAggregator reads from these PAI sources:
 
 | Source | What's Extracted | Section |
 |--------|-----------------|---------|
-| TELOS/MISSION.md | M1, M2 (public missions) | [MISSION] |
+| TELOS/MISSION.md | M, M(public missions) | [MISSION] |
 | TELOS/GOALS.md | Public project goals | [TELOS] |
 | TELOS/BOOKS.md | Book titles | [FAVORITE_BOOKS] |
 | TELOS/MOVIES.md | Movie titles | [FAVORITE_MOVIES] |
-| TELOS/WISDOM.md | Top 5 quotes | [WISDOM] |
-| KNOWLEDGE/Ideas/_index.md | 10 recent Ideas (title + thesis) | [RECENT_IDEAS] |
+| TELOS/WISDOM.md | Top quotes | [WISDOM] |
+| KNOWLEDGE/Ideas/_index.md | recent Ideas (title + thesis) | [RECENT_IDEAS] |
 | PROJECTS.md | Public repos and sites | Projects integration |
-| MEMORY/WORK/ | Topic themes (last 14 days) | [CURRENTLY_WORKING_ON] |
+| MEMORY/WORK/ | Topic themes (last days) | [CURRENTLY_WORKING_ON] |
 | PRINCIPAL_IDENTITY.md | Public bio, role, focus | [ABOUT] |
 | Existing daemon.md | Preserved sections (predictions, routine, podcasts, preferences) | Various |
 
-## For Community Forks
+For Community Forks
 
 This skill is designed to be generic:
 
-1. Fork the public Daemon repo (danielmiessler/Daemon)
-2. Create your own private data repo with `daemon-data.json`
-3. Configure  with your own blocked names/paths
-4. The aggregator reads from standard PAI directory structure
-5. Use `deploy.sh` to build and deploy to your own Cloudflare Pages
+. Fork the public Daemon repo (danielmiessler/Daemon)
+. Create your own private data repo with `daemon-data.json`
+. Configure  with your own blocked names/paths
+. The aggregator reads from standard PAI directory structure
+. Use `deploy.sh` to build and deploy to your own Cloudflare Pages
 
-## Examples
+Examples
 
-**Example 1: Full update cycle**
-```
+Example : Full update cycle```
 User: "update daemon"
 → Aggregates PAI data sources
 → Applies security filter (deterministic)
@@ -135,32 +133,30 @@ User: "update daemon"
 → Writes daemon-data.json to daemon-dm → deploys static site
 ```
 
-**Example 2: Check what's current**
-```
+Example : Check what's current```
 User: "check daemon"
 → Reads daemon-data.json from daemon-dm
 → Shows section-by-section status
 ```
 
-**Example 3: Preview before committing**
-```
+Example : Preview before committing```
 User: "preview daemon"
 → Runs aggregator in preview mode
 → Shows diff against current daemon-data.json
 → No writes, no deploys
 ```
 
-## Gotchas
+Gotchas
 
-- **Two repos:** Public framework (`~/Projects/daemon/`) and private content (`~/Projects/daemon-dm/`). The framework is forkable. The content is yours.
-- **deploy.sh copies data into the framework at build time, then cleans up.** Personal data never gets committed to the public repo.
-- **SecurityFilter is code, not prompts.** If you need to add new blocked patterns, edit SecurityFilter.ts, not the workflow markdown.
-- **Site is fully static.** Data is embedded at build time. Changes require running `deploy.sh`.
+- Two repos:Public framework (`~/Projects/daemon/`) and private content (`~/Projects/daemon-dm/`). The framework is forkable. The content is yours.
+- deploy.sh copies data into the framework at build time, then cleans up.Personal data never gets committed to the public repo.
+- SecurityFilter is code, not prompts.If you need to add new blocked patterns, edit SecurityFilter.ts, not the workflow markdown.
+- Site is fully static.Data is embedded at build time. Changes require running `deploy.sh`.
 
-## Execution Log
+Execution Log
 
 After completing any workflow, append a single JSONL entry:
 
 ```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Daemon","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.claude/PAI/MEMORY/SKILLS/execution.jsonl
+echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Daemon","workflow":"WORKFLOW_USED","input":"_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.claude/PAI/MEMORY/SKILLS/execution.jsonl
 ```

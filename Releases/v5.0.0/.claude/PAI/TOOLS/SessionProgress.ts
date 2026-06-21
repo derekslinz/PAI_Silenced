@@ -211,7 +211,7 @@ function resumeProgress(project: string): void {
   }
 
   if (progress.handoff_notes) {
-    console.log(`\n📝 HANDOFF NOTES:`);
+    console.log(`\n HANDOFF NOTES:`);
     console.log(`  ${progress.handoff_notes}`);
   }
 
@@ -242,9 +242,9 @@ function listActive(): void {
   for (const file of files) {
     const progress = JSON.parse(readFileSync(join(PROGRESS_DIR, file), 'utf-8')) as SessionProgress;
     const statusIcon = {
-      active: '🔵',
+      active: '',
       completed: '✅',
-      blocked: '🔴'
+      blocked: ''
     }[progress.status];
 
     console.log(`${statusIcon} ${progress.project} (${progress.status})`);
