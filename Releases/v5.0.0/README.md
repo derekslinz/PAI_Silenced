@@ -14,23 +14,11 @@
 
 **Full documentation lives at [docs.ourpai.ai](https://docs.ourpai.ai)** — every subsystem (Algorithm, ISA, Memory, Skills, Hooks, Pulse, Containment) has its own deep-dive page with diagrams, examples, and reference material.
 
-<br />
-
-<img src="./pai-stack.jpg" alt="Three-layer PAI architecture: engines (Claude Code, OpenCode, Pi) at the bottom, PAI context-based Life Operating System (Memory, Skills, Hooks, Agents, , Learning, Security, Statusline) in the middle, and You (work, health, goals, relationships, creative, finances, learning, life) at the top, with context beams flowing through all three layers." width="780" />
-
-</div>
-
----
-
 ## One-Line Install
-
-```bash
-curl -sSL https://ourpai.ai/install.sh | bash
-```
 
 That's it. The installer wizard handles Bun, Git, Claude Code verification, DA identity setup, Pulse launchd registration, and validation. Existing `~/.claude/` is auto-backed-up to `~/.claude.backup-{TIMESTAMP}` before anything is overwritten.
 
-**Prefer to inspect first?** [Read the script](https://ourpai.ai/install.sh) before piping it. Or clone manually:
+**Prefer to inspect first?** [Read the script] before piping it. Or clone manually:
 
 ```bash
 git clone https://github.com/danielmiessler/PAI.git ~/.claude
