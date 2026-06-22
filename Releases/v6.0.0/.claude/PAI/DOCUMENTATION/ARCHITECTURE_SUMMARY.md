@@ -88,7 +88,7 @@ System file inventory by pipeline. When you modify a file, trace its pipeline to
 |----------|-----------|
 | **Security** | `hooks/SecurityPipeline.hook.ts`, `hooks/security/pipeline.ts`, `hooks/security/inspectors/{Pattern,Egress,Rules,Prompt,Injection}Inspector.ts`, `USER/SECURITY/PATTERNS.yaml` |
 | **Algorithm** | `Algorithm/LATEST` → `Algorithm/v{VERSION}.md` (currently v6.3.0), `Algorithm/capabilities.md`, `Algorithm/mode-detection.md`, `hooks/ISASync.hook.ts` → `MEMORY/WORK/{slug}/ISA.md`, `skills/ISA/` (canonical Scaffold/Append/Reconcile workflows) |
-| **Memory** | `hooks/WorkCompletionLearning.hook.ts`, `hooks/SatisfactionCapture.hook.ts`, `hooks/RelationshipMemory.hook.ts`, `Tools/KnowledgeHarvester.ts` → `MEMORY/KNOWLEDGE/`, `MEMORY/LEARNING/`; `Tools/SessionHarvester.ts --mine` → `KNOWLEDGE/_harvest-queue/`; `Tools/MemoryRetriever.ts` (BM25 retrieval), `Tools/KnowledgeGraph.ts` (graph navigation) — read-only |
+| **Memory** | `hooks/WorkCompletionLearning.hook.ts`, `hooks/RelationshipMemory.hook.ts`, `Tools/KnowledgeHarvester.ts` → `MEMORY/KNOWLEDGE/`, `MEMORY/LEARNING/`; `Tools/SessionHarvester.ts --mine` → `KNOWLEDGE/_harvest-queue/`; `Tools/MemoryRetriever.ts` (BM25 retrieval), `Tools/KnowledgeGraph.ts` (graph navigation) — read-only |
 | **Hooks** | `hooks/*.hook.ts`, `hooks/handlers/*.ts`, `hooks/lib/*.ts`, `settings.json` |
 | **Observability** | `hooks/ToolActivityTracker.hook.ts`, `hooks/ToolFailureTracker.hook.ts`, `hooks/lib/observability-transport.ts` → `MEMORY/OBSERVABILITY/*.jsonl` |
 | **Pulse** | `Pulse/pulse.ts` (port 31337), `Pulse/modules/{observability,hooks,wiki,imessage,telegram,user-index,da}.ts`, `Pulse/PULSE.toml`, `Pulse/Observability/src/`, `Pulse/Assistant/module.ts` |

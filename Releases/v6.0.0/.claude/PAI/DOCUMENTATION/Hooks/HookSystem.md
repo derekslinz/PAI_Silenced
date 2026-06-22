@@ -161,16 +161,6 @@ Claude Code supports the following hook events:
           "timeout": 5
         }
       ]
-    },
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "$HOME/.claude/hooks/SatisfactionCapture.hook.ts",
-          "timeout": 20,
-          "async": true
-        }
-      ]
     }
   ]
 }
@@ -197,9 +187,7 @@ Claude Code supports the following hook events:
 
 **RepeatDetection.hook.ts** - Detect repeated asks / repeat-request complaints from the user. Synchronous, short-timeout.
 
-**SatisfactionCapture.hook.ts** - Captures user satisfaction signals from prompt content for analytics and learning. Async.
-
-> **Migration note:** Older hooks (RatingCapture, UpdateTabTitle, SessionAutoName, SessionAnalysis, ModeClassifier, ClassifierTelemetry) are no longer wired in settings.json. The active chain is the four hooks above.
+> **Migration note:** Older hooks (RatingCapture, UpdateTabTitle, SessionAutoName, SessionAnalysis, ModeClassifier, ClassifierTelemetry, SatisfactionCapture) are no longer wired in settings.json. The active chain is the three hooks above.
 
 ---
 
@@ -988,7 +976,6 @@ tail -f ~/.claude/hooks/subagent-stop-debug.log
 
 **Affected Hooks:**
 - `PromptProcessing.hook.ts` - Couldn't read user messages for context
-- `SatisfactionCapture.hook.ts` - Same issue
 
 **Fix Applied:**
 1. Changed `entry.type === 'human'` → `entry.type === 'user'`
@@ -1169,7 +1156,6 @@ USER PROMPT SUBMIT (4 hooks):
   PromptGuard.hook.ts            Security: PromptInspector (injection/exfil/evasion)
   RepeatDetection.hook.ts        Detect repeated asks / repeat-request complaints
   PromptProcessing.hook.ts       Unified: rating + tab title + session name + mode + tier [async]
-  SatisfactionCapture.hook.ts    User satisfaction signal capture [async]
 
 PRE TOOL USE (2 hooks + 2 Pulse HTTP routes):
   SecurityPipeline.hook.ts       Security validation [Bash, Edit, Write, Read, MultiEdit]
@@ -1364,7 +1350,7 @@ Events use a dot-separated topic hierarchy for filtering. A `custom.*` escape ha
 |----------|-------|----------------|
 | `work.*` | created, completed | ISASync, SessionCleanup |
 | `session.*` | named, completed | SessionCleanup |
-| `rating.*` | captured | SatisfactionCapture |
+| `rating.*` | captured | PromptProcessing |
 | `learning.*` | captured | WorkCompletionLearning |
 | `isa.*` | synced | ISASync |
 | `doc.*` | integrity | DocIntegrity |

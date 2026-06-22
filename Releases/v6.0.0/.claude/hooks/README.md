@@ -48,7 +48,6 @@ Hooks are TypeScript scripts that execute at specific lifecycle events in Claude
   UserPromptSubmit  PromptGuard (PromptInspector — no LLM)     
                       RepeatDetection                            
                       PromptProcessing (rating + tab + name)    
-                      SatisfactionCapture                        
                                                                      
   PreToolUse  SecurityPipeline (Bash/Edit/Write/MultiEdit/Read) 
                 Context Reduction (Bash → compressed commands)   
@@ -144,7 +143,6 @@ interface StopPayload extends BasePayload {
 | `PromptGuard.hook.ts` | Security: PromptInspector (injection/exfil/evasion, no LLM) | Yes | `hooks/security/inspectors/` |
 | `RepeatDetection.hook.ts` | Detect repeated asks / repeat-request complaints | Yes | None |
 | `PromptProcessing.hook.ts` | Unified: rating + tab title + session name + mode + tier | No (async) | Inference API, `ratings.jsonl`, `session-names.json` |
-| `SatisfactionCapture.hook.ts` | User satisfaction signal capture | No (async) | `MEMORY/OBSERVABILITY/` |
 
 ### PreToolUse Hooks
 
