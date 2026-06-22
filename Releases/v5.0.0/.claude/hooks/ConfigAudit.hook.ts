@@ -40,8 +40,14 @@ interface ConfigChangeEvent {
   change_summary: string;
 }
 
-const OBS_DIR = paiPath('MEMORY', 'OBSERVABILITY');
-const AUDIT_FILE = join(OBS_DIR, 'config-changes.jsonl');
+// Lazy evaluation: don't resolve paths at module load time (prevents literal
+// ${HOME} directory creation if env vars are unexpanded when hook is loaded).
+function getObsDir(): string {
+  return paiPath('MEMORY', 'OBSERVABILITY');
+}
+function getAuditFile(): string {
+  return join(getObsDir(), 'config-changes.jsonl');
+}
 const SNAPSHOT_PATH = '/tmp/pai-settings-snapshot.json';
 
 // Sensitive keys that warrant extra logging
@@ -172,8 +178,10 @@ async function main() {
       change_summary: summary,
     };
 
-    if (!existsSync(OBS_DIR)) mkdirSync(OBS_DIR, { recursive: true });
-    appendFileSync(AUDIT_FILE, JSON.stringify(event) + '\n', 'utf-8');
+    const obsDir = getObsDir();
+    const auditFile = getAuditFile();
+    if (!existsSync(obsDir)) mkdirSync(obsDir, { recursive: true });
+    appendFileSync(auditFile, JSON.stringify(event) + '\n', 'utf-8');
 
     const sensitivity = isSensitive ? ' [SENSITIVE]' : '';
     console.error(`[ConfigAudit] Logged: ${configKey}${sensitivity} — ${summary}`);
