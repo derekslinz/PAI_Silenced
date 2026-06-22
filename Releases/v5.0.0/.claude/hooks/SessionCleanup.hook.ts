@@ -36,10 +36,11 @@
 import { writeFileSync, existsSync, readFileSync, unlinkSync } from 'fs';
 import { join } from 'path';
 import { getISOTimestamp } from './lib/time';
+import { getPaiDir } from './lib/paths';
 import { setTabState, cleanupKittySession } from './lib/tab-setter';
 import { readRegistry, writeRegistry, findArtifactPath } from './lib/isa-utils';
 
-const BASE_DIR = process.env.PAI_DIR || join(process.env.HOME!, '.claude', 'PAI');
+const BASE_DIR = getPaiDir(); // expands ${HOME}/~ and falls back to ~/.claude/PAI
 const MEMORY_DIR = join(BASE_DIR, 'MEMORY');
 const STATE_DIR = join(MEMORY_DIR, 'STATE');
 const WORK_DIR = join(MEMORY_DIR, 'WORK');

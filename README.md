@@ -301,7 +301,7 @@ Recovery is straightforward:
 ## Roadmap
 
 | Feature | Description |
-|---------|-------------|
+| --------- | ------------- |
 | **Local Model Support** | Run PAI with local models (Ollama, llama.cpp) for privacy and cost control |
 | **Granular Model Routing** | Route different tasks to different models based on complexity |
 | **Remote Access** | Access your PAI from anywhere—mobile, web, other devices |

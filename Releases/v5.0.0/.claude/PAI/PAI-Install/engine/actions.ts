@@ -504,7 +504,21 @@ export async function moveExistingClaudeToBackup(
 
   try {
     mkdirSync(dirname(state.backupPath), { recursive: true });
-    cpSync(claudeDir, state.backupPath, { recursive: true });
+    // Skip non-regular files (sockets, FIFOs, char/block devices). cpSync
+    // throws ENXIO trying to copy them — e.g. a live daemon's IPC socket that
+    // happens to sit under ~/.claude while the install runs. Directories,
+    // regular files, and symlinks copy normally.
+    cpSync(claudeDir, state.backupPath, {
+      recursive: true,
+      filter: (src: string): boolean => {
+        try {
+          const st = lstatSync(src);
+          return st.isDirectory() || st.isFile() || st.isSymbolicLink();
+        } catch {
+          return false; // unreadable entry — skip rather than abort the backup
+        }
+      },
+    });
     await emit({
       event: "message",
       content: `Copied existing ~/.claude to ${state.backupPath.replace(homedir(), "~")} before installing the fresh tree.`,
