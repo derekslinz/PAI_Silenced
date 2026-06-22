@@ -250,9 +250,9 @@ export type EngineEventHandler = (event: EngineEvent) => void | Promise<void>;
 // Update these when cutting a new PAI release.
 // The installer reads these constants — no other file should hardcode versions.
 
-export const PAI_VERSION = "5.0.0";
+export const PAI_VERSION = "6.0.0";
 // Fallback only — the live PAI/ALGORITHM/LATEST file is the single source
 // of truth (v6.2.0+ doctrine). runConfiguration prefers LATEST and only
 // uses this constant when the staged tree didn't ship a LATEST file.
 export const ALGORITHM_VERSION = "6.3.0";
-export const INSTALLER_VERSION = "5.0";
+export const INSTALLER_VERSION = "6.0";

@@ -33,7 +33,7 @@ export const STEPS: StepDefinition[] = [
   {
     id: "identity",
     name: "Identity",
-    description: "Configure your name, AI assistant name, timezone, and catchphrase",
+    description: "Configure your name, AI assistant name, and timezone",
     number: 4,
     required: true,
     dependsOn: ["api-keys"],

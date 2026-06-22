@@ -387,9 +387,10 @@ async function cmdLaunch(options: { mcp?: string; resume?: boolean; skipPerms?: 
   }
 
   // Startup status (text). Reads daidentity.startupCatchphrase from
-  // settings.json so the user's install-time catchphrase is honored. Falls
-  // back to the historical "<name> here, ready to go." default when unset.
-  notifyStatus(`[ focused] ${getStartupCatchphrase()}`);
+  // settings.json. Empty by default (fork philosophy: no scripted catchphrase);
+  // only appended if the user explicitly set one.
+  const catchphrase = getStartupCatchphrase();
+  notifyStatus(catchphrase ? `[ focused] ${catchphrase}` : `[ focused]`);
 
   // Launch Claude
   // BILLING: subscription, not API. Strip ANTHROPIC_API_KEY before spawn so the

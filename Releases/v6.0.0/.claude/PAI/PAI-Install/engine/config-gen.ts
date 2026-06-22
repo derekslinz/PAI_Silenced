@@ -37,7 +37,6 @@ export function generateSettingsJson(config: PAIConfig): Record<string, any> {
       fullName: `${config.aiName} — Personal AI`,
       displayName: config.aiName.toUpperCase(),
       color: "#3B82F6",
-      startupCatchphrase: config.catchphrase,
     },
 
     principal: {

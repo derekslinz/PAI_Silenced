@@ -942,17 +942,6 @@ export async function runIdentity(
   );
   state.collected.aiName = aiName.trim() || defaultAi || "PAI";
 
-  // Catchphrase
-  const defaultCatch = state.collected.catchphrase || `${state.collected.aiName} here, ready to go`;
-  const catchphrase = await getInput(
-    "catchphrase",
-    `Startup catchphrase for ${state.collected.aiName}?`,
-    "text",
-    defaultCatch,
-    state.collected.aiName
-  );
-  state.collected.catchphrase = catchphrase.trim() || defaultCatch;
-
   // Projects directory (optional)
   const defaultProjects = state.collected.projectsDir || "";
   const projDir = await getInput(

@@ -1767,10 +1767,8 @@ function handleLifeHome(): Response {
     const randomSpark = sparkNames.length > 0 ? sparkNames[Math.floor(Math.random() * sparkNames.length)] : null
     const timelineBlocks = timelineRaw.split("\n").filter(l => l.startsWith("### ")).length
 
-    const mood = fields.mood || "Unknown"
-    const energy = fields.energy || "Unknown"
     const focus = fields.focus || "Unknown"
-    const oneSentence = `${mood}, ${energy} energy. Focused on: ${focus}.`
+    const oneSentence = `Focused on: ${focus}.`
 
     return Response.json({
       oneSentence,

@@ -3,18 +3,18 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 // ─── Insights Dashboard ───
-// Scrollable grid layout hosting all 15 analytics widgets.
+// Scrollable grid layout hosting utility analytics widgets. Affect widgets
+// (satisfaction pulse, reflection feed, session wordcloud) were removed per the
+// fork philosophy: observability measures utility/correctness, not feeling.
 // Each widget is a self-contained component under src/components/activity/insights/.
-// WidgetCard placeholders will be replaced as individual widget agents deliver.
 
 export default function InsightsDashboard() {
   return (
     <ScrollArea className="flex-1">
       <div className="p-4 space-y-4">
         {/* Row 1: Overview metrics */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <WidgetCard id="effort-donut" title="Effort Distribution" />
-          <WidgetCard id="satisfaction-pulse" title="Satisfaction Pulse" />
           <WidgetCard id="phase-bottleneck" title="Phase Bottlenecks" />
         </div>
 
@@ -37,14 +37,9 @@ export default function InsightsDashboard() {
           <WidgetCard id="mode-sankey" title="Mode Escalation" />
         </div>
 
-        {/* Row 5: History & Learning */}
-        <div className="grid grid-cols-2 gap-4">
-          <WidgetCard id="reflection-feed" title="Reflection Insights" tall />
-          <div className="space-y-4">
-            <WidgetCard id="rework-archaeology" title="Rework Archaeology" />
-            <WidgetCard id="session-wordcloud" title="Session Wordcloud" />
-          </div>
-        </div>
+        {/* Row 5: Rework — affect widgets (satisfaction, reflections, wordcloud)
+            removed per fork philosophy: observability measures utility, not feeling. */}
+        <WidgetCard id="rework-archaeology" title="Rework Archaeology" fullWidth />
 
         {/* Row 6: Evidence */}
         <WidgetCard

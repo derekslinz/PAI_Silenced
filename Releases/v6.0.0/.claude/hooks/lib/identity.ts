@@ -181,7 +181,8 @@ export function getStartupCatchphrase(): string {
   const settings = loadSettings();
   const stored = (settings.daidentity as any)?.startupCatchphrase as string | undefined;
   const name = getDAName();
-  const template = (stored && stored.trim()) || "{name} here, ready to go.";
+  // Fork philosophy: no scripted catchphrase. Empty unless the user set one.
+  const template = (stored && stored.trim()) || "";
   return template.replace(/\{name\}/gi, name);
 }
 
