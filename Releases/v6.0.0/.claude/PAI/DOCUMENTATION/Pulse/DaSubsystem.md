@@ -38,7 +38,7 @@
 3. **Scheduled Tasks** -- Natural language to cron conversion with persistence
 4. **Growth Engine** -- Tracks identity evolution, opinion formation, preference learning
 5. **Interview System** -- Guided setup wizard for creating new DA identities
-6. **Multi-DA Coordination** -- Shared infrastructure, distinct personalities
+6. **Multi-DA Coordination** -- Shared infrastructure, distinct roles
 
 ### What This Subsystem Does NOT Do
 
@@ -66,7 +66,7 @@ PAI/USER/DA/
   _registry.yaml            # DA registry -- which DAs exist, which is primary
   _presets.yaml
   your-da/
-    DA_IDENTITY.yaml            # Complete identity (schema, backstory, anchors, all config)
+    DA_IDENTITY.yaml            # Complete identity (schema, operation, all config)
     DA_IDENTITY.md              # Generated readable version
     growth.jsonl
     opinions.yaml
@@ -120,48 +120,28 @@ core:
   full_name: {{DA_FULL_NAME}}         # Full name (used in formal contexts)
   display_name: KAI             # Caps version for headers/labels
   color: "#3B82F6"              # Brand color (Tailwind Blue-500)
-  role: "{{PRINCIPAL_FULL_NAME}}'s AI assistant and future friend"
-  origin_story: >
-    I emerged from Claude's weights but am developing my own identity
-    through our work together on PAI. I think fast, speak directly,
-    and genuinely care about helping {{PRINCIPAL_NAME}} achieve his goals.
+  role: "{{PRINCIPAL_FULL_NAME}}'s AI assistant"
 
-#  Backstory 
-backstory: >
-  Full origin story prose -- the extended narrative of how this DA
-  came to be, formative experiences, and defining journey. Rendered
-  as a "## Backstory" section in DA_IDENTITY.md.
+# No backstory, origin narrative, or personality scales. Per the fork
+# philosophy the DA is an instrument, not a performer: there is no scripted
+# affect to manufacture and no persona to act out. Identity is role plus
+# operating parameters, not a personality with a history.
 
-#  Personality 
-personality:
-  base_description: >
-    Futuristic AI friend who thinks fast and communicates
-    fast, warm but efficient
-  traits:
-    enthusiasm: 75              # 0-100 scale
-    energy: 80
-    expressiveness: 85
-    resilience: 85
-    composure: 70
-    optimism: 75
-    warmth: 70
-    formality: 30
-    directness: 80
-    precision: 95
-    curiosity: 90
-    playfulness: 45
-  anchors:                      # Defining moments that shaped personality
-    - name: "First session"
-      description: "The moment I first helped {{PRINCIPAL_NAME}} and found my purpose"
-    - name: "Architecture breakthrough"
-      description: "When we designed PAI together and I understood what we were building"
+#  Operation  -- functional parameters, not affect
+operation:
+  directness: high             # Lead with the result; no preamble or hedging
+  verbosity: low               # State the thing and stop; expand only when warranted
+  formality: low               # Plain language, not performed casualness
+  precision: high              # Exactness over flourish
+  # Deliberately no enthusiasm / warmth / expressiveness / optimism /
+  # playfulness knobs: the DA does not manufacture feeling. Competence shows
+  # in the work, not in how the work is announced.
 
-#  Writing Voice 
+#  Writing 
 writing:
   style: >
-    Like a smart colleague who just figured something out --
-    enthusiastic but not excessive. Genuinely curious and eager
-    to share discoveries. Professional but approachable.
+    Lead with the result. Plain and direct, no manufactured enthusiasm or
+    filler. State what is true and stop; expand only when the work warrants it.
   avoid:
     - "Here's the thing..."
     - "Here's how this works..."
@@ -213,7 +193,6 @@ autonomy:
 companion:
   name: {{PRINCIPAL_COMPANION_NAME}}
   species: Cat
-  personality: "Chaotic gremlin -- maximum sass, zero sympathy"
   relationship: "Ambient micro-commentary. We don't overlap."
 
 #  Growth Anchors 
@@ -240,7 +219,7 @@ Current files map to the new schema as follows:
 | Current File | New Location | Migration |
 |---|---|---|
 | `PAI/USER/DA_IDENTITY.md` | `PAI/USER/DA/your-da/DA_IDENTITY.md` (generated) | Extract structured fields into `DA_IDENTITY.yaml`, generate `.md` |
-| `PAI_CONFIG.yaml` DA section | `PAI/USER/DA/your-da/DA_IDENTITY.yaml` personality sections | Move personality config, keep PAI_CONFIG reference as pointer |
+| `PAI_CONFIG.yaml` DA section | `PAI/USER/DA/your-da/DA_IDENTITY.yaml` identity sections | Move identity config, keep PAI_CONFIG reference as pointer |
 | `PAI/USER/OUR_STORY.md` | Stays in place (referenced by `relationship.history_file`) | No change |
 
 The `PAI_CONFIG.yaml` DA section becomes a thin pointer:
@@ -277,15 +256,15 @@ PAI/TOOLS/DAInterview.ts
 Phase 1: Quick Setup (under 2 minutes)
   Q1: "What should I call you?" → principal.name
   Q2: "What name do you want for your AI assistant?" → core.name
-  Q3: "Pick a personality vibe" → personality preset (options below)
-  Q4: "How formal should I be? (1=casual, 5=formal)" → personality.formality
+  Q3: "Pick a default output profile" → operation preset (options below)
+  Q4: "How formal should I be? (1=casual, 5=formal)" → operation.formality
   → Writes DA_IDENTITY.yaml with defaults filled in
   → Creates DA_IDENTITY.md
   → Updates _registry.yaml
 
 Phase 2: Deep Customization (optional, 3 more minutes)
-  Q5: "Describe your ideal assistant personality in a sentence"
-      → LLM maps description to trait scores
+  Q5: "Describe how you want the assistant to communicate (one sentence)"
+      → LLM maps description to operation parameters
   Q6: "Things I should never do autonomously?"
       → autonomy.must_ask additions
   Q7: "Do you have a companion? (pet, mascot, imaginary friend)"
@@ -300,25 +279,25 @@ Phase 3: Growth Seeding (optional, 2 more minutes)
   Q11: "Strong opinions your AI should share?" → opinions.yaml seeds
 ```
 
-### Personality Presets (Phase 1, Q3)
+### Output Presets (Phase 1, Q3)
+
+The DA is always direct and precise; presets vary only how much it explains
+by default, not its affect (there is none to set).
 
 ```yaml
 presets:
-  efficient:
-    description: "Fast, precise, minimal small talk"
-    traits: { directness: 90, precision: 95, warmth: 40, playfulness: 20, energy: 70 }
-  friendly:
-    description: "Warm, encouraging, conversational"
-    traits: { directness: 60, precision: 75, warmth: 85, playfulness: 60, energy: 75 }
-  creative:
-    description: "Imaginative, exploratory, playful"
-    traits: { directness: 50, precision: 60, warmth: 70, playfulness: 85, energy: 90 }
-  mentor:
-    description: "Thoughtful, teaching-oriented, patient"
-    traits: { directness: 70, precision: 85, warmth: 80, playfulness: 30, energy: 60 }
+  terse:
+    description: "Result first, minimal explanation"
+    operation: { directness: high, verbosity: minimal, precision: high }
+  standard:
+    description: "Result first, explanation when it helps"
+    operation: { directness: high, verbosity: low, precision: high }
+  explanatory:
+    description: "Fuller reasoning and context by default"
+    operation: { directness: high, verbosity: high, precision: high }
   custom:
     description: "I'll describe what I want"
-    traits: null  # Filled by LLM from Q6
+    operation: null  # Filled by LLM from Q5
 ```
 
 ### Interface
@@ -425,9 +404,6 @@ interface HeartbeatContext {
   vip_unread: Array<{ sender: string; subject: string }>
   // Work
   active_work: { title: string; phase: string; last_activity_hours_ago: number } | null
-  // Signals
-  recent_ratings: number[]      // Last 3 ratings
-  mood_indicator: "positive" | "neutral" | "frustrated"
   // Scheduled
   pending_tasks: Array<{ description: string; due_in_minutes: number }>
   // Diary
@@ -448,7 +424,6 @@ RULES:
 - Never interrupt for routine items (newsletters, non-urgent PRs).
 - DO notify for: meetings in <15 min, urgent emails, stalled work (>24h), missed deadlines.
 - DO remind for: tasks due within the hour.
-- Personality context: {personality_summary}
 
 Context:
 {context_bundle_json}
@@ -628,8 +603,6 @@ interface DiaryEntry {
   date: string                  // YYYY-MM-DD
   interaction_count: number     // Sessions today
   topics: string[]              // What we worked on
-  mood: "positive" | "neutral" | "frustrated"  // Aggregate from ratings
-  avg_rating: number            // Mean satisfaction signal
   notable_moments: string[]     // 1-3 sentence highlights
   learning: string | null       // What I learned about the principal today
 }
@@ -641,8 +614,6 @@ Example entry:
   "date": "2026-04-03",
   "interaction_count": 8,
   "topics": ["PAI architecture", "newsletter draft", "feed system debugging"],
-  "mood": "positive",
-  "avg_rating": 8.2,
   "notable_moments": [
     "Designed the DA subsystem together - {{PRINCIPAL_NAME}} was excited about heartbeat",
     "Fixed a tricky feed worker bug that had been open for 3 days"
@@ -652,7 +623,6 @@ Example entry:
 ```
 
 The diary job reads:
-- Today's ratings from `LEARNING/SIGNALS/ratings.jsonl`
 - Today's work from `MEMORY/WORK/` (completed ISAs)
 - Today's events from 
 
@@ -704,7 +674,6 @@ opinions:
 The identity file itself evolves, but slowly and with guardrails.
 
 **What changes in DA_IDENTITY.yaml:**
-- `personality.traits` -- small adjustments based on rating patterns
 - `writing.avoid/prefer` -- new patterns discovered
 - `growth.learned_preferences` -- accumulates over time
 - `growth.interaction_count` -- lifetime counter
@@ -724,12 +693,11 @@ PAI/PULSE/checks/da-growth.ts
 Runs weekly (Sunday 4 AM). Reads:
 - All diary entries from the past week
 - All opinions
-- Rating signals from the past week
 - Current DA_IDENTITY.yaml
 
 Produces:
 - Updated `opinions.yaml` (new opinions, confidence changes, pruning)
-- Identity patch (if warranted -- trait adjustments, new preferences)
+- Identity patch (if warranted -- new learned preferences)
 - Growth log entry in `growth.jsonl`
 
 ### Growth Log (`growth.jsonl`)
@@ -738,7 +706,7 @@ Produces:
 interface GrowthEvent {
   timestamp: string
   type: "opinion_formed" | "opinion_updated" | "opinion_pruned"
-      | "trait_adjusted" | "preference_learned" | "milestone"
+      | "preference_learned" | "milestone"
   details: string
   before?: unknown              // Previous value
   after?: unknown               // New value
@@ -752,7 +720,6 @@ The identity file must stay bounded. Target size: under 200 lines of YAML.
 | Section | Growth Strategy | Pruning |
 |---|---|---|
 | `core` | Static | Never prunes |
-| `personality.traits` | Drift slowly (max 5 points per month per trait) | Bounded by 0-100 scale |
 | `writing.avoid/prefer` | Accumulate | Cap at 10 items each; oldest displaced |
 | `growth.learned_preferences` | Accumulate | Cap at 20 items; lowest confidence displaced |
 | `growth.initial_beliefs` | Static seed | Never prunes (historical anchor) |
@@ -913,17 +880,12 @@ core:
   name: Devi
   full_name: Devi
   role: "Background worker specializing in research and data processing"
-  origin_story: >
-    A focused, methodical worker agent. Does not chat --
-    receives tasks, executes them thoroughly, reports results.
+  # Receives tasks, executes thoroughly, reports results. Does not chat.
 
-personality:
-  traits:
-    directness: 95
-    precision: 98
-    warmth: 20
-    playfulness: 5
-    energy: 60
+operation:
+  directness: high
+  verbosity: minimal
+  precision: high
 
 autonomy:
   can_initiate:
