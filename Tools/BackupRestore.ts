@@ -18,7 +18,7 @@
 
 import { existsSync, readdirSync, statSync, readFileSync, cpSync, rmSync } from "fs";
 import { homedir } from "os";
-import { join, basename } from "path";
+import { join } from "path";
 
 const HOME = homedir();
 const CLAUDE_DIR = join(HOME, ".claude");
