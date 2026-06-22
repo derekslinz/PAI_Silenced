@@ -133,6 +133,15 @@
         ]
       },
       {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/ContainmentGuard.hook.ts"
+          }
+        ]
+      },
+      {
         "matcher": "Skill",
         "hooks": [
           {
@@ -200,6 +209,28 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/ISASync.hook.ts",
+            "timeout": 5,
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/CheckpointPerISC.hook.ts",
+            "timeout": 5,
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/ConfigAudit.hook.ts",
             "timeout": 5,
             "async": true
           }
@@ -1031,7 +1062,7 @@
       "Agent teams need CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 (already enabled).",
       "Say 'create an agent team' to trigger multi-agent collaboration.",
       "Custom agents use subagent_type='general-purpose', never built-in type names.",
-      "40 hooks run across the session lifecycle — security, tracking, learning, naming.",
+      "25 hooks run across the session lifecycle — security, tracking, learning, naming.",
       "SecurityPipeline active on Bash/Write/Edit/Read. SkillGuard + AgentGuard active via Pulse HTTP routes at pai:31337.",
       "SatisfactionCapture.hook.ts captures session ratings (async).",
       "PromptProcessing.hook.ts decides MODE/TIER and handles session naming/analysis (async).",
@@ -1325,7 +1356,7 @@
     "skillsPublic": 45,
     "skillsPrivate": 0,
     "workflows": 170,
-    "hooks": 22,
+    "hooks": 25,
     "signals": 8609,
     "files": 0,
     "work": 3857,
