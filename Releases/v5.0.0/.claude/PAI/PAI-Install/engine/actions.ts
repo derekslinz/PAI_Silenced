@@ -502,6 +502,29 @@ export async function moveExistingClaudeToBackup(
   const claudeDir = state.detection?.paiDir || join(homedir(), ".claude");
   if (!existsSync(claudeDir) || !pathLooksLikeExistingClaudeRoot(claudeDir)) return;
 
+  // The 'debug/latest' symlink can cause issues during backup.
+  // It often points to a transient log file. Removing it before backup
+  // can prevent the `cpSync` operation from failing.
+  const debugLatestPath = join(claudeDir, "debug", "latest");
+  if (existsSync(debugLatestPath)) {
+    try {
+      const stats = lstatSync(debugLatestPath);
+      if (stats.isSymbolicLink()) {
+        unlinkSync(debugLatestPath);
+        await emit({
+          event: "message",
+          content: "Removed potentially problematic ~/.claude/debug/latest symlink before backup.",
+        });
+      }
+    } catch (e) {
+      // Non-fatal, proceed with backup attempt even if this fails.
+      await emit({
+        event: "message",
+        content: `Could not remove ~/.claude/debug/latest: ${e instanceof Error ? e.message : String(e)}`,
+      });
+    }
+  }
+
   try {
     mkdirSync(dirname(state.backupPath), { recursive: true });
     // Skip non-regular files (sockets, FIFOs, char/block devices). cpSync

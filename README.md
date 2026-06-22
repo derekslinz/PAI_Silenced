@@ -1,67 +1,14 @@
-<div align="center">
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./images/pai-logo-v7.png">
-  <source media="(prefers-color-scheme: light)" srcset="./images/pai-logo-v7.png">
-  <img alt="PAI Logo" src="./images/pai-logo-v7.png" width="300">
-</picture>
-
-<br/>
-<br/>
-
 # Personal AI Infrastructure
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=24&pause=1000&color=60A5FA&center=true&vCenter=true&width=600&lines=Everyone+needs+access+to+the+best+AI.;AI+should+magnify+everyone.;Your+Life+Operating+System.)](https://github.com/danielmiessler/Personal_AI_Infrastructure)
-
-<br/>
-
-<!-- Social Proof -->
-![Stars](https://img.shields.io/github/stars/danielmiessler/Personal_AI_Infrastructure?style=social)
-![Forks](https://img.shields.io/github/forks/danielmiessler/Personal_AI_Infrastructure?style=social)
-![Watchers](https://img.shields.io/github/watchers/danielmiessler/Personal_AI_Infrastructure?style=social)
-
-<!-- Project Health -->
-![Release](https://img.shields.io/github/v/release/danielmiessler/Personal_AI_Infrastructure?style=flat&logo=github&color=8B5CF6)
-![Last Commit](https://img.shields.io/github/last-commit/danielmiessler/Personal_AI_Infrastructure?style=flat&logo=git&color=22C55E)
-![Open Issues](https://img.shields.io/github/issues/danielmiessler/Personal_AI_Infrastructure?style=flat&logo=github&color=F97316)
-![Open PRs](https://img.shields.io/github/issues-pr/danielmiessler/Personal_AI_Infrastructure?style=flat&logo=github&color=EC4899)
-![License](https://img.shields.io/github/license/danielmiessler/Personal_AI_Infrastructure?style=flat&color=60A5FA)
-
-<!-- Metrics -->
-![Discussions](https://img.shields.io/github/discussions/danielmiessler/Personal_AI_Infrastructure?style=flat&logo=github&label=Discussions&color=EAB308)
-![Commit Activity](https://img.shields.io/github/commit-activity/m/danielmiessler/Personal_AI_Infrastructure?style=flat&logo=git&label=Commits%2Fmo&color=F59E0B)
-![Repo Size](https://img.shields.io/github/repo-size/danielmiessler/Personal_AI_Infrastructure?style=flat&logo=database&label=Repo%20Size&color=D97706)
-
-<!-- Content -->
-[![Get Started](https://img.shields.io/badge/_Get_Started-Install-22C55E?style=flat)](#-installation)
-[![Release v5.0.0](https://img.shields.io/badge/_Release-v5.0.0-8B5CF6?style=flat)](Releases/v5.0.0/)
-[![Algorithm v6.3.0](https://img.shields.io/badge/Algorithm-v6.3.0-D97706?style=flat)](Releases/v5.0.0/.claude/PAI/ALGORITHM/v6.3.0.md)
-[![Pulse](https://img.shields.io/badge/Pulse-included-3B82F6?style=flat)](Releases/v5.0.0/.claude/PAI/PULSE/)
-[![Contributors](https://img.shields.io/github/contributors/danielmiessler/Personal_AI_Infrastructure?style=flat&logo=githubsponsors&logoColor=white&label=Contributors&color=EC4899)](https://github.com/danielmiessler/Personal_AI_Infrastructure/graphs/contributors)
-
-<!-- Tech Stack -->
-[![Built with Claude](https://img.shields.io/badge/Built_with-Claude-D4A574?style=flat&logo=anthropic&logoColor=white)](https://claude.ai)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Bun](https://img.shields.io/badge/Bun-000000?style=flat&logo=bun&logoColor=white)](https://bun.sh)
-[![Community](https://img.shields.io/badge/Community-5865F2?style=flat&logo=discord&logoColor=white)](https://danielmiessler.com/upgrade)
-
-<br/>
+![PAI Logo](./images/pai-logo-v7.png)
 
 **Overview:** [What PAI Is](#what-pai-is) · [Principles](#principles) · [Features](#features)
 
-**Get Started:** [Installation](#-installation) · [Releases](Releases/) · [Packs](Packs/)
+**Get Started:** [Installation](#installation) · [Releases](Releases/) · [Packs](Packs/)
 
-**Resources:** [FAQ](#-faq) · [Roadmap](#-roadmap) · [Community](#-community) · [Contributing](#-contributing)
+**Resources:** [FAQ](#faq) · [Roadmap](#roadmap) · [Community](#community) · [Contributing](#contributing)
 
-<br/>
-
-[![PAI Overview Video](https://img.youtube.com/vi/Le0DLrn7ta0/maxresdefault.jpg)](https://youtu.be/Le0DLrn7ta0)
-
-**[Watch the full PAI walkthrough](https://youtu.be/Le0DLrn7ta0)** | **[Read: The Real Internet of Things](https://danielmiessler.com/blog/the-real-internet-of-things)**
-
----
-
-</div>
+[Watch the full PAI walkthrough](https://youtu.be/Le0DLrn7ta0) · [Read: The Real Internet of Things](https://danielmiessler.com/blog/the-real-internet-of-things)
 
 > [!IMPORTANT]
 > **PAI v5.0.0 — Life Operating System** — the biggest release in PAI history. PAI is no longer "AI scaffolding" — it's a **Life Operating System** with the unified **Pulse** daemon (Life Dashboard at `localhost:31337`), a **DA** (Digital Assistant) identity layer, **Algorithm v6.3.0** (Current State → Ideal State, seven phases, classifier-driven mode + tier), the **ISA** primitive (universal "ideal state" articulation), 45 skills, 171 workflows, 37 hooks, and structural privacy via containment zones.
@@ -71,12 +18,6 @@
 > **One-line install:** `curl -sSL https://ourpai.ai/install.sh | bash`
 >
 > Upgrading from v4.x? This is a different system, not a patch. Read the [migration guide](Releases/v5.0.0/README.md#migration-guide-from-v4x) first.
-
-<div align="center">
-
-# AI should magnify everyone—not just the top 1%
-
-</div>
 
 ## What PAI Is
 
@@ -320,16 +261,6 @@ Recovery is straightforward:
 
 **Blog:** [danielmiessler.com](https://danielmiessler.com)
 
-### Star History
-
-<a href="https://star-history.com/#danielmiessler/Personal_AI_Infrastructure&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=danielmiessler/Personal_AI_Infrastructure&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=danielmiessler/Personal_AI_Infrastructure&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=danielmiessler/Personal_AI_Infrastructure&type=Date" />
- </picture>
-</a>
-
 ---
 
 ## Contributing
@@ -363,18 +294,6 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-## Support This Project
-
-<div align="center">
-
-<a href="https://github.com/sponsors/danielmiessler"><img src="https://img.shields.io/badge/Sponsor--EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white" alt="Sponsor"></a>
-
-**PAI is free and open-source forever. If you find it valuable, you can [sponsor the project](https://github.com/sponsors/danielmiessler).**
-
-</div>
-
----
-
 ## Related Reading
 
 - [The Real Internet of Things](https://danielmiessler.com/blog/the-real-internet-of-things) — The vision behind PAI
@@ -385,8 +304,6 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 <details>
 <summary><strong>Update History</strong></summary>
-
-<br/>
 
 **v5.0.0 (2026-04-30) — Life Operating System**
 
@@ -480,13 +397,3 @@ MIT License - see [LICENSE](LICENSE) for details.
 - Claude Code native design
 
 </details>
-
----
-
-<div align="center">
-
-**Built with by [Daniel Miessler](https://danielmiessler.com) and the PAI community**
-
-*Augment yourself.*
-
-</div>

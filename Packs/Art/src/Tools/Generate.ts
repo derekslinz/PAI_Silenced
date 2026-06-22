@@ -793,9 +793,9 @@ async function generateWithNanoBananaPro(
   const ai = new GoogleGenAI({ apiKey });
 
   if (referenceImages && referenceImages.length > 0) {
-    console.log(`★ Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio} with ${referenceImages.length} reference image(s)...`);
+    console.log(`Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio} with ${referenceImages.length} reference image(s)...`);
   } else {
-    console.log(`★ Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio}...`);
+    console.log(`Generating with Nano Banana Pro (Gemini 3 Pro) at ${size} ${aspectRatio}...`);
   }
 
   // Prepare content parts

@@ -731,7 +731,7 @@ async function main() {
   console.log(`✓ Fetch complete. Found ${allUpdates.length} updates.\n`);
 
   if (allUpdates.length === 0) {
-    console.log('★ No new updates found. Everything is up to date!\n');
+    console.log('No new updates found. Everything is up to date!\n');
     console.log('STATUS: All monitored sources checked, no changes detected');
     console.log('→NEXT: Check again later or use --force to see all current content');
     console.log('COMPLETED: Completed Anthropic changes monitoring check');
