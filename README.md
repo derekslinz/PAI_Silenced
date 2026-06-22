@@ -303,9 +303,9 @@ MIT License - see [LICENSE](LICENSE) for details.
 ---
 
 <details>
-<summary><strong>Update History</strong></summary>
+<summary>Update History</summary>
 
-**v5.0.0 (2026-04-30) — Life Operating System**
+### v5.0.0 (2026-04-30) — Life Operating System
 
 - **Pulse** — unified daemon (port 31337): voice, hooks, observability, cron, Life Dashboard (22 routes), wiki API, optional Telegram/iMessage bridges. Replaces every previous loose service.
 - **The DA** — Digital Assistant identity layer. PRINCIPAL_IDENTITY + DA_IDENTITY pair, loaded at session start. `/interview` walks you through naming your DA, picking a voice, capturing TELOS.
@@ -317,7 +317,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 - **One-line installer** — `curl -sSL https://ourpai.ai/install.sh | bash`. Auto-backs-up existing `~/.claude/`, runs the DA identity wizard, registers Pulse as a launchd service, validates.
 - [Full release notes + migration guide](Releases/v5.0.0/README.md)
 
-**v4.0.3 (2026-03-01) — Community PR Patch**
+### v4.0.3 (2026-03-01) — Community PR Patch
 
 - JSON array parsing fix in Inference.ts
 - 29 dead references removed from CONTEXT_ROUTING.md
@@ -325,21 +325,21 @@ MIT License - see [LICENSE](LICENSE) for details.
 - User context migration for v2.5/v3.0 upgraders
 - [Release Notes](Releases/v4.0.3/README.md)
 
-**v4.0.2 (2026-03-01) — Bug Fix Patch**
+### v4.0.2 (2026-03-01) — Bug Fix Patch
 
 - 13 surgical fixes: Linux compatibility, installer, statusline, hooks
 - Cross-platform OAuth token extraction, GNU coreutils tr fix
 - Inference guard (~15s savings), lineage tracking, dead code removal
 - [Release Notes](Releases/v4.0.2/README.md)
 
-**v4.0.1 (2026-02-28) — Upgrade Path & Preferences**
+### v4.0.1 (2026-02-28) — Upgrade Path & Preferences
 
 - Upgrade documentation with backup, merge, and post-upgrade checklist
 - Configurable temperature unit (Fahrenheit/Celsius) in statusline and installer
 - FAQ fixes: removed stale Python reference, improved recovery guidance
 - [Release Notes](Releases/v4.0.1/README.md)
 
-**v4.0.0 (2026-02-27) — Lean and Mean**
+### v4.0.0 (2026-02-27) — Lean and Mean
 
 - 38 flat skill directories → 12 hierarchical categories (-68% top-level dirs)
 - Dead systems removed: Components/, DocRebuild, RebuildSkill
@@ -350,7 +350,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 - 63 skills, 21 hooks, 180 workflows, 14 agents
 - [Release Notes](Releases/v4.0.0/README.md)
 
-**v3.0.0 (2026-02-15) — The Algorithm Matures**
+### v3.0.0 (2026-02-15) — The Algorithm Matures
 
 - Algorithm v1.4.0 with constraint extraction and build drift prevention
 - Persistent PRDs and parallel loop execution
@@ -359,7 +359,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 - 38 skills, 20 hooks, 162 workflows
 - [Release Notes](Releases/v3.0/README.md)
 
-**v2.5.0 (2026-01-30) — Think Deeper, Execute Faster**
+### v2.5.0 (2026-01-30) — Think Deeper, Execute Faster
 
 - Two-Pass Capability Selection: Hook hints validated against ISC in THINK phase
 - Thinking Tools with Justify-Exclusion: Opt-OUT, not opt-IN for Council, RedTeam, FirstPrinciples, etc.
@@ -367,7 +367,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 - 28 skills, 17 hooks, 356 workflows
 - [Release Notes](Releases/v2.5/README.md)
 
-**v2.4.0 (2026-01-23) — The Algorithm**
+### v2.4.0 (2026-01-23) — The Algorithm
 
 - Universal problem-solving system with ISC (Ideal State Criteria) tracking
 - 29 skills, 15 hooks, 331 workflows
@@ -375,7 +375,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 - Enhanced security with AllowList enforcement
 - [Release Notes](Releases/v2.4/README.md)
 
-**v2.3.0 (2026-01-15) — Full Releases Return**
+### v2.3.0 (2026-01-15) — Full Releases Return
 
 - Complete `.claude/` directory releases with continuous learning
 - Explicit and implicit rating capture
@@ -383,15 +383,15 @@ MIT License - see [LICENSE](LICENSE) for details.
 - Status line with learning signal display
 - [Release Notes](Releases/v2.3/README.md)
 
-**v2.1.1 (2026-01-09) — MEMORY System Migration**
+### v2.1.1 (2026-01-09) — MEMORY System Migration
 
 - History system merged into core as MEMORY System
 
-**v2.1.0 (2025-12-31) — Modular Architecture**
+### v2.1.0 (2025-12-31) — Modular Architecture
 
 - Source code in real files instead of embedded markdown
 
-**v2.0.0 (2025-12-28) — PAI v2 Launch**
+### v2.0.0 (2025-12-28) — PAI v2 Launch
 
 - Modular architecture with independent skills
 - Claude Code native design
