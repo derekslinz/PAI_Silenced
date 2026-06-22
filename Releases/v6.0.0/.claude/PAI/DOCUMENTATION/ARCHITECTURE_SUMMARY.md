@@ -9,7 +9,7 @@ PAI (Personal AI Infrastructure) is scaffolding for AI — architectural framewo
 AI assistance dependable, maintainable, and effective. Built around a universal algorithm for
 accomplishing any task: Current State to Ideal State via verifiable iteration (ISC).
 
-**Current versions:** PAI 5.0.0 | Algorithm v6.3.0 | Memory v7.6
+**Current versions:** PAI 6.0.0 | Algorithm v6.3.0 | Memory v7.6
 
 ## Subsystem Reference
 

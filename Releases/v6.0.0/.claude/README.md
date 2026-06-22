@@ -2,7 +2,7 @@
 
 > **PAI is a Life OS.** Scaffolding that turns your AI from a chatbot you talk to into a system that runs your life — knows your goals, people, workflows, current state, and ideal state, and continuously hill-climbs you from one to the other.
 
-**Status:** Version 5.0.0 | **License:** [MIT](./LICENSE)
+**Status:** Version 6.0.0 | **License:** [MIT](./LICENSE)
 
 ---
 

@@ -8,7 +8,7 @@ PAI targets **AS3** on the [PAI Maturity Model](https://example.com/blog/persona
 
 **Canonical thesis:** `PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md` — read this first when any framing question comes up. This architecture doc describes *how* the OS is built; the thesis doc describes *what* the OS is for.
 
-**Version:** PAI 5.0.0 | Algorithm v6.3.0 | Memory v7.6
+**Version:** PAI 6.0.0 | Algorithm v6.3.0 | Memory v7.6
 
 ---
 
