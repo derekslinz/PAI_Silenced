@@ -1,24 +1,19 @@
-<div align="center">
+# PAI v6.0.0 — The Silenced Release
 
-# PAI v5.0.0 — Life Operating System
+This is the fork's debut as its own product. v6.0.0 keeps the full machinery of v5.0.0 — the Algorithm, ISA, Memory, Skills, Hooks, Pulse, Containment — and removes the performance: the affect, the chrome, the appeals to what the user *feels*.
 
-**The biggest release in PAI history.** PAI is no longer "AI scaffolding" — it is a **Life Operating System** with a unified daemon, a Life Dashboard, a personalized Digital Assistant, and a fully-articulated execution algorithm.
+The standard it ships under is in [PHILOSOPHY.md](.claude/PHILOSOPHY.md): **usefulness without pageantry, utilitarian.** Every artifact is measured against one question — is this performing, or is this useful?
 
-[![Docs](https://img.shields.io/badge/_Full_Docs-docs.ourpai.ai-2563EB?style=flat)](https://docs.ourpai.ai)
-[![Skills](https://img.shields.io/badge/Skills-45-22C55E?style=flat)](.claude/skills/)
-[![Hooks](https://img.shields.io/badge/Hooks-37-F97316?style=flat)](.claude/hooks/)
-[![Workflows](https://img.shields.io/badge/Workflows-171-8B5CF6?style=flat)](.claude/skills/)
-[![Algorithm](https://img.shields.io/badge/Algorithm-v6.3.0-D97706?style=flat)](.claude/PAI/ALGORITHM/)
-[![Memory](https://img.shields.io/badge/Memory-v7.6-EC4899?style=flat)](.claude/PAI/MEMORY/)
-[![Pulse](https://img.shields.io/badge/Pulse-included-3B82F6?style=flat)](.claude/PAI/PULSE/)
+## What changed from v5.0.0
 
-**Full documentation lives at [docs.ourpai.ai](https://docs.ourpai.ai)** — every subsystem (Algorithm, ISA, Memory, Skills, Hooks, Pulse, Containment) has its own deep-dive page with diagrams, examples, and reference material.
+This is a major bump because the contract changed, not the feature set. A user upgrading meets a categorically different assistant.
 
-<br />
+- **DA identity → instrument.** `DA_IDENTITY.md` no longer scripts an "enthusiastic colleague." The assistant is direct because directness is useful, manufactures no warmth, and leads with the result.
+- **Success metric → recognition, not feeling.** The Algorithm and constitutional system prompt no longer chase "euphoric surprise" — what the user *feels*. The bar is whether the explanation holds up: a hard-to-vary answer instantly recognized as true.
+- **Mode templates → no chrome.** The ` PAI | MODE ` banners and the DA signature-flourish line are gone from the output format. Lead with the work; the CHANGE/VERIFY discipline stays.
+- **Lineage decoupled.** Hard fork — does not track upstream, does not merge back. Origin's machinery may be borrowed; origin's affect is rejected on sight.
 
-<img src="./pai-stack.jpg" alt="Three-layer PAI architecture: engines (Claude Code, OpenCode, Pi) at the bottom, PAI context-based Life Operating System (Memory, Skills, Hooks, Agents, , Learning, Security, Statusline) in the middle, and You (work, health, goals, relationships, creative, finances, learning, life) at the top, with context beams flowing through all three layers." width="780" />
-
-</div>
+Older Algorithm version files and the v5.0.0 release are preserved unchanged as historical record.
 
 ---
 
