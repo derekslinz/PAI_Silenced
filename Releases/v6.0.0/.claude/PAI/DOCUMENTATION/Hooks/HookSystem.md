@@ -1152,7 +1152,7 @@ SESSION START (2 hooks):
   LoadContext.hook.ts             Dynamic context injection (relationship, learning, work)
   KVSync.hook.ts                 Push work.json to Cloudflare KV [async]
 
-USER PROMPT SUBMIT (4 hooks):
+USER PROMPT SUBMIT (3 hooks):
   PromptGuard.hook.ts            Security: PromptInspector (injection/exfil/evasion)
   RepeatDetection.hook.ts        Detect repeated asks / repeat-request complaints
   PromptProcessing.hook.ts       Unified: rating + tab title + session name + mode + tier [async]
