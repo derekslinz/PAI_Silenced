@@ -10,7 +10,7 @@ This document tracks all platform-specific code and dependencies across PAI, pro
 ## Platform Support Matrix
 
 | Platform | Status | Notes |
-|----------|--------|-------|
+| ---------- | -------- | ------- |
 | **macOS** | ✓ Fully Supported | Primary development platform |
 | **Linux** | ✓ Fully Supported | Ubuntu/Debian tested, other distros via community |
 | **Windows** | ✗ Not Supported | Community contributions welcome |
@@ -22,6 +22,7 @@ This document tracks all platform-specific code and dependencies across PAI, pro
 ### ✓ FIXED (PR #XXX - Linux Compatibility Fixes)
 
 **Critical Blockers:**
+
 1. ✓ `sed -i ''` syntax (macOS BSD vs GNU sed)
    - **File:** Voice system INSTALL.md
    - **Fix:** Platform-aware sed with USERNAME fallback
@@ -34,34 +35,37 @@ This document tracks all platform-specific code and dependencies across PAI, pro
 
 **Auto-Start Feature Parity:**
 3. ✓ LaunchAgent plist only (no Linux alternative)
-   - **File:** Voice system INSTALL.md Step 9
-   - **Fix:** Added systemd user service for Linux
-   - **Status:** Linux now has full auto-start support
 
-4. ✓ launchctl commands (macOS-only daemon management)
+- **File:** Voice system INSTALL.md Step 9
+- **Fix:** Added systemd user service for Linux
+- **Status:** Linux now has full auto-start support
+
+1. ✓ launchctl commands (macOS-only daemon management)
    - **Context:** Part of LaunchAgent system
    - **Fix:** systemd equivalent provided for Linux
    - **Status:** Platform-specific but both supported
 
-5. ✓ ~/Library/LaunchAgents path (macOS directory structure)
+2. ✓ ~/Library/LaunchAgents path (macOS directory structure)
    - **Context:** Part of LaunchAgent system
    - **Fix:** Linux uses `~/.config/systemd/user`
    - **Status:** Platform-specific but both supported
 
 **Documentation:**
 6. ✓ VERIFY.md misleading "requires modifications" warning
-   - **File:** Voice system VERIFY.md
-   - **Fix:** Updated to reflect Linux is fully supported
-   - **Status:** Documentation now accurate
+
+- **File:** Voice system VERIFY.md
+- **Fix:** Updated to reflect Linux is fully supported
+- **Status:** Documentation now accurate
 
 6a. ✓ `Pulse` vs `PULSE` directory casing mismatch
-   - **Files:** `Releases/v5.0.0/.claude/PAI/PULSE/{run-job,lib,setup,pulse-unified}.ts`,
+
+- **Files:** `Releases/v5.0.0/.claude/PAI/PULSE/{run-job,lib,setup,pulse-unified}.ts`,
      `PULSE/modules/{imessage,user-index}.ts`, `PULSE/Performance/cost-aggregator.ts`,
      `PULSE/checks/{notification-governor,poller-meta-monitor,github-work}.ts`,
      `PULSE/Observability/observability.ts` (11 files, 14 occurrences)
-   - **Issue:** Source referenced `~/.claude/PAI/Pulse/...` but directory on disk is `PULSE`. Worked on macOS APFS (case-insensitive default) but broke on Linux ext4 and case-sensitive APFS — config and state lookups silently missed.
-   - **Fix:** Aligned all `path.join(...)` literals to `"PULSE"`.
-   - **Tested:** Linux (Ubuntu, runtime-verified). Behavior unchanged on case-insensitive filesystems (macOS default, NTFS).
+- **Issue:** Source referenced `~/.claude/PAI/Pulse/...` but directory on disk is `PULSE`. Worked on macOS APFS (case-insensitive default) but broke on Linux ext4 and case-sensitive APFS — config and state lookups silently missed.
+- **Fix:** Aligned all `path.join(...)` literals to `"PULSE"`.
+- **Tested:** Linux (Ubuntu, runtime-verified). Behavior unchanged on case-insensitive filesystems (macOS default, NTFS).
 
 ---
 
@@ -73,20 +77,20 @@ This document tracks all platform-specific code and dependencies across PAI, pro
     - **Status:** Runtime platform detection via `process.platform`
     - **Implementation:** macOS uses afplay, Linux auto-detects mpg123/mpv/snap
 
-18. ✓ Linux audio player auto-detection
+1. ✓ Linux audio player auto-detection
     - **Status:** Fully implemented with graceful fallbacks
     - **Priority:** mpg123 → mpv → snap/mpv → warn user
 
-19. ✓ Cross-platform notifications
+2. ✓ Cross-platform notifications
     - **macOS:** osascript (native notification center)
     - **Linux:** notify-send (libnotify)
     - **Status:** Both fully implemented
 
-20. ✓ process.platform checks
+3. ✓ process.platform checks
     - **Status:** Correct pattern throughout codebase
     - **Note:** Needs Windows support added (future work)
 
-21. ✓ Bun runtime
+4. ✓ Bun runtime
     - **Status:** Cross-platform, no issues
     - **Installation:** Works on macOS, Linux, Windows
 
@@ -96,12 +100,13 @@ This document tracks all platform-specific code and dependencies across PAI, pro
 
 **Documentation Inconsistencies:**
 7. Platform check mentions paplay but code doesn't use it
-   - **File:** Voice system INSTALL.md platform check
-   - **Impact:** Minor - doesn't block functionality
-   - **Fix:** Either add paplay support or remove from docs
-   - **Priority:** Low - mpg123/mpv work fine
 
-8. /Users/ hardcoded paths in examples
+- **File:** Voice system INSTALL.md platform check
+- **Impact:** Minor - doesn't block functionality
+- **Fix:** Either add paplay support or remove from docs
+- **Priority:** Low - mpg123/mpv work fine
+
+1. /Users/ hardcoded paths in examples
    - **Files:** Various documentation showing macOS examples
    - **Impact:** Documentation only, not actual code
    - **Fix:** Use generic paths like `$HOME` in examples
@@ -113,11 +118,11 @@ This document tracks all platform-specific code and dependencies across PAI, pro
     - **Status:** Not applicable to Linux
     - **Priority:** Low - macOS functionality works
 
-15. osascript for notifications
+1. osascript for notifications
     - **Status:** Already has notify-send fallback
     - **Priority:** Low - both platforms supported
 
-16. ~/Library/Logs for logging
+2. ~/Library/Logs for logging
     - **Status:** Already uses `~/.config/pai` on Linux
     - **Priority:** Low - platform-appropriate paths used
 
@@ -125,7 +130,7 @@ This document tracks all platform-specific code and dependencies across PAI, pro
 
 ### ✗ UNSUPPORTED (Windows - Community Contributions Welcome)
 
-22. ✗ Windows support entirely absent
+1. ✗ Windows support entirely absent
     - **Audio:** No Windows Media Player integration
     - **Notifications:** No Windows Toast notifications
     - **Auto-start:** No Task Scheduler implementation
@@ -133,6 +138,7 @@ This document tracks all platform-specific code and dependencies across PAI, pro
     - **Priority:** Medium - depends on community interest
 
 **How to Contribute Windows Support:**
+
 1. Add Windows audio playback (Windows Media Player, ffplay, or native APIs)
 2. Implement Windows Toast notifications
 3. Create Task Scheduler auto-start alternative
@@ -170,6 +176,7 @@ if (process.platform === 'darwin') {
 ```
 
 **Anti-patterns to avoid:**
+
 - Hardcoding paths that only exist on one platform
 - Assuming package manager locations (Homebrew, apt, etc.)
 - Using platform-specific syntax without detection (sed -i '', etc.)
@@ -188,6 +195,7 @@ Contributors fixing platform issues should:
 5. **Add to this document** - Update the inventory with your fixes
 
 **Current test coverage:**
+
 - macOS: Tested by Daniel Miessler
 - Linux (Ubuntu/WSL2): Tested by contributors
 - Linux (other distros): Community testing
@@ -198,16 +206,19 @@ Contributors fixing platform issues should:
 ## Future Work
 
 **High Priority:**
+
 - Windows audio playback support
 - Windows notification support
 - Windows auto-start mechanism
 
 **Medium Priority:**
+
 - Test on non-Ubuntu Linux distros (Fedora, Arch, etc.)
 - Improve error messages for missing dependencies
 - Add platform compatibility checks to installation
 
 **Low Priority:**
+
 - Support for alternative package managers
 - Docker/container deployment guide
 - Automated multi-platform testing (CI/CD)
@@ -247,6 +258,7 @@ When contributing platform fixes:
 ## Credits
 
 **Platform compatibility work by:**
+
 - Daniel Miessler - Original PAI implementation (macOS focus)
 - PR #285 - Google Cloud TTS provider, Linux audio support
 - PR #XXX - Linux compatibility fixes (sed, PATH, systemd)

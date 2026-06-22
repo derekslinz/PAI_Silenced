@@ -74,7 +74,7 @@
 
 <div align="center">
 
-# AI should magnify everyone—not just the top 1%.
+# AI should magnify everyone—not just the top 1%
 
 </div>
 
@@ -190,6 +190,7 @@ cd ~/.claude && ./install.sh
 ```
 
 **The installer will:**
+
 - Verify Bun, Git, and Claude Code are installed
 - Prompt for your ElevenLabs API key (skippable — voice falls back to desktop notifications)
 - Launch the DA identity wizard (name + voice + personality)
@@ -232,6 +233,7 @@ open http://localhost:31337
 If you had personal content in v4.x (notes, project state, custom rules), tell your DA: *"Help me migrate my old content into the PAI/USER/ structure."* The **Migrate** skill intakes from `.md`/`.markdown`/`.txt`, Obsidian, Notion, Apple Notes — classifies each chunk against the v5 taxonomy (TELOS, KNOWLEDGE, PROJECTS, FEED, etc.) and commits with provenance.
 
 **Post-upgrade checklist:**
+
 - [ ] Pulse is alive: `curl -s http://localhost:31337/api/pulse/health | jq`
 - [ ] Voice announces: `curl -s -X POST http://localhost:31337/notify -H "Content-Type: application/json" -d '{"message": "Hello from your DA"}'`
 - [ ] Dashboard renders: `open http://localhost:31337`
@@ -387,6 +389,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 <br/>
 
 **v5.0.0 (2026-04-30) — Life Operating System**
+
 - **Pulse** — unified daemon (port 31337): voice, hooks, observability, cron, Life Dashboard (22 routes), wiki API, optional Telegram/iMessage bridges. Replaces every previous loose service.
 - **The DA** — Digital Assistant identity layer. PRINCIPAL_IDENTITY + DA_IDENTITY pair, loaded at session start. `/interview` walks you through naming your DA, picking a voice, capturing TELOS.
 - **Algorithm v6.3.0** — seven-phase loop (OBSERVE → THINK → PLAN → BUILD → EXECUTE → VERIFY → LEARN). Sonnet-backed mode classifier picks MINIMAL/NATIVE/ALGORITHM and tier (E1–E5) per prompt. Closed-list thinking capabilities. Voice phase announcements. Verification doctrine (live-probe, advisor calls at commitment boundaries, cross-vendor audit at E4/E5).
@@ -398,6 +401,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 - [Full release notes + migration guide](Releases/v5.0.0/README.md)
 
 **v4.0.3 (2026-03-01) — Community PR Patch**
+
 - JSON array parsing fix in Inference.ts
 - 29 dead references removed from CONTEXT_ROUTING.md
 - WorldThreatModelHarness PAI_DIR portability
@@ -405,18 +409,21 @@ MIT License - see [LICENSE](LICENSE) for details.
 - [Release Notes](Releases/v4.0.3/README.md)
 
 **v4.0.2 (2026-03-01) — Bug Fix Patch**
+
 - 13 surgical fixes: Linux compatibility, installer, statusline, hooks
 - Cross-platform OAuth token extraction, GNU coreutils tr fix
 - Inference guard (~15s savings), lineage tracking, dead code removal
 - [Release Notes](Releases/v4.0.2/README.md)
 
 **v4.0.1 (2026-02-28) — Upgrade Path & Preferences**
+
 - Upgrade documentation with backup, merge, and post-upgrade checklist
 - Configurable temperature unit (Fahrenheit/Celsius) in statusline and installer
 - FAQ fixes: removed stale Python reference, improved recovery guidance
 - [Release Notes](Releases/v4.0.1/README.md)
 
 **v4.0.0 (2026-02-27) — Lean and Mean**
+
 - 38 flat skill directories → 12 hierarchical categories (-68% top-level dirs)
 - Dead systems removed: Components/, DocRebuild, RebuildSkill
 - CLAUDE.md template system with BuildCLAUDE.ts + SessionStart hook
@@ -427,6 +434,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 - [Release Notes](Releases/v4.0.0/README.md)
 
 **v3.0.0 (2026-02-15) — The Algorithm Matures**
+
 - Algorithm v1.4.0 with constraint extraction and build drift prevention
 - Persistent PRDs and parallel loop execution
 - Full installer with GUI wizard
@@ -435,6 +443,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 - [Release Notes](Releases/v3.0/README.md)
 
 **v2.5.0 (2026-01-30) — Think Deeper, Execute Faster**
+
 - Two-Pass Capability Selection: Hook hints validated against ISC in THINK phase
 - Thinking Tools with Justify-Exclusion: Opt-OUT, not opt-IN for Council, RedTeam, FirstPrinciples, etc.
 - Parallel-by-Default Execution: Independent tasks run concurrently via parallel agent spawning
@@ -442,6 +451,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 - [Release Notes](Releases/v2.5/README.md)
 
 **v2.4.0 (2026-01-23) — The Algorithm**
+
 - Universal problem-solving system with ISC (Ideal State Criteria) tracking
 - 29 skills, 15 hooks, 331 workflows
 - Euphoric Surprise as the outcome metric
@@ -449,6 +459,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 - [Release Notes](Releases/v2.4/README.md)
 
 **v2.3.0 (2026-01-15) — Full Releases Return**
+
 - Complete `.claude/` directory releases with continuous learning
 - Explicit and implicit rating capture
 - Enhanced hook system with 14 production hooks
@@ -456,12 +467,15 @@ MIT License - see [LICENSE](LICENSE) for details.
 - [Release Notes](Releases/v2.3/README.md)
 
 **v2.1.1 (2026-01-09) — MEMORY System Migration**
+
 - History system merged into core as MEMORY System
 
 **v2.1.0 (2025-12-31) — Modular Architecture**
+
 - Source code in real files instead of embedded markdown
 
 **v2.0.0 (2025-12-28) — PAI v2 Launch**
+
 - Modular architecture with independent skills
 - Claude Code native design
 
