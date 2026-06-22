@@ -534,6 +534,11 @@ export async function moveExistingClaudeToBackup(
     cpSync(claudeDir, state.backupPath, {
       recursive: true,
       filter: (src: string): boolean => {
+        // Skip regenerable dependency/build trees. They are huge, pointless to
+        // back up (rebuilt on install via `bun install`), and a source of cpSync
+        // "subdirectory of self" failures — e.g. electron's node_modules contains
+        // a self-referential symlink that aborts the whole backup.
+        if (/[/\\](node_modules|\.next|\.cache)([/\\]|$)/.test(src)) return false;
         try {
           const st = lstatSync(src);
           return st.isDirectory() || st.isFile() || st.isSymbolicLink();
