@@ -5,9 +5,9 @@
  */
 
 import { execSync, spawn } from "child_process";
-import { existsSync, mkdirSync, writeFileSync, readFileSync, readdirSync, symlinkSync, unlinkSync, chmodSync, lstatSync, cpSync, rmSync, readlinkSync } from "fs";
+import { existsSync, mkdirSync, writeFileSync, readFileSync, readdirSync, symlinkSync, unlinkSync, chmodSync, lstatSync, cpSync, rmSync, readlinkSync, copyFileSync } from "fs";
 import { homedir } from "os";
-import { join, dirname } from "path";
+import { join, dirname, resolve } from "path";
 import type { InstallState, EngineEventHandler, DetectionResult, ExistingUserContentDetection, StepId } from "./types";
 import { PAI_VERSION, ALGORITHM_VERSION } from "./types";
 import { detectSystem, detectExistingUserContent, scanApiKeys } from "./detect";
@@ -74,6 +74,86 @@ function isPlaceholderValue(value: string): boolean {
 function computeBackupPath(home: string): string {
   const ts = new Date().toISOString().replace(/[:.]/g, "-");
   return join(home, `.claude.backup-${ts}`);
+}
+
+// Failure-tolerant recursive backup. We deliberately do NOT use one recursive
+// cpSync: its cycle check throws ERR_FS_CP_EINVAL ("cannot copy X to a
+// subdirectory of self") on symlink loops / self-references and aborts the
+// WHOLE backup on the first bad entry. Instead we walk manually — copying files
+// individually with copyFileSync (no cycle check), recreating symlinks
+// literally (never following them), skipping the backup destination itself and
+// regenerable trees, and swallowing per-entry errors so one unreadable file
+// never aborts the run.
+function backupClaudeTree(src: string, dest: string): { copied: number; skipped: number } {
+  const SKIP = /[/\\](node_modules|\.next|\.cache|\.git)([/\\]|$)/;
+  const destReal = resolve(dest);
+  let copied = 0;
+  let skipped = 0;
+
+  const walk = (curSrc: string, curDest: string): void => {
+    // Never descend into the backup destination itself — guards against a
+    // self-copy even if dest somehow resolves inside src.
+    if (resolve(curSrc) === destReal) return;
+    if (SKIP.test(curSrc)) return;
+
+    let st;
+    try {
+      st = lstatSync(curSrc);
+    } catch {
+      skipped++;
+      return;
+    }
+
+    if (st.isSymbolicLink()) {
+      // Recreate the link literally; never follow it (that is what triggers the
+      // cycle errors). A dangling target is fine — we only copy the link itself.
+      try {
+        const target = readlinkSync(curSrc);
+        mkdirSync(dirname(curDest), { recursive: true });
+        try { unlinkSync(curDest); } catch {}
+        symlinkSync(target, curDest);
+        copied++;
+      } catch {
+        skipped++;
+      }
+      return;
+    }
+
+    if (st.isDirectory()) {
+      try {
+        mkdirSync(curDest, { recursive: true });
+      } catch {
+        skipped++;
+        return;
+      }
+      let entries: string[];
+      try {
+        entries = readdirSync(curSrc);
+      } catch {
+        skipped++;
+        return;
+      }
+      for (const name of entries) walk(join(curSrc, name), join(curDest, name));
+      return;
+    }
+
+    if (st.isFile()) {
+      try {
+        mkdirSync(dirname(curDest), { recursive: true });
+        copyFileSync(curSrc, curDest);
+        copied++;
+      } catch {
+        skipped++;
+      }
+      return;
+    }
+
+    // Sockets, FIFOs, char/block devices — nothing to back up.
+    skipped++;
+  };
+
+  walk(src, dest);
+  return { copied, skipped };
 }
 
 async function emitSectionHeader(
@@ -527,29 +607,13 @@ export async function moveExistingClaudeToBackup(
 
   try {
     mkdirSync(dirname(state.backupPath), { recursive: true });
-    // Skip non-regular files (sockets, FIFOs, char/block devices). cpSync
-    // throws ENXIO trying to copy them — e.g. a live daemon's IPC socket that
-    // happens to sit under ~/.claude while the install runs. Directories,
-    // regular files, and symlinks copy normally.
-    cpSync(claudeDir, state.backupPath, {
-      recursive: true,
-      filter: (src: string): boolean => {
-        // Skip regenerable dependency/build trees. They are huge, pointless to
-        // back up (rebuilt on install via `bun install`), and a source of cpSync
-        // "subdirectory of self" failures — e.g. electron's node_modules contains
-        // a self-referential symlink that aborts the whole backup.
-        if (/[/\\](node_modules|\.next|\.cache)([/\\]|$)/.test(src)) return false;
-        try {
-          const st = lstatSync(src);
-          return st.isDirectory() || st.isFile() || st.isSymbolicLink();
-        } catch {
-          return false; // unreadable entry — skip rather than abort the backup
-        }
-      },
-    });
+    // Failure-tolerant manual copy (see backupClaudeTree). A single recursive
+    // cpSync aborts the entire backup on the first symlink loop / self-reference
+    // ("subdirectory of self"); this copies what it can and skips the rest.
+    const { copied, skipped } = backupClaudeTree(claudeDir, state.backupPath);
     await emit({
       event: "message",
-      content: `Copied existing ~/.claude to ${state.backupPath.replace(homedir(), "~")} before installing the fresh tree.`,
+      content: `Copied existing ~/.claude to ${state.backupPath.replace(homedir(), "~")} before installing the fresh tree (${copied} entries${skipped ? `, ${skipped} skipped` : ""}).`,
     });
   } catch (err) {
     const reason = err instanceof Error ? err.message : String(err);
