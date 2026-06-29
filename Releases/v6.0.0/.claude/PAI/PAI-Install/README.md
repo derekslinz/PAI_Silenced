@@ -68,7 +68,7 @@ The installer is designed to recover from partial failures:
 
 ### Two-Layer Design
 
-1. **Bootstrap** (`install.sh`) — Pure bash. Only needs bash + curl. Installs Bun and Git, then hands off to the TypeScript installer.
+1. **Bootstrap** (`install.sh`) — Pure bash. Only needs bash + curl. Installs Bun, then hands off to the TypeScript installer (which detects and installs Git, Claude Code, and the rest).
 2. **Engine + UI** (`engine/` + `web/` + `public/`) — TypeScript (Bun). All install logic, web server, and frontend.
 
 ### Launch Modes

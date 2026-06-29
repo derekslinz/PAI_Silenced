@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # 
-#  PAI Installer v5.0 — Bootstrap Script
+#  PAI Installer v6.0 — Bootstrap Script
 #  Requirements: bash, curl
 #  This script bootstraps the installer by ensuring Bun is
 #  available, then hands off to the TypeScript installer.
@@ -61,7 +61,7 @@ echo -e "           ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${GRAY}\"${RE
 echo -e "           ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${BAR}"
 echo -e "           ${NAVY}${RESET}        ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${NAVY}${RESET}  ${GRAY}PAI${RESET}       ${SILVER}v6.0.0${RESET}"
 echo -e "           ${NAVY}${RESET}        ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${NAVY}${RESET}  ${GRAY}Algo${RESET}      ${SILVER}${ALGO_VERSION_DISPLAY}${RESET}"
-echo -e "           ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${LIGHT_BLUE}${RESET}  ${GRAY}Installer${RESET} ${SILVER}v5.0${RESET}"
+echo -e "           ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${LIGHT_BLUE}${RESET}  ${GRAY}Installer${RESET} ${SILVER}v6.0${RESET}"
 echo -e "           ${NAVY}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${BAR}"
 echo -e "           ${NAVY}${RESET}        ${BLUE}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}"
 echo -e "           ${NAVY}${RESET}        ${BLUE}${RESET}${LIGHT_BLUE}${RESET}   ${SEP}  ${YELLOW}  Alpha — rough edges expected${RESET}"
@@ -98,36 +98,7 @@ if ! command -v curl &>/dev/null; then
 fi
 success "curl found"
 
-#  Check/Install Git 
-if command -v git &>/dev/null; then
-  success "Git found: $(git --version 2>&1 | head -1)"
-else
-  warn "Git not found — attempting to install..."
-  if [[ "$OS" == "Darwin" ]]; then
-    if command -v brew &>/dev/null; then
-      brew install git 2>/dev/null || warn "Could not install Git via Homebrew"
-    else
-      info "Installing Xcode Command Line Tools (includes Git)..."
-      xcode-select --install 2>/dev/null || true
-      echo "  Please complete the Xcode installation and re-run this script."
-      exit 1
-    fi
-  elif [[ "$OS" == "Linux" ]]; then
-    if command -v apt-get &>/dev/null; then
-      sudo apt-get install -y git 2>/dev/null || warn "Could not install Git"
-    elif command -v yum &>/dev/null; then
-      sudo yum install -y git 2>/dev/null || warn "Could not install Git"
-    fi
-  fi
-
-  if command -v git &>/dev/null; then
-    success "Git installed: $(git --version 2>&1 | head -1)"
-  else
-    warn "Git could not be installed automatically. Please install it manually."
-  fi
-fi
-
-#  Check/Install Bun 
+#  Check/Install Bun
 if command -v bun &>/dev/null; then
   success "Bun found: v$(bun --version 2>/dev/null || echo 'unknown')"
 else
@@ -193,14 +164,7 @@ if [ -x "$HOME/.bun/bin/bun" ]; then
   done
 fi
 
-#  Check Claude Code 
-if command -v claude &>/dev/null; then
-  success "Claude Code found"
-else
-  warn "Claude Code not found — will install during setup"
-fi
-
-#  Launch Installer 
+#  Launch Installer
 # Resolve PAI-Install directory. Canonical location is $SCRIPT_DIR/PAI/PAI-Install
 # (install.sh lives at ~/.claude/ root). Fallbacks cover legacy nested layouts
 # in case install.sh is executed from inside PAI-Install/.
@@ -245,41 +209,20 @@ fi
 
 # Export the bundle directory so the wizard can install from local files
 # instead of git-cloning the public repo. SCRIPT_DIR is the directory
-# containing this install.sh — the root of the v5 release bundle.
+# containing this install.sh — the root of the v6 release bundle.
 export PAI_BUNDLE_DIR="$SCRIPT_DIR"
 
-# Run the wizard. We deliberately do NOT exec here — once the wizard exits we
-# need to hand off to the user's interactive shell with `pai` already running.
-# Capture the exit code in the SAME statement — a bare `bun run; INSTALL_EXIT=$?`
-# would let `set -e` abort on a non-zero wizard exit before the capture runs,
-# making the post-wizard handoff (and the headless fallback message) dead code.
+# Run the wizard. Capture the exit code in the SAME statement — a bare
+# `bun run; INSTALL_EXIT=$?` would let `set -e` abort on a non-zero wizard exit
+# before the capture runs, making the post-wizard message dead code.
 INSTALL_EXIT=0
 bun run "$INSTALLER_DIR/main.ts" --mode "$INSTALL_MODE" || INSTALL_EXIT=$?
 
-# Post-wizard handoff. Two paths, in priority order:
-#
-# 1. Controlling terminal accessible (any path where the user can see/type:
-#    direct `bash install.sh`, SSH session running `curl … | sh`, local
-#    `curl … | sh` in Terminal): redirect stdin from /dev/tty and exec into
-#    `zsh -i -c 'source ~/.zshrc && pai'`. The /dev/tty redirect is what
-#    makes this work under `curl | sh` — stdin to the install.sh process is
-#    the curl pipe (not a TTY), but /dev/tty still resolves to the user's
-#    actual controlling terminal, so the new zsh + pai inherit a real TTY
-#    and Claude Code can read keystrokes. Without the redirect, pai would
-#    launch with a closed-pipe stdin and immediately fail or hang.
-#
-# 2. No controlling terminal (true headless: CI harness, daemon spawn): print
-#    the explicit one-liner. We deliberately do NOT fall through to
-#    `osascript … Terminal` here — on a remote/headless macOS box that
-#    silently opens a window the user can't see, leaving them thinking
-#    nothing happened (the bug Daniel hit on server.baylander.lan).
+# Post-wizard message. The bun PATH export was already persisted to every
+# shell rc earlier (.zshenv / .zprofile / .zshrc / .bash_profile), so a fresh
+# shell of any kind picks up `pai` with no shell-specific sourcing required.
 if [ "$INSTALL_EXIT" -eq 0 ]; then
   echo ""
-  if [ -r /dev/tty ]; then
-    info "Launching pai..."
-    exec zsh -i -c 'source ~/.zshrc && pai' < /dev/tty
-  else
-    info "Install complete. To start pai, run:  ${BOLD}source ~/.zshrc && pai${RESET}"
-  fi
+  info "Install complete. Open a new terminal and run:  ${BOLD}pai${RESET}"
 fi
 exit $INSTALL_EXIT
