@@ -38,8 +38,7 @@ The installer runs 8 steps in dependency order:
 | 4 | **Identity** | Prompts for your name, AI assistant name, timezone, and a personal catchphrase |
 | 5 | **PAI Repository** | Clones the PAI repo to `~/.claude/` (or updates if already present) |
 | 6 | **Configuration** | Generates `settings.json`, `.env`, directory structure, `pai` shell alias, and patches version files |
-| 7 | **Pulse (Life Dashboard)** | Prompts to install Pulse (Life Dashboard + observability on port 31337) and the Pulse menu bar app via launchd |
-| 8 | **Validation** | Verifies directory structure, settings file, Pulse health on 31337, launchd plist, shell alias — reports pass/fail for each |
+| 7 | **Validation** | Verifies directory structure, settings file, launchd plist, shell alias — reports pass/fail for each |
 
 ### Pulse Setup
 

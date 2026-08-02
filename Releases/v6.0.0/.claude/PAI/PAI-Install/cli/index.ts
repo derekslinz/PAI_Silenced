@@ -20,7 +20,7 @@ import {
   runIdentity,
   runRepository,
   runConfiguration,
-  runPulseSetup,
+  runDashboardSetup,
   runTelegramSetup,
 } from "../engine/actions";
 import { runValidation, generateSummary } from "../engine/validate";
@@ -196,34 +196,12 @@ export async function runCLI(): Promise<void> {
       printStep(step.number, 9, step.name);
       await runConfiguration(state, emit);
       completeStep(state, "configuration");
-      state.currentStep = "pulse";
-    }
-
-    //  Step 7: Pulse 
-    if (!state.completedSteps.includes("pulse") && !state.skippedSteps.includes("pulse")) {
-      const step = STEPS[6];
-      printStep(step.number, 9, step.name);
-      await runPulseSetup(state, emit, getChoice);
-      completeStep(state, "pulse");
-      state.currentStep = "telegram";
-    }
-
-    //  Step 8: Telegram (optional) 
-    if (!state.completedSteps.includes("telegram") && !state.skippedSteps.includes("telegram")) {
-      const step = STEPS[7];
-      printStep(step.number, 9, step.name);
-      await runTelegramSetup(state, emit, getChoice, getInput);
-      // runTelegramSetup either completes or marks the step skipped internally;
-      // ensure something is recorded so the loop advances.
-      if (!state.completedSteps.includes("telegram") && !state.skippedSteps.includes("telegram")) {
-        completeStep(state, "telegram");
-      }
       state.currentStep = "validation";
     }
 
-    //  Step 9: Validation 
+    //  Step 7: Validation 
     if (!state.completedSteps.includes("validation")) {
-      const step = STEPS[8];
+      const step = STEPS[6];
       printStep(step.number, 9, step.name);
 
       const checks = await runValidation(state, emit);
@@ -266,7 +244,7 @@ export async function runCLI(): Promise<void> {
     print(`     ${c.bold}~/.claude/PAI/USER/Config/README.md${c.reset}      ${c.gray}— credentials and PAI config${c.reset}`);
     print("");
     print(`  ${c.lightBlue}${c.bold}While you're here:${c.reset}`);
-    print(`  ${c.gray}•${c.reset} Visit the Life Dashboard at ${c.bold}http://localhost:31337${c.reset}${c.gray} (Pulse).${c.reset}`);
+    print(`  ${c.gray}•${c.reset} Visit the Life Dashboard at ${c.bold}http://localhost:31337${c.reset}${c.gray} (Dashboard).${c.reset}`);
     print(`  ${c.gray}•${c.reset} Anything you write under ${c.bold}PAI/USER/${c.reset}${c.gray} stays on your machine — it never ships in any PAI release.${c.reset}`);
     print("");
 

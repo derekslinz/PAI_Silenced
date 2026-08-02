@@ -1520,42 +1520,42 @@ export async function runConfiguration(
   await emit({ event: "step_complete", step: "configuration" });
 }
 
-//  Pulse Management 
+//  Dashboard Management 
 
-// PAI 5.0 ships Pulse on port 31337: the Life Dashboard, observability, and
+// PAI 5.0 ships Dashboard on port 31337: the Life Dashboard, observability, and
 // scheduled jobs in one launchd-managed runtime. Health-check it by probing
-// the health endpoint — any non-network response means Pulse is up.
-async function isPulseRunning(): Promise<boolean> {
+// the health endpoint — any non-network response means Dashboard is up.
+async function isDashboardRunning(): Promise<boolean> {
   try {
-    const res = await fetch("http://localhost:31337/api/pulse/health", {
+    const res = await fetch("http://localhost:31337/api/dashboard/health", {
       method: "GET",
       signal: AbortSignal.timeout(2000),
     });
-    // Any non-network response (200/204/4xx) means Pulse is up and serving.
+    // Any non-network response (200/204/4xx) means Dashboard is up and serving.
     return res.status >= 200 && res.status < 500;
   } catch {
     return false;
   }
 }
 
-// Install Pulse as a launchd agent via the canonical `PULSE/manage.sh install`.
+// Install Dashboard as a launchd agent via the canonical `DASHBOARD/manage.sh install`.
 // Manage.sh substitutes __HOME__ in the public plist template, copies it to
-// ~/Library/LaunchAgents/com.pai.pulse.plist, and `launchctl load`s it.
-async function installPulse(paiDir: string, emit: EngineEventHandler): Promise<boolean> {
-  const pulseDir = join(paiDir, "PAI", "PULSE");
-  const manageScript = join(pulseDir, "manage.sh");
+// ~/Library/LaunchAgents/com.pai.dashboard.plist, and `launchctl load`s it.
+async function installDashboard(paiDir: string, emit: EngineEventHandler): Promise<boolean> {
+  const dashboardDir = join(paiDir, "PAI", "DASHBOARD");
+  const manageScript = join(dashboardDir, "manage.sh");
 
   if (!existsSync(manageScript)) {
-    await emit({ event: "message", content: "Pulse not found in installation. The Life Dashboard will be unavailable." });
+    await emit({ event: "message", content: "Dashboard not found in installation. The Life Dashboard will be unavailable." });
     return false;
   }
 
-  await emit({ event: "progress", step: "pulse", percent: 20, detail: "Installing Pulse (dashboard + observability)..." });
+  await emit({ event: "progress", step: "dashboard", percent: 20, detail: "Installing Dashboard (Life Dashboard + observability)..." });
 
   try {
     const installOk = await new Promise<boolean>((resolve) => {
       const child = spawn("bash", [manageScript, "install"], {
-        cwd: pulseDir,
+        cwd: dashboardDir,
         stdio: ["ignore", "pipe", "pipe"],
       });
       const timer = setTimeout(() => { child.kill(); resolve(false); }, 30000);
@@ -1564,37 +1564,37 @@ async function installPulse(paiDir: string, emit: EngineEventHandler): Promise<b
     });
 
     if (!installOk) {
-      await emit({ event: "message", content: "Pulse install command failed. The Life Dashboard will not be available." });
+      await emit({ event: "message", content: "Dashboard install command failed. The Life Dashboard will not be available." });
       return false;
     }
 
     for (let i = 0; i < 20; i++) {
       await new Promise(r => setTimeout(r, 500));
-      if (await isPulseRunning()) {
-        await emit({ event: "message", content: "Pulse installed and running on port 31337 (dashboard + observability)." });
+      if (await isDashboardRunning()) {
+        await emit({ event: "message", content: "Dashboard installed and running on port 31337 (Life Dashboard + observability)." });
         return true;
       }
     }
-    // Pulse plist installed but never bound :31337. Surface this as an install
+    // Dashboard plist installed but never bound :31337. Surface this as an install
     // failure rather than silently reporting success — the user will hit
-    // mysterious 'pulse not starting' / dashboard-unreachable issues otherwise.
-    await emit({ event: "message", content: "Pulse plist installed but port 31337 did not bind within 10s. Check ~/.claude/PAI/PULSE/logs/pulse-stderr.log. The dashboard will not work until this is resolved." });
+    // mysterious 'dashboard not starting' / dashboard-unreachable issues otherwise.
+    await emit({ event: "message", content: "Dashboard plist installed but port 31337 did not bind within 10s. Check ~/.claude/PAI/DASHBOARD/logs/dashboard-stderr.log. The dashboard will not work until this is resolved." });
     return false;
   } catch {
-    await emit({ event: "message", content: "Could not install Pulse. The Life Dashboard will not be available." });
+    await emit({ event: "message", content: "Could not install Dashboard. The Life Dashboard will not be available." });
     return false;
   }
 }
 
 // Optional menu bar app — separate launchd plist + macOS .app bundle.
-async function installPulseMenuBar(paiDir: string, emit: EngineEventHandler): Promise<boolean> {
-  const menuBarInstall = join(paiDir, "PAI", "PULSE", "MenuBar", "install.sh");
+async function installDashboardMenuBar(paiDir: string, emit: EngineEventHandler): Promise<boolean> {
+  const menuBarInstall = join(paiDir, "PAI", "DASHBOARD", "MenuBar", "install.sh");
   if (!existsSync(menuBarInstall)) {
     await emit({ event: "message", content: "Menu bar installer not found — skipping." });
     return false;
   }
 
-  await emit({ event: "progress", step: "pulse", percent: 60, detail: "Installing Pulse menu bar app..." });
+  await emit({ event: "progress", step: "dashboard", percent: 60, detail: "Installing Dashboard menu bar app..." });
 
   try {
     const ok = await new Promise<boolean>((resolve) => {
@@ -1608,85 +1608,85 @@ async function installPulseMenuBar(paiDir: string, emit: EngineEventHandler): Pr
     });
 
     if (ok) {
-      await emit({ event: "message", content: "Menu bar app installed — look for the Pulse icon in your menu bar." });
+      await emit({ event: "message", content: "Menu bar app installed — look for the Dashboard icon in your menu bar." });
       return true;
     }
-    await emit({ event: "message", content: "Menu bar install did not complete. You can run it later: bash ~/.claude/PAI/PULSE/MenuBar/install.sh" });
+    await emit({ event: "message", content: "Menu bar install did not complete. You can run it later: bash ~/.claude/PAI/DASHBOARD/MenuBar/install.sh" });
     return false;
   } catch {
     return false;
   }
 }
 
-//  Step 7: Pulse Setup 
+//  Step 7: Dashboard Setup 
 
-export async function runPulseSetup(
+export async function runDashboardSetup(
   state: InstallState,
   emit: EngineEventHandler,
   getChoice: ChoicePrompt
 ): Promise<void> {
-  await emit({ event: "step_start", step: "pulse" });
+  await emit({ event: "step_start", step: "dashboard" });
   await emitSectionHeader(
     emit,
-    "PULSE-SETUP",
-    "PULSE (LIFE DASHBOARD)",
-    "Installing Pulse — the Life Dashboard, observability, and scheduled jobs",
+    "DASHBOARD-SETUP",
+    "Dashboard",
+    "Setting up the PAI Dashboard",
     7
   );
   const daName = state.collected.aiName;
   const paiDir = state.detection?.paiDir || join(homedir(), ".claude");
 
-  //  Install Pulse (Y/n) — Life Dashboard + observability + scheduled jobs 
+  //  Install Dashboard (Y/n) — PAI Dashboard + observability + scheduled jobs 
   await emit({
     event: "message",
     content:
-      "Pulse is the unified PAI runtime: it serves the Life Dashboard at http://localhost:31337 " +
+      "The PAI Dashboard is the unified PAI runtime: it serves the Life Dashboard at http://localhost:31337 " +
       "and runs observability + scheduled jobs. Installing it as a launchd agent makes it " +
-      "auto-start on login and stay running across reboots.",
+      "auto-starts on login and stay running across reboots.",
   });
 
-  const installPulseChoice = await getChoice("install-pulse", "Install Pulse as a system launchd service?", [
-    { label: "Yes — install Pulse (recommended)", value: "yes", description: "Auto-starts on login. Dashboard + Observability." },
-    { label: "Skip — don't install Pulse now", value: "skip", description: "The dashboard will not run until you run: bash ~/.claude/PAI/PULSE/manage.sh install" },
+  const installDashboardChoice = await getChoice("install-dashboard", "Install Dashboard as a system launchd service?", [
+    { label: "Yes — install Dashboard (recommended)", value: "yes", description: "Auto-starts on login. Dashboard + Observability." },
+    { label: "Skip — don't install Dashboard now", value: "skip", description: "The dashboard will not run until you run: bash ~/.claude/PAI/DASHBOARD/manage.sh install" },
   ], daName);
 
-  let pulseReady = false;
-  if (installPulseChoice === "yes") {
-    pulseReady = await installPulse(paiDir, emit);
+  let dashboardReady = false;
+  if (installDashboardChoice === "yes") {
+    dashboardReady = await installDashboard(paiDir, emit);
   } else {
-    await emit({ event: "message", content: "Pulse skipped. Install later via: bash ~/.claude/PAI/PULSE/manage.sh install" });
+    await emit({ event: "message", content: "Dashboard skipped. Install later via: bash ~/.claude/PAI/DASHBOARD/manage.sh install" });
   }
 
   //  Optional menu bar app (Y/n) — separate launchd plist + .app bundle 
-  if (pulseReady) {
+  if (dashboardReady) {
     await emit({
       event: "message",
       content:
-        "The Pulse menu bar app shows live status in your macOS menu bar (running indicator, " +
+        "The Dashboard menu bar app shows live status in your macOS menu bar (running indicator, " +
         "quick access to the Life Dashboard). It builds a small .app bundle and installs a " +
         "second launchd plist that auto-starts on login.",
     });
-    const installMenuBarChoice = await getChoice("install-menubar", "Install the Pulse menu bar app?", [
+    const installMenuBarChoice = await getChoice("install-menubar", "Install the Dashboard menu bar app?", [
       { label: "Yes — install menu bar app", value: "yes", description: "Adds an icon to your menu bar. Auto-starts on login." },
-      { label: "Skip — Pulse runs without menu bar", value: "skip", description: "Pulse keeps running. You can install the menu bar later: bash ~/.claude/PAI/PULSE/MenuBar/install.sh" },
+      { label: "Skip — Dashboard runs without menu bar", value: "skip", description: "Dashboard keeps running. You can install the menu bar later: bash ~/.claude/PAI/DASHBOARD/MenuBar/install.sh" },
     ], daName);
 
     if (installMenuBarChoice === "yes") {
-      await installPulseMenuBar(paiDir, emit);
+      await installDashboardMenuBar(paiDir, emit);
     } else {
-      await emit({ event: "message", content: "Menu bar skipped. Install later: bash ~/.claude/PAI/PULSE/MenuBar/install.sh" });
+      await emit({ event: "message", content: "Menu bar skipped. Install later: bash ~/.claude/PAI/DASHBOARD/MenuBar/install.sh" });
     }
   }
 
-  await emit({ event: "progress", step: "pulse", percent: 100, detail: "Pulse setup complete" });
-  await emit({ event: "step_complete", step: "pulse" });
+  await emit({ event: "progress", step: "dashboard", percent: 100, detail: "Dashboard setup complete" });
+  await emit({ event: "step_complete", step: "dashboard" });
 }
 
 //  Telegram Setup 
 //
-// Optional step. If the user wants Pulse's Telegram bot to work, we collect
+// Optional step. If the user wants Dashboard's Telegram bot to work, we collect
 // the bot token + allowed user/chat ID, validate via Telegram getMe, write
-// to ~/.claude/.env, then ask Pulse to restart so it picks up the env vars.
+// to ~/.claude/.env, then ask Dashboard to restart so it picks up the env vars.
 //
 // Key-discovery pattern: check primary .env first,
 // ask permission before scanning .claude* backup directories, fall back to
@@ -1712,8 +1712,8 @@ async function validateTelegramBotToken(token: string): Promise<TelegramValidati
   }
 }
 
-async function restartPulse(paiDir: string): Promise<boolean> {
-  const manage = join(paiDir, "PAI", "PULSE", "manage.sh");
+async function restartDashboard(paiDir: string): Promise<boolean> {
+  const manage = join(paiDir, "PAI", "DASHBOARD", "manage.sh");
   if (!existsSync(manage)) return false;
   return new Promise<boolean>((resolve) => {
     const child = spawn("bash", [manage, "restart"], { cwd: dirname(manage), stdio: ["ignore", "pipe", "pipe"] });
@@ -1752,18 +1752,18 @@ export async function runTelegramSetup(
   await emit({
     event: "message",
     content:
-      "Optional: Telegram bot integration. Pulse can run a Telegram bot that lets you " +
+      "Optional: Telegram bot integration. Dashboard can run a Telegram bot that lets you " +
       "chat with your DA from your phone and pushes long-task notifications. " +
       "Requires a bot token from @BotFather and your Telegram user/chat ID.",
   });
 
   const wantsTelegram = await getChoice("telegram-enable", "Set up Telegram now?", [
     { label: "Yes — I have a bot token from BotFather", value: "yes" },
-    { label: "Skip — I'll set this up later (or never)", value: "skip", description: "Pulse runs fine without Telegram. Add later via ~/.claude/.env" },
+    { label: "Skip — I'll set this up later (or never)", value: "skip", description: "Dashboard runs fine without Telegram. Add later via ~/.claude/.env" },
   ]);
 
   if (wantsTelegram !== "yes") {
-    await emit({ event: "message", content: "Skipped Telegram setup. Add later: TELEGRAM_BOT_TOKEN and TELEGRAM_ALLOWED_USERS in ~/.claude/.env, then bash ~/.claude/PAI/PULSE/manage.sh restart" });
+    await emit({ event: "message", content: "Skipped Telegram setup. Add later: TELEGRAM_BOT_TOKEN and TELEGRAM_ALLOWED_USERS in ~/.claude/.env, then bash ~/.claude/PAI/DASHBOARD/manage.sh restart" });
     skipStep(state, "telegram", "user-skipped");
     return;
   }
@@ -1853,7 +1853,7 @@ export async function runTelegramSetup(
     return;
   }
 
-  //  Step 5: Persist to ~/.claude/.env and restart Pulse 
+  //  Step 5: Persist to ~/.claude/.env and restart Dashboard 
   state.collected.telegramBotToken = token;
   state.collected.telegramAllowedUsers = allowedUsers;
   state.collected.telegramBotUsername = validation.username;
@@ -1869,14 +1869,14 @@ export async function runTelegramSetup(
     return;
   }
 
-  // Pulse may already be running from the Pulse step; restart so it picks up env.
-  await emit({ event: "progress", step: "telegram", percent: 80, detail: "Restarting Pulse to pick up Telegram credentials..." });
-  const restarted = await restartPulse(paiDir);
+  // Dashboard may already be running from the Dashboard step; restart so it picks up env.
+  await emit({ event: "progress", step: "telegram", percent: 80, detail: "Restarting Dashboard to pick up Telegram credentials..." });
+  const restarted = await restartDashboard(paiDir);
   await emit({
     event: "message",
     content: restarted
-      ? `Pulse restarted. Telegram bot @${validation.username} is now polling.`
-      : `Pulse not restarted automatically — run: bash ~/.claude/PAI/PULSE/manage.sh restart`,
+      ? `Dashboard restarted. Telegram bot @${validation.username} is now polling.`
+      : `Dashboard not restarted automatically — run: bash ~/.claude/PAI/DASHBOARD/manage.sh restart`,
   });
 
   await emit({ event: "step_complete", step: "telegram" });

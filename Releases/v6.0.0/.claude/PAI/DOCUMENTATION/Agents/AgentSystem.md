@@ -96,15 +96,10 @@ These are pre-built agents in the Claude Code Task tool. They are for **internal
 | `Plan` | Implementation planning | Plan mode |
 | `Forge` | Cross-vendor coder (OpenAI-family GPT-5.4 via `codex exec`) | Production-grade code at E3+ or "no shortcuts" directive |
 | `Anvil` | Cross-vendor coder (Kimi K2.6 via Moonshot direct API, 256K context) | Whole-project long-context reasoning where the entire repo matters |
-| `Cato` | Cross-vendor auditor (read-only, OpenAI-family GPT-5.x via `codex exec --sandbox read-only`) | MANDATORY at E4/E5 in VERIFY — surfaces same-family blind spots |
-| ~~`BrowserAgent`~~ | **DEPRECATED** | Replaced by **Interceptor** skill (real Chrome, no CDP fingerprint) |
-| ~~`UIReviewer`~~ | **DEPRECATED** | Replaced by **Interceptor** skill |
-| ~~`QATester`~~ | **DEPRECATED** | Replaced by **Interceptor** skill — Gate 4 browser-based QA validation |
+| `Cato` | Cross-vendor auditor (read-only, OpenAI-family GPT-5.x via `codex exec --sandbox read-only`) | MANDATORY at E4/E5 in VERIFY — surfaces same-family blind spots | validation |
 | `Silas` | Security testing (offensive-security specialist persona) | Spawned by security assessment skills (one per attack surface) |
 | `claude-code-guide` | Claude Code knowledge (hooks, settings, slash commands, MCP, agent types, keybindings, IDE, Agent SDK, Claude API) | Any task involving Claude Code internals — freshness check before implementing |
-| `ClaudeResearcher` | Claude-based research | Research skill workflows |
-| `GeminiResearcher` | Gemini-based research | Research skill workflows |
-| `GrokResearcher` | Grok-based research | Research skill workflows |
+
 
 **These do NOT have distinct personas or ComposeAgent composition.**
 

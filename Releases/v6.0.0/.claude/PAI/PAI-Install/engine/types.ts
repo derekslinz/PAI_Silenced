@@ -114,8 +114,6 @@ export type StepId =
   | "identity"
   | "repository"
   | "configuration"
-  | "pulse"
-  | "telegram"
   | "validation";
 
 export interface StepDefinition {

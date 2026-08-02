@@ -1,6 +1,6 @@
 /**
  * PAI Installer v5.0 — Step Definitions
- * Defines the 8 installation steps, their dependencies, and conditions.
+ * Defines the 7 installation steps, their dependencies, and conditions.
  */
 
 import type { StepDefinition, StepId, InstallState } from "./types";
@@ -55,28 +55,12 @@ export const STEPS: StepDefinition[] = [
     dependsOn: ["repository"],
   },
   {
-    id: "pulse",
-    name: "Pulse (Life Dashboard)",
-    description: "Install Pulse — the Life Dashboard + observability runtime on port 31337",
-    number: 7,
-    required: true,
-    dependsOn: ["configuration"],
-  },
-  {
-    id: "telegram",
-    name: "Telegram Bot (optional)",
-    description: "Optional: connect a Telegram bot so Pulse can chat with you and send notifications",
-    number: 8,
-    required: false,
-    dependsOn: ["pulse"],
-  },
-  {
     id: "validation",
     name: "Validation",
     description: "Verify installation completeness and show summary",
-    number: 9,
+    number: 7,
     required: true,
-    dependsOn: ["telegram"],
+    dependsOn: ["configuration"],
   },
 ];
 

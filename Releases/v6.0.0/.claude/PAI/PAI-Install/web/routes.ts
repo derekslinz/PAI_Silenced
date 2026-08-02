@@ -11,7 +11,7 @@ import {
   runIdentity,
   runRepository,
   runConfiguration,
-  runPulseSetup,
+  runDashboardSetup,
   runTelegramSetup,
 } from "../engine/actions";
 import { runValidation, generateSummary } from "../engine/validate";
@@ -220,25 +220,25 @@ async function startInstallation(): Promise<void> {
     if (!installState.completedSteps.includes("configuration")) {
       await runConfiguration(installState, emit);
       completeStep(installState, "configuration");
-      installState.currentStep = "pulse";
+      installState.currentStep = "validation";
     }
 
-    // Step 7: Pulse (installs the Life Dashboard + observability runtime)
-    if (!installState.completedSteps.includes("pulse") && !installState.skippedSteps.includes("pulse")) {
+    // Step 7: Dashboard (installs the Life Dashboard + observability runtime)
+    if (!installState.completedSteps.includes("dashboard") && !installState.skippedSteps.includes("dashboard")) {
       try {
-        await runPulseSetup(installState, emit, requestChoice);
-        if (!installState.skippedSteps.includes("pulse")) {
-          completeStep(installState, "pulse");
+        await runDashboardSetup(installState, emit, requestChoice);
+        if (!installState.skippedSteps.includes("dashboard")) {
+          completeStep(installState, "dashboard");
         }
-      } catch (pulseErr: any) {
-        broadcast({ type: "error", message: `Pulse setup error: ${pulseErr?.message || "Unknown error"}` });
-        broadcast({ type: "message", role: "assistant", content: "Pulse setup encountered an error. Continuing with installation..." });
-        skipStep(installState, "pulse", pulseErr?.message || "error");
+      } catch (dashboardErr: any) {
+        broadcast({ type: "error", message: `Dashboard setup error: ${dashboardErr?.message || "Unknown error"}` });
+        broadcast({ type: "message", role: "assistant", content: "Dashboard setup encountered an error. Continuing with installation..." });
+        skipStep(installState, "dashboard", dashboardErr?.message || "error");
       }
       installState.currentStep = "telegram";
     }
 
-    // Step 8: Telegram (optional — token + allowed user/chat ID + Pulse restart)
+    // Step 8: Telegram (optional — token + allowed user/chat ID + Dashboard restart)
     if (!installState.completedSteps.includes("telegram") && !installState.skippedSteps.includes("telegram")) {
       try {
         await runTelegramSetup(installState, emit, requestChoice, requestInput);

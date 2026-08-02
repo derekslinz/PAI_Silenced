@@ -17,7 +17,7 @@ export function generateSettingsJson(config: PAIConfig): Record<string, any> {
   return {
     env: {
       // PAI_DIR is the PAI subsystem directory (~/.claude/PAI) — where Memory,
-      // Algorithm, USER, TOOLS, PULSE live. NOT the install root (~/.claude).
+      // Algorithm, USER, TOOLS, DASHBOARD live. NOT the install root (~/.claude).
       // statusline-command.sh, hooks, and tools read PAI_DIR expecting the /PAI
       // suffix; if we write just `~/.claude` here the statusline can't find
       // ALGORITHM/LATEST and falls back to "—". The variable name `config.paiDir`

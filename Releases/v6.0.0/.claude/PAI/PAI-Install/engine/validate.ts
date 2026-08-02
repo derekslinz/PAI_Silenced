@@ -11,13 +11,13 @@ import { PAI_VERSION } from "./types";
 import { homedir } from "os";
 
 /**
- * Check if Pulse is running. PAI 5.0 ships Pulse on port 31337 — the Life
+ * Check if Dashboard is running. PAI 5.0 ships Dashboard on port 31337 — the Life
  * Dashboard + observability runtime. Probe the health endpoint; any
- * 2xx-4xx response means Pulse is up and the route is registered.
+ * 2xx-4xx response means Dashboard is up and the route is registered.
  */
-async function checkPulseHealth(): Promise<boolean> {
+async function checkDashboardHealth(): Promise<boolean> {
   try {
-    const res = await fetch("http://localhost:31337/api/pulse/health", {
+    const res = await fetch("http://localhost:31337/api/dashboard/health", {
       method: "GET",
       signal: AbortSignal.timeout(2000),
     });
@@ -178,27 +178,27 @@ export async function runValidation(state: InstallState, emit?: EngineEventHandl
     critical: false,
   });
 
-  // 5. Pulse running — Life Dashboard + observability (PAI 5.0)
-  const pulseHealthy = await checkPulseHealth();
+  // 5. Dashboard running — Life Dashboard + observability (PAI 5.0)
+  const dashboardHealthy = await checkDashboardHealth();
 
   checks.push({
-    name: "Pulse (Life Dashboard)",
-    passed: pulseHealthy,
-    detail: pulseHealthy
+    name: "Dashboard (Life Dashboard)",
+    passed: dashboardHealthy,
+    detail: dashboardHealthy
       ? "Running on localhost:31337"
       : "Not reachable — install via: bash ~/.claude/PAI/PULSE/manage.sh install",
     critical: false,
   });
 
-  // 7b. Pulse launchd plist present (auto-start on login)
-  const pulsePlist = join(homedir(), "Library", "LaunchAgents", "com.pai.pulse.plist");
-  const pulsePlistInstalled = existsSync(pulsePlist);
+  // 7b. Dashboard launchd plist present (auto-start on login)
+  const dashboardPlist = join(homedir(), "Library", "LaunchAgents", "com.pai.dashboard.plist");
+  const dashboardPlistInstalled = existsSync(dashboardPlist);
   checks.push({
-    name: "Pulse launchd agent",
-    passed: pulsePlistInstalled,
-    detail: pulsePlistInstalled
-      ? "Installed at ~/Library/LaunchAgents/com.pai.pulse.plist"
-      : "Not installed — Pulse will not auto-start on login",
+    name: "Dashboard launchd agent",
+    passed: dashboardPlistInstalled,
+    detail: dashboardPlistInstalled
+      ? "Installed at ~/Library/LaunchAgents/com.pai.dashboard.plist"
+      : "Not installed — Dashboard will not auto-start on login",
     critical: false,
   });
 
