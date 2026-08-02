@@ -40,24 +40,24 @@ The installer runs 8 steps in dependency order:
 | 6 | **Configuration** | Generates `settings.json`, `.env`, directory structure, `pai` shell alias, and patches version files |
 | 7 | **Validation** | Verifies directory structure, settings file, launchd plist, shell alias — reports pass/fail for each |
 
-### Pulse Setup
+### Dashboard Setup
 
-The Pulse step installs the unified PAI runtime:
+The Dashboard step installs the unified PAI runtime:
 
-1. **Asks (Y/n) to install Pulse** as a launchd service — Pulse serves the Life Dashboard at `http://localhost:31337` and runs observability + scheduled jobs. Installing as a launchd agent makes it auto-start on login.
-2. **Asks (Y/n) to install the Pulse menu bar app** — adds a status icon to your macOS menu bar, second launchd plist, auto-starts on login
+1. **Asks (Y/n) to install Dashboard** as a launchd service — Dashboard serves the Life Dashboard at `http://localhost:31337` and runs observability + scheduled jobs. Installing as a launchd agent makes it auto-start on login.
+2. **Asks (Y/n) to install the Dashboard menu bar app** — adds a status icon to your macOS menu bar, second launchd plist, auto-starts on login
 
-In PAI 5.0 Pulse on port 31337 embeds the Life Dashboard, observability, and scheduled jobs in one launchd-managed runtime.
+In PAI 5.0 Dashboard on port 31337 embeds the Life Dashboard, observability, and scheduled jobs in one launchd-managed runtime.
 
-Pulse is optional. Skip the install and you can run it later: `bash ~/.claude/PAI/PULSE/manage.sh install`.
+Dashboard is optional. Skip the install and you can run it later: `bash ~/.claude/PAI/DASHBOARD/manage.sh install`.
 
 ### Graceful Degradation
 
 The installer is designed to recover from partial failures:
 
 - No existing PAI → fresh install (vs. upgrade if detected)
-- Pulse install declined or fails → configuration saved, dashboard unavailable until Pulse is installed manually
-- Menu bar install declined or fails → Pulse keeps running; menu bar can be installed later
+- Dashboard install declined or fails → configuration saved, dashboard unavailable until Dashboard is installed manually
+- Menu bar install declined or fails → Dashboard keeps running; menu bar can be installed later
 - Claude Code not installed → attempts installation, continues if it fails
 - Port conflicts → installer port configurable via `PAI_INSTALL_PORT` environment variable
 
@@ -93,7 +93,7 @@ PAI-Install/
     types.ts            # TypeScript interfaces (InstallState, messages, events)
     detect.ts           # System detection (OS, tools, existing install)
     steps.ts            # Step definitions + dependency graph
-    actions.ts          # Install action functions (clone, configure, Pulse, etc.)
+    actions.ts          # Install action functions (clone, configure, Dashboard, etc.)
     config-gen.ts       # Fallback settings.json generator
     validate.ts         # Post-install validation checks
     state.ts            # State persistence (resume interrupted installs)
@@ -169,10 +169,10 @@ Client                          Server
    user_input →
   ← message   ("Welcome, {{PRINCIPAL_NAME}}!")
                                  
-  ← choice_request   ("Install Pulse?")
+  ← choice_request   ("Install Dashboard?")
    user_choice →
-  ← progress   (Pulse install: 40%)
-  ← step_update   (pulse → completed)
+  ← progress   (Dashboard install: 40%)
+  ← step_update   (dashboard → completed)
                                  
   ← validation_result   (all checks)
   ← install_complete   (summary card)
@@ -288,8 +288,8 @@ Each section is skippable. If you have existing data (Obsidian, Notion, journals
 | Port 1337 in use | Set `PAI_INSTALL_PORT=8080` before running install.sh |
 | Permission denied | Run `chmod -R 755 ~/.claude` |
 | `pai` command not found | Run `source ~/.zshrc` to reload shell config |
-| Pulse / Life Dashboard not working | Check port 31337 is free: `lsof -ti:31337`. Restart Pulse: `bash ~/.claude/PAI/PULSE/manage.sh restart`. Check status: `bash ~/.claude/PAI/PULSE/manage.sh status`. |
-| Pulse menu bar icon missing | Install or reinstall: `bash ~/.claude/PAI/PULSE/MenuBar/install.sh`. Verify launchd plist: `ls ~/Library/LaunchAgents/com.pai.pulse-menubar.plist`. |
+| Dashboard / Life Dashboard not working | Check port 31337 is free: `lsof -ti:31337`. Restart Dashboard: `bash ~/.claude/PAI/DASHBOARD/manage.sh restart`. Check status: `bash ~/.claude/PAI/DASHBOARD/manage.sh status`. |
+| Dashboard menu bar icon missing | Install or reinstall: `bash ~/.claude/PAI/DASHBOARD/MenuBar/install.sh`. Verify launchd plist: `ls ~/Library/LaunchAgents/com.pai.dashboard-menubar.plist`. |
 | Banner shows wrong algorithm version | Check `~/.claude/PAI/Algorithm/LATEST` contains correct version |
 | Banner counts all show 0 | Normal on first launch — counts populate after your first Claude Code session ends |
 | WebSocket "Connection lost" | The installer auto-reconnects. If persistent, check if another process is using port 1337 |
@@ -320,7 +320,7 @@ bun run PAI-Install/main.ts --mode gui
 
 - **No framework dependencies** — Frontend is vanilla JavaScript. No React, no build step.
 - **Bun-native server** — Uses `Bun.serve()` for HTTP and WebSocket in one process.
-- **Async Pulse install** — Pulse install via `manage.sh install` uses async `spawn` (not `execSync`) to avoid blocking the event loop and killing WebSocket connections. PAI 5.0 ships Pulse on port 31337 as the unified Life Dashboard + observability runtime.
+- **Async Dashboard install** — Dashboard install via `manage.sh install` uses async `spawn` (not `execSync`) to avoid blocking the event loop and killing WebSocket connections. PAI 5.0 ships Dashboard on port 31337 as the unified Life Dashboard + observability runtime.
 - **Safe process cleanup** — Port cleanup uses `lsof -sTCP:LISTEN` to kill only the listening process, not client connections.
 - **Template-based settings** — Installer merges user fields into the release template rather than generating a complete settings.json from scratch.
 

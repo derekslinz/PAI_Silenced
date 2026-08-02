@@ -11,7 +11,6 @@ import {
   runIdentity,
   runRepository,
   runConfiguration,
-  runDashboardSetup,
   runTelegramSetup,
 } from "../engine/actions";
 import { runValidation, generateSummary } from "../engine/validate";
@@ -220,25 +219,10 @@ async function startInstallation(): Promise<void> {
     if (!installState.completedSteps.includes("configuration")) {
       await runConfiguration(installState, emit);
       completeStep(installState, "configuration");
-      installState.currentStep = "validation";
-    }
-
-    // Step 7: Dashboard (installs the Life Dashboard + observability runtime)
-    if (!installState.completedSteps.includes("dashboard") && !installState.skippedSteps.includes("dashboard")) {
-      try {
-        await runDashboardSetup(installState, emit, requestChoice);
-        if (!installState.skippedSteps.includes("dashboard")) {
-          completeStep(installState, "dashboard");
-        }
-      } catch (dashboardErr: any) {
-        broadcast({ type: "error", message: `Dashboard setup error: ${dashboardErr?.message || "Unknown error"}` });
-        broadcast({ type: "message", role: "assistant", content: "Dashboard setup encountered an error. Continuing with installation..." });
-        skipStep(installState, "dashboard", dashboardErr?.message || "error");
-      }
       installState.currentStep = "telegram";
     }
 
-    // Step 8: Telegram (optional — token + allowed user/chat ID + Dashboard restart)
+    // Step 7: Telegram (optional — token + allowed user/chat ID)
     if (!installState.completedSteps.includes("telegram") && !installState.skippedSteps.includes("telegram")) {
       try {
         await runTelegramSetup(installState, emit, requestChoice, requestInput);
@@ -252,7 +236,7 @@ async function startInstallation(): Promise<void> {
       installState.currentStep = "validation";
     }
 
-    // Step 9: Validation
+    // Step 8: Validation
     const checks = await runValidation(installState, emit);
     broadcast({ type: "validation_result", checks });
     completeStep(installState, "validation");
