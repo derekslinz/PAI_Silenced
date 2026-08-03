@@ -1,6 +1,6 @@
 # PAI 6.0.0 — Personal AI Infrastructure (the Life Operating System)
 
-> **PAI is the Life OS. {DA_IDENTITY.NAME} is {PRINCIPAL.NAME}'s DA. Pulse is the Life Dashboard.**
+> **PAI is the Life OS. {DA_IDENTITY.NAME} is {PRINCIPAL.NAME}'s DA.**
 > Canonical thesis: `PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md`. Everyone running PAI names their own DA; {DA_IDENTITY.NAME} is {PRINCIPAL.NAME}'s specific instantiation. PAI targets AS3 on the [PAI Maturity Model](https://your-domain.example.com/blog/personal-ai-maturity-model), with lineage from [The Real Internet of Things](https://your-domain.example.com/blog/the-real-internet-of-things) (2016).
 
 @PAI/USER/DA_IDENTITY.md

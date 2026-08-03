@@ -2,7 +2,7 @@
 
 **Notifications for PAI workflows and task execution.**
 
-> **Infrastructure:** Notification channels (desktop, ntfy, Discord) are driven by `~/.claude/hooks/lib/notifications.ts`. The unified Pulse daemon (`~/.claude/PAI/PULSE/`) runs on one port, one launchd plist (`com.pai.pulse`).
+> **Infrastructure:** Notification channels (desktop, ntfy, Discord) are driven by `~/.claude/hooks/lib/notifications.ts`.
 
 This system provides:
 

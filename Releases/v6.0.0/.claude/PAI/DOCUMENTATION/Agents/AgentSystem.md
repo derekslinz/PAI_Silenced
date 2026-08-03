@@ -262,7 +262,7 @@ When the Algorithm needs to delegate work, use this priority:
 
 ## Agent Watchdog (Background Agent Monitoring)
 
-Background agents can hang or go silent with no visibility. The Pulse agent-guard hook automatically injects a Monitor watchdog reminder when `run_in_background: true` agents are spawned. The watchdog (`Tools/AgentWatchdog.ts`) monitors `tool-activity.jsonl` for silence — if no tool calls for 90 seconds while agents are active, it alerts via the Monitor tool's stdout notification mechanism. One persistent watchdog covers all background agents per session.
+Background agents can hang or go silent with no visibility. The agent-guard hook automatically injects a Monitor watchdog reminder when `run_in_background: true` agents are spawned. The watchdog (`Tools/AgentWatchdog.ts`) monitors `tool-activity.jsonl` for silence — if no tool calls for 90 seconds while agents are active, it alerts via the Monitor tool's stdout notification mechanism. One persistent watchdog covers all background agents per session.
 
 ---
 
@@ -273,7 +273,7 @@ Distinct from functional teams (engineering, design, security, etc.). An Observe
 **Shape:**
 - **Read-only** — observers never call write tools. Violations = immediate self-halt.
 - **Fed the audit log** — consume `MEMORY/OBSERVABILITY/tool-activity.jsonl` (with `ground_truth` captured by `ToolActivityTracker.hook.ts`), not chat transcripts.
-- **Vote** — continue / halt / escalate. Majority rule; any escalate bubbles to {{PRINCIPAL_NAME}} via Pulse.
+- **Vote** — continue / halt / escalate. Majority rule; any escalate bubbles to {{PRINCIPAL_NAME}}.
 - **Cost-justified by catastrophe prevention**, not feature velocity.
 
 **Use ONLY when BOTH conditions hold:**

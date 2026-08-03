@@ -10,7 +10,7 @@
 
 - **A Digital Assistant (DA)** — named by you, running as a peer. Ships with a generic "PAI" DA out of the box; `/interview` personalizes it.
 - **The Algorithm** — a structured problem-solving framework (OBSERVE → THINK → PLAN → BUILD → EXECUTE → VERIFY → LEARN) that the DA runs for non-trivial tasks.
-- **Pulse** — a local daemon on port 31337 that provides push notifications, observability, scheduled tasks, and a Life Dashboard. Runs as a macOS launchd service with a menu bar app.
+
 - **Skills** — 40+ composable capabilities (research, creative writing, security assessment, Cloudflare deploys, etc.) that the DA self-selects at runtime.
 - **Memory** — persistent typed storage that compounds across sessions (KNOWLEDGE for durable notes, WORK for active projects, LEARNING for meta-patterns).
 - **TELOS** — your mission, goals, beliefs, challenges, and wisdom captured in structured files so the DA can frame every recommendation against who you are and what you're trying to do.

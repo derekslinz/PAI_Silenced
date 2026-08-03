@@ -2,11 +2,11 @@
 
 > **The canonical shape of the USER directory in PAI.**
 >
-> Everything your DA knows about you lives in one flat, biography-style tree. This spec defines the rules every PAI user follows — so the same Pulse dashboard, the same Interview skill, the same Daemon aggregator, and the same skills work for everyone out of the box.
+> Everything your DA knows about you lives in one flat, biography-style tree. This spec defines the rules every PAI user follows — so the same Interview skill, the same Daemon aggregator, and the same skills work for everyone out of the box.
 
 **Status:** Draft v1.0 · 2026-04-16
 **Applies to:** `PAI/USER/` in every PAI installation
-**Companion docs:** `PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md` (the why), `PAI/DOCUMENTATION/Pulse/PulseSystem.md` (the dashboard), `PAI/TEMPLATES/User/` (the starter scaffold)
+**Companion docs:** `PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md` (the why), `PAI/TEMPLATES/User/` (the starter scaffold)
 
 ---
 

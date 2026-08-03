@@ -16,7 +16,6 @@ Everything else in this system exists to serve that one thing.
 
 - **PAI** = Personal AI Infrastructure = the Life Operating System
 - **The DA** = the digital assistant — the primary interface to the OS
-- **Pulse** = the Life Dashboard — the visible surface onto the OS
 
 Each PAI user names their own DA. The OS underneath is the same framework everyone runs.
 

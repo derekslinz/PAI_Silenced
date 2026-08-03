@@ -22,7 +22,7 @@ The PAI hook system is an event-driven automation infrastructure built on Claude
 - **Tab Titles** - Dynamic terminal tab updates with task context
 - **Unified Event Stream** - All hooks emit structured events to `events.jsonl` for real-time observability
 
-**Key Principle:** Most hooks run asynchronously and fail gracefully. Security hooks (SecurityPipeline) are synchronous and blocking — they can prevent tool execution via `exit(2)`. All `.ts` hooks have `#!/usr/bin/env bun` shebangs and `+x` permissions — settings.json references them directly (e.g., `$HOME/.claude/hooks/SecurityPipeline.hook.ts`) without a `bun` prefix. HTTP hooks (SkillGuard, AgentGuard) run via Pulse routes on `localhost:31337`.
+**Key Principle:** Most hooks run asynchronously and fail gracefully. Security hooks (SecurityPipeline) are synchronous and blocking — they can prevent tool execution via `exit(2)`. All `.ts` hooks have `#!/usr/bin/env bun` shebangs and `+x` permissions — settings.json references them directly (e.g., `$HOME/.claude/hooks/SecurityPipeline.hook.ts`) without a `bun` prefix. HTTP hooks (SkillGuard, AgentGuard) run via local HTTP routes.
 
 **Freshness Authority:** When adding or modifying hooks, consult the `claude-code-guide` agent to verify current hook event types, return value schemas, and available fields.
 

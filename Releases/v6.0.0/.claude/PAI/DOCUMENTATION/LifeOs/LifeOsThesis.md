@@ -10,7 +10,6 @@
 
 - **PAI** = Personal AI Infrastructure = the **Life Operating System** (the framework itself)
 - **The DA** = your Digital Assistant = the primary (and eventually the only) interface to the Life OS
-- **Pulse** = the **Life Dashboard** = the visible surface that lets you see and interact with the Life OS
 - **Target** = **AS3** on the [PAI Maturity Model](https://example.com/blog/personal-ai-maturity-model)
 - **Lineage** = [The Real Internet of Things](https://example.com/blog/the-real-internet-of-things) (2016)
 
@@ -18,7 +17,7 @@
 
 ## The Core Distinction
 
-**PAI is not a dashboard. PAI is not a chatbot. PAI is not an "AI scaffolding framework" in the passive sense.**
+**PAI is not a chatbot. PAI is not an "AI scaffolding framework" in the passive sense.**
 
 PAI is the Life Operating System. Like a computer operating system, it manages the resources, processes, identity, memory, and interfaces that let you live and work. The difference is the resources it manages are *your life* — your goals, your relationships, your work, your health, your creative output, your time — and the processes it runs are the workflows a human actually cares about.
 
@@ -36,9 +35,7 @@ The confusion most people have when they start building in this space: they thin
                                                  
 
                                                  
-  PULSE — the Life Dashboard                       ← Visible surface
-  (where you SEE your current state, goals,      
-   workflows, progress, day-in-the-life preview) 
+
                                                  
 
                                                  
