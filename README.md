@@ -1,33 +1,40 @@
-# Personal AI Infrastructure
+# PAI — Personal AI Infrastructure
 
-![PAI Logo](./images/pai-logo-v7.png)
+**PAI = Personal AI Infrastructure = the Life Operating System.** It turns AI from a chatbot you talk to into a system that runs your life — it knows your goals, your people, your workflows, your current state, your ideal state, and continuously hill-climbs you from one to the other.
 
-**Overview:** [What PAI Is](#what-pai-is) · [Principles](#principles) · [Features](#features)
+This is the **Silenced** fork: a hard fork of PAI that keeps the machinery and removes the pageantry. The standard is in [PHILOSOPHY.md](PHILOSOPHY.md) — **usefulness without pageantry, utilitarian.** Every artifact is measured against one question: *is this performing, or is this useful?*
 
-**Get Started:** [Installation](#installation) · [Releases](Releases/) · [Packs](Packs/)
+**Get Started:** [Installation](#installation) · [Releases](Releases/) · [Packs](Packs/) · [Philosophy](PHILOSOPHY.md) · [Security](SECURITY.md)
 
-**Resources:** [FAQ](#faq) · [Roadmap](#roadmap) · [Community](#community) · [Contributing](#contributing)
-
-[Watch the full PAI walkthrough](https://youtu.be/Le0DLrn7ta0) · [Read: The Real Internet of Things](https://danielmiessler.com/blog/the-real-internet-of-things)
-
-> [!IMPORTANT]
-> **PAI v5.0.0 — Life Operating System** — the biggest release in PAI history. PAI is no longer "AI scaffolding" — it's a **Life Operating System** with the unified **Pulse** daemon (Life Dashboard at `localhost:31337`), a **DA** (Digital Assistant) identity layer, **Algorithm v6.3.0** (Current State → Ideal State, seven phases, classifier-driven mode + tier), the **ISA** primitive (universal "ideal state" articulation), 45 skills, 171 workflows, 37 hooks, and structural privacy via containment zones.
->
-> **[v5.0.0 release notes →](Releases/v5.0.0/README.md)** | **[All releases →](Releases/)**
->
-> **One-line install:** `curl -sSL https://ourpai.ai/install.sh | bash`
->
-> Upgrading from v4.x? This is a different system, not a patch. Read the [migration guide](Releases/v5.0.0/README.md#migration-guide-from-v4x) first.
+---
 
 ## What PAI Is
 
-PAI is a Life Operating System. It captures who you are, what you care about, and where you're trying to go — and then helps you get there using AI that knows you. Three layers stack on top of each other:
+PAI is a Life Operating System. It captures who you are, what you care about, and where you're trying to go — and then helps you get there using AI that knows you.
 
 - **PAI** — the OS itself. Skills, memory, the Algorithm, your identity files.
-- **Pulse** — the Life Dashboard at `localhost:31337`. Where you actually see your state, goals, and work.
-- **The DA** — your Digital Assistant. The voice and personality you talk to.
+- **The Algorithm** — the universal Current State → Ideal State execution loop.
+- **Packs** — standalone, AI-installable capabilities you can add to any AI coding harness.
 
 It's designed for individuals first, but the same architecture works for teams, companies, or any entity that wants to articulate what it's trying to be and move toward it.
+
+---
+
+## The Silenced Fork
+
+This is a **hard fork**. It does not track upstream and does not merge back.
+
+Origin PAI optimizes for **presence** — an AI that is felt. Affect, voice, emoji, theatrical mode banners, "euphoric surprise." This fork optimizes for **signal** — an AI that is used. The assistant is an instrument, not a companion.
+
+The machinery is kept: hooks, the Algorithm, memory, determinism. The voice is removed.
+
+**The decision rule** — every artifact, instruction, and output is tested against one question:
+
+> Is this performing, or is this useful?
+
+If it exists to be felt — emoji, voice, decorative banners, enthusiasm scripted into identity — it is pageantry. Cut it. If it exists to do work — a check, a tool, a fact, a transform — keep it, and strip any performance wrapped around it.
+
+When unsure, the answer is silence. The system without its voice is still the system.
 
 ---
 
@@ -47,18 +54,9 @@ The biggest unsolved problem with AI is that nobody can define what "good" or "d
 
 The primary expression is the **ISA** (Ideal State Artifact). An ISA is similar to a software PRD: it captures what done looks like so you can build toward it. The difference is that an ISA is general — it works for any creative task, from design to art to philosophy to engineering to strategy. The system decomposes the ideal state into discrete **ISCs** (Ideal State Criteria), which populate the document and double as verification items. That's how PAI hill-climbs toward ideal state on any kind of work.
 
-### A single Digital Assistant will be everyone's interface to AI
+### The standard is the explanation, not the feeling
 
-I wrote about this in 2016 in [The Real Internet of Things](https://danielmiessler.com/blog/the-real-internet-of-things), and I'm more convinced now than I was then. The trajectory is clear: chatbots → agents → assistants. We're all building the same thing, and the endpoint is one DA per person.
-
-TRIOT had four core ideas that PAI is built on:
-
-- **Digital Assistants** — one DA per person, your primary interface to all AI
-- **Everything gets an API** — every product, service, person, and place becomes addressable
-- **Your DA dynamically creates your interfaces** — no more apps and dashboards; the DA assembles whatever you need in the moment
-- **You define your ideal state, AI helps you get there** — the whole system points at your goals
-
-This is what PAI is reaching for.
+The bar for "done" is whether the explanation holds up — a hard-to-vary answer instantly recognized as true — not whether it delights. That single frame covers both verifiable pursuits (code, research, decisions) and experiential ones (design, writing, anything that has to *land*), because both are climbing toward explanations that hold up.
 
 ---
 
@@ -66,7 +64,7 @@ This is what PAI is reaching for.
 
 ### Text over opaque storage
 
-Heavy bias toward plain text and Markdown. PAI avoids SQLite, Postgres, and other opaque stores wherever possible. Everything should be transparent and parsable — by you, by your DA, by `rg`, by anything else. If you can't read it with `cat`, we don't want it.
+Heavy bias toward plain text and Markdown. PAI avoids SQLite, Postgres, and other opaque stores wherever possible. Everything should be transparent and parsable — by you, by your assistant, by `rg`, by anything else. If you can't read it with `cat`, we don't want it.
 
 ### Context scaffolding > model
 
@@ -83,10 +81,6 @@ PAI has avoided RAG since June 2025. Rich text with cross-references, plus fast 
 ### Memory that compounds
 
 A text-based memory system that captures what you've done, what you've learned, and what's worth keeping — and feeds it back as input to future work. Three tiers (WORK, KNOWLEDGE, LEARNING) plus a typed graph across people, companies, ideas, and research.
-
-### Self-improvement loop
-
-PAI captures signals about what went well and what didn't — explicit ratings, sentiment, verification outcomes, satisfaction — and uses them to improve itself. The system that runs the work is also the system that gets better at running it.
 
 ### The Algorithm
 
@@ -109,7 +103,7 @@ A meaningful library of custom thinking skills — first principles, council deb
 
 ### Use your AI to install and run PAI
 
-We very much believe in AI-based installation and modification of PAI. Once you have a working install, point your AI at the system itself — upgrade versions, add skills, modify hooks, change settings, repair anything that breaks. The most important thing your AI can do for you up front is bring all of your existing custom context — notes, project state, preferences, identity, history — into the `PAI/USER/` directory so PAI knows who you are from day one. Tell your DA: *"Help me migrate my context into PAI/USER/."* The system was designed to be operated by AI; lean on it.
+We very much believe in AI-based installation and modification of PAI. Once you have a working install, point your AI at the system itself — upgrade versions, add skills, modify hooks, change settings, repair anything that breaks. The most important thing your AI can do for you up front is bring all of your existing custom context — notes, project state, preferences, identity, history — into the `PAI/USER/` directory so PAI knows who you are from day one. The system was designed to be operated by AI; lean on it.
 
 ### One-line install (recommended)
 
@@ -117,15 +111,15 @@ We very much believe in AI-based installation and modification of PAI. Once you 
 curl -sSL https://ourpai.ai/install.sh | bash
 ```
 
-That's it. The installer wizard handles Bun, Git, and Claude Code verification, ElevenLabs key (optional), DA identity setup, voice picker, Pulse launchd registration, and validation. An existing `~/.claude/` is auto-backed-up to `~/.claude.backup-{TIMESTAMP}` before anything is overwritten.
+That's it. The installer wizard handles Bun, Git, and Claude Code verification, identity setup, and validation. An existing `~/.claude/` is auto-backed-up to `~/.claude.backup-{TIMESTAMP}` before anything is overwritten.
 
 **Prefer to inspect first?** [Read the script](https://ourpai.ai/install.sh) before piping it.
 
 ### Manual install (clone + run)
 
 ```bash
-git clone https://github.com/danielmiessler/Personal_AI_Infrastructure.git
-cd Personal_AI_Infrastructure/Releases/v5.0.0
+git clone https://github.com/derekslinz/PAI_Silenced.git
+cd PAI_Silenced/Releases/v6.0.0
 cp -R .claude ~/
 cd ~/.claude && ./install.sh
 ```
@@ -133,58 +127,18 @@ cd ~/.claude && ./install.sh
 **The installer will:**
 
 - Verify Bun, Git, and Claude Code are installed
-- Prompt for your ElevenLabs API key (skippable — voice falls back to desktop notifications)
-- Launch the DA identity wizard (name + voice + personality)
-- Set up Pulse as a launchd service (`com.pai.pulse`)
+- Set up identity
 - Run validation
 
 ### After install
 
-```bash
-open http://localhost:31337    # the Life Dashboard
-```
-
-Then run `/interview` in Claude Code. Your DA will guide you through:
-
-1. **Phase 1 — Goals & context:** Mission, Goals, Beliefs, Wisdom, Challenges, Books, Mental models, Narratives
-2. **Phase 2 — Ideal state:** What does success look like for you?
-3. **Phase 3 — Preferences:** Tools, conventions, working style
-4. **Phase 4 — Identity:** Final DA personality tuning
-
-This is the most important step. **Without your goals, your DA has nothing to optimize against.**
-
-### Upgrading from v4.x
-
-> [!IMPORTANT]
-> v5.0.0 is a different system, not a patch. Read the **[full migration guide](Releases/v5.0.0/README.md#migration-guide-from-v4x)** before installing.
-
-Quick path:
-
-```bash
-# 1. Back up your existing installation
-cp -R ~/.claude ~/.claude.backup-$(date +%Y%m%d)
-
-# 2. Install v5.0.0 (one-liner above) or via manual clone
-curl -sSL https://ourpai.ai/install.sh | bash
-
-# 3. Open the Life Dashboard and run the interview
-open http://localhost:31337
-```
-
-If you had personal content in v4.x (notes, project state, custom rules), tell your DA: *"Help me migrate my old content into the PAI/USER/ structure."* The **Migrate** skill intakes from `.md`/`.markdown`/`.txt`, Obsidian, Notion, Apple Notes — classifies each chunk against the v5 taxonomy (KNOWLEDGE, PROJECTS, FEED, etc.) and commits with provenance.
-
-**Post-upgrade checklist:**
-
-- [ ] Pulse is alive: `curl -s http://localhost:31337/api/pulse/health | jq`
-- [ ] Voice announces: `curl -s -X POST http://localhost:31337/notify -H "Content-Type: application/json" -d '{"message": "Hello from your DA"}'`
-- [ ] Dashboard renders: `open http://localhost:31337`
-- [ ] DA identity populated in `PAI/USER/DA_IDENTITY.md`
+Run `/interview` in Claude Code to bring your context into `PAI/USER/`. This is the most important step — without your goals and context, the system has nothing to optimize against.
 
 ---
 
 ## PAI Packs
 
-Packs are standalone, AI-installable capabilities you can add to any AI coding harness without installing PAI. Each pack is a self-contained prompt your DA can read and execute — point it at the pack directory and say "install this," and it handles the rest.
+Packs are standalone, AI-installable capabilities you can add to any AI coding harness without installing PAI. Each pack is a self-contained prompt your assistant can read and execute — point it at the pack directory and say "install this," and it handles the rest.
 
 **[Browse all packs →](Packs/)**
 
@@ -198,11 +152,11 @@ PAI is built natively on Claude Code and designed to stay that way. We chose Cla
 
 PAI isn't a replacement for Claude Code — it's the layer on top that makes Claude Code *yours*:
 
-- **Persistent memory** — Your DA remembers past sessions, decisions, and learnings
-- **Custom skills** — Specialized capabilities for the things you do most
-- **Your context** — Goals, contacts, preferences—all available without re-explaining
-- **Intelligent routing** — Say "research this" and the right workflow triggers automatically
-- **Self-improvement** — The system modifies itself based on what it learns
+- **Persistent memory** — remembers past sessions, decisions, and learnings
+- **Custom skills** — specialized capabilities for the things you do most
+- **Your context** — goals, contacts, preferences—all available without re-explaining
+- **Intelligent routing** — say "research this" and the right workflow triggers automatically
+- **Self-improvement** — the system modifies itself based on what it learns
 
 Think of it this way: Claude Code is the engine. PAI is everything else that makes it *your* car.
 
@@ -222,7 +176,7 @@ That said, PAI's concepts (skills, memory, algorithms) are universal, and the co
 
 [Fabric](https://github.com/danielmiessler/fabric) is a collection of AI prompts (patterns) for specific tasks. It's focused on *what to ask AI*.
 
-PAI is infrastructure for *how your DA operates*—memory, skills, routing, context, self-improvement. They're complementary. Many PAI users integrate Fabric patterns into their skills.
+PAI is infrastructure for *how your assistant operates* — memory, skills, routing, context, self-improvement. They're complementary. Many PAI users integrate Fabric patterns into their skills.
 
 ### What if I break something?
 
@@ -232,8 +186,7 @@ Recovery is straightforward:
 - **USER/ is safe** — Your customizations in `USER/` are never touched by the installer or upgrades
 - **Settings merge, not overwrite** — The installer only updates identity and version fields; your hooks, statusline, and custom config are preserved
 - **Git-backed** — Version control everything, roll back when needed
-- **History is preserved** — Your DA's memory survives mistakes
-- **DA can fix it** — Your DA helped build it, it can help repair it
+- **History is preserved** — Memory survives mistakes
 - **Re-install** — Run the installer again; it detects existing installations and merges intelligently
 
 ---
@@ -245,26 +198,13 @@ Recovery is straightforward:
 | **Local Model Support** | Run PAI with local models (Ollama, llama.cpp) for privacy and cost control |
 | **Granular Model Routing** | Route different tasks to different models based on complexity |
 | **Remote Access** | Access your PAI from anywhere—mobile, web, other devices |
-| **Outbound Phone Calling** | Voice capabilities for outbound calls |
 | **External Notifications** | Robust notification system for Email, Discord, Telegram, Slack |
-
----
-
-## Community
-
-**GitHub Discussions:** [Join the conversation](https://github.com/danielmiessler/Personal_AI_Infrastructure/discussions)
-
-**Community Discord:** PAI is discussed in the [community Discord](https://danielmiessler.com/upgrade) along with other AI projects
-
-**Twitter/X:** [@danielmiessler](https://twitter.com/danielmiessler)
-
-**Blog:** [danielmiessler.com](https://danielmiessler.com)
 
 ---
 
 ## Contributing
 
-We welcome contributions! See our [GitHub Issues](https://github.com/danielmiessler/Personal_AI_Infrastructure/issues) for open tasks.
+We welcome contributions! See our [GitHub Issues](https://github.com/derekslinz/PAI_Silenced/issues) for open tasks.
 
 1. **Fork the repository**
 2. **Make your changes** — Bug fixes, new skills, documentation improvements
@@ -279,120 +219,8 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-## Credits
-
-**Anthropic and the Claude Code team** — First and foremost. You are moving AI further and faster than anyone right now. Claude Code is the foundation that makes all of this possible.
-
-**[IndyDevDan](https://www.youtube.com/@indydevdan)** — For great videos on meta-prompting and custom agents that have inspired parts of PAI.
-
-### Contributors
-
-**[fayerman-source](https://github.com/fayerman-source)** — Google Cloud TTS provider integration and Linux audio support for the voice system.
-
-**Matt Espinoza** — Extensive testing, ideas, and feedback for the PAI 2.3 release, plus roadmap contributions.
-
----
-
 ## Related Reading
 
 - [The Real Internet of Things](https://danielmiessler.com/blog/the-real-internet-of-things) — The vision behind PAI
 - [AI's Predictable Path: 7 Components](https://danielmiessler.com/blog/ai-predictable-path-7-components-2024) — Visual walkthrough of where AI is heading
 - [Building a Personal AI Infrastructure](https://danielmiessler.com/blog/personal-ai-infrastructure) — Full PAI walkthrough with examples
-
----
-
-<details>
-<summary>Update History</summary>
-
-### v5.0.0 (2026-04-30) — Life Operating System
-
-- **Pulse** — unified daemon (port 31337): voice, hooks, observability, cron, Life Dashboard (22 routes), wiki API, optional Telegram/iMessage bridges. Replaces every previous loose service.
-- **The DA** — Digital Assistant identity layer. PRINCIPAL_IDENTITY + DA_IDENTITY pair, loaded at session start. `/interview` walks you through naming your DA and picking a voice.
-- **Algorithm v6.3.0** — seven-phase loop (OBSERVE → THINK → PLAN → BUILD → EXECUTE → VERIFY → LEARN). Sonnet-backed mode classifier picks MINIMAL/NATIVE/ALGORITHM and tier (E1–E5) per prompt. Closed-list thinking capabilities. Voice phase announcements. Verification doctrine (live-probe, advisor calls at commitment boundaries, cross-vendor audit at E4/E5).
-- **The ISA** — Ideal State Artifact primitive. One document, twelve sections (Problem → Vision → Out of Scope → Principles → Constraints → Goal → Criteria → Test Strategy → Features → Decisions → Changelog → Verification), five identities (articulation, test harness, build verification, done condition, system of record). Owned by the **ISA skill** (Scaffold, Interview, CheckCompleteness, Reconcile, Seed, Append) with a dozen reference examples spanning E1–E5.
-- **Containment + release tooling** — privacy is structural. `containment-zones.ts` declares every directory's privacy zone; `ContainmentGuard` PreToolUse hook blocks cross-zone leaks; 12 security gates run on every public release; two-stage release (stage → publish) never auto-chains.
-- **Memory v7.6** — structured by purpose: WORK (active task ISAs), KNOWLEDGE (typed graph: People, Companies, Ideas, Research, Blogs), LEARNING (meta-patterns), RELATIONSHIP (DA-Principal notes), OBSERVABILITY (every tool call + hook firing + satisfaction signal), STATE (session registry).
-- **45 public skills, 171 workflows, 37 hooks** — skills are self-activating composable domain units; hooks fire across SessionStart, UserPromptSubmit, PreToolUse, PostToolUse, Stop, SubagentStop, PreCompact, SessionEnd.
-- **One-line installer** — `curl -sSL https://ourpai.ai/install.sh | bash`. Auto-backs-up existing `~/.claude/`, runs the DA identity wizard, registers Pulse as a launchd service, validates.
-- [Full release notes + migration guide](Releases/v5.0.0/README.md)
-
-### v4.0.3 (2026-03-01) — Community PR Patch
-
-- JSON array parsing fix in Inference.ts
-- 29 dead references removed from CONTEXT_ROUTING.md
-- WorldThreatModelHarness PAI_DIR portability
-- User context migration for v2.5/v3.0 upgraders
-- [Release Notes](Releases/v4.0.3/README.md)
-
-### v4.0.2 (2026-03-01) — Bug Fix Patch
-
-- 13 surgical fixes: Linux compatibility, installer, statusline, hooks
-- Cross-platform OAuth token extraction, GNU coreutils tr fix
-- Inference guard (~15s savings), lineage tracking, dead code removal
-- [Release Notes](Releases/v4.0.2/README.md)
-
-### v4.0.1 (2026-02-28) — Upgrade Path & Preferences
-
-- Upgrade documentation with backup, merge, and post-upgrade checklist
-- Configurable temperature unit (Fahrenheit/Celsius) in statusline and installer
-- FAQ fixes: removed stale Python reference, improved recovery guidance
-- [Release Notes](Releases/v4.0.1/README.md)
-
-### v4.0.0 (2026-02-27) — Lean and Mean
-
-- 38 flat skill directories → 12 hierarchical categories (-68% top-level dirs)
-- Dead systems removed: Components/, DocRebuild, RebuildSkill
-- CLAUDE.md template system with BuildCLAUDE.ts + SessionStart hook
-- Algorithm v3.5.0 (up from v1.4.0)
-- Comprehensive security sanitization (33+ files cleaned)
-- All version refs updated, Electron crash fix
-- 63 skills, 21 hooks, 180 workflows, 14 agents
-- [Release Notes](Releases/v4.0.0/README.md)
-
-### v3.0.0 (2026-02-15) — The Algorithm Matures
-
-- Algorithm v1.4.0 with constraint extraction and build drift prevention
-- Persistent PRDs and parallel loop execution
-- Full installer with GUI wizard
-- 10 new skills, agent teams/swarm, voice personality system
-- 38 skills, 20 hooks, 162 workflows
-- [Release Notes](Releases/v3.0/README.md)
-
-### v2.5.0 (2026-01-30) — Think Deeper, Execute Faster
-
-- Two-Pass Capability Selection: Hook hints validated against ISC in THINK phase
-- Thinking Tools with Justify-Exclusion: Opt-OUT, not opt-IN for Council, RedTeam, FirstPrinciples, etc.
-- Parallel-by-Default Execution: Independent tasks run concurrently via parallel agent spawning
-- 28 skills, 17 hooks, 356 workflows
-- [Release Notes](Releases/v2.5/README.md)
-
-### v2.4.0 (2026-01-23) — The Algorithm
-
-- Universal problem-solving system with ISC (Ideal State Criteria) tracking
-- 29 skills, 15 hooks, 331 workflows
-- Euphoric Surprise as the outcome metric
-- Enhanced security with AllowList enforcement
-- [Release Notes](Releases/v2.4/README.md)
-
-### v2.3.0 (2026-01-15) — Full Releases Return
-
-- Complete `.claude/` directory releases with continuous learning
-- Explicit and implicit rating capture
-- Enhanced hook system with 14 production hooks
-- Status line with learning signal display
-- [Release Notes](Releases/v2.3/README.md)
-
-### v2.1.1 (2026-01-09) — MEMORY System Migration
-
-- History system merged into core as MEMORY System
-
-### v2.1.0 (2025-12-31) — Modular Architecture
-
-- Source code in real files instead of embedded markdown
-
-### v2.0.0 (2025-12-28) — PAI v2 Launch
-
-- Modular architecture with independent skills
-- Claude Code native design
-
-</details>
