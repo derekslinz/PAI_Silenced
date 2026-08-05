@@ -12,6 +12,9 @@ import type { ActorRunOptions } from '../../types'
 export const XQUIK_TWEET_ACTOR = 'xquik/x-tweet-scraper'
 export const XQUIK_FOLLOWER_ACTOR = 'xquik/x-follower-scraper'
 
+/** Default dataset item cap when the caller does not provide maxItems. */
+const DEFAULT_MAX_ITEMS = 1000
+
 export type XquikTweetMode =
   | 'legacy'
   | 'tweet'
@@ -111,8 +114,8 @@ interface XquikActorRun {
   defaultDatasetId: string
 }
 
-interface XquikDataset {
-  listItems(options: { limit: number }): Promise<unknown[]>
+interface XquikDataset<T = unknown> {
+  listItems(options: { limit: number }): Promise<T[]>
 }
 
 export interface XquikActorClient {
@@ -121,7 +124,7 @@ export interface XquikActorClient {
     input: Record<string, unknown>,
     options?: ActorRunOptions
   ): Promise<XquikActorRun>
-  getDataset(datasetId: string): XquikDataset
+  getDataset<T = unknown>(datasetId: string): XquikDataset<T>
 }
 
 /**
@@ -167,12 +170,13 @@ export async function runXquikFollowerScraper(
   )
 }
 
-async function runXquikActor<T extends Record<string, unknown>>(
+async function runXquikActor<T = unknown>(
   client: XquikActorClient,
   actorId: string,
   input: Record<string, unknown>,
   maxItems: number | undefined,
-  options: ActorRunOptions | undefined
+  options?: ActorRunOptions,
+  logger: { info?: (...args: any[]) => void; warn?: (...args: any[]) => void } = console
 ): Promise<T[]> {
   const run = await client.callActor(actorId, input, options)
 
@@ -182,12 +186,27 @@ async function runXquikActor<T extends Record<string, unknown>>(
     )
   }
 
-  const dataset = client.getDataset(run.defaultDatasetId)
-  const items = await dataset.listItems({
-    limit: maxItems ?? 1000
-  })
+  if (!run.defaultDatasetId) {
+    throw new Error('Xquik Actor run did not return a defaultDatasetId.')
+  }
 
-  return items as T[]
+  const dataset = client.getDataset<T>(run.defaultDatasetId)
+  const limit = Math.max(0, Math.trunc(maxItems ?? DEFAULT_MAX_ITEMS))
+  const items = await dataset.listItems({ limit })
+
+  // Log if we hit the provided limit — indicates possible truncation
+  if (items.length >= limit && limit > 0) {
+    logger.warn?.({
+      event: 'dataset_truncated',
+      actorId,
+      runId: run.id,
+      datasetId: run.defaultDatasetId,
+      requestedLimit: limit,
+      returnedCount: items.length,
+    }, 'Reached maxItems limit; result may be truncated.')
+  }
+
+  return items
 }
 
 function validateXStartUrls(
