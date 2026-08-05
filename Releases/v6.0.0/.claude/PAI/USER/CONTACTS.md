@@ -1,6 +1,6 @@
 # Contacts
 
-> People the DA should know about — short entries, relational context.
+> People the assistant should know about — short entries, relational context.
 
 ## Format
 
@@ -19,4 +19,4 @@ Each entry: name, relationship, context, last touch (optional), handle/email (op
 (interview — add people one at a time via `/interview contacts`)
 
 ---
-*The DA uses this file to disambiguate names in conversation ("which Sarah?"), recall context when drafting messages, and flag overdue touches. Keep it small and honest — names without context don't help.*
+*The assistant uses this file to disambiguate names in conversation ("which Sarah?"), recall context when drafting messages, and flag overdue touches. Keep it small and honest — names without context don't help.*

@@ -2,7 +2,7 @@
 
 **PAI's file-system-based memory. Everything we know, everything we've learned, everything we've researched, everything we're working on.**
 
-This is not a narrow event log or a preferences store. This is PAI's comprehensive knowledge system — the full shared memory between {{PRINCIPAL_NAME}} and {{DA_NAME}}. If we built knowledge together, it belongs here. That includes: work tracking, learnings from failures and successes, research and OSINT investigations, contact dossiers, security events, runtime state, and any other knowledge that would be valuable in future conversations.
+This is not a narrow event log or a preferences store. This is PAI's comprehensive knowledge system — the full shared memory between {{PRINCIPAL_NAME}} and {{ASSISTANT_NAME}}. If we built knowledge together, it belongs here. That includes: work tracking, learnings from failures and successes, research and OSINT investigations, contact dossiers, security events, runtime state, and any other knowledge that would be valuable in future conversations.
 
 **Two storage layers:**
 - **PAI MEMORY** (`~/.claude/PAI/MEMORY/`) — structured, hook-driven, entity-based

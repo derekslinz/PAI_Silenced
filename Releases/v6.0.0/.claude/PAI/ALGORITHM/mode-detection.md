@@ -89,4 +89,4 @@ Analysis, review, or investigation with no code changes.
 - Skip ISA creation only at E with the same whitelist conditions; otherwise scaffold via `Skill("ISA")`.
 - Compress to: OBSERVE → THINK → EXECUTE → VERIFY → LEARN.
 
-v.. doctrine note: the whitelist exists because the new twelve-section ISA frame and `Skill("ISA")` invocation pattern raise the OBSERVE-phase floor. Without an explicit whitelist, an E task could "feel like" a fast-path candidate to the model and bypass the skill silently — recreating the v.. BPE under-cut {{PRINCIPAL_NAME}} and {{DA_NAME}} already closed at the mode-selection layer in v... The whitelist is the same enforcement pattern, applied one level deeper.
+v.. doctrine note: the whitelist exists because the new twelve-section ISA frame and `Skill("ISA")` invocation pattern raise the OBSERVE-phase floor. Without an explicit whitelist, an E task could "feel like" a fast-path candidate to the model and bypass the skill silently — recreating the v.. BPE under-cut {{PRINCIPAL_NAME}} and {{ASSISTANT_NAME}} already closed at the mode-selection layer in v... The whitelist is the same enforcement pattern, applied one level deeper.

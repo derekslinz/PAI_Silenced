@@ -2,7 +2,7 @@
 
 **Date:** 2025-10-31 (original migration)
 **Updated:** 2026-04-01 (Nomad verification upgrade)
-**Intern Agent:** Nova (original), {{DA_NAME}} (update)
+**Intern Agent:** Nova (original), {{ASSISTANT_NAME}} (update)
 **Architecture:** Skills-as-Containers
 
 > **2026-04-01 Update:** Research skill upgraded with Nomad-inspired explorer-verifier pattern. Quick now uses Claude (not Perplexity). Standard uses 2 agents (Claude + Gemini) with cross-check synthesis. Extensive uses 7 explorers + 2 verifiers (9 total). All agents have self-verification. New Verify.md workflow added. See SKILL.md for current state. Counts below reflect original migration state.

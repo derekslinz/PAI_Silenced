@@ -723,8 +723,8 @@ Check `flow-state.json` for errors. Common: malformed pipeline output, AUTH_TOKE
 
 | Date | Change | Author | Related |
 |------|--------|--------|---------|
-| 2026-04-20 | Consolidated ACTIONS/, FLOWS/, PIPELINES/, ARBOLSYSTEM.md under PAI/ARBOL/ | {{DA_NAME}} | Subsystem unification |
-| 2026-04-01 | Consolidated ACTIONS.md, PIPELINES.md, FLOWS.md, DEPLOYMENT.md into this single authoritative doc | {{DA_NAME}} | Architecture reorg |
-| 2026-02-25 | Added Queue Composition pattern | {{DA_NAME}} | Feed system |
-| 2026-02-22 | Added Loop Gate, aligned with actual Arbol codebase | {{DA_NAME}} | FLOWS.md |
-| 2026-02-03 | Initial document creation | {{DA_NAME}} | PAISYSTEMARCHITECTURE.md |
+| 2026-04-20 | Consolidated ACTIONS/, FLOWS/, PIPELINES/, ARBOLSYSTEM.md under PAI/ARBOL/ | {{ASSISTANT_NAME}} | Subsystem unification |
+| 2026-04-01 | Consolidated ACTIONS.md, PIPELINES.md, FLOWS.md, DEPLOYMENT.md into this single authoritative doc | {{ASSISTANT_NAME}} | Architecture reorg |
+| 2026-02-25 | Added Queue Composition pattern | {{ASSISTANT_NAME}} | Feed system |
+| 2026-02-22 | Added Loop Gate, aligned with actual Arbol codebase | {{ASSISTANT_NAME}} | FLOWS.md |
+| 2026-02-03 | Initial document creation | {{ASSISTANT_NAME}} | PAISYSTEMARCHITECTURE.md |

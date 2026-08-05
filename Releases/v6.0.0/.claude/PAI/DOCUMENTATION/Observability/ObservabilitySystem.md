@@ -233,20 +233,20 @@ All endpoints served by the Pulse daemon's observability module (`Observability/
 | `/api/wiki/search` | GET | Full-text search across system docs | `modules/wiki.ts` |
 | `/api/wiki/graph` | GET | Knowledge graph data for visualization | `modules/wiki.ts` |
 
-**DA (Digital Assistant)**
+**Assistant**
 
 | Endpoint | Method | Purpose | Source |
 |----------|--------|---------|--------|
-| `/assistant/health` | GET | DA subsystem health | `Assistant/module.ts` |
-| `/assistant/identity` | GET | Current DA identity summary | `Assistant/module.ts` |
-| `/assistant/personality` | GET | DA personality traits | `Assistant/module.ts` |
+| `/assistant/health` | GET | assistant subsystem health | `Assistant/module.ts` |
+| `/assistant/identity` | GET | Current assistant identity summary | `Assistant/module.ts` |
+| `/assistant/personality` | GET | assistant personality traits | `Assistant/module.ts` |
 | `/assistant/personality/traits` | PATCH | Update personality traits | `Assistant/module.ts` |
-| `/assistant/avatar` | GET | DA avatar image | `Assistant/module.ts` |
-| `/assistant/tasks` | GET | Unified task view (DA + Pulse cron + CC triggers) | `Assistant/module.ts` |
-| `/assistant/tasks` | POST | Create DA scheduled task | `Assistant/module.ts` |
-| `/assistant/tasks/:id` | DELETE | Cancel DA task | `Assistant/module.ts` |
+| `/assistant/avatar` | GET | assistant avatar image | `Assistant/module.ts` |
+| `/assistant/tasks` | GET | Unified task view (assistant + Pulse cron + CC triggers) | `Assistant/module.ts` |
+| `/assistant/tasks` | POST | Create assistant scheduled task | `Assistant/module.ts` |
+| `/assistant/tasks/:id` | DELETE | Cancel assistant task | `Assistant/module.ts` |
 | `/assistant/diary` | GET | Recent diary entries | `Assistant/module.ts` |
-| `/assistant/opinions` | GET | Current DA opinions | `Assistant/module.ts` |
+| `/assistant/opinions` | GET | Current assistant opinions | `Assistant/module.ts` |
 
 **Notifications**
 

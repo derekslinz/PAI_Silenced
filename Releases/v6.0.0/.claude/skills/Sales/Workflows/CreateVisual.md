@@ -99,7 +99,7 @@ CRITICAL:
 - Visual captures the VALUE PROPOSITION
 - Gallery-worthy gestural sketch aesthetic
 
-Sign {DA_IDENTITY.NAME} small in charcoal bottom right.
+Sign {ASSISTANT_IDENTITY.NAME} small in charcoal bottom right.
 NO other text.
 ```
 

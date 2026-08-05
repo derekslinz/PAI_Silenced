@@ -2,7 +2,7 @@
 
 >  SAMPLE TEMPLATE — Replace with your own business data via /interview or by editing this file.
 
-The AOS is the single document your DA reads to understand where your business is heading this year. Keep it current — outdated AOS content produces outdated advice.
+The AOS is the single document your assistant reads to understand where your business is heading this year. Keep it current — outdated AOS content produces outdated advice.
 
 ---
 
@@ -71,6 +71,6 @@ The numbers you watch every week to know if the business is healthy.
 
 ## Notes
 
-Anything else the DA should know to give you good business answers.
+Anything else the assistant should know to give you good business answers.
 
 (interview — freeform notes)

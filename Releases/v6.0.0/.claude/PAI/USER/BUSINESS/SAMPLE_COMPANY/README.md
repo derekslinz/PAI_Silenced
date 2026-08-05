@@ -9,10 +9,10 @@ This is a stub for a single business entity. If you operate multiple companies, 
 Entity-specific records and reference material:
 
 - **`README.md`** (this file) — overview of the company: what it does, who runs it, key facts.
-- **`Revenue/`** — revenue records, invoices, quarterly/annual summaries. Files in here are how your DA answers "how is the business doing financially this year."
+- **`Revenue/`** — revenue records, invoices, quarterly/annual summaries. Files in here are how your assistant answers "how is the business doing financially this year."
 - **Formation documents** — EIN, articles of incorporation, operating agreement, W9, etc.
 - **Customer-facing materials** — media kit, one-pager, pricing sheet.
-- **Anything else specific to this entity** that your DA should be able to reference.
+- **Anything else specific to this entity** that your assistant should be able to reference.
 
 ## Sample fields to populate
 

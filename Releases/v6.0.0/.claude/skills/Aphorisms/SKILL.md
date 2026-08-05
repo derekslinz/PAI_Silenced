@@ -100,7 +100,7 @@ Analyze newsletter or article content to find the perfect thematic aphorism:
 
 ### 2. Comprehensive Database
 Curated collection organized by:
-- **Author** - Thinkers aligned with TELOS philosophy
+- **Author** - Thinkers aligned with life philosophy
 - **Theme** - Categories like resilience, learning, stoicism, risk, progress
 - **Context** - Background on quote origin and meaning
 - **Usage History** - Track which quotes used in which newsletters
@@ -130,7 +130,7 @@ Aphorisms categorized by themes matching user content:
 
 **Current Collections:**
 1. **Initial Collection (Rahil Arora)** - 15 curated quotes covering core themes
-2. **Thinkers Aligned with TELOS** - Sections for Hitchens, Deutsch, Harris, Spinoza, Feynman (to be populated)
+2. **Thinkers Aligned with Life Philosophy** - Sections for Hitchens, Deutsch, Harris, Spinoza, Feynman (to be populated)
 3. **Theme Index** - Quick reference by category
 4. **Newsletter Usage History** - Tracking to avoid repetition
 
@@ -167,7 +167,7 @@ Aphorisms categorized by themes matching user content:
 
 **research-thinker.md** - Deep thinker research
 - Research specific philosopher's relevant quotes
-- Focus on TELOS-aligned themes
+- Focus on life-philosophy-aligned themes
 - Add quotes to appropriate database section
 - Include context and sources
 - Update theme index
@@ -205,7 +205,7 @@ Aphorisms categorized by themes matching user content:
 
 ### Why These Thinkers?
 
-All five thinkers align with TELOS themes of **wisdom, rationality, truth-seeking, and human flourishing:**
+All five thinkers align with life philosophy themes of **wisdom, rationality, truth-seeking, and human flourishing:**
 
 **Christopher Hitchens**
 - Intellectual honesty and skepticism
@@ -314,7 +314,7 @@ All five thinkers align with TELOS themes of **wisdom, rationality, truth-seekin
 1. **Primary sources** - Prefer direct quotes from books/speeches
 2. **Context critical** - Include enough background for understanding
 3. **Avoid misattribution** - Verify quote authenticity
-4. **TELOS alignment** - Focus on wisdom, rationality, truth-seeking
+4. **Life philosophy alignment** - Focus on wisdom, rationality, truth-seeking
 5. **Practical wisdom** - Quotes should be actionable or profound
 
 ---
@@ -325,7 +325,7 @@ All five thinkers align with TELOS themes of **wisdom, rationality, truth-seekin
 1. **Automatic theme detection** - ML-based content analysis
 2. **Quote recommendation engine** - Collaborative filtering based on past selections
 3. **Integration with previous newsletters** - Analyze historical aphorism usage patterns
-4. **Expanded thinker research** - Add more philosophers aligned with TELOS
+4. **Expanded thinker research** - Add more philosophers aligned with life philosophy
 5. **Mood/tone matching** - Match quote emotional tone to content
 6. **Quote formatting** - Auto-format for newsletter style
 

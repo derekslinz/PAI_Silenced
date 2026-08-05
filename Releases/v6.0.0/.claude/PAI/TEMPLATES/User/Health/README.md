@@ -9,7 +9,7 @@ last_updated: TBD
 
 # Health
 
-**Your health as a system.** The index for everything your DA tracks about your body, fitness, nutrition, and medical care. Always private — this domain never leaves your machine unless you explicitly flip a specific file's `publish:` flag.
+**Your health as a system.** The index for everything your assistant tracks about your body, fitness, nutrition, and medical care. Always private — this domain never leaves your machine unless you explicitly flip a specific file's `publish:` flag.
 
 ## Current State
 
@@ -21,7 +21,7 @@ One paragraph on where you want your health to be. What "working" looks like.
 
 ## Gap
 
-What's between current and ideal? What's your DA's job in closing that gap?
+What's between current and ideal? What's your assistant's job in closing that gap?
 
 ## Files in This Domain
 
@@ -33,12 +33,12 @@ What's between current and ideal? What's your DA's job in closing that gap?
 | `Conditions.md` | narrative | Ongoing health conditions and their management |
 | `Fitness.md` | narrative | Current training program, goals, progress |
 | `Nutrition.md` | narrative | Eating pattern, restrictions, what works |
-| `History.md` | narrative | Significant health history your DA should know |
+| `History.md` | narrative | Significant health history your assistant should know |
 | `Labs/` | directory | Time-series: one file per lab panel, named `YYYY-MM.md` |
 
 ## Review Triggers
 
-Your DA surfaces this domain when:
+Your assistant surfaces this domain when:
 
 - New lab results arrive (update `Labs/`, flag changes against `Metrics.md`)
 - Medication changes (update `Medications.md`)
@@ -47,4 +47,4 @@ Your DA surfaces this domain when:
 
 ---
 
-*Setup tip: Start with `Metrics.md` and `Providers.md` — those two unlock most of what your DA needs to be useful. The rest accretes over time.*
+*Setup tip: Start with `Metrics.md` and `Providers.md` — those two unlock most of what your assistant needs to be useful. The rest accretes over time.*

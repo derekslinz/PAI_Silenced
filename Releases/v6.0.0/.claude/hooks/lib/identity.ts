@@ -123,14 +123,13 @@ function loadSettings(): Settings {
 export function getIdentity(): Identity {
   const settings = loadSettings();
 
-  // Prefer settings.daidentity, fall back to env.DA for backward compat
+  // Prefer settings.daidentity, fall back to defaults
   const daidentity = settings.daidentity || {};
-  const envDA = settings.env?.DA;
 
   return {
-    name: daidentity.name || envDA || DEFAULT_IDENTITY.name,
-    fullName: daidentity.fullName || daidentity.name || envDA || DEFAULT_IDENTITY.fullName,
-    displayName: daidentity.displayName || daidentity.name || envDA || DEFAULT_IDENTITY.displayName,
+    name: daidentity.name || DEFAULT_IDENTITY.name,
+    fullName: daidentity.fullName || daidentity.name || DEFAULT_IDENTITY.fullName,
+    displayName: daidentity.displayName || daidentity.name || DEFAULT_IDENTITY.displayName,
     color: daidentity.color || DEFAULT_IDENTITY.color,
   };
 }

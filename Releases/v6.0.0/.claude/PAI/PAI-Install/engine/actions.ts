@@ -1386,7 +1386,7 @@ export async function runConfiguration(
   }
 
   // Render identity into the user-facing markdown.
-  // CLAUDE.md ships with `{DA_IDENTITY.NAME}` / `{PRINCIPAL.NAME}` tokens
+  // CLAUDE.md ships with `{ASSISTANT_IDENTITY.NAME}` / `{PRINCIPAL.NAME}` tokens
   // (because the public release can't know either yet). Without this step,
   // the model literalises the curly-brace tokens at runtime.
   await emit({ event: "progress", step: "configuration", percent: 42, detail: "Personalising identity files..." });
@@ -1397,7 +1397,7 @@ export async function runConfiguration(
   if (existsSync(claudeMdPath)) {
     try {
       const content = readFileSync(claudeMdPath, "utf-8")
-        .replace(/\{DA_IDENTITY\.NAME\}/g, aiName)
+        .replace(/\{ASSISTANT_IDENTITY\.NAME\}/g, aiName)
         .replace(/\{PRINCIPAL\.NAME\}/g, principalName);
       writeFileSync(claudeMdPath, content);
     } catch {}

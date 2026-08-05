@@ -26,4 +26,4 @@
 - (interview — things you've built, shipped, or published that matter to you)
 
 ---
-*Used by the DA when drafting bios, pitch emails, speaker submissions, or LinkedIn posts. Keep current — it's easier to maintain incrementally than reconstruct.*
+*Used by the assistant when drafting bios, pitch emails, speaker submissions, or LinkedIn posts. Keep current — it's easier to maintain incrementally than reconstruct.*

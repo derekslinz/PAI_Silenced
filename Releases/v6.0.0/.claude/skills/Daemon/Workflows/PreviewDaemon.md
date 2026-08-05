@@ -38,8 +38,8 @@ Flag any sections where:
 Daemon Preview — what would change:
 
   [ABOUT]: unchanged
-  [MISSION]: 2 goals updated from TELOS
-  [FAVORITE_BOOKS]: +2 new (from TELOS/BOOKS.md)
+  [MISSION]: 2 goals updated from life context
+  [FAVORITE_BOOKS]: +2 new (from life context books)
   [RECENT_IDEAS]: 10 new ideas (title + thesis)
   [CURRENTLY_WORKING_ON]: 6 themes from last 14 days
   [WISDOM]: 5 quotes added

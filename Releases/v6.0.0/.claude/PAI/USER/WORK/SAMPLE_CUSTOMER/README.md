@@ -13,7 +13,7 @@ Engagement-specific records:
 - **Deliverables** — drafts and final versions of the work product you're producing for them.
 - **Meeting notes** — running log of calls and key decisions.
 - **Reference material** they've given you — their docs, their architecture, their data.
-- **Anything else specific to this customer** that your DA should be able to surface when you ask "what's the status with $CUSTOMER."
+- **Anything else specific to this customer** that your assistant should be able to surface when you ask "what's the status with $CUSTOMER."
 
 ## Sample fields to populate
 

@@ -1,7 +1,7 @@
 # PAI_CONFIG.yaml — User credentials and per-system configuration
 #
 # Bootstrap default. Run /interview or /setup to fill in your real values.
-# The DA reads this at session start. Keys live in this file; secrets stay
+# The assistant reads this at session start. Keys live in this file; secrets stay
 # in environment variables and ~/.claude/.env (never committed).
 #
 # Schema: see PAI/DOCUMENTATION/Config/ConfigSystem.md
@@ -13,7 +13,7 @@ principal:
   email: ""                # Primary contact email
 
 da:
-  name: "PAI"              # Your DA's name (e.g. {{DA_NAME}}, Aria, etc.)
+  name: "PAI"              # Your assistant's name (e.g. {{DA_NAME}}, Aria, etc.)
 
 services:
   # API key NAMES referenced from ~/.claude/.env — do NOT store keys here.
@@ -30,5 +30,5 @@ paths:
 pulse:
   port: 31337
 
-# Add your own keys below as you customize. The DA respects everything
+# Add your own keys below as you customize. The assistant respects everything
 # in this file but you decide what's worth tracking.

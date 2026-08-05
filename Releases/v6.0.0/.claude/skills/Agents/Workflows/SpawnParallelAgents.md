@@ -148,7 +148,7 @@ Provide a brief assessment and any issues found.`,
 
 **{PRINCIPAL.NAME}:** "Launch agents to research these 5 AI security companies"
 
-**{DA_IDENTITY.NAME}'s Execution:**
+**{ASSISTANT_IDENTITY.NAME}'s Execution:**
 ```typescript
 // Single message with 5 Task calls:
 Task({

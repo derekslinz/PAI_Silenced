@@ -20,7 +20,7 @@ Running **D3Dashboards** in **Art**...
 Creates sophisticated, interactive data visualizations using D3.js for dashboards, reports, and data analysis.
 
 **Use for:**
-- TELOS consulting dashboards (project dependencies, constraint analysis)
+- Life goals consulting dashboards (project dependencies, constraint analysis)
 - Blog post data visualizations (statistics, trends, relationships)
 - Network diagrams (system architecture, organizational relationships)
 - Interactive reports and presentations
@@ -186,7 +186,7 @@ resizeObserver.observe(document.querySelector('#chart-container'));
 
 ---
 
-## TELOS Dashboard Patterns
+## Life Goals Dashboard Patterns
 
 ### Project Dependency Network
 

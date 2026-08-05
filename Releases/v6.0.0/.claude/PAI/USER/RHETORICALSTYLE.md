@@ -2,7 +2,7 @@
 
 > Bootstrap default. Run `/interview` to capture your argumentation style.
 
-How you argue — distinct from how you write prose. The DA reads this when
+How you argue — distinct from how you write prose. The assistant reads this when
 constructing pitches, replies to disagreement, or framing controversial
 claims in your voice.
 

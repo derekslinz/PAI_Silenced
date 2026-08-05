@@ -96,7 +96,7 @@ ONLY templated, safe, public, ready content. Period.
 - ✗ Customer data, customer-specific workflows, customer engagement context
 - ✗ First-person war stories tied to a specific incident, project, or person
 - ✗ User-specific filesystem paths (`/Users/<name>/...`, `/home/<name>/...`)
-- ✗ Identity-bound preferences (DA name, principal name, partner name, pet name, financial figures, health data)
+- ✗ Identity-bound preferences (assistant name, principal name, partner name, pet name, financial figures, health data)
 
 **Private skill (`_ALLCAPS`) — content rule:**
 

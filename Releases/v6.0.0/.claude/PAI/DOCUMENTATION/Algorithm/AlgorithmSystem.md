@@ -175,7 +175,7 @@ The Algorithm's THINK and LEARN phases integrate with the Knowledge Archive (ent
 | **gotcha** | A trap to avoid next time — appended to the relevant SKILL.md `Gotchas` section |
 | **state** | Operational state (e.g., "X is now deployed at Y") — appended to the relevant project doc |
 | **business** | Business-domain learning — `PAI/USER/BUSINESS/` |
-| **identity** | Principal/DA identity update — `PAI/USER/PRINCIPAL_IDENTITY.md` or `DA_IDENTITY.md` |
+| **identity** | Principal/assistant identity update — `PAI/USER/PRINCIPAL_IDENTITY.md` |
 | **doctrine** | An Algorithm- or PAI-level principle — proposed for `PAI/ALGORITHM/v{NEXT}.md` |
 | **hook** | A behavior that should be enforced automatically — proposed as a hook |
 | **permission** | A new automation permission boundary — proposed for `settings.json` |

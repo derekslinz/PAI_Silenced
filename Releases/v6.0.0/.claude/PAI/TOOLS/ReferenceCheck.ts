@@ -377,7 +377,7 @@ function extractRefs(content: string, referringFile: string): RefHit[] {
       if (raw.includes('<') || raw.includes('>') || raw.includes('$SkillName')) continue;
       // Date/version placeholders in templates
       if (raw.includes('YYYY') || raw.includes('MM-DD') || raw.includes('vX.Y.Z') || raw.includes('{slug}')) continue;
-      // Per-user template placeholder ("your-da" = the user's named DA in the
+      // Per-user template placeholder ("your-da" = the user's named assistant in the
       // PAI install template; "SKILLCUSTOMIZATIONS/<skill-name>/" = optional
       // user-defined override file that may not exist by default)
       if (raw.includes('your-da')) continue;

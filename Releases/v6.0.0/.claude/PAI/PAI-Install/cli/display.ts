@@ -93,7 +93,7 @@ function visibleLength(text: string): number {
   return text.replace(ANSI_PATTERN, "").length;
 }
 
-export function printQuestion(text: string, daName: string = "{{DA_NAME}}"): void {
+export function printQuestion(text: string, daName: string = "{{ASSISTANT_NAME}}"): void {
   const borderColor = c.lightBlue;
   const header = `${daName} asks`;
   const lines = text.split("\n");
@@ -129,7 +129,7 @@ export function printBanner(): void {
   print(`                     ${c.italic}${c.lightBlue}"Magnifying human capabilities..."${c.reset}`);
   print("");
   print("");
-  print(`           ${c.navy}${c.reset}${c.lightBlue}${c.reset}   ${sep}  ${c.gray}"${c.reset}${c.lightBlue}{{DA_NAME}} here, ready to go${c.reset}${c.gray}..."${c.reset}`);
+  print(`           ${c.navy}${c.reset}${c.lightBlue}${c.reset}   ${sep}  ${c.gray}"${c.reset}${c.lightBlue}{{ASSISTANT_NAME}} here, ready to go${c.reset}${c.gray}..."${c.reset}`);
   print(`           ${c.navy}${c.reset}${c.lightBlue}${c.reset}   ${sep}  ${bar}`);
   print(`           ${c.navy}${c.reset}        ${c.navy}${c.reset}${c.lightBlue}${c.reset}   ${sep}  ${c.navy}${c.reset}  ${c.gray}PAI${c.reset}       ${c.silver}v5.0.0${c.reset}`);
   print(`           ${c.navy}${c.reset}        ${c.navy}${c.reset}${c.lightBlue}${c.reset}   ${sep}  ${c.navy}${c.reset}  ${c.gray}Algo${c.reset}      ${c.silver}v6.3.0${c.reset}`);

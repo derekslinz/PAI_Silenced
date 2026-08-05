@@ -180,7 +180,7 @@ If `--timing` is omitted, agents get no scope section (backward compatible).
 
 **{PRINCIPAL.NAME}:** "Create 5 custom science agents to analyze this climate data"
 
-**{DA_IDENTITY.NAME}'s Internal Execution:**
+**{ASSISTANT_IDENTITY.NAME}'s Internal Execution:**
 ```bash
 # Agent 1 - Climate Science Enthusiast
 bun run ComposeAgent.ts --traits "research,enthusiastic,thorough" --task "Analyze climate data patterns" --output json

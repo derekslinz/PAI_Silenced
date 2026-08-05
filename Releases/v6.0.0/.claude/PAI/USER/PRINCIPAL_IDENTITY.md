@@ -2,7 +2,7 @@
 
 > Bootstrap default — functional before interview. Run `/interview` to personalize.
 
-Loaded at every session startup via CLAUDE.md `@` import. Gives the DA a concise identity reference.
+Loaded at every session startup via CLAUDE.md `@` import. Gives the assistant a concise identity reference.
 
 ---
 
@@ -34,7 +34,7 @@ Loaded at every session startup via CLAUDE.md `@` import. Gives the DA a concise
 ## Work Patterns & Communication
 
 - (interview — how you work best)
-- (interview — how you want the DA to talk to you)
+- (interview — how you want the assistant to talk to you)
 
 ## Preferences
 
@@ -44,7 +44,7 @@ Loaded at every session startup via CLAUDE.md `@` import. Gives the DA a concise
 
 ---
 
-## For the DA's Reference
+## For the assistant's Reference
 
 When representing the user or working in their context:
 - (interview — what one sentence summarizes who they are?)
@@ -53,4 +53,4 @@ When representing the user or working in their context:
 
 ---
 
-*After `/interview`, this file is rewritten with your actual identity. The DA reads it at every session start — keeping it current is how the DA stays aligned.*
+*After `/interview`, this file is rewritten with your actual identity. The assistant reads it at every session start — keeping it current is how the assistant stays aligned.*

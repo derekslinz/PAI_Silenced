@@ -50,7 +50,7 @@ Launch 4-8 agents concurrently if scene count > 3.
 
 ### 4. Generate narration (ElevenLabs TTS)
 
-Use the voice the user has configured for DA narration. Save to `public/narration.mp3`.
+Use the voice the user has configured for assistant narration. Save to `public/narration.mp3`.
 
 ```tsx
 const audio = await elevenlabs.textToSpeech.convert(VOICE_ID, {

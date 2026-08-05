@@ -63,7 +63,7 @@ const RULES: Array<{ target: Target; patterns: RegExp[]; weight: number }> = [
   { target: "MEMORY/KNOWLEDGE/Research", patterns: [/\bresearch\b/i, /\bstudy shows\b/i, /\baccording to\b/i], weight: 1 },
 
   // Feedback (AI collaboration preferences)
-  { target: "memory/feedback", patterns: [/\b(always|never|do not) (do|use|include)\b/i, /\bwhen (you|{{DA_NAME}})\b/i, /\bKai should\b/i, /\bfrom now on\b/i, /\brule:\b/i], weight: 3 },
+  { target: "memory/feedback", patterns: [/\b(always|never|do not) (do|use|include)\b/i, /\bwhen (you|{{ASSISTANT_NAME}})\b/i, /\bKai should\b/i, /\bfrom now on\b/i, /\brule:\b/i], weight: 3 },
 ];
 
 //  Chunking 

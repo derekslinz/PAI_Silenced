@@ -58,7 +58,7 @@ interface ReflectionResult {
 const MILESTONES = [
   {
     id: 'first-pushback',
-    description: 'First time {{DA_NAME}} correctly pushed back on {{PRINCIPAL_NAME}}\'s approach',
+    description: 'First time {{ASSISTANT_NAME}} correctly pushed back on {{PRINCIPAL_NAME}}\'s approach',
     pattern: /pushed back|disagreed|suggested alternative|recommended against/i,
     detected: false
   },

@@ -9,7 +9,7 @@ last_updated: TBD
 
 # Rhythms
 
-**How your life actually runs across time.** Daily, weekly, seasonal — the cadences that shape everything. Your DA uses this to time suggestions, avoid interrupting, and know when "this week" means different things.
+**How your life actually runs across time.** Daily, weekly, seasonal — the cadences that shape everything. Your assistant uses this to time suggestions, avoid interrupting, and know when "this week" means different things.
 
 ## Daily
 
@@ -36,7 +36,7 @@ last_updated: TBD
 
 ## What Disrupts the Rhythm
 
-Things that throw you off — travel, deadlines, social density. Your DA should flag these.
+Things that throw you off — travel, deadlines, social density. Your assistant should flag these.
 
 -
 

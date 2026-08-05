@@ -69,7 +69,7 @@ export const CONTAINMENT_ZONES: readonly ContainmentZone[] = [
       "PAI/PULSE/.playwright-cli/**",
       "PAI/ScheduledTasks/**",
     ],
-    description: "Top-level private infrastructure dirs: cloud worker code, DA-specific assistant, planning docs, runtime logs/state, rendered HTML",
+    description: "Top-level private infrastructure dirs: cloud worker code, assistant-specific, planning docs, runtime logs/state, rendered HTML",
   },
 ];
 

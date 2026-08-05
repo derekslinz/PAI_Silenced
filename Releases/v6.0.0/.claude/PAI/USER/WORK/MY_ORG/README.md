@@ -11,7 +11,7 @@ If `BUSINESS/<COMPANY>/` describes what the company *is* (entity records, format
 - **`Business/`** — operational documents: SOPs, internal playbooks, vendor lists, process notes.
 - **`Design/`** — brand assets, logos, color palettes, typography specs, design system reference.
 - **Media kit, one-pagers, pitch decks** — public-facing organizational materials you reuse across opportunities.
-- **Internal team notes** — anything internal-only that your DA should be able to reference.
+- **Internal team notes** — anything internal-only that your assistant should be able to reference.
 
 ## Sample fields to populate
 

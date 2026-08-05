@@ -63,7 +63,7 @@ If a skill does not follow this structure, it is not properly configured and wil
 - Customer data, customer-specific workflows
 - First-person war stories tied to a specific incident
 - User-specific filesystem paths (`/Users/<name>/...`)
-- Identity-bound preferences (DA name, principal name, partner name, financial figures)
+- Identity-bound preferences (assistant name, principal name, partner name, financial figures)
 
 ### Private skills (`_ALLCAPS`) — never leave the local repo
 - Anything goes: real names, real domains, real customers, real internal infra

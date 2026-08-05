@@ -1,6 +1,6 @@
 ---
 name: Migrate
-description: "Intakes existing content from external sources, classifies each chunk against the PAI destination taxonomy, and commits approved chunks with provenance. Sources: .md/.markdown/.txt, stdin, PAI TELOS/MEMORY/KNOWLEDGE dirs, CLAUDE.md/.cursorrules/OpenAI Custom Instructions, Obsidian/Notion/Apple Notes exports, journal dumps. MigrateScan.ts chunks and classifies, producing a routing table with per-target counts and confidence %. MigrateApprove.ts approval loop: --approve-all, --approve-target, --review, --dry-run. UNCLEAR never bulk-approved. Phase 6 delivers summary and /interview recommendation for sparse areas. Confidence: ≥70% auto-approve; 40-70% confirm; <40% walk-through. Destinations: TELOS (MISSION/GOALS/PROBLEMS/STRATEGIES/CHALLENGES/BELIEFS/WISDOM/MODELS/FRAMES/NARRATIVES/SPARKS), IDEAL_STATE (per-dimension explicit call), preferences (BOOKS/AUTHORS/MOVIES/BANDS/RESTAURANTS/FOOD_PREFERENCES/LEARNING/MEETUPS/CIVIC), Identity (PRINCIPAL_IDENTITY.md — always prompts), Knowledge (MEMORY/KNOWLEDGE/{Ideas,People,Companies,Research}), AI rules (memory/feedback_*.md — new file per chunk), UNCLEAR. Provenance HTML comment on every commit. Dedup via substring match. USE WHEN /migrate, migrate content, import from other PAI, bring in old notes, import Cursor rules, import CLAUDE.md, import Custom Instructions, bulk import, Obsidian/Notion/Apple Notes import. NOT FOR single-file edits (use Telos Update), conversational interviews (use Interview), Knowledge Archive (use Knowledge), identity edits (use _PROFILE)."
+description: "Intakes existing content from external sources, classifies each chunk against the PAI destination taxonomy, and commits approved chunks with provenance. Sources: .md/.markdown/.txt, stdin, PAI life context/MEMORY/KNOWLEDGE dirs, CLAUDE.md/.cursorrules/OpenAI Custom Instructions, Obsidian/Notion/Apple Notes exports, journal dumps. MigrateScan.ts chunks and classifies, producing a routing table with per-target counts and confidence %. MigrateApprove.ts approval loop: --approve-all, --approve-target, --review, --dry-run. UNCLEAR never bulk-approved. Phase 6 delivers summary and /interview recommendation for sparse areas. Confidence: ≥70% auto-approve; 40-70% confirm; <40% walk-through. Destinations: life context (MISSION/GOALS/PROBLEMS/STRATEGIES/CHALLENGES/BELIEFS/WISDOM/MODELS/FRAMES/NARRATIVES/SPARKS), IDEAL_STATE (per-dimension explicit call), preferences (BOOKS/AUTHORS/MOVIES/BANDS/RESTAURANTS/FOOD_PREFERENCES/LEARNING/MEETUPS/CIVIC), Identity (PRINCIPAL_IDENTITY.md — always prompts), Knowledge (MEMORY/KNOWLEDGE/{Ideas,People,Companies,Research}), AI rules (memory/feedback_*.md — new file per chunk), UNCLEAR. Provenance HTML comment on every commit. Dedup via substring match. USE WHEN /migrate, migrate content, import from other PAI, bring in old notes, import Cursor rules, import CLAUDE.md, import Custom Instructions, bulk import, Obsidian/Notion/Apple Notes import. NOT FOR single-file edits (use life context Update), conversational interviews (use Interview), Knowledge Archive (use Knowledge), identity edits (use _PROFILE)."
 ---
 
 # Migrate — external-content intake and classification
@@ -22,7 +22,7 @@ Migrates content into the PAI structure from external sources. Unlike `/intervie
 
 - **Files:** `.md`, `.markdown`, `.txt` (single file or directory recursion)
 - **Stdin:** piped content or pasted directly
-- **Other PAI installs:** point at their `USER/TELOS/` or `MEMORY/KNOWLEDGE/` directories
+- **Other PAI installs:** point at their life context or `MEMORY/KNOWLEDGE/` directories
 - **Agent-harness rule files:** `CLAUDE.md`, `.cursorrules`, OpenAI Custom Instructions export
 - **Exports:** Obsidian vaults (markdown), Notion exports (markdown), Apple Notes exports (.txt), raw journal dumps
 
@@ -30,7 +30,7 @@ Migrates content into the PAI structure from external sources. Unlike `/intervie
 
 | Category | Destinations |
 |---|---|
-| **Foundational TELOS** | MISSION, GOALS, PROBLEMS, STRATEGIES, CHALLENGES, BELIEFS, WISDOM, MODELS, FRAMES, NARRATIVES, SPARKS |
+| **Foundational life context** | MISSION, GOALS, PROBLEMS, STRATEGIES, CHALLENGES, BELIEFS, WISDOM, MODELS, FRAMES, NARRATIVES, SPARKS |
 | **IDEAL_STATE dimensions** | HEALTH, MONEY, FREEDOM, RELATIONSHIPS, CREATIVE, RHYTHMS |
 | **Preference files** | BOOKS, AUTHORS, MOVIES, BANDS, RESTAURANTS, FOOD_PREFERENCES, LEARNING, MEETUPS, CIVIC |
 | **Identity** | USER/PRINCIPAL_IDENTITY.md |
@@ -48,7 +48,7 @@ Ask the user what he wants to migrate:
 - "Point me at a file path"
 - "Point me at a directory and I'll scan everything inside"
 - "I have a Cursor rules file at ~/Projects/X/.cursorrules"
-- "My old PAI install has TELOS at ~/old-claude/TELOS/"
+- "My old PAI install has life context at ~/old-claude/life-context/"
 
 Collect the source path. If content is pasted, write it to a temp file first.
 
@@ -76,9 +76,9 @@ Show the user the routing proposal in a scannable format:
 ```
 Found 47 chunks from 3 files. Proposed routing:
 
-  TELOS/GOALS.md              12 chunks  (78% avg confidence)
-  TELOS/WISDOM.md              8 chunks  (65% avg confidence)
-  TELOS/BELIEFS.md             6 chunks  (71% avg confidence)
+  Life context goals              12 chunks  (78% avg confidence)
+  Life context wisdom              8 chunks  (65% avg confidence)
+  Life context beliefs             6 chunks  (71% avg confidence)
   MEMORY/KNOWLEDGE/Ideas      15 chunks  (52% avg confidence)
   memory/feedback              4 chunks  (85% avg confidence)
   UNCLEAR                      2 chunks  (needs your call)
@@ -102,8 +102,8 @@ Commits everything non-UNCLEAR. Then walk through UNCLEAR chunks conversationall
 
 **Category path** (he says "approve goals and wisdom, skip knowledge"):
 ```bash
-bun ~/.claude/PAI/TOOLS/MigrateApprove.ts --approve-target TELOS/GOALS.md
-bun ~/.claude/PAI/TOOLS/MigrateApprove.ts --approve-target TELOS/WISDOM.md
+bun ~/.claude/PAI/TOOLS/MigrateApprove.ts --approve-target life-context/goals
+bun ~/.claude/PAI/TOOLS/MigrateApprove.ts --approve-target life-context/wisdom
 ```
 
 **Walk-through path** (he wants careful review):
@@ -131,7 +131,7 @@ After approval pass:
 
 ## Rules
 
-- **Every commit carries provenance.** The committed content includes an HTML comment noting source file + section + timestamp. Nothing gets dropped into TELOS without attribution.
+- **Every commit carries provenance.** The committed content includes an HTML comment noting source file + section + timestamp. Nothing gets dropped into life context without attribution.
 - **Never bulk-approve UNCLEAR.** Those require the user's explicit routing.
 - **Confidence thresholds:** ≥70% = trusted (auto-approve eligible). 40-70% = medium (show for confirmation). <40% = low (walk-through required).
 - **Ask before touching identity.** PRINCIPAL_IDENTITY.md commits always prompt — that file is load-bearing.
@@ -142,31 +142,31 @@ After approval pass:
 
 ## Examples
 
-### User: `/migrate ~/old-claude/TELOS/`
+### User: `/migrate ~/old-claude/life-context/`
 
-the DA scans the old TELOS directory, classifies every chunk, presents the routing summary, offers fast-path vs. walk-through approval.
+the assistant scans the old life context directory, classifies every chunk, presents the routing summary, offers fast-path vs. walk-through approval.
 
 ### User: `/migrate` (then pastes CLAUDE.md content)
 
-the DA reads from stdin, classifies the rules as `memory/feedback` (most) plus maybe PRINCIPAL_IDENTITY (if identity lines are mixed in), walks through approval.
+the assistant reads from stdin, classifies the rules as `memory/feedback` (most) plus maybe PRINCIPAL_IDENTITY (if identity lines are mixed in), walks through approval.
 
 ### User: "migrate my Cursor rules at ~/.cursor/rules"
 
-the DA scans the rules dir, surfaces likely-feedback classifications, walks through with extra care (Cursor rules often have tool-specific stuff that doesn't translate to PAI).
+the assistant scans the rules dir, surfaces likely-feedback classifications, walks through with extra care (Cursor rules often have tool-specific stuff that doesn't translate to PAI).
 
 ### User: "import the stuff I dumped in /tmp/journal.md"
 
-the DA scans the journal, expects a lot of UNCLEAR + WISDOM, walks through each section.
+the assistant scans the journal, expects a lot of UNCLEAR + WISDOM, walks through each section.
 
 ## Related
 
 - `/interview` — fills gaps by asking questions (not by intaking existing content)
-- `/Telos` Update workflow — edit a single TELOS file directly
+- `/Life context` Update workflow — edit a single life context file directly
 - `/Knowledge` — manage the Knowledge Archive
 - `/_PROFILE` — manage PRINCIPAL_IDENTITY
 
 ## Troubleshooting
 
 - **Low average confidence (<40%):** the source is probably genre-mismatched (e.g., code comments, logs, raw data). Consider pre-filtering to remove non-prose chunks before scanning.
-- **Everything goes to UNCLEAR:** the source probably has no recognizable PAI-taxonomy patterns. Either add the content manually via `/Telos` or write it as general Knowledge notes.
+- **Everything goes to UNCLEAR:** the source probably has no recognizable PAI-taxonomy patterns. Either add the content manually via `/Life context` or write it as general Knowledge notes.
 - **Duplicate content warnings:** the scanner doesn't dedupe against existing files yet. Run `--dry-run` first to preview before committing.

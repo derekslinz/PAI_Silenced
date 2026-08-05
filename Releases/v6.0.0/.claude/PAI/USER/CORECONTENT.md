@@ -17,4 +17,4 @@
 - (interview — topics others might expect from you but you deliberately avoid)
 
 ---
-*The DA uses this to recognize when a content draft, pitch, or post is on-brand for you vs drifting off. Also used to generate title ideas, filter news sources, and suggest content angles that match your voice.*
+*The assistant uses this to recognize when a content draft, pitch, or post is on-brand for you vs drifting off. Also used to generate title ideas, filter news sources, and suggest content angles that match your voice.*

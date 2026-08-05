@@ -3,7 +3,7 @@
 > Bootstrap default. Run `/interview` to map your actual setup.
 
 Your personal-system architecture — what runs where, how the pieces talk
-to each other, what depends on what. The DA reads this when making
+to each other, what depends on what. The assistant reads this when making
 infrastructure suggestions or debugging cross-system issues.
 
 ## Compute
@@ -20,7 +20,7 @@ infrastructure suggestions or debugging cross-system issues.
 
 ## Communications
 
-- (interview — how you reach the DA when not at the keyboard: iMessage,
+- (interview — how you reach the assistant when not at the keyboard: iMessage,
   Telegram, etc.)
 
 ## Identity boundaries
@@ -28,5 +28,5 @@ infrastructure suggestions or debugging cross-system issues.
 - **Public properties:** (your blog, social, open-source repos)
 - **Private properties:** (internal sites, work, tooling)
 
-This map matters because the DA respects it: public-property work goes
+This map matters because the assistant respects it: public-property work goes
 through public-clean workflows; private stuff stays private.

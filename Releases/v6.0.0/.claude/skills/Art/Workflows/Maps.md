@@ -390,7 +390,7 @@ open /path/to/conceptual-map.png
 - **Features:** Ocean of unknown threats, Mountain range of technical barriers
 - **Aspect:** 16:9
 
-### Example 3: "The TELOS Territory"
+### Example 3: "The Life Goals Territory"
 - **Territories:** Questions (center), Context (surrounding), Blockers (west mountains), Constraints (north), Solutions (east coast)
 - **Features:** Rivers connecting domains, Bridges from problems to solutions
 - **Aspect:** 1:1

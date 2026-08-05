@@ -1,13 +1,13 @@
-!/usr/bin/env bun
+#!/usr/bin/env bun
 
-/ SecurityFilter — Deterministic allowlist-based content sanitizer for Daemon.
+/* SecurityFilter — Deterministic allowlist-based content sanitizer for Daemon.
   This is a CODE-LEVEL filter, not an LLM filter. Every field passes through
  deterministic pattern matching. The LLM can assist in drafting content,
  but this filter is the enforcement boundary.
   Usage:
    bun SecurityFilter.ts --input <json-file> [--contacts <contacts-file>] [--overrides <overrides-file>]
    echo '{"text": "..."}' | bun SecurityFilter.ts --stdin
- /
+ */
 
 import { readFileSync, existsSync } from "fs";
 
@@ -29,8 +29,8 @@ const BLOCKED_PATH_PATTERNS = [
 ];
 
 const BLOCKED_CREDENTIAL_PATTERNS = [
-  /sk-[a-zA-Z-_-]{,}/g,
-  /ghp_[a-zA-Z-]{,}/g,
+  /sk-[a-zA-Z0-9_-]{20,}/g,
+  /ghp_[a-zA-Z0-9]{36,}/g,
   /\b[A-Z_]+_API_KEY\s[=:]\s\S+/g,
   /\b[A-Z_]+_TOKEN\s[=:]\s\S+/g,
   /\b[A-Z_]+_SECRET\s[=:]\s\S+/g,
@@ -39,7 +39,7 @@ const BLOCKED_CREDENTIAL_PATTERNS = [
 ];
 
 const BLOCKED_INTERNAL_PATTERNS = [
-  /localhost:\d{,}/g,
+  /localhost:\d{1,5}/g,
   /\.hook\.ts/g,
   /hooks\/\w+/g,
   /PAI\/Algorithm\/v[\d.]+\.md/g,
@@ -96,7 +96,7 @@ export function filterContent(
     while ((match = regex.exec(clean)) !== null) {
       redactions.push({
         type: "name",
-        original: match[],
+        original: match[0],
         position: match.index,
       });
     }
@@ -110,7 +110,7 @@ export function filterContent(
     while ((match = pattern.exec(testClean)) !== null) {
       redactions.push({
         type: "alias",
-        original: match[],
+        original: match[0],
         position: match.index,
       });
     }
@@ -132,7 +132,7 @@ export function filterContent(
     while ((match = freshPattern.exec(clean)) !== null) {
       redactions.push({
         type: "path",
-        original: match[],
+        original: match[0],
         position: match.index,
       });
     }
@@ -146,7 +146,7 @@ export function filterContent(
     while ((match = freshPattern.exec(clean)) !== null) {
       redactions.push({
         type: "credential",
-        original: match[].slice(, ) + "...",
+        original: match[0].slice(0, 20) + "...",
         position: match.index,
       });
     }
@@ -160,7 +160,7 @@ export function filterContent(
     while ((match = freshPattern.exec(clean)) !== null) {
       redactions.push({
         type: "internal",
-        original: match[],
+        original: match[0],
         position: match.index,
       });
     }
@@ -168,30 +168,30 @@ export function filterContent(
   }
 
   // Clean up multiple consecutive [REDACTED] markers
-  clean = clean.replace(/(\[(?:REDACTED|PATH_REDACTED|CREDENTIAL_REDACTED|INTERNAL_REDACTED)\]\s){,}/g, "[REDACTED] ");
+  clean = clean.replace(/(\[(?:REDACTED|PATH_REDACTED|CREDENTIAL_REDACTED|INTERNAL_REDACTED)\]\s){2,}/g, "[REDACTED] ");
 
   return {
     clean: clean.trim(),
     redactions,
-    passed: redactions.length === ,
+    passed: redactions.length === 0,
   };
 }
 
-/ Filter a structured daemon data object. Applies filterContent to every string field.
- /
+/* Filter a structured daemon data object. Applies filterContent to every string field.
+ */
 export function filterDaemonData(
   data: Record<string, unknown>,
   options: FilterOptions = {}
 ): { data: Record<string, unknown>; totalRedactions: number; redactionsBySection: Record<string, number> } {
-  let totalRedactions = ;
+  let totalRedactions = 0;
   const redactionsBySection: Record<string, number> = {};
 
   function filterValue(value: unknown, section: string): unknown {
     if (typeof value === "string") {
       const result = filterContent(value, options);
-      if (result.redactions.length > ) {
+      if (result.redactions.length > 0) {
         totalRedactions += result.redactions.length;
-        redactionsBySection[section] = (redactionsBySection[section] || ) + result.redactions.length;
+        redactionsBySection[section] = (redactionsBySection[section] || 0) + result.redactions.length;
       }
       return result.clean;
     }
@@ -216,17 +216,16 @@ export function filterDaemonData(
   return { data: filtered, totalRedactions, redactionsBySection };
 }
 
-/ Load extra blocked names from a contacts file (one name per line, or markdown list).
- /
+// Load extra blocked names from a contacts file (one name per line, or markdown list).
 export function loadContactNames(contactsPath: string): string[] {
   if (!existsSync(contactsPath)) return [];
-  const content = readFileSync(contactsPath, "utf-");
+  const content = readFileSync(contactsPath, "utf-8");
   const names: string[] = [];
   for (const line of content.split("\n")) {
     const match = line.match(/^[-]\s+(.+)/);
     if (match) {
-      const name = match[].trim();
-      if (name && name.length > && !name.startsWith("")) {
+      const name = match[1].trim();
+      if (name && name.length > 0 && !name.startsWith("#")) {
         names.push(name);
       }
     }
@@ -234,11 +233,10 @@ export function loadContactNames(contactsPath: string): string[] {
   return names;
 }
 
-/ Load security overrides from SKILLCUSTOMIZATIONS.
- /
+// Load security overrides from SKILLCUSTOMIZATIONS.
 export function loadSecurityOverrides(overridesPath: string): FilterOptions {
   if (!existsSync(overridesPath)) return {};
-  const content = readFileSync(overridesPath, "utf-");
+  const content = readFileSync(overridesPath, "utf-8");
   const extraNames: string[] = [];
   const extraPaths: string[] = [];
 
@@ -248,27 +246,27 @@ export function loadSecurityOverrides(overridesPath: string): FilterOptions {
       currentSection = "names";
     } else if (line.startsWith("Additional Excluded Paths")) {
       currentSection = "paths";
-    } else if (line.startsWith("")) {
+    } else if (line.startsWith("#")) {
       currentSection = "";
     } else if (currentSection === "names") {
       const match = line.match(/^[-]\s+(.+)/);
-      if (match) extraNames.push(match[].trim());
+      if (match) extraNames.push(match[1].trim());
     } else if (currentSection === "paths") {
       const match = line.match(/^[-]\s+(.+)/);
-      if (match) extraPaths.push(match[].trim());
+      if (match) extraPaths.push(match[1].trim());
     }
   }
 
   return {
-    extraBlockedNames: extraNames.length > ? extraNames : undefined,
-    extraBlockedPaths: extraPaths.length > ? extraPaths : undefined,
+    extraBlockedNames: extraNames.length > 0 ? extraNames : undefined,
+    extraBlockedPaths: extraPaths.length > 0 ? extraPaths : undefined,
   };
 }
 
 //  CLI 
 
 if (import.meta.main) {
-  const args = process.argv.slice();
+  const args = process.argv.slice(2);
 
   if (args.includes("--help") || args.includes("-h")) {
     console.log(`
@@ -298,10 +296,10 @@ Options:
       { input: "localhost:pulse server", expectRedactions: true, desc: "Internal endpoint" },
     ];
 
-    let passed = ;
+    let passed = 0;
     for (const tc of testCases) {
       const result = filterContent(tc.input);
-      const ok = tc.expectRedactions ? result.redactions.length > : result.redactions.length === ;
+      const ok = tc.expectRedactions ? result.redactions.length > 0 : result.redactions.length === 0;
       console.log(`${ok ? "PASS" : "FAIL"}: ${tc.desc}`);
       if (!ok) {
         console.log(`  Input: "${tc.input}"`);
@@ -312,14 +310,14 @@ Options:
     }
 
     console.log(`\n${passed}/${testCases.length} tests passed`);
-    process.exit(passed === testCases.length ? : );
+    process.exit(passed === testCases.length ? 0 : 1);
   }
 
   const textIdx = args.indexOf("--text");
-  if (textIdx !== -&& args[textIdx + ]) {
-    const result = filterContent(args[textIdx + ]);
+  if (textIdx !== -1 && args[textIdx + 1]) {
+    const result = filterContent(args[textIdx + 1]);
     console.log("Clean:", result.clean);
-    if (result.redactions.length > ) {
+    if (result.redactions.length > 0) {
       console.log(`Redactions: ${result.redactions.length}`);
       for (const r of result.redactions) {
         console.log(`  [${r.type}] "${r.original}" at position ${r.position}`);
@@ -329,22 +327,22 @@ Options:
   }
 
   const inputIdx = args.indexOf("--input");
-  if (inputIdx !== -&& args[inputIdx + ]) {
-    const inputFile = args[inputIdx + ];
-    const data = JSON.parse(readFileSync(inputFile, "utf-"));
+  if (inputIdx !== -1 && args[inputIdx + 1]) {
+    const inputFile = args[inputIdx + 1];
+    const data = JSON.parse(readFileSync(inputFile, "utf-8"));
 
     let options: FilterOptions = {};
     const contactsIdx = args.indexOf("--contacts");
-    if (contactsIdx !== -&& args[contactsIdx + ]) {
-      options.extraBlockedNames = loadContactNames(args[contactsIdx + ]);
+    if (contactsIdx !== -1 && args[contactsIdx + 1]) {
+      options.extraBlockedNames = loadContactNames(args[contactsIdx + 1]);
     }
     const overridesIdx = args.indexOf("--overrides");
-    if (overridesIdx !== -&& args[overridesIdx + ]) {
-      options = { ...options, ...loadSecurityOverrides(args[overridesIdx + ]) };
+    if (overridesIdx !== -1 && args[overridesIdx + 1]) {
+      options = { ...options, ...loadSecurityOverrides(args[overridesIdx + 1]) };
     }
 
     const result = filterDaemonData(data, options);
-    console.log(JSON.stringify(result.data, null, ));
+    console.log(JSON.stringify(result.data, null, 2));
 
     if (args.includes("--verbose")) {
       console.error(`\nTotal redactions: ${result.totalRedactions}`);

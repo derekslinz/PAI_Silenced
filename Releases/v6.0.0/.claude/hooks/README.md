@@ -326,7 +326,7 @@ Located in `hooks/lib/`:
 
 | Library | Purpose | Used By |
 |---------|---------|---------|
-| `identity.ts` | Get DA name, principal from settings | Most hooks |
+| `identity.ts` | Get assistant name, principal from settings | Most hooks |
 | `time.ts` | PST timestamps, ISO formatting | Rating hooks, work hooks |
 | `paths.ts` | Canonical path construction | Work hooks, security |
 | `notifications.ts` | ntfy push notifications | SessionEnd hooks, StopNotify |

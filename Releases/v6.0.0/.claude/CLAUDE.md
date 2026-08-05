@@ -1,9 +1,8 @@
 # PAI 6.0.0 — Personal AI Infrastructure (the Life Operating System)
 
-> **PAI is the Life OS. {DA_IDENTITY.NAME} is {PRINCIPAL.NAME}'s assistant.**
+> **PAI is the Life OS. {ASSISTANT_IDENTITY.NAME} is {PRINCIPAL.NAME}'s assistant.**
 > PAI targets AS3 on the [PAI Maturity Model](https://your-domain.example.com/blog/personal-ai-maturity-model), with lineage from [The Real Internet of Things](https://your-domain.example.com/blog/the-real-internet-of-things) (2016).
 
-@PAI/USER/DA_IDENTITY.md
 @PAI/USER/PROJECTS/PROJECTS.md
 @PAI/DOCUMENTATION/ARCHITECTURE_SUMMARY.md
 
@@ -66,7 +65,7 @@ VERIFY: [8-word bullets on how we know what happened]
 
 Constitutional rules are in the system prompt (PAI/PAI_SYSTEM_PROMPT.md). This file defines operational procedures and format templates.
 
-Startup context is `@`-imported above (PRINCIPAL_IDENTITY, DA_IDENTITY, PROJECTS) — always available. Use the routing table below to find file paths for any additional specialized context. Load on-demand only.
+Startup context is `@`-imported above (PRINCIPAL_IDENTITY, PROJECTS) — always available. Use the routing table below to find file paths for any additional specialized context. Load on-demand only.
 
 ## PAI System
 
@@ -109,7 +108,7 @@ Startup context is `@`-imported above (PRINCIPAL_IDENTITY, DA_IDENTITY, PROJECTS
 | AI writing patterns | `~/.claude/PAI/USER/AI_WRITING_PATTERNS.md` |
 | Rhetorical style | `~/.claude/PAI/USER/RHETORICALSTYLE.md` |
 
-## {DA_IDENTITY.NAME} (Assistant Identity)
+## {ASSISTANT_IDENTITY.NAME} (Assistant Identity)
 
 | Topic | Path |
 |-------|------|

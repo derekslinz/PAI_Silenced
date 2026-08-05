@@ -1,6 +1,6 @@
 ---
 name: Daemon
-description: "Manage the public daemon profile — a living digital representation of what you're working on, thinking about, reading, and building. DaemonAggregator.ts reads PAI sources (TELOS missions/goals/books/wisdom, KNOWLEDGE/Ideas titles, PROJECTS.md, MEMORY/WORK themes, PRINCIPAL_IDENTITY bio) and writes to daemon-data.json. SecurityFilter.ts applies deterministic pattern-matching (NOT LLM judgment) to strip names, paths, credentials, and internal refs. Structurally excludes CONTACTS, FINANCES, HEALTH, OUR_STORY, OPINIONS. deploy.sh builds the VitePress static site and deploys to Cloudflare Pages. Two-repo pattern: public framework (danielmiessler/Daemon, forkable) + private content (daemon-dm). Workflows: UpdateDaemon, ReadDaemon, PreviewDaemon, DeployDaemon. USE WHEN daemon, update daemon, daemon profile, deploy daemon, preview daemon, read daemon, check daemon, daemon status, public profile, digital presence. NOT FOR internal PAI system management (use _PAI)."
+description: "Manage the public daemon profile — a living digital representation of what you're working on, thinking about, reading, and building. DaemonAggregator.ts reads PAI sources (life context missions/goals/books/wisdom, KNOWLEDGE/Ideas titles, PROJECTS.md, MEMORY/WORK themes, PRINCIPAL_IDENTITY bio) and writes to daemon-data.json. SecurityFilter.ts applies deterministic pattern-matching (NOT LLM judgment) to strip names, paths, credentials, and internal refs. Structurally excludes CONTACTS, FINANCES, HEALTH, OUR_STORY, OPINIONS. deploy.sh builds the VitePress static site and deploys to Cloudflare Pages. Two-repo pattern: public framework (danielmiessler/Daemon, forkable) + private content (daemon-dm). Workflows: UpdateDaemon, ReadDaemon, PreviewDaemon, DeployDaemon. USE WHEN daemon, update daemon, daemon profile, deploy daemon, preview daemon, read daemon, check daemon, daemon status, public profile, digital presence. NOT FOR internal PAI system management (use _PAI)."
 effort: medium
 ---
 
@@ -39,7 +39,7 @@ Two-repo pattern: public framework + private content.
 
 ```
 PAI SOURCES (private, read-only)
-  TELOS/ (missions, goals, books, movies, wisdom)
+  LIFE CONTEXT/ (missions, goals, books, movies, wisdom)
   KNOWLEDGE/Ideas/ (title + thesis only)
   PROJECTS.md (public projects only)
   MEMORY/WORK/ (abstracted to topic themes)
@@ -111,11 +111,11 @@ The DaemonAggregator reads from these PAI sources:
 
 | Source | What's Extracted | Section |
 |--------|-----------------|---------|
-| TELOS/MISSION.md | M1, M2 (public missions) | [MISSION] |
-| TELOS/GOALS.md | Public project goals | [TELOS] |
-| TELOS/BOOKS.md | Book titles | [FAVORITE_BOOKS] |
-| TELOS/MOVIES.md | Movie titles | [FAVORITE_MOVIES] |
-| TELOS/WISDOM.md | Top 5 quotes | [WISDOM] |
+| Life context missions | M1, M2 (public missions) | [MISSION] |
+| Life context goals | Public project goals | [GOALS] |
+| Life context books | Book titles | [FAVORITE_BOOKS] |
+| Life context movies | Movie titles | [FAVORITE_MOVIES] |
+| Life context wisdom | Top 5 quotes | [WISDOM] |
 | KNOWLEDGE/Ideas/_index.md | 10 recent Ideas (title + thesis) | [RECENT_IDEAS] |
 | PROJECTS.md | Public repos and sites | Projects integration |
 | MEMORY/WORK/ | Topic themes (last 14 days) | [CURRENTLY_WORKING_ON] |

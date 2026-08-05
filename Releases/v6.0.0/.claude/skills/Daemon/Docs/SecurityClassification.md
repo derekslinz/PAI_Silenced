@@ -12,10 +12,10 @@ Defines what data is public vs private for daemon aggregation. The aggregator us
 
 | Source | Fields | Notes |
 |--------|--------|-------|
-| TELOS/BOOKS.md | All titles | Book preferences are public |
-| TELOS/MOVIES.md | All titles | Movie preferences are public |
-| TELOS/WISDOM.md | All quotes | Philosophical quotes, no PII |
-| TELOS/MISSION.md | M1, M2 | Philosophical missions |
+| Life context books | All titles | Book preferences are public |
+| Life context movies | All titles | Movie preferences are public |
+| Life context wisdom | All quotes | Philosophical quotes, no PII |
+| Life context missions | M1, M2 | Philosophical missions |
 | daemon data: predictions | All | Public predictions with confidence |
 | daemon data: daily_routine | All | Generic routine, no locations |
 | daemon data: podcasts | All | Public preferences |
@@ -24,9 +24,9 @@ Defines what data is public vs private for daemon aggregation. The aggregator us
 
 | Source | Public Fields | Filtered Out |
 |--------|--------------|-------------|
-| TELOS/GOALS.md | Public project goals (G0, G1, G9-G14) | Revenue targets, follower counts, private repos |
-| TELOS/MISSION.md | M1, M2 | M3 (references partner) |
-| TELOS/CHALLENGES.md | C0-C2 (general self-improvement) | Any referencing private people |
+| Life context goals | Public project goals (G0, G1, G9-G14) | Revenue targets, follower counts, private repos |
+| Life context missions | M1, M2 | M3 (references partner) |
+| Life context challenges | C0-C2 (general self-improvement) | Any referencing private people |
 | PRINCIPAL_IDENTITY.md | Role, focus, career, interests, worldview | Partner name, private contacts |
 | PROJECTS.md | Public repos and sites only | Private repos, internal tools |
 | KNOWLEDGE/Ideas/ | Title + thesis only | Evidence, implications, internal refs |
@@ -41,7 +41,7 @@ Defines what data is public vs private for daemon aggregation. The aggregator us
 | PAI/USER/CONTACTS.md | Contains real names, emails, phones |
 | PAI/USER/FINANCES/ | Financial data |
 | PAI/USER/HEALTH/ | Health data |
-| PAI/USER/TELOS/TRAUMAS.md | Deeply personal |
+| PAI/USER/TRAUMAS.md | Deeply personal |
 | PAI/USER/BUSINESS/ | Business confidential |
 | MEMORY/KNOWLEDGE/People/ | OSINT dossiers, consent not given |
 | MEMORY/KNOWLEDGE/Companies/ | May contain proprietary intel |
@@ -61,7 +61,6 @@ Public projects (include in daemon):
 
 - Daemon (daemon.example.com)
 - Substrate (public repo)
-- Telos (public repo)
 - TheAlgorithm (public repo)
 - FoundryServices (public repo)
 - Ladder (public repo)
@@ -70,7 +69,7 @@ Private projects (exclude from daemon):
 - (your internal dashboards — list here)
 - (your private infrastructure — list here)
 - Feed (private infrastructure)
-- the DA (private, is the PAI system itself)
+- the assistant (private, is the PAI system itself)
 - PAI Observatory (internal)
 - iMessage Bot (private)
 - (your private workers — list here)

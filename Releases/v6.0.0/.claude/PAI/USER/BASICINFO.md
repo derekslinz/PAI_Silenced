@@ -22,4 +22,4 @@
 **Communication Preference:** (interview — terse / detailed / somewhere between)
 
 ---
-*The DA references this file at session start for framing — name, timezone, unit conventions, and communication style all live here.*
+*The assistant references this file at session start for framing — name, timezone, unit conventions, and communication style all live here.*

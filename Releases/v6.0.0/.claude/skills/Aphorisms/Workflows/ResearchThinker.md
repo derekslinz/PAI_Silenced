@@ -1,6 +1,6 @@
 # Research Thinker Quotes
 
-**Purpose:** Deep research on specific philosopher/thinker to discover relevant aphorisms aligned with TELOS philosophy, then add to database.
+**Purpose:** Deep research on specific philosopher/thinker to discover relevant aphorisms aligned with life philosophy, then add to database.
 
 ## Voice Notification
 
@@ -45,27 +45,27 @@ Running **ResearchThinker** in **Aphorisms**...
 **Christopher Hitchens (1949-2011)**
 - Focus: Rationality, skepticism, intellectual honesty, evidence-based thinking
 - Key Works: God Is Not Great, Hitch-22, Letters to a Young Contrarian
-- TELOS Alignment: Truth-seeking, questioning authority, rational discourse
+- Life Philosophy Alignment: Truth-seeking, questioning authority, rational discourse
 
 **David Deutsch (1953-present)**
 - Focus: Knowledge creation, optimism, explanations, problem-solving
 - Key Works: The Beginning of Infinity, The Fabric of Reality
-- TELOS Alignment: Progress through knowledge, problems are solvable, explanatory frameworks
+- Life Philosophy Alignment: Progress through knowledge, problems are solvable, explanatory frameworks
 
 **Sam Harris (1967-present)**
 - Focus: Rationality, meditation, free will, morality, science
 - Key Works: The End of Faith, Waking Up, Free Will, The Moral Landscape
-- TELOS Alignment: Scientific rationality applied to ethics, mindfulness, evidence-based thinking
+- Life Philosophy Alignment: Scientific rationality applied to ethics, mindfulness, evidence-based thinking
 
 **Baruch Spinoza (1632-1677)**
 - Focus: Ethics, reason, freedom through understanding, nature
 - Key Works: Ethics, Tractatus Theologico-Politicus
-- TELOS Alignment: Rational ethics, freedom through knowledge, understanding reality
+- Life Philosophy Alignment: Rational ethics, freedom through knowledge, understanding reality
 
 **Richard Feynman (1918-1988)**
 - Focus: Curiosity, scientific thinking, doubt as tool, clarity, intellectual honesty
 - Key Works: Surely You're Joking Mr. Feynman, The Pleasure of Finding Things Out, The Character of Physical Law
-- TELOS Alignment: Curiosity-driven learning, doubt enables knowledge, clarity of thought
+- Life Philosophy Alignment: Curiosity-driven learning, doubt enables knowledge, clarity of thought
 
 ---
 
@@ -112,7 +112,7 @@ research_skill.parallel_research(
 ```
 "[Thinker Name] most famous quotes"
 "[Thinker Name] on [theme]"
-"[Thinker Name] wisdom about [TELOS topic]"
+"[Thinker Name] wisdom about [life philosophy topic]"
 "[Thinker Name] book quotes [Work Title]"
 "[Thinker Name] interview quotes"
 "best [Thinker Name] aphorisms"
@@ -134,7 +134,7 @@ research_skill.parallel_research(
 - Cross-reference multiple sources
 - When in doubt, mark as "Disputed" or skip
 
-**2. TELOS Alignment** (HIGH PRIORITY)
+**2. Life Philosophy Alignment** (HIGH PRIORITY)
 - Does quote embody wisdom, rationality, truth-seeking?
 - Aligns with user's philosophy?
 - Relevant to human flourishing and progress?
@@ -158,7 +158,7 @@ research_skill.parallel_research(
 
 **Filter down to top 10-15 quotes:**
 - All must pass Authenticity check
-- Most should score high on TELOS Alignment and Quotability
+- Most should score high on Life Philosophy Alignment and Quotability
 - Variety across themes
 - Represent thinker's philosophy well
 
@@ -183,7 +183,7 @@ research_skill.parallel_research(
 **3. Relevance**
 - Why does this matter for the user's audience?
 - How does it apply to modern life?
-- Connection to TELOS philosophy?
+- Connection to life philosophy?
 - Practical wisdom it provides?
 
 **Example:**
@@ -313,7 +313,7 @@ Edit(
 **Philosophy Summary:**
 [2-3 sentences capturing thinker's core philosophy as represented in quotes]
 
-**TELOS Alignment:**
+**Life Philosophy Alignment:**
 [How this thinker's wisdom aligns with user's philosophy]
 
 **Best Use Cases:**
@@ -430,7 +430,7 @@ Before finalizing research:
 - [ ] 10-15 high-quality quotes selected
 - [ ] Each quote has context (source, background, relevance)
 - [ ] Themes assigned appropriately
-- [ ] TELOS alignment clear for all quotes
+- [ ] Life philosophy alignment clear for all quotes
 - [ ] Quotes organized by theme
 - [ ] Formatted correctly for database
 - [ ] Database updated with quotes
@@ -444,7 +444,7 @@ Before finalizing research:
 ### What if Research Yields No Good Quotes?
 
 **Reasons:**
-1. Thinker doesn't align with TELOS philosophy
+1. Thinker doesn't align with life philosophy
 2. Thinker's style isn't quotable (dense academic prose)
 3. Works not readily accessible
 
@@ -457,7 +457,7 @@ Before finalizing research:
 
 **Prioritize:**
 1. Most impactful and memorable
-2. Best TELOS alignment
+2. Best life philosophy alignment
 3. Variety across themes
 4. Can add more in phases
 
@@ -507,7 +507,7 @@ Spinoza's philosophical language might need more context than Feynman's accessib
 **Research succeeds when:**
 - 10-15 verified, high-quality quotes added
 - All quotes have proper context and themes
-- TELOS alignment clear for each
+- Life philosophy alignment clear for each
 - Thinker's philosophy well-represented
 - Quotes immediately useful for newsletter selection
 - User understands thinker's contribution
@@ -546,7 +546,7 @@ Sources:
 ### Step 3: Filter
 Initial: 45 potential quotes
 Verified: 28 authentic
-TELOS-aligned: 22
+Life-philosophy-aligned: 22
 Most quotable: 15 selected
 
 ### Step 4: Add Context
@@ -600,9 +600,9 @@ Use Edit to replace placeholder in Feynman section
 [2 more highlights...]
 
 **Philosophy Summary:**
-Feynman embodied curiosity-driven learning combined with radical intellectual honesty. His emphasis on doubt as a tool, pleasure in discovery, and clarity of explanation makes him perfect for TELOS philosophy.
+Feynman embodied curiosity-driven learning combined with radical intellectual honesty. His emphasis on doubt as a tool, pleasure in discovery, and clarity of explanation makes him perfect for life philosophy.
 
-**TELOS Alignment:**
+**Life Philosophy Alignment:**
 Perfect alignment with truth-seeking, rationality, and continuous learning. His quotes inspire curiosity while maintaining rigorous standards for evidence and explanation.
 
 **Best Use Cases:**

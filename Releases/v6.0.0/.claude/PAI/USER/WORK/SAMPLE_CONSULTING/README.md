@@ -8,7 +8,7 @@ This directory holds your consulting practice — the offerings you sell, the te
 
 - **`Offerings/`** — descriptions of each consulting service you offer (e.g. assessments, advisory retainers, workshops). One file per offering, with scope, deliverables, pricing model, and ideal-fit customer.
 - **`Templates/`** — reusable templates for proposals, SOWs, NDAs, project plans, kickoff decks. Anything you copy-paste-customize for each new engagement.
-- **Proposals and SOWs in flight** — drop active proposal documents directly in this directory, named so your DA can identify the prospect (e.g. `Acme_Assessment_Proposal.pdf`).
+- **Proposals and SOWs in flight** — drop active proposal documents directly in this directory, named so your assistant can identify the prospect (e.g. `Acme_Assessment_Proposal.pdf`).
 - **Letters of recommendation, case studies, references** — anything that supports selling future engagements.
 
 ## Sample fields to populate

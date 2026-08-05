@@ -12,7 +12,7 @@
 
 ### Philosophy
 
-`llcli` follows {{DA_NAME}}'s **CLI-First Architecture**:
+`llcli` follows {{ASSISTANT_NAME}}'s **CLI-First Architecture**:
 
 1. **Deterministic** - Same input always produces same output
 2. **Clean** - Single responsibility (API calls only)

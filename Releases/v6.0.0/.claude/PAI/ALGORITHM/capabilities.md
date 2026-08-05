@@ -53,7 +53,7 @@ Behavior: At PLAN phase, add Forge to ` CAPABILITIES SELECTED` with target phase
 
 Explicit-name override: If {{PRINCIPAL_NAME}} mentions "Forge" in the request, invoke regardless of tier (even E/E). Name-match always wins over tier gate.
 
-Parallel with Engineer: At E/E where duplicate perspectives earn their cost, Forge and Engineer may both be spawned on the same task for cross-vendor code production. Each works in its own worktree; {{DA_NAME}} merges or picks the stronger diff in VERIFY.
+Parallel with Engineer: At E/E where duplicate perspectives earn their cost, Forge and Engineer may both be spawned on the same task for cross-vendor code production. Each works in its own worktree; {{ASSISTANT_NAME}} merges or picks the stronger diff in VERIFY.
 
 What this gate prevents: E+ coding work silently routed through Claude-family only, repeating the same-family blind spot pattern that Cato addresses on the review side.
 
@@ -67,7 +67,7 @@ Picking Forge vs Anvil (both Moonshot-family and OpenAI-family are non-Anthropic
 
 - Forge (GPT-., codex exec): localized completion speed, quality/completeness focus. Default producer at E/E/E. Pick when the change is bounded to a small surface and the verification bar is "every branch is real."
 - Anvil (Kimi K., Moonshot API): long-context breadth, project-shape focus. Pick when the correctness depends on the surrounding architecture more than the local code — "does this fit" is the dominant question.
-- Parallel both: at E/E on the hardest work, {{DA_NAME}} may spawn Forge AND Anvil on the same task in isolated worktrees, then pick the stronger diff in VERIFY. Cross-vendor cross-coder diversity compounds.
+- Parallel both: at E/E on the hardest work, {{ASSISTANT_NAME}} may spawn Forge AND Anvil on the same task in isolated worktrees, then pick the stronger diff in VERIFY. Cross-vendor cross-coder diversity compounds.
 
 Explicit-name override: If {{PRINCIPAL_NAME}} mentions "Anvil" in the request, invoke regardless of tier (even E/E). Name-match always wins.
 

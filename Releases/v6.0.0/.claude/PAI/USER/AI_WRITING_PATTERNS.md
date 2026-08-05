@@ -1,6 +1,6 @@
 # AI Writing Patterns — Avoid List
 
-> Bootstrap default. The DA references this when writing in your voice
+> Bootstrap default. The assistant references this when writing in your voice
 > to scrub AI-isms.
 
 Generated text has tells. This file is the running list of patterns to

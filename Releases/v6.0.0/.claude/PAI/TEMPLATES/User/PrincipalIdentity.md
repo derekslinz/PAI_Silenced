@@ -9,7 +9,7 @@ last_updated: TBD
 
 # Principal Identity
 
-**Who are you, really?** This file is the irreducible answer — the one your DA loads at every session so it knows who it's working with.
+**Who are you, really?** This file is the irreducible answer — the one your assistant loads at every session so it knows who it's working with.
 
 ## Quick Reference
 
@@ -26,7 +26,7 @@ One short paragraph. The arc of your professional life in three or four sentence
 
 ## Worldview
 
-Core posture on the universe, morality, meaning, politics. One line each. This shapes how your DA frames everything.
+Core posture on the universe, morality, meaning, politics. One line each. This shapes how your assistant frames everything.
 
 - **Universe:**
 - **Morality:**
@@ -50,7 +50,7 @@ What do you do when no one's watching? Reading, music, hobbies, languages, aesth
 
 ## Work Patterns
 
-How do you work? Deep focus vs context-switching? Late nights vs early mornings? What do you need from a DA?
+How do you work? Deep focus vs context-switching? Late nights vs early mornings? What do you need from an assistant?
 
 -
 
@@ -60,9 +60,9 @@ How do you work? Deep focus vs context-switching? Late nights vs early mornings?
 - **Decision style:** (build vs ask, simple vs clever)
 - **Communication style:** (concise vs thorough, direct vs diplomatic)
 
-## For Your DA's Reference
+## For Your Assistant's Reference
 
-When your DA represents you, it should know:
+When your assistant represents you, it should know:
 
 -
 -
@@ -70,4 +70,4 @@ When your DA represents you, it should know:
 
 ---
 
-*Your DA loads this file at every session startup. Keep it current — stale identity context makes everything else downstream drift.*
+*Your assistant loads this file at every session startup. Keep it current — stale identity context makes everything else downstream drift.*

@@ -4,7 +4,7 @@
 
 This directory holds your day-to-day work context — the consulting engagements, customer relationships, and organizational work you do under one or more business entities. Where `BUSINESS/` describes the company itself, `WORK/` describes the work the company does.
 
-PAI and Pulse read this directory so your DA can answer questions like "what's my pipeline look like," "what proposals are open," or "what should I prioritize this week" with real names and real numbers — not generic advice.
+PAI and Pulse read this directory so your assistant can answer questions like "what's my pipeline look like," "what proposals are open," or "what should I prioritize this week" with real names and real numbers — not generic advice.
 
 ## What goes here
 
@@ -17,14 +17,14 @@ PAI and Pulse read this directory so your DA can answer questions like "what's m
 
 Either:
 
-1. Run `/interview` and choose the WORK scope — your DA will walk you through it conversationally.
+1. Run `/interview` and choose the WORK scope — your assistant will walk you through it conversationally.
 2. Edit these files directly. Replace every `(interview — ...)` placeholder and rename `SAMPLE_*` / `MY_*` directories with your real names.
 
 ## Conventions
 
-- **One subdirectory per customer.** Don't pile multiple customers into one directory — your DA uses directory boundaries to separate engagements.
+- **One subdirectory per customer.** Don't pile multiple customers into one directory — your assistant uses directory boundaries to separate engagements.
 - **Use the customer's actual name** for the directory (e.g. `AcmeCorp/`). Match how you'd say it in conversation.
-- **Keep contracts and proposals close to the work** they describe — easier for your DA to find context.
+- **Keep contracts and proposals close to the work** they describe — easier for your assistant to find context.
 
 ## Privacy
 

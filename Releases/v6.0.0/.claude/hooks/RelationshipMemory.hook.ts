@@ -19,12 +19,12 @@
  *
  * RELATIONSHIP NOTE TYPES:
  * - W (World): Objective facts about the principal's situation
- * - B (Biographical): What happened this session (first-person DA)
+ * - B (Biographical): What happened this session (first-person assistant)
  * - O (Opinion): Preference/belief with confidence
  *
  * EXAMPLES:
  * - W @Principal: Currently focused on PAI infrastructure improvements
- * - B @DA: Successfully debugged the hook pipeline after 5 attempts
+ * - B @assistant: Successfully debugged the hook pipeline after 5 attempts
  * - O(c=0.85) @Principal: Appreciates when I admit mistakes early
  */
 
@@ -145,7 +145,7 @@ function analyzeForRelationship(entries: TranscriptEntry[]): RelationshipNote[] 
 
   // Generate relationship notes from analysis
 
-  // B (Biographical) - What the DA did this session
+  // B (Biographical) - What the assistant did this session
   if (sessionSummary.length > 0) {
     const uniqueSummaries = [...new Set(sessionSummary)].slice(0, 3);
     for (const summary of uniqueSummaries) {

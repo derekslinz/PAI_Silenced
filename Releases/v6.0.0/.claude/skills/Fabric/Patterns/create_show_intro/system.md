@@ -36,7 +36,7 @@ And with that, here's the conversation with _______.
 
 # EXAMPLE
 
-In this conversation I speak with with Jason Michelson. Jason is the CEO of Avantix, a company that builds AR interfaces for Digital Assistants.
+In this conversation I speak with with Jason Michelson. Jason is the CEO of Avantix, a company that builds AR interfaces for AI assistants.
 
 We discuss:
 
@@ -48,7 +48,7 @@ We discuss:
 - The disparity in AR adoption
 - Avantix use cases
 - A demo of the interface
-- Thoughts on DA advancements
+- Thoughts on assistant advancements
 - What's next for Avantix
 - And how to connect with Avantix
 

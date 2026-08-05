@@ -205,20 +205,20 @@
 201. **summarize_rpg_session**: Summarizes a role-playing game session by extracting key events, combat stats, character changes, quotes, and more.
 202. **t_analyze_challenge_handling**: Provides 8-16 word bullet points evaluating how well challenges are being addressed, calling out any lack of effort.
 203. **t_check_dunning_kruger**: Assess narratives for Dunning-Kruger patterns by contrasting self-perception with demonstrated competence and confidence cues.
-204. **t_check_metrics**: Analyzes deep context from the TELOS file and input instruction, then provides a wisdom-based output while considering metrics and KPIs to assess recent improvements.
-205. **t_create_h3_career**: Summarizes context and produces wisdom-based output by deeply analyzing both the TELOS File and the input instruction, considering the relationship between the two.
-206. **t_create_opening_sentences**: Describes from TELOS file the person's identity, goals, and actions in 4 concise, 32-word bullet points, humbly.
-207. **t_describe_life_outlook**: Describes from TELOS file a person's life outlook in 5 concise, 16-word bullet points.
-208. **t_extract_intro_sentences**: Summarizes from TELOS file a person's identity, work, and current projects in 5 concise and grounded bullet points.
-209. **t_extract_panel_topics**: Creates 5 panel ideas with titles and descriptions based on deep context from a TELOS file and input.
+204. **t_check_metrics**: Analyzes deep context from the life context file and input instruction, then provides a wisdom-based output while considering metrics and KPIs to assess recent improvements.
+205. **t_create_h3_career**: Summarizes context and produces wisdom-based output by deeply analyzing both the life context file and the input instruction, considering the relationship between the two.
+206. **t_create_opening_sentences**: Describes from life context file the person's identity, goals, and actions in 4 concise, 32-word bullet points, humbly.
+207. **t_describe_life_outlook**: Describes from life context file a person's life outlook in 5 concise, 16-word bullet points.
+208. **t_extract_intro_sentences**: Summarizes from life context file a person's identity, work, and current projects in 5 concise and grounded bullet points.
+209. **t_extract_panel_topics**: Creates 5 panel ideas with titles and descriptions based on deep context from a life context file and input.
 210. **t_find_blindspots**: Identify potential blindspots in thinking, frames, or models that may expose the individual to error or risk.
-211. **t_find_negative_thinking**: Analyze a TELOS file and input to identify negative thinking in documents or journals, followed by tough love encouragement.
-212. **t_find_neglected_goals**: Analyze a TELOS file and input instructions to identify goals or projects that have not been worked on recently.
-213. **t_give_encouragement**: Analyze a TELOS file and input instructions to evaluate progress, provide encouragement, and offer recommendations for continued effort.
-214. **t_red_team_thinking**: Analyze a TELOS file and input instructions to red-team thinking, models, and frames, then provide recommendations for improvement.
-215. **t_threat_model_plans**: Analyze a TELOS file and input instructions to create threat models for a life plan and recommend improvements.
-216. **t_visualize_mission_goals_projects**: Analyze a TELOS file and input instructions to create an ASCII art diagram illustrating the relationship of missions, goals, and projects.
-217. **t_year_in_review**: Analyze a TELOS file to create insights about a person or entity, then summarize accomplishments and visualizations in bullet points.
+211. **t_find_negative_thinking**: Analyze a life context file and input to identify negative thinking in documents or journals, followed by tough love encouragement.
+212. **t_find_neglected_goals**: Analyze a life context file and input instructions to identify goals or projects that have not been worked on recently.
+213. **t_give_encouragement**: Analyze a life context file and input instructions to evaluate progress, provide encouragement, and offer recommendations for continued effort.
+214. **t_red_team_thinking**: Analyze a life context file and input instructions to red-team thinking, models, and frames, then provide recommendations for improvement.
+215. **t_threat_model_plans**: Analyze a life context file and input instructions to create threat models for a life plan and recommend improvements.
+216. **t_visualize_mission_goals_projects**: Analyze a life context file and input instructions to create an ASCII art diagram illustrating the relationship of missions, goals, and projects.
+217. **t_year_in_review**: Analyze a life context file to create insights about a person or entity, then summarize accomplishments and visualizations in bullet points.
 218. **to_flashcards**: Create Anki flashcards from a given text, focusing on concise, optimized questions and answers without external context.
 219. **transcribe_minutes**: Extracts (from meeting transcription) meeting minutes, identifying actionables, insightful ideas, decisions, challenges, and next steps in a structured format.
 220. **translate**: Translates sentences or documentation into the specified language code while maintaining the original formatting and tone.

@@ -46,7 +46,7 @@ Distill into:
 - Explicit not-wants (what user said they don't want — these become Out of Scope)
 - Implied not-wants (industry/context inference — these become Out of Scope)
 - Constraints implied by the domain (these become Constraints)
-- Principles implied by the user's TELOS (responsiveness, information density, operator-first, etc. — these become Principles)
+- Principles implied by the user's life philosophy (responsiveness, information density, operator-first, etc. — these become Principles)
 
 ### Step 4 — Write frontmatter
 

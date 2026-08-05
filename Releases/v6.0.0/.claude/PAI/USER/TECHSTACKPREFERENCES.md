@@ -1,6 +1,6 @@
 # Tech Stack Preferences
 
-> Languages, tools, and conventions you prefer — the DA uses these when suggesting or writing code.
+> Languages, tools, and conventions you prefer — the assistant uses these when suggesting or writing code.
 
 ## Languages
 
@@ -26,4 +26,4 @@ Three layers — pick the right one for the context:
 - **Config:** (interview — env var / config file / CLI flag preference)
 
 ---
-*These preferences shape every code suggestion, refactor, and tool selection. The DA consults this file before invoking any code-writing capability.*
+*These preferences shape every code suggestion, refactor, and tool selection. The assistant consults this file before invoking any code-writing capability.*

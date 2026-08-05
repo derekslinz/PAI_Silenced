@@ -46,13 +46,13 @@ PAI uses a **hybrid agent system** that combines:
 
 **How {PRINCIPAL.NAME} uses it:** Just ask naturally.
 
-| {PRINCIPAL.NAME} Says | {DA_IDENTITY.NAME} Does |
+| {PRINCIPAL.NAME} Says | {ASSISTANT_IDENTITY.NAME} Does |
 |-------------|----------|
 | "I need a legal expert to review this" | Composes legal + analytical + thorough agent |
 | "Get me someone skeptical about security" | Composes security + skeptical + adversarial agent |
 | "Quick business assessment" | Composes business + pragmatic + rapid agent |
 
-**{PRINCIPAL.NAME} never touches tools.** {DA_IDENTITY.NAME} composes agents internally based on the request.
+**{PRINCIPAL.NAME} never touches tools.** {ASSISTANT_IDENTITY.NAME} composes agents internally based on the request.
 
 ### CRITICAL TRIGGER: Agent Type Selection
 
@@ -86,7 +86,7 @@ PAI uses a **hybrid agent system** that combines:
 **Example - CORRECT:**
 ```bash
 # {PRINCIPAL.NAME}: "Spin up 5 CUSTOM science agents"
-# {DA_IDENTITY.NAME} runs ComposeAgent 5 times with DIFFERENT trait combos:
+# {ASSISTANT_IDENTITY.NAME} runs ComposeAgent 5 times with DIFFERENT trait combos:
 bun run ComposeAgent.ts --traits "research,enthusiastic,exploratory" --task "Astrophysicist" --output json
 bun run ComposeAgent.ts --traits "medical,meticulous,systematic" --task "Molecular biologist" --output json
 bun run ComposeAgent.ts --traits "technical,creative,bold" --task "Quantum physicist" --output json
@@ -112,7 +112,7 @@ Task(prompt=<ComposeAgent output>, subagent_type="general-purpose", model="sonne
 **Example - CORRECT:**
 ```bash
 # {PRINCIPAL.NAME}: "Spin up 5 agents to research these companies"
-# {DA_IDENTITY.NAME} launches 5 parallel agents:
+# {ASSISTANT_IDENTITY.NAME} launches 5 parallel agents:
 Task(prompt="Research Company A...", subagent_type="general-purpose", model="haiku")
 Task(prompt="Research Company B...", subagent_type="general-purpose", model="haiku")
 # etc.
@@ -140,13 +140,13 @@ Task(prompt="You are Dr. Nova...", subagent_type="general-purpose")
 2. Task with that prompt + `subagent_type: "general-purpose"`
 3. Describe as "custom agents" not "intern agents"
 
-**Available Traits {DA_IDENTITY.NAME} Can Compose:**
+**Available Traits {ASSISTANT_IDENTITY.NAME} Can Compose:**
 
 - **Expertise**: security, legal, finance, medical, technical, research, creative, business, data, communications
 - **Personality**: skeptical, enthusiastic, cautious, bold, analytical, creative, empathetic, contrarian, pragmatic, meticulous
 - **Approach**: thorough, rapid, systematic, exploratory, comparative, synthesizing, adversarial, consultative
 
-**Internal Infrastructure** (for {DA_IDENTITY.NAME}'s use):
+**Internal Infrastructure** (for {ASSISTANT_IDENTITY.NAME}'s use):
 - Trait definitions: `~/.claude/skills/Agents/Data/Traits.yaml`
 - Agent template: `~/.claude/skills/Agents/Templates/DynamicAgent.hbs`
 - Composition tool: `~/.claude/skills/Agents/Tools/ComposeAgent.ts`
@@ -168,7 +168,7 @@ Task(prompt="You are Dr. Nova...", subagent_type="general-purpose")
 
 ## Character Backstories and Personalities (Archived Reference)
 
-### Jamie ({DA_IDENTITY.NAME}) - "The Expressive Eager Buddy"
+### Jamie ({ASSISTANT_IDENTITY.NAME}) - "The Expressive Eager Buddy"
 
 **Real Name**: Jamie Thompson
 **Voice Settings**: Stability 0.38, Similarity Boost 0.70, Rate 235 wpm
@@ -584,7 +584,7 @@ Higher stability (0.65) creates precise, measured delivery - each word chosen de
 
 **Fast Speakers (235-240 wpm):**
 - **Ava Chen (Perplexity)**: 240 wpm - Highly efficient confident presentation
-- **Jamie ({DA_IDENTITY.NAME})**: 235 wpm - Enthusiastic energy, warm but grounded
+- **Jamie ({ASSISTANT_IDENTITY.NAME})**: 235 wpm - Enthusiastic energy, warm but grounded
 - **Alex Rivera (Gemini)**: 235 wpm - Comprehensive multi-perspective coverage
 
 **Medium Speakers (220-230 wpm):**
@@ -606,7 +606,7 @@ Higher stability (0.65) creates precise, measured delivery - each word chosen de
 - **Priya (Artist)**: 0.20 - Extreme creative tangential flow
 
 **Expressive (0.38-0.52):**
-- **Jamie ({DA_IDENTITY.NAME})**: 0.38 - More expressive celebration and warmth
+- **Jamie ({ASSISTANT_IDENTITY.NAME})**: 0.38 - More expressive celebration and warmth
 - **Emma (Writer)**: 0.48 - Greater narrative emotional range
 - **Zoe (Engineer)**: 0.50 - Steady but engaged professional
 - **Aditi (Designer)**: 0.52 - Controlled sophisticated precision
@@ -625,7 +625,7 @@ Higher stability (0.65) creates precise, measured delivery - each word chosen de
 
 **Most Creative Interpretation (0.52-0.70):**
 - **Priya (Artist)**: 0.52 - LOWEST - Maximum creative interpretation freedom
-- **Jamie ({DA_IDENTITY.NAME})**: 0.70 - Warm expressive with consistency
+- **Jamie ({ASSISTANT_IDENTITY.NAME})**: 0.70 - Warm expressive with consistency
 
 **Balanced Professional (0.78-0.84):**
 - **Emma (Writer)**: 0.78 - Articulate warm storytelling consistency
@@ -678,6 +678,6 @@ Voice server automatically loads this configuration at startup. To update person
 - **v1.3.2** (2025-11-16): DRAMATIC voice differentiation - 97% rate increase, 54% similarity increase, 42% stability increase using personality psychology mapping
 - **v1.3.1** (2025-11-16): Deep character development - backstories, life events, refined voice characteristics
 - **v1.3.0** (2025-11-16): Centralized in PAI, increased expressiveness for all agents
-- **v1.2.1** (2025-11-16): Enhanced DA expressiveness specifically
+- **v1.2.1** (2025-11-16): Enhanced assistant expressiveness specifically
 - **v1.2.0** (2025-11-16): Added character personalities for 5 key agents
 - **v1.1.0** (2025-11-16): Initial agent personality system
