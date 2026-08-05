@@ -1,6 +1,6 @@
 ---
 name: Migrate
-description: "Intakes existing content from external sources, classifies each chunk against the PAI destination taxonomy, and commits approved chunks with provenance. Sources: .md/.markdown/.txt, stdin, PAI TELOS/MEMORY/KNOWLEDGE dirs, CLAUDE.md/.cursorrules/OpenAI Custom Instructions, Obsidian/Notion/Apple Notes exports, journal dumps. MigrateScan.ts chunks and classifies, producing a routing table with per-target counts and confidence %. MigrateApprove.ts approval loop: --approve-all, --approve-target, --review, --dry-run. UNCLEAR never bulk-approved. Phase 6 delivers summary and /interview recommendation for sparse areas. Confidence: ≥70% auto-approve; 40-70% confirm; <40% walk-through. Destinations: TELOS (MISSION/GOALS/PROBLEMS/STRATEGIES/CHALLENGES/BELIEFS/WISDOM/MODELS/FRAMES/NARRATIVES/SPARKS), IDEAL_STATE (per-dimension explicit call), preferences (BOOKS/AUTHORS/MOVIES/BANDS/RESTAURANTS/FOOD_PREFERENCES/LEARNING/MEETUPS/CIVIC), Identity (PRINCIPAL_IDENTITY.md — always prompts), Knowledge (MEMORY/KNOWLEDGE/{Ideas,People,Companies,Research}), AI rules (memory/feedback_*.md — new file per chunk), UNCLEAR. Provenance HTML comment on every commit. Dedup via substring match. USE WHEN /migrate, migrate content, import from other PAI, bring in old notes, import Cursor rules, import CLAUDE.md, import Custom Instructions, bulk import, Obsidian/Notion/Apple Notes import. NOT FOR single-file edits (use Telos Update), conversational interviews (use Interview), Knowledge Archive (use Knowledge), identity edits (use _PROFILE)."
+description: "Intakes existing content from external sources, classifies each chunk against the PAI destination taxonomy, and commits approved chunks with provenance. Sources: .md/.markdown/.txt, stdin, PAI TELOS/MEMORY/KNOWLEDGE dirs, CLAUDE.md/.cursorrules/OpenAI Custom Instructions, Obsidian/Notion/Apple Notes exports, journal dumps. MigrateScan.ts chunks and classifies, producing a routing table with per-target counts and confidence %. MigrateApprove.ts approval loop: --approve-all, --approve-target, --review, --dry-run. UNCLEAR never bulk-approved. Phase 6 delivers summary and /interview recommendation for sparse areas. Confidence: ≥70% auto-approve; 40-70% confirm; <40% walk-through. Destinations: TELOS (MISSION/GOALS/PROBLEMS/STRATEGIES/CHALLENGES/BELIEFS/WISDOM/MODELS/FRAMES/NARRATIVES/SPARKS), IDEAL_STATE (per-dimension explicit call), preferences (BOOKS/AUTHORS/MOVIES/BANDS/RESTAURANTS/FOOD_PREFERENCES/LEARNING/MEETUPS/CIVIC), Identity (PRINCIPAL_IDENTITY.md — always prompts), Knowledge (MEMORY/KNOWLEDGE/{Ideas,People,Companies,Research}), AI rules (memory/feedback_*.md — new file per chunk), UNCLEAR. Provenance HTML comment on every commit. Dedup via substring match. USE WHEN /migrate, migrate content, import from other PAI, bring in old notes, import Cursor rules, import CLAUDE.md, import Custom Instructions, bulk import, Obsidian/Notion/Apple Notes import. NOT FOR single-file edits, conversational interviews (use Interview), Knowledge Archive (use Knowledge), identity edits (use _PROFILE)."
 ---
 
 # Migrate — external-content intake and classification
@@ -30,7 +30,7 @@ Migrates content into the PAI structure from external sources. Unlike `/intervie
 
 | Category | Destinations |
 |---|---|
-| **Foundational TELOS** | MISSION, GOALS, PROBLEMS, STRATEGIES, CHALLENGES, BELIEFS, WISDOM, MODELS, FRAMES, NARRATIVES, SPARKS |
+| **Foundational life context** | MISSION, GOALS, PROBLEMS, STRATEGIES, CHALLENGES, BELIEFS, WISDOM, MODELS, FRAMES, NARRATIVES, SPARKS |
 | **IDEAL_STATE dimensions** | HEALTH, MONEY, FREEDOM, RELATIONSHIPS, CREATIVE, RHYTHMS |
 | **Preference files** | BOOKS, AUTHORS, MOVIES, BANDS, RESTAURANTS, FOOD_PREFERENCES, LEARNING, MEETUPS, CIVIC |
 | **Identity** | USER/PRINCIPAL_IDENTITY.md |
@@ -131,7 +131,7 @@ After approval pass:
 
 ## Rules
 
-- **Every commit carries provenance.** The committed content includes an HTML comment noting source file + section + timestamp. Nothing gets dropped into TELOS without attribution.
+- **Every commit carries provenance.** The committed content includes an HTML comment noting source file + section + timestamp. Nothing gets dropped into life context without attribution.
 - **Never bulk-approve UNCLEAR.** Those require the user's explicit routing.
 - **Confidence thresholds:** ≥70% = trusted (auto-approve eligible). 40-70% = medium (show for confirmation). <40% = low (walk-through required).
 - **Ask before touching identity.** PRINCIPAL_IDENTITY.md commits always prompt — that file is load-bearing.
@@ -144,7 +144,7 @@ After approval pass:
 
 ### User: `/migrate ~/old-claude/TELOS/`
 
-the DA scans the old TELOS directory, classifies every chunk, presents the routing summary, offers fast-path vs. walk-through approval.
+the DA scans the old life context directory, classifies every chunk, presents the routing summary, offers fast-path vs. walk-through approval.
 
 ### User: `/migrate` (then pastes CLAUDE.md content)
 
@@ -161,12 +161,11 @@ the DA scans the journal, expects a lot of UNCLEAR + WISDOM, walks through each 
 ## Related
 
 - `/interview` — fills gaps by asking questions (not by intaking existing content)
-- `/Telos` Update workflow — edit a single TELOS file directly
 - `/Knowledge` — manage the Knowledge Archive
 - `/_PROFILE` — manage PRINCIPAL_IDENTITY
 
 ## Troubleshooting
 
 - **Low average confidence (<40%):** the source is probably genre-mismatched (e.g., code comments, logs, raw data). Consider pre-filtering to remove non-prose chunks before scanning.
-- **Everything goes to UNCLEAR:** the source probably has no recognizable PAI-taxonomy patterns. Either add the content manually via `/Telos` or write it as general Knowledge notes.
+- **Everything goes to UNCLEAR:** the source probably has no recognizable PAI-taxonomy patterns. Either add the content manually via the life context files or write it as general Knowledge notes.
 - **Duplicate content warnings:** the scanner doesn't dedupe against existing files yet. Run `--dry-run` first to preview before committing.

@@ -30,7 +30,7 @@ if [ -f "$_SETTINGS_CACHE" ] && [ "$SETTINGS_FILE" -ot "$_SETTINGS_CACHE" ]; the
 else
     jq -r '
       "TEMP_UNIT=" + (.preferences.temperatureUnit // "fahrenheit" | @sh) + "\n" +
-      "DA_NAME=" + (.daidentity.name // .daidentity.displayName // .env.DA // "Assistant" | @sh) + "\n" +
+      "ASSISTANT_NAME=" + (.daidentity.name // .daidentity.displayName // .env.DA // "Assistant" | @sh) + "\n" +
       "USER_TZ=" + (.principal.timezone // "UTC" | @sh) + "\n" +
       "PAI_VERSION=" + (.pai.version // "—" | @sh) + "\n" +
       "settings_has_counts=" + (has("counts") | tostring) + "\n" +
@@ -48,7 +48,7 @@ else
 fi
 TEMP_UNIT="${TEMP_UNIT:-fahrenheit}"
 [ "$TEMP_UNIT" != "celsius" ] && TEMP_UNIT="fahrenheit"
-DA_NAME="${DA_NAME:-Assistant}"
+ASSISTANT_NAME="${ASSISTANT_NAME:-Assistant}"
 USER_TZ="${USER_TZ:-UTC}"
 PAI_VERSION="${PAI_VERSION:-—}"
 # v6.2.0+: LATEST is the single source of truth for the Algorithm version.
@@ -185,8 +185,8 @@ reset_time_str() {
 
 input=$(cat)
 
-# Get DA name from settings (single source of truth)
-DA_NAME="${DA_NAME:-Assistant}"
+# Get assistant name from settings (single source of truth)
+ASSISTANT_NAME="${ASSISTANT_NAME:-Assistant}"
 
 # Get user timezone from settings (for reset time display)
 USER_TZ="${USER_TZ:-UTC}"
@@ -712,7 +712,7 @@ if [ "$MODE" = "normal" ] && { [ -z "${usage_5h_reset:-}" ] || [ -z "${usage_7d_
     [ -z "${usage_7d_reset:-}" ] && usage_7d_reset="${_cache_usage_7d_reset:-}"
 fi
 
-# NOTE: DA_NAME, PAI_VERSION, input JSON, cc_version, model_name, dir_name
+# NOTE: ASSISTANT_NAME, PAI_VERSION, input JSON, cc_version, model_name, dir_name
 # are all already parsed above (lines 59-113). No duplicate parsing needed.
 
 # 
@@ -1074,72 +1074,6 @@ else
 fi
 printf "${SLATE_600}%s${RESET}\n" "$SEP_DASHED"
 
-# 
-# LINE: STATE METER — dimension meters toward Ideal State
-# Reads PAI/USER/TELOS/PAI_STATE.json (written by ComputeGap.ts on a schedule).
-# Falls back to placeholder values if the state file is missing.
-# Format: STATE: HEALTH 68%CREATIVE 31%FREEDOM 78%RELATIONSHIPS 84%FINANCIAL 42%
-# 
-
-_dim_color() {
-    # Blue-family gradient — navy → light blue across dimensions
-    case "$1" in
-        health)        printf '\033[38;2;56;189;248m' ;;   # sky — bright cyan-blue
-        money)         printf '\033[38;2;37;99;235m' ;;    # royal blue
-        freedom)       printf '\033[38;2;59;130;246m' ;;   # blue
-        relationships) printf '\033[38;2;96;165;250m' ;;   # medium-light
-        creative)      printf '\033[38;2;147;197;253m' ;;  # light blue
-        *)             printf '%b' "$SLATE_400" ;;
-    esac
-}
-_tier_color() {
-    # Tier signal via blue intensity — brighter = closer to ideal.
-    # Non-numeric values (e.g. "N/A" before the user has populated TELOS) get
-    # the muted slate to read as "no signal yet" rather than "low score".
-    local pct="${1%%.*}"
-    case "$pct" in
-        ''|*[!0-9]*) printf '\033[38;2;100;116;139m'; return ;;  # muted — not a number
-    esac
-    if   [ "$pct" -ge 75 ]; then printf '\033[38;2;219;234;254m'  # brightest (near-ideal)
-    elif [ "$pct" -ge 50 ]; then printf '\033[38;2;96;165;250m'   # medium blue
-    else                         printf '\033[38;2;100;116;139m'  # muted slate-blue (far from ideal)
-    fi
-}
-
-_PAI_STATE_JSON="$PAI_DIR/USER/TELOS/PAI_STATE.json"
-_dims=(health creative freedom relationships money)
-_labels=(HEALTH CREATIVE FREEDOM RELATIONS FIN)
-# Fresh installs have no TELOS data yet — show N/A so the line reads "no signal"
-# instead of misleadingly looking like real numbers. ComputeGap.ts populates
-# PAI_STATE.json once the user runs /interview and rates dimensions.
-declare -a _pcts=(N/A N/A N/A N/A N/A)
-
-if [ -f "$_PAI_STATE_JSON" ]; then
-    IFS=$'\t' read -r _state_health _state_creative _state_freedom _state_relationships _state_money <<< "$(
-        jq -r '[.dimensions.health.pct // "", .dimensions.creative.pct // "", .dimensions.freedom.pct // "", .dimensions.relationships.pct // "", .dimensions.money.pct // ""] | @tsv' "$_PAI_STATE_JSON" 2>/dev/null
-    )"
-    [ -n "$_state_health" ] && [ "$_state_health" != "null" ] && _pcts[0]="${_state_health%%.*}"
-    [ -n "$_state_creative" ] && [ "$_state_creative" != "null" ] && _pcts[1]="${_state_creative%%.*}"
-    [ -n "$_state_freedom" ] && [ "$_state_freedom" != "null" ] && _pcts[2]="${_state_freedom%%.*}"
-    [ -n "$_state_relationships" ] && [ "$_state_relationships" != "null" ] && _pcts[3]="${_state_relationships%%.*}"
-    [ -n "$_state_money" ] && [ "$_state_money" != "null" ] && _pcts[4]="${_state_money%%.*}"
-fi
-
-printf "${SLATE_500}STATE:${RESET} "
-for _i in "${!_dims[@]}"; do
-    _dc=$(_dim_color "${_dims[$_i]}")
-    _tc=$(_tier_color "${_pcts[$_i]}")
-    # Append "%" only for numeric values; N/A renders bare so it reads as "no data".
-    _val="${_pcts[$_i]}"
-    case "$_val" in
-        ''|*[!0-9]*) _suffix="" ;;
-        *)           _suffix="%" ;;
-    esac
-    printf "%b%s${RESET} %b%s%s${RESET}" "$_dc" "${_labels[$_i]}" "$_tc" "$_val" "$_suffix"
-    [ "$_i" -lt $((${#_dims[@]} - 1)) ] && printf " ${SLATE_600}${RESET} "
-done
-printf "\n"
-sep
 printf "${SLATE_400}CC:${RESET} ${PAI_A}${cc_version}${RESET} ${SLATE_600}${RESET} ${SLATE_500}PAI:${PAI_A}${PAI_VERSION}${RESET} ${SLATE_400}ALG:${PAI_A}${ALGO_VERSION}${RESET} ${SLATE_600}${RESET} ${WIELD_ACCENT}SK:${RESET} ${SLATE_300}${public_skills}${RESET}${SLATE_600}${RESET} ${SLATE_500}${private_skills}${RESET}${SLATE_600}${RESET} ${SLATE_600}${RESET} ${WIELD_WORKFLOWS}WF:${RESET} ${SLATE_300}${workflows_count}${RESET} ${SLATE_600}${RESET} ${WIELD_HOOKS}HK:${RESET} ${SLATE_300}${hooks_count}${RESET}\n"
 sep
 

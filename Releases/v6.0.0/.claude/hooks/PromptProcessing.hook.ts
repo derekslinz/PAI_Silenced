@@ -8,9 +8,6 @@
  *
  * TRIGGER: UserPromptSubmit
  *
- * NOTE: Satisfaction/rating capture is handled by the dedicated
- * SatisfactionCapture.hook.ts — this hook does NOT handle ratings.
- *
  * FLOW:
  * 1. Parse stdin
  * 2. Skip system text and very short prompts
@@ -721,7 +718,7 @@ Examples of separating instruction from subject:
 - "What's the best drum pedal for metal?" → question about drum pedals → "Research Best Metal Drum Pedals"
 - "How does the auth flow work?" → question about auth → "Analyze Auth Flow Design Pattern"
 - "Analyze ISD, ISC, BPE differences" → subject is the three concepts → "Analyze ISD ISC BPE Differences"
-- "Create the PAI TELOS framework" → subject is the TELOS framework → "Create PAI TELOS Framework System"
+- "Create the PAI goals framework" → subject is the goals framework → "Create PAI Goals Framework System"
 - "[pasted email from agent asking for commission bump]... I want you to research what a fair price is for an agent like this" → goal is research on agent commission rates → "Research Talent Agent Commission Rates" (NOT "Add Agenda Thanks Accurate Guys" — those are tokens from the pasted email, ignore them entirely)
 - "[pasted Slack message about a deploy failure] What do I do?" → goal is fixing the deploy → "Fix Deploy Failure From Slack" (subject is the deploy problem, not Slack words)
 - "Should I be paying them 10%, 20%, or 30%?" → goal is a percentage decision → "Decide Talent Agent Commission Percentage"
@@ -729,7 +726,7 @@ Examples of separating instruction from subject:
 
 QUESTIONS: If the message is a question (not a task command), use "Research [4 noun-phrase words]" or "Analyze [4 noun-phrase words]".
 GOOD: "Fix Session Naming Word Count", "Build PAI TUI Dataviz Module", "Deploy Git Server Update Hook", "Research South Bay Pet Stores", "Refactor Algorithm Phase Transition Logic"
-BAD: "Fix" (one word), "Make Sure" (two words, not a task), "Analyze ISD ISC BPE" (four words, missing subject completion), "Create PAI TELOS Seriously Soon" (filler adverbs), "Pull Work See Continue Now" (instruction words), "Show Latest Build Status Page" (meta-instruction), "Pet Stores South Bay Area" (no verb), "Okay Recently Unified Session Name" (random fragments)` : ''}
+BAD: "Fix" (one word), "Make Sure" (two words, not a task), "Analyze ISD ISC BPE" (four words, missing subject completion), "Create PAI Goals Seriously Soon" (filler adverbs), "Pull Work See Continue Now" (instruction words), "Show Latest Build Status Page" (meta-instruction), "Pet Stores South Bay Area" (no verb), "Okay Recently Unified Session Name" (random fragments)` : ''}
 
 ## TASK 3: MODE + TIER CLASSIFICATION
 Classify the prompt into a response mode for ${ASSISTANT_NAME}. When CONTEXT is provided, use it to disambiguate the CURRENT MESSAGE. The CURRENT MESSAGE is the only thing being classified; context is interpretive aid.

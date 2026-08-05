@@ -159,16 +159,16 @@ export function scanApiKeys(
 }
 
 /**
- * Try to recover the DA's name from a prior install or any backup tree. Reads
- * `PAI/USER/DA_IDENTITY.md` (or .yaml) and pulls the name from the title line
- * (`# DA Identity — Atlas`) or a `name:` frontmatter / yaml field.
+ * Try to recover the assistant's name from a prior install or any backup tree.
+ * Reads `PAI/USER/ASSISTANT_IDENTITY.md` (or .yaml) and pulls the name from the
+ * title line (`# Assistant Identity — Atlas`) or a `name:` frontmatter / yaml field.
  */
 function detectDaName(paiDir: string, backupPaths: string[]): string | undefined {
   const roots = [paiDir, ...backupPaths];
   const relCandidates = [
-    "PAI/USER/DA_IDENTITY.md",
-    "PAI/USER/DA_IDENTITY.yaml",
-    "PAI/USER/DA/IDENTITY.md",
+    "PAI/USER/ASSISTANT_IDENTITY.md",
+    "PAI/USER/ASSISTANT_IDENTITY.yaml",
+    "PAI/USER/ASSISTANT_IDENTITY/README.md",
   ];
 
   for (const root of roots) {
@@ -181,8 +181,8 @@ function detectDaName(paiDir: string, backupPaths: string[]): string | undefined
       } catch {
         continue;
       }
-      // `# DA Identity — Atlas` or `# DA Identity - Atlas`
-      const titleMatch = content.match(/^#\s*DA Identity\s*[—–-]\s*([A-Za-z][\w\s'-]+?)\s*$/m);
+      // `# Assistant Identity — Atlas` or `# Assistant Identity - Atlas`
+      const titleMatch = content.match(/^#\s*(?:Assistant|AI)\s*Identity\s*[—–-]\s*([A-Za-z][\w\s'-]+?)\s*$/m);
       if (titleMatch) return titleMatch[1].trim();
       // YAML/frontmatter `name: Atlas`
       const yamlMatch = content.match(/^\s*name:\s*["']?([A-Za-z][\w\s'-]+?)["']?\s*$/m);
@@ -194,17 +194,6 @@ function detectDaName(paiDir: string, backupPaths: string[]): string | undefined
 
 function fileExists(root: string, relPath: string): boolean {
   return existsSync(join(root, relPath));
-}
-
-function countGoals(goalsPath: string): number {
-  if (!existsSync(goalsPath)) return 0;
-  try {
-    const content = readFileSync(goalsPath, "utf-8");
-    const matches = content.match(/^\s*-\s*(?:\*\*G|G)/gm);
-    return matches?.length || 0;
-  } catch {
-    return 0;
-  }
 }
 
 function countContacts(contactsPath: string): number {
@@ -238,20 +227,8 @@ function countProjectRows(projectsPath: string): number {
 
 export function detectExistingUserContent(paiUserDir: string): ExistingUserContentDetection {
   return {
-    telos: {
-      mission: fileExists(paiUserDir, "TELOS/MISSION.md"),
-      goals: fileExists(paiUserDir, "TELOS/GOALS.md"),
-      goalsCount: countGoals(join(paiUserDir, "TELOS", "GOALS.md")),
-      activeProblems: fileExists(paiUserDir, "TELOS/ACTIVE_PROBLEMS.md"),
-      strategy: fileExists(paiUserDir, "TELOS/STRATEGY.md"),
-      principles: fileExists(paiUserDir, "TELOS/PRINCIPLES.md"),
-      areas: fileExists(paiUserDir, "TELOS/AREAS.md"),
-      now: fileExists(paiUserDir, "TELOS/NOW.md"),
-    },
     identity: {
       principalIdentity: fileExists(paiUserDir, "PRINCIPAL_IDENTITY.md"),
-      daIdentity: fileExists(paiUserDir, "DA_IDENTITY.md"),
-      daIdentityYaml: fileExists(paiUserDir, "DA_IDENTITY.yaml"),
       workingStyle: fileExists(paiUserDir, "WORKINGSTYLE.md"),
       rhetoricalStyle: fileExists(paiUserDir, "RHETORICALSTYLE.md"),
       aiWritingPatterns: fileExists(paiUserDir, "AI_WRITING_PATTERNS.md"),

@@ -30,7 +30,6 @@ accomplishing any task: Current State to Ideal State via verifiable iteration (I
 | Notifications | PAI/DOCUMENTATION/Notifications/NotificationSystem.md |
 | Observability | PAI/DOCUMENTATION/Observability/ObservabilitySystem.md |
 | Pulse | PAI/DOCUMENTATION/Pulse/PulseSystem.md |
-| DA subsystem (design) | PAI/DOCUMENTATION/Pulse/DaSubsystem.md |
 | CLI tools (Algorithm + Arbol) | PAI/DOCUMENTATION/Tools/Cli.md |
 | Configuration | PAI/DOCUMENTATION/Config/ConfigSystem.md |
 | Containment policy | PAI/DOCUMENTATION/Tools/Containment.md |
@@ -68,7 +67,7 @@ accomplishing any task: Current State to Ideal State via verifiable iteration (I
 
 1. **System Prompt** — PAI_SYSTEM_PROMPT.md, constitutional, survives compaction
 2. **CLAUDE.md** — operational procedures, format templates, context routing
-3. **@Imported files** — PRINCIPAL_IDENTITY, DA_IDENTITY, PROJECTS, PRINCIPAL_TELOS, this file
+3. **@Imported files** — PRINCIPAL_IDENTITY, PROJECTS, this file
 4. **Dynamic context** — LoadContext hook output, ephemeral
 
 ## Key Design Decisions

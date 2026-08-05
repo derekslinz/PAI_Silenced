@@ -238,7 +238,7 @@ interface SystemStats {
   model: string;
 }
 
-function readDAIdentity(): string {
+function readAssistantIdentity(): string {
   const settingsPath = join(CLAUDE_DIR, "settings.json");
   try {
     const settings = JSON.parse(readFileSync(settingsPath, "utf-8"));
@@ -318,7 +318,7 @@ function countUserFiles(): number {
 
 function getStats(): SystemStats {
   return {
-    name: readDAIdentity(),
+    name: readAssistantIdentity(),
     skills: countSkills(),
     hooks: countHooks(),
     workItems: countWorkItems(),
@@ -455,7 +455,7 @@ function createNeofetchBanner(): string {
   const maxSkills = 100;
   const maxHooks = 50;
 
-  statsLines.push(`${GRADIENT.cyan1}${RESET} ${UI.muted}DA Name${RESET}      ${UI.text}${stats.name}${RESET}`);
+  statsLines.push(`${GRADIENT.cyan1}${RESET} ${UI.muted}Assistant${RESET}    ${UI.text}${stats.name}${RESET}`);
   statsLines.push(`${GRADIENT.blue1}${RESET} ${UI.muted}Skills${RESET}       ${GRADIENT.blue1}${stats.skills}${RESET} ${progressBar(stats.skills, maxSkills, 10)}`);
   statsLines.push(`${GRADIENT.purple1}${RESET}  ${UI.muted}Hooks${RESET}        ${GRADIENT.purple1}${stats.hooks}${RESET} ${progressBar(stats.hooks, maxHooks, 10)}`);
   statsLines.push(`${UI.warning}${RESET} ${UI.muted}Work Items${RESET}   ${UI.warning}${stats.workItems}+${RESET}`);

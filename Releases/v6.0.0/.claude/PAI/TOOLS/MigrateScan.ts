@@ -28,32 +28,6 @@ const PAI_DIR = process.env.PAI_DIR || join(HOME, ".claude", "PAI");
 const QUEUE_FILE = join(PAI_DIR, "MEMORY", "MIGRATION", "migration-proposals.jsonl");
 
 type Target =
-  | "TELOS/MISSION.md"
-  | "TELOS/GOALS.md"
-  | "TELOS/PROBLEMS.md"
-  | "TELOS/STRATEGIES.md"
-  | "TELOS/CHALLENGES.md"
-  | "TELOS/BELIEFS.md"
-  | "TELOS/WISDOM.md"
-  | "TELOS/MODELS.md"
-  | "TELOS/FRAMES.md"
-  | "TELOS/NARRATIVES.md"
-  | "TELOS/SPARKS.md"
-  | "TELOS/IDEAL_STATE/HEALTH.md"
-  | "TELOS/IDEAL_STATE/MONEY.md"
-  | "TELOS/IDEAL_STATE/FREEDOM.md"
-  | "TELOS/IDEAL_STATE/RELATIONSHIPS.md"
-  | "TELOS/IDEAL_STATE/CREATIVE.md"
-  | "TELOS/IDEAL_STATE/RHYTHMS.md"
-  | "TELOS/BOOKS.md"
-  | "TELOS/AUTHORS.md"
-  | "TELOS/MOVIES.md"
-  | "TELOS/BANDS.md"
-  | "TELOS/RESTAURANTS.md"
-  | "TELOS/FOOD_PREFERENCES.md"
-  | "TELOS/LEARNING.md"
-  | "TELOS/MEETUPS.md"
-  | "TELOS/CIVIC.md"
   | "USER/PRINCIPAL_IDENTITY.md"
   | "MEMORY/KNOWLEDGE/Ideas"
   | "MEMORY/KNOWLEDGE/People"
@@ -79,38 +53,6 @@ type Proposal = {
 //  Classification rules (keyword → target, with weight) 
 
 const RULES: Array<{ target: Target; patterns: RegExp[]; weight: number }> = [
-  // Foundational TELOS
-  { target: "TELOS/MISSION.md", patterns: [/\bmission\b/i, /\bnorth[\s-]?star\b/i, /\bwhy I\b(work|build|do)/i, /\blife's?\s+work\b/i], weight: 3 },
-  { target: "TELOS/GOALS.md", patterns: [/\bgoal[s]?\b/i, /\btarget\b/i, /\bmilestone\b/i, /\bby (end of|Q[1-4]|next year|2026|2027)/i, /\baim to\b/i], weight: 2 },
-  { target: "TELOS/PROBLEMS.md", patterns: [/\bproblem\b/i, /\bissue\b/i, /\bcrisis\b/i, /\bbroken\b/i, /\bsolve\b/i], weight: 2 },
-  { target: "TELOS/STRATEGIES.md", patterns: [/\bstrategy\b/i, /\bapproach\b/i, /\bplan of attack\b/i, /\bhow we'?ll\b/i], weight: 2 },
-  { target: "TELOS/CHALLENGES.md", patterns: [/\bstruggle[s]? with\b/i, /\bI procrastinate\b/i, /\bweakness\b/i, /\bbad at\b/i, /\bblocker\b/i], weight: 2 },
-  { target: "TELOS/BELIEFS.md", patterns: [/\bI (believe|am convinced|am certain)\b/i, /\bmy conviction\b/i, /\bcore belief\b/i], weight: 2 },
-  { target: "TELOS/WISDOM.md", patterns: [/\blearned that\b/i, /\binsight\b/i, /\brule of thumb\b/i, /\bhard[-\s]won\b/i, /\baphorism\b/i], weight: 2 },
-  { target: "TELOS/MODELS.md", patterns: [/\bmental model\b/i, /\bframework\b/i, /\bheuristic\b/i, /\bway of thinking\b/i], weight: 2 },
-  { target: "TELOS/FRAMES.md", patterns: [/\bframe\b/i, /\blens\b/i, /\bway of seeing\b/i], weight: 1 },
-  { target: "TELOS/NARRATIVES.md", patterns: [/\bpitch\b/i, /\bone[-\s]liner\b/i, /\belevator pitch\b/i, /\bhow I describe\b/i], weight: 2 },
-  { target: "TELOS/SPARKS.md", patterns: [/\bspark\b/i, /\bcreative (drive|pull|itch)\b/i, /\bplay\b/i, /\balways wanted to\b/i], weight: 2 },
-
-  // IDEAL_STATE
-  { target: "TELOS/IDEAL_STATE/HEALTH.md", patterns: [/\bweight\b/i, /\bsleep\b/i, /\bfitness\b/i, /\bcholesterol\b/i, /\bVO2\b/i, /\bbloodwork\b/i, /\bexercise\b/i], weight: 2 },
-  { target: "TELOS/IDEAL_STATE/MONEY.md", patterns: [/\b(revenue|income|burn|runway|savings rate|investment)\b/i, /\b(MRR|ARR|net worth)\b/i, /\$\d/], weight: 2 },
-  { target: "TELOS/IDEAL_STATE/FREEDOM.md", patterns: [/\bmeetings? per\b/i, /\bdeep work\b/i, /\btravel\b/i, /\bcalendar\b/i, /\bautonomy\b/i], weight: 2 },
-  { target: "TELOS/IDEAL_STATE/RELATIONSHIPS.md", patterns: [/\bpartner\b/i, /\bspouse\b/i, /\bdaughters?\b/i, /\bsons?\b/i, /\bchildren\b/i, /\bfamily\b/i, /\btier[-\s][ABC]\b/i, /\bfriends?\b/i], weight: 2 },
-  { target: "TELOS/IDEAL_STATE/CREATIVE.md", patterns: [/\bdrums?\b/i, /\bfiction\b/i, /\bwriting\b/i, /\bmusic\b/i, /\bcreative block\b/i], weight: 2 },
-  { target: "TELOS/IDEAL_STATE/RHYTHMS.md", patterns: [/\bmorning ritual\b/i, /\bdaily rhythm\b/i, /\bweekly\b/i, /\bwake time\b/i, /\bcoffee ritual\b/i], weight: 2 },
-
-  // Preferences
-  { target: "TELOS/BOOKS.md", patterns: [/\bbook\b/i, /\bfavorite read\b/i, /\bby\s+([A-Z][a-z]+\s+[A-Z][a-z]+)/], weight: 2 },
-  { target: "TELOS/AUTHORS.md", patterns: [/\bauthor\b/i, /\bwriter\b/i, /\bnovelist\b/i], weight: 2 },
-  { target: "TELOS/MOVIES.md", patterns: [/\bmovie\b/i, /\bfilm\b/i, /\bdirector\b/i, /\bcinema\b/i], weight: 2 },
-  { target: "TELOS/BANDS.md", patterns: [/\bband\b/i, /\bartist\b/i, /\balbum\b/i, /\bconcert\b/i, /\bdrummer\b/i], weight: 2 },
-  { target: "TELOS/RESTAURANTS.md", patterns: [/\brestaurant\b/i, /\bdiner\b/i, /\beatery\b/i, /\bPapaya Thai\b/i], weight: 2 },
-  { target: "TELOS/FOOD_PREFERENCES.md", patterns: [/\bcuisine\b/i, /\bspice\b/i, /\b(love|hate|avoid) (eating|food)\b/i, /\bdietary\b/i], weight: 2 },
-  { target: "TELOS/LEARNING.md", patterns: [/\blearn\b/i, /\blesson\b/i, /\bclass\b/i, /\bstudy\b/i, /\bcourse\b/i], weight: 2 },
-  { target: "TELOS/MEETUPS.md", patterns: [/\bmeetup\b/i, /\bconference\b/i, /\bevent\b/i], weight: 2 },
-  { target: "TELOS/CIVIC.md", patterns: [/\bpermit\b/i, /\bcity council\b/i, /\bzoning\b/i, /\bNewark\b/i], weight: 2 },
-
   // Identity
   { target: "USER/PRINCIPAL_IDENTITY.md", patterns: [/\bI am\b/i, /\bmy role\b/i, /\bmy background\b/i, /\bI work as\b/i, /\bexperience\b/i], weight: 1 },
 

@@ -162,7 +162,7 @@ Quote: "Walk away from anything or anyone who takes away from your joy."
 
 3. **Relevance** - Why does this matter for the audience?
    - How it applies to modern life
-   - Connection to TELOS philosophy
+   - Connection to life philosophy
    - Practical wisdom it provides
 
 **If context not immediately known:**

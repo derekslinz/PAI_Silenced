@@ -2,7 +2,7 @@
 
 **Welcome to your Life OS.**
 
-This is where your DA learns who you are, what you're working toward, and what matters to you. When you first install PAI, this directory is scaffolded from `PAI/TEMPLATES/User/`. Every file here is yours to fill in — your DA will help via the `Interview` skill.
+This is where your assistant learns who you are, what you're working toward, and what matters to you. When you first install PAI, this directory is scaffolded from `PAI/TEMPLATES/User/`. Every file here is yours to fill in — your assistant will help via the `Interview` skill.
 
 ## The One Rule
 
@@ -13,7 +13,7 @@ Walking into this directory should read like a biography. `Books.md` is you. `Be
 ## How to Get Started
 
 1. **Run the Interview** — `/interview` walks you through every file, phase by phase, filling them in conversationally.
-2. **Start small** — `PrincipalIdentity.md`, `Telos/Mission.md`, `Beliefs.md`. The rest accretes over time.
+2. **Start small** — `PrincipalIdentity.md`, `Mission.md`, `Beliefs.md`. The rest accretes over time.
 3. **Drop new files at root** — `Podcasts.md`, `Gratitude.md`, `Travel.md`, anything. They appear in Pulse automatically.
 
 ## The Frontmatter Contract
@@ -39,7 +39,7 @@ Full spec: `PAI/DOCUMENTATION/LifeOs/LifeOsSchema.md`.
 - **taste** — what you love (`Books.md`, `Movies.md`, `Music.md`, `Restaurants.md`, `Food.md`)
 - **shape** — how your life runs (`Rhythms.md`, `Sparks.md`, `Current.md`, `Ideal.md`)
 - **ops** — infrastructure of self (`Productivity.md`, `AssetManagement.md`, `Feed.md`)
-- **domain** — multi-file life domains as directories (`Telos/`, `Health/`, `Finances/`, `Business/`, `Work/`)
+- **domain** — multi-file life domains as directories (`Health/`, `Finances/`, `Business/`, `Work/`)
 
 ## Privacy
 

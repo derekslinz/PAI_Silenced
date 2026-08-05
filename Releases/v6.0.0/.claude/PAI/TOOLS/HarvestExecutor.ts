@@ -672,21 +672,6 @@ async function handleOpenGithubIssue(
   };
 }
 
-async function handleTelosUpdate(
-  item: HarvestItem,
-  action: Action,
-  _ctx: ExecCtx,
-): Promise<ActionResult> {
-  // NOTE: github dispatch deferred to UL Work Hub follow-up; sidecar status=deferred captures the gap.
-  console.log("Deferred telos update dispatch:", { itemId: item.id, params: action.params });
-  return {
-    verb: action.verb,
-    status: "deferred",
-    reason: "stub — telos updates flow through Telos skill, not raw appends",
-    params: action.params,
-  };
-}
-
 async function dispatchAction(item: HarvestItem, action: Action, ctx: ExecCtx): Promise<ActionResult> {
   switch (action.verb) {
     case "create_knowledge_source_entry":
@@ -696,8 +681,6 @@ async function dispatchAction(item: HarvestItem, action: Action, ctx: ExecCtx): 
       return handleCreateLearningQueue(item, action, ctx);
     case "open_github_issue":
       return handleOpenGithubIssue(item, action, ctx);
-    case "telos_update":
-      return handleTelosUpdate(item, action, ctx);
     default:
       return { verb: action.verb, status: "skipped", reason: "unknown verb" };
   }

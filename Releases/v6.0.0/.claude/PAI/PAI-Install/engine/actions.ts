@@ -44,12 +44,9 @@ const PLACEHOLDER_LITERALS = new Set([
 
 const USER_MIGRATION_IDENTITY_FILES = [
   "PRINCIPAL_IDENTITY.md",
-  "DA_IDENTITY.md",
-  "DA_IDENTITY.yaml",
 ] as const;
 
 const USER_MIGRATION_FULL_ENTRIES = [
-  "TELOS",
   "CONTACTS.md",
   "OPINIONS.md",
   "PROJECTS",
@@ -167,22 +164,8 @@ async function emitSectionHeader(
 }
 
 function summariseExistingUserContent(content: ExistingUserContentDetection): string {
-  const telosParts: string[] = [];
-  if (content.telos.mission) telosParts.push("MISSION ");
-  if (content.telos.goals) {
-    const goalsSuffix = content.telos.goalsCount > 0 ? ` (${content.telos.goalsCount} entries)` : "";
-    telosParts.push(`GOALS ${goalsSuffix}`);
-  }
-  if (content.telos.activeProblems) telosParts.push("ACTIVE_PROBLEMS ");
-  if (content.telos.strategy) telosParts.push("STRATEGY ");
-  if (content.telos.principles) telosParts.push("PRINCIPLES ");
-  if (content.telos.areas) telosParts.push("AREAS ");
-  if (content.telos.now) telosParts.push("NOW ");
-
   const identityParts: string[] = [];
   if (content.identity.principalIdentity) identityParts.push("PRINCIPAL_IDENTITY ");
-  if (content.identity.daIdentity) identityParts.push("DA_IDENTITY ");
-  if (content.identity.daIdentityYaml) identityParts.push("DA_IDENTITY.yaml ");
   if (content.identity.workingStyle) identityParts.push("WORKINGSTYLE ");
   if (content.identity.rhetoricalStyle) identityParts.push("RHETORICALSTYLE ");
   if (content.identity.aiWritingPatterns) identityParts.push("AI_WRITING_PATTERNS ");
@@ -194,7 +177,6 @@ function summariseExistingUserContent(content: ExistingUserContentDetection): st
   if (content.identity.beliefs) identityParts.push("BELIEFS ");
 
   const sections: string[] = [];
-  if (telosParts.length > 0) sections.push(`TELOS: ${telosParts.join(", ")}`);
   if (identityParts.length > 0) sections.push(`IDENTITY: ${identityParts.join(", ")}`);
   if (content.contacts.contacts) {
     const contactsSuffix = content.contacts.count > 0 ? ` (${content.contacts.count} entries)` : "";
@@ -339,7 +321,7 @@ function tryExec(cmd: string, timeout = 30000): string | null {
 
 //  User Context Migration (v2.5/v3.0 → v5.x) 
 //
-// In v2.5–v3.0, user context (ABOUTME.md, TELOS/, CONTACTS.md, etc.)
+// In v2.5–v3.0, user context (ABOUTME.md, CONTACTS.md, etc.)
 // lived at skills/PAI/USER/ (or skills/CORE/USER/ in v2.4).
 // In v4.0, user context moved to PAI/USER/ and CONTEXT_ROUTING.md
 // points there. But the installer never migrated existing files,
@@ -401,7 +383,6 @@ function shouldOverwriteTemplateDestination(dstPath: string): boolean {
     const content = readFileSync(dstPath, "utf-8");
     return (
       content.includes("{PRINCIPAL.NAME}") ||
-      content.includes("{DA_IDENTITY.NAME}") ||
       content.includes("Your name") ||
       content.includes("e.g., Atlas, Nova, Sage")
     );
@@ -785,7 +766,7 @@ export async function runSystemDetect(
 
     const preFills: string[] = [];
     if (state.collected.principalName) preFills.push(`name=${state.collected.principalName}`);
-    if (state.collected.aiName) preFills.push(`DA=${state.collected.aiName}`);
+    if (state.collected.aiName) preFills.push(`assistant=${state.collected.aiName}`);
     if (detection.principal?.email) preFills.push(`email=${detection.principal.email}`);
     if (state.collected.timezone) preFills.push(`timezone=${state.collected.timezone}`);
     const apiHits: string[] = [];
@@ -953,7 +934,7 @@ export async function runIdentity(
     emit,
     "YOUR-IDENTITY",
     "YOUR IDENTITY",
-    "Confirming the human and DA details that personalize this install",
+    "Confirming the human and assistant details that personalize this install",
     4
   );
 
@@ -1246,7 +1227,7 @@ export async function runRepository(
       emit,
       "MIGRATING-YOUR-USER-CONTENT",
       "MIGRATING YOUR USER CONTENT",
-      "Restoring your TELOS, identity, and personal docs from the backup"
+      "Restoring your identity and personal docs from the backup"
     );
     await migrateUserContentFromBackup(state, emit);
   }
@@ -1406,10 +1387,8 @@ export async function runConfiguration(
 
   // Render identity into the user-facing markdown.
   // CLAUDE.md ships with `{DA_IDENTITY.NAME}` / `{PRINCIPAL.NAME}` tokens
-  // (because the public release can't know either yet) and DA_IDENTITY.md
-  // / PRINCIPAL_IDENTITY.md ship as bootstrap defaults. Without this step,
-  // the model literalises the curly-brace tokens at runtime and shows
-  // `{{DA_NAME}}` in chat instead of the user's actual DA name.
+  // (because the public release can't know either yet). Without this step,
+  // the model literalises the curly-brace tokens at runtime.
   await emit({ event: "progress", step: "configuration", percent: 42, detail: "Personalising identity files..." });
   const aiName = state.collected.aiName || "PAI";
   const principalName = state.collected.principalName || "User";
@@ -1421,26 +1400,6 @@ export async function runConfiguration(
         .replace(/\{DA_IDENTITY\.NAME\}/g, aiName)
         .replace(/\{PRINCIPAL\.NAME\}/g, principalName);
       writeFileSync(claudeMdPath, content);
-    } catch {}
-  }
-
-  const daIdentityPath = join(paiDir, "PAI", "USER", "DA_IDENTITY.md");
-  if (existsSync(daIdentityPath)) {
-    try {
-      const content = readFileSync(daIdentityPath, "utf-8")
-        // Title — lenient match for any DA Identity heading
-        .replace(/^# DA Identity — .+$/m, `# DA Identity — ${aiName}`)
-        // Body Name/Full Name/Display line — structural match (any current values),
-        // not literal "PAI Assistant", so the replace works regardless of which
-        // template variant is on disk (fixes the "PAI | PAI | PAI" + "Kergan title"
-        // drift case where title got updated but body did not).
-        .replace(
-          /^- \*\*Name:\*\* [^|\n]+\| \*\*Full Name:\*\* [^|\n]+\| \*\*Display:\*\* [^\n]+$/m,
-          `- **Name:** ${aiName} | **Full Name:** ${aiName} | **Display:** ${aiName}`
-        )
-        // Self-introduction line — match either template variant
-        .replace(/I am PAI, (the user's|User's) AI assistant/g, `I am ${aiName}, ${principalName}'s AI assistant`);
-      writeFileSync(daIdentityPath, content);
     } catch {}
   }
 
@@ -1753,7 +1712,7 @@ export async function runTelegramSetup(
     event: "message",
     content:
       "Optional: Telegram bot integration. Dashboard can run a Telegram bot that lets you " +
-      "chat with your DA from your phone and pushes long-task notifications. " +
+      "chat with your assistant from your phone and pushes long-task notifications. " +
       "Requires a bot token from @BotFather and your Telegram user/chat ID.",
   });
 

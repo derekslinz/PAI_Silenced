@@ -19,7 +19,7 @@
 import { readFileSync } from 'fs';
 import { getIdentity } from '../../../.claude/hooks/lib/identity';
 
-const DA_IDENTITY = getIdentity();
+const ASSISTANT_IDENTITY = getIdentity();
 
 // ============================================================================
 // Types
@@ -194,7 +194,7 @@ export function extractCompletionSummary(text: string): string {
 
   // Use global flag and find LAST match (completion line is at end of response)
   const completedPatterns = [
-    new RegExp(`\\s*\\*{0,2}${DA_IDENTITY.name}:?\\*{0,2}\\s*(.+?)(?:\\n|$)`, 'gi'),
+    new RegExp(`\\s*\\*{0,2}${ASSISTANT_IDENTITY.name}:?\\*{0,2}\\s*(.+?)(?:\\n|$)`, 'gi'),
     /\s*\*{0,2}COMPLETED:?\*{0,2}\s*(.+?)(?:\n|$)/gi,
   ];
 
@@ -225,7 +225,7 @@ export function extractCompletionPlain(text: string): string {
 
   // Use global flag and find LAST match (completion line is at end of response)
   const completedPatterns = [
-    new RegExp(`\\s*\\*{0,2}${DA_IDENTITY.name}:?\\*{0,2}\\s*(.+?)(?:\\n|$)`, 'gi'),
+    new RegExp(`\\s*\\*{0,2}${ASSISTANT_IDENTITY.name}:?\\*{0,2}\\s*(.+?)(?:\\n|$)`, 'gi'),
     /\s*\*{0,2}COMPLETED:?\*{0,2}\s*(.+?)(?:\n|$)/gi,
   ];
 
@@ -274,7 +274,7 @@ export function extractStructuredSections(text: string): StructuredResponse {
     results: /\s*RESULTS:\s*(.+?)(?:\n|$)/i,
     status: /\s*STATUS:\s*(.+?)(?:\n|$)/i,
     next: /\s*NEXT:\s*(.+?)(?:\n|$)/i,
-    completed: new RegExp(`(?:\\s*${DA_IDENTITY.name}:|\\s*COMPLETED:)\\s*(.+?)(?:\\n|$)`, 'i'),
+    completed: new RegExp(`(?:\\s*${ASSISTANT_IDENTITY.name}:|\\s*COMPLETED:)\\s*(.+?)(?:\\n|$)`, 'i'),
   };
 
   for (const [key, pattern] of Object.entries(patterns)) {

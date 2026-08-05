@@ -12,7 +12,7 @@
 
 import { setTabState, readTabState, stripPrefix, setPhaseTab } from '../lib/tab-setter';
 import { isValidCompletionTitle, gerundToPastTense, getWorkingFallback, trimToValidTitle } from '../lib/output-validators';
-import { getDAName } from '../lib/identity';
+import { getAssistantName } from '../lib/identity';
 
 import type { ParsedTranscript } from '../../PAI/TOOLS/TranscriptParser';
 
@@ -26,7 +26,7 @@ function extractTabTitle(summaryLine: string): string | null {
 
   const cleaned = summaryLine
     .replace(/^\s*/, '')
-    .replace(new RegExp(`^${getDAName()}:\\s*`, 'i'), '')
+    .replace(new RegExp(`^${getAssistantName()}:\\s*`, 'i'), '')
     .replace(/^(Done\.?\s*)/i, '')
     .trim();
 

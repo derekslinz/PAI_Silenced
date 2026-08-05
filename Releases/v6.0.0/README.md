@@ -63,7 +63,7 @@ We've spent the last few years arguing about agents and harnesses and context en
 
 The principal — you, the human — is at the center. Your DA wraps around you. Skills, memory, the algorithm, hooks, agents, Pulse, the web, devices, robots, other people's DAs — all of it is infrastructure your DA reaches into. You don't talk to an army of agents. You talk to one entity. That entity has the army.
 
-The prime directive is simple: **read your current state from every signal it can reach, compare it to your TELOS-articulated ideal state, and constantly close the gap.** That is what AI is for. That is what we are building.
+The prime directive is simple: **read your current state from every signal it can reach, compare it to your articulated ideal state, and constantly close the gap.** That is what AI is for. That is what we are building.
 
 > Daniel walks through the full thesis in [**We're All Building a Single Digital Assistant**](https://danielmiessler.com/blog/we-are-all-building-single-digital-assistant) — blog post + [companion video](https://www.youtube.com/watch?v=uUForkn00mk). v5.0.0 is the implementation of the architecture argued for in that piece.
 
@@ -101,17 +101,16 @@ Pulse replaces every previous loose service. It runs:
 
 After install, Pulse runs as a supervised macOS launchd service (`com.pai.pulse`) with a menu bar app. **You should leave it running.** It's how the dashboard stays live, how scheduled work fires.
 
-The dashboard surfaces **22 routes**: Life, Health, Finances, Business, Work, Telos, Goals, Air, Performance, Hooks, Skills, Agents, Security, Knowledge, Knowledge Graph, System Docs, System Graph, Arbol, Ladder, Novelty, Assistant, root.
+The dashboard surfaces **22 routes**: Life, Health, Finances, Business, Work, Goals, Air, Performance, Hooks, Skills, Agents, Security, Knowledge, Knowledge Graph, System Docs, System Graph, Arbol, Ladder, Novelty, Assistant, root.
 
 ### 2. The DA system — your AI gets a name
 
-Every PAI install picks a **DA identity**: name, , color, personality. This is your AI — the peer you work with daily.  **Run `/interview` after install** and your DA will guide you through naming itself,  capturing your TELOS.
+Every PAI install picks a **DA identity**: name, , color, personality. This is your AI — the peer you work with daily.  **Run `/interview` after install** and your DA will guide you through naming itself.
 
 | File | What it owns |
 | ------ | -------------- |
 | `PAI/USER/PRINCIPAL_IDENTITY.md` | Who **you** are — name, role, location, worldview, preferences, work patterns |
 | `PAI/USER/DA_IDENTITY.md` | Who your **DA** is — name, personality, writing style, what they love, what they dislike |
-| `PAI/USER/TELOS/` | Mission, goals, beliefs, wisdom, challenges, narratives — the spine of every recommendation |
 
 Both files are **loaded at session start** so the DA always has them in context. The Life OS frame requires this — without the DA knowing who you are, none of the upstream features have anything to climb against.
 
@@ -197,7 +196,7 @@ Below is the complete catalog — what each skill does, and how we actually use 
 | **FirstPrinciples** | Physics-style deconstruct → challenge → rebuild reasoning (Musk methodology). | Breaking through analogical reasoning when a problem feels stuck; rebuilding from constraints rather than precedent. |
 | **Ideate** | 9-phase evolutionary idea generation (Consume → Dream → Daydream → Contemplate → Steal → Mate → Test → Evolve → Meta-Learn). | Long-form idea generation when single-pass ideation runs dry; producing genuinely novel angles via cross-domain stealing. |
 | **Interceptor** | Real Chrome browser automation via extension — zero CDP fingerprint, passes all major bot detection (BrowserScan, CreepJS, Pixelscan). | Verifying every web change before declaring it done; testing logged-in flows on bot-protected sites. |
-| **Interview** | Phased conversational interview across all PAI context files (TELOS → IDEAL_STATE → preferences → identity). | Initial PAI personalization after install; periodic TELOS refresh; onboarding a new DA identity. |
+| **Interview** | Phased conversational interview across all PAI context files (goals → ideal state → preferences → identity). | Initial PAI personalization after install; periodic context refresh; onboarding a new DA identity. |
 | **ISA** | Owns the Ideal State Artifact primitive — six workflows: Scaffold, Interview, CheckCompleteness, Reconcile, Seed, Append. | Every E2+ Algorithm run; the scaffolding for any project's "done" definition. |
 | **IterativeDepth** | Multi-angle exploration running 2-8 sequential passes from systematically different scientific lenses. | Surfacing requirements and edge cases invisible from any single angle — usually at THINK phase on hard problems. |
 | **Knowledge** | Manage the typed graph archive (People, Companies, Ideas, Research, Blogs) with wikilinks and backlinks. | Adding and searching durable notes; navigating the knowledge graph; harvesting from PAI sources into long-term memory. |
@@ -214,7 +213,6 @@ Below is the complete catalog — what each skill does, and how we actually use 
 | **Sales** | Transform product documentation into sales-ready narrative packages — story explanation + charcoal sketch art + talking points. | Generating pitch material from spec docs; emotional-register-aware narrative production for outbound. |
 | **Science** | The scientific method as universal problem-solving — DefineGoal, GenerateHypotheses (≥3 required), DesignExperiment, MeasureResults. | Forcing hypothesis-plurality on hard problems; designing falsifiable tests instead of confirming intuitions. |
 | **SystemsThinking** | Structural analysis grounded in Donella Meadows, Senge, Forrester, Ackoff — Iceberg, Causal Loops, leverage points. | When the same problem keeps recurring; mapping feedback loops before changing a complex system. |
-| **Telos** | Read/update Mission, Goals, Beliefs, Wisdom, Books, Movies, Challenges, Mental Models, Predictions, Traumas, Frames, Lessons-Learned, Wrong-Beliefs, Narratives, Strategies. | The Life OS spine — every recommendation traces back here. Daily check-ins, monthly reviews, planning sessions. |
 | **USMetrics** | Analyze 68 US economic and social indicators from FRED, EIA, Treasury FiscalData, BLS, Census APIs. | Background research for newsletter and podcast on US macro trends; quick lookup of CPI, unemployment, GDP, etc. |
 | **Webdesign** | Design and integrate web interfaces using Anthropic's Claude Design (claude.ai/design) driven through Interceptor. | Building UI prototypes; landing-page iteration; production-code handoff via the frontend-design plugin. |
 | **WorldThreatModel** | Persistent world-model harness stress-testing ideas against 11 time horizons (6 months to 50 years). | Strategy decisions with long tails; investment thinking; resilience planning against geopolitical, technology, economic shifts. |
@@ -303,12 +301,12 @@ The installer will:
 
 Run `/interview` in Claude Code. Your DA will guide you through:
 
-1. **Phase 1 — TELOS:** Mission, Goals, Beliefs, Wisdom, Challenges, Books, Wrong-beliefs, Mental models, Narratives
-2. **Phase 2 — IDEAL_STATE:** What does success look like for you?
+1. **Phase 1 — Goals & context:** Mission, Goals, Beliefs, Wisdom, Challenges, Books, Wrong-beliefs, Mental models, Narratives
+2. **Phase 2 — Ideal state:** What does success look like for you?
 3. **Phase 3 — Preferences:** Tools, conventions, working style
 4. **Phase 4 — Identity:** Final DA personality tuning
 
-This is the most important step. **Without TELOS, your DA has nothing to optimize against.**
+This is the most important step. **Without your goals, your DA has nothing to optimize against.**
 
 ### Step 4: Migrate your content into PAI/USER/
 
@@ -319,7 +317,7 @@ Tell your DA: *"Help me migrate my old content into the PAI/USER/ structure."*
 Your DA will use the **Migrate** skill, which:
 
 - Intakes content from `.md`/`.markdown`/`.txt`, stdin, Obsidian, Notion, Apple Notes
-- Classifies each chunk against the PAI destination taxonomy (TELOS, KNOWLEDGE, PROJECTS, FEED, etc.)
+- Classifies each chunk against the PAI destination taxonomy (KNOWLEDGE, PROJECTS, FEED, etc.)
 - Asks you to approve each placement
 - Commits with provenance metadata
 
@@ -327,10 +325,10 @@ Common migration targets:
 
 | Old content | New home |
  ------------- | ---------- |
-| Personal goals & mission | `PAI/USER/TELOS/` |
+| Personal goals & mission | `PAI/USER/` |
 | Notes about people / companies | `PAI/USER/KNOWLEDGE/{People,Companies}/` |
 | Project state | `PAI/USER/PROJECTS/PROJECTS.md` |
-| Reading list / books | `PAI/USER/TELOS/BOOKS.md` |
+| Reading list / books | `PAI/USER/` |
 | Content sources to follow | `PAI/USER/FEED.md` |
 | Health / finances / business | `PAI/USER/{HEALTH,FINANCES,BUSINESS}/` |
 

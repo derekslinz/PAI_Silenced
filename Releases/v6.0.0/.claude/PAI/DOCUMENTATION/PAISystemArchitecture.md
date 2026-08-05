@@ -2,7 +2,7 @@
 
 **The authoritative architecture reference for Personal AI Infrastructure.**
 
-**PAI is the Life Operating System.** It is the framework that turns AI from a chatbot you talk to into a system that runs your life — it knows your goals, people, workflows, current state, and ideal state, and continuously hill-climbs you from one to the other. The DA (your Digital Assistant) is the primary interface to this OS. **Pulse** is the Life Dashboard — the visible surface onto the Life OS.
+**PAI is the Life Operating System.** It is the framework that turns AI from a chatbot you talk to into a system that runs your life — it knows your goals, people, workflows, current state, and ideal state, and continuously hill-climbs you from one to the other. The assistant is the primary interface to this OS. **Pulse** is the Life Dashboard — the visible surface onto the Life OS.
 
 PAI targets **AS3** on the [PAI Maturity Model](https://example.com/blog/personal-ai-maturity-model), with lineage from [The Real Internet of Things](https://example.com/blog/the-real-internet-of-things) (2016).
 
@@ -41,7 +41,7 @@ These are the immutable design principles that govern all PAI development.
 
 ### 0. PAI is the Life Operating System
 
-PAI is not a chatbot, not a dashboard, not a passive "AI scaffolding framework." PAI is the **Life Operating System** — the framework that manages the resources, processes, identity, memory, and interfaces that let a human live and work with a DA as their primary interface. The DA is the interface. Pulse is the visible dashboard. PAI is the OS behind both. The target maturity level is AS3 on the [PAI Maturity Model](https://example.com/blog/personal-ai-maturity-model). The core loop is Current State → Ideal State via continuous hill-climbing. This principle is the root from which every other principle derives. Canonical thesis: `PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md`.
+PAI is not a chatbot, not a dashboard, not a passive "AI scaffolding framework." PAI is the **Life Operating System** — the framework that manages the resources, processes, identity, memory, and interfaces that let a human live and work with an assistant as their primary interface. The assistant is the interface. Pulse is the visible dashboard. PAI is the OS behind both. The target maturity level is AS3 on the [PAI Maturity Model](https://example.com/blog/personal-ai-maturity-model). The core loop is Current State → Ideal State via continuous hill-climbing. This principle is the root from which every other principle derives. Canonical thesis: `PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md`.
 
 ### 1. Customization of an Agentic Platform for Achieving Your Goals
 
@@ -138,9 +138,8 @@ Layer 2: CLAUDE.MD (user context, loaded natively, survives compaction)
   operational rules, context routing table. ~139 lines.
 
 Layer 3: @IMPORTED FILES (loaded with CLAUDE.md, survive compaction)
-  Files: PRINCIPAL_IDENTITY, DA_IDENTITY, PROJECTS, PRINCIPAL_TELOS,
-  PAI_ARCHITECTURE_SUMMARY
-  Contains: Rich identity context, project routing, goals, system architecture map.
+  Files: PRINCIPAL_IDENTITY, PROJECTS, PAI_ARCHITECTURE_SUMMARY
+  Contains: Rich identity context, project routing, system architecture map.
 
 Layer 4: DYNAMIC CONTEXT (session-specific, ephemeral, does NOT survive compaction)
   Injected by: LoadContext.hook.ts (SessionStart)
@@ -285,7 +284,7 @@ JSONL sources on local disk (tool-activity, tool-failures, subagent-events) are 
 
 **Pulse is the Life Dashboard — the visible surface of the PAI Life Operating System.**
 
-PAI is the OS. Pulse is the Dashboard. Everything a human (or the DA) can *see* about the Life OS flows through Pulse: real-time observability, push notifications, chat surfaces (iMessage/Telegram), scheduled work, background worker state, DA heartbeat, and (as the dashboard grows) live views of current state vs ideal state, goal progress, workflows, and day-in-the-life preview. If a Life OS with no dashboard would still be a Life OS, and a dashboard with no OS behind it would be a widget — Pulse is what keeps the OS visible and interactive.
+PAI is the OS. Pulse is the Dashboard. Everything a human (or the assistant) can *see* about the Life OS flows through Pulse: real-time observability, push notifications, chat surfaces (iMessage/Telegram), scheduled work, background worker state, assistant heartbeat, and (as the dashboard grows) live views of current state vs ideal state, goal progress, workflows, and day-in-the-life preview. If a Life OS with no dashboard would still be a Life OS, and a dashboard with no OS behind it would be a widget — Pulse is what keeps the OS visible and interactive.
 
 **Implementation:** A single Bun process managed by launchd (`com.pai.pulse`), listening on port 31337. Pulse absorbed all previously separate daemon services into a module architecture: observability server (`Observability/observability.ts`), Telegram bot (`modules/telegram.ts`), iMessage bot (`modules/imessage.ts`), and session hooks (`modules/hooks.ts`). Reads job definitions from PULSE.toml, evaluates cron schedules, executes due jobs (shell scripts or Claude CLI invocations), and routes output through existing notification channels. Circuit breaker pattern: 3 consecutive failures skip the job.
 
@@ -293,7 +292,7 @@ PAI is the OS. Pulse is the Dashboard. Everything a human (or the DA) can *see* 
 - **Location:** `~/.claude/PAI/PULSE/`
 - **Launchd:** `com.pai.pulse`
 - **Port:** 31337
-- **API:** ~40 endpoints across categories (observability, algorithm, life, user-index, security, knowledge, wiki, DA, hooks). Full reference: `PAI/DOCUMENTATION/Observability/ObservabilitySystem.md` → "API Reference"
+- **API:** ~40 endpoints across categories (observability, algorithm, life, user-index, security, knowledge, wiki, hooks). Full reference: `PAI/DOCUMENTATION/Observability/ObservabilitySystem.md` → "API Reference"
 - **Full doc:** `PAI/DOCUMENTATION/Pulse/PulseSystem.md`
 
 ### Life OS Schema
@@ -316,16 +315,6 @@ Walks `USER/` (root + one level), parses frontmatter + body of each `.md`, compu
 - **Location:** `PAI/PULSE/modules/user-index.ts`
 - **Index output:** `PAI/PULSE/state/user-index.json`
 - **Spec:** `PAI/DOCUMENTATION/LifeOs/LifeOsSchema.md`
-
-### DA Subsystem
-
-**Digital Assistant identity, lifecycle, and growth management within Pulse.**
-
-Formalizes how Pulse instantiates, manages, and evolves a Digital Assistant. Replaces manual DA_IDENTITY.md editing with a structured YAML schema, adds proactive heartbeat evaluation (2-layer: free context gathering + cheap Haiku eval), natural-language scheduled tasks, and bounded identity growth over time. Supports multiple DAs via a registry with primary/worker roles.
-
-- **Status:** Active
-- **Location:** `~/.claude/PAI/USER/DA/` (identity data), `~/.claude/` (runtime)
-- **Full doc:** `PAI/DOCUMENTATION/Pulse/DaSubsystem.md`, `PAI/DOCUMENTATION/Pulse/PulseSystem.md` (DA Module section)
 
 ### Browser Automation
 

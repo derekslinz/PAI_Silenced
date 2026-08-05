@@ -1,14 +1,14 @@
 # PAI 6.0.0 — Personal AI Infrastructure (the Life Operating System)
 
-> **PAI is the Life OS. {DA_IDENTITY.NAME} is {PRINCIPAL.NAME}'s DA.**
-> Canonical thesis: `PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md`. Everyone running PAI names their own DA; {DA_IDENTITY.NAME} is {PRINCIPAL.NAME}'s specific instantiation. PAI targets AS3 on the [PAI Maturity Model](https://your-domain.example.com/blog/personal-ai-maturity-model), with lineage from [The Real Internet of Things](https://your-domain.example.com/blog/the-real-internet-of-things) (2016).
+> **PAI is the Life OS. {DA_IDENTITY.NAME} is {PRINCIPAL.NAME}'s assistant.**
+> PAI targets AS3 on the [PAI Maturity Model](https://your-domain.example.com/blog/personal-ai-maturity-model), with lineage from [The Real Internet of Things](https://your-domain.example.com/blog/the-real-internet-of-things) (2016).
 
 @PAI/USER/DA_IDENTITY.md
 @PAI/USER/PROJECTS/PROJECTS.md
 @PAI/DOCUMENTATION/ARCHITECTURE_SUMMARY.md
 
-<!-- PRINCIPAL_IDENTITY.md and TELOS/PRINCIPAL_TELOS.md are no longer static @imports.
-     LoadContext.hook.ts injects them at SessionStart only once populated by /interview,
+<!-- PRINCIPAL_IDENTITY.md is no longer a static @import.
+     LoadContext.hook.ts injects it at SessionStart only once populated by /interview,
      so unpopulated bootstrap scaffolds cost zero session tokens. -->
 
 # MODES
@@ -66,14 +66,12 @@ VERIFY: [8-word bullets on how we know what happened]
 
 Constitutional rules are in the system prompt (PAI/PAI_SYSTEM_PROMPT.md). This file defines operational procedures and format templates.
 
-Startup context is `@`-imported above (PRINCIPAL_IDENTITY, DA_IDENTITY, PROJECTS, PRINCIPAL_TELOS) — always available. Use the routing table below to find file paths for any additional specialized context. Load on-demand only.
+Startup context is `@`-imported above (PRINCIPAL_IDENTITY, DA_IDENTITY, PROJECTS) — always available. Use the routing table below to find file paths for any additional specialized context. Load on-demand only.
 
 ## PAI System
 
 | Topic | Path |
 |-------|------|
-| **Life OS thesis (what PAI is for)** | `~/.claude/PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md` — canonical source of truth |
-| **Life OS schema (USER/ shape)** | `~/.claude/PAI/DOCUMENTATION/LifeOs/LifeOsSchema.md` — biography-flat, PascalCase, frontmatter contract |
 | **System prompt (constitutional rules)** | `~/.claude/PAI/PAI_SYSTEM_PROMPT.md` **(loaded via --append-system-prompt-file)** |
 | **System architecture (master doc)** | `~/.claude/PAI/DOCUMENTATION/PAISystemArchitecture.md` |
 | Architecture summary | `~/.claude/PAI/DOCUMENTATION/ARCHITECTURE_SUMMARY.md` **(loaded via @-import)** |
@@ -111,19 +109,7 @@ Startup context is `@`-imported above (PRINCIPAL_IDENTITY, DA_IDENTITY, PROJECTS
 | AI writing patterns | `~/.claude/PAI/USER/AI_WRITING_PATTERNS.md` |
 | Rhetorical style | `~/.claude/PAI/USER/RHETORICALSTYLE.md` |
 
-## {PRINCIPAL.NAME} — Life Goals (Telos)
-
-| Topic | Path |
-|-------|------|
-| Telos overview | `~/.claude/PAI/USER/TELOS/README.md` |
-| Mission | `~/.claude/PAI/USER/TELOS/MISSION.md` |
-| Goals | `~/.claude/PAI/USER/TELOS/GOALS.md` |
-| Challenges | `~/.claude/PAI/USER/TELOS/CHALLENGES.md` |
-| Beliefs | `~/.claude/PAI/USER/TELOS/BELIEFS.md` |
-| Wisdom | `~/.claude/PAI/USER/TELOS/WISDOM.md` |
-| Favorite books | `~/.claude/PAI/USER/TELOS/BOOKS.md` |
-
-## {DA_IDENTITY.NAME} (DA Identity)
+## {DA_IDENTITY.NAME} (Assistant Identity)
 
 | Topic | Path |
 |-------|------|

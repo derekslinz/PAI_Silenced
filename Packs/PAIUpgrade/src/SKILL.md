@@ -1,6 +1,6 @@
 ---
 name: PAIUpgrade
-description: "Generate prioritized PAI upgrade recommendations via 4 parallel threads: Thread 0 (prior-work audit — reads current Algorithm, PATTERNS.yaml, hooks, settings, recent ISAs, and KNOWLEDGE to assign Prior Status tags), Thread 1 (user context — TELOS goals, active projects, PAI system state), Thread 2 (source collection — Anthropic releases, YouTube channels, GitHub trending, custom sources), Thread 3 (internal reflections — Algorithm execution Q1/Q2 patterns). Output format: Discoveries table ranked by interestingness, then tiered Recommendations (CRITICAL/HIGH/MEDIUM/LOW) each with Prior Status (NEW/PARTIAL/DISCUSSED/REJECTED/DONE), then full Technique Details with before/after code. Every recommendation cites file:line evidence from Thread 0 — already-implemented items go to Skipped, never re-surfaced. Workflows: Upgrade, MineReflections, AlgorithmUpgrade, ResearchUpgrade, FindSources, TwitterBookmarks. USE WHEN upgrade, system upgrade, check Anthropic, new Claude features, algorithm upgrade, PAI upgrade, check bookmarks, scan bookmarks, twitter bookmarks, X bookmarks, bookmarks for upgrades, what have I bookmarked, mine reflections."
+description: "Generate prioritized PAI upgrade recommendations via 4 parallel threads: Thread 0 (prior-work audit — reads current Algorithm, PATTERNS.yaml, hooks, settings, recent ISAs, and KNOWLEDGE to assign Prior Status tags), Thread 1 (user context — life goals, active projects, PAI system state), Thread 2 (source collection — Anthropic releases, YouTube channels, GitHub trending, custom sources), Thread 3 (internal reflections — Algorithm execution Q1/Q2 patterns). Output format: Discoveries table ranked by interestingness, then tiered Recommendations (CRITICAL/HIGH/MEDIUM/LOW) each with Prior Status (NEW/PARTIAL/DISCUSSED/REJECTED/DONE), then full Technique Details with before/after code. Every recommendation cites file:line evidence from Thread 0 — already-implemented items go to Skipped, never re-surfaced. Workflows: Upgrade, MineReflections, AlgorithmUpgrade, ResearchUpgrade, FindSources, TwitterBookmarks. USE WHEN upgrade, system upgrade, check Anthropic, new Claude features, algorithm upgrade, PAI upgrade, check bookmarks, scan bookmarks, twitter bookmarks, X bookmarks, bookmarks for upgrades, what have I bookmarked, mine reflections."
 effort: high
 ---
 
@@ -34,7 +34,7 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
 The skill runs **four parallel agent threads** that converge into personalized recommendations:
 
 - **Thread 0** — Prior-Work Audit (Algorithm, PATTERNS.yaml, hooks, skills, recent ISAs, KNOWLEDGE, feedback memory)
-- **Thread 1** — User Context (TELOS, projects, recent work, PAI state)
+- **Thread 1** — User Context (life goals, projects, recent work, PAI state)
 - **Thread 2** — Source Collection (Anthropic, YouTube, custom sources, GitHub trending)
 - **Thread 3** — Internal Reflections (algorithm-reflections.jsonl)
 
@@ -111,7 +111,7 @@ Section order: Discoveries → Recommendations → Technique Details → Interna
 2. **Quote the Source** — actual code, doc quotes, or transcript excerpts.
 3. **PAI-Contextualized** — every technique maps to a specific PAI file, skill, or component.
 4. **Explain "Why You"** — "this helps because your [X] currently [Y]".
-5. **TELOS-Connected** — reference user's goals and challenges when explaining relevance.
+5. **Life-Connected** — reference user's goals and challenges when explaining relevance.
 6. **Skip Boldly** — if content has no extractable technique, skip it entirely.
 7. **Implementation-Ready** — provide actual code changes, not vague recommendations.
 8. **Claude Code Freshness via claude-code-guide** — when discoveries involve Claude Code internals (hooks, settings, slash commands, MCP, agent types, keybindings, Agent SDK, Claude API), spawn `Agent(subagent_type="claude-code-guide")` to verify PAI's current references match the latest API surface.

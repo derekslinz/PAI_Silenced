@@ -22,7 +22,7 @@ export const CONTAINMENT_ZONES: readonly ContainmentZone[] = [
   {
     name: "user-data",
     patterns: ["PAI/USER/**"],
-    description: "Principal identity, TELOS, credentials, personal infrastructure, contacts, finances, health, business",
+    description: "Principal identity, credentials, personal infrastructure, contacts, finances, health, business",
   },
   {
     name: "config-secrets",

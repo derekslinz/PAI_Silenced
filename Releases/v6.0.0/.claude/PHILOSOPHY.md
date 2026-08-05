@@ -44,7 +44,7 @@ the system.
 ## Status of the fork
 
 The artifact layer is largely purged (emoji, voice, status-line chrome).
-The instruction layer that *generates* affect — DA identity, mode-banner
+The instruction layer that *generates* affect — assistant identity, mode-banner
 templates, "euphoric surprise" framing — is the remaining origin residue
 and the next target. Propagate source-down: fix what produces the voice
 before chasing what it produced.

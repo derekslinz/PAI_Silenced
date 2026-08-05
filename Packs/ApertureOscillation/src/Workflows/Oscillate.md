@@ -19,7 +19,7 @@ This workflow is invoked:
 
 If invoked without explicit inputs, extract them from the conversation:
 - Tactical = the specific ask or task being worked on
-- Strategic = the broader goal, system, or vision mentioned in context (CLAUDE.md, TELOS, project context)
+- Strategic = the broader goal, system, or vision mentioned in context (CLAUDE.md, life context, project context)
 
 ## Execution
 
@@ -159,7 +159,7 @@ OBSERVE Phase:
 2. Capability Audit
 3. >>> APERTURE OSCILLATION (if selected) <<<
    - Takes tactical target from the user's request
-   - Takes strategic context from project/TELOS/conversation context
+   - Takes strategic context from project/life context/conversation context
    - Surfaces design tensions before ISC criteria are written
 4. ISC CREATION (now informed by scope oscillation)
 ```

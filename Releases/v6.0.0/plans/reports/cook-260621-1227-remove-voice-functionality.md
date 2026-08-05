@@ -20,8 +20,6 @@
 - Ran successful Next.js production build (`bun run build`) in `PAI/PULSE/Observability/` to verify type-safety and compile correctness.
 
 ### 3. Tools & Templates
-- Stripped voice option out of `DAInterview.ts` registration channels.
-- Changed default channel to `telegram` and updated help output in `DASchedule.ts`.
 - Deleted standard ElevenLabs configurations `VoicePresets.yaml` and `Voice.hbs`.
 - Removed voice parameters, prosody rationale, and mappings from [CUSTOMAGENTTEMPLATE.md](file:///Users/lderek/GitHub/Personal_AI_Infrastructure/Releases/v5.0.0/.claude/skills/Agents/Templates/CUSTOMAGENTTEMPLATE.md).
 

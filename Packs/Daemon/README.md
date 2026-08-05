@@ -3,7 +3,7 @@ name: Daemon
 pack-id: pai-daemon-v1.0.0
 version: 1.0.0
 author: danielmiessler
-description: Manage the public daemon profile — a living digital representation of what you're working on, thinking about, reading, and building. DaemonAggregator.ts reads PAI sources (TELOS missions/goals/books/wisdom, KNOWLEDGE/Ideas titles, PROJECTS.md, MEMORY/WORK themes, PRINCIPAL_IDENTITY bio) and writes to daemon-data.json. SecurityFilter.ts applies deterministic pattern-matching (NOT LLM judgment) to strip names, paths, credentials, and internal refs. Structurally excludes CONTACTS, FINANCES, HEALTH, OUR_STORY, OPINIONS. deploy.sh builds the VitePress static site and deploys to Cloudflare Pages. Two-repo pattern: public framework (danielmiessler/Daemon, forkable) + private content (daemon-dm). Workflows: UpdateDaemon, ReadDaemon, PreviewDaemon, DeployDaemon.
+description: Manage the public daemon profile — a living digital representation of what you're working on, thinking about, reading, and building. DaemonAggregator.ts reads PAI sources (life context missions/goals/books/wisdom, KNOWLEDGE/Ideas titles, PROJECTS.md, MEMORY/WORK themes, PRINCIPAL_IDENTITY bio) and writes to daemon-data.json. SecurityFilter.ts applies deterministic pattern-matching (NOT LLM judgment) to strip names, paths, credentials, and internal refs. Structurally excludes CONTACTS, FINANCES, HEALTH, OUR_STORY, OPINIONS. deploy.sh builds the VitePress static site and deploys to Cloudflare Pages. Two-repo pattern: public framework (danielmiessler/Daemon, forkable) + private content (daemon-dm). Workflows: UpdateDaemon, ReadDaemon, PreviewDaemon, DeployDaemon.
 type: skill
 platform: claude-code
 source: PAI v5.0.0
@@ -11,7 +11,7 @@ source: PAI v5.0.0
 
 # Daemon
 
-Manage the public daemon profile — a living digital representation of what you're working on, thinking about, reading, and building. DaemonAggregator.ts reads PAI sources (TELOS missions/goals/books/wisdom, KNOWLEDGE/Ideas titles, PROJECTS.md, MEMORY/WORK themes, PRINCIPAL_IDENTITY bio) and writes to daemon-data.json. SecurityFilter.ts applies deterministic pattern-matching (NOT LLM judgment) to strip names, paths, credentials, and internal refs. Structurally excludes CONTACTS, FINANCES, HEALTH, OUR_STORY, OPINIONS. deploy.sh builds the VitePress static site and deploys to Cloudflare Pages. Two-repo pattern: public framework (danielmiessler/Daemon, forkable) + private content (daemon-dm). Workflows: UpdateDaemon, ReadDaemon, PreviewDaemon, DeployDaemon.
+Manage the public daemon profile — a living digital representation of what you're working on, thinking about, reading, and building. DaemonAggregator.ts reads PAI sources (life context missions/goals/books/wisdom, KNOWLEDGE/Ideas titles, PROJECTS.md, MEMORY/WORK themes, PRINCIPAL_IDENTITY bio) and writes to daemon-data.json. SecurityFilter.ts applies deterministic pattern-matching (NOT LLM judgment) to strip names, paths, credentials, and internal refs. Structurally excludes CONTACTS, FINANCES, HEALTH, OUR_STORY, OPINIONS. deploy.sh builds the VitePress static site and deploys to Cloudflare Pages. Two-repo pattern: public framework (danielmiessler/Daemon, forkable) + private content (daemon-dm). Workflows: UpdateDaemon, ReadDaemon, PreviewDaemon, DeployDaemon.
 
 ## Installation
 

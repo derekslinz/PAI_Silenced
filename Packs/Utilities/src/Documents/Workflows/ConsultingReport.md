@@ -164,13 +164,13 @@ tbody tr:nth-child(even) { background: #f8fafc; }
 
 ### Cover Page Template (REQUIRED Branding)
 
-The cover page MUST include {YOUR_BUSINESS_NAME} branding: your logo, "TELOS Assessment" label, and "{YOUR_BUSINESS_NAME} CONSULTING" in all caps. The footer on every page MUST include "{YOUR_BUSINESS_NAME} Consulting".
+The cover page MUST include {YOUR_BUSINESS_NAME} branding: your logo, "Life Assessment" label, and "{YOUR_BUSINESS_NAME} CONSULTING" in all caps. The footer on every page MUST include "{YOUR_BUSINESS_NAME} Consulting".
 
 ```html
 <div class="cover">
   <div class="classification">CONFIDENTIAL</div>
   <img class="logo" src="file:///path/to/your-logo.png" alt="{YOUR_BUSINESS_NAME}" />
-  <div class="brand-label">TELOS Assessment</div>
+  <div class="brand-label">Life Assessment</div>
   <div class="report-title">Report Title</div>
   <div class="prepared-for">Prepared for Client Name</div>
   <div class="divider"></div>

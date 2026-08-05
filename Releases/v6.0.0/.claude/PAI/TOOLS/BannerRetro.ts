@@ -310,7 +310,7 @@ interface SystemStats {
   model: string;
 }
 
-function readDAIdentity(): string {
+function readAssistantIdentity(): string {
   const settingsPath = join(CLAUDE_DIR, "settings.json");
   try {
     const settings = JSON.parse(readFileSync(settingsPath, "utf-8"));
@@ -389,7 +389,7 @@ function countLearnings(): number {
 
 function getStats(): SystemStats {
   return {
-    name: readDAIdentity(),
+    name: readAssistantIdentity(),
     skills: countSkills(),
     userFiles: countUserFiles(),
     hooks: countHooks(),
@@ -441,7 +441,7 @@ function createRetroBanner(): string {
   // System stats box content
   const statsBox = [
     `${f}${BOX.stl}${BOX.sh.repeat(24)}${BOX.str}${RESET}`,
-    `${f}${BOX.sv}${RESET} ${g}DA${RESET}${gd}..........${RESET}: ${h}${stats.name.padEnd(8)}${RESET} ${f}${BOX.sv}${RESET}`,
+    `${f}${BOX.sv}${RESET} ${g}AI${RESET}${gd}..........${RESET}: ${h}${stats.name.padEnd(8)}${RESET} ${f}${BOX.sv}${RESET}`,
     `${f}${BOX.sv}${RESET} ${g}Skills${RESET}${gd}......${RESET}: ${h}${String(stats.skills).padEnd(8)}${RESET} ${f}${BOX.sv}${RESET}`,
     `${f}${BOX.sv}${RESET} ${g}Hooks${RESET}${gd}.......${RESET}: ${h}${String(stats.hooks).padEnd(8)}${RESET} ${f}${BOX.sv}${RESET}`,
     `${f}${BOX.sv}${RESET} ${g}Work Items${RESET}${gd}..${RESET}: ${h}${(stats.workItems > 100 ? "100+" : String(stats.workItems)).padEnd(8)}${RESET} ${f}${BOX.sv}${RESET}`,
@@ -564,11 +564,11 @@ function createPureASCIIBanner(): string {
     "       I I I",
   ];
 
-  // Stats in ASCII box - dynamically pad DA name to fit
-  const DA_NAME = stats.name.substring(0, 10).padEnd(10);
+  // Stats in ASCII box - dynamically pad assistant name to fit
+  const ASSISTANT_NAME = stats.name.substring(0, 10).padEnd(10);
   const statsBox = [
     "+------------------------+",
-    `| DA.........: ${DA_NAME} |`,
+    `| AI.........: ${ASSISTANT_NAME} |`,
     "| Skills.....: " + String(stats.skills).padEnd(10) + " |",
     "| Hooks......: " + String(stats.hooks).padEnd(10) + " |",
     "| Work Items.: " + (stats.workItems > 100 ? "100+" : String(stats.workItems)).padEnd(10) + " |",
@@ -665,7 +665,7 @@ function createCompactRetroBanner(): string {
 
   // Minimal stats
   const statsLines = [
-    `${g}DA${gd}:${RESET} ${h}${stats.name}${RESET}`,
+    `${g}AI${gd}:${RESET} ${h}${stats.name}${RESET}`,
     `${g}Skills${gd}:${RESET} ${h}${stats.skills}${RESET}`,
     `${g}Model${gd}:${RESET} ${h}${stats.model}${RESET}`,
   ];

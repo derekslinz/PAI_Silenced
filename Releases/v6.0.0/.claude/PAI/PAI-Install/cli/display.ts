@@ -188,7 +188,7 @@ export function printDetection(det: DetectionResult): void {
     printInfo(`Detected email: ${det.principal.email}`);
   }
   if (det.existing.daName) {
-    printSuccess(`Detected DA name: ${det.existing.daName} (from prior install/backup)`);
+    printSuccess(`Detected assistant name: ${det.existing.daName} (from prior install/backup)`);
   }
   const apiHits: string[] = [];
   if (det.existing.apiKeys?.anthropic) apiHits.push("Anthropic");

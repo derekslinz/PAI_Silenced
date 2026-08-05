@@ -66,7 +66,7 @@ function logCommit(entry: Record<string, unknown>): void {
 
 function resolveTargetPath(target: string): string {
   // Map target label to absolute file path.
-  if (target.startsWith("TELOS/") || target.startsWith("USER/") || target.startsWith("MEMORY/")) {
+  if (target.startsWith("USER/") || target.startsWith("MEMORY/")) {
     return join(PAI_DIR, target.startsWith("USER/") ? target : target);
   }
   if (target === "memory/feedback") {
@@ -135,7 +135,7 @@ ${p.content_full}
     return true;
   }
 
-  // Regular TELOS / USER files = append
+  // Regular USER files = append
   if (!existsSync(targetPath)) {
     console.error(`Target file does not exist: ${targetPath}`);
     return false;

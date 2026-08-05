@@ -290,7 +290,7 @@ function generate(): string {
     "",
     "1. **System Prompt** — PAI_SYSTEM_PROMPT.md, constitutional, survives compaction",
     "2. **CLAUDE.md** — operational procedures, format templates, context routing",
-    "3. **@Imported files** — PRINCIPAL_IDENTITY, DA_IDENTITY, PROJECTS, PRINCIPAL_TELOS, this file",
+    "3. **@Imported files** — PRINCIPAL_IDENTITY, PROJECTS, this file",
     "4. **Dynamic context** — LoadContext hook output, ephemeral",
     "",
     "## Key Design Decisions",

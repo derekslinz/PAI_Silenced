@@ -80,13 +80,12 @@ function loadSettings(): Settings {
  * Load relationship context for session startup.
  * Returns a lightweight summary of key opinions and recent notes.
  */
-// Conditionally load identity/TELOS — only when populated by /interview.
+// Conditionally load identity — only when populated by /interview.
 // Unpopulated bootstrap templates carry placeholder sentinels and are skipped,
 // so empty scaffolds cost zero session tokens (no @import).
 function loadIdentityContext(paiDir: string): string | null {
   const targets = [
     join(paiDir, 'USER/PRINCIPAL_IDENTITY.md'),
-    join(paiDir, 'USER/TELOS/PRINCIPAL_TELOS.md'),
   ];
   const placeholder = /\(interview|\(sample\)|SAMPLE TEMPLATE|Bootstrap default/;
   const parts: string[] = [];
@@ -491,10 +490,10 @@ async function main() {
       console.error(' Skipped learning readback (disabled)');
     }
 
-    // Load identity/TELOS only when populated (replaces static @imports of bootstrap scaffolds)
+    // Load identity only when populated (replaces static @imports of bootstrap scaffolds)
     const identityContext = loadIdentityContext(paiDir);
     if (identityContext) {
-      console.error(` Loaded identity/TELOS context (${identityContext.length} chars)`);
+      console.error(` Loaded identity context (${identityContext.length} chars)`);
     }
 
     // Inject dynamic context if we have any

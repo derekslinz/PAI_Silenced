@@ -263,7 +263,7 @@ This reloads your shell config (activates the `pai` alias) and launches PAI for 
 
 ### First-run: populate your personal context
 
-Once PAI is running, kick off the phased interview to populate your TELOS, identity, preferences, and life dimensions:
+Once PAI is running, kick off the phased interview to populate your goals, identity, preferences, and life dimensions:
 
 ```
 /interview
@@ -271,7 +271,7 @@ Once PAI is running, kick off the phased interview to populate your TELOS, ident
 
 The interview is conversational and resumable. It runs in 4 phases:
 
-1. **Phase 1 — Foundational TELOS:** Mission, Goals, Problems, Strategies, Challenges, Narratives, Beliefs, Wisdom, Models, Frames
+1. **Phase 1 — Foundational goals:** Mission, Goals, Problems, Strategies, Challenges, Narratives, Beliefs, Wisdom, Models, Frames
 2. **Phase 2 — IDEAL_STATE:** Health, Money, Freedom, Relationships, Creative
 3. **Phase 3 — Preferences:** Books, Authors, Bands, Movies, Restaurants, Food, Learning, Civic
 4. **Phase 4 — Identity:** Light review of PRINCIPAL_IDENTITY and current state

@@ -39,7 +39,7 @@ The skill runs **three parallel agent threads** that converge into personalized 
 ```
 Thread 1: USER CONTEXT     Thread 2: SOURCE COLLECTION    Thread 3: INTERNAL REFLECTIONS
 ┌───────────────────┐     ┌───────────────────────┐      ┌───────────────────────┐
-│ TELOS Analysis    │     │ Anthropic Sources     │      │ Algorithm Reflections │
+│ Life Context Analysis    │     │ Anthropic Sources     │      │ Algorithm Reflections │
 │ Project Analysis  │     │ YouTube Channels      │      │ Q2: Algorithm fixes   │
 │ Recent Work       │     │ Custom USER Sources   │      │ Q1: Execution errors  │
 │ PAI System State  │     │ GitHub Trending       │      │ Sentiment weighting   │
@@ -287,7 +287,7 @@ Launch **parallel agents** to analyze:
 
 | Agent | Focus | Sources |
 |-------|-------|---------|
-| **TELOS Agent** | User's goals, challenges, current focus | `PAI/USER/TELOS/*.md` |
+| **Life Context Agent** | User's goals, challenges, current focus | `PAI/USER/TELOS/*.md` |
 | **Project Agent** | Active projects, tech stacks, dependencies | TELOS/PROJECTS.md, recent work context |
 | **History Agent** | Recent work patterns, what's been done | `MEMORY/WORK/`, `MEMORY/STATE/current-work.json` |
 | **PAI State Agent** | System capabilities, installed skills, gaps | `skills/`, `hooks/`, `settings.json` |
@@ -327,7 +327,7 @@ Using BACKGROUNDDELEGATION, spawn both analysis threads simultaneously:
 ```markdown
 ## Thread 1: User Context (4 parallel agents)
 
-### Agent 1: TELOS Analysis
+### Agent 1: Life Context Analysis
 Read and analyze:
 - ~/.claude/PAI/USER/TELOS/TELOS.md
 - ~/.claude/PAI/USER/TELOS/GOALS.md
@@ -380,7 +380,7 @@ Once both threads complete:
 
 1. **Merge context:** Combine user analysis into unified context object
 2. **Filter discoveries:** Remove items that don't apply to user's stack/focus
-3. **Score relevance:** Rate each discovery against user's TELOS and projects
+3. **Score relevance:** Rate each discovery against user's life goals and projects
 4. **Prioritize:** Sort by (relevance to user × impact × ease)
 
 ### Step 3: Generate Recommendations
@@ -428,7 +428,7 @@ Generate the prioritized recommendations report (see format above).
 2. **Quote the Source:** Show actual code, documentation quotes, or transcript excerpts
 3. **PAI-Contextualized:** Every technique maps to a specific PAI file, skill, or component
 4. **Explain "Why You":** Use phrases like "This helps because your [X] currently [Y]"
-5. **TELOS-Connected:** Reference user's goals and challenges when explaining relevance
+5. **Life-Connected:** Reference user's goals and challenges when explaining relevance
 6. **Skip Boldly:** If content has no extractable technique, skip it entirely
 7. **Implementation-Ready:** Provide actual code changes, not vague recommendations
 

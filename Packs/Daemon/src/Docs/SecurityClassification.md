@@ -61,7 +61,6 @@ Public projects (include in daemon):
 
 - Daemon (daemon.example.com)
 - Substrate (public repo)
-- Telos (public repo)
 - TheAlgorithm (public repo)
 - FoundryServices (public repo)
 - Ladder (public repo)

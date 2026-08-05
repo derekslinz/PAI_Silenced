@@ -145,7 +145,7 @@ Complete collection of curated aphorisms organized by theme and author.
 
 ---
 
-## Thinkers Aligned with TELOS Philosophy
+## Thinkers Aligned with Life Philosophy
 
 ### Christopher Hitchens
 *Quotes to be added from research*

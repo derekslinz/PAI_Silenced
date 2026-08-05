@@ -23,7 +23,7 @@
 
 PAI is a Life Operating System. It captures who you are, what you care about, and where you're trying to go — and then helps you get there using AI that knows you. Three layers stack on top of each other:
 
-- **PAI** — the OS itself. Skills, memory, the Algorithm, your Telos, your identity files.
+- **PAI** — the OS itself. Skills, memory, the Algorithm, your identity files.
 - **Pulse** — the Life Dashboard at `localhost:31337`. Where you actually see your state, goals, and work.
 - **The DA** — your Digital Assistant. The voice and personality you talk to.
 
@@ -56,7 +56,7 @@ TRIOT had four core ideas that PAI is built on:
 - **Digital Assistants** — one DA per person, your primary interface to all AI
 - **Everything gets an API** — every product, service, person, and place becomes addressable
 - **Your DA dynamically creates your interfaces** — no more apps and dashboards; the DA assembles whatever you need in the moment
-- **You define your ideal state, AI helps you get there** — the whole system points at your Telos
+- **You define your ideal state, AI helps you get there** — the whole system points at your goals
 
 This is what PAI is reaching for.
 
@@ -146,12 +146,12 @@ open http://localhost:31337    # the Life Dashboard
 
 Then run `/interview` in Claude Code. Your DA will guide you through:
 
-1. **Phase 1 — TELOS:** Mission, Goals, Beliefs, Wisdom, Challenges, Books, Mental models, Narratives
-2. **Phase 2 — IDEAL_STATE:** What does success look like for you?
+1. **Phase 1 — Goals & context:** Mission, Goals, Beliefs, Wisdom, Challenges, Books, Mental models, Narratives
+2. **Phase 2 — Ideal state:** What does success look like for you?
 3. **Phase 3 — Preferences:** Tools, conventions, working style
 4. **Phase 4 — Identity:** Final DA personality tuning
 
-This is the most important step. **Without TELOS, your DA has nothing to optimize against.**
+This is the most important step. **Without your goals, your DA has nothing to optimize against.**
 
 ### Upgrading from v4.x
 
@@ -171,7 +171,7 @@ curl -sSL https://ourpai.ai/install.sh | bash
 open http://localhost:31337
 ```
 
-If you had personal content in v4.x (notes, project state, custom rules), tell your DA: *"Help me migrate my old content into the PAI/USER/ structure."* The **Migrate** skill intakes from `.md`/`.markdown`/`.txt`, Obsidian, Notion, Apple Notes — classifies each chunk against the v5 taxonomy (TELOS, KNOWLEDGE, PROJECTS, FEED, etc.) and commits with provenance.
+If you had personal content in v4.x (notes, project state, custom rules), tell your DA: *"Help me migrate my old content into the PAI/USER/ structure."* The **Migrate** skill intakes from `.md`/`.markdown`/`.txt`, Obsidian, Notion, Apple Notes — classifies each chunk against the v5 taxonomy (KNOWLEDGE, PROJECTS, FEED, etc.) and commits with provenance.
 
 **Post-upgrade checklist:**
 
@@ -179,7 +179,6 @@ If you had personal content in v4.x (notes, project state, custom rules), tell y
 - [ ] Voice announces: `curl -s -X POST http://localhost:31337/notify -H "Content-Type: application/json" -d '{"message": "Hello from your DA"}'`
 - [ ] Dashboard renders: `open http://localhost:31337`
 - [ ] DA identity populated in `PAI/USER/DA_IDENTITY.md`
-- [ ] TELOS captured under `PAI/USER/TELOS/`
 
 ---
 
@@ -308,7 +307,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 ### v5.0.0 (2026-04-30) — Life Operating System
 
 - **Pulse** — unified daemon (port 31337): voice, hooks, observability, cron, Life Dashboard (22 routes), wiki API, optional Telegram/iMessage bridges. Replaces every previous loose service.
-- **The DA** — Digital Assistant identity layer. PRINCIPAL_IDENTITY + DA_IDENTITY pair, loaded at session start. `/interview` walks you through naming your DA, picking a voice, capturing TELOS.
+- **The DA** — Digital Assistant identity layer. PRINCIPAL_IDENTITY + DA_IDENTITY pair, loaded at session start. `/interview` walks you through naming your DA and picking a voice.
 - **Algorithm v6.3.0** — seven-phase loop (OBSERVE → THINK → PLAN → BUILD → EXECUTE → VERIFY → LEARN). Sonnet-backed mode classifier picks MINIMAL/NATIVE/ALGORITHM and tier (E1–E5) per prompt. Closed-list thinking capabilities. Voice phase announcements. Verification doctrine (live-probe, advisor calls at commitment boundaries, cross-vendor audit at E4/E5).
 - **The ISA** — Ideal State Artifact primitive. One document, twelve sections (Problem → Vision → Out of Scope → Principles → Constraints → Goal → Criteria → Test Strategy → Features → Decisions → Changelog → Verification), five identities (articulation, test harness, build verification, done condition, system of record). Owned by the **ISA skill** (Scaffold, Interview, CheckCompleteness, Reconcile, Seed, Append) with a dozen reference examples spanning E1–E5.
 - **Containment + release tooling** — privacy is structural. `containment-zones.ts` declares every directory's privacy zone; `ContainmentGuard` PreToolUse hook blocks cross-zone leaks; 12 security gates run on every public release; two-stage release (stage → publish) never auto-chains.

@@ -30,7 +30,7 @@ export interface DetectionResult {
     settingsPath?: string;
     hasApiKeys: boolean;
     backupPaths: string[];
-    /** DA name recovered from a prior install or backup (DA_IDENTITY.md / settings.json). */
+    /** Assistant name recovered from a prior install or backup (settings.json). */
     daName?: string;
     /** API key VALUES recovered from shell rc files / .env / prior install — not just presence flags. */
     apiKeys: {
@@ -58,20 +58,8 @@ export interface DetectionResult {
 }
 
 export interface ExistingUserContentDetection {
-  telos: {
-    mission: boolean;
-    goals: boolean;
-    goalsCount: number;
-    activeProblems: boolean;
-    strategy: boolean;
-    principles: boolean;
-    areas: boolean;
-    now: boolean;
-  };
   identity: {
     principalIdentity: boolean;
-    daIdentity: boolean;
-    daIdentityYaml: boolean;
     workingStyle: boolean;
     rhetoricalStyle: boolean;
     aiWritingPatterns: boolean;

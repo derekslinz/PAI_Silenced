@@ -223,7 +223,6 @@ No customization needed -- the skill works as-is with sensible defaults across a
 ## Works Well With
 
 - **Thinking Pack** -- Red Team and World Threat Model modes provide adversarial analysis for security findings
-- **Telos Pack** -- Project TELOS analysis can map security posture across organizational context
 
 ---
 

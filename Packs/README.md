@@ -47,7 +47,7 @@ Your DA reads `INSTALL.md` and walks through a 5-phase wizard: system analysis, 
 | [FirstPrinciples](FirstPrinciples/) | Physics-based reasoning that deconstructs problems to irreducible truths |
 | [Ideate](Ideate/) | Evolutionary ideation engine — 9-phase loop for novel solution generation |
 | [Interceptor](Interceptor/) | Real Chrome browser automation with zero CDP fingerprint; mandatory for visual verification |
-| [Interview](Interview/) | Phased conversational interview across all PAI context files (TELOS first) |
+| [Interview](Interview/) | Phased conversational interview across all PAI context files (life context first) |
 | [ISA](ISA/) | Owns the Ideal State Artifact primitive — articulate "done" for any kind of work |
 | [IterativeDepth](IterativeDepth/) | Multi-angle exploration through 2-8 sequential passes from different scientific lenses |
 | [Knowledge](Knowledge/) | Manage typed Knowledge Archive across People, Companies, Ideas, Research with 8 link types |
@@ -64,7 +64,6 @@ Your DA reads `INSTALL.md` and walks through a 5-phase wizard: system analysis, 
 | [Sales](Sales/) | Transform product docs into sales narratives with charcoal sketch art and talking points |
 | [Science](Science/) | Scientific method as a universal problem-solving algorithm — goal, hypotheses, experiments |
 | [SystemsThinking](SystemsThinking/) | Structural analysis via Iceberg, Causal Loop, Archetypes, Leverage Points, Concept Map |
-| [Telos](Telos/) | Dual-context Life OS — read and update goals, beliefs, wisdom, missions, mental models |
 | [USMetrics](USMetrics/) | 68 US economic indicators from FRED, EIA, Treasury, BLS, Census APIs |
 | [Webdesign](Webdesign/) | Web/UI design via Anthropic's Claude Design (claude.ai/design) with frontend handoff |
 | [WorldThreatModel](WorldThreatModel/) | Stress-test ideas, strategies, investments against 11 time horizons from 6 months to 50 years |
@@ -85,7 +84,6 @@ Pre-built combinations with their own install wizards. Useful when you want a th
 | [Media](Media/) | Visual and video content — illustrations, diagrams, Remotion |
 | [Research](Research/) | Multi-agent research with quick/standard/extensive/deep modes |
 | [Scraping](Scraping/) | Bright Data + Apify scraping bundle |
-| [Telos](Telos/) | Life OS goals, beliefs, wisdom, dashboards |
 | [Thinking](Thinking/) | First principles, council, red team, science, brainstorming |
 | [USMetrics](USMetrics/) | 68 US economic indicators |
 | [Utilities](Utilities/) | Developer tools — CLI generation, skill scaffolding, Fabric, browser automation |

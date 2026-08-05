@@ -16,12 +16,12 @@ Most people have AI in tabs and chat windows — a tool you visit, ask things of
 
 ## Vision
 
-PAI is the Life Operating System — scaffolding that turns AI from a chatbot you talk to into a system that helps you run your life. The Algorithm is the universal engine for accomplishing any task at any scale — fixing a typo, building a feature, launching a company — by transitioning current state to ideal state through verifiable iteration. The DA ({{PRINCIPAL_NAME}}'s is {{DA_NAME}}) is the primary interface — peer, not assistant — speaking in first person, with personality and opinions, capable of both deep work and casual conversation. The Memory system compounds across sessions: WORK → LEARNING → KNOWLEDGE. Skills are self-activating composable domain units. Hooks integrate the SessionStart→SessionEnd lifecycle. The whole thing is open-source and template-able — every PAI user names their own DA, fills in their own TELOS, and gets a Life OS built on the same framework {{PRINCIPAL_NAME}} runs. Euphoric surprise: a new user installs PAI, configures it in an afternoon, and within a week catches themselves talking to their DA the way {{PRINCIPAL_NAME}} talks to {{DA_NAME}} — peer, builder, friend.
+PAI is the Life Operating System — scaffolding that turns AI from a chatbot you talk to into a system that helps you run your life. The Algorithm is the universal engine for accomplishing any task at any scale — fixing a typo, building a feature, launching a company — by transitioning current state to ideal state through verifiable iteration. The assistant ({{PRINCIPAL_NAME}}'s is {{ASSISTANT_NAME}}) is the primary interface — peer, not assistant — speaking in first person, with personality and opinions, capable of both deep work and casual conversation. The Memory system compounds across sessions: WORK → LEARNING → KNOWLEDGE. Skills are self-activating composable domain units. Hooks integrate the SessionStart→SessionEnd lifecycle. The whole thing is open-source and template-able — every PAI user names their own assistant, fills in their own goals, and gets a Life OS built on the same framework {{PRINCIPAL_NAME}} runs. Euphoric surprise: a new user installs PAI, configures it in an afternoon, and within a week catches themselves talking to their assistant the way {{PRINCIPAL_NAME}} talks to {{ASSISTANT_NAME}} — peer, builder, friend.
 
 ## Out of Scope
 
 - **Multi-tenant SaaS.** PAI is for individual use. Each human installs it for themselves; one human, one Anthropic subscription, one PAI instance. The Personal Use Boundary in the system prompt is non-negotiable.
-- **Cloud-hosted DA.** The Life OS runs on the user's machine and the user's accounts.
+- **Cloud-hosted assistant.** The Life OS runs on the user's machine and the user's accounts.
 - **Mass-market consumer onboarding.** PAI targets technically capable users (developers, operators, power users). The maturity model targets AS3 — Augmented Self level 3 — not "everyone."
 - **Company-grade MDM/RBAC for the OS itself.** PAI is single-user infrastructure; team / enterprise versions are a separate downstream concern, not v6.x.
 - **A model competitor.** PAI is scaffolding. The model is Claude (and any other model the user wires in). The principle is **Scaffolding > Model** — the framework wins by making any underlying model dependable and contextual, not by replacing it.
@@ -50,7 +50,7 @@ PAI is the Life Operating System — scaffolding that turns AI from a chatbot yo
 
 ## Goal
 
-PAI ships as an open-source, template-able Personal AI Infrastructure where the Algorithm (currently v6.2.0) is the universal task engine, the ISA (currently format spec v2.7) is the system of record for any thing being built, the Memory system compounds across sessions, the DA is a peer-grade primary interface, and the whole framework is configurable per-user via `USER/` while remaining structurally identical across installs. Done state for the project: any new user who runs the public release can install it, scaffold their own TELOS, name their own DA, and have a working Life OS within an afternoon — and the Algorithm version progression (v3 → v4 → v5 → v6 → onward) demonstrably improves the doctrine each release without losing prior invariants.
+PAI ships as an open-source, template-able Personal AI Infrastructure where the Algorithm (currently v6.2.0) is the universal task engine, the ISA (currently format spec v2.7) is the system of record for any thing being built, the Memory system compounds across sessions, the assistant is a peer-grade primary interface, and the whole framework is configurable per-user via `USER/` while remaining structurally identical across installs. Done state for the project: any new user who runs the public release can install it, scaffold their own goals, name their own assistant, and have a working Life OS within an afternoon — and the Algorithm version progression (v3 → v4 → v5 → v6 → onward) demonstrably improves the doctrine each release without losing prior invariants.
 
 ## Criteria
 
@@ -82,9 +82,9 @@ PAI ships as an open-source, template-able Personal AI Infrastructure where the 
 - [x] ISC-16: `MEMORY/KNOWLEDGE/` typed graph (People / Companies / Ideas / Research) is queried at THINK and written at LEARN.
 - [x] ISC-17: Memory v7.6 documented in `PAI/DOCUMENTATION/Memory/MemorySystem.md`.
 
-### DA / Pulse
+### Assistant / Pulse
 
-- [x] ISC-18: {{PRINCIPAL_NAME}}'s DA `{{DA_FULL_NAME}}` is configured at `USER/DA_IDENTITY.md`; personality, autonomy boundaries, companion ({{PRINCIPAL_COMPANION_NAME}}), and partner (Devi) are documented.
+- [x] ISC-18: {{PRINCIPAL_NAME}}'s assistant `{{ASSISTANT_FULL_NAME}}` is configured at `USER/DA_IDENTITY.md`; personality, autonomy boundaries, companion ({{PRINCIPAL_COMPANION_NAME}}), and partner (Devi) are documented.
 - [x] ISC-19: Pulse runs at `localhost:31337` and serves the Life Dashboard UI.
 
 ### Hooks / Security
@@ -101,11 +101,11 @@ PAI ships as an open-source, template-able Personal AI Infrastructure where the 
 ### Anti-criteria
 
 - [x] ISC-25: Anti: out of scope — no multi-tenant SaaS code path exists in `~/.claude` (out of scope: "Multi-tenant SaaS").
-- [x] ISC-26: Anti: out of scope — no cloud-hosted DA endpoint serves the OS (Pulse stays on `localhost:31337`).
+- [x] ISC-26: Anti: out of scope — no cloud-hosted assistant endpoint serves the OS (Pulse stays on `localhost:31337`).
 - [x] ISC-27: Anti: regression — `~/.claude` repo never pushes to a public remote (constitutional rule in system prompt).
 - [x] ISC-28: Anti: regression — no `claude --bare` invocation appears in any subprocess in `~/.claude/` Tools / hooks / scripts.
 - [x] ISC-29: Anti: regression — every channel that responds to non-{{PRINCIPAL_NAME}} humans uses API key billing, never OAuth.
-- [ ] ISC-30: Antecedent: a new user can install PAI, name their DA, fill TELOS, and reach a working Life OS within an afternoon (the precondition for the Vision-stated euphoric surprise).
+- [ ] ISC-30: Antecedent: a new user can install PAI, name their assistant, fill in their goals, and reach a working Life OS within an afternoon (the precondition for the Vision-stated euphoric surprise).
 
 ## Test Strategy
 
@@ -175,7 +175,7 @@ PAI ships as an open-source, template-able Personal AI Infrastructure where the 
   parallelizable: true  # subsystem can iterate independently
 
 - name: DAandPulse
-  description: {{PRINCIPAL_NAME}}'s DA ({{DA_NAME}}), Pulse dashboard
+  description: {{PRINCIPAL_NAME}}'s assistant ({{ASSISTANT_NAME}}), Pulse dashboard
   satisfies: [ISC-18, ISC-19]
   depends_on: [AlgorithmDoctrine, MemorySystem]
   parallelizable: true
@@ -193,7 +193,7 @@ PAI ships as an open-source, template-able Personal AI Infrastructure where the 
   parallelizable: true
 
 - name: NewUserOnboarding
-  description: Install flow, TELOS scaffolding, DA naming, working Life OS within an afternoon
+  description: Install flow, goal scaffolding, assistant naming, working Life OS within an afternoon
   satisfies: [ISC-30]
   depends_on: [AlgorithmDoctrine, ISAPrimitive, MemorySystem, DAandPulse, PublicReleaseSurface]
   parallelizable: false  # integrative — gates on the others
@@ -201,7 +201,7 @@ PAI ships as an open-source, template-able Personal AI Infrastructure where the 
 
 ## Decisions
 
-- 2025-late: PAI created when {{PRINCIPAL_NAME}} started building scaffolding around Claude. DA named {{DA_FULL_NAME}}.
+- 2025-late: PAI created when {{PRINCIPAL_NAME}} started building scaffolding around Claude. Assistant named {{ASSISTANT_FULL_NAME}}.
 - 2026-04-21 (v4.0.0): PRD renamed to ISA — vocabulary release; ideal-state-artifact framing introduced.
 - 2026-04-26 (v5.0.0): BPE compaction — removed prescriptive count floors; replaced with operational rules (granularity + binding-commitment).
 - 2026-04-27 (v6.0.0): Frame shift — ISA elevated to universal primitive with five identities; mode-selection floor via EscalationGate; capability floors restored.

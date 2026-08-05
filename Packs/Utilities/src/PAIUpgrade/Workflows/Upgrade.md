@@ -21,7 +21,7 @@ Running the **Upgrade** workflow in the **PAIUpgrade** skill to check for upgrad
 
 This workflow executes the core PAIUpgrade pattern:
 
-1. **Thread 1:** Analyze user context (TELOS, projects, recent work, PAI state)
+1. **Thread 1:** Analyze user context (life goals, projects, recent work, PAI state)
 2. **Thread 2:** Collect updates from sources (Anthropic, YouTube, custom)
 3. **Synthesize:** Combine context + discoveries into personalized recommendations
 4. **Output:** Prioritized upgrade report
@@ -39,8 +39,8 @@ Spawn 4 parallel agents to gather user context:
 ```
 Use Task tool with subagent_type=general-purpose, run 4 agents in parallel:
 
-Agent 1 - TELOS Analysis:
-"Read and analyze the user's TELOS files to understand their current focus:
+Agent 1 - Life Context Analysis:
+"Read and analyze the user's life context files to understand their current focus:
 - ~/.claude/PAI/USER/TELOS/TELOS.md
 - ~/.claude/PAI/USER/TELOS/GOALS.md
 - ~/.claude/PAI/USER/TELOS/PROJECTS.md

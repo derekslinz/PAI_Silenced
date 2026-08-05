@@ -48,7 +48,7 @@ Daemon Status (daemon.example.com)
     Preferences: 10 items
     Daily Routine: 9 items
     Podcasts: 5 items
-    TELOS: populated
+    Life context: populated
     Projects: 8 technical, 3 creative
 
   Live endpoint: 200 OK

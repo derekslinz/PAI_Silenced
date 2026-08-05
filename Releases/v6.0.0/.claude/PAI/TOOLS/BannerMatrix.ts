@@ -263,7 +263,7 @@ interface SystemStats {
   model: string;
 }
 
-function readDAIdentity(): string {
+function readAssistantIdentity(): string {
   const settingsPath = join(CLAUDE_DIR, "settings.json");
   try {
     const settings = JSON.parse(readFileSync(settingsPath, "utf-8"));
@@ -343,7 +343,7 @@ function countLearnings(): number {
 
 function getStats(): SystemStats {
   return {
-    name: readDAIdentity(),
+    name: readAssistantIdentity(),
     skills: countSkills(),
     userFiles: countUserFiles(),
     hooks: countHooks(),
@@ -492,7 +492,7 @@ function createMiniBanner(stats: SystemStats): string {
   lines.push(rainOverlay(headerLine.padEnd(width), 0.2));
 
   // Stats as terminal readout
-  lines.push(`${d} > ${RESET}${p}DA_NAME${RESET}${d}.......: ${RESET}${w}${BOLD}${stats.name}${RESET}`);
+  lines.push(`${d} > ${RESET}${p}ASSISTANT${RESET}${d}...: ${RESET}${w}${BOLD}${stats.name}${RESET}`);
   lines.push(`${d} > ${RESET}${p}SKILLS_COUNT${RESET}${d}.: ${RESET}${g}${stats.skills}${RESET}`);
   lines.push(`${d} > ${RESET}${p}HOOKS_ACTIVE${RESET}${d}.: ${RESET}${g}${stats.hooks}${RESET}`);
   lines.push(`${d} > ${RESET}${p}MODEL${RESET}${d}........: ${RESET}${g}${stats.model}${RESET}`);
@@ -554,7 +554,7 @@ function createNormalBanner(stats: SystemStats): string {
 
   // Content section: Logo left, Stats right
   const statLabels = [
-    { key: "DA_NAME", val: stats.name, color: w, bold: true },
+    { key: "ASSISTANT", val: stats.name, color: w, bold: true },
     { key: "SKILLS_COUNT", val: String(stats.skills), color: g, bold: false },
     { key: "HOOKS_ACTIVE", val: String(stats.hooks), color: g, bold: false },
     { key: "WORK_ITEMS", val: String(stats.workItems), color: g, bold: false },

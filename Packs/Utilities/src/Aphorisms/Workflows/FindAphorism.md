@@ -64,7 +64,7 @@ Use deep thinking for deep thematic analysis. Identify:
 3. **Key Messages** - What are the 2-3 main takeaways?
    - Examples: "Persistence matters more than talent", "Question assumptions", "Focus on fundamentals"
 
-4. **Philosophical Alignment** - Which TELOS themes are present?
+4. **Philosophical Alignment** - Which philosophical themes are present?
    - Wisdom & Truth-seeking
    - Rationality & Evidence
    - Human flourishing & Progress
@@ -88,7 +88,7 @@ Use deep thinking for deep thematic analysis. Identify:
   1. [Message 1]
   2. [Message 2]
   3. [Message 3]
-- **TELOS Themes**: [Theme 1], [Theme 2], [Theme 3]
+- **Philosophical Themes**: [Theme 1], [Theme 2], [Theme 3]
 - **Audience**: [Context]
 ```
 
@@ -137,7 +137,7 @@ For each potential aphorism, score on:
    - Neutral or contradictory = 0-3
 
 4. **Philosophical Alignment** (0-10)
-   - Does the quote embody TELOS philosophy?
+   - Does the quote embody life philosophy?
    - Deep alignment = 8-10
    - Some alignment = 5-7
    - Misaligned = 0-4
@@ -174,7 +174,7 @@ For each potential aphorism, score on:
 - **Thematic Relevance**: [Specific connection to newsletter themes]
 - **Tonal Alignment**: [How mood/style matches]
 - **Message Support**: [Which key message it reinforces]
-- **TELOS Alignment**: [Which philosophy themes it embodies]
+- **Philosophical Alignment**: [Which philosophy themes it embodies]
 
 **Placement Suggestion:**
 [Opening quote / Closing quote / Section divider] - [Reasoning]
@@ -288,7 +288,7 @@ Before finalizing recommendations:
 - [ ] All quotes verified for accuracy (correct text and attribution)
 - [ ] Thematic relevance is clear and specific
 - [ ] Tonal alignment makes sense (no jarring mismatches)
-- [ ] TELOS philosophy alignment is genuine
+- [ ] life philosophy alignment is genuine
 - [ ] Usage history checked (not recently used)
 - [ ] Context provided if quote needs background
 - [ ] Placement suggestion is appropriate
@@ -311,7 +311,7 @@ Before finalizing recommendations:
 - Add new quotes to database and recommend
 
 **Option 3: Use philosophical principles**
-- Match to higher-level TELOS themes (wisdom, rationality, flourishing)
+- Match to higher-level philosophical themes (wisdom, rationality, flourishing)
 - Recommend quotes that align philosophically even if not directly on-topic
 
 ### What if User Rejects All Recommendations?
@@ -379,7 +379,7 @@ Newsletter about "AI safety through careful engineering"
 - User says "perfect!" or "exactly what I needed"
 - Minimal back-and-forth required
 - Quote scores 35+ on matching criteria
-- TELOS alignment is clear
+- philosophical alignment is clear
 - Recommendation saves user research time
 
 ---
@@ -398,7 +398,7 @@ Newsletter about "AI safety through careful engineering"
   1. Basics matter more than advanced techniques
   2. Ignoring fundamentals leads to failure
   3. Excellence requires discipline on basics
-- **TELOS Themes**: Excellence & Mastery, Discipline, Learning (back to basics)
+- **Philosophical Themes**: Excellence & Mastery, Discipline, Learning (back to basics)
 - **Audience**: Security professionals, technical readers
 ```
 
@@ -425,7 +425,7 @@ Read database, identify matches in:
 - **Thematic Relevance**: Security hygiene IS hard work - tedious, unglamorous, but critical
 - **Tonal Alignment**: Uncompromising, results-focused matches newsletter's emphasis on fundamentals
 - **Message Support**: Reinforces "basics matter" - the "hard work" IS the basics
-- **TELOS Alignment**: Excellence through discipline, results > effort
+- **Philosophical Alignment**: Excellence through discipline, results > effort
 
 **Placement Suggestion:**
 Opening quote - Sets tone that security fundamentals are non-negotiable hard work
@@ -441,7 +441,7 @@ Opening quote - Sets tone that security fundamentals are non-negotiable hard wor
 - **Thematic Relevance**: Training = security hygiene practice - boring but prevents breaches
 - **Tonal Alignment**: Direct, honest about difficulty, emphasizes long-term payoff
 - **Message Support**: "Suffer now" (do the boring security work) = "live as champion" (avoid breaches)
-- **TELOS Alignment**: Delayed gratification, discipline, mastery
+- **Philosophical Alignment**: Delayed gratification, discipline, mastery
 
 **Placement Suggestion:**
 Closing quote - Motivates readers to commit to security fundamentals despite tedium
@@ -457,7 +457,7 @@ Closing quote - Motivates readers to commit to security fundamentals despite ted
 - **Thematic Relevance**: Security requires BOTH knowledge and applied practice (hygiene)
 - **Tonal Alignment**: Warning tone matches cautionary newsletter mood
 - **Message Support**: "Does not learn" (ignores basics) = "great danger" (breaches happen)
-- **TELOS Alignment**: Integration of knowledge and action, wisdom through practice
+- **Philosophical Alignment**: Integration of knowledge and action, wisdom through practice
 
 **Placement Suggestion:**
 Section divider - Connects learning about security to actually implementing hygiene

@@ -24,8 +24,6 @@ We scanned the entire workspace for occurrences of voice features, ElevenLabs in
 ### 3. Core Tools
 - **`PAI/TOOLS/algorithm.ts`**: Defines a stub `voiceNotify` that prints to `console.error` (the actual audio subsystem notification was previously removed). It still has instructions warning against voice curls.
 - **`PAI/TOOLS/TranscriptParser.ts`**: Implements voice line parsing functions: `extractVoiceCompletion`, `extractCompletionPlain`, and variables like `voiceCompletion`.
-- **`PAI/TOOLS/DAInterview.ts`**: References setting up the voice configuration and channels (`voice`).
-- **`PAI/TOOLS/DASchedule.ts`**: Lists `voice` as a notification channel.
 - **`PAI/TOOLS/IntegrityMaintenance.ts`**: Mentions that voice/TTS completion notice was removed.
 - **`PAI/TOOLS/CostTracker.ts`**: Mentions that voice/TTS emission was removed.
 - **`PAI/TOOLS/pai.ts`**: Mentions that voice/TTS emission via Pulse was removed.
@@ -49,5 +47,5 @@ We scanned the entire workspace for occurrences of voice features, ElevenLabs in
 To remove voice functionality, we need to:
 1. Strip out voice configurations and defaults from identity settings and templates.
 2. Remove the `voice` channel, quiet hours, and daily cap rate limits from the notification governor in Pulse.
-3. Clean up the voice line extraction, types, and properties from core tools (e.g., `TranscriptParser.ts`, `DASchedule.ts`, `DAInterview.ts`).
+3. Clean up the voice line extraction, types, and properties from core tools (e.g., `TranscriptParser.ts`).
 4. Clean up `Remotion` references and skills references to ElevenLabs voice/TTS/STT.

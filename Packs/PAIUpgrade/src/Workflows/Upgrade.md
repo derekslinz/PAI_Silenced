@@ -22,7 +22,7 @@ Running the **Upgrade** workflow in the **PAIUpgrade** skill to check for upgrad
 Four parallel threads, then synthesize:
 
 0. **Thread 0 (MANDATORY):** Prior-Work Audit — inventory current Algorithm, PATTERNS.yaml, hooks, skills, recent ISAs, KNOWLEDGE, feedback memory.
-1. **Thread 1:** User context (TELOS, projects, recent work, PAI state).
+1. **Thread 1:** User context (life goals, projects, recent work, PAI state).
 2. **Thread 2:** External sources (Anthropic, YouTube, custom, GitHub trending).
 3. **Thread 3:** Internal reflections (algorithm-reflections.jsonl).
 4. **Synthesize:** filter discoveries against Thread 0 inventory; assign Prior Status; emit deltas only.
@@ -69,7 +69,7 @@ Return: inventory with file:line evidence.
 
 Spawn 4 parallel agents (`subagent_type=general-purpose`):
 
-**Agent 1 — TELOS:** read `~/.claude/PAI/USER/TELOS/*.md`. Extract current high-priority goals, active focus areas, key challenges, project themes.
+**Agent 1 — Life Context:** read `~/.claude/PAI/USER/TELOS/*.md`. Extract current high-priority goals, active focus areas, key challenges, project themes.
 
 **Agent 2 — Recent Work:** read `~/.claude/PAI/MEMORY/STATE/work.json` and recent `MEMORY/WORK/` dirs (last 7 days). Extract active projects, recurring patterns, open tasks, recent accomplishments.
 
@@ -139,7 +139,7 @@ Wait for all 14 agents (5 prior-work + 4 context + 4 source + 1 reflection). Thr
 
 ### Step 4: Synthesize User Context
 
-Merge Thread 1 results into a unified context object covering: TELOS goals/focus/challenges, recent_work projects/patterns/open_tasks, pai_state skills/hooks/config, tech_stack languages/frameworks/deployment.
+Merge Thread 1 results into a unified context object covering: life goals/focus/challenges, recent_work projects/patterns/open_tasks, pai_state skills/hooks/config, tech_stack languages/frameworks/deployment.
 
 ### Step 5: Filter, Score, Assign Prior Status
 

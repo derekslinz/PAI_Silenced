@@ -23,12 +23,12 @@ Today's zones:
 
 | Name | Pattern(s) | What lives here |
 |------|-----------|-----------------|
-| `user-data` | `PAI/USER/**` | Principal identity, TELOS, credentials, personal infra, contacts, finances, health, business |
+| `user-data` | `PAI/USER/**` | Principal identity, goals, credentials, personal infra, contacts, finances, health, business |
 | `config-secrets` | `settings.json`, `settings.local.json`, `.vscode/settings.json`, `.env`, `.env.*`, `PAI/.env`, `PAI/.env.*` | API tokens, allowed command lists, MCP auth |
 | `runtime-memory` | `PAI/MEMORY/**` | Work sessions, learnings, observability, research, raw data, bookmarks, relationship notes |
 | `private-skills` | `skills/_*/**` (underscore prefix) | Principal-specific and proprietary skills |
 | `install-state` | `history.jsonl`, `Plugins/**`, `plugins/installed_plugins.json`, `plugins/known_marketplaces.json` | Claude Code runtime install state written by the harness |
-| `private-infra` | `PAI/ARBOL/**`, `PAI/PULSE/Assistant/**`, `PAI/PULSE/Plans/**`, `PAI/PULSE/logs/**`, `PAI/PULSE/state/**`, `PAI/PULSE/Observability/out/**`, `PAI/PULSE/.playwright-cli/**`, `PAI/ScheduledTasks/**` | Top-level private infrastructure: cloud worker source, DA-specific assistant, planning docs, runtime logs/state, rendered HTML, scheduled tasks |
+| `private-infra` | `PAI/ARBOL/**`, `PAI/PULSE/Assistant/**`, `PAI/PULSE/Plans/**`, `PAI/PULSE/logs/**`, `PAI/PULSE/state/**`, `PAI/PULSE/Observability/out/**`, `PAI/PULSE/.playwright-cli/**`, `PAI/ScheduledTasks/**` | Top-level private infrastructure: cloud worker source, assistant-specific assistant, planning docs, runtime logs/state, rendered HTML, scheduled tasks |
 
 The underscore-prefix rule for `private-skills` is the interface contract. If a skill name does NOT start with `_`, that skill directory must be clean enough to ship to strangers.
 

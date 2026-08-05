@@ -24,7 +24,7 @@ Creates **PROCESS RECIPE CARDS** — numbered steps with small illustrations for
 Process recipe cards present methodologies, workflows, and step-by-step processes as visual recipes. These **illustrated how-to guides** make complex processes scannable and memorable.
 
 **Use this workflow for:**
-- "The 5-Step TELOS Analysis Recipe"
+- "The 5-Step Life Context Analysis Recipe"
 - Consulting methodology playbooks
 - How-to guides and processes
 - Workflow documentation
@@ -199,7 +199,7 @@ TIER 1 - RECIPE TITLE (Advocate Block Display):
 - Font: Advocate style, extra bold, hand-lettered, all-caps
 - Size: 3x larger than body text
 - Color: Black #000000
-- Example: "THE 5-STEP TELOS ANALYSIS RECIPE"
+- Example: "THE 5-STEP LIFE ANALYSIS RECIPE"
 
 TIER 2 - STEP NAMES (Concourse Sans):
 - "Step 1: [Name]", "Step 2: [Name]", etc.
@@ -341,7 +341,7 @@ open /path/to/recipe-card.png
 
 ## Example Use Cases
 
-### Example 1: "5-Step TELOS Analysis Recipe"
+### Example 1: "5-Step Life Context Analysis Recipe"
 - **Steps:** Context → Questions → Blockers → Constraints → Solutions
 - **Icons:** Magnifying glass, question marks, roadblock, fence, lightbulb
 - **Color:** Purple on final "Solutions" step

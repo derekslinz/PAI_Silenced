@@ -1,10 +1,10 @@
 # The Pulse System
 
-**Pulse is the Life Dashboard.** It is the visible surface of the PAI Life Operating System — the place where you (and your DA) see and interact with everything the OS is doing. PAI is the OS; Pulse is how you watch it run.
+**Pulse is the Life Dashboard.** It is the visible surface of the PAI Life Operating System — the place where you (and your assistant) see and interact with everything the OS is doing. PAI is the OS; Pulse is how you watch it run.
 
-Every Pulse module is a sub-surface of the Dashboard: real-time observability, chat surfaces (iMessage/Telegram), scheduled work, background worker state, DA heartbeat, and — as the dashboard grows — live views of current state vs ideal state, goal progress, workflows, and day-in-the-life preview. A Life OS with no dashboard would still be a Life OS; Pulse is what keeps it visible.
+Every Pulse module is a sub-surface of the Dashboard: real-time observability, chat surfaces (iMessage/Telegram), scheduled work, background worker state, assistant heartbeat, and — as the dashboard grows — live views of current state vs ideal state, goal progress, workflows, and day-in-the-life preview. A Life OS with no dashboard would still be a Life OS; Pulse is what keeps it visible.
 
-**Canonical thesis:** `PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md` — the source of truth for what PAI is, what the DA is, and why Pulse exists.
+**Canonical thesis:** `PAI/DOCUMENTATION/LifeOs/LifeOsThesis.md` — the source of truth for what PAI is and why Pulse exists.
 
 **Implementation:** The unified daemon of PAI — a single always-on process that handles cron jobs, hook validation, observability APIs + dashboard, Telegram chat, iMessage chat, and GitHub work polling. Pulse is THE local runtime for all PAI services. It absorbed TelegramBot, iMessageBot, and the Observability server into crash-isolated modules running under one process, one port (31337), and one launchd plist (`com.pai.pulse`).
 
@@ -25,7 +25,7 @@ Each subsystem runs in its own crash-isolated loop within the single Pulse proce
 | **Telegram** | grammY polling bot with claude-agent-sdk sessions (absorbed from TelegramBot) | `modules/telegram.ts` |
 | **iMessage** | SQLite polling bot with claude-agent-sdk sessions (absorbed from iMessageBot, disabled by default) | `modules/imessage.ts` |
 | **Worker** | GitHub Issues work polling for PAI Workers (optional) | `checks/github-work.ts` |
-| **Assistant** | Digital Assistant identity, heartbeat, scheduling, growth | `Assistant/module.ts` |
+| **Assistant** | Assistant identity, heartbeat, scheduling, growth | `Assistant/module.ts` |
 | **UserIndex** | Life OS USER/ indexer — parses frontmatter + collections into typed JSON; fs.watch live refresh; powers `/life` dashboard + Daemon publish feed | `modules/user-index.ts` |
 
 ---
@@ -546,7 +546,7 @@ bun run checks/github.ts
     syslog.ts             # System log aggregation
     imessage.ts           # SQLite polling bot + claude-agent-sdk sessions (disabled by default)
  Assistant/
-    module.ts             # Digital Assistant identity, heartbeat, scheduling (private — DA-specific)
+    module.ts             # Assistant identity, heartbeat, scheduling
  Observability/
     observability.ts      # Data APIs + Observatory dashboard + security APIs
     src/                  # Next.js 15.5 dashboard source
@@ -712,125 +712,10 @@ The observability module serves all dashboard data. Full API reference with all 
 | Security | `/api/security`, `/api/security/patterns`, `/api/security/rules`, `/api/security/hooks-detail` | PATTERNS.yaml + SECURITY_RULES.md CRUD |
 | Knowledge | `/api/knowledge`, `/api/knowledge/:domain/:slug` | Knowledge archive read/write |
 | Wiki | `/api/wiki`, `/api/wiki/search`, `/api/wiki/graph` | System docs, full-text search, knowledge graph (wikilink-based; CLI `KnowledgeGraph.ts` provides richer graph with tags + related fields) |
-| DA | `/assistant/*` | Identity, tasks, diary, opinions, personality |
+| Assistant | `/assistant/*` | Identity, tasks, diary, opinions, personality |
 | Hook Validation | `/hooks/skill-guard`, `/hooks/agent-guard` | PreToolUse HTTP hooks for Skill/Agent validation |
 
 ---
-
-## DA Module -- Digital Assistant Subsystem
-
-The DA module formalizes how Pulse instantiates, manages, and evolves a Digital Assistant. It replaces manual DA_IDENTITY.md editing with a structured schema, adds proactive heartbeat evaluation, natural-language scheduled tasks, and identity growth over time.
-
-### Architecture
-
-The DA module adds four capabilities to Pulse:
-
-1. **Identity Registry** -- Structured YAML identity per DA with personality traits, writing style, autonomy rules
-2. **Heartbeat** -- Proactive "should I do something?" evaluation every 30 minutes (2-layer: free context + cheap Haiku eval, ~$0.05/day)
-3. **Scheduled Tasks** -- JSONL-based task store with natural language creation, persistent across restarts
-4. **Growth Engine** -- Daily diary, weekly opinion formation, bounded identity evolution
-
-### Configuration
-
-```toml
-[da]
-enabled = true
-primary = "your-da"
-heartbeat_schedule = "*/30 * * * *"
-heartbeat_model = "haiku"
-heartbeat_cost_ceiling = 0.01
-diary_schedule = "0 23 * * *"
-growth_schedule = "0 4 * * 0"
-```
-
-### File Structure
-
-```
-PAI/USER/DA/
-  _registry.yaml                # Which DAs exist, which is primary
-  _presets.yaml                 # Personality presets for interview
-  your-da/
-    DA_IDENTITY.yaml               # Structured identity (source of truth)
-    DA_IDENTITY.md                 # Generated readable version
-    growth.jsonl                # Append-only growth events
-    opinions.yaml               # Confidence-weighted beliefs
-    diary.jsonl                 # Daily interaction summaries
-  devi/
-    DA_IDENTITY.yaml
-    DA_IDENTITY.md
-    growth.jsonl
-    opinions.yaml
-    diary.jsonl
-```
-
-### Identity Schema
-
-The DA_IDENTITY.yaml schema covers: core identity (name, role, color), 12 personality traits (0-100), writing style, relationship context, autonomy rules (can_initiate vs must_ask), companion, and growth anchors.
-
-### Heartbeat
-
-Two-layer architecture:
-- **Layer 1 ($0):** Deterministic context gathering -- calendar, email, active work, pending tasks, recent ratings
-- **Layer 2 (~$0.001):** Single Haiku evaluation -- should I notify, remind, create a task, or stay silent?
-
-Most evaluations return NO_ACTION. Cost: ~$0.05/day ($1.50/month).
-
-### Scheduled Tasks
-
-Tasks are stored in `Pulse/Assistant/state/scheduled-tasks.jsonl`. Types:
-- **once** -- fires at a specific time, then completes
-- **recurring** -- fires on cron schedule until cancelled or expired
-
-Actions: notify (telegram), prompt (LLM call), script (shell command).
-
-Natural language routing:
-- "remind me at 9am" --> Pulse local task (free)
-- "every Monday research security news" --> CC trigger (cloud)
-
-### Growth System
-
-Three mechanisms:
-1. **Diary** (daily 11PM) -- Summarizes sessions, topics, mood, notable moments
-2. **Opinions** (weekly Sunday 4AM) -- Forms confidence-weighted beliefs about the principal
-3. **Identity drift** (monthly) -- Personality traits evolve within bounded ranges (max 5 points/month)
-
-### DA Interview
-
-New PAI installations create DA identity via guided CLI interview:
-```bash
-bun PAI/TOOLS/DAInterview.ts                    # Quick (under 2 min)
-bun PAI/TOOLS/DAInterview.ts --depth standard   # + personality refinement
-bun PAI/TOOLS/DAInterview.ts --depth deep       # + companion, beliefs
-```
-
-### Multi-DA Support
-
-Registry tracks primary + worker DAs. Primary owns interactive channels (terminal, telegram). Workers run background tasks only. Each DA has independent identity, growth, and opinions.
-
-### HTTP API
-
-| Route | Method | Description |
-|-------|--------|-------------|
-| `/assistant/health` | GET | Assistant subsystem health |
-| `/assistant/identity` | GET | Current identity summary |
-| `/assistant/tasks` | GET | Unified task view (DA + Pulse cron + CC triggers) |
-| `/assistant/tasks` | POST | Create DA scheduled task |
-| `/assistant/tasks/:id` | DELETE | Cancel DA task |
-| `/assistant/diary` | GET | Recent diary entries |
-| `/assistant/opinions` | GET | Current opinions |
-
-### Tools
-
-| Tool | Usage | Purpose |
-|------|-------|---------|
-| `DAInterview.ts` | `bun PAI/TOOLS/DAInterview.ts` | Create/update DA identity |
-| `DASchedule.ts` | `bun PAI/TOOLS/DASchedule.ts list` | Manage scheduled tasks |
-| `DAGrowth.ts` | `bun PAI/TOOLS/DAGrowth.ts summary` | View growth data |
-| `DAIdentityGenerator.ts` | `bun PAI/TOOLS/DAIdentityGenerator.ts` | Regenerate DA_IDENTITY.md from YAML |
-
-### Competitive Context
-
-This subsystem provides all features of OpenClaw's SOUL.md identity system plus: structured schema (vs flat markdown), guided interview (vs manual editing), proactive heartbeat (matched), scheduled tasks (matched), opinion formation (novel), bounded identity growth (novel), and multi-DA support (novel). At 30-50x lower cost than OpenClaw's GPT-4 heartbeat.
 
 ---
 

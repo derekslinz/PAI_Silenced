@@ -55,7 +55,6 @@ Hooks are TypeScript scripts that execute at specific lifecycle events in Claude
                 SkillGuard (Pulse HTTP: localhost:31337)          
                                                                      
   PostToolUse  ContentScanner (injection detection)            
-                 TelosSummarySync (Write/Edit)                   
                  ISASync (ISA → work.json + KV sync) [Write/Edit]
                  ToolActivityTracker (global)                    
                                                                      
@@ -160,7 +159,6 @@ interface StopPayload extends BasePayload {
 | Hook | Purpose | Blocking | Dependencies |
 |------|---------|----------|--------------|
 | `ContentScanner.hook.ts` | Prompt injection detection in tool output (WebFetch/WebSearch + global) | No | `hooks/security/inspectors/` |
-| `TelosSummarySync.hook.ts` | Regenerate PRINCIPAL_TELOS.md when TELOS files modified (Write/Edit) | No | `MEMORY/WORK/`, `TOOLS/GenerateTelosSummary.ts` |
 | `ISASync.hook.ts` | Sync ISA frontmatter → work.json + KV push (Write/Edit) | No | `MEMORY/WORK/`, `work.json`, `CLOUDFLARE_API_TOKEN_WORKERS_EDIT` or `CLOUDFLARE_API_TOKEN` in `~/.claude/.env` |
 | `ToolActivityTracker.hook.ts` | Per-tool event log to `MEMORY/OBSERVABILITY/` (global) | No | `MEMORY/OBSERVABILITY/` |
 

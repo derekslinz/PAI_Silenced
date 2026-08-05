@@ -18,7 +18,7 @@ bun ${CLAUDE_SKILL_DIR}/Tools/DaemonAggregator.ts --preview --verbose
 ```
 
 This reads from:
-- TELOS (missions, goals, books, movies, wisdom)
+- Life context (missions, goals, books, movies, wisdom)
 - Knowledge archive (recent Ideas — title + thesis only)
 - PROJECTS.md (public projects only)
 - Recent work sessions (abstracted to topic themes)
@@ -96,7 +96,7 @@ Security filter: clean (no redactions needed)
 Changes vs current daemon:
   + Added 3 new recent ideas
   + Updated work themes (4 new, 2 removed)
-  ~ Books list merged (2 new from TELOS)
+  ~ Books list merged (2 new from life context)
   = Mission, location, predictions unchanged
 
 Approve this update? [Waiting for the user]

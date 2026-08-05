@@ -182,28 +182,6 @@
         ]
       },
       {
-        "matcher": "Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/TelosSummarySync.hook.ts",
-            "timeout": 5,
-            "async": true
-          }
-        ]
-      },
-      {
-        "matcher": "Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/TelosSummarySync.hook.ts",
-            "timeout": 5,
-            "async": true
-          }
-        ]
-      },
-      {
         "matcher": "Write|Edit",
         "hooks": [
           {
@@ -645,7 +623,7 @@
       "Deep-working",
       "Flow-stating",
       "Mise-en-placing",
-      "{DA_IDENTITY.NAME}zen-improving",
+      "Assistant-zen-improving",
       "Wabi-sabi-accepting",
       "Kintsugi-repairing",
       "Bushido-following",
@@ -950,8 +928,7 @@
       "/newsletter manages UL newsletter drafts and engagement stats.",
       "/blog handles the full blog workflow — write, preview, deploy.",
       "/feed manages intelligence sources, polling, and AI processing.",
-      "/inbox checks Gmail. /communication sends email as {DA_IDENTITY.NAME}.",
-      "/telos is your Life OS — goals, projects, dependencies, books, movies.",
+      "/inbox checks Gmail. /communication sends email as the assistant.",
       "/osint does open source intelligence and due diligence.",
       "/recon runs security reconnaissance and attack surface mapping.",
       "/web-assessment performs web security testing and vulnerability scanning.",
@@ -1054,7 +1031,6 @@
       "Custom agents use subagent_type='general-purpose', never built-in type names.",
       "25 hooks run across the session lifecycle — security, tracking, learning, naming.",
       "SecurityPipeline active on Bash/Write/Edit/Read. SkillGuard + AgentGuard active via Pulse HTTP routes at pai:31337.",
-      "SatisfactionCapture.hook.ts captures session ratings (async).",
       "PromptProcessing.hook.ts decides MODE/TIER and handles session naming/analysis (async).",
       "PRD.md on disk is the system of record — AI writes state directly.",
       "RelationshipMemory.hook.ts captures relationship context at session end.",
@@ -1069,7 +1045,7 @@
       "Use bun Inference.ts fast|standard|smart for AI inference — never direct API.",
       "bun SessionHarvester.ts extracts insights from past session transcripts.",
       "settings.json is the single source of truth for all PAI configuration.",
-      "daidentity in settings.json controls {DA_IDENTITY.NAME}'s name, color, and personality.",
+      "daidentity in settings.json controls the assistant's name, color, and personality.",
       "principal in settings.json stores {PRINCIPAL.NAME}'s name and timezone.",
       "The statusline command runs from PAI/statusline-command.sh.",
       "Personality traits (0-100) shape how emotions are expressed vocally.",
@@ -1236,7 +1212,7 @@
   "_contextFiles_docs": "v5.0: contextFiles is empty — constitutional rules in PAI/PAI_SYSTEM_PROMPT.md (system prompt), operational procedures + @imported context in CLAUDE.md (native). Dynamic context (relationship, learning, work) injected by LoadContext.hook.ts.",
   "teammateMode": "in-process",
   "daidentity": {
-    "_docs_defaults": "Bootstrap defaults — functional for first boot. Interview overwrites name/fullName/displayName with user's chosen DA identity.",
+    "_docs_defaults": "Bootstrap defaults — functional for first boot. Interview overwrites name/fullName/displayName with user's chosen assistant identity.",
     "name": "PAI",
     "fullName": "PAI Assistant",
     "displayName": "PAI",
@@ -1271,7 +1247,7 @@
   "_docs": {
     "_overview": "PAI settings — directly edited. Personal values live here. ShadowRelease.ts produces public staging via containment: clone + zone deletion + template overlay.",
     "_sections": {
-      "daidentity": "Digital Assistant identity (name, displayName, fullName, color). Read by hooks via hooks/lib/identity.ts.",
+      "daidentity": "Assistant identity (name, displayName, fullName, color). Read by hooks via hooks/lib/identity.ts.",
       "principal": "Principal (owner) identity (name, pronunciation, timezone).",
       "env": "Environment variables available to all hooks and tools via process.env",
       "permissions": "Tool permission configuration (allow, deny, ask lists)",

@@ -1,8 +1,8 @@
-!/usr/bin/env bun
+#/usr/bin/env bun
 
 / DaemonAggregator — Reads PAI system data sources and produces
  a security-filtered daemon.md update.
-  This tool aggregates from TELOS, Knowledge, Projects, and Work sessions,
+  This tool aggregates from Knowledge, Projects, and Work sessions,
  applies the SecurityFilter, and outputs either a daemon.md file or
  a structured JSON diff for preview.
   Usage:
@@ -22,7 +22,6 @@ const HOME = process.env.HOME || process.env.USERPROFILE || "";
 const PAI_DIR = process.env.PAI_DIR || join(HOME, ".claude", "PAI");
 const USER_DIR = join(PAI_DIR, "USER");
 const MEMORY_DIR = join(PAI_DIR, "MEMORY");
-const TELOS_DIR = join(USER_DIR, "TELOS");
 const KNOWLEDGE_DIR = join(MEMORY_DIR, "KNOWLEDGE");
 const WORK_DIR = join(MEMORY_DIR, "WORK");
 const PROJECTS_FILE = join(USER_DIR, "PROJECTS", "PROJECTS.md");
@@ -39,21 +38,8 @@ const EXCLUDED_PATHS = [
   join(USER_DIR, "BUSINESS"),
   join(USER_DIR, "OUR_STORY.md"),
   join(USER_DIR, "OPINIONS.md"),
-  join(TELOS_DIR, "TRAUMAS.md"),
   join(KNOWLEDGE_DIR, "People"),
   join(KNOWLEDGE_DIR, "Companies"),
-  //  Current→Ideal Monitoring Spine (--) 
-  // the user's explicit decision: IDEAL_STATE is fully private (Decision ).
-  // CURRENT_STATE contains aggregated health/finance/location/social — hardest private.
-  // Preference files with location or consumption data are private.
-  join(TELOS_DIR, "IDEAL_STATE"),
-  join(TELOS_DIR, "CURRENT_STATE"),
-  join(TELOS_DIR, "GAP"),
-  join(TELOS_DIR, "RESTAURANTS.md"),
-  join(TELOS_DIR, "FOOD_PREFERENCES.md"),
-  join(TELOS_DIR, "LEARNING.md"),
-  join(TELOS_DIR, "MEETUPS.md"),
-  join(TELOS_DIR, "CIVIC.md"),
 ];
 
 function isExcluded(filePath: string): boolean {
@@ -65,7 +51,7 @@ function isExcluded(filePath: string): boolean {
 
 const PUBLIC_PROJECTS = [
   "Website", "Fabric", "SecLists", "PAI", "Surface",
-  "Human .", "UL Site", "Daemon", "Substrate", "Telos",
+  "Human .", "UL Site", "Daemon", "Substrate",
   "TheAlgorithm", "FoundryServices", "Ladder", "PAI Marketing",
 ];
 
@@ -75,86 +61,6 @@ function readFileIfExists(path: string): string | null {
   if (isExcluded(path)) return null;
   if (!existsSync(path)) return null;
   return readFileSync(path, "utf-");
-}
-
-function readMissions(): string {
-  const content = readFileIfExists(join(TELOS_DIR, "MISSION.md"));
-  if (!content) return "";
-
-  const lines = content.split("\n");
-  const publicMissions: string[] = [];
-
-  for (const line of lines) {
-    const trimmed = line.trim();
-    // Include Mand M— they're public-safe philosophical missions
-    if (trimmed.match(/^[-]\s+\?\?M[]\b/)) {
-      publicMissions.push(trimmed.replace(/^[-]\s+/, ""));
-    }
-  }
-
-  // Mreworded: mind upload aspiration without partner reference
-  publicMissions.push(
-    "M: Explore the transfer and storage of human minds into digital formats for future continuity."
-  );
-
-  return publicMissions.join("\n");
-}
-
-function readGoals(): string {
-  const content = readFileIfExists(join(TELOS_DIR, "GOALS.md"));
-  if (!content) return "";
-
-  const lines = content.split("\n");
-  const publicGoals: string[] = [];
-
-  for (const line of lines) {
-    const trimmed = line.trim();
-    // Include goals for public projects, exclude revenue/follower targets
-    if (trimmed.match(/^[-]\s+\?\?G\d+\b/)) {
-      // Filter out goals with revenue, follower count, or monetization targets
-      if (
-        !trimmed.match(/\b(revenue|follower|subscriber|monetiz)/i) &&
-        !trimmed.match(/\b\d+[Kk]\s+(follower|subscriber)/i)
-      ) {
-        publicGoals.push(trimmed.replace(/^[-]\s+/, ""));
-      }
-    }
-  }
-
-  return publicGoals.join("\n");
-}
-
-function readBooks(): string[] {
-  const content = readFileIfExists(join(TELOS_DIR, "BOOKS.md"));
-  if (!content) return [];
-
-  return content
-    .split("\n")
-    .filter((l) => l.match(/^[-]\s+/))
-    .map((l) => l.replace(/^[-]\s+/, "").trim())
-    .filter((l) => l.length > );
-}
-
-function readMovies(): string[] {
-  const content = readFileIfExists(join(TELOS_DIR, "MOVIES.md"));
-  if (!content) return [];
-
-  return content
-    .split("\n")
-    .filter((l) => l.match(/^[-]\s+/))
-    .map((l) => l.replace(/^[-]\s+/, "").trim())
-    .filter((l) => l.length > );
-}
-
-function readWisdom(): string[] {
-  const content = readFileIfExists(join(TELOS_DIR, "WISDOM.md"));
-  if (!content) return [];
-
-  // Split by double newlines to get individual quotes
-  return content
-    .split(/\n{,}/)
-    .map((q) => q.trim())
-    .filter((q) => q.length > && !q.startsWith(""));
 }
 
 function readRecentIdeas(limit = ): Array<{ title: string; thesis: string }> {
@@ -307,7 +213,7 @@ function generalizeTheme(slug: string): string | null {
     [/pai|algorithm|skill|hook/, null], // Internal — exclude
     [/fix|bug|debug|error/, "Debugging and problem-solving"],
     [/newsletter|email|broadcast/, "Newsletter and communications"],
-    [/telos|goal|mission/, "Purpose and goal development"],
+    [/goal|mission/, "Purpose and goal development"],
   ];
 
   for (const [pattern, theme] of themeMap) {
@@ -404,7 +310,6 @@ interface DaemonUpdate {
   about: string;
   mission: string;
   current_location: string;
-  telos: string;
   favorite_books: string[];
   favorite_movies: string[];
   predictions: string[];
@@ -423,19 +328,9 @@ export function aggregate(): DaemonUpdate {
 
   // About: always prefer existing hand-written bio over auto-generated
   const about = (existing.about as string) || readAbout() || "";
-  const mission = readMissions() || (existing.mission as string) || "";
-  const books = readBooks();
-  const movies = readMovies();
-  const wisdom = readWisdom();
   const recentIdeas = readRecentIdeas();
   const projects = readPublicProjects();
   const workThemes = readWorkThemes(, );
-  const goals = readGoals();
-
-  // Combine missions and goals into TELOS section
-  const telosParts: string[] = [];
-  if (mission) telosParts.push(mission);
-  if (goals) telosParts.push(goals);
 
   // Preserve existing sections that we don't have PAI sources for
   const predictions = existing.predictions
@@ -476,9 +371,7 @@ export function aggregate(): DaemonUpdate {
 
   return {
     about,
-    mission: telosParts.join("\n\n"),
     current_location: (existing.current_location as string) || "San Francisco Bay Area",
-    telos: telosParts.join("\n\n"),
     favorite_books: mergedBooks,
     favorite_movies: mergedMovies,
     predictions,
@@ -508,10 +401,6 @@ function toDaemonMd(data: DaemonUpdate): string {
   sections.push("[ABOUT]", "", data.about, "");
   sections.push("[CURRENT_LOCATION]", "", data.current_location, "");
   sections.push("[MISSION]", "", data.mission, "");
-
-  if (data.telos) {
-    sections.push("[TELOS]", "", data.telos, "");
-  }
 
   sections.push("[FAVORITE_BOOKS]", "");
   for (const book of data.favorite_books) {
@@ -619,11 +508,6 @@ Options:
   if (args.includes("--sources")) {
     console.log("Data Source Status:\n");
     const sources = [
-      { name: "TELOS/MISSION.md", path: join(TELOS_DIR, "MISSION.md") },
-      { name: "TELOS/GOALS.md", path: join(TELOS_DIR, "GOALS.md") },
-      { name: "TELOS/BOOKS.md", path: join(TELOS_DIR, "BOOKS.md") },
-      { name: "TELOS/MOVIES.md", path: join(TELOS_DIR, "MOVIES.md") },
-      { name: "TELOS/WISDOM.md", path: join(TELOS_DIR, "WISDOM.md") },
       { name: "KNOWLEDGE/Ideas/_index.md", path: join(KNOWLEDGE_DIR, "Ideas", "_index.md") },
       { name: "PROJECTS.md", path: PROJECTS_FILE },
       { name: "PRINCIPAL_IDENTITY.md", path: IDENTITY_FILE },

@@ -32,7 +32,7 @@ import { writeFileSync, existsSync, mkdirSync, appendFileSync } from 'fs';
 import { join } from 'path';
 import { getPaiDir } from './lib/paths';
 import { getPSTComponents } from './lib/time';
-import { getDAName, getPrincipalName } from './lib/identity';
+import { getAssistantName, getPrincipalName } from './lib/identity';
 import { parseTranscript } from '../PAI/TOOLS/TranscriptParser';
 
 interface HookInput {
@@ -151,7 +151,7 @@ function analyzeForRelationship(entries: TranscriptEntry[]): RelationshipNote[] 
     for (const summary of uniqueSummaries) {
       notes.push({
         type: 'B',
-        entities: [`@${getDAName()}`],
+        entities: [`@${getAssistantName()}`],
         content: summary
       });
     }

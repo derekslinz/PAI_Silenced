@@ -1,6 +1,6 @@
 /**
  * Central Identity Loader
- * Single source of truth for DA (Digital Assistant) and Principal identity
+ * Single source of truth for assistant and Principal identity
  *
  * Reads from settings.json - the programmatic way, not markdown parsing.
  * All hooks and tools should import from here.
@@ -118,7 +118,7 @@ function loadSettings(): Settings {
 }
 
 /**
- * Get DA (Digital Assistant) identity from settings.json
+ * Get assistant identity from settings.json
  */
 export function getIdentity(): Identity {
   const settings = loadSettings();
@@ -160,27 +160,27 @@ export function clearCache(): void {
 }
 
 /**
- * Get just the DA name (convenience function)
+ * Get just the assistant name (convenience function)
  */
-export function getDAName(): string {
+export function getAssistantName(): string {
   return getIdentity().name;
 }
 
 /**
  * Get the user-customized startup catchphrase the install wizard collected,
- * with `{name}` placeholder substitution against the active DA name.
+ * with `{name}` placeholder substitution against the active assistant name.
  *
  * Read order:
  *   1. settings.daidentity.startupCatchphrase (set by PAI-Install wizard)
  *   2. fallback default: `<name> here, ready to go.`
  *
- * Callers should prefer this over hand-rolling `${getDAName()} here, ready
- * to go.` so the install's collected catchphrase is actually honored.
+ * Callers should prefer this over hand-rolling `${getAssistantName()} here,
+ * ready to go.` so the install's collected catchphrase is actually honored.
  */
 export function getStartupCatchphrase(): string {
   const settings = loadSettings();
   const stored = (settings.daidentity as any)?.startupCatchphrase as string | undefined;
-  const name = getDAName();
+  const name = getAssistantName();
   // Fork philosophy: no scripted catchphrase. Empty unless the user set one.
   const template = (stored && stored.trim()) || "";
   return template.replace(/\{name\}/gi, name);

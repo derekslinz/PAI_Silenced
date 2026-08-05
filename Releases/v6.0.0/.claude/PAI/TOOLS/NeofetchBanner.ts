@@ -317,7 +317,7 @@ const LETTERS: Record<string, string[]> = {
 // 
 
 interface SystemStats {
-  DA_NAME: string;
+  ASSISTANT_NAME: string;
   skills: number;
   hooks: number;
   workItems: string;
@@ -326,7 +326,7 @@ interface SystemStats {
   model: string;
 }
 
-function readDAIdentity(): string {
+function readAssistantIdentity(): string {
   const settingsPath = join(CLAUDE_DIR, "settings.json");
   try {
     const settings = JSON.parse(readFileSync(settingsPath, "utf-8"));
@@ -406,7 +406,7 @@ function countUserFiles(): number {
 
 function getStats(): SystemStats {
   return {
-    DA_NAME: readDAIdentity(),
+    ASSISTANT_NAME: readAssistantIdentity(),
     skills: countSkills(),
     hooks: countHooks(),
     workItems: countWorkItems(),
@@ -580,7 +580,7 @@ function createNeofetchBanner(): string {
 
   // Stats formatted as key-value pairs
   const statItems = [
-    { key: "DA Name", value: stats.DA_NAME, color: nc },
+    { key: "Assistant", value: stats.ASSISTANT_NAME, color: nc },
     { key: "Skills", value: String(stats.skills), color: g },
     { key: "Hooks", value: String(stats.hooks), color: c },
     { key: "Work Items", value: stats.workItems, color: o },

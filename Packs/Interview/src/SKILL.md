@@ -1,6 +1,6 @@
 ---
 name: Interview
-description: "Runs a phased conversational interview across all PAI context files using InterviewScan.ts, which orders targets by PHASE and assigns conversation mode per file. Phase 1 (foundational TELOS) always runs first regardless of completeness: MISSION, GOALS, PROBLEMS, STRATEGIES, CHALLENGES, NARRATIVES, SPARKS, BELIEFS, WISDOM, MODELS, FRAMES in leverage order. Phase 2: IDEAL_STATE (HEALTH, MONEY, FREEDOM, RELATIONSHIPS, CREATIVE) in Fill mode. Phase 3: preferences (BOOKS, AUTHORS, BANDS, MOVIES, RESTAURANTS, FOOD_PREFERENCES, LEARNING, MEETUPS, CIVIC) in mixed mode. Phase 4: light touch on CURRENT_STATE/SNAPSHOT and PRINCIPAL_IDENTITY. Phase 9 (RHYTHMS) deferred. Review mode (≥80%) reads file then asks targeted questions one at a time — still accurate, outdated, missing, sharpen? Fill mode (<80%) walks scanner prompts one at a time. The principal answers in natural language; the DA formats into file structure. Voice confirms on actual changes only. Stop signals respected immediately. Target vs. north-star type confirmed per entry. Timestamped backup to TELOS/Backups/ before multi-edit at ≥50% of a file. TelosRenderer.ts regenerates PRINCIPAL_TELOS.md after foundational changes. USE WHEN /interview, resume interview, continue interview, start the interview, review TELOS, fill in context, what's missing in setup, conversational review, phased review, TELOS walkthrough, quarterly context refresh. NOT FOR single-file edits (use Telos Update workflow), intaking external content (use Migrate), identity edits (use _PROFILE)."
+description: "Runs a phased conversational interview across all PAI context files using InterviewScan.ts, which orders targets by PHASE and assigns conversation mode per file. Phase 1 (foundational life context) always runs first regardless of completeness: MISSION, GOALS, PROBLEMS, STRATEGIES, CHALLENGES, NARRATIVES, SPARKS, BELIEFS, WISDOM, MODELS, FRAMES in leverage order. Phase 2: IDEAL_STATE (HEALTH, MONEY, FREEDOM, RELATIONSHIPS, CREATIVE) in Fill mode. Phase 3: preferences (BOOKS, AUTHORS, BANDS, MOVIES, RESTAURANTS, FOOD_PREFERENCES, LEARNING, MEETUPS, CIVIC) in mixed mode. Phase 4: light touch on CURRENT_STATE/SNAPSHOT and PRINCIPAL_IDENTITY. Phase 9 (RHYTHMS) deferred. Review mode (≥80%) reads file then asks targeted questions one at a time — still accurate, outdated, missing, sharpen? Fill mode (<80%) walks scanner prompts one at a time. The principal answers in natural language; the DA formats into file structure. Voice confirms on actual changes only. Stop signals respected immediately. Target vs. north-star type confirmed per entry. Timestamped backup to TELOS/Backups/ before multi-edit at ≥50% of a file. USE WHEN /interview, resume interview, continue interview, start the interview, review life context, fill in context, what's missing in setup, conversational review, phased review, life context walkthrough, quarterly context refresh. NOT FOR single-file edits, intaking external content (use Migrate), identity edits (use _PROFILE)."
 ---
 
 # Interview — phased conversational context review + fill
@@ -18,13 +18,13 @@ curl -s -X POST http://localhost:31337/notify \
 
 ## What this skill does
 
-Runs a **phased conversational interview** across every PAI context file. Phase 1 (foundational TELOS) is the core — the DA always reviews it first, even if files look "complete," because foundational context is never actually done. Only after Phase 1 does the interview move to IDEAL_STATE dimensions, preferences, and identity.
+Runs a **phased conversational interview** across every PAI context file. Phase 1 (foundational life context) is the core — the DA always reviews it first, even if files look "complete," because foundational context is never actually done. Only after Phase 1 does the interview move to IDEAL_STATE dimensions, preferences, and identity.
 
 ### The phases
 
 | Phase | Scope | Mode default |
 |---|---|---|
-| **Phase 1** | Foundational TELOS context — MISSION, GOALS, PROBLEMS, STRATEGIES, CHALLENGES, NARRATIVES, SPARKS, BELIEFS, WISDOM, MODELS, FRAMES | Review (files are typically already populated — surface updates/refinements) |
+| **Phase 1** | Foundational life context — MISSION, GOALS, PROBLEMS, STRATEGIES, CHALLENGES, NARRATIVES, SPARKS, BELIEFS, WISDOM, MODELS, FRAMES | Review (files are typically already populated — surface updates/refinements) |
 | **Phase 2** | IDEAL_STATE dimensions (minus RHYTHMS) — HEALTH, MONEY, FREEDOM, RELATIONSHIPS, CREATIVE | Fill (typically sparse — walk through prompts) |
 | **Phase 3** | Preferences — BOOKS, AUTHORS, BANDS, MOVIES, RESTAURANTS, FOOD_PREFERENCES, LEARNING, MEETUPS, CIVIC | Mix — depends on completeness |
 | **Phase 4** | CURRENT_STATE/SNAPSHOT + PRINCIPAL_IDENTITY | Light touch |
@@ -49,11 +49,11 @@ bun ~/.claude/PAI/TOOLS/InterviewScan.ts
 
 The scanner orders items phase-first (Phase 1 always before Phase 2). Present the per-phase summary to the principal:
 
-> "Your setup is 85% overall. Phase 1 foundational TELOS is at 100% — but every file is worth a review pass. Phase 2 IDEAL_STATE is at 59%. Phase 3 preferences mostly good except FOOD_PREFERENCES at 7%. Starting with Phase 1: MISSION. Ready?"
+> "Your setup is 85% overall. Phase 1 foundational life context is at 100% — but every file is worth a review pass. Phase 2 IDEAL_STATE is at 59%. Phase 3 preferences mostly good except FOOD_PREFERENCES at 7%. Starting with Phase 1: MISSION. Ready?"
 
 ### Step 2 — Walk Phase 1 first
 
-**Do not skip Phase 1.** Even if every foundational TELOS file scores 100%, walk through each in priority order. These files are never truly "done" — a quarterly review pass is what keeps them current.
+**Do not skip Phase 1.** Even if every foundational life context file scores 100%, walk through each in priority order. These files are never truly "done" — a quarterly review pass is what keeps them current.
 
 Phase 1 order (by leverage): MISSION → GOALS → PROBLEMS → STRATEGIES → CHALLENGES → NARRATIVES → SPARKS → BELIEFS → WISDOM → MODELS → FRAMES.
 
@@ -106,13 +106,9 @@ After Phase 1 completes:
 
 Same pattern Phase 2 → Phase 3 → Phase 4.
 
-### Step 5 — Regenerate PRINCIPAL_TELOS.md
+### Step 5 — Regenerate the startup summary
 
-After foundational changes, regenerate the startup summary so future sessions pick up the updates:
-
-```bash
-bun ~/.claude/PAI/TOOLS/TelosRenderer.ts 2>/dev/null || true
-```
+After foundational changes, regenerate the startup summary so future sessions pick up the updates.
 
 ## Rules
 
@@ -146,5 +142,4 @@ The DA marks current section progress via file state (already saved by Edit tool
 ## Related
 
 - `/migrate` — intake content from other sources (not an interview, a one-shot classification)
-- `/Telos` — edit a single TELOS file directly with backup
 - `/_PROFILE` — manage PRINCIPAL_IDENTITY directly

@@ -251,7 +251,6 @@ No customization needed -- all seven thinking modes work as-is with sensible def
 ## Works Well With
 
 - **Security Pack** -- Red Team and World Threat Model modes naturally complement security assessment workflows
-- **Telos Pack** -- First Principles and Council modes enhance TELOS project analysis and decision-making
 
 ---
 

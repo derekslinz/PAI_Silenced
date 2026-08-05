@@ -35,4 +35,4 @@ This file is a credentials store, not a template source. Private skills (like `_
 
 ## Identity
 
-DA and principal identity values live directly in `settings.json` under `daidentity` and `principal` keys. Hooks read these via `hooks/lib/identity.ts`.
+Assistant and principal identity values live directly in `settings.json` under `daidentity` and `principal` keys. Hooks read these via `hooks/lib/identity.ts`.

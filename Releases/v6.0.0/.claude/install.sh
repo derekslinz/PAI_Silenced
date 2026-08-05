@@ -180,9 +180,9 @@ else
   exit 1
 fi
 
-# DA identity setup is handled by the wizard (main.ts → CLI or GUI), not by
+# Identity setup is handled by the wizard (main.ts → CLI or GUI), not by
 # this bootstrap script. Running it here would duplicate prompts the wizard
-# already asks. The wizard knows install order: copy files first, then DA.
+# already asks. The wizard knows install order: copy files first, then identity.
 echo ""
 
 info "Launching installer..."

@@ -35,7 +35,7 @@ Claude Code supports the following hook events:
 ### 1. **SessionStart**
 **When:** Claude Code session begins (new conversation)
 **Use Cases:**
-- Load PAI context (CLAUDE.md auto-loads routing + identity + PRINCIPAL_TELOS via @-imports)
+- Load PAI context (CLAUDE.md auto-loads routing + identity via @-imports)
 - Initialize session state
 - Capture session metadata
 
@@ -192,7 +192,7 @@ Claude Code supports the following hook events:
 ---
 
 ### 4. **Stop**
-**When:** Main agent ({DA_IDENTITY.NAME}) completes a response
+**When:** Main agent (the assistant) completes a response
 **Use Cases:**
 - Capture work summaries and learnings
 - **Update terminal tab with final state** (color + suffix based on outcome)
@@ -291,15 +291,13 @@ Each Stop hook is a self-contained `.hook.ts` file that reads stdin via shared `
     {
       "matcher": "Write",
       "hooks": [
-        { "type": "command", "command": "$HOME/.claude/hooks/ISASync.hook.ts" },
-        { "type": "command", "command": "$HOME/.claude/hooks/TelosSummarySync.hook.ts" }
+        { "type": "command", "command": "$HOME/.claude/hooks/ISASync.hook.ts" }
       ]
     },
     {
       "matcher": "Edit",
       "hooks": [
-        { "type": "command", "command": "$HOME/.claude/hooks/ISASync.hook.ts" },
-        { "type": "command", "command": "$HOME/.claude/hooks/TelosSummarySync.hook.ts" }
+        { "type": "command", "command": "$HOME/.claude/hooks/ISASync.hook.ts" }
       ]
     },
     {
@@ -325,10 +323,6 @@ Each Stop hook is a self-contained `.hook.ts` file that reads stdin via shared `
 - Keeps work registry in sync without manual updates
 - Non-blocking, fire-and-forget
 - Uses `hooks/lib/isa-utils.ts::appendPhase()` (2026-04-16+) for phaseHistory with `source: "prd"` — the other source being the `/notify` endpoint. Both feed the same phaseHistory array with dedup via upgrade to `source: "merged"`. See `PAI/MEMORY/KNOWLEDGE/Ideas/dual-source-event-tracking-pattern.md`.
-
-**TelosSummarySync.hook.ts** - Principal TELOS Sync
-- Fires after Write/Edit alongside ISASync
-- Regenerates PRINCIPAL_TELOS.md when TELOS source files are modified
 
 **ToolActivityTracker.hook.ts** - Tool Activity Tracking + Ground-Truth Audit
 - Fires after any tool use (global matcher)
@@ -514,7 +508,7 @@ const identity = getIdentity();    // { name, fullName, displayName, color, pers
 const principal = getPrincipal();  // { name, pronunciation, timezone }
 
 // Convenience functions
-const DA_NAME = getDAName();        // "PAI"
+const ASSISTANT_NAME = getDAName(); // "PAI"
 const USER_NAME = getPrincipalName(); // "{YourName}"
 ```
 
@@ -1165,7 +1159,6 @@ PRE TOOL USE (2 hooks + 2 Pulse HTTP routes):
 
 POST TOOL USE (4 hooks):
   ContentScanner.hook.ts         Security: InjectionInspector for prompt injection [global]
-  TelosSummarySync.hook.ts       TELOS edits → regenerate PRINCIPAL_TELOS.md [Write, Edit]
   ISASync.hook.ts                ISA → work.json sync [Write, Edit]
   ToolActivityTracker.hook.ts    Per-tool event log to OBSERVABILITY/ [global]
 
