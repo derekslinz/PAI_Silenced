@@ -1,4 +1,4 @@
-# PAI Installer v5.0
+# PAI Installer v6.0
 
 > Install [PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/PAI) with a single command.
 
@@ -11,6 +11,80 @@ bash PAI-Install/install.sh
 That's it. The script handles everything:
 
 1. Detects your operating system and installed tools
+2. Installs **Bun** and **Git** if missing
+3. Launches a guided Web UI installer
+4. Walks you through identity and configuration
+5. Validates the installation before finishing
+
+### Requirements
+
+- **bash** and **curl** — that's all you need to start
+- macOS or Linux
+- Internet connection
+
+Everything else (Bun, Git, Claude Code) is installed automatically.
+
+---
+
+## Installation Steps
+
+The installer runs 7 steps in dependency order:
+
+| # | Step | What It Does |
+|---|------|-------------|
+| 1 | **System Detection** | Detects OS, architecture, shell, installed tools (Bun, Git, Claude Code), timezone, and any existing PAI installation |
+| 2 | **Prerequisites** | Installs missing tools: Git via Xcode CLT or package manager, Bun via official installer, Claude Code via npm |
+| 3 | **API Keys** | Auto-completes — no keys are collected by the installer; add them later in `~/.config/PAI/.env` |
+| 4 | **Identity** | Prompts for your name, AI assistant name, timezone, and a personal catchphrase |
+| 5 | **PAI Repository** | Clones the PAI repo to `~/.claude/` (or updates if already present) |
+| 6 | **Configuration** | Generates `settings.json`, `.env`, directory structure, `pai` shell alias, and patches version files |
+| 7 | **Validation** | Verifies directory structure, settings file, launchd plist, shell alias — reports pass/fail for each |
+
+### Graceful Degradation
+
+The installer is designed to recover from partial failures:
+
+- No existing PAI → fresh install (vs. upgrade if detected)
+- Claude Code not installed → attempts installation, continues if it fails
+- Port conflicts → installer port configurable via `PAI_INSTALL_PORT` environment variable
+
+---
+
+## Architecture
+
+### Two-Layer Design
+
+1. **Bootstrap** (`install.sh`) — Pure bash. Only needs bash + curl. Installs Bun, then hands off to the TypeScript installer (which detects and installs Git, Claude Code, and the rest).
+2. **Engine + UI** (`engine/` + `web/` + `public/`) — TypeScript (Bun). All install logic, web server, and frontend.
+
+### Launch Modes
+
+The installer supports three modes via `main.ts`:
+
+| Mode | Command | Description |
+|------|---------|-------------|
+| **GUI** (default) | `--mode gui` | Launches Electron window wrapping the web server. This is what `install.sh` uses. |
+| **Web** | `--mode web` | Starts the Bun HTTP/WebSocket server on port 1337. Open in any browser. |
+| **CLI** | `--mode cli` | Terminal-only wizard with ANSI colors and progress bars. No browser needed. |
+
+GUI mode auto-installs Electron dependencies on first run and clears macOS quarantine flags.
+
+### Directory Structure
+
+```
+PAI-Install/
+ install.sh              # Bash bootstrap entry point
+ main.ts                 # Mode router (gui/web/cli)
+
+ engine/                 # Core install logic (shared across all modes)
+    types.ts            # TypeScript interfaces (InstallState, messages, events)
+    detect.ts           # System detection (OS, tools, existing install)
+    steps.ts            # Step definitions + dependency graph
+    actions.ts          # Install action functions (clone, configure, etc.)
+    config-gen.ts       # Fallback settings.json generator
+    validate.ts         # Post-install validation checks
+    state.ts            # State persistence (resume interrupted installs)
+    index.ts            # Re-exports
 2. Installs **Bun** and **Git** if missing
 3. Launches a guided Web UI installer
 4. Walks you through identity and configuration

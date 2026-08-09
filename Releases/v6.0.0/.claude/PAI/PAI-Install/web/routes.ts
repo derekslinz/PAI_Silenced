@@ -11,7 +11,6 @@ import {
   runIdentity,
   runRepository,
   runConfiguration,
-  runTelegramSetup,
 } from "../engine/actions";
 import { runValidation, generateSummary } from "../engine/validate";
 import {
@@ -219,24 +218,10 @@ async function startInstallation(): Promise<void> {
     if (!installState.completedSteps.includes("configuration")) {
       await runConfiguration(installState, emit);
       completeStep(installState, "configuration");
-      installState.currentStep = "telegram";
-    }
-
-    // Step 7: Telegram (optional — token + allowed user/chat ID)
-    if (!installState.completedSteps.includes("telegram") && !installState.skippedSteps.includes("telegram")) {
-      try {
-        await runTelegramSetup(installState, emit, requestChoice, requestInput);
-        if (!installState.skippedSteps.includes("telegram") && !installState.completedSteps.includes("telegram")) {
-          completeStep(installState, "telegram");
-        }
-      } catch (telegramErr: any) {
-        broadcast({ type: "error", message: `Telegram setup error: ${telegramErr?.message || "Unknown error"}` });
-        skipStep(installState, "telegram", telegramErr?.message || "error");
-      }
       installState.currentStep = "validation";
     }
 
-    // Step 8: Validation
+    // Step 7: Validation
     const checks = await runValidation(installState, emit);
     broadcast({ type: "validation_result", checks });
     completeStep(installState, "validation");

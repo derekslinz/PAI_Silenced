@@ -20,8 +20,7 @@ import {
   runIdentity,
   runRepository,
   runConfiguration,
-  runDashboardSetup,
-  runTelegramSetup,
+  runValidation,
 } from "../engine/actions";
 import { runValidation, generateSummary } from "../engine/validate";
 import {

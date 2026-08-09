@@ -15,9 +15,7 @@ let steps = [
   { id: 'identity', name: 'Identity', number: 4, status: 'pending' },
   { id: 'repository', name: 'PAI Repository', number: 5, status: 'pending' },
   { id: 'configuration', name: 'Configuration', number: 6, status: 'pending' },
-  { id: 'dashboard', name: 'Dashboard', number: 7, status: 'pending' },
-  { id: 'telegram', name: 'Telegram', number: 8, status: 'pending' },
-  { id: 'validation', name: 'Validation', number: 9, status: 'pending' },
+  { id: 'validation', name: 'Validation', number: 7, status: 'pending' },
 ];
 
 // ─── WebSocket Connection ────────────────────────────────────────

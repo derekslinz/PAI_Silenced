@@ -140,9 +140,6 @@ export interface InstallState {
     catchphrase?: string;
     projectsDir?: string;
     temperatureUnit?: "fahrenheit" | "celsius";
-    telegramBotToken?: string;
-    telegramAllowedUsers?: string;
-    telegramBotUsername?: string;
   };
 
   // Results

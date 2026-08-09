@@ -11,23 +11,6 @@ import { PAI_VERSION } from "./types";
 import { homedir } from "os";
 
 /**
- * Check if Dashboard is running. PAI 5.0 ships Dashboard on port 31337 — the Life
- * Dashboard + observability runtime. Probe the health endpoint; any
- * 2xx-4xx response means Dashboard is up and the route is registered.
- */
-async function checkDashboardHealth(): Promise<boolean> {
-  try {
-    const res = await fetch("http://localhost:31337/api/dashboard/health", {
-      method: "GET",
-      signal: AbortSignal.timeout(2000),
-    });
-    return res.status >= 200 && res.status < 500;
-  } catch {
-    return false;
-  }
-}
-
-/**
  * Run the SecurityPipeline.hook.ts as Claude Code would, with a benign Bash
  * payload. The hook MUST exit 0 (allow) and MUST NOT print "patterns file
  * missing — fail-closed". A failure here means PATTERNS.yaml is unreachable
@@ -85,7 +68,7 @@ export async function runValidation(state: InstallState, emit?: EngineEventHandl
       sectionId: "FINAL-VALIDATION",
       title: "FINAL VALIDATION",
       subtitle: "Verifying the install before handing control back to you",
-      stepNumber: 9,
+      stepNumber: 7,
     });
   }
 
@@ -178,31 +161,7 @@ export async function runValidation(state: InstallState, emit?: EngineEventHandl
     critical: false,
   });
 
-  // 5. Dashboard running — Life Dashboard + observability (PAI 5.0)
-  const dashboardHealthy = await checkDashboardHealth();
-
-  checks.push({
-    name: "Dashboard (Life Dashboard)",
-    passed: dashboardHealthy,
-    detail: dashboardHealthy
-      ? "Running on localhost:31337"
-      : "Not reachable — install via: bash ~/.claude/PAI/PULSE/manage.sh install",
-    critical: false,
-  });
-
-  // 7b. Dashboard launchd plist present (auto-start on login)
-  const dashboardPlist = join(homedir(), "Library", "LaunchAgents", "com.pai.dashboard.plist");
-  const dashboardPlistInstalled = existsSync(dashboardPlist);
-  checks.push({
-    name: "Dashboard launchd agent",
-    passed: dashboardPlistInstalled,
-    detail: dashboardPlistInstalled
-      ? "Installed at ~/Library/LaunchAgents/com.pai.dashboard.plist"
-      : "Not installed — Dashboard will not auto-start on login",
-    critical: false,
-  });
-
-  // 8. Zsh alias configured
+  // 5. Zsh alias configured
   const zshrcPath = join(homedir(), ".zshrc");
   let aliasConfigured = false;
   if (existsSync(zshrcPath)) {
@@ -219,7 +178,7 @@ export async function runValidation(state: InstallState, emit?: EngineEventHandl
     critical: true,
   });
 
-  // 9. SecurityPipeline smoke test — runs the actual hook with a benign Bash
+  // 6. SecurityPipeline smoke test — runs the actual hook with a benign Bash
   // payload. Catches the v5.0 fail-closed regression where PATTERNS.yaml was
   // missing from the public template, leaving every fresh install unable to
   // execute Bash commands. CRITICAL — if this fails, the install is broken.
@@ -246,6 +205,6 @@ export function generateSummary(state: InstallState): InstallSummary {
     catchphrase: state.collected.catchphrase || "",
     installType: state.installType || "fresh",
     completedSteps: state.completedSteps.length,
-    totalSteps: 9,
+    totalSteps: 7,
   };
 }
