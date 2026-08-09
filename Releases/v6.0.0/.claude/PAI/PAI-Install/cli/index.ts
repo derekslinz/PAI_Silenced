@@ -243,7 +243,6 @@ export async function runCLI(): Promise<void> {
     print(`     ${c.bold}~/.claude/PAI/USER/Config/README.md${c.reset}      ${c.gray}— credentials and PAI config${c.reset}`);
     print("");
     print(`  ${c.lightBlue}${c.bold}While you're here:${c.reset}`);
-    print(`  ${c.gray}•${c.reset} Visit the Life Dashboard at ${c.bold}http://localhost:31337${c.reset}${c.gray} (Dashboard).${c.reset}`);
     print(`  ${c.gray}•${c.reset} Anything you write under ${c.bold}PAI/USER/${c.reset}${c.gray} stays on your machine — it never ships in any PAI release.${c.reset}`);
     print("");
 
