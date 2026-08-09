@@ -1097,7 +1097,7 @@ async function installFromLocalBundle(
     event: "progress",
     step: "repository",
     percent: 30,
-    detail: `Installing from local v5 bundle...`,
+    detail: `Installing from local release bundle...`,
   });
   if (!existsSync(targetDir)) mkdirSync(targetDir, { recursive: true });
   const stats = copyBundleTree(bundleDir, targetDir);
@@ -1130,20 +1130,32 @@ export async function runRepository(
     mkdirSync(paiDir, { recursive: true });
   }
 
-  // The backup we just created IS a complete v5 bundle (it's a copy of the
-  // staging tree this installer shipped with). Use it as the install source
-  // — never reach out to GitHub when we already have the tree on disk.
-  // Falls through to PAI_BUNDLE_DIR / git-clone only if the backup path is
-  // missing markers (e.g. user explicitly skipped backup, or partial copy).
+  // The backup is a copy of the USER'S EXISTING installation (which may be v5.0.0
+  // or older). The PAI_BUNDLE_DIR (set by install.sh) points to the NEW release
+  // bundle (v6.0.0). We should prefer the new release bundle over the old backup.
+  // Only fall back to the backup if PAI_BUNDLE_DIR is not set or is incomplete.
+  // This prevents accidentally reinstalling the old version instead of upgrading.
   if (state.backupPath && existsSync(state.backupPath)) {
     const backupHasMarkers = BUNDLE_MARKERS.every((m) =>
       existsSync(join(state.backupPath!, m))
     );
-    if (backupHasMarkers) {
+    // Check if PAI_BUNDLE_DIR is already set to a valid bundle (the new release)
+    const bundleDir = process.env.PAI_BUNDLE_DIR;
+    const bundleHasMarkers = bundleDir && BUNDLE_MARKERS.every((m) =>
+      existsSync(join(bundleDir, m))
+    );
+    
+    if (!bundleHasMarkers && backupHasMarkers) {
+      // Only use backup as source if we don't have a valid new release bundle
       process.env.PAI_BUNDLE_DIR = state.backupPath;
       await emit({
         event: "message",
         content: `Using your backup as the install source — no GitHub clone needed.`,
+      });
+    } else if (bundleHasMarkers) {
+      await emit({
+        event: "message",
+        content: `Using new release bundle from ${bundleDir} (preferred over backup).`,
       });
     }
   }
@@ -1154,7 +1166,7 @@ export async function runRepository(
   if (localBundle) {
     await emit({
       event: "message",
-      content: `Local v5 bundle detected at ${localBundle}. Installing from bundle (skipping git clone).`,
+      content: `Local release bundle detected at ${localBundle}. Installing from bundle (skipping git clone).`,
     });
     try {
       const stats = await installFromLocalBundle(localBundle, paiDir, emit);

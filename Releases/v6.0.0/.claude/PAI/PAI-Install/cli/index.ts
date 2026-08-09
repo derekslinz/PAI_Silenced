@@ -1,5 +1,5 @@
 /**
- * PAI Installer v5.0 — CLI Wizard
+ * PAI Installer v6.0 — CLI Wizard
  * Interactive command-line installation experience.
  */
 
