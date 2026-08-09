@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * PAI Installer v5.0 — Main Entry Point
+ * PAI Installer v6.0 — Main Entry Point
  * Routes to CLI, Web server (for Electron), or GUI (Electron app).
  *
  * Modes:
