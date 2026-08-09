@@ -1,5 +1,5 @@
 /**
- * PAI Installer v5.0 — Type Definitions
+ * PAI Installer v6.0 — Type Definitions
  * Shared types for engine, CLI, and web frontends.
  */
 

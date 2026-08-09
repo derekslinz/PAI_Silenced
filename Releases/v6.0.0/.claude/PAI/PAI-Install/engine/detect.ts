@@ -1,5 +1,5 @@
 /**
- * PAI Installer v5.0 — System Detection
+ * PAI Installer v6.0 — System Detection
  * Detects OS, tools, existing PAI installation, and environment.
  * All detection is read-only and non-destructive.
  */

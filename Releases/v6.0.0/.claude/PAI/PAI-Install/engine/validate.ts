@@ -1,5 +1,5 @@
 /**
- * PAI Installer v5.0 — Validation
+ * PAI Installer v6.0 — Validation
  * Verifies installation completeness after all steps run.
  */
 

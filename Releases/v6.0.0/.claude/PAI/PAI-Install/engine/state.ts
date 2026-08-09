@@ -1,5 +1,5 @@
 /**
- * PAI Installer v5.0 — State Persistence
+ * PAI Installer v6.0 — State Persistence
  * Manages install state to support resume from interruption.
  */
 

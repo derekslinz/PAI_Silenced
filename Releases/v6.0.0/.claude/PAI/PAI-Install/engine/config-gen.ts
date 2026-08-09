@@ -1,5 +1,5 @@
 /**
- * PAI Installer v5.0 — Configuration Generator
+ * PAI Installer v6.0 — Configuration Generator
  * Generates a FALLBACK settings.json from collected user data.
  * Only used when no existing settings.json exists.
  * Produces minimal output — just fields the installer collects.

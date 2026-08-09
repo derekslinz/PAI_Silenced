@@ -1,5 +1,5 @@
 /**
- * PAI Installer v5.0 — Install Actions
+ * PAI Installer v6.0 — Install Actions
  * Pure action functions called by both CLI and web frontends.
  * Each action takes state + event emitter, performs work, returns result.
  */

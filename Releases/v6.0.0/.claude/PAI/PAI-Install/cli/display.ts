@@ -1,5 +1,5 @@
 /**
- * PAI Installer v5.0 — CLI Display Helpers
+ * PAI Installer v6.0 — CLI Display Helpers
  * ANSI colors, progress bars, banners, and formatted output.
  */
 

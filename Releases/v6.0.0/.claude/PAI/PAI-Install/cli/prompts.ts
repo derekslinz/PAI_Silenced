@@ -1,5 +1,5 @@
 /**
- * PAI Installer v5.0 — CLI Interactive Prompts
+ * PAI Installer v6.0 — CLI Interactive Prompts
  * readline-based input collection with proper cleanup.
  *
  * Non-interactive mode: when PAI_TEST_AUTOMATED=1 or stdin is not a TTY
