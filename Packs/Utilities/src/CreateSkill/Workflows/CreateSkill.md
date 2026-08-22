@@ -207,7 +207,6 @@ Verify ALL files use TitleCase:
 - [ ] Description is under 1024 characters
 
 ### Markdown Body
-- [ ] `## Voice Notification` section present (for skills with workflows)
 - [ ] `## Workflow Routing` section with table format
 - [ ] All workflow files have routing entries
 - [ ] `## Examples` section with 2-3 concrete usage patterns

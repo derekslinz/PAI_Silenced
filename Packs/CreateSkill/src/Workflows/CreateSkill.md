@@ -96,25 +96,6 @@ description: [What it does]. USE WHEN [intent triggers using OR]. NOT FOR [confu
 
 [Brief description]
 
-## Voice Notification
-
-**When executing a workflow, do BOTH:**
-
-1. **Send voice notification**:
-   ```bash
-   curl -s -X POST http://localhost:31337/notify \
-     -H "Content-Type: application/json" \
-     -d '{"message": "Running WORKFLOWNAME in SKILLNAME"}' \
-     > /dev/null 2>&1 &
-   ```
-
-2. **Output text notification**:
-   ```
-   Running **WorkflowName** in **SkillName**...
-   ```
-
-**Full documentation:** `~/.claude/PAI/DOCUMENTATION/Notifications/NotificationSystem.md`
-
 ## Workflow Routing
 
 | Workflow | Trigger | File |
@@ -263,7 +244,6 @@ Verify ALL files use TitleCase:
 - [ ] Description is under 1024 characters
 
 ### Markdown Body
-- [ ] `## Voice Notification` section present (for skills with workflows)
 - [ ] `## Workflow Routing` section with table format
 - [ ] All workflow files have routing entries
 - [ ] `## Gotchas` section present with known failure modes

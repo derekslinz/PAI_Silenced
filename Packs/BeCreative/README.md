@@ -36,11 +36,3 @@ Your AI walks through a 5-phase wizard: system analysis, user questions, backup,
 ```
 
 The full skill source lives under `src/`. Read `src/SKILL.md` for detailed capabilities, workflows, and usage.
-
-## Source
-
-Built from the PAI v5.0.0 release skill at `Releases/v5.0.0/.claude/skills/BeCreative/`.
-
-## License
-
-MIT — see [PAI LICENSE](../../LICENSE).

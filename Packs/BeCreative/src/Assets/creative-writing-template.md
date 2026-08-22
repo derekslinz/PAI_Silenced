@@ -148,16 +148,4 @@ After this deep exploration, create your story concept:
 Create a story concept that blends [INSERT GENRES AND DETAILS]
 ```
 
-## Why This Works
 
-**deep thinking Approach:**
-- Engages deep reasoning capabilities before creative output
-- Explores multiple conceptual paths before committing
-- Identifies and avoids clichés through systematic exploration
-- Produces more sophisticated, memorable creative work
-
-**No Format Constraints:**
-- Creativity flows naturally without artificial structure requirements
-- Focus remains on quality and originality
-- Output adapts to the specific creative challenge
-- Voice server and structured response format handle presentation

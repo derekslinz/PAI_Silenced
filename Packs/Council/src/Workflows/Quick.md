@@ -2,14 +2,7 @@
 
 Fast single-round perspective check. Use for sanity checks and quick feedback.
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Quick workflow in the Council skill to get fast perspectives"}' \
-  > /dev/null 2>&1 &
-```
+## Notification
 
 Running the **Quick** workflow in the **Council** skill to get fast perspectives...
 
