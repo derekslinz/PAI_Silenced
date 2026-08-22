@@ -2,17 +2,6 @@
 
 **Comic strips in brand editorial illustration style, NOT cartoonish.**
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:8888/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Comics workflow in the Art skill to create comic strips"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **Comics** in **Art**...
-
 ---
 
 Creates **EDITORIAL COMICS** — 3-4 panel storytelling with sophisticated hand-drawn aesthetic, maintaining brand flat color and black linework.

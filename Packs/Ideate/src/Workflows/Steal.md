@@ -4,17 +4,6 @@
 
 **Phase invoked:** STEAL only.
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Steal workflow in the Ideate skill to map foreign-domain patterns onto the problem"}' \
-  > /dev/null 2>&1 &
-```
-
-## Inputs
-
 - **Problem statement** (required): defines what to look for in foreign domains
 - **Domains** (optional): explicit list of domains to scavenge from. If omitted, drawn via weighted random lottery from the standard 50+ candidate pool.
 - **Patterns per domain** (optional, default 3): how many patterns each agent extracts from its assigned domain

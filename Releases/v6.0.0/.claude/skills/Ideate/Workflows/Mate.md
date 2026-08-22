@@ -4,17 +4,6 @@
 
 **Phase invoked:** MATE only.
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Mate workflow in the Ideate skill to recombine ideas into offspring"}' \
-  > /dev/null 2>&1 &
-```
-
-## Inputs
-
 - **Idea pool** (required): list of existing ideas to breed (typically 8-30 items)
 - **Phase tags** (optional): mark each input idea with its origin phase (e.g. "Dream", "Steal", "Contemplate") to enable cross-phase pairing enforcement
 - **Offspring count** (optional, default 10): minimum number of offspring to produce

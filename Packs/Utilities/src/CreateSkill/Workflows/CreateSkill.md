@@ -59,25 +59,6 @@ description: [What it does]. USE WHEN [intent triggers using OR]. [Additional ca
 
 [Brief description]
 
-## Voice Notification
-
-**When executing a workflow, do BOTH:**
-
-1. **Send voice notification**:
-   ```bash
-   curl -s -X POST http://localhost:8888/notify \
-     -H "Content-Type: application/json" \
-     -d '{"message": "Running WORKFLOWNAME in SKILLNAME"}' \
-     > /dev/null 2>&1 &
-   ```
-
-2. **Output text notification**:
-   ```
-   Running **WorkflowName** in **SkillName**...
-   ```
-
-**Full documentation:** `~/.claude/PAI/THENOTIFICATIONSYSTEM.md`
-
 ## Workflow Routing
 
 | Workflow | Trigger | File |

@@ -2,17 +2,6 @@
 
 **Default Ideate workflow.** Runs the full evolutionary cycle through all 9 phases (CONSUME → DREAM → DAYDREAM → CONTEMPLATE → STEAL → MATE → TEST → EVOLVE → META-LEARN), with a Loop Controller that decides continue / pivot / stop after each cycle.
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the FullCycle workflow in the Ideate skill to evolve novel solutions"}' \
-  > /dev/null 2>&1 &
-```
-
-## Inputs
-
 - **Problem statement** (required): the question or challenge to ideate against
 - **time_scale** (optional, default `weeks`): `hours | days | weeks | months | years | decades` → maps to time budget
 - **domains** (optional): seed list of domains to consume from

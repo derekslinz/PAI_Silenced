@@ -4,17 +4,6 @@
 
 **Phase invoked:** DREAM only (noise=0.9). No CONSUME (caller supplies inputs), no scoring, no iteration.
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Dream workflow in the Ideate skill to free-associate inputs"}' \
-  > /dev/null 2>&1 &
-```
-
-## Inputs
-
 - **Input pool** (required): a list of atomic ideas, facts, patterns. 10-30 items recommended.
 - **Agent count** (optional, default 3): how many Dreamer agents run in parallel
 - **Subset ratio** (optional, default 0.33): each agent gets `pool_size × ratio` random items
