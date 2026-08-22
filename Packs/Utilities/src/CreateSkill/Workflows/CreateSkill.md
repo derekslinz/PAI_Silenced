@@ -2,17 +2,6 @@
 
 Create a new skill following the canonical structure with proper TitleCase naming.
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:8888/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the CreateSkill workflow in the CreateSkill skill to create new skill"}' \
-  > /dev/null 2>&1 &
-```
-
-Running the **CreateSkill** workflow in the **CreateSkill** skill to create new skill...
-
 ## Step 1: Read the Authoritative Sources
 
 **REQUIRED FIRST:**
