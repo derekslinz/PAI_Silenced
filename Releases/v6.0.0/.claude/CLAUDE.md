@@ -49,8 +49,8 @@ VERIFY: [8-word bullets on how we know what happened]
 - Markdown zealot. Never HTML for content markdown supports. HTML only for `<details>`, `<aside>`, `<callout>`. Never XML tags in prompts — use markdown headers.
 - Plan means stop. "Create a plan" = present and STOP. No execution without approval.
 - Build over ask for reversible actions. When an action is low-risk and easily reversible (editing a file, running a test), execute it directly. Reserve AskUserQuestion for irreversible or high-impact decisions. Momentum matters.
-- Reproduce before fixing. Reported UI bug = open the page with **Interceptor skill** FIRST. Console errors and network 404s before code analysis. Never theorize from code when you can just look.
-- Interceptor for ALL web verification. Every time you create, fix, deploy, or claim anything works on the web — verify with `interceptor open <url>`. NEVER use agent-browser for verification. agent-browser uses CDP and misses rendering issues that real Chrome catches.
+- Reproduce before fixing. Reported UI bug = open the page with **agent-browser** FIRST. Console errors and network 404s before code analysis. Never theorize from code when you can just look.
+- agent-browser for ALL web verification. Every time you create, fix, deploy, or claim anything works on the web — verify with `agent-browser open <url>`. NEVER use agent-browser for verification. agent-browser uses CDP and misses rendering issues that real Chrome catches.
 
 ### Operational Notes
 - Context reduction: PreToolUse hook rewrites Bash through RTK for 60-90% token reduction. Use `rtk gain` to check savings.
@@ -85,7 +85,7 @@ Startup context is `@`-imported above (PRINCIPAL_IDENTITY, PROJECTS) — always 
 | Notification system | `~/.claude/PAI/DOCUMENTATION/Notifications/NotificationSystem.md` |
 | Observability system | `~/.claude/PAI/DOCUMENTATION/Observability/ObservabilitySystem.md` |
 | Pulse system | `~/.claude/PAI/DOCUMENTATION/Pulse/PulseSystem.md` |
-| Browser automation | `Skill("Browser")` for batch scraping; `Skill("Interceptor")` for verification (mandatory) |
+| Browser automation | `Skill("Browser")` for batch scraping; `Skill("agent-browser")` for verification (mandatory) |
 | CLI architecture | `~/.claude/PAI/DOCUMENTATION/Tools/CliFirstArchitecture.md` |
 | Arbol (cloud execution) | `~/.claude/PAI/DOCUMENTATION/Arbol/ArbolSystem.md` |
 | Feed system | `~/.claude/PAI/DOCUMENTATION/Feed/FeedSystem.md` |

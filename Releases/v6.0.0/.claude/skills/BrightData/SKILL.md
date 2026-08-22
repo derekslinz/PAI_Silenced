@@ -1,6 +1,6 @@
 ---
 name: BrightData
-description: "4-tier progressive scraping with automatic escalation: Tier 1 WebFetch (fast, built-in), Tier 2 curl with Chrome headers (basic bot bypass), Tier 3 agent-browser (headless JavaScript rendering via Rust CLI daemon), Tier 4 Bright Data MCP proxy (CAPTCHA, advanced bot detection, residential proxies). Two workflows: FourTierScrape for single URLs, Crawl for multi-page site mapping (light crawl via scrape_batch loop up to 50 pages, or full crawl via Bright Data Crawl API). Always starts at Tier 1 and escalates only when blocked — Tier 4 has usage costs. Outputs URL content in markdown format. USE WHEN Bright Data, scrape URL, web scraping, bot detection, crawl site, CAPTCHA, can't access, site blocking, extract page content, scrape whole site, spider domain, convert URL to markdown, getting blocked. NOT FOR headless batch automation without scraping need (use Browser). NOT FOR simple public content (use WebFetch directly). NOT FOR real-browser bot bypass where staying logged in and zero CDP fingerprint matter (use Interceptor). Playwright is banned across PAI."
+description: "4-tier progressive scraping with automatic escalation: Tier 1 WebFetch (fast, built-in), Tier 2 curl with Chrome headers (basic bot bypass), Tier 3 agent-browser (headless JavaScript rendering via Rust CLI daemon), Tier 4 Bright Data MCP proxy (CAPTCHA, advanced bot detection, residential proxies). Two workflows: FourTierScrape for single URLs, Crawl for multi-page site mapping (light crawl via scrape_batch loop up to 50 pages, or full crawl via Bright Data Crawl API). Always starts at Tier 1 and escalates only when blocked — Tier 4 has usage costs. Outputs URL content in markdown format. USE WHEN Bright Data, scrape URL, web scraping, bot detection, crawl site, CAPTCHA, can't access, site blocking, extract page content, scrape whole site, spider domain, convert URL to markdown, getting blocked. NOT FOR headless batch automation without scraping need (use Browser). NOT FOR simple public content (use WebFetch directly). NOT FOR real-browser bot bypass where staying logged in and zero CDP fingerprint matter (use agent-browser). Playwright is banned across PAI."
 effort: medium
 ---
 
@@ -11,18 +11,6 @@ effort: medium
 
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
-
-## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
-
-**You MUST send this notification BEFORE doing anything else when this skill is invoked.**
-
-1. **Send voice notification**:
-   ```bash
-   curl -s -X POST http://localhost:31337/notify \
-     -H "Content-Type: application/json" \
-     -d '{"message": "Running the WORKFLOWNAME workflow in the BrightData skill to ACTION"}' \
-     > /dev/null 2>&1 &
-   ```
 
 2. **Output text notification**:
    ```

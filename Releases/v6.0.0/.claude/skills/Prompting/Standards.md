@@ -193,7 +193,7 @@ Create setup scripts (`init.sh`) for:
 ## Verification Without Human Feedback
 
 Provide testing capabilities:
-- Interceptor skill for browser validation
+- agent-browser for browser validation
 - Computer use for visual verification
 - Automated test suites
 - Self-checking mechanisms

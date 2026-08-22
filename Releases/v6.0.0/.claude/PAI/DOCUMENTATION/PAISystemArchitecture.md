@@ -219,7 +219,7 @@ Two storage layers: PAI MEMORY (`PAI/MEMORY/`) for structured, hook-driven, enti
 
 **Three distinct agent systems that serve different purposes.**
 
-Task Tool Subagent Types are pre-built agents in Claude Code (Architect, Engineer, Explore, etc.) for internal workflow use. **`BrowserAgent`, `UIReviewer`, and `QATester` are DEPRECATED** — replaced by the **Interceptor** skill (real Chrome, no CDP fingerprint). Cross-vendor agents extend coverage: **Forge** (OpenAI-family GPT-5.4 via `codex exec`) writes production-grade code at E3+; **Cato** (cross-vendor auditor) is MANDATORY at E4/E5 in VERIFY (Algorithm Rule 2a). **Anvil** (Kimi K2.6 via Moonshot API) provides whole-project long-context reasoning. Named Agents are persistent identities with backstories for recurring work. Custom Agents are dynamic compositions via ComposeAgent from base traits. The word "custom" is the routing trigger -- when the user says "custom agents," invoke the Agents skill, never Task tool subagent types. Background agents are supervised by the Agent Watchdog (`Tools/AgentWatchdog.ts`) — a Monitor-tool script that detects hung agents via tool-activity.jsonl silence, auto-triggered by the Pulse agent-guard hook.
+Task Tool Subagent Types are pre-built agents in Claude Code (Architect, Engineer, Explore, etc.) for internal workflow use. **`BrowserAgent`, `UIReviewer`, and `QATester` are DEPRECATED** — replaced by the **agent-browser** (real Chrome, no CDP fingerprint). Cross-vendor agents extend coverage: **Forge** (OpenAI-family GPT-5.4 via `codex exec`) writes production-grade code at E3+; **Cato** (cross-vendor auditor) is MANDATORY at E4/E5 in VERIFY (Algorithm Rule 2a). **Anvil** (Kimi K2.6 via Moonshot API) provides whole-project long-context reasoning. Named Agents are persistent identities with backstories for recurring work. Custom Agents are dynamic compositions via ComposeAgent from base traits. The word "custom" is the routing trigger -- when the user says "custom agents," invoke the Agents skill, never Task tool subagent types. Background agents are supervised by the Agent Watchdog (`Tools/AgentWatchdog.ts`) — a Monitor-tool script that detects hung agents via tool-activity.jsonl silence, auto-triggered by the Pulse agent-guard hook.
 
 - **Status:** Active
 - **Location:** `~/.claude/agents/`
@@ -320,10 +320,10 @@ Walks `USER/` (root + one level), parses frontmatter + body of each `.md`, compu
 
 **agent-browser: Rust CLI daemon with persistent auth profiles per site.**
 
-Headless by default. Handles screenshots, multi-step sessions, authenticated browsing, scraping, and data extraction. Auth via persistent profiles (`--profile ~/.agent-browser/profiles/<site>`). Legacy built-in agents BrowserAgent / UIReviewer / QATester are DEPRECATED — do not invoke for new work. All web-based output must be verified through the **Interceptor skill** before showing to the user. Playwright is banned across PAI.
+Headless by default. Handles screenshots, multi-step sessions, authenticated browsing, scraping, and data extraction. Auth via persistent profiles (`--profile ~/.agent-browser/profiles/<site>`). Legacy built-in agents BrowserAgent / UIReviewer / QATester are DEPRECATED — do not invoke for new work. All web-based output must be verified through the **agent-browser** before showing to the user. Playwright is banned across PAI.
 
 - **Status:** Active
-- **Location:** `~/.claude/skills/Browser/` (batch/headless) + `~/.claude/skills/Interceptor/` (stealth Chrome, mandatory for verification)
+- **Location:** `~/.claude/skills/Browser/` (batch/headless) + `~/.claude/skills/agent-browser/` (stealth Chrome, mandatory for verification)
 
 ### Cloud Execution (Arbol)
 

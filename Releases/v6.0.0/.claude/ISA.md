@@ -44,7 +44,7 @@ PAI is the Life Operating System — scaffolding that turns AI from a chatbot yo
 - **`~/.claude` is PRIVATE forever.** No public push, no copy into public repos, no paste into web tools, no quoting absolute paths in public-destined output. The `<your-release-skill>` skill release workflow is the only sanctioned path to public visibility.
 - **Bun and TypeScript only.** Never npm/npx. Never Python without explicit approval.
 - **Markdown over HTML and XML.** Markdown headers structure prompts; XML tags are forbidden in instruction files.
-- **Verification over claims.** "Should work" is forbidden. Every assertion requires tool-based evidence. Browser changes verify through Interceptor.
+- **Verification over claims.** "Should work" is forbidden. Every assertion requires tool-based evidence. Browser changes verify through agent-browser.
 - **No `claude --bare` in subprocesses.** Subprocess invocations mirror `Tools/Inference.ts` flag pattern and scrub `ANTHROPIC_API_KEY` / `ANTHROPIC_AUTH_TOKEN` to keep OAuth billing.
 - **Hard-to-vary explanations.** Every ISC must name a single binary tool probe; vague criteria fail the granularity rule.
 

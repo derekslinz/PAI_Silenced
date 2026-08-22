@@ -29,10 +29,6 @@ A markdown file at one of:
 ### Step 1 — Voice notification
 
 ```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Scaffold workflow in the ISA skill"}' \
-  > /dev/null 2>&1 &
 ```
 
 ### Step 2 — Pick the canonical template

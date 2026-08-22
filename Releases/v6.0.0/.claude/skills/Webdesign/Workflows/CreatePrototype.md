@@ -25,8 +25,8 @@ Optional (strongly recommended):
 Confirm all prerequisites from `SKILL.md` → Prerequisites. If any fail, halt with remediation.
 
 ```bash
-# Verify Interceptor available
-interceptor --version || echo "ABORT: Interceptor skill not installed"
+# Verify agent-browser available
+agent-browser --version || echo "ABORT: agent-browser not installed"
 ```
 
 ### 2. Construct the Brief
@@ -47,7 +47,7 @@ Use the prompt patterns in `References/InputFormats.md`.
 bun ~/.claude/skills/Webdesign/Tools/DriveClaudeDesign.ts open
 ```
 
-This opens `claude.ai/design` in the authenticated Interceptor-controlled Chrome session. First-run may require a headed login; subsequent runs are headless.
+This opens `claude.ai/design` in the authenticated agent-browser-controlled Chrome session. First-run may require a headed login; subsequent runs are headless.
 
 ### 4. Submit the Brief
 

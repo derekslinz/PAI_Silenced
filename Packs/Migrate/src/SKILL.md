@@ -5,13 +5,8 @@ description: "Intakes existing content from external sources, classifies each ch
 
 # Migrate — external-content intake and classification
 
-## MANDATORY: Voice Notification
 
 ```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Starting the migration. Scanning source and classifying chunks."}' \
-  > /dev/null 2>&1 &
 ```
 
 ## What this skill does

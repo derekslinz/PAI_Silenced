@@ -59,10 +59,6 @@ ISC-keyed evidence line. Used at VERIFY phase to record how each ISC was probed.
 ### Step 1 — Voice notification
 
 ```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Append workflow in the ISA skill"}' \
-  > /dev/null 2>&1 &
 ```
 
 ### Step 2 — Resolve target ISA and section

@@ -61,14 +61,14 @@ Deliver a complete Cardinal brand identity v1 — logo (3 lockups), type system 
 
 - [x] ISC-1: Wordmark and standalone mark exist as separate Figma components with shared baseline.
 - [x] ISC-2: Three logo lockups in the kit: horizontal wordmark, stacked wordmark + mark, mark-only.
-- [x] ISC-3: Antecedent: logo wordmark renders legibly at 16×16px (probe: Skill('Interceptor') screenshot at `cardinal.example.com/favicon.ico` — three unfamiliar viewers identify "Cardinal" within 5 seconds, ≥2/3 succeed).
+- [x] ISC-3: Antecedent: logo wordmark renders legibly at 16×16px (probe: Skill('agent-browser') screenshot at `cardinal.example.com/favicon.ico` — three unfamiliar viewers identify "Cardinal" within 5 seconds, ≥2/3 succeed).
 - [x] ISC-4: Antecedent: logo mark survives 1-bit black-and-white conversion without losing recognizability (probe: viewer test — 5 people shown 1-bit version next to color version, ≥4/5 say "same logo").
 - [x] ISC-5: Logo files exported to SVG (master), PNG @1x/@2x/@3x, and ICO favicon.
 - [ ] ISC-6: Logo clear-space rule documented (≥ ½ × cap height on all sides).
 - [x] ISC-7: Type family selected with confirmed OFL license (probe: `head -50 fonts/<family>/LICENSE.txt` shows SIL OFL 1.1).
 - [x] ISC-8: Type system defines exactly 6 sizes: 12, 14, 16, 20, 28, 44 (px on web; pt on print).
 - [x] ISC-9: Type system uses exactly 2 weights: Regular 400 and Semibold 600.
-- [ ] ISC-10: Antecedent: body copy at 16px renders cleanly at 1.5× line-height across Chrome, Safari, Firefox latest (probe: Interceptor screenshot diff per browser, no kerning regressions).
+- [ ] ISC-10: Antecedent: body copy at 16px renders cleanly at 1.5× line-height across Chrome, Safari, Firefox latest (probe: agent-browser screenshot diff per browser, no kerning regressions).
 - [x] ISC-11: Color palette defines exactly 2 hue tokens: `cardinal-red-600` (primary) and `dawn-500` (secondary).
 - [x] ISC-12: Neutral scale defines exactly 5 steps: `ink-900`, `ink-700`, `ink-500`, `ink-300`, `ink-100`.
 - [x] ISC-13: Color palette exported as CSS custom properties at `tokens/colors.css`.
@@ -123,7 +123,7 @@ Deliver a complete Cardinal brand identity v1 — logo (3 lockups), type system 
   type: experiential-probe
   check: legibility at 16px favicon
   threshold: ≥2/3 unfamiliar viewers identify "Cardinal" within 5 seconds
-  tool: Skill('Interceptor') screenshot + 3-viewer survey
+  tool: Skill('agent-browser') screenshot + 3-viewer survey
 
 - isc: ISC-4
   type: experiential-probe
@@ -240,7 +240,7 @@ Deliver a complete Cardinal brand identity v1 — logo (3 lockups), type system 
 ## Verification
 
 - ISC-1: Figma file `cardinal-brand-v1` shows wordmark and standalone mark as separate components, confirmed via component inspector. Verified 2026-02-26.
-- ISC-3: Interceptor screenshot of `cardinal.example.com/favicon.ico` rendered in 3 browsers; viewer survey of 3 unfamiliar designers — 3/3 identified "Cardinal" within 4 seconds. Verified 2026-03-04.
+- ISC-3: agent-browser screenshot of `cardinal.example.com/favicon.ico` rendered in 3 browsers; viewer survey of 3 unfamiliar designers — 3/3 identified "Cardinal" within 4 seconds. Verified 2026-03-04.
 - ISC-4: 1-bit B&W viewer test — 5/5 viewers said "same logo." Verified 2026-03-04.
 - ISC-5: `ls brand/logo/` shows `cardinal.svg` (master), `cardinal@1x.png`, `cardinal@2x.png`, `cardinal@3x.png`, `favicon.ico`. Verified 2026-03-09.
 - ISC-7: `head -50 fonts/<family>/LICENSE.txt` returns `SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007`. Verified 2026-02-12.

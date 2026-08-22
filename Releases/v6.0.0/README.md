@@ -163,7 +163,7 @@ PAI's privacy boundary is now enforced **at the file system level**, not by hand
 
 ### 6. The Skills system — 45 public skills, 171 workflows
 
-![A diagram with YOUR DA at the center surrounded by five clusters of skills — THINKING (Council, RedTeam, FirstPrinciples), CONTENT (Art, WriteStory, Fabric), RESEARCH (Research, Knowledge, ArXiv), AGENTS (Interceptor, Browser, Agents), BUILD (ISA, CreateSkill, Prompting) — with the caption 'plus 30 more skills in your install' and three insights '171 workflows', 'self-activating', 'your DA picks the tool'.](./skills-constellation.jpg)
+![A diagram with YOUR DA at the center surrounded by five clusters of skills — THINKING (Council, RedTeam, FirstPrinciples), CONTENT (Art, WriteStory, Fabric), RESEARCH (Research, Knowledge, ArXiv), AGENTS (Browser, Agents), BUILD (ISA, CreateSkill, Prompting) — with the caption 'plus 30 more skills in your install' and three insights '171 workflows', 'self-activating', 'your DA picks the tool'.](./skills-constellation.jpg)
 
 Skills are self-activating composable domain units. Your DA selects them at runtime based on intent. The public release ships **45 skills** (private skills with `_ALLCAPS` names stay in your install).
 
@@ -182,7 +182,7 @@ Below is the complete catalog — what each skill does, and how we actually use 
 | **AudioEditor** | Whisper word-level transcription → Claude segment classification → ffmpeg execution with crossfades and room-tone gap fill. | Cleaning up podcast and video recordings — strips fillers, false starts, stutters, and dead air automatically. |
 | **BeCreative** | Verbalized Sampling + extended thinking for divergent ideation; expands seed corpora into diverse N-example datasets. | Generating 5 internally-diverse candidates when a single answer feels too predictable; building eval datasets from a small seed. |
 | **BitterPillEngineering** | Audits any AI instruction set for over-prompting using the test "would a smarter model make this rule unnecessary?" | Trimming SKILL.md, agent prompts, and hooks before release; catching ceremony bloat in the Algorithm itself. |
-| **BrightData** | 4-tier progressive scraping with auto-escalation: WebFetch → curl → agent-browser → BrightData proxy. | Default web fetcher when Interceptor is overkill; escalates automatically through tiers when bot detection blocks the simpler ones. |
+| **BrightData** | 4-tier progressive scraping with auto-escalation: WebFetch → curl → agent-browser → BrightData proxy. | Default web fetcher; escalates automatically through tiers when bot detection blocks the simpler ones. |
 | **Browser** | Headless agent-browser (Rust CLI daemon) with persistent auth profiles for fast, scriptable, parallel browser work. | Batch scraping logged-in sessions; automating repetitive web work where stored auth survives across runs. |
 | **ContextSearch** | 2-phase parallel scan of the session registry, work directories, ISAs, and session names. | Cold-starting a new session on existing work; resuming a paused project; "what was I doing on X two weeks ago." |
 | **Council** | Multi-agent collaborative debate with visible round-by-round transcripts and genuine intellectual friction. | When a decision benefits from disagreement made visible — not consensus, but multiple expert lenses arguing it out. |
@@ -195,7 +195,7 @@ Below is the complete catalog — what each skill does, and how we actually use 
 | **Fabric** | Execute 240+ specialized prompt patterns natively (no CLI required for most). | extract_wisdom, summarize, create_5_sentence_summary, create_threat_model — pulling battle-tested patterns instead of inventing from scratch. |
 | **FirstPrinciples** | Physics-style deconstruct → challenge → rebuild reasoning (Musk methodology). | Breaking through analogical reasoning when a problem feels stuck; rebuilding from constraints rather than precedent. |
 | **Ideate** | 9-phase evolutionary idea generation (Consume → Dream → Daydream → Contemplate → Steal → Mate → Test → Evolve → Meta-Learn). | Long-form idea generation when single-pass ideation runs dry; producing genuinely novel angles via cross-domain stealing. |
-| **Interceptor** | Real Chrome browser automation via extension — zero CDP fingerprint, passes all major bot detection (BrowserScan, CreepJS, Pixelscan). | Verifying every web change before declaring it done; testing logged-in flows on bot-protected sites. |
+
 | **Interview** | Phased conversational interview across all PAI context files (goals → ideal state → preferences → identity). | Initial PAI personalization after install; periodic context refresh; onboarding a new DA identity. |
 | **ISA** | Owns the Ideal State Artifact primitive — six workflows: Scaffold, Interview, CheckCompleteness, Reconcile, Seed, Append. | Every E2+ Algorithm run; the scaffolding for any project's "done" definition. |
 | **IterativeDepth** | Multi-angle exploration running 2-8 sequential passes from systematically different scientific lenses. | Surfacing requirements and edge cases invisible from any single angle — usually at THINK phase on hard problems. |
@@ -214,7 +214,7 @@ Below is the complete catalog — what each skill does, and how we actually use 
 | **Science** | The scientific method as universal problem-solving — DefineGoal, GenerateHypotheses (≥3 required), DesignExperiment, MeasureResults. | Forcing hypothesis-plurality on hard problems; designing falsifiable tests instead of confirming intuitions. |
 | **SystemsThinking** | Structural analysis grounded in Donella Meadows, Senge, Forrester, Ackoff — Iceberg, Causal Loops, leverage points. | When the same problem keeps recurring; mapping feedback loops before changing a complex system. |
 | **USMetrics** | Analyze 68 US economic and social indicators from FRED, EIA, Treasury FiscalData, BLS, Census APIs. | Background research for newsletter and podcast on US macro trends; quick lookup of CPI, unemployment, GDP, etc. |
-| **Webdesign** | Design and integrate web interfaces using Anthropic's Claude Design (claude.ai/design) driven through Interceptor. | Building UI prototypes; landing-page iteration; production-code handoff via the frontend-design plugin. |
+| **Webdesign** | Design and integrate web interfaces using Anthropic's Claude Design (claude.ai/design). | Building UI prototypes; landing-page iteration; production-code handoff via the frontend-design plugin. |
 | **WorldThreatModel** | Persistent world-model harness stress-testing ideas against 11 time horizons (6 months to 50 years). | Strategy decisions with long tails; investment thinking; resilience planning against geopolitical, technology, economic shifts. |
 | **WriteStory** | Construct fiction across 7 simultaneous narrative layers — Storr, Pressfield, Forsyth frameworks. | Long-form fiction; story-driven content production; teaching narrative structure through a working pipeline. |
 
@@ -351,13 +351,7 @@ Edit `PAI/USER/FEED.md` to add the YouTube channels, blogs, newsletters, X accou
 curl -s http://localhost:31337/api/pulse/health | jq
 
 #  should announce
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Hello from your DA"}'
-
-# The dashboard should render
-open http://localhost:31337
-```
+``
 
 ---
 

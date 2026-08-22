@@ -46,7 +46,7 @@ Your DA reads `INSTALL.md` and walks through a 5-phase wizard: system analysis, 
 | [Fabric](Fabric/) | Execute any of 240+ Fabric prompt patterns natively across extraction, analysis, creation |
 | [FirstPrinciples](FirstPrinciples/) | Physics-based reasoning that deconstructs problems to irreducible truths |
 | [Ideate](Ideate/) | Evolutionary ideation engine — 9-phase loop for novel solution generation |
-| [Interceptor](Interceptor/) | Real Chrome browser automation with zero CDP fingerprint; mandatory for visual verification |
+| [agent-browser](agent-browser/) | Real Chrome browser automation with zero CDP fingerprint; mandatory for visual verification |
 | [Interview](Interview/) | Phased conversational interview across all PAI context files (life context first) |
 | [ISA](ISA/) | Owns the Ideal State Artifact primitive — articulate "done" for any kind of work |
 | [IterativeDepth](IterativeDepth/) | Multi-angle exploration through 2-8 sequential passes from different scientific lenses |

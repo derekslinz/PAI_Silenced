@@ -4,7 +4,7 @@ PAI orchestration skill for **Claude Design** (claude.ai/design) — Anthropic's
 
 ## What It Does
 
-Drives Claude Design programmatically through the Interceptor skill (real Chrome + authenticated claude.ai session), processes the handoff bundles it produces, and integrates the resulting designs into existing web applications.
+Drives Claude Design programmatically through the agent-browser (real Chrome + authenticated claude.ai session), processes the handoff bundles it produces, and integrates the resulting designs into existing web applications.
 
 Claude Design is the engine. This skill is the cockpit around it.
 
@@ -18,7 +18,7 @@ Most design tools assume greenfield. Webdesign assumes the opposite: you already
 
 ## Prerequisites
 
-- [Interceptor skill](https://github.com/anthropics/claude-code) installed and authenticated to claude.ai
+- [agent-browser](https://github.com/anthropics/claude-code) installed and authenticated to claude.ai
 - Active Claude subscription with Claude Design access (Pro / Max / Team / Enterprise)
 - For integration: the target project's framework, token file, and component directory
 
@@ -50,9 +50,9 @@ The skill routes your request to the right workflow automatically.
 ## Relationship to Other Tools
 
 - **`frontend-design` plugin** (Anthropic, auto-activates in Claude Code): the downstream code-generation engine when exporting bundles. Not invoked directly by this skill.
-- **Interceptor skill**: required, drives claude.ai/design.
+- **agent-browser**: required, drives claude.ai/design.
 - **Art skill**: for illustrations, diagrams, header images — not overlapping scope.
-- **Browser skill**: not used; Interceptor is the only supported browser path for authenticated claude.ai work.
+- **Browser skill**: not used; agent-browser is the only supported browser path for authenticated claude.ai work.
 
 ## License
 

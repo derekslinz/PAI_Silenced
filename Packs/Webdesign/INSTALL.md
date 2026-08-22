@@ -13,7 +13,7 @@ Use Claude Code's native tools (`AskUserQuestion`, `TodoWrite`, `Bash`, `Read`, 
 ```
 "I'm installing the Webdesign skill from the PAI v5.0.0 release.
 
-Design and integrate web interfaces using Anthropic's Claude Design (claude.ai/design) as the primary engine, with optional downstream handoff to the frontend-design plugin for production code. Drives Claude Design through the Interceptor skill for programmatic access to the authenticated claude.ai session.
+Design and integrate web interfaces using Anthropic's Claude Design (claude.ai/design) as the primary engine, with optional downstream handoff to the frontend-design plugin for production code. Drives Claude Design through the agent-browser for programmatic access to the authenticated claude.ai session.
 
 Let me check your system and install."
 ```

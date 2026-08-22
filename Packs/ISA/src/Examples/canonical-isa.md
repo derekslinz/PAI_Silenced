@@ -121,7 +121,7 @@ Ship a Cloudflare-hosted marketplace at `beanline.example.com` where verified ro
 
 - [ ] ISC-36: Anti: out of scope — `/api/follow`, `/api/dm`, and any social-graph endpoint return 404 (probe: curl).
 - [ ] ISC-37: Anti: privacy — image originals (raw camera JPEGs) are NEVER served from R2 (probe: every image URL returns WebP).
-- [ ] ISC-38: Anti: regression — first-page browse load makes zero third-party network requests (no analytics beacon, no font CDN, no ad-tech) (probe: Interceptor network-panel screenshot, 0 third-party requests).
+- [ ] ISC-38: Anti: regression — first-page browse load makes zero third-party network requests (no analytics beacon, no font CDN, no ad-tech) (probe: agent-browser network-panel screenshot, 0 third-party requests).
 
 ## Test Strategy
 
@@ -178,7 +178,7 @@ Ship a Cloudflare-hosted marketplace at `beanline.example.com` where verified ro
   type: privacy
   check: zero third-party requests on browse page
   threshold: 0
-  tool: Skill("Interceptor") network panel at /browse
+  tool: Skill("agent-browser") network panel at /browse
 ```
 
 ## Features
@@ -273,7 +273,7 @@ Ship a Cloudflare-hosted marketplace at `beanline.example.com` where verified ro
 - ISC-30: `curl -i https://beanline.example.com/checkout` (no session) — `HTTP/2 401`
 - ISC-36: `curl -i https://beanline.example.com/api/follow` — `HTTP/2 404`
 - ISC-37: Image-format audit 2026-04-22 — 100% of 247 image URLs returned `Content-Type: image/webp`
-- ISC-38: Interceptor network panel at `/browse` 2026-04-25 — 0 third-party requests on initial load
+- ISC-38: agent-browser network panel at `/browse` 2026-04-25 — 0 third-party requests on initial load
 
 <!--
 Canonical showpiece. Marketplace pattern (auth + Stripe escrow + RBAC + listings + search + reviews + messaging) at E5 scale, all twelve sections populated, real-feeling Decisions with two ✗ DEAD ENDs and four refinements, four-piece C/R/L Changelog entries spanning the 4-month build. ISC count 38 is below the E5 floor of 256 — show-your-math: the work surface is genuinely smaller than enterprise scope; the marketplace pattern is well-bounded and over-decomposing into 256 ISCs would manufacture probes that don't reflect real verification needs. Anti-criteria (ISC-36, 37, 38) cover scope, privacy, and regression. Antecedents (none) — the goal is verifiable, not experiential, so antecedents aren't required at this gate. The euphoric-surprise prediction in Vision is principal-falsification but not gated as an ISC because the marketplace's success is measured by transactions completed, not by any single user's reaction.

@@ -1,6 +1,6 @@
 ---
 name: Webdesign
-description: "Design and integrate web interfaces using Anthropic's Claude Design (claude.ai/design) as the primary engine, with optional downstream handoff to the frontend-design plugin for production code. Drives Claude Design through the Interceptor skill for programmatic access to the authenticated claude.ai session. USE WHEN: web design, UI design, create prototype, design system, design tokens, brand extraction, redesign site, mockup, wireframe, landing page, dashboard design, component library, design-to-code, figma alternative, claude design, frontend design, polish UI, design audit, accessibility review. ALSO USE WHEN: this skill is called as a sub-step of larger site work (blog, admin panel, marketing site) — it integrates designs INTO an existing application, not just greenfield. NOT FOR: static illustrations or diagrams (use Art), logo/brand asset generation (use Art), video/motion graphics (use Remotion), or arbitrary graphic design outside the web/UI domain."
+description: "Design and integrate web interfaces using Anthropic's Claude Design (claude.ai/design) as the primary engine, with optional downstream handoff to the frontend-design plugin for production code. Drives Claude Design through the agent-browser for programmatic access to the authenticated claude.ai session. USE WHEN: web design, UI design, create prototype, design system, design tokens, brand extraction, redesign site, mockup, wireframe, landing page, dashboard design, component library, design-to-code, figma alternative, claude design, frontend design, polish UI, design audit, accessibility review. ALSO USE WHEN: this skill is called as a sub-step of larger site work (blog, admin panel, marketing site) — it integrates designs INTO an existing application, not just greenfield. NOT FOR: static illustrations or diagrams (use Art), logo/brand asset generation (use Art), video/motion graphics (use Remotion), or arbitrary graphic design outside the web/UI domain."
 license: Complete terms in LICENSE.txt
 effort: medium
 ---
@@ -9,11 +9,11 @@ effort: medium
 
 Webdesign is the PAI orchestration layer around **Claude Design** — Anthropic's web-based visual design product launched in April 2026 at `claude.ai/design`. Claude Design is not a CLI tool or plugin; it is a surface on claude.ai powered by Claude Opus 4.7 vision. This skill bridges the gap by:
 
-1. **Driving Claude Design programmatically** through the Interceptor skill (real-Chrome automation of the authenticated claude.ai session).
+1. **Driving Claude Design programmatically** through the agent-browser (real-Chrome automation of the authenticated claude.ai session).
 2. **Processing handoff bundles** that Claude Design produces, feeding them into local codebases.
 3. **Delegating production code generation** to the `frontend-design` plugin (Anthropic, auto-activates in Claude Code) when the output is code.
 4. **Integrating designs INTO existing applications** — framework-aware diff/patch flow, not greenfield-only.
-5. **Verifying and deploying** the result via Interceptor + the project's chosen host.
+5. **Verifying and deploying** the result via agent-browser + the project's chosen host.
 
 Claude Design is the engine. Webdesign is the cockpit.
 
@@ -63,8 +63,8 @@ Running **WorkflowName** in **Webdesign**...
 
 Before running any workflow, confirm:
 
-1. **Interceptor skill available** — `which interceptor` returns a path. If not, instruct user to invoke `Skill("Interceptor")` setup first.
-2. **Authenticated claude.ai session** — Interceptor must have a logged-in claude.ai profile. First-run is headed; subsequent runs are headless.
+1. **agent-browser available** — `which agent-browser` returns a path. If not, instruct user to invoke `Skill("agent-browser")` setup first.
+2. **Authenticated claude.ai session** — agent-browser must have a logged-in claude.ai profile. First-run is headed; subsequent runs are headless.
 3. **Claude Design access** — User's Claude subscription must include Claude Design (Pro, Max, Team, or Enterprise with admin opt-in).
 4. **For `IntegrateIntoApp`**: parent-project path + framework identifier (next, astro, vitepress, vite-react, vue, vanilla) passed in context.
 
@@ -74,8 +74,8 @@ Missing prerequisites → halt with a clear remediation step. Never silently fal
 
 Accumulate lessons here. Information density is highest in gotchas.
 
-- **Claude Design is web-only.** There is no API, no MCP server, no plugin. Interceptor is the only programmatic path.
-- **Real Chrome required.** Use the Interceptor skill — it is the only sanctioned browser automation in PAI. Claude Design's UI depends on claude.ai's full session state; CDP-based automation trips bot detection and drops session cookies.
+- **Claude Design is web-only.** There is no API, no MCP server, no plugin. agent-browser is the only programmatic path.
+- **Real Chrome required.** Use the agent-browser — it is the only sanctioned browser automation in PAI. Claude Design's UI depends on claude.ai's full session state; CDP-based automation trips bot detection and drops session cookies.
 - **Handoff bundles are directories, not single files.** A bundle contains `PROMPT.md`, optional `tokens.json`, `components/`, `assets/`, and framework-specific scaffolding. Treat the whole directory as the unit.
 - **`frontend-design` plugin auto-activates.** When the handoff bundle is fed to Claude Code, the plugin (already installed in the official marketplace) picks up the frontend work automatically — do NOT manually invoke it.
 - **Claude Design's design-system extraction runs during onboarding.** For a new codebase you want Claude Design to understand, run `ExtractDesignSystem` FIRST before `CreatePrototype` — otherwise Claude Design uses generic defaults and overrides your tokens.
@@ -93,7 +93,7 @@ Accumulate lessons here. Information density is highest in gotchas.
 ```
 User: "Design a pricing page for an AI security startup — editorial aesthetic, dark only"
 → Invokes CreatePrototype workflow
-→ Preflight: Interceptor + authenticated claude.ai session
+→ Preflight: agent-browser + authenticated claude.ai session
 → Composes brief with explicit aesthetic, constraints, differentiation
 → Drives claude.ai/design via Tools/DriveClaudeDesign.ts
 → Screenshots output, verifies a11y via Tools/VerifyDesign.ts
@@ -139,7 +139,7 @@ skills/Webdesign/
 │   ├── IntegrateIntoApp.md
 │   └── DeployDesign.md
 ├── Tools/
-│   ├── DriveClaudeDesign.ts          # Interceptor wrapper for claude.ai/design
+│   ├── DriveClaudeDesign.ts          # agent-browser wrapper for claude.ai/design
 │   ├── ProcessHandoffBundle.ts       # Parse bundle → structured brief
 │   └── VerifyDesign.ts               # Screenshot + a11y probe
 └── References/

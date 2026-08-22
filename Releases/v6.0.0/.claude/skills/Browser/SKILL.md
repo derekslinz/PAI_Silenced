@@ -1,6 +1,6 @@
 ---
 name: Browser
-description: "Headless browser automation via agent-browser — Rust CLI daemon with persistent auth profiles for fast, scriptable, parallel browser work. Supports batch commands, network interception, device emulation, per-site profile auth (one-time headed login, headless forever after), and parallel isolated sessions via --session. Workflows: ReviewStories (fan out YAML user stories to parallel UIReviewers), Automate (load/run parameterized recipe templates), Update. Delegates to general-purpose agents with agent-browser instructions for background parallel scraping. Falls back to Interceptor if site has bot detection. USE WHEN headless browser, batch scrape, fast screenshot, dev server test, parallel browser, background automation, extract data, review stories, automate recipe, batch screenshots, scrape multiple pages in parallel. NOT FOR deploy verification or UI confirmation with real Chrome (use Interceptor). NOT FOR simple single-URL fetching (use WebFetch). NOT FOR CAPTCHA or bot-detection bypass (use BrightData or Interceptor)."
+description: "Headless browser automation via agent-browser — Rust CLI daemon with persistent auth profiles for fast, scriptable, parallel browser work. Supports batch commands, network interception, device emulation, per-site profile auth (one-time headed login, headless forever after), and parallel isolated sessions via --session. Workflows: ReviewStories (fan out YAML user stories to parallel UIReviewers), Automate (load/run parameterized recipe templates), Update. Delegates to general-purpose agents with agent-browser instructions for background parallel scraping.  USE WHEN headless browser, batch scrape, fast screenshot, dev server test, parallel browser, background automation, extract data, review stories, automate recipe, batch screenshots, scrape multiple pages in parallel.  NOT FOR simple single-URL fetching (use WebFetch). NOT FOR CAPTCHA or bot-detection bypass (use BrightData)."
 version: 10.0.0
 effort: medium
 ---
@@ -13,18 +13,6 @@ effort: medium
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 
-## MANDATORY: Voice Notification (REQUIRED BEFORE ANY ACTION)
-
-**You MUST send this notification BEFORE doing anything else when this skill is invoked.**
-
-1. **Send voice notification**:
-   ```bash
-   curl -s -X POST http://localhost:31337/notify \
-     -H "Content-Type: application/json" \
-     -d '{"message": "Running the WORKFLOWNAME workflow in the Browser skill to ACTION"}' \
-     > /dev/null 2>&1 &
-   ```
-
 2. **Output text notification**:
    ```
    Running the **WorkflowName** workflow in the **Browser** skill to ACTION...
@@ -36,7 +24,7 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
 
 **Tool:** `agent-browser` — headless Rust CLI daemon with persistent auth profiles.
 
-**If agent-browser isn't working or a site has bot detection, use the Interceptor skill instead.** Interceptor is a Chrome extension with zero CDP fingerprint — passes all major bot detection checks.
+
 
 ### Does the site need auth?
 
@@ -155,9 +143,9 @@ Agent 1: agent-browser --session scrape1 open https://site-a.com
 Agent 2: agent-browser --session scrape2 open https://site-b.com
 ```
 
-**Fallback:** If agent-browser fails or the site has bot detection, use the **Interceptor** skill instead.
 
-**Legacy built-in agents — DEPRECATED, do not invoke.** BrowserAgent and UIReviewer are Claude Code built-ins whose internals cannot be modified; they run browser automation that PAI no longer uses. Route all browser work through the **Interceptor** skill (verification, authenticated flows) or **agent-browser** (headless scraping).
+
+**Legacy built-in agents — DEPRECATED, do not invoke.** BrowserAgent and UIReviewer are Claude Code built-ins whose internals cannot be modified; they run browser automation that PAI no longer uses. Route all browser work through **agent-browser** (headless scraping).
 
 ---
 

@@ -3,7 +3,7 @@ name: Webdesign
 pack-id: pai-webdesign-v1.0.0
 version: 1.0.0
 author: danielmiessler
-description: Design and integrate web interfaces using Anthropic's Claude Design (claude.ai/design) as the primary engine, with optional downstream handoff to the frontend-design plugin for production code. Drives Claude Design through the Interceptor skill for programmatic access to the authenticated claude.ai session.
+description: Design and integrate web interfaces using Anthropic's Claude Design (claude.ai/design) as the primary engine, with optional downstream handoff to the frontend-design plugin for production code. Drives Claude Design through the agent-browser for programmatic access to the authenticated claude.ai session.
 type: skill
 platform: claude-code
 source: PAI v5.0.0
@@ -11,7 +11,7 @@ source: PAI v5.0.0
 
 # Webdesign
 
-Design and integrate web interfaces using Anthropic's Claude Design (claude.ai/design) as the primary engine, with optional downstream handoff to the frontend-design plugin for production code. Drives Claude Design through the Interceptor skill for programmatic access to the authenticated claude.ai session.
+Design and integrate web interfaces using Anthropic's Claude Design (claude.ai/design) as the primary engine, with optional downstream handoff to the frontend-design plugin for production code. Drives Claude Design through the agent-browser for programmatic access to the authenticated claude.ai session.
 
 ## Installation
 

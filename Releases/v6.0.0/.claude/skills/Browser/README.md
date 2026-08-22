@@ -1,11 +1,11 @@
 # Browser — Browser Automation
 
 **Primary:** `agent-browser` — headless Rust CLI daemon with persistent auth profiles.
-**Fallback:** `interceptor` — Chrome extension CLI, zero bot-detection fingerprints. Use when agent-browser is down or site has aggressive bot detection.
+**Fallback:** `agent-browser` — Chrome extension CLI, zero bot-detection fingerprints. Use when agent-browser is down or site has aggressive bot detection.
 
-| Need | Primary (agent-browser) | Fallback (interceptor) |
+| Need | Primary (agent-browser) | Fallback (agent-browser) |
 |------|------------------------|-----------------|
-| **Anonymous** | `agent-browser open URL` | `interceptor open URL` |
+| **Anonymous** | `agent-browser open URL` | `agent-browser open URL` |
 | **Auth** | `--profile ~/.agent-browser/profiles/<site>` | Uses Chrome's own profiles |
 | **Bot evasion** | Standard headless | Zero CDP fingerprint — passes all checks |
 

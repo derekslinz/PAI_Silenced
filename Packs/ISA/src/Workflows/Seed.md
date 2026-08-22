@@ -41,10 +41,6 @@ review_required: true
 ### Step 1 — Voice notification
 
 ```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Seed workflow in the ISA skill"}' \
-  > /dev/null 2>&1 &
 ```
 
 ### Step 2 — Refuse if ISA already exists

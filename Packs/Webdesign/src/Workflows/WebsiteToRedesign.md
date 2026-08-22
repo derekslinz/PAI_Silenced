@@ -26,8 +26,8 @@ OUT=~/Downloads/webdesign/redesign/$(date +%Y%m%d-%H%M%S)
 mkdir -p "$OUT"
 
 # Full-page screenshot
-bun ~/.claude/skills/Interceptor/Tools/Open.ts "$URL"
-bun ~/.claude/skills/Interceptor/Tools/Screenshot.ts --full-page "$OUT/original.png"
+bun ~/.claude/skills/agent-browser/Tools/Open.ts "$URL"
+bun ~/.claude/skills/agent-browser/Tools/Screenshot.ts --full-page "$OUT/original.png"
 
 # HTML snapshot
 curl -sL "$URL" > "$OUT/original.html"

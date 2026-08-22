@@ -26,7 +26,7 @@ Optional:
 ### 1. Preflight
 
 ```bash
-interceptor --version || echo "ABORT: Interceptor not installed"
+agent-browser --version || echo "ABORT: agent-browser not installed"
 ls "$INPUT_PATH" || echo "ABORT: input path not readable"
 ```
 
