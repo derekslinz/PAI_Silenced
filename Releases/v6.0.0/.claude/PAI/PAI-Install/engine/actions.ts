@@ -632,6 +632,7 @@ export async function moveExistingClaudeToBackup(
     try {
       for (const entry of readdirSync(paiRoot)) {
         if (entry === "PAI-Install") continue;
+        if (entry === "USER") continue; // Preserve user context
         rmSync(join(paiRoot, entry), { recursive: true, force: true });
       }
     } catch (err) {
@@ -1422,6 +1423,42 @@ export async function runConfiguration(
         .replace(/^# Principal Identity — .+$/m, `# Principal Identity — ${principalName}`);
       writeFileSync(principalIdPath, content);
     } catch {}
+  }
+
+  // Personalize all USER template files by replacing common placeholders
+  const userDir = join(paiDir, "PAI", "USER");
+  if (existsSync(userDir)) {
+    try {
+      const templateFiles = readdirSync(userDir, { withFileTypes: true })
+        .filter(e => e.isFile() && e.name.endsWith(".md"))
+        .map(e => e.name);
+      
+      for (const file of templateFiles) {
+        const filePath = join(userDir, file);
+        try {
+          let content = readFileSync(filePath, "utf-8");
+          const original = content;
+          
+          // Replace common template placeholders
+          content = content
+            .replace(/\{ASSISTANT_IDENTITY\.NAME\}/g, aiName)
+            .replace(/\{PRINCIPAL\.NAME\}/g, principalName)
+            .replace(/\bUser\b/g, principalName)  // "User" -> actual name
+            .replace(/\bPAI\b/g, aiName);           // "PAI" -> actual AI name (in DA context)
+          
+          // Clean up extra blank lines
+          content = content.replace(/\n{3,}/g, "\n\n");
+          
+          if (content !== original) {
+            writeFileSync(filePath, content);
+          }
+        } catch {
+          // Skip files that can't be processed
+        }
+      }
+    } catch {
+      // Non-fatal
+    }
   }
 
   // Ensure the config dir exists so later steps (e.g. Telegram) can write .env.

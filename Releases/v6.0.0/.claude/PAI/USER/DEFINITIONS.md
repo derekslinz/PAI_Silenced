@@ -1,0 +1,20 @@
+# Definitions — User Vocabulary
+
+
+Words and phrases that mean something specific in your work. The assistant reads
+this so when you say a term it grabs your meaning, not the generic one.
+
+## Core terms
+
+- **(your term):** (definition)
+
+## Acronyms
+
+- **(your acronym):** (expansion + meaning)
+
+## Position terms
+
+These are stances you hold — labels for views you've articulated and want
+the assistant to recognize when constructing arguments in your voice.
+
+- **(position name):** (the view, in one sentence)

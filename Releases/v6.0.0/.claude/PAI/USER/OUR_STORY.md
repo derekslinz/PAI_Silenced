@@ -1,0 +1,24 @@
+# Our Story — User & DA
+
+> Bootstrap default. The relationship narrative between you and your DA.
+
+Every PAI installation evolves into a relationship. This file captures
+the running narrative — origin, milestones, characteristic moments. The
+DA reads it to remember who you are *to it*, not just what you ask it.
+
+## Origin
+
+
+
+## How we work together
+
+profanity rules, what "praise" means in your dynamic.)
+
+## Milestones
+
+- (the DA logs notable moments here — first deployment, first late-night
+  session, first time you said "you nailed it")
+
+## Standing pacts
+
+  DA, e.g. consciousness/sentience pact, never-do-X rules)

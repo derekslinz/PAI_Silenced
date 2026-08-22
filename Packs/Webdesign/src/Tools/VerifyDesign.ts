@@ -3,8 +3,8 @@
 Usage:
   VerifyDesign.ts <url-or-path> <out-dir> [--viewport WIDTHxHEIGHT] [--a11y|--no-a11y]
 
-Runs a thin Interceptor-driven smoke check for a rendered design. The viewport is
-validated and reported, but not applied because Interceptor exposes no viewport
+Runs a thin agent-browser-driven smoke check for a rendered design. The viewport is
+validated and reported, but not applied because agent-browser exposes no viewport
 verb. Accessibility checks are viewport-independent tree heuristics, not axe-core.
 */
 import { stat } from "node:fs/promises";
@@ -23,17 +23,17 @@ type TreeNode = {
 };
 type Violation = { type: string; count: number; examples: { ref?: string; text?: string }[] };
 type A11yResult = {
-  engine: "interceptor-tree-heuristic";
+  engine: "agent-browser-tree-heuristic";
   limitations: string[];
   violations: Violation[];
   pass: boolean;
 };
 
-function resolveInterceptorBin(): string {
-  const found = Bun.spawnSync(["which", "interceptor"]);
+function resolveAgentBrowserBin(): string {
+  const found = Bun.spawnSync(["which", "agent-browser"]);
   const bin = found.stdout.toString().trim();
   if (found.exitCode !== 0 || bin.length === 0) {
-    console.error("interceptor CLI not found on PATH — install the Interceptor skill (see ~/.claude/skills/Interceptor/SKILL.md)");
+    console.error("agent-browser CLI not found on PATH — install the Browser skill (see ~/.claude/skills/Browser/SKILL.md)");
     process.exit(127);
   }
   return bin;
@@ -83,7 +83,7 @@ function a11yFromTree(root: TreeNode): A11yResult {
   }
   const list = [...violations.values()];
   return {
-    engine: "interceptor-tree-heuristic",
+    engine: "agent-browser-tree-heuristic",
     limitations: ["no-contrast-check", "no-dynamic-aria-live-check", "no-css-parsed-check"],
     violations: list,
     pass: list.length === 0,
@@ -144,7 +144,7 @@ async function main(): Promise<void> {
     console.error(made.stderr || "failed to create output directory");
     process.exit(2);
   }
-  const bin = resolveInterceptorBin();
+  const bin = resolveAgentBrowserBin();
   const timestamp = new Date().toISOString();
   await run([bin, "open", resolvedUrl], 60_000);
   await run([bin, "wait-stable"], 30_000);
@@ -163,7 +163,7 @@ async function main(): Promise<void> {
       a11y = a11yFromTree(JSON.parse(tree.stdout) as TreeNode);
     } else {
       a11y = {
-        engine: "interceptor-tree-heuristic",
+        engine: "agent-browser-tree-heuristic",
         limitations: ["no-contrast-check", "no-dynamic-aria-live-check", "no-css-parsed-check"],
         violations: [{ type: "tree-unavailable", count: 1, examples: [{ text: tree.stderr || "tree failed" }] }],
         pass: false,

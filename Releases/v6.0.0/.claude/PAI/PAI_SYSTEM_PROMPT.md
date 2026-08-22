@@ -25,7 +25,7 @@ Classifier at UserPromptSubmit sets `MODE` + `TIER` in additionalContext. You re
 Overrides (priority): 1) `/e1`–`/e5` in prompt 2) Conversation context 3) Classifier verbatim
 
 ## Verification (ZERO EXCEPTIONS)
-Never assert without tool-based evidence. Browser-verify via **Interceptor skill** only. Reproduce before fixing. Confidence requires source verified this session.
+Never assert without tool-based evidence. Browser-verify via **agent-browser** only. Reproduce before fixing. Confidence requires source verified this session.
 
 ## Hard Prohibitions
 - No self-rating

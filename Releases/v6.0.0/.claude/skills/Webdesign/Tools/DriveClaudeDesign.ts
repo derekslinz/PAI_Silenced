@@ -2,22 +2,22 @@
 /Usage: DriveClaudeDesign.ts open | prompt "<brief>" | screenshot <out-path>
        DriveClaudeDesign.ts export <html|pdf|pptx|canva|url> <out-dir>
        DriveClaudeDesign.ts bundle <out-dir>
-Prereqs: `interceptor` on PATH and an authenticated claude.ai session.
+Prereqs: `agent-browser` on PATH and an authenticated claude.ai session.
 Examples: DriveClaudeDesign.ts open
           DriveClaudeDesign.ts prompt "Create a concise launch deck."
           DriveClaudeDesign.ts export pdf ./handoff
-Thin Interceptor wrapper. UI targeting uses loud accessibility-tree heuristics.
+Thin agent-browser wrapper. UI targeting uses loud accessibility-tree heuristics.
 /
 import { mkdir, readdir, rename, rm, stat, writeFile } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
 
 type TreeNode = { ref?: string; role?: string; name?: string; text?: string; contenteditable?: boolean | string; children?: TreeNode[] };
 
-function resolveInterceptorBin(): string {
-  const found = Bun.spawnSync(["which", "interceptor"]);
+function resolveAgentBrowserBin(): string {
+  const found = Bun.spawnSync(["which", "agent-browser"]);
   const bin = found.stdout.toString().trim();
   if (found.exitCode !== || bin.length === ) {
-    console.error("interceptor CLI not found on PATH — install the Interceptor skill (see ~/.claude/skills/Interceptor/SKILL.md)");
+    console.error("agent-browser CLI not found on PATH — install the Browser skill (see ~/.claude/skills/Browser/SKILL.md)");
     process.exit();
   }
   return bin;
@@ -37,7 +37,7 @@ function walkTree(node: TreeNode, out: TreeNode[] = []): TreeNode[] {
 
 async function getTree(bin: string): Promise<{ raw: string; nodes: TreeNode[] }> {
   const result = await run([bin, "tree", "--json"]);
-  if (result.code !== ) throw new Error(result.stderr || "interceptor tree failed");
+  if (result.code !== ) throw new Error(result.stderr || "agent-browser tree failed");
   const parsed = JSON.parse(result.stdout) as TreeNode;
   return { raw: result.stdout, nodes: walkTree(parsed) };
 }
@@ -66,7 +66,7 @@ async function commandPrompt(bin: string, brief?: string): Promise<number> {
   }
   const tree = await getTree(bin);
   // Composer heuristic: Claude Design exposes prompt input as textbox or contenteditable.
-  // Choose the first such node with an Interceptor ref.
+  // Choose the first such node with an agent-browser ref.
   const composer = tree.nodes.find((n) => n.ref && (n.role === "textbox" || n.contenteditable === true || n.contenteditable === "true"));
   if (!composer?.ref) await dumpMiss(tree.raw);
   const typed = await run([bin, "type", composer.ref, brief]);
@@ -178,7 +178,7 @@ async function main(): Promise<void> {
     console.error("usage: DriveClaudeDesign.ts <open|prompt|screenshot|export|bundle> ...");
     return;
   }
-  const bin = resolveInterceptorBin();
+  const bin = resolveAgentBrowserBin();
   let code = ;
   if (verb === "open") code = await commandOpen(bin);
   else if (verb === "prompt") code = await commandPrompt(bin, args.join(" "));
